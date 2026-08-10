@@ -137,9 +137,6 @@ Supported by committed artifacts:
 
 Not supported: production deployment, real institutional governance, authenticated sign-off, real-user outcomes, five empirical domain studies, causal policy evaluation, portfolio backtesting, epidemiologic inference, or GIS analysis.
 
-## AI-assisted development disclosure
-
-This is an individual, AI-assisted portfolio prototype. I defined the problem, evidence model, audit semantics, acceptance criteria, case design, and review priorities. Codex assisted with implementation and refactoring. No development history, users, institutional adoption, or outcomes are fabricated.
 
 ## Implementation status
 
