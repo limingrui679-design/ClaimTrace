@@ -9,7 +9,7 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Check | Result |
 |---|---|
 | `npm run ci` | Passed |
-| Unit and integration tests | 120/120 passed |
+| Unit and integration tests | 122/122 passed |
 | Real-Chromium read-only acceptance test | 1/1 passed |
 | Executable cases loaded and run in Chromium | 10/10 passed |
 | Controlled benchmark | 64/64 exact labels |
@@ -19,7 +19,7 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Core branch coverage | 77.68% |
 | Executable case regeneration and AuditBundle verification | 10/10 passed |
 | Public-source raw-content and cleaning-parameter tamper tests | 6/6 passed |
-| Source-refresh consistency and failure-path tests | 4/4 passed |
+| Source-refresh consistency and failure-path tests | 6/6 passed |
 | `npm audit --omit=dev` | 0 known vulnerabilities |
 | `npm audit` | 0 known vulnerabilities |
 | Repository English-only artifact test | Passed |
@@ -29,7 +29,7 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 
 The six external cases use pinned responses from the World Bank Indicators API, U.S. DOT/FTA Monthly Modal Time Series, U.S. Treasury yield-curve feed, CFPB Consumer Complaint Database, CDC PLACES, and ONS housing-affordability releases. For each case, the repository stores two source responses, source URLs and retrieval metadata, attribution and limitations, source-specific cleaning parameters, raw-content hashes, cleaned snapshots, expected results, and a verified AuditBundle.
 
-Normal `npm run cases:generate` execution is offline and deterministic. `npm run cases:refresh-sources` is a separate networked operation because a refresh can alter source content and downstream results. It validates both responses with the declared source-specific cleaner before replacing either pinned response, updates the retrieval timestamp, and leaves the selected case unchanged if either download fails, is empty, or fails source-schema and cleaning-parameter validation.
+Normal `npm run cases:generate` execution is offline and deterministic. `npm run cases:refresh-sources` is a separate networked operation because a refresh can alter source content and downstream results. It validates both responses with the declared source-specific cleaner before replacing either pinned response, updates the retrieval timestamp, and leaves the selected case unchanged if either download fails, is empty, or fails source-schema and cleaning-parameter validation. It preflights all three targets and restores their backups if an in-process replacement fails midway.
 
 ### Deliberate claim boundaries
 

@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { readdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
+import { lstat, readdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
@@ -21,13 +21,26 @@ export interface RefreshPublicDataSourcesOptions {
   requestedCaseIds?: string[];
   fetcher?: typeof fetch;
   now?: () => Date;
+  fileOperations?: RefreshFileOperations;
 }
 
 interface StagedFile {
   target: string;
   temporary: string;
+  backup: string;
   content: string;
+  backedUp: boolean;
+  installed: boolean;
 }
+
+export interface RefreshFileOperations {
+  lstat: typeof lstat;
+  rename: typeof rename;
+  unlink: typeof unlink;
+  writeFile: typeof writeFile;
+}
+
+const DEFAULT_FILE_OPERATIONS: RefreshFileOperations = { lstat, rename, unlink, writeFile };
 
 interface AvailableSource {
   directory: string;
@@ -42,18 +55,57 @@ function caseFile(directory: string, fileName: string) {
   return resolved;
 }
 
-async function replaceFiles(files: Array<{ target: string; content: string }>) {
+async function replaceFiles(files: Array<{ target: string; content: string }>, operations: RefreshFileOperations) {
+  if (new Set(files.map((file) => file.target)).size !== files.length) throw new Error("Source refresh targets must be distinct");
+  const transactionId = `${process.pid}-${randomUUID()}`;
   const staged: StagedFile[] = files.map(({ target, content }) => ({
     target,
-    temporary: `${target}.claimtrace-refresh-${process.pid}-${randomUUID()}`,
+    temporary: `${target}.claimtrace-refresh-${transactionId}.new`,
+    backup: `${target}.claimtrace-refresh-${transactionId}.backup`,
     content,
+    backedUp: false,
+    installed: false,
   }));
+
+  await Promise.all(staged.map(async (file) => {
+    const stats = await operations.lstat(file.target);
+    if (!stats.isFile()) throw new Error(`${file.target}: source refresh target must be a regular file`);
+  }));
+
   try {
-    await Promise.all(staged.map((file) => writeFile(file.temporary, file.content, "utf8")));
-    for (const file of staged) await rename(file.temporary, file.target);
+    const writeResults = await Promise.allSettled(staged.map((file) => operations.writeFile(file.temporary, file.content, "utf8")));
+    const writeErrors = writeResults.filter((result): result is PromiseRejectedResult => result.status === "rejected").map((result) => result.reason);
+    if (writeErrors.length) throw new AggregateError(writeErrors, "Source refresh staging failed");
+    for (const file of staged) {
+      await operations.rename(file.target, file.backup);
+      file.backedUp = true;
+    }
+    for (const file of staged) {
+      await operations.rename(file.temporary, file.target);
+      file.installed = true;
+    }
+  } catch (error) {
+    const rollbackErrors: unknown[] = [];
+    for (const file of [...staged].reverse()) {
+      try {
+        if (file.installed) {
+          await operations.unlink(file.target);
+          file.installed = false;
+        }
+        if (file.backedUp) {
+          await operations.rename(file.backup, file.target);
+          file.backedUp = false;
+        }
+      } catch (rollbackError) {
+        rollbackErrors.push(rollbackError);
+      }
+    }
+    if (rollbackErrors.length) throw new AggregateError([error, ...rollbackErrors], "Source refresh failed and rollback was incomplete");
+    throw error;
   } finally {
-    await Promise.all(staged.map((file) => unlink(file.temporary).catch(() => undefined)));
+    await Promise.all(staged.map((file) => operations.unlink(file.temporary).catch(() => undefined)));
   }
+  await Promise.all(staged.map((file) => operations.unlink(file.backup).catch(() => undefined)));
 }
 
 function validateSourceDefinition(caseId: string, config: SourceConfig, provenance: ExternalSourceProvenance) {
@@ -87,6 +139,7 @@ export async function refreshPublicDataSources(options: RefreshPublicDataSources
   const requested = new Set(options.requestedCaseIds ?? []);
   const fetcher = options.fetcher ?? fetch;
   const now = options.now ?? (() => new Date());
+  const fileOperations = options.fileOperations ?? DEFAULT_FILE_OPERATIONS;
   const available = new Map<string, AvailableSource>();
 
   const entries = await readdir(casesDirectory, { withFileTypes: true });
@@ -134,7 +187,7 @@ export async function refreshPublicDataSources(options: RefreshPublicDataSources
     await replaceFiles([
       ...SIDES.map((side) => ({ target: caseFile(item.directory, item.config.rawFiles[side]), content: downloads[side] })),
       { target: item.configPath, content: `${JSON.stringify(nextConfig, null, 2)}\n` },
-    ]);
+    ], fileOperations);
     refreshed += 1;
   }
   return { refreshed, retrievedCaseIds: caseIds };

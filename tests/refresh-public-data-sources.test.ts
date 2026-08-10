@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -146,6 +146,92 @@ test("source refresh rejects malformed nonempty content before replacing any cas
     assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
     assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
     assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh preserves every target after staging, backup, or replacement failures", async () => {
+  const failures = [
+    { phase: "staging", at: 2 },
+    { phase: "backup", at: 2 },
+    { phase: "promotion", at: 1 },
+    { phase: "promotion", at: 2 },
+    { phase: "promotion", at: 3 },
+  ] as const;
+  for (const failure of failures) {
+    const fixture = await makeFixture();
+    try {
+      const originalConfig = await readFile(path.join(fixture.directory, "source-config.json"), "utf8");
+      const newBaseline = worldBankResponse("2019", 79.1);
+      const newCurrent = worldBankResponse("2024", 79.4);
+      let stagedWrites = 0;
+      let backupRenames = 0;
+      let promotionRenames = 0;
+      await assert.rejects(
+        refreshPublicDataSources({
+          casesDirectory: fixture.casesDirectory,
+          requestedCaseIds: ["public-case"],
+          fetcher: (async (input: string | URL | Request) => new Response(
+            String(input).endsWith("baseline") ? newBaseline : newCurrent,
+            { status: 200 },
+          )) as typeof fetch,
+          now: () => new Date(REFRESHED_AT),
+          fileOperations: {
+            lstat,
+            unlink,
+            writeFile: async (target, content, encoding) => {
+              stagedWrites += 1;
+              if (failure.phase === "staging" && stagedWrites === failure.at) throw new Error("injected staging failure");
+              await writeFile(target, content, encoding);
+            },
+            rename: async (source, target) => {
+              if (String(target).endsWith(".backup")) {
+                backupRenames += 1;
+                if (failure.phase === "backup" && backupRenames === failure.at) throw new Error("injected backup failure");
+              }
+              if (String(source).endsWith(".new")) {
+                promotionRenames += 1;
+                if (failure.phase === "promotion" && promotionRenames === failure.at) throw new Error("injected replacement failure");
+              }
+              await rename(source, target);
+            },
+          },
+        }),
+        /Source refresh staging failed|injected (backup|replacement) failure/,
+      );
+      assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
+      assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
+      assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
+      assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.includes(".claimtrace-refresh-")), []);
+    } finally {
+      await rm(fixture.casesDirectory, { recursive: true, force: true });
+    }
+  }
+});
+
+test("source refresh rejects a non-file target before staging replacements", async () => {
+  const fixture = await makeFixture();
+  try {
+    const baselinePath = path.join(fixture.directory, "raw-baseline.json");
+    const currentPath = path.join(fixture.directory, "raw-current.json");
+    const originalConfig = await readFile(path.join(fixture.directory, "source-config.json"), "utf8");
+    await rm(currentPath);
+    await mkdir(currentPath);
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async (input: string | URL | Request) => new Response(
+          String(input).endsWith("baseline") ? worldBankResponse("2019", 79.1) : worldBankResponse("2024", 79.4),
+          { status: 200 },
+        )) as typeof fetch,
+      }),
+      /source refresh target must be a regular file/,
+    );
+    assert.equal(await readFile(baselinePath, "utf8"), fixture.oldBaseline);
+    assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
+    assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.includes(".claimtrace-refresh-")), []);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }
