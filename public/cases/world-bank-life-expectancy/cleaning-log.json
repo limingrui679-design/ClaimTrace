@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "claimtrace-cleaning-log/1.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "implementation": "world-bank-indicator-v1",
+  "sourceConfigSha256": "11c82bb3e9b22ae52aed71ca975829bca488a2262487f3cddb4a383674b3415a",
+  "transformations": [
+    "Parse two pinned World Bank Indicators API v2 JSON responses",
+    "Require indicator SP.DYN.LE00.IN and source last-updated 2026-07-13",
+    "Keep exactly 8 declared ISO3 country codes",
+    "Map 2019 to baseline and 2024 to current",
+    "Round life expectancy to 3 decimal places with fixed-width output",
+    "Sort records by ISO3 country code and emit UTF-8 CSV with a stable column order"
+  ],
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2019.json",
+      "sha256": "1d3099e857c9c9458f7b7d65d760a19c9949ef9e076483d70b55aac54b3dce7f",
+      "bytes": 1988
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2024.json",
+      "sha256": "c0bfd3f786d2ed938f0d44ab2b324e03217575f4f056b447efaf059ca6d2867d",
+      "bytes": 1988
+    }
+  ],
+  "outputs": {
+    "baseline.csv": {
+      "sha256": "3f1204b0a9493a639aaf67aadafc55e15f5aaf69ea0ed33d44596538ea1cffd8",
+      "bytes": 392,
+      "rows": 8
+    },
+    "current.csv": {
+      "sha256": "88dd522a8ca931e79f790a9a47c80d0e58ef071c1c6c7c2e46c0e666329e2b14",
+      "bytes": 392,
+      "rows": 8
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "claimtrace-case-audit/1.0.0",
+  "caseId": "spatial-planning",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "claims": [
+    {
+      "id": "spatial-demand-rank",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "East 82",
+      "currentValue": "West 86",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "spatial-travel-gate",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "19",
+      "currentValue": "19.5",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "spatial-flood-gate",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "3",
+      "currentValue": "4",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "spatial-site-choice",
+      "previousOutcome": "PASS",
+      "currentOutcome": "HOLD",
+      "status": "DECISION_CHANGED",
+      "recommendedOptionId": "west"
+    }
+  ]
+}

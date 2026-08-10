@@ -1,0 +1,419 @@
+// Generated from the executable source under src/cases/population-health/case.ts.
+export default {
+  "id": "population-health",
+  "title": "Population Health: Follow-Up Priorities and Model Gating",
+  "primaryKey": "row_id",
+  "claims": [
+    {
+      "id": "north-risk",
+      "code": "CT-001",
+      "title": "North has the highest high-risk rate among the four regions and should receive follow-up resources first",
+      "section": "Executive summary · paragraph 2",
+      "owner": "ClaimTrace demonstration",
+      "category": "Resource allocation",
+      "formula": "argmax(segment, value) where indicator = High-risk rate",
+      "rule": {
+        "type": "rank",
+        "field": "value",
+        "aggregation": "average",
+        "groupField": "segment",
+        "expectedGroup": "North",
+        "rank": "max",
+        "filters": [
+          {
+            "field": "indicator",
+            "equals": "High-risk rate"
+          }
+        ]
+      }
+    },
+    {
+      "id": "recall-gate",
+      "code": "CT-002",
+      "title": "Model recall exceeds the 80% deployment gate, allowing a controlled pilot",
+      "section": "Model evaluation · paragraph 4",
+      "owner": "ClaimTrace demonstration",
+      "category": "Model gate",
+      "formula": "TP / (TP + FN) > 80%",
+      "rule": {
+        "type": "threshold",
+        "field": "value",
+        "aggregation": "average",
+        "operator": ">",
+        "threshold": 80,
+        "filters": [
+          {
+            "field": "indicator",
+            "equals": "Model recall"
+          },
+          {
+            "field": "segment",
+            "equals": "Citywide"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 80,
+          "unit": "percent",
+          "source": "Synthetic model admission policy v1",
+          "rationale": "Do not begin the pilot when recall is below 80%",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "followup-gap",
+      "code": "CT-003",
+      "title": "Citywide follow-up completion is below the 80% target, requiring additional outreach capacity",
+      "section": "Operations diagnosis · paragraph 1",
+      "owner": "ClaimTrace demonstration",
+      "category": "Operations diagnosis",
+      "formula": "completed / eligible < 80%",
+      "rule": {
+        "type": "threshold",
+        "field": "value",
+        "aggregation": "average",
+        "operator": "<",
+        "threshold": 80,
+        "filters": [
+          {
+            "field": "indicator",
+            "equals": "Follow-up completion rate"
+          },
+          {
+            "field": "segment",
+            "equals": "Citywide"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 80,
+          "unit": "percent",
+          "source": "Synthetic follow-up target policy v1",
+          "rationale": "The annual follow-up completion target is 80%",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "east-completion",
+      "code": "CT-004",
+      "title": "East retains the highest follow-up completion rate and can serve as a process-replication example",
+      "section": "Regional case · paragraph 3",
+      "owner": "ClaimTrace demonstration",
+      "category": "Best practice",
+      "formula": "argmax(segment, value) where indicator = Follow-up completion rate",
+      "rule": {
+        "type": "rank",
+        "field": "value",
+        "aggregation": "average",
+        "groupField": "segment",
+        "expectedGroup": "East",
+        "rank": "max",
+        "filters": [
+          {
+            "field": "indicator",
+            "equals": "Follow-up completion rate"
+          }
+        ],
+        "excludes": [
+          {
+            "field": "segment",
+            "equals": "Citywide"
+          }
+        ]
+      }
+    },
+    {
+      "id": "west-risk",
+      "code": "CT-005",
+      "title": "West still has the lowest high-risk rate and should not be overprioritized because of total volume",
+      "section": "Resource allocation · paragraph 5",
+      "owner": "ClaimTrace demonstration",
+      "category": "Resource allocation",
+      "formula": "argmin(segment, value) where indicator = High-risk rate",
+      "rule": {
+        "type": "rank",
+        "field": "value",
+        "aggregation": "average",
+        "groupField": "segment",
+        "expectedGroup": "West",
+        "rank": "min",
+        "filters": [
+          {
+            "field": "indicator",
+            "equals": "High-risk rate"
+          }
+        ]
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision-model-pilot",
+      "title": "Should the risk model enter a controlled pilot?",
+      "owner": "Model governance lead",
+      "passActionId": "health:model-controlled-pilot",
+      "holdActionId": "health:model-pause-and-remediate",
+      "actionIfPass": "Begin a controlled pilot and continue monitoring recall.",
+      "actionIfFail": "Pause the pilot, remediate false negatives, and validate again.",
+      "conditions": [
+        {
+          "claimId": "recall-gate",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        }
+      ],
+      "priorSignedResult": {
+        "versionId": "health-v1",
+        "outcome": "PASS",
+        "activeActionId": "health:model-controlled-pilot",
+        "actionIdentityHash": "f9ae3f779a1822b5f1f50a06e72805264cf00a27c110b528c2685f95e7576951",
+        "recommendedOptionId": "full-pilot",
+        "feasibleOptionIds": [
+          "full-pilot",
+          "hold",
+          "limited-pilot"
+        ],
+        "decisionPolicyHash": "c39f122b1504a96beb4780f88645bb2c9c43073c7a8fa2a567d3995a71344d74",
+        "decisionInputProvenanceHash": "bc522669d6b44788c7764fc2b820da2aa3e27dd7dc946e8309bdebf5c740eb07",
+        "baselineSha256": "2b34242914e7548a4d9974afcf0bf617f8b7175f17afdedf7c7a812194f97324",
+        "currentSha256": "b6eb517e4a2e673e61151122bf95bb2741c30015445d83fda3ac3a7fc161cf01",
+        "ruleVersion": "claimtrace-rule/4.0.0",
+        "claimResultIds": [
+          "prior-result:health-v1:recall-gate"
+        ],
+        "historyBasis": "RECORDED_IDENTITY",
+        "reviewRecordId": "synthetic-prior-review:decision-model-pilot:health-v1",
+        "reviewRecordHash": "51aff80b33b45a2cc2d6b7937e22381e92138540c28993a5ab186f26dd855654",
+        "signedAt": "2026-07-31T10:00:00.000Z",
+        "signedBy": "Synthetic model owner"
+      },
+      "stakeholders": [
+        "Model governance",
+        "Follow-up team",
+        "Patient safety"
+      ],
+      "objective": {
+        "benefitWeight": 1,
+        "costWeight": 0.15,
+        "riskWeight": 1.2
+      },
+      "riskTolerance": 24,
+      "noActionLoss": 45,
+      "inputProvenance": {
+        "kind": "MANUAL_ASSUMPTION",
+        "source": "Synthetic model governance assumptions",
+        "version": "1.0.0",
+        "rationale": "Used to demonstrate model-pilot option scoring; these are not clinical utility, patient outcomes, or real operating-cost estimates",
+        "units": {
+          "benefit": "synthetic utility points",
+          "cost": "synthetic cost points",
+          "risk": "synthetic risk points",
+          "capacity": "synthetic capacity points"
+        },
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      },
+      "uncertainty": {
+        "method": "BOUNDED_UNIFORM",
+        "benefitMultiplier": [
+          0.8,
+          1.2
+        ],
+        "costMultiplier": [
+          0.85,
+          1.2
+        ],
+        "riskMultiplier": [
+          0.8,
+          1.25
+        ],
+        "capacityMultiplier": [
+          0.9,
+          1.15
+        ],
+        "trials": 512,
+        "seed": "health-model-pilot-v1",
+        "stabilitySweep": {
+          "parameter": "benefitMultiplier",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05
+        }
+      },
+      "constraints": [
+        {
+          "id": "pilot-budget",
+          "label": "Pilot budget",
+          "metric": "cost",
+          "operator": "<=",
+          "value": 60
+        },
+        {
+          "id": "review-capacity",
+          "label": "Manual-review capacity",
+          "metric": "capacity",
+          "operator": "<=",
+          "value": 40
+        }
+      ],
+      "options": [
+        {
+          "id": "hold",
+          "label": "Pause and retrain",
+          "benefit": 45,
+          "cost": 32,
+          "risk": 8,
+          "capacity": 18
+        },
+        {
+          "id": "limited-pilot",
+          "label": "Limited controlled pilot",
+          "benefit": 82,
+          "cost": 54,
+          "risk": 22,
+          "capacity": 36
+        },
+        {
+          "id": "full-pilot",
+          "label": "Full pilot",
+          "benefit": 108,
+          "cost": 86,
+          "risk": 38,
+          "capacity": 62
+        }
+      ]
+    },
+    {
+      "id": "decision-followup-allocation",
+      "title": "Should North receive follow-up resources under the original plan?",
+      "owner": "Operations lead",
+      "passActionId": "health:keep-north-priority",
+      "holdActionId": "health:freeze-and-reallocate",
+      "actionIfPass": "The original resource priority remains supported.",
+      "actionIfFail": "Freeze the original ranking and reallocate resources using the revised version.",
+      "conditions": [
+        {
+          "claimId": "north-risk",
+          "allowedStatuses": [
+            "SUPPORTED",
+            "WEAKENED"
+          ]
+        }
+      ],
+      "priorSignedResult": {
+        "versionId": "health-v1",
+        "outcome": "PASS",
+        "activeActionId": "health:keep-north-priority",
+        "actionIdentityHash": "99475e9aedf09333ea5cb3bcd07370c5ae6078fe72c5f3e8cb40a7cbe7ee4d90",
+        "recommendedOptionId": "keep",
+        "feasibleOptionIds": [
+          "keep"
+        ],
+        "decisionPolicyHash": "a234acfc51b97ffdca9aa47a5b1e55e6b9a0df6ca3d569c7360df1c1001d4dc2",
+        "decisionInputProvenanceHash": "54d0177946ec611b1fc15f9359e4cc8742f2c9abbb42dc3d99107cd162c19b7a",
+        "baselineSha256": "2b34242914e7548a4d9974afcf0bf617f8b7175f17afdedf7c7a812194f97324",
+        "currentSha256": "b6eb517e4a2e673e61151122bf95bb2741c30015445d83fda3ac3a7fc161cf01",
+        "ruleVersion": "claimtrace-rule/4.0.0",
+        "claimResultIds": [
+          "prior-result:health-v1:north-risk"
+        ],
+        "historyBasis": "RECORDED_IDENTITY",
+        "reviewRecordId": "synthetic-prior-review:decision-followup-allocation:health-v1",
+        "reviewRecordHash": "20116de1d49787f97cfa01acd830018c95971913ad6f35764986051759daa88f",
+        "signedAt": "2026-07-31T10:05:00.000Z",
+        "signedBy": "Synthetic operations owner"
+      },
+      "stakeholders": [
+        "North team",
+        "Other regions",
+        "Operations management"
+      ],
+      "objective": {
+        "benefitWeight": 1,
+        "costWeight": 0.2,
+        "riskWeight": 0.8
+      },
+      "riskTolerance": 20,
+      "noActionLoss": 30,
+      "inputProvenance": {
+        "kind": "MANUAL_ASSUMPTION",
+        "source": "Synthetic follow-up operations assumptions",
+        "version": "1.0.0",
+        "rationale": "Used to demonstrate resource-allocation scoring; these are not observed health benefits, real follow-up costs, or real capacity",
+        "units": {
+          "benefit": "synthetic utility points",
+          "cost": "synthetic cost points",
+          "risk": "synthetic risk points",
+          "capacity": "synthetic capacity points"
+        },
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      },
+      "uncertainty": {
+        "method": "BOUNDED_UNIFORM",
+        "benefitMultiplier": [
+          0.8,
+          1.2
+        ],
+        "costMultiplier": [
+          0.85,
+          1.2
+        ],
+        "riskMultiplier": [
+          0.8,
+          1.25
+        ],
+        "capacityMultiplier": [
+          0.9,
+          1.15
+        ],
+        "trials": 512,
+        "seed": "health-followup-allocation-v1",
+        "stabilitySweep": {
+          "parameter": "benefitMultiplier",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05
+        }
+      },
+      "constraints": [
+        {
+          "id": "visit-capacity",
+          "label": "Additional follow-up capacity",
+          "metric": "capacity",
+          "operator": "<=",
+          "value": 50
+        }
+      ],
+      "options": [
+        {
+          "id": "keep",
+          "label": "Keep the original allocation",
+          "benefit": 48,
+          "cost": 18,
+          "risk": 19,
+          "capacity": 12
+        },
+        {
+          "id": "rebalance",
+          "label": "Reallocate by revised ranking",
+          "benefit": 76,
+          "cost": 28,
+          "risk": 12,
+          "capacity": 42
+        },
+        {
+          "id": "expand-all",
+          "label": "Expand capacity across all regions",
+          "benefit": 92,
+          "cost": 64,
+          "risk": 9,
+          "capacity": 78
+        }
+      ]
+    }
+  ]
+} as const;

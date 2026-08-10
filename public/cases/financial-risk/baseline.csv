@@ -1,0 +1,6 @@
+account_id,portfolio,pd_percent,exposure,observed_label
+A-001,Retail,2.1,120,0
+A-002,Retail,3.2,95,0
+A-003,SME,5.8,260,1
+A-004,SME,4.9,310,0
+A-005,Retail,2.8,80,0

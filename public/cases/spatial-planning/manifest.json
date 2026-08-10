@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "synthetic": true,
+  "dataOrigin": "SYNTHETIC",
+  "sourceMetadataFile": null,
+  "caseId": "spatial-planning",
+  "primaryKey": "site_id",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
+      "bytes": 126
+    },
+    "current.csv": {
+      "sha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
+      "bytes": 126
+    },
+    "claims.json": {
+      "sha256": "868ecceb21fbef0fed495f5f48703b173d0130c88927a868b4108370bd41902a",
+      "bytes": 2031
+    },
+    "decisions.json": {
+      "sha256": "eb22d3955161d5f87304253049eeb932d1a1f7969f0db39a04161c55603c036b",
+      "bytes": 4156
+    },
+    "expected-audit.json": {
+      "sha256": "bffc9bf84660f73fb86604500174f5742c8c5f646ca9dfe35a98b380822fda9c",
+      "bytes": 1341
+    },
+    "evidence-package.json": {
+      "sha256": "2536d146643e6c3764e17410466534c1bc87c588d948e48c35be2320bac48f58",
+      "bytes": 48888
+    },
+    "case.ts": {
+      "sha256": "e61a34b820e489201188253f7940ae5ad6c9a662a8b7dffb30ca8941d38e3140",
+      "bytes": 6863
+    },
+    "README.md": {
+      "sha256": "66d69250d40d7ddd14872ba1d23e171f8ab788fabe748958627eefb024b05a4b",
+      "bytes": 420
+    }
+  }
+}

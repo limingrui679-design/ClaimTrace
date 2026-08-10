@@ -1,0 +1,70 @@
+import type { ExecutableCaseDefinition } from "../types";
+import { confirmedThreshold, controlledUncertainty, filter, manualDecisionInputs } from "../types";
+
+export const WORLD_BANK_LIFE_EXPECTANCY_CASE: ExecutableCaseDefinition = {
+  id: "world-bank-life-expectancy",
+  title: "Public Data: World Bank Life-Expectancy Version Audit",
+  projectName: "World Bank WDI Eight-Country Life-Expectancy Audit",
+  primaryKey: "country_code",
+  baselineFile: "/cases/world-bank-life-expectancy/baseline.csv",
+  currentFile: "/cases/world-bank-life-expectancy/current.csv",
+  sourceMetadataFile: "/cases/world-bank-life-expectancy/source-metadata.json",
+  dataOrigin: "PUBLIC",
+  expectedGeneratedAt: "2026-08-10T00:00:00.000Z",
+  claims: [
+    {
+      id: "wdi-japan-rank",
+      code: "WB-001",
+      title: "Japan still has the highest life expectancy at birth among the eight selected countries",
+      section: "Cross-country descriptive comparison",
+      owner: "Public-data case reviewer",
+      category: "Group ranking",
+      formula: "argmax(country, life_expectancy_years) = Japan",
+      rule: { type: "rank", field: "life_expectancy_years", aggregation: "average", groupField: "country", expectedGroup: "Japan", rank: "max", tiePolicy: "require_unique" },
+    },
+    {
+      id: "wdi-germany-threshold",
+      code: "WB-002",
+      title: "Germany's life expectancy at birth remains at or above 81 years",
+      section: "Illustrative threshold audit",
+      owner: "Public-data case reviewer",
+      category: "Threshold gate",
+      formula: "Germany life_expectancy_years >= 81",
+      rule: { type: "threshold", field: "life_expectancy_years", aggregation: "average", operator: ">=", threshold: 81, filters: [filter("country_code", "DEU")], thresholdSpec: confirmedThreshold(81, "absolute", "Illustrative analyst review threshold v1", "Used only to demonstrate how an updated public indicator can invalidate an existing threshold claim; this is not World Bank guidance or a policy standard") },
+    },
+    {
+      id: "wdi-eight-country-stability",
+      code: "WB-003",
+      title: "Mean life expectancy at birth across the eight selected countries changes by no more than 1%",
+      section: "Sample-mean stability",
+      owner: "Public-data case reviewer",
+      category: "Version stability",
+      formula: "abs(mean(2024)-mean(2019))/mean(2019) <= 1%",
+      rule: { type: "stability", field: "life_expectancy_years", aggregation: "average", supportTolerance: 1, reversalThreshold: 3, supportToleranceSpec: confirmedThreshold(1, "percent", "Illustrative descriptive stability rule v1", "Used to demonstrate a stability audit of a descriptive mean across periods; this does not imply statistical significance"), reversalThresholdSpec: confirmedThreshold(3, "percent", "Illustrative descriptive reversal rule v1", "At 3%, treat the original stability statement as materially invalid") },
+    },
+  ],
+  decisions: [{
+    id: "wdi-publication-note",
+    title: "Can the 2019 summary be reused without a revision note?",
+    owner: "Public-data case reviewer",
+    passActionId: "wdi:retain-summary-with-source-date",
+    holdActionId: "wdi:update-summary-and-note-threshold-change",
+    actionIfPass: "Retain the summary, but disclose the indicator, observation year, access date, and license.",
+    actionIfFail: "Update the summary and state that Germany crossed the illustrative threshold; do not interpret a descriptive change as a causal effect.",
+    conditions: [{ claimId: "wdi-japan-rank", allowedStatuses: ["SUPPORTED"] }, { claimId: "wdi-germany-threshold", allowedStatuses: ["SUPPORTED"] }, { claimId: "wdi-eight-country-stability", allowedStatuses: ["SUPPORTED", "WEAKENED"] }],
+    stakeholders: ["Data readers", "Report authors", "Public-data provider"],
+    objective: { benefitWeight: 1, costWeight: 0.2, riskWeight: 1.1 },
+    riskTolerance: 20,
+    noActionLoss: 24,
+    inputProvenance: manualDecisionInputs("Illustrative publication-governance assumptions v1", "Option benefits, costs, risks, and capacities are manually supplied ClaimTrace demonstration inputs; they are not World Bank data or observed communication effects"),
+    uncertainty: controlledUncertainty("world-bank-publication-note-v1"),
+    constraints: [{ id: "editorial-capacity", label: "Editorial capacity", metric: "capacity", operator: "<=", value: 45 }],
+    options: [
+      { id: "reuse", label: "Reuse the old summary unchanged", benefit: 42, cost: 8, risk: 28, capacity: 5 },
+      { id: "annotate", label: "Update with source and threshold notes", benefit: 78, cost: 24, risk: 8, capacity: 24 },
+      { id: "full-study", label: "Expand into a full cross-country study", benefit: 96, cost: 72, risk: 12, capacity: 68 },
+    ],
+  }],
+};
+
+export default WORLD_BANK_LIFE_EXPECTANCY_CASE;

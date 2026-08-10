@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "claimtrace-external-source-config/1.0.0",
+  "publisher": "World Bank",
+  "dataset": "World Development Indicators",
+  "indicator": {
+    "id": "SP.DYN.LE00.IN",
+    "name": "Life expectancy at birth, total (years)"
+  },
+  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceLastUpdated": "2026-07-13",
+  "sourceUrls": {
+    "baseline": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2019&format=json&per_page=1000",
+    "current": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2024&format=json&per_page=1000"
+  },
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://datacatalog.worldbank.org/public-licenses",
+  "attribution": "World Bank, World Development Indicators, Life expectancy at birth, total (years) (SP.DYN.LE00.IN), accessed 2026-08-10; transformed by ClaimTrace.",
+  "cleaning": {
+    "implementation": "world-bank-indicator-v1",
+    "scriptPath": "tools/generate-world-bank-case.mjs",
+    "baselineYear": "2019",
+    "currentYear": "2024",
+    "selectedCountryCodes": ["BRA", "CHN", "DEU", "FRA", "GBR", "IND", "JPN", "USA"],
+    "decimalPlaces": 3
+  }
+}

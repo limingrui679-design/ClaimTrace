@@ -1,0 +1,1645 @@
+{
+  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "bundleType": "AuditBundle",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "previousBundleHash": null,
+  "project": "Synthetic Channel Resource-Allocation Audit",
+  "primaryKey": "channel_id",
+  "ruleVersion": "claimtrace-rule/6.1.2",
+  "isDemo": true,
+  "dataOrigin": "SYNTHETIC",
+  "snapshots": {
+    "baseline": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "baseline-d3d7cb0ae80886b7",
+      "side": "baseline",
+      "fileName": "baseline.csv",
+      "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+      "normalizedSha256": "1e70057b77e4459adfa5d5fb91999064ebd2aca53172b2c30e39f366643d9165",
+      "rowCount": 4,
+      "byteSize": 170,
+      "columns": [
+        "channel_id",
+        "channel",
+        "conversion_rate",
+        "ticket_hours",
+        "eligible_leads"
+      ],
+      "primaryKey": "channel_id",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "verifiedAt": "2026-08-08T00:00:00.000Z",
+      "verificationStatus": "verified"
+    },
+    "current": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "current-7c9de810429a84fd",
+      "side": "current",
+      "fileName": "current.csv",
+      "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+      "normalizedSha256": "1b442715a9d5487cc9be65bd1dd360f48e2d87603581b3e470e03c38014b9221",
+      "rowCount": 4,
+      "byteSize": 167,
+      "columns": [
+        "channel_id",
+        "channel",
+        "conversion_rate",
+        "ticket_hours",
+        "eligible_leads"
+      ],
+      "primaryKey": "channel_id",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "verifiedAt": "2026-08-08T00:00:00.000Z",
+      "verificationStatus": "verified"
+    }
+  },
+  "snapshotPayloads": {
+    "baseline": {
+      "fileName": "baseline.csv",
+      "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+      "normalizedSha256": "1e70057b77e4459adfa5d5fb91999064ebd2aca53172b2c30e39f366643d9165",
+      "text": "channel_id,channel,conversion_rate,ticket_hours,eligible_leads\nCH-01,Search,8.4,11.2,1200\nCH-02,Referral,9.1,8.6,760\nCH-03,Partner,7.8,13.4,920\nCH-04,Direct,8.7,7.9,1100\n",
+      "rawBytesBase64": "Y2hhbm5lbF9pZCxjaGFubmVsLGNvbnZlcnNpb25fcmF0ZSx0aWNrZXRfaG91cnMsZWxpZ2libGVfbGVhZHMKQ0gtMDEsU2VhcmNoLDguNCwxMS4yLDEyMDAKQ0gtMDIsUmVmZXJyYWwsOS4xLDguNiw3NjAKQ0gtMDMsUGFydG5lciw3LjgsMTMuNCw5MjAKQ0gtMDQsRGlyZWN0LDguNyw3LjksMTEwMAo="
+    },
+    "current": {
+      "fileName": "current.csv",
+      "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+      "normalizedSha256": "1b442715a9d5487cc9be65bd1dd360f48e2d87603581b3e470e03c38014b9221",
+      "text": "channel_id,channel,conversion_rate,ticket_hours,eligible_leads\nCH-01,Search,8.2,12.8,1180\nCH-02,Referral,8.5,9.2,680\nCH-03,Partner,9.3,15.1,950\nCH-04,Direct,8.7,,1100\n",
+      "rawBytesBase64": "Y2hhbm5lbF9pZCxjaGFubmVsLGNvbnZlcnNpb25fcmF0ZSx0aWNrZXRfaG91cnMsZWxpZ2libGVfbGVhZHMKQ0gtMDEsU2VhcmNoLDguMiwxMi44LDExODAKQ0gtMDIsUmVmZXJyYWwsOC41LDkuMiw2ODAKQ0gtMDMsUGFydG5lciw5LjMsMTUuMSw5NTAKQ0gtMDQsRGlyZWN0LDguNywsMTEwMAo="
+    }
+  },
+  "summary": {
+    "total": 3,
+    "supported": 1,
+    "weakened": 0,
+    "reversed": 2,
+    "untestable": 0,
+    "reviewRequired": 0,
+    "completenessChecksPassed": 48,
+    "completenessChecksTotal": 48,
+    "evidenceCoverage": 100,
+    "changedRecords": 4
+  },
+  "diffSummary": {
+    "totalChanged": 4,
+    "exported": 4,
+    "truncated": false,
+    "limit": 500
+  },
+  "diffs": [
+    {
+      "key": "CH-01",
+      "kind": "changed",
+      "changedFields": [
+        "conversion_rate",
+        "ticket_hours",
+        "eligible_leads"
+      ],
+      "baseline": {
+        "channel_id": "CH-01",
+        "channel": "Search",
+        "conversion_rate": "8.4",
+        "ticket_hours": "11.2",
+        "eligible_leads": "1200"
+      },
+      "current": {
+        "channel_id": "CH-01",
+        "channel": "Search",
+        "conversion_rate": "8.2",
+        "ticket_hours": "12.8",
+        "eligible_leads": "1180"
+      },
+      "baselineLine": 2,
+      "currentLine": 2
+    },
+    {
+      "key": "CH-02",
+      "kind": "changed",
+      "changedFields": [
+        "conversion_rate",
+        "ticket_hours",
+        "eligible_leads"
+      ],
+      "baseline": {
+        "channel_id": "CH-02",
+        "channel": "Referral",
+        "conversion_rate": "9.1",
+        "ticket_hours": "8.6",
+        "eligible_leads": "760"
+      },
+      "current": {
+        "channel_id": "CH-02",
+        "channel": "Referral",
+        "conversion_rate": "8.5",
+        "ticket_hours": "9.2",
+        "eligible_leads": "680"
+      },
+      "baselineLine": 3,
+      "currentLine": 3
+    },
+    {
+      "key": "CH-03",
+      "kind": "changed",
+      "changedFields": [
+        "conversion_rate",
+        "ticket_hours",
+        "eligible_leads"
+      ],
+      "baseline": {
+        "channel_id": "CH-03",
+        "channel": "Partner",
+        "conversion_rate": "7.8",
+        "ticket_hours": "13.4",
+        "eligible_leads": "920"
+      },
+      "current": {
+        "channel_id": "CH-03",
+        "channel": "Partner",
+        "conversion_rate": "9.3",
+        "ticket_hours": "15.1",
+        "eligible_leads": "950"
+      },
+      "baselineLine": 4,
+      "currentLine": 4
+    },
+    {
+      "key": "CH-04",
+      "kind": "changed",
+      "changedFields": [
+        "ticket_hours"
+      ],
+      "baseline": {
+        "channel_id": "CH-04",
+        "channel": "Direct",
+        "conversion_rate": "8.7",
+        "ticket_hours": "7.9",
+        "eligible_leads": "1100"
+      },
+      "current": {
+        "channel_id": "CH-04",
+        "channel": "Direct",
+        "conversion_rate": "8.7",
+        "ticket_hours": "",
+        "eligible_leads": "1100"
+      },
+      "baselineLine": 5,
+      "currentLine": 5
+    }
+  ],
+  "queryTrace": [
+    {
+      "claimId": "business-referral-rank",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "conversion_rate",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {
+            "Search": 1,
+            "Referral": 1,
+            "Partner": 1,
+            "Direct": 1
+          }
+        },
+        "current": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {
+            "Search": 1,
+            "Referral": 1,
+            "Partner": 1,
+            "Direct": 1
+          }
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 8,
+        "exportedReferences": 8,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "business-referral-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "business-service-gate",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "ticket_hours",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 3,
+          "missingRows": 1,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 8,
+        "exportedReferences": 8,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "business-service-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "business-lead-stability",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "eligible_leads",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 8,
+        "exportedReferences": 8,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "business-lead-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      }
+    }
+  ],
+  "dataPreview": {
+    "columns": [
+      "channel_id",
+      "channel",
+      "conversion_rate",
+      "ticket_hours",
+      "eligible_leads"
+    ],
+    "baselineRows": [
+      {
+        "channel_id": "CH-01",
+        "channel": "Search",
+        "conversion_rate": "8.4",
+        "ticket_hours": "11.2",
+        "eligible_leads": "1200"
+      },
+      {
+        "channel_id": "CH-02",
+        "channel": "Referral",
+        "conversion_rate": "9.1",
+        "ticket_hours": "8.6",
+        "eligible_leads": "760"
+      },
+      {
+        "channel_id": "CH-03",
+        "channel": "Partner",
+        "conversion_rate": "7.8",
+        "ticket_hours": "13.4",
+        "eligible_leads": "920"
+      },
+      {
+        "channel_id": "CH-04",
+        "channel": "Direct",
+        "conversion_rate": "8.7",
+        "ticket_hours": "7.9",
+        "eligible_leads": "1100"
+      }
+    ],
+    "currentRows": [
+      {
+        "channel_id": "CH-01",
+        "channel": "Search",
+        "conversion_rate": "8.2",
+        "ticket_hours": "12.8",
+        "eligible_leads": "1180"
+      },
+      {
+        "channel_id": "CH-02",
+        "channel": "Referral",
+        "conversion_rate": "8.5",
+        "ticket_hours": "9.2",
+        "eligible_leads": "680"
+      },
+      {
+        "channel_id": "CH-03",
+        "channel": "Partner",
+        "conversion_rate": "9.3",
+        "ticket_hours": "15.1",
+        "eligible_leads": "950"
+      },
+      {
+        "channel_id": "CH-04",
+        "channel": "Direct",
+        "conversion_rate": "8.7",
+        "ticket_hours": "",
+        "eligible_leads": "1100"
+      }
+    ],
+    "previewLimit": 20
+  },
+  "scaleBoundary": {
+    "maxExportedDiffs": 500,
+    "maxRawBytesPerSnapshot": 500000,
+    "maxReferencesPerClaim": 200,
+    "note": "Above the size limits, preserve hashes, manifests, changed records, and required samples instead of copying full tables."
+  },
+  "claimSpecs": [
+    {
+      "id": "business-referral-rank",
+      "code": "BO-001",
+      "title": "Referral remains the highest-converting channel",
+      "section": "Channel strategy",
+      "owner": "Growth owner",
+      "category": "Channel ranking",
+      "formula": "argmax(channel, conversion_rate) = Referral",
+      "rule": {
+        "type": "rank",
+        "field": "conversion_rate",
+        "aggregation": "average",
+        "groupField": "channel",
+        "expectedGroup": "Referral",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      }
+    },
+    {
+      "id": "business-service-gate",
+      "code": "BO-002",
+      "title": "Average ticket handling time does not exceed 12 hours",
+      "section": "Service capacity",
+      "owner": "Service owner",
+      "category": "Service threshold",
+      "formula": "mean(ticket_hours) <= 12",
+      "rule": {
+        "type": "threshold",
+        "field": "ticket_hours",
+        "aggregation": "average",
+        "operator": "<=",
+        "threshold": 12,
+        "thresholdSpec": {
+          "value": 12,
+          "unit": "absolute",
+          "source": "Synthetic service SLA v1",
+          "rationale": "Handling times above 12 hours trigger service-capacity expansion",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "business-lead-stability",
+      "code": "BO-003",
+      "title": "Serviceable lead volume remains within a 5% change",
+      "section": "Capacity planning",
+      "owner": "Operations owner",
+      "category": "Volume stability",
+      "formula": "abs(mean(eligible_leads_v2)-mean(eligible_leads_v1))/mean(v1) <= 5%",
+      "rule": {
+        "type": "stability",
+        "field": "eligible_leads",
+        "aggregation": "average",
+        "supportTolerance": 5,
+        "reversalThreshold": 12,
+        "supportToleranceSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Synthetic capacity plan v1",
+          "rationale": "Retain the current staffing plan within a 5% change",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 12,
+          "unit": "percent",
+          "source": "Synthetic capacity risk policy v1",
+          "rationale": "At 12%, the original capacity assumption is invalid",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      }
+    }
+  ],
+  "claimResults": [
+    {
+      "id": "business-referral-rank",
+      "code": "BO-001",
+      "title": "Referral remains the highest-converting channel",
+      "section": "Channel strategy",
+      "owner": "Growth owner",
+      "category": "Channel ranking",
+      "formula": "argmax(channel, conversion_rate) = Referral",
+      "rule": {
+        "type": "rank",
+        "field": "conversion_rate",
+        "aggregation": "average",
+        "groupField": "channel",
+        "expectedGroup": "Referral",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVERSED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "Referral 9.1",
+      "currentValue": "Partner 9.3",
+      "reason": "The highest group is Partner, not expected group Referral.",
+      "action": "Stop citing the prior ranking claim and inspect linked decisions.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-01",
+          "lineNumber": 2,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-02",
+          "lineNumber": 3,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-03",
+          "lineNumber": 4,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-04",
+          "lineNumber": 5,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-01",
+          "lineNumber": 2,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-02",
+          "lineNumber": 3,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-03",
+          "lineNumber": 4,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-04",
+          "lineNumber": 5,
+          "fields": [
+            "channel_id",
+            "conversion_rate",
+            "channel"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Referral remains the highest-converting channel",
+          "kind": "Claim",
+          "title": "Referral remains the highest-converting channel",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:business-referral-rank:04cc0b3bdfed5e2dec674a1c",
+          "kind": "Comparison result",
+          "title": "conversion_rate version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:conversion_rate",
+          "kind": "Metric",
+          "title": "conversion_rate",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:conversion_rate",
+          "kind": "Field",
+          "title": "conversion_rate",
+          "detail": "Primary key: channel_id",
+          "bound": true
+        },
+        {
+          "id": "records:channel_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVERSED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-08T00:00:00.000Z",
+        "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+        "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 8,
+        "exportedReferences": 8,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "business-referral-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {
+            "Search": 1,
+            "Referral": 1,
+            "Partner": 1,
+            "Direct": 1
+          }
+        },
+        "current": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {
+            "Search": 1,
+            "Referral": 1,
+            "Partner": 1,
+            "Direct": 1
+          }
+        }
+      },
+      "resultId": "claim-result:business-referral-rank:04cc0b3bdfed5e2dec674a1c",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "business-service-gate",
+      "code": "BO-002",
+      "title": "Average ticket handling time does not exceed 12 hours",
+      "section": "Service capacity",
+      "owner": "Service owner",
+      "category": "Service threshold",
+      "formula": "mean(ticket_hours) <= 12",
+      "rule": {
+        "type": "threshold",
+        "field": "ticket_hours",
+        "aggregation": "average",
+        "operator": "<=",
+        "threshold": 12,
+        "thresholdSpec": {
+          "value": 12,
+          "unit": "absolute",
+          "source": "Synthetic service SLA v1",
+          "rationale": "Handling times above 12 hours trigger service-capacity expansion",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVERSED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "10.27",
+      "currentValue": "12.37",
+      "reason": "Current average is 12.37 and does not satisfy rule <= 12.",
+      "action": "Stop citing this claim and inspect linked decisions.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-01",
+          "lineNumber": 2,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-02",
+          "lineNumber": 3,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-03",
+          "lineNumber": 4,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-04",
+          "lineNumber": 5,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-01",
+          "lineNumber": 2,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-02",
+          "lineNumber": 3,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-03",
+          "lineNumber": 4,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-04",
+          "lineNumber": 5,
+          "fields": [
+            "channel_id",
+            "ticket_hours"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Average ticket handling time does not exceed 12 hours",
+          "kind": "Claim",
+          "title": "Average ticket handling time does not exceed 12 hours",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:business-service-gate:1e60c5010c9a3d7933c4c618",
+          "kind": "Comparison result",
+          "title": "ticket_hours version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:ticket_hours",
+          "kind": "Metric",
+          "title": "ticket_hours",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:ticket_hours",
+          "kind": "Field",
+          "title": "ticket_hours",
+          "detail": "Primary key: channel_id",
+          "bound": true
+        },
+        {
+          "id": "records:channel_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVERSED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-08T00:00:00.000Z",
+        "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+        "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 8,
+        "exportedReferences": 8,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "business-service-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 3,
+          "missingRows": 1,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:business-service-gate:1e60c5010c9a3d7933c4c618",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "business-lead-stability",
+      "code": "BO-003",
+      "title": "Serviceable lead volume remains within a 5% change",
+      "section": "Capacity planning",
+      "owner": "Operations owner",
+      "category": "Volume stability",
+      "formula": "abs(mean(eligible_leads_v2)-mean(eligible_leads_v1))/mean(v1) <= 5%",
+      "rule": {
+        "type": "stability",
+        "field": "eligible_leads",
+        "aggregation": "average",
+        "supportTolerance": 5,
+        "reversalThreshold": 12,
+        "supportToleranceSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Synthetic capacity plan v1",
+          "rationale": "Retain the current staffing plan within a 5% change",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 12,
+          "unit": "percent",
+          "source": "Synthetic capacity risk policy v1",
+          "rationale": "At 12%, the original capacity assumption is invalid",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      },
+      "kind": "VERSION_COMPARISON",
+      "status": "SUPPORTED",
+      "baselineStatus": "UNTESTABLE",
+      "baselineValue": "995",
+      "currentValue": "977.5",
+      "reason": "average of eligible_leads changed 1.76%, within the confirmed support tolerance of 5%.",
+      "action": "The claim may continue to be cited.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-01",
+          "lineNumber": 2,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-02",
+          "lineNumber": 3,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-03",
+          "lineNumber": 4,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "keyField": "channel_id",
+          "keyValue": "CH-04",
+          "lineNumber": 5,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-01",
+          "lineNumber": 2,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-02",
+          "lineNumber": 3,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-03",
+          "lineNumber": 4,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "keyField": "channel_id",
+          "keyValue": "CH-04",
+          "lineNumber": 5,
+          "fields": [
+            "channel_id",
+            "eligible_leads"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Serviceable lead volume remains within a 5% change",
+          "kind": "Claim",
+          "title": "Serviceable lead volume remains within a 5% change",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:business-lead-stability:aa73f2bb336458809643f186",
+          "kind": "Comparison result",
+          "title": "eligible_leads version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:eligible_leads",
+          "kind": "Metric",
+          "title": "eligible_leads",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:eligible_leads",
+          "kind": "Field",
+          "title": "eligible_leads",
+          "detail": "Primary key: channel_id",
+          "bound": true
+        },
+        {
+          "id": "records:channel_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-08T00:00:00.000Z",
+        "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+        "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 8,
+        "exportedReferences": 8,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "business-lead-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 4,
+            "exportedReferences": 4,
+            "changedCandidates": 4,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 4,
+          "filteredRows": 4,
+          "effectiveRows": 4,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 4,
+          "includedKeysHash": "f805f5d0",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:business-lead-stability:aa73f2bb336458809643f186",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisionSpecs": [
+    {
+      "id": "business-channel-allocation",
+      "title": "How should next month's channel budget and service capacity be allocated?",
+      "owner": "Commercial operations lead",
+      "passActionId": "business:keep-referral-priority",
+      "holdActionId": "business:freeze-and-reallocate",
+      "actionIfPass": "Retain the Referral-first allocation.",
+      "actionIfFail": "Freeze the original budget ranking and reallocate using the revised results.",
+      "conditions": [
+        {
+          "claimId": "business-referral-rank",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "business-service-gate",
+          "allowedStatuses": [
+            "SUPPORTED",
+            "WEAKENED"
+          ]
+        }
+      ],
+      "priorSignedResult": {
+        "versionId": "business-v1",
+        "outcome": "PASS",
+        "activeActionId": "business:keep-referral-priority",
+        "actionIdentityHash": "e0d661553f3aabd3e0f7068f3d2eb6ff812144563ecb73e6f1d7b3e96c55a4e5",
+        "recommendedOptionId": "keep-referral",
+        "feasibleOptionIds": [
+          "keep-referral"
+        ],
+        "decisionPolicyHash": "f9c44cb50b2145f2c6672af89074d1dd2159aa2e375eb4def98bf3f391cdd9ae",
+        "decisionInputProvenanceHash": "3def3abbf6f8f11c6314063bb2d7e9718d468408ca99233c45aec28b41e82279",
+        "baselineSha256": "f7f552cad2e423840a127163c82fd67b19985c9d9acb39876b42a0d32d2138a3",
+        "currentSha256": "5f13b35768ec69233e17580f207065e6194bf2959d93904e329f981b1ae42890",
+        "ruleVersion": "claimtrace-rule/4.0.0",
+        "claimResultIds": [
+          "prior-result:business-v1:business-referral-rank",
+          "prior-result:business-v1:business-service-gate"
+        ],
+        "historyBasis": "RECORDED_IDENTITY",
+        "reviewRecordId": "synthetic-prior-review:business-channel-allocation:business-v1",
+        "reviewRecordHash": "5ea518a210ba207c67bee6f0e07463eb2c519429d774e33670ec309580027296",
+        "signedAt": "2026-08-01T08:00:00.000Z",
+        "signedBy": "Synthetic commercial owner"
+      },
+      "stakeholders": [
+        "Growth team",
+        "Customer service team",
+        "Finance"
+      ],
+      "objective": {
+        "benefitWeight": 1,
+        "costWeight": 0.25,
+        "riskWeight": 1
+      },
+      "riskTolerance": 22,
+      "noActionLoss": 35,
+      "inputProvenance": {
+        "kind": "MANUAL_ASSUMPTION",
+        "source": "Synthetic commercial planning assumptions",
+        "version": "1.0.0",
+        "rationale": "Used to demonstrate deterministic multi-option scoring; these are not observed business outcomes or real budgets",
+        "units": {
+          "benefit": "synthetic utility points",
+          "cost": "synthetic cost points",
+          "risk": "synthetic risk points",
+          "capacity": "synthetic capacity points"
+        },
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      },
+      "uncertainty": {
+        "method": "BOUNDED_UNIFORM",
+        "benefitMultiplier": [
+          0.8,
+          1.2
+        ],
+        "costMultiplier": [
+          0.85,
+          1.2
+        ],
+        "riskMultiplier": [
+          0.8,
+          1.25
+        ],
+        "capacityMultiplier": [
+          0.9,
+          1.15
+        ],
+        "trials": 512,
+        "seed": "business-allocation-v1",
+        "stabilitySweep": {
+          "parameter": "benefitMultiplier",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05
+        }
+      },
+      "constraints": [
+        {
+          "id": "budget",
+          "label": "Budget ceiling",
+          "metric": "cost",
+          "operator": "<=",
+          "value": 65
+        },
+        {
+          "id": "capacity",
+          "label": "Service capacity",
+          "metric": "capacity",
+          "operator": "<=",
+          "value": 55
+        }
+      ],
+      "options": [
+        {
+          "id": "keep-referral",
+          "label": "Keep Referral first",
+          "benefit": 64,
+          "cost": 42,
+          "risk": 24,
+          "capacity": 40
+        },
+        {
+          "id": "shift-partner",
+          "label": "Shift to Partner",
+          "benefit": 86,
+          "cost": 54,
+          "risk": 16,
+          "capacity": 52
+        },
+        {
+          "id": "expand-all",
+          "label": "Expand all channels",
+          "benefit": 105,
+          "cost": 88,
+          "risk": 28,
+          "capacity": 76
+        }
+      ]
+    }
+  ],
+  "decisionResults": [
+    {
+      "decisionId": "business-channel-allocation",
+      "previousOutcome": "PASS",
+      "previousVersionId": "business-v1",
+      "previousRecommendedOptionId": "keep-referral",
+      "currentOutcome": "HOLD",
+      "boundClaimIds": [
+        "business-referral-rank",
+        "business-service-gate"
+      ],
+      "affectedClaimIds": [
+        "business-referral-rank",
+        "business-service-gate"
+      ],
+      "comparisonBasis": "RECORDED_SIGNED_IDENTITY",
+      "changeReasons": [
+        "OUTCOME",
+        "ACTION_IDENTITY",
+        "RECOMMENDED_OPTION",
+        "FEASIBLE_OPTIONS",
+        "DECISION_POLICY",
+        "INPUT_PROVENANCE",
+        "BASELINE_SNAPSHOT",
+        "CURRENT_SNAPSHOT",
+        "RULE_VERSION",
+        "CLAIM_RESULTS"
+      ],
+      "binding": {
+        "activeActionId": "business:freeze-and-reallocate",
+        "actionIdentityHash": "deee7a78a7f84f59f4cabd9a75de3917ea59aae7881cc1ef4e5675294c6a7663",
+        "recommendedOptionId": "shift-partner",
+        "feasibleOptionIds": [
+          "shift-partner"
+        ],
+        "decisionPolicyHash": "6346a0174b0e8ce5220752a7602097a9d62121f02778b6ca559f015d3e3edcb4",
+        "decisionInputProvenanceHash": "86def82e7aacbd26f2b417f1a23d915123dca5aa23d220213d58a994c430e30f",
+        "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+        "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "claimResultIds": [
+          "claim-result:business-referral-rank:04cc0b3bdfed5e2dec674a1c",
+          "claim-result:business-service-gate:1e60c5010c9a3d7933c4c618"
+        ]
+      },
+      "analysis": {
+        "options": [
+          {
+            "optionId": "shift-partner",
+            "label": "Shift to Partner",
+            "feasible": true,
+            "score": 56.5,
+            "failedConstraints": [],
+            "breakEvenBenefit": -5.5,
+            "scoreInterval": {
+              "min": 32.6,
+              "max": 78.925
+            },
+            "paretoEfficient": true
+          },
+          {
+            "optionId": "expand-all",
+            "label": "Expand all channels",
+            "feasible": false,
+            "score": 55,
+            "failedConstraints": [
+              "budget",
+              "capacity",
+              "risk-tolerance"
+            ],
+            "breakEvenBenefit": 15,
+            "scoreInterval": {
+              "min": 22.6,
+              "max": 84.9
+            },
+            "paretoEfficient": false
+          },
+          {
+            "optionId": "keep-referral",
+            "label": "Keep Referral first",
+            "feasible": false,
+            "score": 29.5,
+            "failedConstraints": [
+              "risk-tolerance"
+            ],
+            "breakEvenBenefit": -0.5,
+            "scoreInterval": {
+              "min": 8.6,
+              "max": 48.675
+            },
+            "paretoEfficient": false
+          }
+        ],
+        "recommendedOptionId": "shift-partner",
+        "noActionScore": -35,
+        "sensitivity": [
+          {
+            "scenarioId": "benefit-down-20",
+            "label": "Benefit down 20%",
+            "recommendedOptionId": "shift-partner"
+          },
+          {
+            "scenarioId": "cost-up-20",
+            "label": "Cost up 20%",
+            "recommendedOptionId": "shift-partner"
+          },
+          {
+            "scenarioId": "risk-up-20",
+            "label": "Risk up 20%",
+            "recommendedOptionId": "shift-partner"
+          }
+        ],
+        "paretoFrontierOptionIds": [
+          "shift-partner"
+        ],
+        "recommendationStability": {
+          "parameter": "benefitMultiplier",
+          "recommendedOptionId": "shift-partner",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05,
+          "evaluatedPoints": 21
+        },
+        "monteCarlo": {
+          "method": "DETERMINISTIC_SEEDED_BOUNDED_UNIFORM",
+          "seed": "business-allocation-v1",
+          "trials": 512,
+          "recommendationShares": [
+            {
+              "optionId": "shift-partner",
+              "count": 329,
+              "share": 0.642578
+            },
+            {
+              "optionId": "NO_ACTION",
+              "count": 123,
+              "share": 0.240234
+            },
+            {
+              "optionId": "keep-referral",
+              "count": 60,
+              "share": 0.117188
+            }
+          ],
+          "options": [
+            {
+              "optionId": "expand-all",
+              "feasibilityRate": 0,
+              "scoreP05": 32.501598,
+              "scoreP50": 54.373496,
+              "scoreP95": 75.129213
+            },
+            {
+              "optionId": "keep-referral",
+              "feasibilityRate": 0.306641,
+              "scoreP05": 15.081088,
+              "scoreP50": 29.113052,
+              "scoreP95": 42.650102
+            },
+            {
+              "optionId": "shift-partner",
+              "feasibilityRate": 0.642578,
+              "scoreP05": 39.249121,
+              "scoreP50": 56.155514,
+              "scoreP95": 72.55232
+            }
+          ]
+        }
+      },
+      "status": "DECISION_CHANGED",
+      "reason": "The recorded prior signed version business-v1 was PASS; the current outcome is HOLD; active action identity, recommended option, feasible option set also changed. The action identity changed and must be signed again.",
+      "governance": {
+        "engineStatus": "DECISION_CHANGED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "resultId": "decision-result:business-channel-allocation:0f542757ec6837bd0f18b8ed"
+    }
+  ],
+  "reviews": [],
+  "reviewChain": {
+    "count": 0,
+    "headRecordId": null,
+    "headRecordHash": null
+  },
+  "externalSource": null,
+  "upstreamLineage": null,
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "claimtrace-json-c14n/1.0.0",
+    "payloadHash": "46c60f96822b1fd57c8cff077cd524fc4581b5f3d99572dc96a4314186dee7c6",
+    "sectionHashes": {
+      "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
+      "snapshots": "ea25ac3d9c9d33e9f7c4629a474db9855f8fa16350931752c3cda0e1cc195031",
+      "claims": "eb5f51160ef7f2c7743a650997d3cd1fe990677cd28f67e52ee108780ef56216",
+      "decisions": "5d5aedb1b41bd5520841abaf46060d580a3646a03699c39bb0f1079e79bac183",
+      "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
+      "provenance": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+import { computeEvidenceCompleteness, sha256Canonical, verifyEvidencePackage } from "../app/claimtrace-core";
+import { EXECUTABLE_CASES, runExecutableCase } from "../src/cases";
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const CASES = path.join(ROOT, "public", "cases");
+
+for (const definition of EXECUTABLE_CASES) {
+  test(`executable case ${definition.id} reproduces its claims, decisions, evidence, and manifest`, async () => {
+    const directory = path.join(CASES, definition.id);
+    const baselineText = await readFile(path.join(directory, "baseline.csv"), "utf8");
+    const currentText = await readFile(path.join(directory, "current.csv"), "utf8");
+    const committedClaims = JSON.parse(await readFile(path.join(directory, "claims.json"), "utf8"));
+    const committedDecisions = JSON.parse(await readFile(path.join(directory, "decisions.json"), "utf8"));
+    const expected = JSON.parse(await readFile(path.join(directory, "expected-audit.json"), "utf8"));
+    const evidence = JSON.parse(await readFile(path.join(directory, "evidence-package.json"), "utf8"));
+    const manifest = JSON.parse(await readFile(path.join(directory, "manifest.json"), "utf8"));
+    assert.deepEqual(committedClaims, definition.claims);
+    assert.deepEqual(committedDecisions, definition.decisions);
+
+    const upstreamLineage = definition.upstreamLineageFile
+      ? JSON.parse(await readFile(path.join(ROOT, "public", definition.upstreamLineageFile.replace(/^\//, "")), "utf8"))
+      : undefined;
+    const externalSource = definition.sourceMetadataFile
+      ? JSON.parse(await readFile(path.join(ROOT, "public", definition.sourceMetadataFile.replace(/^\//, "")), "utf8"))
+      : undefined;
+    const run = await runExecutableCase(definition, baselineText, currentText, upstreamLineage, externalSource);
+    const projection = {
+      schemaVersion: "claimtrace-case-audit/1.0.0",
+      caseId: definition.id,
+      generatedAt: definition.expectedGeneratedAt,
+      claims: run.claims.map((claim) => ({ id: claim.id, kind: claim.kind, baselineStatus: claim.baselineStatus, status: claim.status, baselineValue: claim.baselineValue, currentValue: claim.currentValue, evidenceCompleteness: computeEvidenceCompleteness(claim, run.dataset) })),
+      decisions: run.decisions.map((decision) => ({ decisionId: decision.decisionId, previousOutcome: decision.previousOutcome, currentOutcome: decision.currentOutcome, status: decision.status, recommendedOptionId: decision.analysis?.recommendedOptionId ?? null })),
+    };
+    assert.deepEqual(projection, expected);
+    assert.deepEqual(run.evidencePackage, evidence);
+    assert.equal((await verifyEvidencePackage(evidence)).valid, true);
+    assert.equal(manifest.claimCount, definition.claims.length);
+    assert.equal(manifest.decisionCount, definition.decisions.length);
+    for (const [name, metadata] of Object.entries(manifest.files) as Array<[string, { sha256: string; bytes: number }]>) {
+      const content = await readFile(path.join(directory, name));
+      assert.equal(content.byteLength, metadata.bytes, name);
+      assert.equal(createHash("sha256").update(content).digest("hex"), metadata.sha256, name);
+    }
+  });
+}
+
+test("world-bank public-data case rejects rehashed raw-source or cleaning tampering", async () => {
+  const bundle = JSON.parse(await readFile(path.join(CASES, "world-bank-life-expectancy", "evidence-package.json"), "utf8"));
+  assert.equal((await verifyEvidencePackage(bundle)).valid, true);
+  for (const mutate of [
+    (copy: typeof bundle) => { copy.externalSource.rawArtifacts[0].text = copy.externalSource.rawArtifacts[0].text.replace("75.809", "95.809"); },
+    (copy: typeof bundle) => { copy.externalSource.cleaning.decimalPlaces = 2; },
+  ]) {
+    const copy = structuredClone(bundle);
+    mutate(copy);
+    copy.integrity.sectionHashes.provenance = await sha256Canonical(copy.externalSource);
+    const payload = Object.fromEntries(Object.entries(copy).filter(([key]) => key !== "integrity"));
+    copy.integrity.payloadHash = await sha256Canonical(payload);
+    const verification = await verifyEvidencePackage(copy);
+    assert.equal(verification.valid, false);
+    assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
+  }
+});
+
+test("population-health upstream lineage rejects rehashed aggregation and raw-source tampering", async () => {
+  const bundle = JSON.parse(await readFile(path.join(CASES, "population-health", "evidence-package.json"), "utf8"));
+  assert.equal((await verifyEvidencePackage(bundle)).valid, true);
+
+  for (const mutate of [
+    (copy: typeof bundle) => { copy.upstreamLineage.aggregations[0].sourceRowCount += 1; },
+    (copy: typeof bundle) => { copy.upstreamLineage.sources[0].rawText = copy.upstreamLineage.sources[0].rawText.replace(",1,", ",0,"); },
+  ]) {
+    const copy = structuredClone(bundle);
+    mutate(copy);
+    copy.integrity.sectionHashes.upstream = await sha256Canonical(copy.upstreamLineage);
+    const payload = Object.fromEntries(Object.entries(copy).filter(([key]) => key !== "integrity"));
+    copy.integrity.payloadHash = await sha256Canonical(payload);
+    const verification = await verifyEvidencePackage(copy);
+    assert.equal(verification.valid, false);
+    assert.equal(verification.checks.find((check: { name: string }) => check.name === "upstream-lineage")?.passed, false);
+  }
+});

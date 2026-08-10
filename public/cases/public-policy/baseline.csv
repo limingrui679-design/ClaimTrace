@@ -1,0 +1,5 @@
+district_id,district,coverage_percent,outcome_score,eligible_population
+D-01,North,61,72,800
+D-02,East,64,75,720
+D-03,South,58,70,910
+D-04,West,60,71,650

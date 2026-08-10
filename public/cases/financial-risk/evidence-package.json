@@ -1,0 +1,1743 @@
+{
+  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "bundleType": "AuditBundle",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "previousBundleHash": null,
+  "project": "Synthetic Credit-Portfolio Decision Audit",
+  "primaryKey": "account_id",
+  "ruleVersion": "claimtrace-rule/6.1.2",
+  "isDemo": true,
+  "dataOrigin": "SYNTHETIC",
+  "snapshots": {
+    "baseline": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "baseline-6d00c82527100f1c",
+      "side": "baseline",
+      "fileName": "baseline.csv",
+      "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+      "normalizedSha256": "1c3df6dcdb964ff0445b31cc1232ae8247e71901cbf7f6161e737186b28e5aa4",
+      "rowCount": 5,
+      "byteSize": 163,
+      "columns": [
+        "account_id",
+        "portfolio",
+        "pd_percent",
+        "exposure",
+        "observed_label"
+      ],
+      "primaryKey": "account_id",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "verifiedAt": "2026-08-08T00:00:00.000Z",
+      "verificationStatus": "verified"
+    },
+    "current": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "current-25bfce2950dc7481",
+      "side": "current",
+      "fileName": "current.csv",
+      "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+      "normalizedSha256": "001ad77568ea4651f1ac36c0f33cc1205d7fc2e50cd8a7922266bc716351849f",
+      "rowCount": 5,
+      "byteSize": 161,
+      "columns": [
+        "account_id",
+        "portfolio",
+        "pd_percent",
+        "exposure",
+        "observed_label"
+      ],
+      "primaryKey": "account_id",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "verifiedAt": "2026-08-08T00:00:00.000Z",
+      "verificationStatus": "verified"
+    }
+  },
+  "snapshotPayloads": {
+    "baseline": {
+      "fileName": "baseline.csv",
+      "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+      "normalizedSha256": "1c3df6dcdb964ff0445b31cc1232ae8247e71901cbf7f6161e737186b28e5aa4",
+      "text": "account_id,portfolio,pd_percent,exposure,observed_label\nA-001,Retail,2.1,120,0\nA-002,Retail,3.2,95,0\nA-003,SME,5.8,260,1\nA-004,SME,4.9,310,0\nA-005,Retail,2.8,80,0\n",
+      "rawBytesBase64": "YWNjb3VudF9pZCxwb3J0Zm9saW8scGRfcGVyY2VudCxleHBvc3VyZSxvYnNlcnZlZF9sYWJlbApBLTAwMSxSZXRhaWwsMi4xLDEyMCwwCkEtMDAyLFJldGFpbCwzLjIsOTUsMApBLTAwMyxTTUUsNS44LDI2MCwxCkEtMDA0LFNNRSw0LjksMzEwLDAKQS0wMDUsUmV0YWlsLDIuOCw4MCwwCg=="
+    },
+    "current": {
+      "fileName": "current.csv",
+      "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+      "normalizedSha256": "001ad77568ea4651f1ac36c0f33cc1205d7fc2e50cd8a7922266bc716351849f",
+      "text": "account_id,portfolio,pd_percent,exposure,observed_label\nA-001,Retail,2.4,120,0\nA-002,Retail,,95,1\nA-003,SME,6.4,260,1\nA-004,SME,5.6,310,1\nA-006,Retail,3.9,140,0\n",
+      "rawBytesBase64": "YWNjb3VudF9pZCxwb3J0Zm9saW8scGRfcGVyY2VudCxleHBvc3VyZSxvYnNlcnZlZF9sYWJlbApBLTAwMSxSZXRhaWwsMi40LDEyMCwwCkEtMDAyLFJldGFpbCwsOTUsMQpBLTAwMyxTTUUsNi40LDI2MCwxCkEtMDA0LFNNRSw1LjYsMzEwLDEKQS0wMDYsUmV0YWlsLDMuOSwxNDAsMAo="
+    }
+  },
+  "summary": {
+    "total": 3,
+    "supported": 0,
+    "weakened": 0,
+    "reversed": 3,
+    "untestable": 0,
+    "reviewRequired": 0,
+    "completenessChecksPassed": 48,
+    "completenessChecksTotal": 48,
+    "evidenceCoverage": 100,
+    "changedRecords": 6
+  },
+  "diffSummary": {
+    "totalChanged": 6,
+    "exported": 6,
+    "truncated": false,
+    "limit": 500
+  },
+  "diffs": [
+    {
+      "key": "A-001",
+      "kind": "changed",
+      "changedFields": [
+        "pd_percent"
+      ],
+      "baseline": {
+        "account_id": "A-001",
+        "portfolio": "Retail",
+        "pd_percent": "2.1",
+        "exposure": "120",
+        "observed_label": "0"
+      },
+      "current": {
+        "account_id": "A-001",
+        "portfolio": "Retail",
+        "pd_percent": "2.4",
+        "exposure": "120",
+        "observed_label": "0"
+      },
+      "baselineLine": 2,
+      "currentLine": 2
+    },
+    {
+      "key": "A-002",
+      "kind": "changed",
+      "changedFields": [
+        "pd_percent",
+        "observed_label"
+      ],
+      "baseline": {
+        "account_id": "A-002",
+        "portfolio": "Retail",
+        "pd_percent": "3.2",
+        "exposure": "95",
+        "observed_label": "0"
+      },
+      "current": {
+        "account_id": "A-002",
+        "portfolio": "Retail",
+        "pd_percent": "",
+        "exposure": "95",
+        "observed_label": "1"
+      },
+      "baselineLine": 3,
+      "currentLine": 3
+    },
+    {
+      "key": "A-003",
+      "kind": "changed",
+      "changedFields": [
+        "pd_percent"
+      ],
+      "baseline": {
+        "account_id": "A-003",
+        "portfolio": "SME",
+        "pd_percent": "5.8",
+        "exposure": "260",
+        "observed_label": "1"
+      },
+      "current": {
+        "account_id": "A-003",
+        "portfolio": "SME",
+        "pd_percent": "6.4",
+        "exposure": "260",
+        "observed_label": "1"
+      },
+      "baselineLine": 4,
+      "currentLine": 4
+    },
+    {
+      "key": "A-004",
+      "kind": "changed",
+      "changedFields": [
+        "pd_percent",
+        "observed_label"
+      ],
+      "baseline": {
+        "account_id": "A-004",
+        "portfolio": "SME",
+        "pd_percent": "4.9",
+        "exposure": "310",
+        "observed_label": "0"
+      },
+      "current": {
+        "account_id": "A-004",
+        "portfolio": "SME",
+        "pd_percent": "5.6",
+        "exposure": "310",
+        "observed_label": "1"
+      },
+      "baselineLine": 5,
+      "currentLine": 5
+    },
+    {
+      "key": "A-005",
+      "kind": "removed",
+      "changedFields": [
+        "account_id",
+        "portfolio",
+        "pd_percent",
+        "exposure",
+        "observed_label"
+      ],
+      "baseline": {
+        "account_id": "A-005",
+        "portfolio": "Retail",
+        "pd_percent": "2.8",
+        "exposure": "80",
+        "observed_label": "0"
+      },
+      "baselineLine": 6
+    },
+    {
+      "key": "A-006",
+      "kind": "added",
+      "changedFields": [
+        "account_id",
+        "portfolio",
+        "pd_percent",
+        "exposure",
+        "observed_label"
+      ],
+      "current": {
+        "account_id": "A-006",
+        "portfolio": "Retail",
+        "pd_percent": "3.9",
+        "exposure": "140",
+        "observed_label": "0"
+      },
+      "currentLine": 6
+    }
+  ],
+  "queryTrace": [
+    {
+      "claimId": "finance-pd-gate",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "pd_percent",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ef6d5056",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 4,
+          "missingRows": 1,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ee6d4ec3",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 10,
+        "exportedReferences": 10,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "finance-pd-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "finance-pd-stability",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "pd_percent",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ef6d5056",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 4,
+          "missingRows": 1,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ee6d4ec3",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 10,
+        "exportedReferences": 10,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "finance-pd-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "finance-label-gate",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "observed_label",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ef6d5056",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ee6d4ec3",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 10,
+        "exportedReferences": 10,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "finance-label-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    }
+  ],
+  "dataPreview": {
+    "columns": [
+      "account_id",
+      "portfolio",
+      "pd_percent",
+      "exposure",
+      "observed_label"
+    ],
+    "baselineRows": [
+      {
+        "account_id": "A-001",
+        "portfolio": "Retail",
+        "pd_percent": "2.1",
+        "exposure": "120",
+        "observed_label": "0"
+      },
+      {
+        "account_id": "A-002",
+        "portfolio": "Retail",
+        "pd_percent": "3.2",
+        "exposure": "95",
+        "observed_label": "0"
+      },
+      {
+        "account_id": "A-003",
+        "portfolio": "SME",
+        "pd_percent": "5.8",
+        "exposure": "260",
+        "observed_label": "1"
+      },
+      {
+        "account_id": "A-004",
+        "portfolio": "SME",
+        "pd_percent": "4.9",
+        "exposure": "310",
+        "observed_label": "0"
+      },
+      {
+        "account_id": "A-005",
+        "portfolio": "Retail",
+        "pd_percent": "2.8",
+        "exposure": "80",
+        "observed_label": "0"
+      }
+    ],
+    "currentRows": [
+      {
+        "account_id": "A-001",
+        "portfolio": "Retail",
+        "pd_percent": "2.4",
+        "exposure": "120",
+        "observed_label": "0"
+      },
+      {
+        "account_id": "A-002",
+        "portfolio": "Retail",
+        "pd_percent": "",
+        "exposure": "95",
+        "observed_label": "1"
+      },
+      {
+        "account_id": "A-003",
+        "portfolio": "SME",
+        "pd_percent": "6.4",
+        "exposure": "260",
+        "observed_label": "1"
+      },
+      {
+        "account_id": "A-004",
+        "portfolio": "SME",
+        "pd_percent": "5.6",
+        "exposure": "310",
+        "observed_label": "1"
+      },
+      {
+        "account_id": "A-006",
+        "portfolio": "Retail",
+        "pd_percent": "3.9",
+        "exposure": "140",
+        "observed_label": "0"
+      }
+    ],
+    "previewLimit": 20
+  },
+  "scaleBoundary": {
+    "maxExportedDiffs": 500,
+    "maxRawBytesPerSnapshot": 500000,
+    "maxReferencesPerClaim": 200,
+    "note": "Above the size limits, preserve hashes, manifests, changed records, and required samples instead of copying full tables."
+  },
+  "claimSpecs": [
+    {
+      "id": "finance-pd-gate",
+      "code": "FR-001",
+      "title": "Mean portfolio probability of default does not exceed 4%",
+      "section": "Risk admission",
+      "owner": "Risk owner",
+      "category": "Risk threshold",
+      "formula": "mean(pd_percent) <= 4",
+      "rule": {
+        "type": "threshold",
+        "field": "pd_percent",
+        "aggregation": "average",
+        "operator": "<=",
+        "threshold": 4,
+        "thresholdSpec": {
+          "value": 4,
+          "unit": "percent",
+          "source": "Synthetic credit policy v1",
+          "rationale": "Pause expansion when mean PD exceeds 4%",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "finance-pd-stability",
+      "code": "FR-002",
+      "title": "Mean portfolio probability of default changes by no more than 5%",
+      "section": "Model monitoring",
+      "owner": "Model risk owner",
+      "category": "Risk stability",
+      "formula": "relative_change(mean(pd_percent)) <= 5%",
+      "rule": {
+        "type": "stability",
+        "field": "pd_percent",
+        "aggregation": "average",
+        "supportTolerance": 5,
+        "reversalThreshold": 15,
+        "supportToleranceSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Synthetic model monitoring policy v1",
+          "rationale": "Treat changes within 5% as stable for monitoring",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 15,
+          "unit": "percent",
+          "source": "Synthetic risk escalation policy v1",
+          "rationale": "A 15% change invalidates the original portfolio assumption",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "finance-label-gate",
+      "code": "FR-003",
+      "title": "The observed default-label share does not exceed 25%",
+      "section": "Post-hoc validation",
+      "owner": "Validation owner",
+      "category": "Outcome threshold",
+      "formula": "mean(observed_label) <= 0.25",
+      "rule": {
+        "type": "threshold",
+        "field": "observed_label",
+        "aggregation": "average",
+        "operator": "<=",
+        "threshold": 0.25,
+        "thresholdSpec": {
+          "value": 0.25,
+          "unit": "score",
+          "source": "Synthetic validation policy v1",
+          "rationale": "Stop the original admission policy when the observed default rate exceeds 25%",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      }
+    }
+  ],
+  "claimResults": [
+    {
+      "id": "finance-pd-gate",
+      "code": "FR-001",
+      "title": "Mean portfolio probability of default does not exceed 4%",
+      "section": "Risk admission",
+      "owner": "Risk owner",
+      "category": "Risk threshold",
+      "formula": "mean(pd_percent) <= 4",
+      "rule": {
+        "type": "threshold",
+        "field": "pd_percent",
+        "aggregation": "average",
+        "operator": "<=",
+        "threshold": 4,
+        "thresholdSpec": {
+          "value": 4,
+          "unit": "percent",
+          "source": "Synthetic credit policy v1",
+          "rationale": "Pause expansion when mean PD exceeds 4%",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVERSED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "3.76",
+      "currentValue": "4.58",
+      "reason": "Current average is 4.58 and does not satisfy rule <= 4.",
+      "action": "Stop citing this claim and inspect linked decisions.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-001",
+          "lineNumber": 2,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-002",
+          "lineNumber": 3,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-003",
+          "lineNumber": 4,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-004",
+          "lineNumber": 5,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-005",
+          "lineNumber": 6,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-001",
+          "lineNumber": 2,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-002",
+          "lineNumber": 3,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-003",
+          "lineNumber": 4,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-004",
+          "lineNumber": 5,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-006",
+          "lineNumber": 6,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Mean portfolio probability of default does not exceed 4%",
+          "kind": "Claim",
+          "title": "Mean portfolio probability of default does not exceed 4%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:finance-pd-gate:bac3d2036331e65348ca0f69",
+          "kind": "Comparison result",
+          "title": "pd_percent version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:pd_percent",
+          "kind": "Metric",
+          "title": "pd_percent",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:pd_percent",
+          "kind": "Field",
+          "title": "pd_percent",
+          "detail": "Primary key: account_id",
+          "bound": true
+        },
+        {
+          "id": "records:account_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVERSED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-08T00:00:00.000Z",
+        "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+        "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 10,
+        "exportedReferences": 10,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "finance-pd-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ef6d5056",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 4,
+          "missingRows": 1,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ee6d4ec3",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:finance-pd-gate:bac3d2036331e65348ca0f69",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "finance-pd-stability",
+      "code": "FR-002",
+      "title": "Mean portfolio probability of default changes by no more than 5%",
+      "section": "Model monitoring",
+      "owner": "Model risk owner",
+      "category": "Risk stability",
+      "formula": "relative_change(mean(pd_percent)) <= 5%",
+      "rule": {
+        "type": "stability",
+        "field": "pd_percent",
+        "aggregation": "average",
+        "supportTolerance": 5,
+        "reversalThreshold": 15,
+        "supportToleranceSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Synthetic model monitoring policy v1",
+          "rationale": "Treat changes within 5% as stable for monitoring",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 15,
+          "unit": "percent",
+          "source": "Synthetic risk escalation policy v1",
+          "rationale": "A 15% change invalidates the original portfolio assumption",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      },
+      "kind": "VERSION_COMPARISON",
+      "status": "REVERSED",
+      "baselineStatus": "UNTESTABLE",
+      "baselineValue": "3.76",
+      "currentValue": "4.58",
+      "reason": "average of pd_percent changed 21.68%, reaching the confirmed reversal threshold of 15%.",
+      "action": "Update the claim and inspect linked decisions.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-001",
+          "lineNumber": 2,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-002",
+          "lineNumber": 3,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-003",
+          "lineNumber": 4,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-004",
+          "lineNumber": 5,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-005",
+          "lineNumber": 6,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-001",
+          "lineNumber": 2,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-002",
+          "lineNumber": 3,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-003",
+          "lineNumber": 4,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-004",
+          "lineNumber": 5,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-006",
+          "lineNumber": 6,
+          "fields": [
+            "account_id",
+            "pd_percent"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Mean portfolio probability of default changes by no more than 5%",
+          "kind": "Claim",
+          "title": "Mean portfolio probability of default changes by no more than 5%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:finance-pd-stability:2c13438fe5b51e05ddfccee8",
+          "kind": "Comparison result",
+          "title": "pd_percent version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:pd_percent",
+          "kind": "Metric",
+          "title": "pd_percent",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:pd_percent",
+          "kind": "Field",
+          "title": "pd_percent",
+          "detail": "Primary key: account_id",
+          "bound": true
+        },
+        {
+          "id": "records:account_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVERSED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-08T00:00:00.000Z",
+        "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+        "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 10,
+        "exportedReferences": 10,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "finance-pd-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ef6d5056",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 4,
+          "missingRows": 1,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ee6d4ec3",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:finance-pd-stability:2c13438fe5b51e05ddfccee8",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "finance-label-gate",
+      "code": "FR-003",
+      "title": "The observed default-label share does not exceed 25%",
+      "section": "Post-hoc validation",
+      "owner": "Validation owner",
+      "category": "Outcome threshold",
+      "formula": "mean(observed_label) <= 0.25",
+      "rule": {
+        "type": "threshold",
+        "field": "observed_label",
+        "aggregation": "average",
+        "operator": "<=",
+        "threshold": 0.25,
+        "thresholdSpec": {
+          "value": 0.25,
+          "unit": "score",
+          "source": "Synthetic validation policy v1",
+          "rationale": "Stop the original admission policy when the observed default rate exceeds 25%",
+          "confirmedBy": "Synthetic case owner",
+          "confirmedAt": "2026-08-08T00:00:00.000Z"
+        }
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVERSED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "0.2",
+      "currentValue": "0.6",
+      "reason": "Current average is 0.6 and does not satisfy rule <= 0.25.",
+      "action": "Stop citing this claim and inspect linked decisions.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-001",
+          "lineNumber": 2,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-002",
+          "lineNumber": 3,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-003",
+          "lineNumber": 4,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-004",
+          "lineNumber": 5,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "keyField": "account_id",
+          "keyValue": "A-005",
+          "lineNumber": 6,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-001",
+          "lineNumber": 2,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-002",
+          "lineNumber": 3,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-003",
+          "lineNumber": 4,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-004",
+          "lineNumber": 5,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "keyField": "account_id",
+          "keyValue": "A-006",
+          "lineNumber": 6,
+          "fields": [
+            "account_id",
+            "observed_label"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:The observed default-label share does not exceed 25%",
+          "kind": "Claim",
+          "title": "The observed default-label share does not exceed 25%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:finance-label-gate:d4d05697b084001aee02ce70",
+          "kind": "Comparison result",
+          "title": "observed_label version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:observed_label",
+          "kind": "Metric",
+          "title": "observed_label",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:observed_label",
+          "kind": "Field",
+          "title": "observed_label",
+          "detail": "Primary key: account_id",
+          "bound": true
+        },
+        {
+          "id": "records:account_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVERSED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-08T00:00:00.000Z",
+        "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+        "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 10,
+        "exportedReferences": 10,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "finance-label-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 4,
+        "sides": {
+          "baseline": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 5,
+            "exportedReferences": 5,
+            "changedCandidates": 5,
+            "pairedChangedReferences": 4,
+            "unpairedChangedReferences": 1,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ef6d5056",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 5,
+          "filteredRows": 5,
+          "effectiveRows": 5,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 5,
+          "includedKeysHash": "ee6d4ec3",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:finance-label-gate:d4d05697b084001aee02ce70",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisionSpecs": [
+    {
+      "id": "finance-underwriting",
+      "title": "Should admission expand under the original policy?",
+      "owner": "Credit committee",
+      "passActionId": "finance:continue-admission",
+      "holdActionId": "finance:pause-and-reestimate",
+      "actionIfPass": "Continue admission within the risk budget.",
+      "actionIfFail": "Pause expansion and re-estimate portfolio thresholds.",
+      "conditions": [
+        {
+          "claimId": "finance-pd-gate",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "finance-label-gate",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        }
+      ],
+      "priorSignedResult": {
+        "versionId": "finance-v1",
+        "outcome": "PASS",
+        "activeActionId": "finance:continue-admission",
+        "actionIdentityHash": "3e121225e04e86f2292834798f7e9f99d2fc167487399f2450b3fff37dc83580",
+        "recommendedOptionId": "expand",
+        "feasibleOptionIds": [
+          "expand",
+          "pause",
+          "tighten"
+        ],
+        "decisionPolicyHash": "8295be83e54ff986cde0d8c4cab3691f83329d666d187102104338ead14cd9a6",
+        "decisionInputProvenanceHash": "72f7712e499ca899b89744b1902bdad39d02ccbd3c1ff62b5e516bbfc6827e5d",
+        "baselineSha256": "21d949bfcb2e4358ac58593ce40978ab847fcc99e93056bcabb42f55142668b7",
+        "currentSha256": "fd5a34dfe1c29432d048ab47f883b637ef2bccc142059b75f0c0b96463bf4851",
+        "ruleVersion": "claimtrace-rule/4.0.0",
+        "claimResultIds": [
+          "prior-result:finance-v1:finance-pd-gate",
+          "prior-result:finance-v1:finance-label-gate"
+        ],
+        "historyBasis": "RECORDED_IDENTITY",
+        "reviewRecordId": "synthetic-prior-review:finance-underwriting:finance-v1",
+        "reviewRecordHash": "49d3061cc23374b86c5532a837705ef0d326e5b9da50531f2b3330e98395df06",
+        "signedAt": "2026-08-01T08:00:00.000Z",
+        "signedBy": "Synthetic credit committee"
+      },
+      "stakeholders": [
+        "Credit committee",
+        "Customers",
+        "Capital management"
+      ],
+      "objective": {
+        "benefitWeight": 1,
+        "costWeight": 0.15,
+        "riskWeight": 1.5
+      },
+      "riskTolerance": 20,
+      "noActionLoss": 28,
+      "inputProvenance": {
+        "kind": "MANUAL_ASSUMPTION",
+        "source": "Synthetic credit committee assumptions",
+        "version": "1.0.0",
+        "rationale": "Used to demonstrate risk constraints and option scoring; this is not a portfolio backtest, capital model, or real underwriting outcome",
+        "units": {
+          "benefit": "synthetic utility points",
+          "cost": "synthetic cost points",
+          "risk": "synthetic risk points",
+          "capacity": "synthetic capacity points"
+        },
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      },
+      "uncertainty": {
+        "method": "BOUNDED_UNIFORM",
+        "benefitMultiplier": [
+          0.8,
+          1.2
+        ],
+        "costMultiplier": [
+          0.85,
+          1.2
+        ],
+        "riskMultiplier": [
+          0.8,
+          1.25
+        ],
+        "capacityMultiplier": [
+          0.9,
+          1.15
+        ],
+        "trials": 512,
+        "seed": "finance-underwriting-v1",
+        "stabilitySweep": {
+          "parameter": "benefitMultiplier",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05
+        }
+      },
+      "constraints": [
+        {
+          "id": "capital",
+          "label": "Capital usage",
+          "metric": "cost",
+          "operator": "<=",
+          "value": 70
+        },
+        {
+          "id": "ops",
+          "label": "Manual-review capacity",
+          "metric": "capacity",
+          "operator": "<=",
+          "value": 50
+        }
+      ],
+      "options": [
+        {
+          "id": "pause",
+          "label": "Pause new admissions",
+          "benefit": 25,
+          "cost": 12,
+          "risk": 5,
+          "capacity": 8
+        },
+        {
+          "id": "tighten",
+          "label": "Tighten and manually review",
+          "benefit": 62,
+          "cost": 44,
+          "risk": 14,
+          "capacity": 48
+        },
+        {
+          "id": "expand",
+          "label": "Expand under the original policy",
+          "benefit": 98,
+          "cost": 65,
+          "risk": 34,
+          "capacity": 38
+        }
+      ]
+    }
+  ],
+  "decisionResults": [
+    {
+      "decisionId": "finance-underwriting",
+      "previousOutcome": "PASS",
+      "previousVersionId": "finance-v1",
+      "previousRecommendedOptionId": "expand",
+      "currentOutcome": "HOLD",
+      "boundClaimIds": [
+        "finance-label-gate",
+        "finance-pd-gate"
+      ],
+      "affectedClaimIds": [
+        "finance-label-gate",
+        "finance-pd-gate"
+      ],
+      "comparisonBasis": "RECORDED_SIGNED_IDENTITY",
+      "changeReasons": [
+        "OUTCOME",
+        "ACTION_IDENTITY",
+        "RECOMMENDED_OPTION",
+        "FEASIBLE_OPTIONS",
+        "DECISION_POLICY",
+        "INPUT_PROVENANCE",
+        "BASELINE_SNAPSHOT",
+        "CURRENT_SNAPSHOT",
+        "RULE_VERSION",
+        "CLAIM_RESULTS"
+      ],
+      "binding": {
+        "activeActionId": "finance:pause-and-reestimate",
+        "actionIdentityHash": "4da438c9b22ab713440499df1c60149b52a157aedc91ad8e3d6479aefe158e46",
+        "recommendedOptionId": "tighten",
+        "feasibleOptionIds": [
+          "pause",
+          "tighten"
+        ],
+        "decisionPolicyHash": "81d282a49836a522893980b962fb1bcd05060261539d8c298e8c20b584c109cc",
+        "decisionInputProvenanceHash": "f76da6a9fa5263f83441f07558c903acff0eedc7e20c033e7065d0b18c247755",
+        "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+        "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "claimResultIds": [
+          "claim-result:finance-label-gate:d4d05697b084001aee02ce70",
+          "claim-result:finance-pd-gate:bac3d2036331e65348ca0f69"
+        ]
+      },
+      "analysis": {
+        "options": [
+          {
+            "optionId": "tighten",
+            "label": "Tighten and manually review",
+            "feasible": true,
+            "score": 34.4,
+            "failedConstraints": [],
+            "breakEvenBenefit": -0.4,
+            "scoreInterval": {
+              "min": 15.43,
+              "max": 51.99
+            },
+            "paretoEfficient": true
+          },
+          {
+            "optionId": "pause",
+            "label": "Pause new admissions",
+            "feasible": true,
+            "score": 15.7,
+            "failedConstraints": [],
+            "breakEvenBenefit": -18.7,
+            "scoreInterval": {
+              "min": 8.465,
+              "max": 22.47
+            },
+            "paretoEfficient": true
+          },
+          {
+            "optionId": "expand",
+            "label": "Expand under the original policy",
+            "feasible": false,
+            "score": 37.25,
+            "failedConstraints": [
+              "risk-tolerance"
+            ],
+            "breakEvenBenefit": 32.75,
+            "scoreInterval": {
+              "min": 2.95,
+              "max": 68.5125
+            },
+            "paretoEfficient": false
+          }
+        ],
+        "recommendedOptionId": "tighten",
+        "noActionScore": -28,
+        "sensitivity": [
+          {
+            "scenarioId": "benefit-down-20",
+            "label": "Benefit down 20%",
+            "recommendedOptionId": "tighten"
+          },
+          {
+            "scenarioId": "cost-up-20",
+            "label": "Cost up 20%",
+            "recommendedOptionId": "tighten"
+          },
+          {
+            "scenarioId": "risk-up-20",
+            "label": "Risk up 20%",
+            "recommendedOptionId": "tighten"
+          }
+        ],
+        "paretoFrontierOptionIds": [
+          "pause",
+          "tighten"
+        ],
+        "recommendationStability": {
+          "parameter": "benefitMultiplier",
+          "recommendedOptionId": "tighten",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05,
+          "evaluatedPoints": 21
+        },
+        "monteCarlo": {
+          "method": "DETERMINISTIC_SEEDED_BOUNDED_UNIFORM",
+          "seed": "finance-underwriting-v1",
+          "trials": 512,
+          "recommendationShares": [
+            {
+              "optionId": "tighten",
+              "count": 281,
+              "share": 0.548828
+            },
+            {
+              "optionId": "pause",
+              "count": 231,
+              "share": 0.451172
+            }
+          ],
+          "options": [
+            {
+              "optionId": "expand",
+              "feasibilityRate": 0,
+              "scoreP05": 15.326894,
+              "scoreP50": 35.894417,
+              "scoreP95": 55.839972
+            },
+            {
+              "optionId": "pause",
+              "feasibilityRate": 1,
+              "scoreP05": 10.829385,
+              "scoreP50": 15.504826,
+              "scoreP95": 20.117165
+            },
+            {
+              "optionId": "tighten",
+              "feasibilityRate": 0.548828,
+              "scoreP05": 21.863156,
+              "scoreP50": 33.739503,
+              "scoreP95": 45.32529
+            }
+          ]
+        }
+      },
+      "status": "DECISION_CHANGED",
+      "reason": "The recorded prior signed version finance-v1 was PASS; the current outcome is HOLD; active action identity, recommended option, feasible option set also changed. The action identity changed and must be signed again.",
+      "governance": {
+        "engineStatus": "DECISION_CHANGED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "resultId": "decision-result:finance-underwriting:1bd06dee49b297df00233c3e"
+    }
+  ],
+  "reviews": [],
+  "reviewChain": {
+    "count": 0,
+    "headRecordId": null,
+    "headRecordHash": null
+  },
+  "externalSource": null,
+  "upstreamLineage": null,
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "claimtrace-json-c14n/1.0.0",
+    "payloadHash": "de1e11df67d16b24782d6fa062f2f1225c1af97a6440290eaf4ac4390c9e9877",
+    "sectionHashes": {
+      "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
+      "snapshots": "e8059132f1b0986cc9847dacfe8a4c940b2244d8b4efe34bcae3edf21577c0da",
+      "claims": "d8d9565274c65852bfe57c1402908c215af95a05a45a36d1cb9216a1d5c5f20b",
+      "decisions": "4313e667056459a0f71ace1a5107c9cae75ff2551f8736aac6d049e3a1b31ab1",
+      "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
+      "provenance": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    }
+  }
+}

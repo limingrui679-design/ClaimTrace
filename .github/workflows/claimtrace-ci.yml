@@ -1,0 +1,103 @@
+name: ClaimTrace CI
+
+on:
+  push:
+    paths:
+      - "app/**"
+      - "benchmarks/**"
+      - "build/**"
+      - "docs/**"
+      - "public/**"
+      - "src/**"
+      - "tests/**"
+      - "tools/**"
+      - ".github/workflows/claimtrace-ci.yml"
+      - ".openai/hosting.json"
+      - "eslint.config.mjs"
+      - "index.html"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright.config.ts"
+      - "tsconfig.json"
+      - "vite.config.ts"
+      - "wrangler.jsonc"
+  pull_request:
+    paths:
+      - "app/**"
+      - "benchmarks/**"
+      - "build/**"
+      - "docs/**"
+      - "public/**"
+      - "src/**"
+      - "tests/**"
+      - "tools/**"
+      - ".github/workflows/claimtrace-ci.yml"
+      - ".openai/hosting.json"
+      - "eslint.config.mjs"
+      - "index.html"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright.config.ts"
+      - "tsconfig.json"
+      - "vite.config.ts"
+      - "wrangler.jsonc"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install exact dependencies
+        run: npm ci
+
+      - name: Install browser runtime
+        run: npx playwright install --with-deps chromium
+
+      - name: Lint and type-check
+        run: npm run lint && npm run typecheck
+
+      - name: Regenerate deterministic artifacts
+        run: npm run demo:generate && npm run cases:generate && npm run benchmark
+
+      - name: Reject stale generated artifacts
+        run: git diff --exit-code -- public/demo-data public/cases app/demo-case.generated.ts benchmarks/results.json
+
+      - name: Build and run the full test suite
+        run: npm test && npm run test:browser
+
+      - name: Enforce core coverage thresholds
+        run: npm run test:coverage
+
+      - name: Audit production and development dependencies
+        run: npm audit --omit=dev --audit-level=high && npm audit --audit-level=high
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: claimtrace-coverage
+          path: coverage/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload browser-test report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: claimtrace-browser-report
+          path: artifacts/playwright-report/
+          if-no-files-found: warn
+          retention-days: 14

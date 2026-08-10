@@ -1,0 +1,9 @@
+country_code,country,observation_year,life_expectancy_years,indicator_code
+BRA,Brazil,2019,75.809,SP.DYN.LE00.IN
+CHN,China,2019,77.940,SP.DYN.LE00.IN
+DEU,Germany,2019,81.293,SP.DYN.LE00.IN
+FRA,France,2019,82.827,SP.DYN.LE00.IN
+GBR,United Kingdom,2019,81.369,SP.DYN.LE00.IN
+IND,India,2019,70.746,SP.DYN.LE00.IN
+JPN,Japan,2019,84.356,SP.DYN.LE00.IN
+USA,United States,2019,78.788,SP.DYN.LE00.IN

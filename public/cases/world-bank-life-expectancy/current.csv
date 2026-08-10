@@ -1,0 +1,9 @@
+country_code,country,observation_year,life_expectancy_years,indicator_code
+BRA,Brazil,2024,76.023,SP.DYN.LE00.IN
+CHN,China,2024,78.017,SP.DYN.LE00.IN
+DEU,Germany,2024,80.793,SP.DYN.LE00.IN
+FRA,France,2024,82.980,SP.DYN.LE00.IN
+GBR,United Kingdom,2024,81.387,SP.DYN.LE00.IN
+IND,India,2024,72.235,SP.DYN.LE00.IN
+JPN,Japan,2024,84.036,SP.DYN.LE00.IN
+USA,United States,2024,78.890,SP.DYN.LE00.IN

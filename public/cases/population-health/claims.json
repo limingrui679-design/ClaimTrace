@@ -1,0 +1,145 @@
+[
+  {
+    "id": "north-risk",
+    "code": "CT-001",
+    "title": "North has the highest high-risk rate among the four regions and should receive follow-up resources first",
+    "section": "Executive summary · paragraph 2",
+    "owner": "ClaimTrace demonstration",
+    "category": "Resource allocation",
+    "formula": "argmax(segment, value) where indicator = High-risk rate",
+    "rule": {
+      "type": "rank",
+      "field": "value",
+      "aggregation": "average",
+      "groupField": "segment",
+      "expectedGroup": "North",
+      "rank": "max",
+      "filters": [
+        {
+          "field": "indicator",
+          "equals": "High-risk rate"
+        }
+      ]
+    }
+  },
+  {
+    "id": "recall-gate",
+    "code": "CT-002",
+    "title": "Model recall exceeds the 80% deployment gate, allowing a controlled pilot",
+    "section": "Model evaluation · paragraph 4",
+    "owner": "ClaimTrace demonstration",
+    "category": "Model gate",
+    "formula": "TP / (TP + FN) > 80%",
+    "rule": {
+      "type": "threshold",
+      "field": "value",
+      "aggregation": "average",
+      "operator": ">",
+      "threshold": 80,
+      "filters": [
+        {
+          "field": "indicator",
+          "equals": "Model recall"
+        },
+        {
+          "field": "segment",
+          "equals": "Citywide"
+        }
+      ],
+      "thresholdSpec": {
+        "value": 80,
+        "unit": "percent",
+        "source": "Synthetic model admission policy v1",
+        "rationale": "Do not begin the pilot when recall is below 80%",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "followup-gap",
+    "code": "CT-003",
+    "title": "Citywide follow-up completion is below the 80% target, requiring additional outreach capacity",
+    "section": "Operations diagnosis · paragraph 1",
+    "owner": "ClaimTrace demonstration",
+    "category": "Operations diagnosis",
+    "formula": "completed / eligible < 80%",
+    "rule": {
+      "type": "threshold",
+      "field": "value",
+      "aggregation": "average",
+      "operator": "<",
+      "threshold": 80,
+      "filters": [
+        {
+          "field": "indicator",
+          "equals": "Follow-up completion rate"
+        },
+        {
+          "field": "segment",
+          "equals": "Citywide"
+        }
+      ],
+      "thresholdSpec": {
+        "value": 80,
+        "unit": "percent",
+        "source": "Synthetic follow-up target policy v1",
+        "rationale": "The annual follow-up completion target is 80%",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "east-completion",
+    "code": "CT-004",
+    "title": "East retains the highest follow-up completion rate and can serve as a process-replication example",
+    "section": "Regional case · paragraph 3",
+    "owner": "ClaimTrace demonstration",
+    "category": "Best practice",
+    "formula": "argmax(segment, value) where indicator = Follow-up completion rate",
+    "rule": {
+      "type": "rank",
+      "field": "value",
+      "aggregation": "average",
+      "groupField": "segment",
+      "expectedGroup": "East",
+      "rank": "max",
+      "filters": [
+        {
+          "field": "indicator",
+          "equals": "Follow-up completion rate"
+        }
+      ],
+      "excludes": [
+        {
+          "field": "segment",
+          "equals": "Citywide"
+        }
+      ]
+    }
+  },
+  {
+    "id": "west-risk",
+    "code": "CT-005",
+    "title": "West still has the lowest high-risk rate and should not be overprioritized because of total volume",
+    "section": "Resource allocation · paragraph 5",
+    "owner": "ClaimTrace demonstration",
+    "category": "Resource allocation",
+    "formula": "argmin(segment, value) where indicator = High-risk rate",
+    "rule": {
+      "type": "rank",
+      "field": "value",
+      "aggregation": "average",
+      "groupField": "segment",
+      "expectedGroup": "West",
+      "rank": "min",
+      "filters": [
+        {
+          "field": "indicator",
+          "equals": "High-risk rate"
+        }
+      ]
+    }
+  }
+]

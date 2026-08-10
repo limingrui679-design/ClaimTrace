@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "synthetic": true,
+  "dataOrigin": "SYNTHETIC",
+  "sourceMetadataFile": null,
+  "caseId": "population-health",
+  "primaryKey": "row_id",
+  "claimCount": 5,
+  "decisionCount": 2,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
+      "bytes": 902
+    },
+    "current.csv": {
+      "sha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
+      "bytes": 906
+    },
+    "claims.json": {
+      "sha256": "95914b27fbc1f499628ff3f1768aa93764a4fb9e3275ddb4c630088a33a460cf",
+      "bytes": 4124
+    },
+    "decisions.json": {
+      "sha256": "fb9ad3db895bbf8e5892fb0cf2bf9512daa74d793313ee1ffe45489bbda2e8c9",
+      "bytes": 7897
+    },
+    "expected-audit.json": {
+      "sha256": "1f530709878a4627c0890148801e0b1c85fe75b98ad8f346be277565c063a24d",
+      "bytes": 2219
+    },
+    "evidence-package.json": {
+      "sha256": "38a87c31a4feb86d7cf9bc35c1a2c52957766a897506e3bc9cb082268586e55f",
+      "bytes": 268548
+    },
+    "case.ts": {
+      "sha256": "d82f47e370d694cce1334ab39c3330cfaea99610e4a5e48c6284759b4835ca6a",
+      "bytes": 13109
+    },
+    "README.md": {
+      "sha256": "740d2ba1d0bac54e9412b526a7e113c3bf061d29893aaa37c8cfbf9a53d5130a",
+      "bytes": 500
+    },
+    "upstream-lineage.json": {
+      "sha256": "85729d51e21aadac10dd3694846f58fc4f0fd266e2bade171c4ea27d349131b2",
+      "bytes": 173989
+    }
+  }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "wdi-japan-rank",
+    "code": "WB-001",
+    "title": "Japan still has the highest life expectancy at birth among the eight selected countries",
+    "section": "Cross-country descriptive comparison",
+    "owner": "Public-data case reviewer",
+    "category": "Group ranking",
+    "formula": "argmax(country, life_expectancy_years) = Japan",
+    "rule": {
+      "type": "rank",
+      "field": "life_expectancy_years",
+      "aggregation": "average",
+      "groupField": "country",
+      "expectedGroup": "Japan",
+      "rank": "max",
+      "tiePolicy": "require_unique"
+    }
+  },
+  {
+    "id": "wdi-germany-threshold",
+    "code": "WB-002",
+    "title": "Germany's life expectancy at birth remains at or above 81 years",
+    "section": "Illustrative threshold audit",
+    "owner": "Public-data case reviewer",
+    "category": "Threshold gate",
+    "formula": "Germany life_expectancy_years >= 81",
+    "rule": {
+      "type": "threshold",
+      "field": "life_expectancy_years",
+      "aggregation": "average",
+      "operator": ">=",
+      "threshold": 81,
+      "filters": [
+        {
+          "field": "country_code",
+          "equals": "DEU"
+        }
+      ],
+      "thresholdSpec": {
+        "value": 81,
+        "unit": "absolute",
+        "source": "Illustrative analyst review threshold v1",
+        "rationale": "Used only to demonstrate how an updated public indicator can invalidate an existing threshold claim; this is not World Bank guidance or a policy standard",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "wdi-eight-country-stability",
+    "code": "WB-003",
+    "title": "Mean life expectancy at birth across the eight selected countries changes by no more than 1%",
+    "section": "Sample-mean stability",
+    "owner": "Public-data case reviewer",
+    "category": "Version stability",
+    "formula": "abs(mean(2024)-mean(2019))/mean(2019) <= 1%",
+    "rule": {
+      "type": "stability",
+      "field": "life_expectancy_years",
+      "aggregation": "average",
+      "supportTolerance": 1,
+      "reversalThreshold": 3,
+      "supportToleranceSpec": {
+        "value": 1,
+        "unit": "percent",
+        "source": "Illustrative descriptive stability rule v1",
+        "rationale": "Used to demonstrate a stability audit of a descriptive mean across periods; this does not imply statistical significance",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      },
+      "reversalThresholdSpec": {
+        "value": 3,
+        "unit": "percent",
+        "source": "Illustrative descriptive reversal rule v1",
+        "rationale": "At 3%, treat the original stability statement as materially invalid",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  }
+]

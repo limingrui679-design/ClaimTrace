@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "claimtrace-demo/2.0.0",
+  "generatedAt": "2026-08-07T08:00:00.000Z",
+  "seed": "claimtrace-demo-v2",
+  "synthetic": true,
+  "statements": {
+    "followupRecords": 4218,
+    "validationSamples": 286,
+    "validationPositives": 156,
+    "baselineTruePositives": 132,
+    "revisionTruePositives": 123,
+    "additionalFalseNegatives": 9
+  },
+  "formulas": {
+    "riskRate": "sum(high_risk) / count(followup_id) * 100",
+    "followupCompletionRate": "sum(followup_completed) / count(followup_id) * 100",
+    "recall": "TP / (TP + FN) * 100"
+  },
+  "files": {
+    "followup-baseline.csv": {
+      "sha256": "6983c3f09c3a73639498e265395292955dc2ad0975c839f744b42781a3cf40c7",
+      "bytes": 69588,
+      "dataRows": 4218
+    },
+    "followup-revision.csv": {
+      "sha256": "78bb4cb14beebb02debf33928fea715c3dc0521d696bb5f449e91fd658c35591",
+      "bytes": 69588,
+      "dataRows": 4218
+    },
+    "validation-baseline.csv": {
+      "sha256": "cffe275c18c8bfcce743077d3207644783e8b95ebbd36fcbcf14081297eac962",
+      "bytes": 6036,
+      "dataRows": 286
+    },
+    "validation-revision.csv": {
+      "sha256": "59375b5fd83521f8042b0b1d8b5d6df6ed4a4f345c08a85445f21967e19a0965",
+      "bytes": 6036,
+      "dataRows": 286
+    },
+    "summary-baseline.csv": {
+      "sha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
+      "bytes": 902,
+      "dataRows": 11
+    },
+    "summary-revision.csv": {
+      "sha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
+      "bytes": 906,
+      "dataRows": 11
+    },
+    "policy.json": {
+      "sha256": "b8c71ba97e2d1c8bf88919ef93aee63ab5518023ffd3169dd6b40e685e675975",
+      "bytes": 101,
+      "dataRows": null
+    },
+    "upstream-lineage.json": {
+      "sha256": "85729d51e21aadac10dd3694846f58fc4f0fd266e2bade171c4ea27d349131b2",
+      "bytes": 173989,
+      "dataRows": null
+    }
+  }
+}

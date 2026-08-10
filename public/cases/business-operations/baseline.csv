@@ -1,0 +1,5 @@
+channel_id,channel,conversion_rate,ticket_hours,eligible_leads
+CH-01,Search,8.4,11.2,1200
+CH-02,Referral,9.1,8.6,760
+CH-03,Partner,7.8,13.4,920
+CH-04,Direct,8.7,7.9,1100

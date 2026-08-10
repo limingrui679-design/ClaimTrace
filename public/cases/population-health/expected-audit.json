@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "claimtrace-case-audit/1.0.0",
+  "caseId": "population-health",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "claims": [
+    {
+      "id": "north-risk",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "North 31.8",
+      "currentValue": "East 32.09",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "recall-gate",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "84.62",
+      "currentValue": "78.85",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "followup-gap",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "72.4",
+      "currentValue": "74.11",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "east-completion",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "East 79.18",
+      "currentValue": "East 81.55",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "west-risk",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "West 22.38",
+      "currentValue": "West 23.78",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "decision-model-pilot",
+      "previousOutcome": "PASS",
+      "currentOutcome": "HOLD",
+      "status": "DECISION_CHANGED",
+      "recommendedOptionId": "limited-pilot"
+    },
+    {
+      "decisionId": "decision-followup-allocation",
+      "previousOutcome": "PASS",
+      "currentOutcome": "HOLD",
+      "status": "DECISION_CHANGED",
+      "recommendedOptionId": "rebalance"
+    }
+  ]
+}

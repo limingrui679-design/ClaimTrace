@@ -1,0 +1,20 @@
+[
+  {
+    "page": 1,
+    "pages": 1,
+    "per_page": 1000,
+    "total": 8,
+    "sourceid": "2",
+    "lastupdated": "2026-07-13"
+  },
+  [
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"BR","value":"Brazil"},"countryiso3code":"BRA","date":"2019","value":75.809,"unit":"","obs_status":"","decimal":0},
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"CN","value":"China"},"countryiso3code":"CHN","date":"2019","value":77.94,"unit":"","obs_status":"","decimal":0},
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"DE","value":"Germany"},"countryiso3code":"DEU","date":"2019","value":81.2926829268293,"unit":"","obs_status":"","decimal":0},
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"FR","value":"France"},"countryiso3code":"FRA","date":"2019","value":82.8268292682927,"unit":"","obs_status":"","decimal":0},
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"GB","value":"United Kingdom"},"countryiso3code":"GBR","date":"2019","value":81.3691219512195,"unit":"","obs_status":"","decimal":0},
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"IN","value":"India"},"countryiso3code":"IND","date":"2019","value":70.746,"unit":"","obs_status":"","decimal":0},
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"JP","value":"Japan"},"countryiso3code":"JPN","date":"2019","value":84.3563414634146,"unit":"","obs_status":"","decimal":0},
+    {"indicator":{"id":"SP.DYN.LE00.IN","value":"Life expectancy at birth, total (years)"},"country":{"id":"US","value":"United States"},"countryiso3code":"USA","date":"2019","value":78.7878048780488,"unit":"","obs_status":"","decimal":0}
+  ]
+]

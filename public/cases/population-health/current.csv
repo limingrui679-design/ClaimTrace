@@ -1,0 +1,12 @@
+row_id,indicator,segment,value,unit,source_file,source_field
+R-001,High-risk rate,North,27.6,%,followup-revision.csv,high_risk
+R-002,High-risk rate,East,32.09,%,followup-revision.csv,high_risk
+R-003,High-risk rate,South,26.38,%,followup-revision.csv,high_risk
+R-004,High-risk rate,West,23.78,%,followup-revision.csv,high_risk
+R-005,Model recall,Citywide,78.85,%,validation-revision.csv,y_true+y_pred
+R-006,Follow-up completion rate,Citywide,74.11,%,followup-revision.csv,followup_completed
+R-007,Follow-up target,Citywide,80,%,policy.json,followup_target_percent
+R-008,Follow-up completion rate,North,73,%,followup-revision.csv,followup_completed
+R-009,Follow-up completion rate,East,81.55,%,followup-revision.csv,followup_completed
+R-010,Follow-up completion rate,South,73.33,%,followup-revision.csv,followup_completed
+R-011,Follow-up completion rate,West,68.26,%,followup-revision.csv,followup_completed

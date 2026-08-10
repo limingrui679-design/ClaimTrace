@@ -1,0 +1,306 @@
+{
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "description": "Six executable audit cases: five deterministic synthetic cases and one pinned public-data case with source and cleaning lineage.",
+  "cases": [
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "synthetic": true,
+      "dataOrigin": "SYNTHETIC",
+      "sourceMetadataFile": null,
+      "caseId": "business-operations",
+      "primaryKey": "channel_id",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+          "bytes": 170
+        },
+        "current.csv": {
+          "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+          "bytes": 167
+        },
+        "claims.json": {
+          "sha256": "6a77cb89a644efb726f3d4193f8badd2d2fc836b28ba4ff51b3284ab85c6abe9",
+          "bytes": 2402
+        },
+        "decisions.json": {
+          "sha256": "e9b952a1d208ac0c9a867c2786c419f082d05f256dd8860190ec188f33378816",
+          "bytes": 4218
+        },
+        "expected-audit.json": {
+          "sha256": "0921aa7f3acb3cab1985740440c63d16aaed0b57143c5547b36742cbcf5df3a4",
+          "bytes": 1401
+        },
+        "evidence-package.json": {
+          "sha256": "712f7e028a31cce5170f8887222d3b4a4adae5e46c0ccdab14606025ecf996b5",
+          "bytes": 51478
+        },
+        "case.ts": {
+          "sha256": "354a989c2758072043285e6207066840fa17481b8f3e47b6b99ab9f0f2d77b26",
+          "bytes": 7336
+        },
+        "README.md": {
+          "sha256": "bb5c7c18c1c933ff026ad3b7fbeab156d96b65c65d8aeb21e1f1890251bc2f54",
+          "bytes": 433
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "synthetic": true,
+      "dataOrigin": "SYNTHETIC",
+      "sourceMetadataFile": null,
+      "caseId": "financial-risk",
+      "primaryKey": "account_id",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
+          "bytes": 163
+        },
+        "current.csv": {
+          "sha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
+          "bytes": 161
+        },
+        "claims.json": {
+          "sha256": "dd09d5a9b0c24aeb44da8a996e5d3f8213699831e506f75c7ba3aa8c032ba22d",
+          "bytes": 2609
+        },
+        "decisions.json": {
+          "sha256": "9ad2e834cfc7ebed64e2516446614c2a26d91d23a3d637b8adc5cfc39012e072",
+          "bytes": 4148
+        },
+        "expected-audit.json": {
+          "sha256": "294f186686742b58972d14eb8c9f63004709dc989649cb9dbe55df5d4a41aa86",
+          "bytes": 1350
+        },
+        "evidence-package.json": {
+          "sha256": "c20fa0a7476e3ca2981daf1aee2165687b1b94a71b35482bc4b21f79d23a2da1",
+          "bytes": 53703
+        },
+        "case.ts": {
+          "sha256": "f2dfb47d9c54d672be9bd382c9e658a046dbb1df10ec00d9a0814354bb02aa2f",
+          "bytes": 7472
+        },
+        "README.md": {
+          "sha256": "9d3d81172d37c8d27ebe37f3bcadbedb86d851d1232be6e829924a10e29d876f",
+          "bytes": 428
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "synthetic": true,
+      "dataOrigin": "SYNTHETIC",
+      "sourceMetadataFile": null,
+      "caseId": "population-health",
+      "primaryKey": "row_id",
+      "claimCount": 5,
+      "decisionCount": 2,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
+          "bytes": 902
+        },
+        "current.csv": {
+          "sha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
+          "bytes": 906
+        },
+        "claims.json": {
+          "sha256": "95914b27fbc1f499628ff3f1768aa93764a4fb9e3275ddb4c630088a33a460cf",
+          "bytes": 4124
+        },
+        "decisions.json": {
+          "sha256": "fb9ad3db895bbf8e5892fb0cf2bf9512daa74d793313ee1ffe45489bbda2e8c9",
+          "bytes": 7897
+        },
+        "expected-audit.json": {
+          "sha256": "1f530709878a4627c0890148801e0b1c85fe75b98ad8f346be277565c063a24d",
+          "bytes": 2219
+        },
+        "evidence-package.json": {
+          "sha256": "38a87c31a4feb86d7cf9bc35c1a2c52957766a897506e3bc9cb082268586e55f",
+          "bytes": 268548
+        },
+        "case.ts": {
+          "sha256": "d82f47e370d694cce1334ab39c3330cfaea99610e4a5e48c6284759b4835ca6a",
+          "bytes": 13109
+        },
+        "README.md": {
+          "sha256": "740d2ba1d0bac54e9412b526a7e113c3bf061d29893aaa37c8cfbf9a53d5130a",
+          "bytes": 500
+        },
+        "upstream-lineage.json": {
+          "sha256": "85729d51e21aadac10dd3694846f58fc4f0fd266e2bade171c4ea27d349131b2",
+          "bytes": 173989
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "synthetic": true,
+      "dataOrigin": "SYNTHETIC",
+      "sourceMetadataFile": null,
+      "caseId": "public-policy",
+      "primaryKey": "district_id",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "ad4ad8bc22316d608966f14e7df00bd6e39283e71bb41aa2c511e7174330bc03",
+          "bytes": 154
+        },
+        "current.csv": {
+          "sha256": "23bc780214141b6a86e8c4e4c89faddd3a825dfcd4db4b7d6c954621890a0d75",
+          "bytes": 154
+        },
+        "claims.json": {
+          "sha256": "77d1b6bf99dbcda09f5fc95e3ee2793f47dd20b1b87de976e0c0cc813fbc9ea6",
+          "bytes": 3004
+        },
+        "decisions.json": {
+          "sha256": "6008b23e7075dc883fb3550bc371053a25d65764a5df8c0e6902bc33dc58033a",
+          "bytes": 4141
+        },
+        "expected-audit.json": {
+          "sha256": "ba249549c282092eefa7261d3253918705abe71466e426f1cf7b7977f0b98ee5",
+          "bytes": 1377
+        },
+        "evidence-package.json": {
+          "sha256": "e9c885db1818227b0ea99395df6bfbb5378a08ba4236f0b2dc5c67cad61d0b25",
+          "bytes": 51891
+        },
+        "case.ts": {
+          "sha256": "6340669c198f75cb1a7d927cececa91042988fbc85f36f90e317d06b92b6bcc3",
+          "bytes": 7874
+        },
+        "README.md": {
+          "sha256": "abdf3777961161454c68c54b939f2b79eda1377762f347d125127227a09c6e66",
+          "bytes": 427
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-08T00:00:00.000Z",
+      "synthetic": true,
+      "dataOrigin": "SYNTHETIC",
+      "sourceMetadataFile": null,
+      "caseId": "spatial-planning",
+      "primaryKey": "site_id",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
+          "bytes": 126
+        },
+        "current.csv": {
+          "sha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
+          "bytes": 126
+        },
+        "claims.json": {
+          "sha256": "868ecceb21fbef0fed495f5f48703b173d0130c88927a868b4108370bd41902a",
+          "bytes": 2031
+        },
+        "decisions.json": {
+          "sha256": "eb22d3955161d5f87304253049eeb932d1a1f7969f0db39a04161c55603c036b",
+          "bytes": 4156
+        },
+        "expected-audit.json": {
+          "sha256": "bffc9bf84660f73fb86604500174f5742c8c5f646ca9dfe35a98b380822fda9c",
+          "bytes": 1341
+        },
+        "evidence-package.json": {
+          "sha256": "2536d146643e6c3764e17410466534c1bc87c588d948e48c35be2320bac48f58",
+          "bytes": 48888
+        },
+        "case.ts": {
+          "sha256": "e61a34b820e489201188253f7940ae5ad6c9a662a8b7dffb30ca8941d38e3140",
+          "bytes": 6863
+        },
+        "README.md": {
+          "sha256": "66d69250d40d7ddd14872ba1d23e171f8ab788fabe748958627eefb024b05a4b",
+          "bytes": 420
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "synthetic": false,
+      "dataOrigin": "PUBLIC",
+      "sourceMetadataFile": "/cases/world-bank-life-expectancy/source-metadata.json",
+      "caseId": "world-bank-life-expectancy",
+      "primaryKey": "country_code",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "3f1204b0a9493a639aaf67aadafc55e15f5aaf69ea0ed33d44596538ea1cffd8",
+          "bytes": 392
+        },
+        "current.csv": {
+          "sha256": "88dd522a8ca931e79f790a9a47c80d0e58ef071c1c6c7c2e46c0e666329e2b14",
+          "bytes": 392
+        },
+        "claims.json": {
+          "sha256": "9583bf46a25de609647fe06c38c42e810fd8fb55a45e5e05ecfae146f314b952",
+          "bytes": 2886
+        },
+        "decisions.json": {
+          "sha256": "39c4ef81723bb99f739b1a1a600efbc025d8477ab2b507f9e497c42855d11c35",
+          "bytes": 3162
+        },
+        "expected-audit.json": {
+          "sha256": "f49190afc0451ce646f87d7c28e81f29e7582405516e7ef765f081c06a6622a8",
+          "bytes": 1384
+        },
+        "evidence-package.json": {
+          "sha256": "45a46b4d0d7533212363db17ffd7141325ece8bee47869c5bcd3fa0480a2e8bd",
+          "bytes": 67691
+        },
+        "case.ts": {
+          "sha256": "41be984647487b6ba7eec6926e5caa7298e0f65098d9c988489e03f38adb1354",
+          "bytes": 6735
+        },
+        "README.md": {
+          "sha256": "348fac1db118264b6d4f58a07bf6c18c338b565f33899024ecf53b3ab6316c03",
+          "bytes": 855
+        },
+        "source-config.json": {
+          "sha256": "11c82bb3e9b22ae52aed71ca975829bca488a2262487f3cddb4a383674b3415a",
+          "bytes": 1197
+        },
+        "source-metadata.json": {
+          "sha256": "31fa610e61c4166319aae1c0a3ddf4b11edf34d95ba7fecf7ba158d74686dc3c",
+          "bytes": 6353
+        },
+        "cleaning-log.json": {
+          "sha256": "f89516f8bd9ad969f5d9498f848575f3f2394e2690e336cec78a33f9937956d4",
+          "bytes": 1362
+        },
+        "raw-2019.json": {
+          "sha256": "1d3099e857c9c9458f7b7d65d760a19c9949ef9e076483d70b55aac54b3dce7f",
+          "bytes": 1988
+        },
+        "raw-2024.json": {
+          "sha256": "c0bfd3f786d2ed938f0d44ab2b324e03217575f4f056b447efaf059ca6d2867d",
+          "bytes": 1988
+        }
+      }
+    }
+  ]
+}

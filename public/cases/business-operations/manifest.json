@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "synthetic": true,
+  "dataOrigin": "SYNTHETIC",
+  "sourceMetadataFile": null,
+  "caseId": "business-operations",
+  "primaryKey": "channel_id",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
+      "bytes": 170
+    },
+    "current.csv": {
+      "sha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
+      "bytes": 167
+    },
+    "claims.json": {
+      "sha256": "6a77cb89a644efb726f3d4193f8badd2d2fc836b28ba4ff51b3284ab85c6abe9",
+      "bytes": 2402
+    },
+    "decisions.json": {
+      "sha256": "e9b952a1d208ac0c9a867c2786c419f082d05f256dd8860190ec188f33378816",
+      "bytes": 4218
+    },
+    "expected-audit.json": {
+      "sha256": "0921aa7f3acb3cab1985740440c63d16aaed0b57143c5547b36742cbcf5df3a4",
+      "bytes": 1401
+    },
+    "evidence-package.json": {
+      "sha256": "712f7e028a31cce5170f8887222d3b4a4adae5e46c0ccdab14606025ecf996b5",
+      "bytes": 51478
+    },
+    "case.ts": {
+      "sha256": "354a989c2758072043285e6207066840fa17481b8f3e47b6b99ab9f0f2d77b26",
+      "bytes": 7336
+    },
+    "README.md": {
+      "sha256": "bb5c7c18c1c933ff026ad3b7fbeab156d96b65c65d8aeb21e1f1890251bc2f54",
+      "bytes": 433
+    }
+  }
+}

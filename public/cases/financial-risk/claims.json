@@ -1,0 +1,82 @@
+[
+  {
+    "id": "finance-pd-gate",
+    "code": "FR-001",
+    "title": "Mean portfolio probability of default does not exceed 4%",
+    "section": "Risk admission",
+    "owner": "Risk owner",
+    "category": "Risk threshold",
+    "formula": "mean(pd_percent) <= 4",
+    "rule": {
+      "type": "threshold",
+      "field": "pd_percent",
+      "aggregation": "average",
+      "operator": "<=",
+      "threshold": 4,
+      "thresholdSpec": {
+        "value": 4,
+        "unit": "percent",
+        "source": "Synthetic credit policy v1",
+        "rationale": "Pause expansion when mean PD exceeds 4%",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "finance-pd-stability",
+    "code": "FR-002",
+    "title": "Mean portfolio probability of default changes by no more than 5%",
+    "section": "Model monitoring",
+    "owner": "Model risk owner",
+    "category": "Risk stability",
+    "formula": "relative_change(mean(pd_percent)) <= 5%",
+    "rule": {
+      "type": "stability",
+      "field": "pd_percent",
+      "aggregation": "average",
+      "supportTolerance": 5,
+      "reversalThreshold": 15,
+      "supportToleranceSpec": {
+        "value": 5,
+        "unit": "percent",
+        "source": "Synthetic model monitoring policy v1",
+        "rationale": "Treat changes within 5% as stable for monitoring",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      },
+      "reversalThresholdSpec": {
+        "value": 15,
+        "unit": "percent",
+        "source": "Synthetic risk escalation policy v1",
+        "rationale": "A 15% change invalidates the original portfolio assumption",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "finance-label-gate",
+    "code": "FR-003",
+    "title": "The observed default-label share does not exceed 25%",
+    "section": "Post-hoc validation",
+    "owner": "Validation owner",
+    "category": "Outcome threshold",
+    "formula": "mean(observed_label) <= 0.25",
+    "rule": {
+      "type": "threshold",
+      "field": "observed_label",
+      "aggregation": "average",
+      "operator": "<=",
+      "threshold": 0.25,
+      "thresholdSpec": {
+        "value": 0.25,
+        "unit": "score",
+        "source": "Synthetic validation policy v1",
+        "rationale": "Stop the original admission policy when the observed default rate exceeds 25%",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  }
+]

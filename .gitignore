@@ -1,0 +1,11 @@
+.DS_Store
+.build/
+dist/
+artifacts/
+*.xcuserstate
+.swiftpm/
+.next/
+.vinext/
+.wrangler/
+node_modules/
+*.tsbuildinfo

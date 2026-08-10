@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "claimtrace-external-source/1.0.0",
+  "sourceType": "WORLD_BANK_INDICATORS_API_V2",
+  "publisher": "World Bank",
+  "dataset": "World Development Indicators",
+  "indicator": {
+    "id": "SP.DYN.LE00.IN",
+    "name": "Life expectancy at birth, total (years)"
+  },
+  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceLastUpdated": "2026-07-13",
+  "sourceUrls": {
+    "baseline": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2019&format=json&per_page=1000",
+    "current": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2024&format=json&per_page=1000"
+  },
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://datacatalog.worldbank.org/public-licenses",
+  "attribution": "World Bank, World Development Indicators, Life expectancy at birth, total (years) (SP.DYN.LE00.IN), accessed 2026-08-10; transformed by ClaimTrace.",
+  "cleaning": {
+    "implementation": "world-bank-indicator-v1",
+    "scriptPath": "tools/generate-world-bank-case.mjs",
+    "baselineYear": "2019",
+    "currentYear": "2024",
+    "selectedCountryCodes": [
+      "BRA",
+      "CHN",
+      "DEU",
+      "FRA",
+      "GBR",
+      "IND",
+      "JPN",
+      "USA"
+    ],
+    "decimalPlaces": 3
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2019.json",
+      "sha256": "1d3099e857c9c9458f7b7d65d760a19c9949ef9e076483d70b55aac54b3dce7f",
+      "text": "[\n  {\n    \"page\": 1,\n    \"pages\": 1,\n    \"per_page\": 1000,\n    \"total\": 8,\n    \"sourceid\": \"2\",\n    \"lastupdated\": \"2026-07-13\"\n  },\n  [\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"BR\",\"value\":\"Brazil\"},\"countryiso3code\":\"BRA\",\"date\":\"2019\",\"value\":75.809,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"CN\",\"value\":\"China\"},\"countryiso3code\":\"CHN\",\"date\":\"2019\",\"value\":77.94,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"DE\",\"value\":\"Germany\"},\"countryiso3code\":\"DEU\",\"date\":\"2019\",\"value\":81.2926829268293,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"FR\",\"value\":\"France\"},\"countryiso3code\":\"FRA\",\"date\":\"2019\",\"value\":82.8268292682927,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"GB\",\"value\":\"United Kingdom\"},\"countryiso3code\":\"GBR\",\"date\":\"2019\",\"value\":81.3691219512195,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"IN\",\"value\":\"India\"},\"countryiso3code\":\"IND\",\"date\":\"2019\",\"value\":70.746,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"JP\",\"value\":\"Japan\"},\"countryiso3code\":\"JPN\",\"date\":\"2019\",\"value\":84.3563414634146,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"US\",\"value\":\"United States\"},\"countryiso3code\":\"USA\",\"date\":\"2019\",\"value\":78.7878048780488,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0}\n  ]\n]\n"
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2024.json",
+      "sha256": "c0bfd3f786d2ed938f0d44ab2b324e03217575f4f056b447efaf059ca6d2867d",
+      "text": "[\n  {\n    \"page\": 1,\n    \"pages\": 1,\n    \"per_page\": 1000,\n    \"total\": 8,\n    \"sourceid\": \"2\",\n    \"lastupdated\": \"2026-07-13\"\n  },\n  [\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"BR\",\"value\":\"Brazil\"},\"countryiso3code\":\"BRA\",\"date\":\"2024\",\"value\":76.023,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"CN\",\"value\":\"China\"},\"countryiso3code\":\"CHN\",\"date\":\"2024\",\"value\":78.017,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"DE\",\"value\":\"Germany\"},\"countryiso3code\":\"DEU\",\"date\":\"2024\",\"value\":80.7926829268293,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"FR\",\"value\":\"France\"},\"countryiso3code\":\"FRA\",\"date\":\"2024\",\"value\":82.9804878048781,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"GB\",\"value\":\"United Kingdom\"},\"countryiso3code\":\"GBR\",\"date\":\"2024\",\"value\":81.3868536585366,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"IN\",\"value\":\"India\"},\"countryiso3code\":\"IND\",\"date\":\"2024\",\"value\":72.235,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"JP\",\"value\":\"Japan\"},\"countryiso3code\":\"JPN\",\"date\":\"2024\",\"value\":84.0363414634146,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0},\n    {\"indicator\":{\"id\":\"SP.DYN.LE00.IN\",\"value\":\"Life expectancy at birth, total (years)\"},\"country\":{\"id\":\"US\",\"value\":\"United States\"},\"countryiso3code\":\"USA\",\"date\":\"2024\",\"value\":78.890243902439,\"unit\":\"\",\"obs_status\":\"\",\"decimal\":0}\n  ]\n]\n"
+    }
+  ]
+}

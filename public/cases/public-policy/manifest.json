@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-08T00:00:00.000Z",
+  "synthetic": true,
+  "dataOrigin": "SYNTHETIC",
+  "sourceMetadataFile": null,
+  "caseId": "public-policy",
+  "primaryKey": "district_id",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "ad4ad8bc22316d608966f14e7df00bd6e39283e71bb41aa2c511e7174330bc03",
+      "bytes": 154
+    },
+    "current.csv": {
+      "sha256": "23bc780214141b6a86e8c4e4c89faddd3a825dfcd4db4b7d6c954621890a0d75",
+      "bytes": 154
+    },
+    "claims.json": {
+      "sha256": "77d1b6bf99dbcda09f5fc95e3ee2793f47dd20b1b87de976e0c0cc813fbc9ea6",
+      "bytes": 3004
+    },
+    "decisions.json": {
+      "sha256": "6008b23e7075dc883fb3550bc371053a25d65764a5df8c0e6902bc33dc58033a",
+      "bytes": 4141
+    },
+    "expected-audit.json": {
+      "sha256": "ba249549c282092eefa7261d3253918705abe71466e426f1cf7b7977f0b98ee5",
+      "bytes": 1377
+    },
+    "evidence-package.json": {
+      "sha256": "e9c885db1818227b0ea99395df6bfbb5378a08ba4236f0b2dc5c67cad61d0b25",
+      "bytes": 51891
+    },
+    "case.ts": {
+      "sha256": "6340669c198f75cb1a7d927cececa91042988fbc85f36f90e317d06b92b6bcc3",
+      "bytes": 7874
+    },
+    "README.md": {
+      "sha256": "abdf3777961161454c68c54b939f2b79eda1377762f347d125127227a09c6e66",
+      "bytes": 427
+    }
+  }
+}

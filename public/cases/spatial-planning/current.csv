@@ -1,0 +1,5 @@
+site_id,zone,demand_index,travel_minutes,flood_risk
+S-04,West,86,19,2
+S-02,East,81,24,1
+S-01,North,78,18,2
+S-03,South,73,17,4

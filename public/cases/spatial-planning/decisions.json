@@ -1,0 +1,144 @@
+[
+  {
+    "id": "spatial-site-choice",
+    "title": "Should the East site plan remain the recommendation?",
+    "owner": "Planning committee",
+    "passActionId": "spatial:advance-east-plan",
+    "holdActionId": "spatial:cancel-and-rerank",
+    "actionIfPass": "Keep East as the preferred site and advance to detailed planning.",
+    "actionIfFail": "Cancel the original preference and rerank using demand, accessibility, and flood constraints.",
+    "conditions": [
+      {
+        "claimId": "spatial-demand-rank",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      },
+      {
+        "claimId": "spatial-flood-gate",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      }
+    ],
+    "priorSignedResult": {
+      "versionId": "spatial-v1",
+      "outcome": "PASS",
+      "activeActionId": "spatial:advance-east-plan",
+      "actionIdentityHash": "e5b792e416c6d6e193b96aa1d70fd40191bcc3199cb8f1c70b8d4d94dcaff2bc",
+      "recommendedOptionId": "east",
+      "feasibleOptionIds": [
+        "east"
+      ],
+      "decisionPolicyHash": "c441bcb173c7967100924c5b2ce2d6c99c8c483ba2f967bb21dcc6ee3e35bcc6",
+      "decisionInputProvenanceHash": "536dc922f9cf0571bb251e95b94d1cefc34c94716c222fe33ada1bad1a7fbee4",
+      "baselineSha256": "b1b4bc7b2abf4da5c5ca8d955af4a218aa014bbcb9458da50312bb9637b507bc",
+      "currentSha256": "f9a06bbbf3bc12936ed61ddf8ded68d6e7ff3f51d188377862f0b06d6030a133",
+      "ruleVersion": "claimtrace-rule/4.0.0",
+      "claimResultIds": [
+        "prior-result:spatial-v1:spatial-demand-rank",
+        "prior-result:spatial-v1:spatial-flood-gate"
+      ],
+      "historyBasis": "RECORDED_IDENTITY",
+      "reviewRecordId": "synthetic-prior-review:spatial-site-choice:spatial-v1",
+      "reviewRecordHash": "8a1d87e398c260ac4d18b3b279aff8474e76763c8aad08bfd1dc7e4ef8b43094",
+      "signedAt": "2026-08-01T08:00:00.000Z",
+      "signedBy": "Synthetic planning committee"
+    },
+    "stakeholders": [
+      "Residents",
+      "Planning department",
+      "Emergency management"
+    ],
+    "objective": {
+      "benefitWeight": 1,
+      "costWeight": 0.2,
+      "riskWeight": 1.4
+    },
+    "riskTolerance": 18,
+    "noActionLoss": 32,
+    "inputProvenance": {
+      "kind": "MANUAL_ASSUMPTION",
+      "source": "Synthetic planning committee assumptions",
+      "version": "1.0.0",
+      "rationale": "Used to demonstrate site-selection constraint scoring; this is not GIS accessibility, spatial-boundary, or real construction-cost analysis",
+      "units": {
+        "benefit": "synthetic utility points",
+        "cost": "synthetic cost points",
+        "risk": "synthetic risk points",
+        "capacity": "synthetic capacity points"
+      },
+      "confirmedBy": "Synthetic case owner",
+      "confirmedAt": "2026-08-08T00:00:00.000Z"
+    },
+    "uncertainty": {
+      "method": "BOUNDED_UNIFORM",
+      "benefitMultiplier": [
+        0.8,
+        1.2
+      ],
+      "costMultiplier": [
+        0.85,
+        1.2
+      ],
+      "riskMultiplier": [
+        0.8,
+        1.25
+      ],
+      "capacityMultiplier": [
+        0.9,
+        1.15
+      ],
+      "trials": 512,
+      "seed": "spatial-site-v1",
+      "stabilitySweep": {
+        "parameter": "benefitMultiplier",
+        "min": 0.5,
+        "max": 1.5,
+        "step": 0.05
+      }
+    },
+    "constraints": [
+      {
+        "id": "capital",
+        "label": "Construction cost",
+        "metric": "cost",
+        "operator": "<=",
+        "value": 75
+      },
+      {
+        "id": "delivery",
+        "label": "Construction capacity",
+        "metric": "capacity",
+        "operator": "<=",
+        "value": 65
+      }
+    ],
+    "options": [
+      {
+        "id": "east",
+        "label": "Original East plan",
+        "benefit": 75,
+        "cost": 58,
+        "risk": 22,
+        "capacity": 54
+      },
+      {
+        "id": "west",
+        "label": "Revised West plan",
+        "benefit": 91,
+        "cost": 66,
+        "risk": 15,
+        "capacity": 62
+      },
+      {
+        "id": "dual",
+        "label": "Dual-site plan",
+        "benefit": 120,
+        "cost": 104,
+        "risk": 12,
+        "capacity": 96
+      }
+    ]
+  }
+]

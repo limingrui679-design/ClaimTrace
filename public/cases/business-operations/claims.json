@@ -1,0 +1,76 @@
+[
+  {
+    "id": "business-referral-rank",
+    "code": "BO-001",
+    "title": "Referral remains the highest-converting channel",
+    "section": "Channel strategy",
+    "owner": "Growth owner",
+    "category": "Channel ranking",
+    "formula": "argmax(channel, conversion_rate) = Referral",
+    "rule": {
+      "type": "rank",
+      "field": "conversion_rate",
+      "aggregation": "average",
+      "groupField": "channel",
+      "expectedGroup": "Referral",
+      "rank": "max",
+      "tiePolicy": "require_unique"
+    }
+  },
+  {
+    "id": "business-service-gate",
+    "code": "BO-002",
+    "title": "Average ticket handling time does not exceed 12 hours",
+    "section": "Service capacity",
+    "owner": "Service owner",
+    "category": "Service threshold",
+    "formula": "mean(ticket_hours) <= 12",
+    "rule": {
+      "type": "threshold",
+      "field": "ticket_hours",
+      "aggregation": "average",
+      "operator": "<=",
+      "threshold": 12,
+      "thresholdSpec": {
+        "value": 12,
+        "unit": "absolute",
+        "source": "Synthetic service SLA v1",
+        "rationale": "Handling times above 12 hours trigger service-capacity expansion",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "business-lead-stability",
+    "code": "BO-003",
+    "title": "Serviceable lead volume remains within a 5% change",
+    "section": "Capacity planning",
+    "owner": "Operations owner",
+    "category": "Volume stability",
+    "formula": "abs(mean(eligible_leads_v2)-mean(eligible_leads_v1))/mean(v1) <= 5%",
+    "rule": {
+      "type": "stability",
+      "field": "eligible_leads",
+      "aggregation": "average",
+      "supportTolerance": 5,
+      "reversalThreshold": 12,
+      "supportToleranceSpec": {
+        "value": 5,
+        "unit": "percent",
+        "source": "Synthetic capacity plan v1",
+        "rationale": "Retain the current staffing plan within a 5% change",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      },
+      "reversalThresholdSpec": {
+        "value": 12,
+        "unit": "percent",
+        "source": "Synthetic capacity risk policy v1",
+        "rationale": "At 12%, the original capacity assumption is invalid",
+        "confirmedBy": "Synthetic case owner",
+        "confirmedAt": "2026-08-08T00:00:00.000Z"
+      }
+    }
+  }
+]
