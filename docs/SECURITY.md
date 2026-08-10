@@ -20,9 +20,11 @@ Review records use UUIDs plus hashes of their bound result, each record, and the
 
 Standalone HTML reports escape user-controlled text. CSV is parsed as data and never executed. JSON evidence exports remain data files; downstream consumers must not execute their contents.
 
+The public-source refresh command accepts raw-response targets only as direct file names inside each case directory. It rejects nested paths, including paths through a symlinked parent, before downloading; final targets must also pass a non-symlink regular-file check before the replacement transaction begins.
+
 ## Dependency and CI audit
 
-Audit date: 2026-08-10.
+Audit date: 2026-08-11.
 
 - Production dependencies: `npm audit --omit=dev --audit-level=high` reports 0 known vulnerabilities.
 - Full development toolchain: `npm audit --audit-level=high` reports 0 known vulnerabilities.

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, rmdir, unlink, writeFile } from "node:fs/promises";
+import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, rmdir, symlink, unlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -380,6 +380,49 @@ test("source refresh rejects an unsafe lock identity without resolving it as a p
     );
     assert.equal(await readFile(sentinelPath, "utf8"), "must remain untouched");
     assert.deepEqual(await readdir(lockDirectory), ["lock.json"]);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects a raw path through a symlinked parent before downloading", async () => {
+  const fixture = await makeFixture();
+  try {
+    const outsideDirectory = path.join(fixture.casesDirectory, "outside-targets");
+    const outsideBaselinePath = path.join(outsideDirectory, "raw-baseline.json");
+    const outsideCurrentPath = path.join(outsideDirectory, "raw-current.json");
+    await mkdir(outsideDirectory);
+    await writeFile(outsideBaselinePath, "outside baseline must remain untouched", "utf8");
+    await writeFile(outsideCurrentPath, "outside current must remain untouched", "utf8");
+    await symlink(outsideDirectory, path.join(fixture.directory, "escape"));
+
+    const configPath = path.join(fixture.directory, "source-config.json");
+    const metadataPath = path.join(fixture.directory, "source-metadata.json");
+    const config = JSON.parse(await readFile(configPath, "utf8"));
+    config.rawFiles.baseline = "escape/raw-baseline.json";
+    config.rawFiles.current = "escape/raw-current.json";
+    const metadata = JSON.parse(await readFile(metadataPath, "utf8"));
+    for (const artifact of metadata.rawArtifacts) artifact.fileName = config.rawFiles[artifact.side];
+    await writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`, "utf8");
+    await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(worldBankResponse("2019", 79.1), { status: 200 });
+        }) as typeof fetch,
+      }),
+      /source-refresh file must be a direct child of its case directory/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(outsideBaselinePath, "utf8"), "outside baseline must remain untouched");
+    assert.equal(await readFile(outsideCurrentPath, "utf8"), "outside current must remain untouched");
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+    assert.deepEqual((await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-")), []);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }

@@ -60,7 +60,7 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 127 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 128 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
 
 ## Reproducible cases
 
@@ -94,13 +94,13 @@ Normal case generation is offline: it consumes the committed raw responses. Refr
 npm run cases:refresh-sources -- usdot-transit-operations
 ```
 
-For each selected case, the refresh command holds an exclusive refresh lock, downloads both source responses, and runs the declared source-specific cleaner against each one before replacing either pinned response, then records the actual retrieval time in `source-config.json`. A concurrent invocation is rejected before it downloads, and a malformed lock identity is rejected before it can be resolved as a filesystem path. If either request fails, is empty, or does not satisfy the source schema and cleaning parameters, the case files remain unchanged. The three-file replacement persists a per-case transaction manifest with the original and committed SHA-256 values: an uncommitted refresh interrupted during replacement is hash-checked and restored before that case is read on the next invocation, while a committed refresh with unfinished cleanup is content-verified and cleaned. Cleanup failures and hash mismatches are reported instead of being treated as success. Run `npm run cases:generate` afterward to rebuild and verify the derived snapshots, manifests, and AuditBundles.
+For each selected case, the refresh command holds an exclusive refresh lock, requires each raw-response target to be a direct file inside its case directory, downloads both source responses, and runs the declared source-specific cleaner against each one before replacing either pinned response, then records the actual retrieval time in `source-config.json`. A concurrent invocation is rejected before it downloads; malformed lock identities and nested raw paths, including paths through a symlinked parent, are rejected before any network request. If either request fails, is empty, or does not satisfy the source schema and cleaning parameters, the case files remain unchanged. The three-file replacement persists a per-case transaction manifest with the original and committed SHA-256 values: an uncommitted refresh interrupted during replacement is hash-checked and restored before that case is read on the next invocation, while a committed refresh with unfinished cleanup is content-verified and cleaned. Cleanup failures and hash mismatches are reported instead of being treated as success. Run `npm run cases:generate` afterward to rebuild and verify the derived snapshots, manifests, and AuditBundles.
 
 Every case includes executable specifications, two snapshots, expected results, a manifest, documentation, and a verified AuditBundle. The population-health synthetic fixture additionally connects 4,218 follow-up and 286 validation records per version through 20 reproducible aggregations to 11 audited summary rows.
 
 ## Evaluation and verification status
 
-- **128 / 128 automated tests** — 127 unit/integration tests plus 1 real-Chromium read-only acceptance test
+- **129 / 129 automated tests** — 128 unit/integration tests plus 1 real-Chromium read-only acceptance test
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
 - **97.11% statement/line coverage, 77.68% branch coverage, 99.33% function coverage** for `src/core`

@@ -91,8 +91,12 @@ interface AvailableSource {
 }
 
 function caseFile(directory: string, fileName: string) {
-  const resolved = path.resolve(directory, fileName);
-  if (!resolved.startsWith(`${path.resolve(directory)}${path.sep}`)) throw new Error(`${fileName}: raw file must stay inside its case directory`);
+  const resolvedDirectory = path.resolve(directory);
+  if (!fileName || fileName === "." || fileName === ".." || path.basename(fileName) !== fileName) {
+    throw new Error(`${fileName}: source-refresh file must be a direct child of its case directory`);
+  }
+  const resolved = path.resolve(resolvedDirectory, fileName);
+  if (path.dirname(resolved) !== resolvedDirectory) throw new Error(`${fileName}: source-refresh file must stay inside its case directory`);
   return resolved;
 }
 
@@ -561,6 +565,7 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     if (config.schemaVersion !== "claimtrace-external-source-config/2.0.0") throw new Error(`${entry.name}: unsupported source-config schema`);
     const provenance = JSON.parse(await fileOperations.readFile(path.join(directory, "source-metadata.json"), "utf8")) as ExternalSourceProvenance;
     validateSourceDefinition(entry.name, config, provenance);
+    for (const side of SIDES) caseFile(directory, config.rawFiles[side]);
     available.set(entry.name, { directory, configPath, config, provenance });
   }
 
