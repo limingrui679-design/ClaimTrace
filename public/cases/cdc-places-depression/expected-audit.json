@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "claimtrace-case-audit/1.0.0",
+  "caseId": "cdc-places-depression",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "claims": [
+    {
+      "id": "places-middlesex-rank",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "Middlesex 23.4",
+      "currentValue": "Middlesex 24.1",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "places-maricopa-threshold",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "20.9",
+      "currentValue": "18.9",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "places-selected-mean-stability",
+      "kind": "VERSION_COMPARISON",
+      "baselineStatus": "UNTESTABLE",
+      "status": "SUPPORTED",
+      "baselineValue": "20.6",
+      "currentValue": "20.33",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "places-surveillance-note",
+      "previousOutcome": null,
+      "currentOutcome": "HOLD",
+      "status": "SUPPORTED",
+      "recommendedOptionId": "revise"
+    }
+  ]
+}

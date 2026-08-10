@@ -1,0 +1,9 @@
+ntd_id,agency,period,mode,type_of_service,ridership,vehicle_revenue_hours,riders_per_revenue_hour
+10003,Massachusetts Bay Transportation Authority,2025-05-01,Heavy Rail,DO,8681151,130138,66.71
+20008,MTA New York City Transit,2025-05-01,Heavy Rail,DO,204151128,1891988,107.90
+30019,Southeastern Pennsylvania Transportation Authority,2025-05-01,Heavy Rail,DO,5413893,90970,59.51
+30030,Washington Metropolitan Area Transit Authority,2025-05-01,Heavy Rail,DO,17224940,345292,49.89
+40034,County of Miami-Dade,2025-05-01,Heavy Rail,DO,1260681,28654,44.00
+50066,Chicago Transit Authority,2025-05-01,Heavy Rail,DO,12064650,406607,29.67
+90003,San Francisco Bay Area Rapid Transit District,2025-05-01,Heavy Rail,DO,5021713,179279,28.01
+90154,Los Angeles County Metropolitan Transportation Authority,2025-05-01,Heavy Rail,DO,1775449,23088,76.90

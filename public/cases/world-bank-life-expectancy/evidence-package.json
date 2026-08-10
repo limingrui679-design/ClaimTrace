@@ -655,8 +655,8 @@
           "unit": "absolute",
           "source": "Illustrative analyst review threshold v1",
           "rationale": "Used only to demonstrate how an updated public indicator can invalidate an existing threshold claim; this is not World Bank guidance or a policy standard",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       }
     },
@@ -666,7 +666,7 @@
       "title": "Mean life expectancy at birth across the eight selected countries changes by no more than 1%",
       "section": "Sample-mean stability",
       "owner": "Public-data case reviewer",
-      "category": "Version stability",
+      "category": "Period stability",
       "formula": "abs(mean(2024)-mean(2019))/mean(2019) <= 1%",
       "rule": {
         "type": "stability",
@@ -679,16 +679,16 @@
           "unit": "percent",
           "source": "Illustrative descriptive stability rule v1",
           "rationale": "Used to demonstrate a stability audit of a descriptive mean across periods; this does not imply statistical significance",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         },
         "reversalThresholdSpec": {
           "value": 3,
           "unit": "percent",
           "source": "Illustrative descriptive reversal rule v1",
           "rationale": "At 3%, treat the original stability statement as materially invalid",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       }
     }
@@ -1093,8 +1093,8 @@
           "unit": "absolute",
           "source": "Illustrative analyst review threshold v1",
           "rationale": "Used only to demonstrate how an updated public indicator can invalidate an existing threshold claim; this is not World Bank guidance or a policy standard",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       },
       "kind": "SNAPSHOT",
@@ -1139,7 +1139,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:wdi-germany-threshold:82c62979ebeacbe4aa103f5a",
+          "id": "claim-result:wdi-germany-threshold:60234e464e35011a08174635",
           "kind": "Comparison result",
           "title": "life_expectancy_years version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1244,7 +1244,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:wdi-germany-threshold:82c62979ebeacbe4aa103f5a",
+      "resultId": "claim-result:wdi-germany-threshold:60234e464e35011a08174635",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1258,7 +1258,7 @@
       "title": "Mean life expectancy at birth across the eight selected countries changes by no more than 1%",
       "section": "Sample-mean stability",
       "owner": "Public-data case reviewer",
-      "category": "Version stability",
+      "category": "Period stability",
       "formula": "abs(mean(2024)-mean(2019))/mean(2019) <= 1%",
       "rule": {
         "type": "stability",
@@ -1271,16 +1271,16 @@
           "unit": "percent",
           "source": "Illustrative descriptive stability rule v1",
           "rationale": "Used to demonstrate a stability audit of a descriptive mean across periods; this does not imply statistical significance",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         },
         "reversalThresholdSpec": {
           "value": 3,
           "unit": "percent",
           "source": "Illustrative descriptive reversal rule v1",
           "rationale": "At 3%, treat the original stability statement as materially invalid",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       },
       "kind": "VERSION_COMPARISON",
@@ -1493,7 +1493,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:wdi-eight-country-stability:6df3c8b9e1de18eda5af96ab",
+          "id": "claim-result:wdi-eight-country-stability:9c6929d9a31e89b9abf51bd9",
           "kind": "Comparison result",
           "title": "life_expectancy_years version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1598,7 +1598,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:wdi-eight-country-stability:6df3c8b9e1de18eda5af96ab",
+      "resultId": "claim-result:wdi-eight-country-stability:9c6929d9a31e89b9abf51bd9",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1655,13 +1655,13 @@
         "version": "1.0.0",
         "rationale": "Option benefits, costs, risks, and capacities are manually supplied ClaimTrace demonstration inputs; they are not World Bank data or observed communication effects",
         "units": {
-          "benefit": "synthetic utility points",
-          "cost": "synthetic cost points",
-          "risk": "synthetic risk points",
-          "capacity": "synthetic capacity points"
+          "benefit": "illustrative utility points",
+          "cost": "illustrative cost points",
+          "risk": "illustrative risk points",
+          "capacity": "illustrative capacity points"
         },
-        "confirmedBy": "Synthetic case owner",
-        "confirmedAt": "2026-08-08T00:00:00.000Z"
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
       },
       "uncertainty": {
         "method": "BOUNDED_UNIFORM",
@@ -1750,13 +1750,13 @@
           "annotate"
         ],
         "decisionPolicyHash": "73778842ee8219980323d08c8ac62c894e2cf61593ac2597b62ae13ba694383b",
-        "decisionInputProvenanceHash": "2534b25f8e77fd40abbc46a4440fc79578a400b162e984546374bbb5b2161eeb",
+        "decisionInputProvenanceHash": "7d2f2a68b280a0eea3350141393eed51c90c96124d53da05bc9f3a6a205c59e2",
         "baselineSha256": "3f1204b0a9493a639aaf67aadafc55e15f5aaf69ea0ed33d44596538ea1cffd8",
         "currentSha256": "88dd522a8ca931e79f790a9a47c80d0e58ef071c1c6c7c2e46c0e666329e2b14",
         "ruleVersion": "claimtrace-rule/6.1.2",
         "claimResultIds": [
-          "claim-result:wdi-eight-country-stability:6df3c8b9e1de18eda5af96ab",
-          "claim-result:wdi-germany-threshold:82c62979ebeacbe4aa103f5a",
+          "claim-result:wdi-eight-country-stability:9c6929d9a31e89b9abf51bd9",
+          "claim-result:wdi-germany-threshold:60234e464e35011a08174635",
           "claim-result:wdi-japan-rank:dc34875584b036d33de038c9"
         ]
       },
@@ -1879,7 +1879,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:wdi-publication-note:15922dbb14508b90a3fe73a1"
+      "resultId": "decision-result:wdi-publication-note:67446b7c9743c40291e9a303"
     }
   ],
   "reviews": [],
@@ -1889,11 +1889,11 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/1.0.0",
+    "schemaVersion": "claimtrace-external-source/2.0.0",
     "sourceType": "WORLD_BANK_INDICATORS_API_V2",
     "publisher": "World Bank",
     "dataset": "World Development Indicators",
-    "indicator": {
+    "measure": {
       "id": "SP.DYN.LE00.IN",
       "name": "Life expectancy at birth, total (years)"
     },
@@ -1906,22 +1906,29 @@
     "license": "CC BY 4.0",
     "licenseUrl": "https://datacatalog.worldbank.org/public-licenses",
     "attribution": "World Bank, World Development Indicators, Life expectancy at birth, total (years) (SP.DYN.LE00.IN), accessed 2026-08-10; transformed by ClaimTrace.",
+    "limitations": [
+      "The two snapshots compare observation years, not two releases of the same observation year.",
+      "The eight-country selection is illustrative and is not a representative global sample.",
+      "Descriptive differences do not identify causes, intervention effects, or country performance."
+    ],
     "cleaning": {
       "implementation": "world-bank-indicator-v1",
-      "scriptPath": "tools/generate-world-bank-case.mjs",
-      "baselineYear": "2019",
-      "currentYear": "2024",
-      "selectedCountryCodes": [
-        "BRA",
-        "CHN",
-        "DEU",
-        "FRA",
-        "GBR",
-        "IND",
-        "JPN",
-        "USA"
-      ],
-      "decimalPlaces": 3
+      "scriptPath": "tools/generate-public-data-cases.ts",
+      "parameters": {
+        "baselineYear": "2019",
+        "currentYear": "2024",
+        "selectedCountryCodes": [
+          "BRA",
+          "CHN",
+          "DEU",
+          "FRA",
+          "GBR",
+          "IND",
+          "JPN",
+          "USA"
+        ],
+        "decimalPlaces": 3
+      }
     },
     "rawArtifacts": [
       {
@@ -1942,14 +1949,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "3dfa34a1b6afc84210dcd0a07f30b45b48dde85b87c6499d8b8dde9b384d0d47",
+    "payloadHash": "b66e357199e80eaba195e44fd4cc36403214b8eb24eca8fecebd33dc0b15c6be",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "2423668a9c6b16dba5250353712b41482b2ce488ba875515b3f197b3aecf7aac",
-      "claims": "b045eee2ed58dc698f7ec9aecac667c631d5b0b456a150d0fccb6b7e61b58a6e",
-      "decisions": "cca5bd86cb65fed498166541f6bc84a909381228ee93290a25e55f2ccb9d18ba",
+      "claims": "36d94c5a27601069aacffbf898d66429c7c5d08971f602d1207b24818c9d69a5",
+      "decisions": "6e76d7d74bfabbf0e552798c37f949b9496db4481a109b32a215e18d1a5f793c",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "7bf73ba110d1f221a63158c378b4b8bd60d0daa3180ed2acdf41a9f5f1003e05",
+      "provenance": "a8e8746806a3ff32ab82b009e9c59698b539de6feb471fc3386e549ab76a71e8",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

@@ -91,7 +91,7 @@ The exported `AuditBundle` places snapshot manifests/payloads, claim specificati
 
 Verification does not trust exported result fields. It reconstructs snapshots from raw bytes, validates hashes and primary keys, reruns all claim and decision specifications, reapplies the review chain, and compares regenerated derived fields. If upstream lineage is present, it also verifies raw source hashes, filters, numerator/denominator rules, rounding, source-key-set hashes, and the resulting summary rows. The bundle is tamper-evident but not digitally signed; see `docs/SECURITY.md`.
 
-For the World Bank case, verification additionally rehashes both retained API responses, checks indicator/country/year/acquisition/license metadata, applies the committed cleaning configuration, regenerates the baseline and current CSV text, and compares it with the snapshot payloads.
+For every public-data case, verification additionally rehashes both retained official-source responses, checks retrieval/license/measure metadata, applies the source-specific committed cleaning parameters, regenerates the baseline and current CSV text, and compares it with the snapshot payloads. The supported transformations cover World Bank Indicators JSON, USDOT and CDC Socrata JSON, U.S. Treasury Atom/XML, CFPB nested trend aggregations, and ONS CSV.
 
 `verifyAuditBundleChain()` accepts bundles in oldest-to-newest order, verifies each package independently, and then checks genesis, exact predecessor roots, duplicate roots, project continuity, and primary-key continuity. A single bundle validates only the format of its link; proving a prior bundle requires retaining and supplying that bundle. The chain is not digitally signed or externally anchored.
 

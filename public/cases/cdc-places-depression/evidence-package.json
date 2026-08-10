@@ -1,0 +1,2126 @@
+{
+  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "bundleType": "AuditBundle",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "previousBundleHash": null,
+  "project": "CDC PLACES Selected-County Depression Estimate Audit",
+  "primaryKey": "county_fips",
+  "ruleVersion": "claimtrace-rule/6.1.2",
+  "isDemo": true,
+  "dataOrigin": "PUBLIC",
+  "snapshots": {
+    "baseline": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "baseline-43742e0837474322",
+      "side": "baseline",
+      "fileName": "baseline.csv",
+      "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+      "normalizedSha256": "17e037c6c700e33962da860041c590d8ae83a97ca42381f2b01749dd88013903",
+      "rowCount": 8,
+      "byteSize": 580,
+      "columns": [
+        "county_fips",
+        "state",
+        "county",
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population",
+        "measure_id"
+      ],
+      "primaryKey": "county_fips",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "verifiedAt": "2026-08-10T00:00:00.000Z",
+      "verificationStatus": "verified"
+    },
+    "current": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "current-ed1fd64345d56388",
+      "side": "current",
+      "fileName": "current.csv",
+      "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+      "normalizedSha256": "3795fe797fecade2d4a554126b0ee05826b003ba1f1dfba7f03a660efbe8c5d1",
+      "rowCount": 8,
+      "byteSize": 580,
+      "columns": [
+        "county_fips",
+        "state",
+        "county",
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population",
+        "measure_id"
+      ],
+      "primaryKey": "county_fips",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "verifiedAt": "2026-08-10T00:00:00.000Z",
+      "verificationStatus": "verified"
+    }
+  },
+  "snapshotPayloads": {
+    "baseline": {
+      "fileName": "baseline.csv",
+      "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+      "normalizedSha256": "17e037c6c700e33962da860041c590d8ae83a97ca42381f2b01749dd88013903",
+      "text": "county_fips,state,county,data_year,age_adjusted_depression_percent,ci_low_percent,ci_high_percent,adult_population,measure_id\n04013,AZ,Maricopa,2022,20.9,18.8,23.1,3532288,DEPRESSION\n06037,CA,Los Angeles,2022,20.4,18.4,22.4,7737357,DEPRESSION\n06075,CA,San Francisco,2022,18.7,16.2,21.3,697737,DEPRESSION\n17031,IL,Cook,2022,17.5,15.4,19.9,4039681,DEPRESSION\n25017,MA,Middlesex,2022,23.4,21.1,25.6,1305661,DEPRESSION\n36061,NY,New York,2022,20.8,18.9,23.0,1372389,DEPRESSION\n48201,TX,Harris,2022,20.1,17.7,22.5,3550425,DEPRESSION\n53033,WA,King,2022,23.0,21.4,24.6,1831091,DEPRESSION\n",
+      "rawBytesBase64": "Y291bnR5X2ZpcHMsc3RhdGUsY291bnR5LGRhdGFfeWVhcixhZ2VfYWRqdXN0ZWRfZGVwcmVzc2lvbl9wZXJjZW50LGNpX2xvd19wZXJjZW50LGNpX2hpZ2hfcGVyY2VudCxhZHVsdF9wb3B1bGF0aW9uLG1lYXN1cmVfaWQKMDQwMTMsQVosTWFyaWNvcGEsMjAyMiwyMC45LDE4LjgsMjMuMSwzNTMyMjg4LERFUFJFU1NJT04KMDYwMzcsQ0EsTG9zIEFuZ2VsZXMsMjAyMiwyMC40LDE4LjQsMjIuNCw3NzM3MzU3LERFUFJFU1NJT04KMDYwNzUsQ0EsU2FuIEZyYW5jaXNjbywyMDIyLDE4LjcsMTYuMiwyMS4zLDY5NzczNyxERVBSRVNTSU9OCjE3MDMxLElMLENvb2ssMjAyMiwxNy41LDE1LjQsMTkuOSw0MDM5NjgxLERFUFJFU1NJT04KMjUwMTcsTUEsTWlkZGxlc2V4LDIwMjIsMjMuNCwyMS4xLDI1LjYsMTMwNTY2MSxERVBSRVNTSU9OCjM2MDYxLE5ZLE5ldyBZb3JrLDIwMjIsMjAuOCwxOC45LDIzLjAsMTM3MjM4OSxERVBSRVNTSU9OCjQ4MjAxLFRYLEhhcnJpcywyMDIyLDIwLjEsMTcuNywyMi41LDM1NTA0MjUsREVQUkVTU0lPTgo1MzAzMyxXQSxLaW5nLDIwMjIsMjMuMCwyMS40LDI0LjYsMTgzMTA5MSxERVBSRVNTSU9OCg=="
+    },
+    "current": {
+      "fileName": "current.csv",
+      "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+      "normalizedSha256": "3795fe797fecade2d4a554126b0ee05826b003ba1f1dfba7f03a660efbe8c5d1",
+      "text": "county_fips,state,county,data_year,age_adjusted_depression_percent,ci_low_percent,ci_high_percent,adult_population,measure_id\n04013,AZ,Maricopa,2023,18.9,17.0,20.9,3572375,DEPRESSION\n06037,CA,Los Angeles,2023,19.3,17.5,21.3,7710575,DEPRESSION\n06075,CA,San Francisco,2023,19.8,17.1,22.8,698599,DEPRESSION\n17031,IL,Cook,2023,19.0,16.8,21.3,4031580,DEPRESSION\n25017,MA,Middlesex,2023,24.1,21.7,26.6,1310019,DEPRESSION\n36061,NY,New York,2023,18.6,16.8,20.7,1381420,DEPRESSION\n48201,TX,Harris,2023,19.5,17.0,22.1,3595915,DEPRESSION\n53033,WA,King,2023,23.4,21.7,25.3,1836529,DEPRESSION\n",
+      "rawBytesBase64": "Y291bnR5X2ZpcHMsc3RhdGUsY291bnR5LGRhdGFfeWVhcixhZ2VfYWRqdXN0ZWRfZGVwcmVzc2lvbl9wZXJjZW50LGNpX2xvd19wZXJjZW50LGNpX2hpZ2hfcGVyY2VudCxhZHVsdF9wb3B1bGF0aW9uLG1lYXN1cmVfaWQKMDQwMTMsQVosTWFyaWNvcGEsMjAyMywxOC45LDE3LjAsMjAuOSwzNTcyMzc1LERFUFJFU1NJT04KMDYwMzcsQ0EsTG9zIEFuZ2VsZXMsMjAyMywxOS4zLDE3LjUsMjEuMyw3NzEwNTc1LERFUFJFU1NJT04KMDYwNzUsQ0EsU2FuIEZyYW5jaXNjbywyMDIzLDE5LjgsMTcuMSwyMi44LDY5ODU5OSxERVBSRVNTSU9OCjE3MDMxLElMLENvb2ssMjAyMywxOS4wLDE2LjgsMjEuMyw0MDMxNTgwLERFUFJFU1NJT04KMjUwMTcsTUEsTWlkZGxlc2V4LDIwMjMsMjQuMSwyMS43LDI2LjYsMTMxMDAxOSxERVBSRVNTSU9OCjM2MDYxLE5ZLE5ldyBZb3JrLDIwMjMsMTguNiwxNi44LDIwLjcsMTM4MTQyMCxERVBSRVNTSU9OCjQ4MjAxLFRYLEhhcnJpcywyMDIzLDE5LjUsMTcuMCwyMi4xLDM1OTU5MTUsREVQUkVTU0lPTgo1MzAzMyxXQSxLaW5nLDIwMjMsMjMuNCwyMS43LDI1LjMsMTgzNjUyOSxERVBSRVNTSU9OCg=="
+    }
+  },
+  "summary": {
+    "total": 3,
+    "supported": 2,
+    "weakened": 0,
+    "reversed": 1,
+    "untestable": 0,
+    "reviewRequired": 0,
+    "completenessChecksPassed": 48,
+    "completenessChecksTotal": 48,
+    "evidenceCoverage": 100,
+    "changedRecords": 8
+  },
+  "diffSummary": {
+    "totalChanged": 8,
+    "exported": 8,
+    "truncated": false,
+    "limit": 500
+  },
+  "diffs": [
+    {
+      "key": "04013",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "04013",
+        "state": "AZ",
+        "county": "Maricopa",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.9",
+        "ci_low_percent": "18.8",
+        "ci_high_percent": "23.1",
+        "adult_population": "3532288",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "04013",
+        "state": "AZ",
+        "county": "Maricopa",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "18.9",
+        "ci_low_percent": "17.0",
+        "ci_high_percent": "20.9",
+        "adult_population": "3572375",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 2,
+      "currentLine": 2
+    },
+    {
+      "key": "06037",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "06037",
+        "state": "CA",
+        "county": "Los Angeles",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.4",
+        "ci_low_percent": "18.4",
+        "ci_high_percent": "22.4",
+        "adult_population": "7737357",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "06037",
+        "state": "CA",
+        "county": "Los Angeles",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.3",
+        "ci_low_percent": "17.5",
+        "ci_high_percent": "21.3",
+        "adult_population": "7710575",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 3,
+      "currentLine": 3
+    },
+    {
+      "key": "06075",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "06075",
+        "state": "CA",
+        "county": "San Francisco",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "18.7",
+        "ci_low_percent": "16.2",
+        "ci_high_percent": "21.3",
+        "adult_population": "697737",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "06075",
+        "state": "CA",
+        "county": "San Francisco",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.8",
+        "ci_low_percent": "17.1",
+        "ci_high_percent": "22.8",
+        "adult_population": "698599",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 4,
+      "currentLine": 4
+    },
+    {
+      "key": "17031",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "17031",
+        "state": "IL",
+        "county": "Cook",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "17.5",
+        "ci_low_percent": "15.4",
+        "ci_high_percent": "19.9",
+        "adult_population": "4039681",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "17031",
+        "state": "IL",
+        "county": "Cook",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.0",
+        "ci_low_percent": "16.8",
+        "ci_high_percent": "21.3",
+        "adult_population": "4031580",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 5,
+      "currentLine": 5
+    },
+    {
+      "key": "25017",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "25017",
+        "state": "MA",
+        "county": "Middlesex",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "23.4",
+        "ci_low_percent": "21.1",
+        "ci_high_percent": "25.6",
+        "adult_population": "1305661",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "25017",
+        "state": "MA",
+        "county": "Middlesex",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "24.1",
+        "ci_low_percent": "21.7",
+        "ci_high_percent": "26.6",
+        "adult_population": "1310019",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 6,
+      "currentLine": 6
+    },
+    {
+      "key": "36061",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "36061",
+        "state": "NY",
+        "county": "New York",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.8",
+        "ci_low_percent": "18.9",
+        "ci_high_percent": "23.0",
+        "adult_population": "1372389",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "36061",
+        "state": "NY",
+        "county": "New York",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "18.6",
+        "ci_low_percent": "16.8",
+        "ci_high_percent": "20.7",
+        "adult_population": "1381420",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 7,
+      "currentLine": 7
+    },
+    {
+      "key": "48201",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "48201",
+        "state": "TX",
+        "county": "Harris",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.1",
+        "ci_low_percent": "17.7",
+        "ci_high_percent": "22.5",
+        "adult_population": "3550425",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "48201",
+        "state": "TX",
+        "county": "Harris",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.5",
+        "ci_low_percent": "17.0",
+        "ci_high_percent": "22.1",
+        "adult_population": "3595915",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 8,
+      "currentLine": 8
+    },
+    {
+      "key": "53033",
+      "kind": "changed",
+      "changedFields": [
+        "data_year",
+        "age_adjusted_depression_percent",
+        "ci_low_percent",
+        "ci_high_percent",
+        "adult_population"
+      ],
+      "baseline": {
+        "county_fips": "53033",
+        "state": "WA",
+        "county": "King",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "23.0",
+        "ci_low_percent": "21.4",
+        "ci_high_percent": "24.6",
+        "adult_population": "1831091",
+        "measure_id": "DEPRESSION"
+      },
+      "current": {
+        "county_fips": "53033",
+        "state": "WA",
+        "county": "King",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "23.4",
+        "ci_low_percent": "21.7",
+        "ci_high_percent": "25.3",
+        "adult_population": "1836529",
+        "measure_id": "DEPRESSION"
+      },
+      "baselineLine": 9,
+      "currentLine": 9
+    }
+  ],
+  "queryTrace": [
+    {
+      "claimId": "places-middlesex-rank",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "age_adjusted_depression_percent",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {
+            "Maricopa": 1,
+            "Los Angeles": 1,
+            "San Francisco": 1,
+            "Cook": 1,
+            "Middlesex": 1,
+            "New York": 1,
+            "Harris": 1,
+            "King": 1
+          }
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {
+            "Maricopa": 1,
+            "Los Angeles": 1,
+            "San Francisco": 1,
+            "Cook": 1,
+            "Middlesex": 1,
+            "New York": 1,
+            "Harris": 1,
+            "King": 1
+          }
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-middlesex-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "places-maricopa-threshold",
+      "filters": [
+        {
+          "field": "county_fips",
+          "equals": "04013"
+        }
+      ],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "age_adjusted_depression_percent",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-maricopa-threshold|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "places-selected-mean-stability",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "age_adjusted_depression_percent",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-selected-mean-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    }
+  ],
+  "dataPreview": {
+    "columns": [
+      "county_fips",
+      "state",
+      "county",
+      "data_year",
+      "age_adjusted_depression_percent",
+      "ci_low_percent",
+      "ci_high_percent",
+      "adult_population",
+      "measure_id"
+    ],
+    "baselineRows": [
+      {
+        "county_fips": "04013",
+        "state": "AZ",
+        "county": "Maricopa",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.9",
+        "ci_low_percent": "18.8",
+        "ci_high_percent": "23.1",
+        "adult_population": "3532288",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "06037",
+        "state": "CA",
+        "county": "Los Angeles",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.4",
+        "ci_low_percent": "18.4",
+        "ci_high_percent": "22.4",
+        "adult_population": "7737357",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "06075",
+        "state": "CA",
+        "county": "San Francisco",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "18.7",
+        "ci_low_percent": "16.2",
+        "ci_high_percent": "21.3",
+        "adult_population": "697737",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "17031",
+        "state": "IL",
+        "county": "Cook",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "17.5",
+        "ci_low_percent": "15.4",
+        "ci_high_percent": "19.9",
+        "adult_population": "4039681",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "25017",
+        "state": "MA",
+        "county": "Middlesex",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "23.4",
+        "ci_low_percent": "21.1",
+        "ci_high_percent": "25.6",
+        "adult_population": "1305661",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "36061",
+        "state": "NY",
+        "county": "New York",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.8",
+        "ci_low_percent": "18.9",
+        "ci_high_percent": "23.0",
+        "adult_population": "1372389",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "48201",
+        "state": "TX",
+        "county": "Harris",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "20.1",
+        "ci_low_percent": "17.7",
+        "ci_high_percent": "22.5",
+        "adult_population": "3550425",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "53033",
+        "state": "WA",
+        "county": "King",
+        "data_year": "2022",
+        "age_adjusted_depression_percent": "23.0",
+        "ci_low_percent": "21.4",
+        "ci_high_percent": "24.6",
+        "adult_population": "1831091",
+        "measure_id": "DEPRESSION"
+      }
+    ],
+    "currentRows": [
+      {
+        "county_fips": "04013",
+        "state": "AZ",
+        "county": "Maricopa",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "18.9",
+        "ci_low_percent": "17.0",
+        "ci_high_percent": "20.9",
+        "adult_population": "3572375",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "06037",
+        "state": "CA",
+        "county": "Los Angeles",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.3",
+        "ci_low_percent": "17.5",
+        "ci_high_percent": "21.3",
+        "adult_population": "7710575",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "06075",
+        "state": "CA",
+        "county": "San Francisco",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.8",
+        "ci_low_percent": "17.1",
+        "ci_high_percent": "22.8",
+        "adult_population": "698599",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "17031",
+        "state": "IL",
+        "county": "Cook",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.0",
+        "ci_low_percent": "16.8",
+        "ci_high_percent": "21.3",
+        "adult_population": "4031580",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "25017",
+        "state": "MA",
+        "county": "Middlesex",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "24.1",
+        "ci_low_percent": "21.7",
+        "ci_high_percent": "26.6",
+        "adult_population": "1310019",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "36061",
+        "state": "NY",
+        "county": "New York",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "18.6",
+        "ci_low_percent": "16.8",
+        "ci_high_percent": "20.7",
+        "adult_population": "1381420",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "48201",
+        "state": "TX",
+        "county": "Harris",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "19.5",
+        "ci_low_percent": "17.0",
+        "ci_high_percent": "22.1",
+        "adult_population": "3595915",
+        "measure_id": "DEPRESSION"
+      },
+      {
+        "county_fips": "53033",
+        "state": "WA",
+        "county": "King",
+        "data_year": "2023",
+        "age_adjusted_depression_percent": "23.4",
+        "ci_low_percent": "21.7",
+        "ci_high_percent": "25.3",
+        "adult_population": "1836529",
+        "measure_id": "DEPRESSION"
+      }
+    ],
+    "previewLimit": 20
+  },
+  "scaleBoundary": {
+    "maxExportedDiffs": 500,
+    "maxRawBytesPerSnapshot": 500000,
+    "maxReferencesPerClaim": 200,
+    "note": "Above the size limits, preserve hashes, manifests, changed records, and required samples instead of copying full tables."
+  },
+  "claimSpecs": [
+    {
+      "id": "places-middlesex-rank",
+      "code": "CDC-001",
+      "title": "Middlesex County remains the highest point estimate among the eight selected counties",
+      "section": "Model-based estimate ranking",
+      "owner": "Public-data case reviewer",
+      "category": "County ranking",
+      "formula": "argmax(county, age_adjusted_depression_percent) = Middlesex",
+      "rule": {
+        "type": "rank",
+        "field": "age_adjusted_depression_percent",
+        "aggregation": "average",
+        "groupField": "county",
+        "expectedGroup": "Middlesex",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      }
+    },
+    {
+      "id": "places-maricopa-threshold",
+      "code": "CDC-002",
+      "title": "Maricopa County's age-adjusted model-based estimate remains at or above 20%",
+      "section": "Illustrative estimate threshold",
+      "owner": "Public-data case reviewer",
+      "category": "Threshold gate",
+      "formula": "Maricopa age_adjusted_depression_percent >= 20",
+      "rule": {
+        "type": "threshold",
+        "field": "age_adjusted_depression_percent",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 20,
+        "filters": [
+          {
+            "field": "county_fips",
+            "equals": "04013"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 20,
+          "unit": "percent",
+          "source": "Illustrative surveillance review threshold v1",
+          "rationale": "An analyst-authored threshold for claim auditing; it is not CDC guidance, a diagnosis threshold, or an intervention rule",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "places-selected-mean-stability",
+      "code": "CDC-003",
+      "title": "The unweighted mean point estimate across the eight selected counties changes by no more than 2%",
+      "section": "Selected-county descriptive stability",
+      "owner": "Public-data case reviewer",
+      "category": "Period stability",
+      "formula": "abs(mean(2023 estimates)-mean(2022 estimates))/mean(2022 estimates) <= 2%",
+      "rule": {
+        "type": "stability",
+        "field": "age_adjusted_depression_percent",
+        "aggregation": "average",
+        "supportTolerance": 2,
+        "reversalThreshold": 5,
+        "supportToleranceSpec": {
+          "value": 2,
+          "unit": "percent",
+          "source": "Illustrative surveillance-summary rule v1",
+          "rationale": "Used to audit a compact descriptive statement; confidence intervals remain visible and must be interpreted separately",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Illustrative surveillance-summary escalation v1",
+          "rationale": "At 5%, treat the compact selected-county mean statement as materially invalid",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
+    }
+  ],
+  "claimResults": [
+    {
+      "id": "places-middlesex-rank",
+      "code": "CDC-001",
+      "title": "Middlesex County remains the highest point estimate among the eight selected counties",
+      "section": "Model-based estimate ranking",
+      "owner": "Public-data case reviewer",
+      "category": "County ranking",
+      "formula": "argmax(county, age_adjusted_depression_percent) = Middlesex",
+      "rule": {
+        "type": "rank",
+        "field": "age_adjusted_depression_percent",
+        "aggregation": "average",
+        "groupField": "county",
+        "expectedGroup": "Middlesex",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      },
+      "kind": "SNAPSHOT",
+      "status": "SUPPORTED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "Middlesex 23.4",
+      "currentValue": "Middlesex 24.1",
+      "reason": "Middlesex is the unique extreme group.",
+      "action": "The claim may continue to be cited.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "06037",
+          "lineNumber": 3,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "06075",
+          "lineNumber": 4,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "17031",
+          "lineNumber": 5,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "25017",
+          "lineNumber": 6,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "36061",
+          "lineNumber": 7,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "48201",
+          "lineNumber": 8,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "53033",
+          "lineNumber": 9,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "06037",
+          "lineNumber": 3,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "06075",
+          "lineNumber": 4,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "17031",
+          "lineNumber": 5,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "25017",
+          "lineNumber": 6,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "36061",
+          "lineNumber": 7,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "48201",
+          "lineNumber": 8,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "53033",
+          "lineNumber": 9,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "county"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Middlesex County remains the highest point estimate among the eight selected counties",
+          "kind": "Claim",
+          "title": "Middlesex County remains the highest point estimate among the eight selected counties",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:places-middlesex-rank:8bc5f138a62060d614d9d766",
+          "kind": "Comparison result",
+          "title": "age_adjusted_depression_percent version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:age_adjusted_depression_percent",
+          "kind": "Metric",
+          "title": "age_adjusted_depression_percent",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:age_adjusted_depression_percent",
+          "kind": "Field",
+          "title": "age_adjusted_depression_percent",
+          "detail": "Primary key: county_fips",
+          "bound": true
+        },
+        {
+          "id": "records:county_fips",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+        "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-middlesex-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {
+            "Maricopa": 1,
+            "Los Angeles": 1,
+            "San Francisco": 1,
+            "Cook": 1,
+            "Middlesex": 1,
+            "New York": 1,
+            "Harris": 1,
+            "King": 1
+          }
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {
+            "Maricopa": 1,
+            "Los Angeles": 1,
+            "San Francisco": 1,
+            "Cook": 1,
+            "Middlesex": 1,
+            "New York": 1,
+            "Harris": 1,
+            "King": 1
+          }
+        }
+      },
+      "resultId": "claim-result:places-middlesex-rank:8bc5f138a62060d614d9d766",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "places-maricopa-threshold",
+      "code": "CDC-002",
+      "title": "Maricopa County's age-adjusted model-based estimate remains at or above 20%",
+      "section": "Illustrative estimate threshold",
+      "owner": "Public-data case reviewer",
+      "category": "Threshold gate",
+      "formula": "Maricopa age_adjusted_depression_percent >= 20",
+      "rule": {
+        "type": "threshold",
+        "field": "age_adjusted_depression_percent",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 20,
+        "filters": [
+          {
+            "field": "county_fips",
+            "equals": "04013"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 20,
+          "unit": "percent",
+          "source": "Illustrative surveillance review threshold v1",
+          "rationale": "An analyst-authored threshold for claim auditing; it is not CDC guidance, a diagnosis threshold, or an intervention rule",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVERSED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "20.9",
+      "currentValue": "18.9",
+      "reason": "Current average is 18.9 and does not satisfy rule >= 20.",
+      "action": "Stop citing this claim and inspect linked decisions.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Maricopa County's age-adjusted model-based estimate remains at or above 20%",
+          "kind": "Claim",
+          "title": "Maricopa County's age-adjusted model-based estimate remains at or above 20%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:places-maricopa-threshold:98d277fa70fd096335efdb04",
+          "kind": "Comparison result",
+          "title": "age_adjusted_depression_percent version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:age_adjusted_depression_percent",
+          "kind": "Metric",
+          "title": "age_adjusted_depression_percent",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:age_adjusted_depression_percent",
+          "kind": "Field",
+          "title": "age_adjusted_depression_percent",
+          "detail": "Primary key: county_fips",
+          "bound": true
+        },
+        {
+          "id": "records:county_fips",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVERSED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+        "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-maricopa-threshold|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:places-maricopa-threshold:98d277fa70fd096335efdb04",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "places-selected-mean-stability",
+      "code": "CDC-003",
+      "title": "The unweighted mean point estimate across the eight selected counties changes by no more than 2%",
+      "section": "Selected-county descriptive stability",
+      "owner": "Public-data case reviewer",
+      "category": "Period stability",
+      "formula": "abs(mean(2023 estimates)-mean(2022 estimates))/mean(2022 estimates) <= 2%",
+      "rule": {
+        "type": "stability",
+        "field": "age_adjusted_depression_percent",
+        "aggregation": "average",
+        "supportTolerance": 2,
+        "reversalThreshold": 5,
+        "supportToleranceSpec": {
+          "value": 2,
+          "unit": "percent",
+          "source": "Illustrative surveillance-summary rule v1",
+          "rationale": "Used to audit a compact descriptive statement; confidence intervals remain visible and must be interpreted separately",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Illustrative surveillance-summary escalation v1",
+          "rationale": "At 5%, treat the compact selected-county mean statement as materially invalid",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      },
+      "kind": "VERSION_COMPARISON",
+      "status": "SUPPORTED",
+      "baselineStatus": "UNTESTABLE",
+      "baselineValue": "20.6",
+      "currentValue": "20.33",
+      "reason": "average of age_adjusted_depression_percent changed 1.33%, within the confirmed support tolerance of 2%.",
+      "action": "The claim may continue to be cited.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "06037",
+          "lineNumber": 3,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "06075",
+          "lineNumber": 4,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "17031",
+          "lineNumber": 5,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "25017",
+          "lineNumber": 6,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "36061",
+          "lineNumber": 7,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "48201",
+          "lineNumber": 8,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "53033",
+          "lineNumber": 9,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "06037",
+          "lineNumber": 3,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "06075",
+          "lineNumber": 4,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "17031",
+          "lineNumber": 5,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "25017",
+          "lineNumber": 6,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "36061",
+          "lineNumber": 7,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "48201",
+          "lineNumber": 8,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "53033",
+          "lineNumber": 9,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:The unweighted mean point estimate across the eight selected counties changes by no more than 2%",
+          "kind": "Claim",
+          "title": "The unweighted mean point estimate across the eight selected counties changes by no more than 2%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:places-selected-mean-stability:085d2061d821a6215cd5118d",
+          "kind": "Comparison result",
+          "title": "age_adjusted_depression_percent version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:age_adjusted_depression_percent",
+          "kind": "Metric",
+          "title": "age_adjusted_depression_percent",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:age_adjusted_depression_percent",
+          "kind": "Field",
+          "title": "age_adjusted_depression_percent",
+          "detail": "Primary key: county_fips",
+          "bound": true
+        },
+        {
+          "id": "records:county_fips",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+        "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-selected-mean-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "09587c34",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:places-selected-mean-stability:085d2061d821a6215cd5118d",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisionSpecs": [
+    {
+      "id": "places-surveillance-note",
+      "title": "Can the earlier selected-county surveillance note be reused without revision?",
+      "owner": "Public-data case reviewer",
+      "passActionId": "places:retain-note-with-model-warning",
+      "holdActionId": "places:update-estimates-and-uncertainty",
+      "actionIfPass": "Retain only supported descriptive statements and show model-based-estimate, confidence-interval, year, and selection limitations.",
+      "actionIfFail": "Update changed point-estimate statements and preserve confidence intervals; do not infer local program effects or individual risk.",
+      "conditions": [
+        {
+          "claimId": "places-middlesex-rank",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "places-maricopa-threshold",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "places-selected-mean-stability",
+          "allowedStatuses": [
+            "SUPPORTED",
+            "WEAKENED"
+          ]
+        }
+      ],
+      "stakeholders": [
+        "Population-health readers",
+        "Methods reviewers",
+        "Public-data provider"
+      ],
+      "objective": {
+        "benefitWeight": 1,
+        "costWeight": 0.2,
+        "riskWeight": 1.3
+      },
+      "riskTolerance": 16,
+      "noActionLoss": 32,
+      "inputProvenance": {
+        "kind": "MANUAL_ASSUMPTION",
+        "source": "Illustrative health-publication assumptions v1",
+        "version": "1.0.0",
+        "rationale": "The option scores are demonstration inputs, not clinical utility, disease burden, intervention effects, or real operating costs",
+        "units": {
+          "benefit": "illustrative utility points",
+          "cost": "illustrative cost points",
+          "risk": "illustrative risk points",
+          "capacity": "illustrative capacity points"
+        },
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      },
+      "uncertainty": {
+        "method": "BOUNDED_UNIFORM",
+        "benefitMultiplier": [
+          0.8,
+          1.2
+        ],
+        "costMultiplier": [
+          0.85,
+          1.2
+        ],
+        "riskMultiplier": [
+          0.8,
+          1.25
+        ],
+        "capacityMultiplier": [
+          0.9,
+          1.15
+        ],
+        "trials": 512,
+        "seed": "places-surveillance-note-v1",
+        "stabilitySweep": {
+          "parameter": "benefitMultiplier",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05
+        }
+      },
+      "constraints": [
+        {
+          "id": "methods-capacity",
+          "label": "Methods-review capacity",
+          "metric": "capacity",
+          "operator": "<=",
+          "value": 45
+        }
+      ],
+      "options": [
+        {
+          "id": "reuse",
+          "label": "Reuse unchanged",
+          "benefit": 30,
+          "cost": 6,
+          "risk": 34,
+          "capacity": 4
+        },
+        {
+          "id": "revise",
+          "label": "Revise estimates and uncertainty notes",
+          "benefit": 85,
+          "cost": 27,
+          "risk": 7,
+          "capacity": 27
+        },
+        {
+          "id": "survey",
+          "label": "Commission direct local measurement",
+          "benefit": 110,
+          "cost": 96,
+          "risk": 10,
+          "capacity": 90
+        }
+      ]
+    }
+  ],
+  "decisionResults": [
+    {
+      "decisionId": "places-surveillance-note",
+      "previousOutcome": null,
+      "currentOutcome": "HOLD",
+      "boundClaimIds": [
+        "places-maricopa-threshold",
+        "places-middlesex-rank",
+        "places-selected-mean-stability"
+      ],
+      "affectedClaimIds": [
+        "places-maricopa-threshold"
+      ],
+      "comparisonBasis": "NO_HISTORY",
+      "changeReasons": [],
+      "binding": {
+        "activeActionId": "places:update-estimates-and-uncertainty",
+        "actionIdentityHash": "bec9da180ccb5cff74b79423bcdb194481e80ce0777ab3f11901ff79a41c86c4",
+        "recommendedOptionId": "revise",
+        "feasibleOptionIds": [
+          "revise"
+        ],
+        "decisionPolicyHash": "3c8e72beaa72edcf5a531137b5b109c6b54262e5cdb0e21793ba82c3c77656fd",
+        "decisionInputProvenanceHash": "3ef5f3ecd81c8bf728a45f4a35bfd89cf829e6314ac2ff463a7fc435035c7f3d",
+        "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+        "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "claimResultIds": [
+          "claim-result:places-maricopa-threshold:98d277fa70fd096335efdb04",
+          "claim-result:places-middlesex-rank:8bc5f138a62060d614d9d766",
+          "claim-result:places-selected-mean-stability:085d2061d821a6215cd5118d"
+        ]
+      },
+      "analysis": {
+        "options": [
+          {
+            "optionId": "revise",
+            "label": "Revise estimates and uncertainty notes",
+            "feasible": true,
+            "score": 70.5,
+            "failedConstraints": [],
+            "breakEvenBenefit": -17.5,
+            "scoreInterval": {
+              "min": 50.145,
+              "max": 90.13
+            },
+            "paretoEfficient": true
+          },
+          {
+            "optionId": "survey",
+            "label": "Commission direct local measurement",
+            "feasible": false,
+            "score": 77.8,
+            "failedConstraints": [
+              "methods-capacity"
+            ],
+            "breakEvenBenefit": 0.2,
+            "scoreInterval": {
+              "min": 48.71,
+              "max": 105.28
+            },
+            "paretoEfficient": false
+          },
+          {
+            "optionId": "reuse",
+            "label": "Reuse unchanged",
+            "feasible": false,
+            "score": -15.4,
+            "failedConstraints": [
+              "risk-tolerance"
+            ],
+            "breakEvenBenefit": 13.4,
+            "scoreInterval": {
+              "min": -32.69,
+              "max": -0.38
+            },
+            "paretoEfficient": false
+          }
+        ],
+        "recommendedOptionId": "revise",
+        "noActionScore": -32,
+        "sensitivity": [
+          {
+            "scenarioId": "benefit-down-20",
+            "label": "Benefit down 20%",
+            "recommendedOptionId": "revise"
+          },
+          {
+            "scenarioId": "cost-up-20",
+            "label": "Cost up 20%",
+            "recommendedOptionId": "revise"
+          },
+          {
+            "scenarioId": "risk-up-20",
+            "label": "Risk up 20%",
+            "recommendedOptionId": "revise"
+          }
+        ],
+        "paretoFrontierOptionIds": [
+          "revise"
+        ],
+        "recommendationStability": {
+          "parameter": "benefitMultiplier",
+          "recommendedOptionId": "revise",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05,
+          "evaluatedPoints": 21
+        },
+        "monteCarlo": {
+          "method": "DETERMINISTIC_SEEDED_BOUNDED_UNIFORM",
+          "seed": "places-surveillance-note-v1",
+          "trials": 512,
+          "recommendationShares": [
+            {
+              "optionId": "revise",
+              "count": 512,
+              "share": 1
+            }
+          ],
+          "options": [
+            {
+              "optionId": "reuse",
+              "feasibilityRate": 0,
+              "scoreP05": -27.9049,
+              "scoreP50": -16.944492,
+              "scoreP95": -5.704937
+            },
+            {
+              "optionId": "revise",
+              "feasibilityRate": 1,
+              "scoreP05": 54.786732,
+              "scoreP50": 69.042508,
+              "scoreP95": 84.677875
+            },
+            {
+              "optionId": "survey",
+              "feasibilityRate": 0,
+              "scoreP05": 56.783609,
+              "scoreP50": 75.26028,
+              "scoreP95": 96.495241
+            }
+          ]
+        }
+      },
+      "status": "SUPPORTED",
+      "reason": "Update changed point-estimate statements and preserve confidence intervals; do not infer local program effects or individual risk. Recommended option: revise. No prior signed decision is recorded, so no version-change classification is made.",
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "resultId": "decision-result:places-surveillance-note:55c5980034e95644fe208c20"
+    }
+  ],
+  "reviews": [],
+  "reviewChain": {
+    "count": 0,
+    "headRecordId": null,
+    "headRecordHash": null
+  },
+  "externalSource": {
+    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "sourceType": "CDC_PLACES_SOCRATA_V1",
+    "publisher": "U.S. Centers for Disease Control and Prevention",
+    "dataset": "PLACES: Local Data for Better Health, County Data",
+    "measure": {
+      "id": "DEPRESSION-AGE-ADJUSTED-PREVALENCE",
+      "name": "Age-adjusted prevalence of depression among adults"
+    },
+    "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "sourceUrls": {
+      "baseline": "https://data.cdc.gov/resource/fu4u-a9bh.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid",
+      "current": "https://data.cdc.gov/resource/swc5-untb.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid"
+    },
+    "license": "U.S. Government public data; CDC data-use terms apply",
+    "licenseUrl": "https://www.cdc.gov/other/agencymaterials.html",
+    "attribution": "Centers for Disease Control and Prevention, PLACES County Data 2024 and 2025 releases, age-adjusted depression estimates for data years 2022 and 2023, accessed 2026-08-10; transformed by ClaimTrace.",
+    "limitations": [
+      "PLACES values are model-based small-area estimates with uncertainty intervals, not direct county survey estimates.",
+      "Overlapping confidence intervals and model changes limit interpretation of year-to-year differences.",
+      "The selected counties are illustrative; the case does not estimate intervention effects, diagnose individuals, or support clinical decisions."
+    ],
+    "cleaning": {
+      "implementation": "cdc-places-county-v1",
+      "scriptPath": "tools/generate-public-data-cases.ts",
+      "parameters": {
+        "baselineDataYear": "2022",
+        "currentDataYear": "2023",
+        "selectedCountyFips": [
+          "04013",
+          "06037",
+          "06075",
+          "17031",
+          "25017",
+          "36061",
+          "48201",
+          "53033"
+        ],
+        "decimalPlaces": 1
+      }
+    },
+    "rawArtifacts": [
+      {
+        "side": "baseline",
+        "fileName": "raw-2024-release.json",
+        "sha256": "53d151dd44d516b58e551b09358e74577a37bda15a12b785b1f918354e122b6b",
+        "text": "[{\"year\":\"2022\",\"stateabbr\":\"AZ\",\"locationname\":\"Maricopa\",\"locationid\":\"04013\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.9\",\"low_confidence_limit\":\"18.8\",\"high_confidence_limit\":\"23.1\",\"totalpop18plus\":\"3532288\"}\n,{\"year\":\"2022\",\"stateabbr\":\"CA\",\"locationname\":\"Los Angeles\",\"locationid\":\"06037\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.4\",\"low_confidence_limit\":\"18.4\",\"high_confidence_limit\":\"22.4\",\"totalpop18plus\":\"7737357\"}\n,{\"year\":\"2022\",\"stateabbr\":\"CA\",\"locationname\":\"San Francisco\",\"locationid\":\"06075\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"18.7\",\"low_confidence_limit\":\"16.2\",\"high_confidence_limit\":\"21.3\",\"totalpop18plus\":\"697737\"}\n,{\"year\":\"2022\",\"stateabbr\":\"IL\",\"locationname\":\"Cook\",\"locationid\":\"17031\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"17.5\",\"low_confidence_limit\":\"15.4\",\"high_confidence_limit\":\"19.9\",\"totalpop18plus\":\"4039681\"}\n,{\"year\":\"2022\",\"stateabbr\":\"MA\",\"locationname\":\"Middlesex\",\"locationid\":\"25017\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"23.4\",\"low_confidence_limit\":\"21.1\",\"high_confidence_limit\":\"25.6\",\"totalpop18plus\":\"1305661\"}\n,{\"year\":\"2022\",\"stateabbr\":\"NY\",\"locationname\":\"New York\",\"locationid\":\"36061\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.8\",\"low_confidence_limit\":\"18.9\",\"high_confidence_limit\":\"23.0\",\"totalpop18plus\":\"1372389\"}\n,{\"year\":\"2022\",\"stateabbr\":\"TX\",\"locationname\":\"Harris\",\"locationid\":\"48201\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.1\",\"low_confidence_limit\":\"17.7\",\"high_confidence_limit\":\"22.5\",\"totalpop18plus\":\"3550425\"}\n,{\"year\":\"2022\",\"stateabbr\":\"WA\",\"locationname\":\"King\",\"locationid\":\"53033\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"23.0\",\"low_confidence_limit\":\"21.4\",\"high_confidence_limit\":\"24.6\",\"totalpop18plus\":\"1831091\"}]\n"
+      },
+      {
+        "side": "current",
+        "fileName": "raw-2025-release.json",
+        "sha256": "a0b3372bd0aed5b9630e44b3825e444f9e414f0fcfc2804504ac7a3d45ecb1ab",
+        "text": "[{\"year\":\"2023\",\"stateabbr\":\"AZ\",\"locationname\":\"Maricopa\",\"locationid\":\"04013\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"18.9\",\"low_confidence_limit\":\"17.0\",\"high_confidence_limit\":\"20.9\",\"totalpop18plus\":\"3572375\"}\n,{\"year\":\"2023\",\"stateabbr\":\"CA\",\"locationname\":\"Los Angeles\",\"locationid\":\"06037\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.3\",\"low_confidence_limit\":\"17.5\",\"high_confidence_limit\":\"21.3\",\"totalpop18plus\":\"7710575\"}\n,{\"year\":\"2023\",\"stateabbr\":\"CA\",\"locationname\":\"San Francisco\",\"locationid\":\"06075\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.8\",\"low_confidence_limit\":\"17.1\",\"high_confidence_limit\":\"22.8\",\"totalpop18plus\":\"698599\"}\n,{\"year\":\"2023\",\"stateabbr\":\"IL\",\"locationname\":\"Cook\",\"locationid\":\"17031\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.0\",\"low_confidence_limit\":\"16.8\",\"high_confidence_limit\":\"21.3\",\"totalpop18plus\":\"4031580\"}\n,{\"year\":\"2023\",\"stateabbr\":\"MA\",\"locationname\":\"Middlesex\",\"locationid\":\"25017\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"24.1\",\"low_confidence_limit\":\"21.7\",\"high_confidence_limit\":\"26.6\",\"totalpop18plus\":\"1310019\"}\n,{\"year\":\"2023\",\"stateabbr\":\"NY\",\"locationname\":\"New York\",\"locationid\":\"36061\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"18.6\",\"low_confidence_limit\":\"16.8\",\"high_confidence_limit\":\"20.7\",\"totalpop18plus\":\"1381420\"}\n,{\"year\":\"2023\",\"stateabbr\":\"TX\",\"locationname\":\"Harris\",\"locationid\":\"48201\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.5\",\"low_confidence_limit\":\"17.0\",\"high_confidence_limit\":\"22.1\",\"totalpop18plus\":\"3595915\"}\n,{\"year\":\"2023\",\"stateabbr\":\"WA\",\"locationname\":\"King\",\"locationid\":\"53033\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"23.4\",\"low_confidence_limit\":\"21.7\",\"high_confidence_limit\":\"25.3\",\"totalpop18plus\":\"1836529\"}]\n"
+      }
+    ]
+  },
+  "upstreamLineage": null,
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "claimtrace-json-c14n/1.0.0",
+    "payloadHash": "1819f2dd423dcca22edab46b7af1db6d926f024d8f0c0f779b050e99d80d3601",
+    "sectionHashes": {
+      "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
+      "snapshots": "cabc38087acf3d167b4a9917613df1c8ceb3461fa726f3098751c4bece3e3e65",
+      "claims": "12ffa8b18e3a76a79e8946389b989fe4f9cca009be045958817c58927fea0868",
+      "decisions": "73c9f1295d0b4434324b7692a3f15ae4c6acffd94a00ae4d3ce2594fb90a1d92",
+      "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
+      "provenance": "9b824a9a115f5d6c4a51483718cee176eacad6bb806100d0bc84339f071d1a3e",
+      "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    }
+  }
+}

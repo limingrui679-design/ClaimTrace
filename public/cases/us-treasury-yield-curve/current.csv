@@ -1,0 +1,10 @@
+maturity_code,maturity,observation_date,yield_percent
+1M,1 month,2025-12-31,3.74
+3M,3 months,2025-12-31,3.67
+6M,6 months,2025-12-31,3.59
+1Y,1 year,2025-12-31,3.48
+2Y,2 years,2025-12-31,3.47
+5Y,5 years,2025-12-31,3.73
+10Y,10 years,2025-12-31,4.18
+20Y,20 years,2025-12-31,4.79
+30Y,30 years,2025-12-31,4.84

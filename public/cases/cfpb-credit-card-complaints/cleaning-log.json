@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "claimtrace-cleaning-log/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "caseId": "cfpb-credit-card-complaints",
+  "sourceType": "CFPB_COMPLAINT_TRENDS_V1",
+  "implementation": "cfpb-complaint-trends-v1",
+  "sourceConfigSha256": "cfdfcaaaaa0420d73a2d8a3a39d06773a2d82018f81420247140616698ef0fe1",
+  "transformations": {
+    "baseline": [
+      "Parse pinned CFPB complaint-trends aggregation JSON",
+      "Retain the 10 most frequent structured issue buckets for 2024-H1",
+      "Do not ingest consumer narrative text",
+      "Calculate bucket share of all matched records to 2 decimal places",
+      "Sort by deterministic issue identifier and emit stable UTF-8 CSV"
+    ],
+    "current": [
+      "Parse pinned CFPB complaint-trends aggregation JSON",
+      "Retain the 10 most frequent structured issue buckets for 2025-H1",
+      "Do not ingest consumer narrative text",
+      "Calculate bucket share of all matched records to 2 decimal places",
+      "Sort by deterministic issue identifier and emit stable UTF-8 CSV"
+    ]
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2024-h1.json",
+      "sha256": "55ebe9ef006351b7f4818afd6357fec6fdc6b08223c1ae3b8a04b1e8f7eb7ed0",
+      "bytes": 36032
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2025-h1.json",
+      "sha256": "61a5b9a0806253916a552ba00c1f94757b08b05a4eeb654b38f87344e66b881c",
+      "bytes": 36048
+    }
+  ],
+  "outputs": {
+    "baseline.csv": {
+      "sha256": "53d148d224d2e9c1131a5e38202ff07c5306939f9e8294d910222efcbb7bc9cc",
+      "bytes": 1026,
+      "rows": 10
+    },
+    "current.csv": {
+      "sha256": "8f06c5b6fcb4a6b60eda1c4b9e7a99c66765e60862e2956bf9ca016c25250b28",
+      "bytes": 1026,
+      "rows": 10
+    }
+  }
+}

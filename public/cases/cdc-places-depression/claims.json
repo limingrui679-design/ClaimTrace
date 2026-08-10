@@ -1,0 +1,82 @@
+[
+  {
+    "id": "places-middlesex-rank",
+    "code": "CDC-001",
+    "title": "Middlesex County remains the highest point estimate among the eight selected counties",
+    "section": "Model-based estimate ranking",
+    "owner": "Public-data case reviewer",
+    "category": "County ranking",
+    "formula": "argmax(county, age_adjusted_depression_percent) = Middlesex",
+    "rule": {
+      "type": "rank",
+      "field": "age_adjusted_depression_percent",
+      "aggregation": "average",
+      "groupField": "county",
+      "expectedGroup": "Middlesex",
+      "rank": "max",
+      "tiePolicy": "require_unique"
+    }
+  },
+  {
+    "id": "places-maricopa-threshold",
+    "code": "CDC-002",
+    "title": "Maricopa County's age-adjusted model-based estimate remains at or above 20%",
+    "section": "Illustrative estimate threshold",
+    "owner": "Public-data case reviewer",
+    "category": "Threshold gate",
+    "formula": "Maricopa age_adjusted_depression_percent >= 20",
+    "rule": {
+      "type": "threshold",
+      "field": "age_adjusted_depression_percent",
+      "aggregation": "average",
+      "operator": ">=",
+      "threshold": 20,
+      "filters": [
+        {
+          "field": "county_fips",
+          "equals": "04013"
+        }
+      ],
+      "thresholdSpec": {
+        "value": 20,
+        "unit": "percent",
+        "source": "Illustrative surveillance review threshold v1",
+        "rationale": "An analyst-authored threshold for claim auditing; it is not CDC guidance, a diagnosis threshold, or an intervention rule",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "places-selected-mean-stability",
+    "code": "CDC-003",
+    "title": "The unweighted mean point estimate across the eight selected counties changes by no more than 2%",
+    "section": "Selected-county descriptive stability",
+    "owner": "Public-data case reviewer",
+    "category": "Period stability",
+    "formula": "abs(mean(2023 estimates)-mean(2022 estimates))/mean(2022 estimates) <= 2%",
+    "rule": {
+      "type": "stability",
+      "field": "age_adjusted_depression_percent",
+      "aggregation": "average",
+      "supportTolerance": 2,
+      "reversalThreshold": 5,
+      "supportToleranceSpec": {
+        "value": 2,
+        "unit": "percent",
+        "source": "Illustrative surveillance-summary rule v1",
+        "rationale": "Used to audit a compact descriptive statement; confidence intervals remain visible and must be interpreted separately",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      },
+      "reversalThresholdSpec": {
+        "value": 5,
+        "unit": "percent",
+        "source": "Illustrative surveillance-summary escalation v1",
+        "rationale": "At 5%, treat the compact selected-county mean statement as materially invalid",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  }
+]

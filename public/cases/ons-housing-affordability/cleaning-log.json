@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "claimtrace-cleaning-log/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "caseId": "ons-housing-affordability",
+  "sourceType": "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1",
+  "implementation": "ons-housing-affordability-v1",
+  "sourceConfigSha256": "36b649bea4219ac5ae7cc9d7b01800d893196440df1145ffaf580e3bc8659ccd",
+  "transformations": {
+    "baseline": [
+      "Parse pinned ONS Explore Local Statistics CSV",
+      "Require period 2024-04-01",
+      "Keep 12 declared local-authority codes",
+      "Format the workplace-based affordability ratio to 2 decimal places",
+      "Sort by authority code and emit stable UTF-8 CSV"
+    ],
+    "current": [
+      "Parse pinned ONS Explore Local Statistics CSV",
+      "Require period 2025-04-01",
+      "Keep 12 declared local-authority codes",
+      "Format the workplace-based affordability ratio to 2 decimal places",
+      "Sort by authority code and emit stable UTF-8 CSV"
+    ]
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2024.csv",
+      "sha256": "2dbfaab741576f4f5d2e06e943ed7c5208ea1a6116e413442544e631052c2350",
+      "bytes": 12064
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2025.csv",
+      "sha256": "6f5ed40eb5f2162444f9fc7bdd0a228b983ba110c1223012bfe369845fb9ca32",
+      "bytes": 12073
+    }
+  ],
+  "outputs": {
+    "baseline.csv": {
+      "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+      "bytes": 529,
+      "rows": 12
+    },
+    "current.csv": {
+      "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+      "bytes": 529,
+      "rows": 12
+    }
+  }
+}

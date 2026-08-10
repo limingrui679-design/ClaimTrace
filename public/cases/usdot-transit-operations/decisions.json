@@ -1,0 +1,120 @@
+[
+  {
+    "id": "ntd-operations-brief",
+    "title": "Can the May 2024 operating brief be reused without a 2025 update note?",
+    "owner": "Public-data case reviewer",
+    "passActionId": "ntd:retain-ranking-with-period-note",
+    "holdActionId": "ntd:update-brief-and-threshold-note",
+    "actionIfPass": "Retain only the supported descriptive ranking and disclose the agency selection, month, retrieval date, and revisions boundary.",
+    "actionIfFail": "Update the operating brief and explain which descriptive threshold or volume statement changed; do not infer service quality or causality.",
+    "conditions": [
+      {
+        "claimId": "ntd-nyct-productivity-rank",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      },
+      {
+        "claimId": "ntd-wmata-productivity-gate",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      },
+      {
+        "claimId": "ntd-selected-ridership-stability",
+        "allowedStatuses": [
+          "SUPPORTED",
+          "WEAKENED"
+        ]
+      }
+    ],
+    "stakeholders": [
+      "Transit-data readers",
+      "Operations analysts",
+      "Public-data provider"
+    ],
+    "objective": {
+      "benefitWeight": 1,
+      "costWeight": 0.2,
+      "riskWeight": 1
+    },
+    "riskTolerance": 20,
+    "noActionLoss": 25,
+    "inputProvenance": {
+      "kind": "MANUAL_ASSUMPTION",
+      "source": "Illustrative transit-publication assumptions v1",
+      "version": "1.0.0",
+      "rationale": "The option scores are demonstration inputs, not observed agency costs, benefits, capacity, or service effects",
+      "units": {
+        "benefit": "illustrative utility points",
+        "cost": "illustrative cost points",
+        "risk": "illustrative risk points",
+        "capacity": "illustrative capacity points"
+      },
+      "confirmedBy": "ClaimTrace public-data case author",
+      "confirmedAt": "2026-08-10T00:00:00.000Z"
+    },
+    "uncertainty": {
+      "method": "BOUNDED_UNIFORM",
+      "benefitMultiplier": [
+        0.8,
+        1.2
+      ],
+      "costMultiplier": [
+        0.85,
+        1.2
+      ],
+      "riskMultiplier": [
+        0.8,
+        1.25
+      ],
+      "capacityMultiplier": [
+        0.9,
+        1.15
+      ],
+      "trials": 512,
+      "seed": "ntd-operations-brief-v1",
+      "stabilitySweep": {
+        "parameter": "benefitMultiplier",
+        "min": 0.5,
+        "max": 1.5,
+        "step": 0.05
+      }
+    },
+    "constraints": [
+      {
+        "id": "editorial-capacity",
+        "label": "Editorial capacity",
+        "metric": "capacity",
+        "operator": "<=",
+        "value": 45
+      }
+    ],
+    "options": [
+      {
+        "id": "reuse",
+        "label": "Reuse unchanged",
+        "benefit": 36,
+        "cost": 7,
+        "risk": 29,
+        "capacity": 4
+      },
+      {
+        "id": "annotate",
+        "label": "Update figures and boundaries",
+        "benefit": 80,
+        "cost": 24,
+        "risk": 8,
+        "capacity": 24
+      },
+      {
+        "id": "expand",
+        "label": "Build a full service study",
+        "benefit": 95,
+        "cost": 76,
+        "risk": 12,
+        "capacity": 72
+      }
+    ]
+  }
+]

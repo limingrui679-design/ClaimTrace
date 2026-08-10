@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "synthetic": false,
+  "dataOrigin": "PUBLIC",
+  "sourceMetadataFile": "/cases/cfpb-credit-card-complaints/source-metadata.json",
+  "caseId": "cfpb-credit-card-complaints",
+  "primaryKey": "issue_id",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "53d148d224d2e9c1131a5e38202ff07c5306939f9e8294d910222efcbb7bc9cc",
+      "bytes": 1026
+    },
+    "current.csv": {
+      "sha256": "8f06c5b6fcb4a6b60eda1c4b9e7a99c66765e60862e2956bf9ca016c25250b28",
+      "bytes": 1026
+    },
+    "claims.json": {
+      "sha256": "e9ec1d857180a724a73476cb0f8fcbaf8a6f45ea16bf70b729a4e3cf2ce009eb",
+      "bytes": 3048
+    },
+    "decisions.json": {
+      "sha256": "66e5fa0807aae653eab5135669948ed202e4b29e581a6d3938a90496774e1e46",
+      "bytes": 3161
+    },
+    "expected-audit.json": {
+      "sha256": "da4a8097e38ba0846d91bb4434e1f858c2f49bc5784c9b39853fd44bb4fabb92",
+      "bytes": 1489
+    },
+    "evidence-package.json": {
+      "sha256": "fe915de0305368182b3394c1c1b8bcb618c4ef4a154ea336e7f5d430435f7fe8",
+      "bytes": 157724
+    },
+    "case.ts": {
+      "sha256": "5e1b2d943bf7021459b27bbcf077923161543e1a3136f150408e884200f21d1e",
+      "bytes": 6892
+    },
+    "README.md": {
+      "sha256": "77141edb0b5ed463acbb242c280839d0d61ac8e8d39fdf89e0a2f627bf77a0e0",
+      "bytes": 2412
+    },
+    "source-config.json": {
+      "sha256": "cfdfcaaaaa0420d73a2d8a3a39d06773a2d82018f81420247140616698ef0fe1",
+      "bytes": 2008
+    },
+    "source-metadata.json": {
+      "sha256": "612c3d0e16c42bc533e87d843c228eef3587fb8f8ccace270fb736b2e2f9650e",
+      "bytes": 81897
+    },
+    "cleaning-log.json": {
+      "sha256": "76639eb78f53bd90c799fc165adbf248a4c4996921cc1377a5def06b8bee3a84",
+      "bytes": 1770
+    },
+    "raw-2024-h1.json": {
+      "sha256": "55ebe9ef006351b7f4818afd6357fec6fdc6b08223c1ae3b8a04b1e8f7eb7ed0",
+      "bytes": 36032
+    },
+    "raw-2025-h1.json": {
+      "sha256": "61a5b9a0806253916a552ba00c1f94757b08b05a4eeb654b38f87344e66b881c",
+      "bytes": 36048
+    }
+  }
+}

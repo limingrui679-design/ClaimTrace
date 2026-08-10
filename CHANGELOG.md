@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0 — 2026-08-10
+
+- expanded the executable catalog from six to ten curated cases by adding five public-data audits for U.S. transit operations, Treasury yield curves, CFPB credit-card complaint trends, CDC PLACES depression estimates, and ONS housing affordability, while retiring the overlapping synthetic public-policy showcase;
+- generalized external-source provenance so all six public cases retain pinned raw responses, source URLs, retrieval metadata, attribution, limitations, source-specific cleaning parameters, and exact SHA-256 verification;
+- separated offline deterministic regeneration from explicit network refresh, and added source-tamper and cleaning-parameter-tamper rejection tests for every public case;
+- added a 15-program alignment matrix grounded in official curricula while separating documented program facts from portfolio-fit interpretation and disclosing current modeling gaps;
+- regenerated and independently verified all 10 AuditBundles and passed the complete unit/integration suite, one real-Chromium acceptance test, 64/64 controlled scenarios, and the enforced core coverage thresholds.
+
 ## 0.7.0 — 2026-08-10
 
 - rebuilt the complete interface as an executive evidence control room with a midnight-navy consulting visual system, responsive editorial typography, refined navigation, presentation-ready panels, and a print-oriented audit report;

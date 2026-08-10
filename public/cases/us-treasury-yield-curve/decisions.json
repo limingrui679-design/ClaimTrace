@@ -1,0 +1,120 @@
+[
+  {
+    "id": "treasury-fixed-income-brief",
+    "title": "Can the 2024 year-end fixed-income brief be reused for the 2025 snapshot?",
+    "owner": "Public-data case reviewer",
+    "passActionId": "treasury:retain-brief-with-date",
+    "holdActionId": "treasury:update-curve-brief",
+    "actionIfPass": "Retain only supported descriptive statements and disclose observation dates, maturities, and source.",
+    "actionIfFail": "Update the curve-shape and short-end statements; do not convert two snapshots into a return forecast or trading recommendation.",
+    "conditions": [
+      {
+        "claimId": "treasury-20y-highest",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      },
+      {
+        "claimId": "treasury-1m-four-percent",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      },
+      {
+        "claimId": "treasury-selected-mean-stability",
+        "allowedStatuses": [
+          "SUPPORTED",
+          "WEAKENED"
+        ]
+      }
+    ],
+    "stakeholders": [
+      "Fixed-income readers",
+      "Risk reviewers",
+      "Public-data provider"
+    ],
+    "objective": {
+      "benefitWeight": 1,
+      "costWeight": 0.2,
+      "riskWeight": 1.2
+    },
+    "riskTolerance": 18,
+    "noActionLoss": 28,
+    "inputProvenance": {
+      "kind": "MANUAL_ASSUMPTION",
+      "source": "Illustrative fixed-income publication assumptions v1",
+      "version": "1.0.0",
+      "rationale": "The option values are demonstration inputs, not portfolio returns, market risk estimates, transaction costs, or investment advice",
+      "units": {
+        "benefit": "illustrative utility points",
+        "cost": "illustrative cost points",
+        "risk": "illustrative risk points",
+        "capacity": "illustrative capacity points"
+      },
+      "confirmedBy": "ClaimTrace public-data case author",
+      "confirmedAt": "2026-08-10T00:00:00.000Z"
+    },
+    "uncertainty": {
+      "method": "BOUNDED_UNIFORM",
+      "benefitMultiplier": [
+        0.8,
+        1.2
+      ],
+      "costMultiplier": [
+        0.85,
+        1.2
+      ],
+      "riskMultiplier": [
+        0.8,
+        1.25
+      ],
+      "capacityMultiplier": [
+        0.9,
+        1.15
+      ],
+      "trials": 512,
+      "seed": "treasury-fixed-income-brief-v1",
+      "stabilitySweep": {
+        "parameter": "benefitMultiplier",
+        "min": 0.5,
+        "max": 1.5,
+        "step": 0.05
+      }
+    },
+    "constraints": [
+      {
+        "id": "review-capacity",
+        "label": "Review capacity",
+        "metric": "capacity",
+        "operator": "<=",
+        "value": 45
+      }
+    ],
+    "options": [
+      {
+        "id": "reuse",
+        "label": "Reuse unchanged",
+        "benefit": 34,
+        "cost": 6,
+        "risk": 31,
+        "capacity": 4
+      },
+      {
+        "id": "revise",
+        "label": "Revise curve statements",
+        "benefit": 84,
+        "cost": 26,
+        "risk": 7,
+        "capacity": 26
+      },
+      {
+        "id": "model",
+        "label": "Add a full term-structure model",
+        "benefit": 102,
+        "cost": 82,
+        "risk": 14,
+        "capacity": 76
+      }
+    ]
+  }
+]

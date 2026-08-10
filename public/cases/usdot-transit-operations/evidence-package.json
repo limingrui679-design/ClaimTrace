@@ -1,0 +1,2085 @@
+{
+  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "bundleType": "AuditBundle",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "previousBundleHash": null,
+  "project": "USDOT NTD Selected Heavy-Rail Operations Audit",
+  "primaryKey": "ntd_id",
+  "ruleVersion": "claimtrace-rule/6.1.2",
+  "isDemo": true,
+  "dataOrigin": "PUBLIC",
+  "snapshots": {
+    "baseline": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "baseline-6de76fae9d280d03",
+      "side": "baseline",
+      "fileName": "baseline.csv",
+      "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+      "normalizedSha256": "8839e879aa40d3838cf44110167f1a510866e1c81d605a5902a1d893a36ace42",
+      "rowCount": 8,
+      "byteSize": 834,
+      "columns": [
+        "ntd_id",
+        "agency",
+        "period",
+        "mode",
+        "type_of_service",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "primaryKey": "ntd_id",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "verifiedAt": "2026-08-10T00:00:00.000Z",
+      "verificationStatus": "verified"
+    },
+    "current": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "current-47243affc422e851",
+      "side": "current",
+      "fileName": "current.csv",
+      "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+      "normalizedSha256": "0404c2f91094031c773b3cec6c795b875b02aa67f215916f65c341f2477169d5",
+      "rowCount": 8,
+      "byteSize": 834,
+      "columns": [
+        "ntd_id",
+        "agency",
+        "period",
+        "mode",
+        "type_of_service",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "primaryKey": "ntd_id",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "verifiedAt": "2026-08-10T00:00:00.000Z",
+      "verificationStatus": "verified"
+    }
+  },
+  "snapshotPayloads": {
+    "baseline": {
+      "fileName": "baseline.csv",
+      "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+      "normalizedSha256": "8839e879aa40d3838cf44110167f1a510866e1c81d605a5902a1d893a36ace42",
+      "text": "ntd_id,agency,period,mode,type_of_service,ridership,vehicle_revenue_hours,riders_per_revenue_hour\n10003,Massachusetts Bay Transportation Authority,2024-05-01,Heavy Rail,DO,7191380,122070,58.91\n20008,MTA New York City Transit,2024-05-01,Heavy Rail,DO,198452660,1871553,106.04\n30019,Southeastern Pennsylvania Transportation Authority,2024-05-01,Heavy Rail,DO,5154063,94901,54.31\n30030,Washington Metropolitan Area Transit Authority,2024-05-01,Heavy Rail,DO,13789248,356294,38.70\n40034,County of Miami-Dade,2024-05-01,Heavy Rail,DO,1314112,29441,44.64\n50066,Chicago Transit Authority,2024-05-01,Heavy Rail,DO,11330441,340364,33.29\n90003,San Francisco Bay Area Rapid Transit District,2024-05-01,Heavy Rail,DO,4767259,183635,25.96\n90154,Los Angeles County Metropolitan Transportation Authority,2024-05-01,Heavy Rail,DO,1869086,23903,78.19\n",
+      "rawBytesBase64": "bnRkX2lkLGFnZW5jeSxwZXJpb2QsbW9kZSx0eXBlX29mX3NlcnZpY2UscmlkZXJzaGlwLHZlaGljbGVfcmV2ZW51ZV9ob3VycyxyaWRlcnNfcGVyX3JldmVudWVfaG91cgoxMDAwMyxNYXNzYWNodXNldHRzIEJheSBUcmFuc3BvcnRhdGlvbiBBdXRob3JpdHksMjAyNC0wNS0wMSxIZWF2eSBSYWlsLERPLDcxOTEzODAsMTIyMDcwLDU4LjkxCjIwMDA4LE1UQSBOZXcgWW9yayBDaXR5IFRyYW5zaXQsMjAyNC0wNS0wMSxIZWF2eSBSYWlsLERPLDE5ODQ1MjY2MCwxODcxNTUzLDEwNi4wNAozMDAxOSxTb3V0aGVhc3Rlcm4gUGVubnN5bHZhbmlhIFRyYW5zcG9ydGF0aW9uIEF1dGhvcml0eSwyMDI0LTA1LTAxLEhlYXZ5IFJhaWwsRE8sNTE1NDA2Myw5NDkwMSw1NC4zMQozMDAzMCxXYXNoaW5ndG9uIE1ldHJvcG9saXRhbiBBcmVhIFRyYW5zaXQgQXV0aG9yaXR5LDIwMjQtMDUtMDEsSGVhdnkgUmFpbCxETywxMzc4OTI0OCwzNTYyOTQsMzguNzAKNDAwMzQsQ291bnR5IG9mIE1pYW1pLURhZGUsMjAyNC0wNS0wMSxIZWF2eSBSYWlsLERPLDEzMTQxMTIsMjk0NDEsNDQuNjQKNTAwNjYsQ2hpY2FnbyBUcmFuc2l0IEF1dGhvcml0eSwyMDI0LTA1LTAxLEhlYXZ5IFJhaWwsRE8sMTEzMzA0NDEsMzQwMzY0LDMzLjI5CjkwMDAzLFNhbiBGcmFuY2lzY28gQmF5IEFyZWEgUmFwaWQgVHJhbnNpdCBEaXN0cmljdCwyMDI0LTA1LTAxLEhlYXZ5IFJhaWwsRE8sNDc2NzI1OSwxODM2MzUsMjUuOTYKOTAxNTQsTG9zIEFuZ2VsZXMgQ291bnR5IE1ldHJvcG9saXRhbiBUcmFuc3BvcnRhdGlvbiBBdXRob3JpdHksMjAyNC0wNS0wMSxIZWF2eSBSYWlsLERPLDE4NjkwODYsMjM5MDMsNzguMTkK"
+    },
+    "current": {
+      "fileName": "current.csv",
+      "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+      "normalizedSha256": "0404c2f91094031c773b3cec6c795b875b02aa67f215916f65c341f2477169d5",
+      "text": "ntd_id,agency,period,mode,type_of_service,ridership,vehicle_revenue_hours,riders_per_revenue_hour\n10003,Massachusetts Bay Transportation Authority,2025-05-01,Heavy Rail,DO,8681151,130138,66.71\n20008,MTA New York City Transit,2025-05-01,Heavy Rail,DO,204151128,1891988,107.90\n30019,Southeastern Pennsylvania Transportation Authority,2025-05-01,Heavy Rail,DO,5413893,90970,59.51\n30030,Washington Metropolitan Area Transit Authority,2025-05-01,Heavy Rail,DO,17224940,345292,49.89\n40034,County of Miami-Dade,2025-05-01,Heavy Rail,DO,1260681,28654,44.00\n50066,Chicago Transit Authority,2025-05-01,Heavy Rail,DO,12064650,406607,29.67\n90003,San Francisco Bay Area Rapid Transit District,2025-05-01,Heavy Rail,DO,5021713,179279,28.01\n90154,Los Angeles County Metropolitan Transportation Authority,2025-05-01,Heavy Rail,DO,1775449,23088,76.90\n",
+      "rawBytesBase64": "bnRkX2lkLGFnZW5jeSxwZXJpb2QsbW9kZSx0eXBlX29mX3NlcnZpY2UscmlkZXJzaGlwLHZlaGljbGVfcmV2ZW51ZV9ob3VycyxyaWRlcnNfcGVyX3JldmVudWVfaG91cgoxMDAwMyxNYXNzYWNodXNldHRzIEJheSBUcmFuc3BvcnRhdGlvbiBBdXRob3JpdHksMjAyNS0wNS0wMSxIZWF2eSBSYWlsLERPLDg2ODExNTEsMTMwMTM4LDY2LjcxCjIwMDA4LE1UQSBOZXcgWW9yayBDaXR5IFRyYW5zaXQsMjAyNS0wNS0wMSxIZWF2eSBSYWlsLERPLDIwNDE1MTEyOCwxODkxOTg4LDEwNy45MAozMDAxOSxTb3V0aGVhc3Rlcm4gUGVubnN5bHZhbmlhIFRyYW5zcG9ydGF0aW9uIEF1dGhvcml0eSwyMDI1LTA1LTAxLEhlYXZ5IFJhaWwsRE8sNTQxMzg5Myw5MDk3MCw1OS41MQozMDAzMCxXYXNoaW5ndG9uIE1ldHJvcG9saXRhbiBBcmVhIFRyYW5zaXQgQXV0aG9yaXR5LDIwMjUtMDUtMDEsSGVhdnkgUmFpbCxETywxNzIyNDk0MCwzNDUyOTIsNDkuODkKNDAwMzQsQ291bnR5IG9mIE1pYW1pLURhZGUsMjAyNS0wNS0wMSxIZWF2eSBSYWlsLERPLDEyNjA2ODEsMjg2NTQsNDQuMDAKNTAwNjYsQ2hpY2FnbyBUcmFuc2l0IEF1dGhvcml0eSwyMDI1LTA1LTAxLEhlYXZ5IFJhaWwsRE8sMTIwNjQ2NTAsNDA2NjA3LDI5LjY3CjkwMDAzLFNhbiBGcmFuY2lzY28gQmF5IEFyZWEgUmFwaWQgVHJhbnNpdCBEaXN0cmljdCwyMDI1LTA1LTAxLEhlYXZ5IFJhaWwsRE8sNTAyMTcxMywxNzkyNzksMjguMDEKOTAxNTQsTG9zIEFuZ2VsZXMgQ291bnR5IE1ldHJvcG9saXRhbiBUcmFuc3BvcnRhdGlvbiBBdXRob3JpdHksMjAyNS0wNS0wMSxIZWF2eSBSYWlsLERPLDE3NzU0NDksMjMwODgsNzYuOTAK"
+    }
+  },
+  "summary": {
+    "total": 3,
+    "supported": 2,
+    "weakened": 0,
+    "reversed": 0,
+    "untestable": 0,
+    "reviewRequired": 1,
+    "completenessChecksPassed": 48,
+    "completenessChecksTotal": 48,
+    "evidenceCoverage": 100,
+    "changedRecords": 8
+  },
+  "diffSummary": {
+    "totalChanged": 8,
+    "exported": 8,
+    "truncated": false,
+    "limit": 500
+  },
+  "diffs": [
+    {
+      "key": "10003",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "10003",
+        "agency": "Massachusetts Bay Transportation Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "7191380",
+        "vehicle_revenue_hours": "122070",
+        "riders_per_revenue_hour": "58.91"
+      },
+      "current": {
+        "ntd_id": "10003",
+        "agency": "Massachusetts Bay Transportation Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "8681151",
+        "vehicle_revenue_hours": "130138",
+        "riders_per_revenue_hour": "66.71"
+      },
+      "baselineLine": 2,
+      "currentLine": 2
+    },
+    {
+      "key": "20008",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "20008",
+        "agency": "MTA New York City Transit",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "198452660",
+        "vehicle_revenue_hours": "1871553",
+        "riders_per_revenue_hour": "106.04"
+      },
+      "current": {
+        "ntd_id": "20008",
+        "agency": "MTA New York City Transit",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "204151128",
+        "vehicle_revenue_hours": "1891988",
+        "riders_per_revenue_hour": "107.90"
+      },
+      "baselineLine": 3,
+      "currentLine": 3
+    },
+    {
+      "key": "30019",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "30019",
+        "agency": "Southeastern Pennsylvania Transportation Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "5154063",
+        "vehicle_revenue_hours": "94901",
+        "riders_per_revenue_hour": "54.31"
+      },
+      "current": {
+        "ntd_id": "30019",
+        "agency": "Southeastern Pennsylvania Transportation Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "5413893",
+        "vehicle_revenue_hours": "90970",
+        "riders_per_revenue_hour": "59.51"
+      },
+      "baselineLine": 4,
+      "currentLine": 4
+    },
+    {
+      "key": "30030",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "30030",
+        "agency": "Washington Metropolitan Area Transit Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "13789248",
+        "vehicle_revenue_hours": "356294",
+        "riders_per_revenue_hour": "38.70"
+      },
+      "current": {
+        "ntd_id": "30030",
+        "agency": "Washington Metropolitan Area Transit Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "17224940",
+        "vehicle_revenue_hours": "345292",
+        "riders_per_revenue_hour": "49.89"
+      },
+      "baselineLine": 5,
+      "currentLine": 5
+    },
+    {
+      "key": "40034",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "40034",
+        "agency": "County of Miami-Dade",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1314112",
+        "vehicle_revenue_hours": "29441",
+        "riders_per_revenue_hour": "44.64"
+      },
+      "current": {
+        "ntd_id": "40034",
+        "agency": "County of Miami-Dade",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1260681",
+        "vehicle_revenue_hours": "28654",
+        "riders_per_revenue_hour": "44.00"
+      },
+      "baselineLine": 6,
+      "currentLine": 6
+    },
+    {
+      "key": "50066",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "50066",
+        "agency": "Chicago Transit Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "11330441",
+        "vehicle_revenue_hours": "340364",
+        "riders_per_revenue_hour": "33.29"
+      },
+      "current": {
+        "ntd_id": "50066",
+        "agency": "Chicago Transit Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "12064650",
+        "vehicle_revenue_hours": "406607",
+        "riders_per_revenue_hour": "29.67"
+      },
+      "baselineLine": 7,
+      "currentLine": 7
+    },
+    {
+      "key": "90003",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "90003",
+        "agency": "San Francisco Bay Area Rapid Transit District",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "4767259",
+        "vehicle_revenue_hours": "183635",
+        "riders_per_revenue_hour": "25.96"
+      },
+      "current": {
+        "ntd_id": "90003",
+        "agency": "San Francisco Bay Area Rapid Transit District",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "5021713",
+        "vehicle_revenue_hours": "179279",
+        "riders_per_revenue_hour": "28.01"
+      },
+      "baselineLine": 8,
+      "currentLine": 8
+    },
+    {
+      "key": "90154",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "ridership",
+        "vehicle_revenue_hours",
+        "riders_per_revenue_hour"
+      ],
+      "baseline": {
+        "ntd_id": "90154",
+        "agency": "Los Angeles County Metropolitan Transportation Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1869086",
+        "vehicle_revenue_hours": "23903",
+        "riders_per_revenue_hour": "78.19"
+      },
+      "current": {
+        "ntd_id": "90154",
+        "agency": "Los Angeles County Metropolitan Transportation Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1775449",
+        "vehicle_revenue_hours": "23088",
+        "riders_per_revenue_hour": "76.90"
+      },
+      "baselineLine": 9,
+      "currentLine": 9
+    }
+  ],
+  "queryTrace": [
+    {
+      "claimId": "ntd-nyct-productivity-rank",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "riders_per_revenue_hour",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {
+            "Massachusetts Bay Transportation Authority": 1,
+            "MTA New York City Transit": 1,
+            "Southeastern Pennsylvania Transportation Authority": 1,
+            "Washington Metropolitan Area Transit Authority": 1,
+            "County of Miami-Dade": 1,
+            "Chicago Transit Authority": 1,
+            "San Francisco Bay Area Rapid Transit District": 1,
+            "Los Angeles County Metropolitan Transportation Authority": 1
+          }
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {
+            "Massachusetts Bay Transportation Authority": 1,
+            "MTA New York City Transit": 1,
+            "Southeastern Pennsylvania Transportation Authority": 1,
+            "Washington Metropolitan Area Transit Authority": 1,
+            "County of Miami-Dade": 1,
+            "Chicago Transit Authority": 1,
+            "San Francisco Bay Area Rapid Transit District": 1,
+            "Los Angeles County Metropolitan Transportation Authority": 1
+          }
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "ntd-wmata-productivity-gate",
+      "filters": [
+        {
+          "field": "ntd_id",
+          "equals": "30030"
+        }
+      ],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "riders_per_revenue_hour",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "9ea66c99",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "9ea66c99",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "ntd-selected-ridership-stability",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "sum",
+      "field": "ridership",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    }
+  ],
+  "dataPreview": {
+    "columns": [
+      "ntd_id",
+      "agency",
+      "period",
+      "mode",
+      "type_of_service",
+      "ridership",
+      "vehicle_revenue_hours",
+      "riders_per_revenue_hour"
+    ],
+    "baselineRows": [
+      {
+        "ntd_id": "10003",
+        "agency": "Massachusetts Bay Transportation Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "7191380",
+        "vehicle_revenue_hours": "122070",
+        "riders_per_revenue_hour": "58.91"
+      },
+      {
+        "ntd_id": "20008",
+        "agency": "MTA New York City Transit",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "198452660",
+        "vehicle_revenue_hours": "1871553",
+        "riders_per_revenue_hour": "106.04"
+      },
+      {
+        "ntd_id": "30019",
+        "agency": "Southeastern Pennsylvania Transportation Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "5154063",
+        "vehicle_revenue_hours": "94901",
+        "riders_per_revenue_hour": "54.31"
+      },
+      {
+        "ntd_id": "30030",
+        "agency": "Washington Metropolitan Area Transit Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "13789248",
+        "vehicle_revenue_hours": "356294",
+        "riders_per_revenue_hour": "38.70"
+      },
+      {
+        "ntd_id": "40034",
+        "agency": "County of Miami-Dade",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1314112",
+        "vehicle_revenue_hours": "29441",
+        "riders_per_revenue_hour": "44.64"
+      },
+      {
+        "ntd_id": "50066",
+        "agency": "Chicago Transit Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "11330441",
+        "vehicle_revenue_hours": "340364",
+        "riders_per_revenue_hour": "33.29"
+      },
+      {
+        "ntd_id": "90003",
+        "agency": "San Francisco Bay Area Rapid Transit District",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "4767259",
+        "vehicle_revenue_hours": "183635",
+        "riders_per_revenue_hour": "25.96"
+      },
+      {
+        "ntd_id": "90154",
+        "agency": "Los Angeles County Metropolitan Transportation Authority",
+        "period": "2024-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1869086",
+        "vehicle_revenue_hours": "23903",
+        "riders_per_revenue_hour": "78.19"
+      }
+    ],
+    "currentRows": [
+      {
+        "ntd_id": "10003",
+        "agency": "Massachusetts Bay Transportation Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "8681151",
+        "vehicle_revenue_hours": "130138",
+        "riders_per_revenue_hour": "66.71"
+      },
+      {
+        "ntd_id": "20008",
+        "agency": "MTA New York City Transit",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "204151128",
+        "vehicle_revenue_hours": "1891988",
+        "riders_per_revenue_hour": "107.90"
+      },
+      {
+        "ntd_id": "30019",
+        "agency": "Southeastern Pennsylvania Transportation Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "5413893",
+        "vehicle_revenue_hours": "90970",
+        "riders_per_revenue_hour": "59.51"
+      },
+      {
+        "ntd_id": "30030",
+        "agency": "Washington Metropolitan Area Transit Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "17224940",
+        "vehicle_revenue_hours": "345292",
+        "riders_per_revenue_hour": "49.89"
+      },
+      {
+        "ntd_id": "40034",
+        "agency": "County of Miami-Dade",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1260681",
+        "vehicle_revenue_hours": "28654",
+        "riders_per_revenue_hour": "44.00"
+      },
+      {
+        "ntd_id": "50066",
+        "agency": "Chicago Transit Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "12064650",
+        "vehicle_revenue_hours": "406607",
+        "riders_per_revenue_hour": "29.67"
+      },
+      {
+        "ntd_id": "90003",
+        "agency": "San Francisco Bay Area Rapid Transit District",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "5021713",
+        "vehicle_revenue_hours": "179279",
+        "riders_per_revenue_hour": "28.01"
+      },
+      {
+        "ntd_id": "90154",
+        "agency": "Los Angeles County Metropolitan Transportation Authority",
+        "period": "2025-05-01",
+        "mode": "Heavy Rail",
+        "type_of_service": "DO",
+        "ridership": "1775449",
+        "vehicle_revenue_hours": "23088",
+        "riders_per_revenue_hour": "76.90"
+      }
+    ],
+    "previewLimit": 20
+  },
+  "scaleBoundary": {
+    "maxExportedDiffs": 500,
+    "maxRawBytesPerSnapshot": 500000,
+    "maxReferencesPerClaim": 200,
+    "note": "Above the size limits, preserve hashes, manifests, changed records, and required samples instead of copying full tables."
+  },
+  "claimSpecs": [
+    {
+      "id": "ntd-nyct-productivity-rank",
+      "code": "NTD-001",
+      "title": "MTA New York City Transit remains the highest in riders per vehicle-revenue hour among the eight selected services",
+      "section": "Descriptive operating intensity",
+      "owner": "Public-data case reviewer",
+      "category": "Group ranking",
+      "formula": "argmax(agency, riders_per_revenue_hour) = MTA New York City Transit",
+      "rule": {
+        "type": "rank",
+        "field": "riders_per_revenue_hour",
+        "aggregation": "average",
+        "groupField": "agency",
+        "expectedGroup": "MTA New York City Transit",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      }
+    },
+    {
+      "id": "ntd-wmata-productivity-gate",
+      "code": "NTD-002",
+      "title": "WMATA reaches at least 45 riders per vehicle-revenue hour in the selected month",
+      "section": "Illustrative operating threshold",
+      "owner": "Public-data case reviewer",
+      "category": "Threshold gate",
+      "formula": "WMATA riders_per_revenue_hour >= 45",
+      "rule": {
+        "type": "threshold",
+        "field": "riders_per_revenue_hour",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 45,
+        "filters": [
+          {
+            "field": "ntd_id",
+            "equals": "30030"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 45,
+          "unit": "absolute",
+          "source": "Illustrative operations review threshold v1",
+          "rationale": "An analyst-authored demonstration threshold; it is not an FTA service standard or causal efficiency target",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "ntd-selected-ridership-stability",
+      "code": "NTD-003",
+      "title": "Total ridership across the eight selected services changes by no more than 5%",
+      "section": "Selected-system volume comparison",
+      "owner": "Public-data case reviewer",
+      "category": "Period stability",
+      "formula": "abs(sum(2025 May ridership)-sum(2024 May ridership))/sum(2024 May ridership) <= 5%",
+      "rule": {
+        "type": "stability",
+        "field": "ridership",
+        "aggregation": "sum",
+        "supportTolerance": 5,
+        "reversalThreshold": 15,
+        "supportToleranceSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Illustrative monthly-monitoring rule v1",
+          "rationale": "Used to test whether a selected-system volume statement remains descriptively stable",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 15,
+          "unit": "percent",
+          "source": "Illustrative monthly-monitoring escalation v1",
+          "rationale": "At 15%, treat the original selected-system volume statement as materially invalid",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
+    }
+  ],
+  "claimResults": [
+    {
+      "id": "ntd-nyct-productivity-rank",
+      "code": "NTD-001",
+      "title": "MTA New York City Transit remains the highest in riders per vehicle-revenue hour among the eight selected services",
+      "section": "Descriptive operating intensity",
+      "owner": "Public-data case reviewer",
+      "category": "Group ranking",
+      "formula": "argmax(agency, riders_per_revenue_hour) = MTA New York City Transit",
+      "rule": {
+        "type": "rank",
+        "field": "riders_per_revenue_hour",
+        "aggregation": "average",
+        "groupField": "agency",
+        "expectedGroup": "MTA New York City Transit",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      },
+      "kind": "SNAPSHOT",
+      "status": "SUPPORTED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "MTA New York City Transit 106.04",
+      "currentValue": "MTA New York City Transit 107.9",
+      "reason": "MTA New York City Transit is the unique extreme group.",
+      "action": "The claim may continue to be cited.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "10003",
+          "lineNumber": 2,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "20008",
+          "lineNumber": 3,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "30019",
+          "lineNumber": 4,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "30030",
+          "lineNumber": 5,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "40034",
+          "lineNumber": 6,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "50066",
+          "lineNumber": 7,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "90003",
+          "lineNumber": 8,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "90154",
+          "lineNumber": 9,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "10003",
+          "lineNumber": 2,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "20008",
+          "lineNumber": 3,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "30019",
+          "lineNumber": 4,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "30030",
+          "lineNumber": 5,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "40034",
+          "lineNumber": 6,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "50066",
+          "lineNumber": 7,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "90003",
+          "lineNumber": 8,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "90154",
+          "lineNumber": 9,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour",
+            "agency"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:MTA New York City Transit remains the highest in riders per vehicle-revenue hour among the eight selected services",
+          "kind": "Claim",
+          "title": "MTA New York City Transit remains the highest in riders per vehicle-revenue hour among the eight selected services",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:ntd-nyct-productivity-rank:0bf76d6700658cdff0da09b5",
+          "kind": "Comparison result",
+          "title": "riders_per_revenue_hour version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:riders_per_revenue_hour",
+          "kind": "Metric",
+          "title": "riders_per_revenue_hour",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:riders_per_revenue_hour",
+          "kind": "Field",
+          "title": "riders_per_revenue_hour",
+          "detail": "Primary key: ntd_id",
+          "bound": true
+        },
+        {
+          "id": "records:ntd_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+        "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {
+            "Massachusetts Bay Transportation Authority": 1,
+            "MTA New York City Transit": 1,
+            "Southeastern Pennsylvania Transportation Authority": 1,
+            "Washington Metropolitan Area Transit Authority": 1,
+            "County of Miami-Dade": 1,
+            "Chicago Transit Authority": 1,
+            "San Francisco Bay Area Rapid Transit District": 1,
+            "Los Angeles County Metropolitan Transportation Authority": 1
+          }
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {
+            "Massachusetts Bay Transportation Authority": 1,
+            "MTA New York City Transit": 1,
+            "Southeastern Pennsylvania Transportation Authority": 1,
+            "Washington Metropolitan Area Transit Authority": 1,
+            "County of Miami-Dade": 1,
+            "Chicago Transit Authority": 1,
+            "San Francisco Bay Area Rapid Transit District": 1,
+            "Los Angeles County Metropolitan Transportation Authority": 1
+          }
+        }
+      },
+      "resultId": "claim-result:ntd-nyct-productivity-rank:0bf76d6700658cdff0da09b5",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ntd-wmata-productivity-gate",
+      "code": "NTD-002",
+      "title": "WMATA reaches at least 45 riders per vehicle-revenue hour in the selected month",
+      "section": "Illustrative operating threshold",
+      "owner": "Public-data case reviewer",
+      "category": "Threshold gate",
+      "formula": "WMATA riders_per_revenue_hour >= 45",
+      "rule": {
+        "type": "threshold",
+        "field": "riders_per_revenue_hour",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 45,
+        "filters": [
+          {
+            "field": "ntd_id",
+            "equals": "30030"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 45,
+          "unit": "absolute",
+          "source": "Illustrative operations review threshold v1",
+          "rationale": "An analyst-authored demonstration threshold; it is not an FTA service standard or causal efficiency target",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVIEW_REQUIRED",
+      "baselineStatus": "REVERSED",
+      "baselineValue": "38.7",
+      "currentValue": "49.89",
+      "reason": "The claim changed from false to true. Current average is 49.89 and satisfies rule >= 45.",
+      "action": "Review threshold provenance, denominator, and sample composition before sign-off.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "30030",
+          "lineNumber": 5,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "30030",
+          "lineNumber": 5,
+          "fields": [
+            "ntd_id",
+            "riders_per_revenue_hour"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:WMATA reaches at least 45 riders per vehicle-revenue hour in the selected month",
+          "kind": "Claim",
+          "title": "WMATA reaches at least 45 riders per vehicle-revenue hour in the selected month",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:ntd-wmata-productivity-gate:93b1dad498fefaf616fa3dbd",
+          "kind": "Comparison result",
+          "title": "riders_per_revenue_hour version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:riders_per_revenue_hour",
+          "kind": "Metric",
+          "title": "riders_per_revenue_hour",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:riders_per_revenue_hour",
+          "kind": "Field",
+          "title": "riders_per_revenue_hour",
+          "detail": "Primary key: ntd_id",
+          "bound": true
+        },
+        {
+          "id": "records:ntd_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVIEW_REQUIRED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+        "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "9ea66c99",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "9ea66c99",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:ntd-wmata-productivity-gate:93b1dad498fefaf616fa3dbd",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ntd-selected-ridership-stability",
+      "code": "NTD-003",
+      "title": "Total ridership across the eight selected services changes by no more than 5%",
+      "section": "Selected-system volume comparison",
+      "owner": "Public-data case reviewer",
+      "category": "Period stability",
+      "formula": "abs(sum(2025 May ridership)-sum(2024 May ridership))/sum(2024 May ridership) <= 5%",
+      "rule": {
+        "type": "stability",
+        "field": "ridership",
+        "aggregation": "sum",
+        "supportTolerance": 5,
+        "reversalThreshold": 15,
+        "supportToleranceSpec": {
+          "value": 5,
+          "unit": "percent",
+          "source": "Illustrative monthly-monitoring rule v1",
+          "rationale": "Used to test whether a selected-system volume statement remains descriptively stable",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 15,
+          "unit": "percent",
+          "source": "Illustrative monthly-monitoring escalation v1",
+          "rationale": "At 15%, treat the original selected-system volume statement as materially invalid",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      },
+      "kind": "VERSION_COMPARISON",
+      "status": "SUPPORTED",
+      "baselineStatus": "UNTESTABLE",
+      "baselineValue": "243,868,249",
+      "currentValue": "255,593,605",
+      "reason": "sum of ridership changed 4.81%, within the confirmed support tolerance of 5%.",
+      "action": "The claim may continue to be cited.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "10003",
+          "lineNumber": 2,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "20008",
+          "lineNumber": 3,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "30019",
+          "lineNumber": 4,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "30030",
+          "lineNumber": 5,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "40034",
+          "lineNumber": 6,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "50066",
+          "lineNumber": 7,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "90003",
+          "lineNumber": 8,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "keyField": "ntd_id",
+          "keyValue": "90154",
+          "lineNumber": 9,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "10003",
+          "lineNumber": 2,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "20008",
+          "lineNumber": 3,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "30019",
+          "lineNumber": 4,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "30030",
+          "lineNumber": 5,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "40034",
+          "lineNumber": 6,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "50066",
+          "lineNumber": 7,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "90003",
+          "lineNumber": 8,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "keyField": "ntd_id",
+          "keyValue": "90154",
+          "lineNumber": 9,
+          "fields": [
+            "ntd_id",
+            "ridership"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Total ridership across the eight selected services changes by no more than 5%",
+          "kind": "Claim",
+          "title": "Total ridership across the eight selected services changes by no more than 5%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:ntd-selected-ridership-stability:a23d976ac2b6da7680171334",
+          "kind": "Comparison result",
+          "title": "ridership version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:ridership",
+          "kind": "Metric",
+          "title": "ridership",
+          "detail": "Aggregation: sum",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:ridership",
+          "kind": "Field",
+          "title": "ridership",
+          "detail": "Primary key: ntd_id",
+          "bound": true
+        },
+        {
+          "id": "records:ntd_id",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+        "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 16,
+        "exportedReferences": 16,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 8,
+        "sides": {
+          "baseline": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 8,
+            "exportedReferences": 8,
+            "changedCandidates": 8,
+            "pairedChangedReferences": 8,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 8,
+          "effectiveRows": 8,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 8,
+          "includedKeysHash": "1cacf812",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:ntd-selected-ridership-stability:a23d976ac2b6da7680171334",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisionSpecs": [
+    {
+      "id": "ntd-operations-brief",
+      "title": "Can the May 2024 operating brief be reused without a 2025 update note?",
+      "owner": "Public-data case reviewer",
+      "passActionId": "ntd:retain-ranking-with-period-note",
+      "holdActionId": "ntd:update-brief-and-threshold-note",
+      "actionIfPass": "Retain only the supported descriptive ranking and disclose the agency selection, month, retrieval date, and revisions boundary.",
+      "actionIfFail": "Update the operating brief and explain which descriptive threshold or volume statement changed; do not infer service quality or causality.",
+      "conditions": [
+        {
+          "claimId": "ntd-nyct-productivity-rank",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "ntd-wmata-productivity-gate",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "ntd-selected-ridership-stability",
+          "allowedStatuses": [
+            "SUPPORTED",
+            "WEAKENED"
+          ]
+        }
+      ],
+      "stakeholders": [
+        "Transit-data readers",
+        "Operations analysts",
+        "Public-data provider"
+      ],
+      "objective": {
+        "benefitWeight": 1,
+        "costWeight": 0.2,
+        "riskWeight": 1
+      },
+      "riskTolerance": 20,
+      "noActionLoss": 25,
+      "inputProvenance": {
+        "kind": "MANUAL_ASSUMPTION",
+        "source": "Illustrative transit-publication assumptions v1",
+        "version": "1.0.0",
+        "rationale": "The option scores are demonstration inputs, not observed agency costs, benefits, capacity, or service effects",
+        "units": {
+          "benefit": "illustrative utility points",
+          "cost": "illustrative cost points",
+          "risk": "illustrative risk points",
+          "capacity": "illustrative capacity points"
+        },
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      },
+      "uncertainty": {
+        "method": "BOUNDED_UNIFORM",
+        "benefitMultiplier": [
+          0.8,
+          1.2
+        ],
+        "costMultiplier": [
+          0.85,
+          1.2
+        ],
+        "riskMultiplier": [
+          0.8,
+          1.25
+        ],
+        "capacityMultiplier": [
+          0.9,
+          1.15
+        ],
+        "trials": 512,
+        "seed": "ntd-operations-brief-v1",
+        "stabilitySweep": {
+          "parameter": "benefitMultiplier",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05
+        }
+      },
+      "constraints": [
+        {
+          "id": "editorial-capacity",
+          "label": "Editorial capacity",
+          "metric": "capacity",
+          "operator": "<=",
+          "value": 45
+        }
+      ],
+      "options": [
+        {
+          "id": "reuse",
+          "label": "Reuse unchanged",
+          "benefit": 36,
+          "cost": 7,
+          "risk": 29,
+          "capacity": 4
+        },
+        {
+          "id": "annotate",
+          "label": "Update figures and boundaries",
+          "benefit": 80,
+          "cost": 24,
+          "risk": 8,
+          "capacity": 24
+        },
+        {
+          "id": "expand",
+          "label": "Build a full service study",
+          "benefit": 95,
+          "cost": 76,
+          "risk": 12,
+          "capacity": 72
+        }
+      ]
+    }
+  ],
+  "decisionResults": [
+    {
+      "decisionId": "ntd-operations-brief",
+      "previousOutcome": null,
+      "currentOutcome": "REVIEW",
+      "boundClaimIds": [
+        "ntd-nyct-productivity-rank",
+        "ntd-selected-ridership-stability",
+        "ntd-wmata-productivity-gate"
+      ],
+      "affectedClaimIds": [
+        "ntd-wmata-productivity-gate"
+      ],
+      "comparisonBasis": "NO_HISTORY",
+      "changeReasons": [],
+      "binding": {
+        "activeActionId": "review-required:ntd-operations-brief",
+        "actionIdentityHash": "a4525fefe2605b8ea3a2a540683bba7a4b9994f6de5532207c5ef5b592f7d7a9",
+        "recommendedOptionId": "annotate",
+        "feasibleOptionIds": [
+          "annotate"
+        ],
+        "decisionPolicyHash": "7e9c96f1ece52748f7538a72f6f8a6ef7e59d423651be6d3861bcbb11021f7c3",
+        "decisionInputProvenanceHash": "2bd7ea1fdfb75390a04d9583307f32dca4b12013a9b0d7833a3eba78f1ae7caa",
+        "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+        "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "claimResultIds": [
+          "claim-result:ntd-nyct-productivity-rank:0bf76d6700658cdff0da09b5",
+          "claim-result:ntd-selected-ridership-stability:a23d976ac2b6da7680171334",
+          "claim-result:ntd-wmata-productivity-gate:93b1dad498fefaf616fa3dbd"
+        ]
+      },
+      "analysis": {
+        "options": [
+          {
+            "optionId": "annotate",
+            "label": "Update figures and boundaries",
+            "feasible": true,
+            "score": 67.2,
+            "failedConstraints": [],
+            "breakEvenBenefit": -12.2,
+            "scoreInterval": {
+              "min": 48.24,
+              "max": 85.52
+            },
+            "paretoEfficient": true
+          },
+          {
+            "optionId": "expand",
+            "label": "Build a full service study",
+            "feasible": false,
+            "score": 67.8,
+            "failedConstraints": [
+              "editorial-capacity"
+            ],
+            "breakEvenBenefit": 2.2,
+            "scoreInterval": {
+              "min": 42.76,
+              "max": 91.48
+            },
+            "paretoEfficient": false
+          },
+          {
+            "optionId": "reuse",
+            "label": "Reuse unchanged",
+            "feasible": false,
+            "score": 5.6,
+            "failedConstraints": [
+              "risk-tolerance"
+            ],
+            "breakEvenBenefit": 5.4,
+            "scoreInterval": {
+              "min": -9.13,
+              "max": 18.81
+            },
+            "paretoEfficient": false
+          }
+        ],
+        "recommendedOptionId": "annotate",
+        "noActionScore": -25,
+        "sensitivity": [
+          {
+            "scenarioId": "benefit-down-20",
+            "label": "Benefit down 20%",
+            "recommendedOptionId": "annotate"
+          },
+          {
+            "scenarioId": "cost-up-20",
+            "label": "Cost up 20%",
+            "recommendedOptionId": "annotate"
+          },
+          {
+            "scenarioId": "risk-up-20",
+            "label": "Risk up 20%",
+            "recommendedOptionId": "annotate"
+          }
+        ],
+        "paretoFrontierOptionIds": [
+          "annotate"
+        ],
+        "recommendationStability": {
+          "parameter": "benefitMultiplier",
+          "recommendedOptionId": "annotate",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05,
+          "evaluatedPoints": 21
+        },
+        "monteCarlo": {
+          "method": "DETERMINISTIC_SEEDED_BOUNDED_UNIFORM",
+          "seed": "ntd-operations-brief-v1",
+          "trials": 512,
+          "recommendationShares": [
+            {
+              "optionId": "annotate",
+              "count": 512,
+              "share": 1
+            }
+          ],
+          "options": [
+            {
+              "optionId": "annotate",
+              "feasibilityRate": 1,
+              "scoreP05": 51.888396,
+              "scoreP50": 66.088817,
+              "scoreP95": 80.744454
+            },
+            {
+              "optionId": "expand",
+              "feasibilityRate": 0,
+              "scoreP05": 48.911916,
+              "scoreP50": 66.298907,
+              "scoreP95": 83.949946
+            },
+            {
+              "optionId": "reuse",
+              "feasibilityRate": 0,
+              "scoreP05": -4.967784,
+              "scoreP50": 4.229095,
+              "scoreP95": 13.453719
+            }
+          ]
+        }
+      },
+      "status": "REVIEW_REQUIRED",
+      "reason": "At least one bound claim is untestable or awaiting review; there is no signable decision result.",
+      "governance": {
+        "engineStatus": "REVIEW_REQUIRED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "resultId": "decision-result:ntd-operations-brief:3c49271db4fd4d22af2f3a93"
+    }
+  ],
+  "reviews": [],
+  "reviewChain": {
+    "count": 0,
+    "headRecordId": null,
+    "headRecordHash": null
+  },
+  "externalSource": {
+    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "sourceType": "USDOT_NTD_SOCRATA_V1",
+    "publisher": "U.S. Department of Transportation, Federal Transit Administration",
+    "dataset": "Monthly Modal Time Series",
+    "measure": {
+      "id": "NTD-MONTHLY-HR-RIDERS-PER-REVENUE-HOUR",
+      "name": "Heavy-rail ridership and vehicle-revenue hours"
+    },
+    "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "sourceLastUpdated": "2026-07-07",
+    "sourceUrls": {
+      "baseline": "https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272024%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100",
+      "current": "https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272025%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100"
+    },
+    "license": "U.S. Government work / public data",
+    "licenseUrl": "https://www.usa.gov/government-copyright",
+    "attribution": "U.S. Department of Transportation, Federal Transit Administration, National Transit Database Monthly Modal Time Series, accessed 2026-08-10; transformed by ClaimTrace.",
+    "limitations": [
+      "The case compares one calendar month for eight selected directly operated heavy-rail services and is not a national performance ranking.",
+      "Ridership per vehicle-revenue hour is a descriptive service-intensity ratio, not a measure of causal efficiency, quality, crowding, or profitability.",
+      "National Transit Database monthly values can be revised after publication."
+    ],
+    "cleaning": {
+      "implementation": "usdot-ntd-monthly-v1",
+      "scriptPath": "tools/generate-public-data-cases.ts",
+      "parameters": {
+        "baselineYear": "2024",
+        "currentYear": "2025",
+        "month": "May",
+        "selectedNtdIds": [
+          "10003",
+          "20008",
+          "30019",
+          "30030",
+          "40034",
+          "50066",
+          "90003",
+          "90154"
+        ],
+        "decimalPlaces": 2
+      }
+    },
+    "rawArtifacts": [
+      {
+        "side": "baseline",
+        "fileName": "raw-2024-05.json",
+        "sha256": "31f3aad46f0a98f8465790a461cf1b7162e0477f7886fd91a3906378f4aff536",
+        "text": "[{\"_5_digit_ntd_id\":\"10003\",\"agency\":\"Massachusetts Bay Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"122070\",\"ridership\":\"7191380\"}\n,{\"_5_digit_ntd_id\":\"20008\",\"agency\":\"MTA New York City Transit\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"1871553\",\"ridership\":\"198452660\"}\n,{\"_5_digit_ntd_id\":\"30019\",\"agency\":\"Southeastern Pennsylvania Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"94901\",\"ridership\":\"5154063\"}\n,{\"_5_digit_ntd_id\":\"30030\",\"agency\":\"Washington Metropolitan Area Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"356294\",\"ridership\":\"13789248\"}\n,{\"_5_digit_ntd_id\":\"40034\",\"agency\":\"County of Miami-Dade\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"29441\",\"ridership\":\"1314112\"}\n,{\"_5_digit_ntd_id\":\"50066\",\"agency\":\"Chicago Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"340364\",\"ridership\":\"11330441\"}\n,{\"_5_digit_ntd_id\":\"90003\",\"agency\":\"San Francisco Bay Area Rapid Transit District\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"183635\",\"ridership\":\"4767259\"}\n,{\"_5_digit_ntd_id\":\"90154\",\"agency\":\"Los Angeles County Metropolitan Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"23903\",\"ridership\":\"1869086\"}]\n"
+      },
+      {
+        "side": "current",
+        "fileName": "raw-2025-05.json",
+        "sha256": "1c5fc1298f75d13e0268f8b92300be3a3940c3b30dfe80c85f0a58eab06aa2ec",
+        "text": "[{\"_5_digit_ntd_id\":\"10003\",\"agency\":\"Massachusetts Bay Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"130138\",\"ridership\":\"8681151\"}\n,{\"_5_digit_ntd_id\":\"20008\",\"agency\":\"MTA New York City Transit\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"1891988\",\"ridership\":\"204151128\"}\n,{\"_5_digit_ntd_id\":\"30019\",\"agency\":\"Southeastern Pennsylvania Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"90970\",\"ridership\":\"5413893\"}\n,{\"_5_digit_ntd_id\":\"30030\",\"agency\":\"Washington Metropolitan Area Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"345292\",\"ridership\":\"17224940\"}\n,{\"_5_digit_ntd_id\":\"40034\",\"agency\":\"County of Miami-Dade\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"28654\",\"ridership\":\"1260681\"}\n,{\"_5_digit_ntd_id\":\"50066\",\"agency\":\"Chicago Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"406607\",\"ridership\":\"12064650\"}\n,{\"_5_digit_ntd_id\":\"90003\",\"agency\":\"San Francisco Bay Area Rapid Transit District\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"179279\",\"ridership\":\"5021713\"}\n,{\"_5_digit_ntd_id\":\"90154\",\"agency\":\"Los Angeles County Metropolitan Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"23088\",\"ridership\":\"1775449\"}]\n"
+      }
+    ]
+  },
+  "upstreamLineage": null,
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "claimtrace-json-c14n/1.0.0",
+    "payloadHash": "1eacdc3220a8394b9ec065cdc8b4144c865421b11d6233ad5d8332e689a14850",
+    "sectionHashes": {
+      "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
+      "snapshots": "f1e1929fea9adc155b63997f7efc9713f6d566aed9dff7b3101c6e8af85cbfe0",
+      "claims": "9b9a5d4e9ec266ed2b5af91dd43ee9c28152e656dc9f1c8aab6aca2ba9060899",
+      "decisions": "78be5543dc1e7c540901582c29432fa4694d01992aaf2cdc1a71cfc13fec0f46",
+      "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
+      "provenance": "d4a286cb041f23948ef55b2f432cada18fd1f65722148edc6d3530a244aa9162",
+      "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    }
+  }
+}

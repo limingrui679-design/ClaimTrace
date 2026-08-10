@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "synthetic": false,
+  "dataOrigin": "PUBLIC",
+  "sourceMetadataFile": "/cases/us-treasury-yield-curve/source-metadata.json",
+  "caseId": "us-treasury-yield-curve",
+  "primaryKey": "maturity_code",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
+      "bytes": 304
+    },
+    "current.csv": {
+      "sha256": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a",
+      "bytes": 304
+    },
+    "claims.json": {
+      "sha256": "82713b5be9c3b79dabe2f4e467ac8c0562adf0becbe4dd01e951057bef019299",
+      "bytes": 2760
+    },
+    "decisions.json": {
+      "sha256": "fcdcb25045175c0d837dc06fed6566529b2b3d3ba4cd65fc82b6eca7548882f0",
+      "bytes": 3133
+    },
+    "expected-audit.json": {
+      "sha256": "4d7fb77338657c6f055eb37357d049fd982e265c8aea1fc467336d3ec8497490",
+      "bytes": 1398
+    },
+    "evidence-package.json": {
+      "sha256": "f4d376777f38d49682cd7cd635737ad65c939142d929d15a8bddecfec6f7ec0e",
+      "bytes": 727502
+    },
+    "case.ts": {
+      "sha256": "4ad981ec49f6ad834d19908f0144c91a18bca8d5ebce4436045fff57d5cd0a04",
+      "bytes": 6573
+    },
+    "README.md": {
+      "sha256": "86cff9094130c914da166a26b29a910db5018327c16c14daf918f020046d28e9",
+      "bytes": 2121
+    },
+    "source-config.json": {
+      "sha256": "8c7c072bebd61c93006be245e8ade683a042c22f5032277f67f400401baf27d3",
+      "bytes": 2369
+    },
+    "source-metadata.json": {
+      "sha256": "3724cb4b616c70192f0c3675713c8640709feb07d2a52d01fac77b19ba794eb1",
+      "bytes": 666235
+    },
+    "cleaning-log.json": {
+      "sha256": "51d8c9f67a6b9e2e987c75006e3d3a5d69f0c6e49184ff3039a2f4f94bd7ee61",
+      "bytes": 1619
+    },
+    "raw-2024.xml": {
+      "sha256": "3d77ebdb32fba00bf4f2211af3ea8924f275518c00f2faa53698b9336d180c36",
+      "bytes": 284423
+    },
+    "raw-2025.xml": {
+      "sha256": "ac0a8ea1a70b6a22e05aa52513188076b2eddfde5e340bd17db71b48cb3df5a5",
+      "bytes": 345104
+    }
+  }
+}

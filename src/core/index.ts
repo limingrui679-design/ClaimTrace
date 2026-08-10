@@ -6,4 +6,5 @@ export * from "./claim-spec";
 export * from "./validation";
 export * from "./decision";
 export * from "./governance";
+export * from "./external-source";
 export * from "./evidence";

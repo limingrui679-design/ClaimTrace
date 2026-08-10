@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "claimtrace-cleaning-log/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "caseId": "usdot-transit-operations",
+  "sourceType": "USDOT_NTD_SOCRATA_V1",
+  "implementation": "usdot-ntd-monthly-v1",
+  "sourceConfigSha256": "26bcb00c883f8b4edd5aef5145523035166ce684eaf3af41f1fc79f3cb9af6e5",
+  "transformations": {
+    "baseline": [
+      "Parse pinned USDOT Socrata JSON",
+      "Require May 2024, Heavy Rail, and directly operated service",
+      "Keep 8 declared NTD agency identifiers",
+      "Derive riders per vehicle-revenue hour to 2 decimal places",
+      "Sort by NTD identifier and emit stable UTF-8 CSV"
+    ],
+    "current": [
+      "Parse pinned USDOT Socrata JSON",
+      "Require May 2025, Heavy Rail, and directly operated service",
+      "Keep 8 declared NTD agency identifiers",
+      "Derive riders per vehicle-revenue hour to 2 decimal places",
+      "Sort by NTD identifier and emit stable UTF-8 CSV"
+    ]
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2024-05.json",
+      "sha256": "31f3aad46f0a98f8465790a461cf1b7162e0477f7886fd91a3906378f4aff536",
+      "bytes": 2000
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2025-05.json",
+      "sha256": "1c5fc1298f75d13e0268f8b92300be3a3940c3b30dfe80c85f0a58eab06aa2ec",
+      "bytes": 2000
+    }
+  ],
+  "outputs": {
+    "baseline.csv": {
+      "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+      "bytes": 834,
+      "rows": 8
+    },
+    "current.csv": {
+      "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+      "bytes": 834,
+      "rows": 8
+    }
+  }
+}

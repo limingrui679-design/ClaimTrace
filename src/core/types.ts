@@ -86,25 +86,41 @@ export interface DatasetVersion {
   upstreamLineage?: UpstreamLineage;
 }
 
+export type ExternalSourceType =
+  | "WORLD_BANK_INDICATORS_API_V2"
+  | "USDOT_NTD_SOCRATA_V1"
+  | "US_TREASURY_YIELD_CURVE_XML_V1"
+  | "CFPB_COMPLAINT_TRENDS_V1"
+  | "CDC_PLACES_SOCRATA_V1"
+  | "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1";
+
+export type ExternalCleaningImplementation =
+  | "world-bank-indicator-v1"
+  | "usdot-ntd-monthly-v1"
+  | "treasury-yield-curve-v1"
+  | "cfpb-complaint-trends-v1"
+  | "cdc-places-county-v1"
+  | "ons-housing-affordability-v1";
+
+export type ExternalCleaningParameter = string | number | boolean | string[] | number[] | Array<Record<string, string | number>>;
+
 export interface ExternalSourceProvenance {
-  schemaVersion: "claimtrace-external-source/1.0.0";
-  sourceType: "WORLD_BANK_INDICATORS_API_V2";
+  schemaVersion: "claimtrace-external-source/2.0.0";
+  sourceType: ExternalSourceType;
   publisher: string;
   dataset: string;
-  indicator: { id: string; name: string };
+  measure: { id: string; name: string };
   retrievedAt: string;
-  sourceLastUpdated: string;
+  sourceLastUpdated?: string;
   sourceUrls: { baseline: string; current: string };
   license: string;
   licenseUrl: string;
   attribution: string;
+  limitations: string[];
   cleaning: {
-    implementation: "world-bank-indicator-v1";
+    implementation: ExternalCleaningImplementation;
     scriptPath: string;
-    baselineYear: string;
-    currentYear: string;
-    selectedCountryCodes: string[];
-    decimalPlaces: number;
+    parameters: Record<string, ExternalCleaningParameter>;
   };
   rawArtifacts: Array<{ side: SnapshotSide; fileName: string; sha256: string; text: string }>;
 }

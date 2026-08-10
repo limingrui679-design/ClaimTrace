@@ -1,0 +1,70 @@
+import type { ExecutableCaseDefinition } from "../types";
+import { controlledUncertainty, filter, publicConfirmedThreshold, publicManualDecisionInputs } from "../types";
+
+export const US_TREASURY_YIELD_CURVE_CASE: ExecutableCaseDefinition = {
+  id: "us-treasury-yield-curve",
+  title: "Public Data: U.S. Treasury Yield-Curve Period Audit",
+  projectName: "U.S. Treasury Year-End Par Yield Curve Audit",
+  primaryKey: "maturity_code",
+  baselineFile: "/cases/us-treasury-yield-curve/baseline.csv",
+  currentFile: "/cases/us-treasury-yield-curve/current.csv",
+  sourceMetadataFile: "/cases/us-treasury-yield-curve/source-metadata.json",
+  dataOrigin: "PUBLIC",
+  expectedGeneratedAt: "2026-08-10T00:00:00.000Z",
+  claims: [
+    {
+      id: "treasury-20y-highest",
+      code: "UST-001",
+      title: "The 20-year maturity remains the highest-yielding selected point on the year-end curve",
+      section: "Curve-shape ranking",
+      owner: "Public-data case reviewer",
+      category: "Maturity ranking",
+      formula: "argmax(maturity, yield_percent) = 20 years",
+      rule: { type: "rank", field: "yield_percent", aggregation: "average", groupField: "maturity", expectedGroup: "20 years", rank: "max", tiePolicy: "require_unique" },
+    },
+    {
+      id: "treasury-1m-four-percent",
+      code: "UST-002",
+      title: "The one-month year-end par yield remains at or above 4%",
+      section: "Short-end threshold",
+      owner: "Public-data case reviewer",
+      category: "Threshold gate",
+      formula: "1M yield_percent >= 4",
+      rule: { type: "threshold", field: "yield_percent", aggregation: "average", operator: ">=", threshold: 4, filters: [filter("maturity_code", "1M")], thresholdSpec: publicConfirmedThreshold(4, "percent", "Illustrative fixed-income review threshold v1", "An analyst-authored monitoring threshold, not Treasury guidance or an investment rule") },
+    },
+    {
+      id: "treasury-selected-mean-stability",
+      code: "UST-003",
+      title: "The mean yield across the nine selected maturities changes by no more than 10%",
+      section: "Curve-level descriptive comparison",
+      owner: "Public-data case reviewer",
+      category: "Period stability",
+      formula: "abs(mean(2025)-mean(2024))/mean(2024) <= 10%",
+      rule: { type: "stability", field: "yield_percent", aggregation: "average", supportTolerance: 10, reversalThreshold: 20, supportToleranceSpec: publicConfirmedThreshold(10, "percent", "Illustrative curve-monitoring rule v1", "Used only to audit whether a compact descriptive curve summary remains stable"), reversalThresholdSpec: publicConfirmedThreshold(20, "percent", "Illustrative curve-monitoring escalation v1", "At 20%, treat the compact curve summary as materially invalid") },
+    },
+  ],
+  decisions: [{
+    id: "treasury-fixed-income-brief",
+    title: "Can the 2024 year-end fixed-income brief be reused for the 2025 snapshot?",
+    owner: "Public-data case reviewer",
+    passActionId: "treasury:retain-brief-with-date",
+    holdActionId: "treasury:update-curve-brief",
+    actionIfPass: "Retain only supported descriptive statements and disclose observation dates, maturities, and source.",
+    actionIfFail: "Update the curve-shape and short-end statements; do not convert two snapshots into a return forecast or trading recommendation.",
+    conditions: [{ claimId: "treasury-20y-highest", allowedStatuses: ["SUPPORTED"] }, { claimId: "treasury-1m-four-percent", allowedStatuses: ["SUPPORTED"] }, { claimId: "treasury-selected-mean-stability", allowedStatuses: ["SUPPORTED", "WEAKENED"] }],
+    stakeholders: ["Fixed-income readers", "Risk reviewers", "Public-data provider"],
+    objective: { benefitWeight: 1, costWeight: 0.2, riskWeight: 1.2 },
+    riskTolerance: 18,
+    noActionLoss: 28,
+    inputProvenance: publicManualDecisionInputs("Illustrative fixed-income publication assumptions v1", "The option values are demonstration inputs, not portfolio returns, market risk estimates, transaction costs, or investment advice"),
+    uncertainty: controlledUncertainty("treasury-fixed-income-brief-v1"),
+    constraints: [{ id: "review-capacity", label: "Review capacity", metric: "capacity", operator: "<=", value: 45 }],
+    options: [
+      { id: "reuse", label: "Reuse unchanged", benefit: 34, cost: 6, risk: 31, capacity: 4 },
+      { id: "revise", label: "Revise curve statements", benefit: 84, cost: 26, risk: 7, capacity: 26 },
+      { id: "model", label: "Add a full term-structure model", benefit: 102, cost: 82, risk: 14, capacity: 76 },
+    ],
+  }],
+};
+
+export default US_TREASURY_YIELD_CURVE_CASE;

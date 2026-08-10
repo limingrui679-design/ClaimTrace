@@ -58,23 +58,6 @@ const cases = [
     ],
   },
   {
-    id: "public-policy",
-    primaryKey: "district_id",
-    columns: ["district_id", "district", "coverage_percent", "outcome_score", "eligible_population"],
-    baseline: [
-      { district_id: "D-01", district: "North", coverage_percent: 61, outcome_score: 72, eligible_population: 800 },
-      { district_id: "D-02", district: "East", coverage_percent: 64, outcome_score: 75, eligible_population: 720 },
-      { district_id: "D-03", district: "South", coverage_percent: 58, outcome_score: 70, eligible_population: 910 },
-      { district_id: "D-04", district: "West", coverage_percent: 60, outcome_score: 71, eligible_population: 650 },
-    ],
-    current: [
-      { district_id: "D-01", district: "North", coverage_percent: 62, outcome_score: 72, eligible_population: 1010 },
-      { district_id: "D-02", district: "East", coverage_percent: 63, outcome_score: 74, eligible_population: 590 },
-      { district_id: "D-03", district: "South", coverage_percent: 59, outcome_score: 71, eligible_population: 1050 },
-      { district_id: "D-04", district: "West", coverage_percent: 60, outcome_score: "", eligible_population: 430 },
-    ],
-  },
-  {
     id: "spatial-planning",
     primaryKey: "site_id",
     columns: ["site_id", "zone", "demand_index", "travel_minutes", "flood_risk"],

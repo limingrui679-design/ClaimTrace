@@ -50,23 +50,25 @@ for (const definition of EXECUTABLE_CASES) {
   });
 }
 
-test("world-bank public-data case rejects rehashed raw-source or cleaning tampering", async () => {
-  const bundle = JSON.parse(await readFile(path.join(CASES, "world-bank-life-expectancy", "evidence-package.json"), "utf8"));
-  assert.equal((await verifyEvidencePackage(bundle)).valid, true);
-  for (const mutate of [
-    (copy: typeof bundle) => { copy.externalSource.rawArtifacts[0].text = copy.externalSource.rawArtifacts[0].text.replace("75.809", "95.809"); },
-    (copy: typeof bundle) => { copy.externalSource.cleaning.decimalPlaces = 2; },
-  ]) {
-    const copy = structuredClone(bundle);
-    mutate(copy);
-    copy.integrity.sectionHashes.provenance = await sha256Canonical(copy.externalSource);
-    const payload = Object.fromEntries(Object.entries(copy).filter(([key]) => key !== "integrity"));
-    copy.integrity.payloadHash = await sha256Canonical(payload);
-    const verification = await verifyEvidencePackage(copy);
-    assert.equal(verification.valid, false);
-    assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
-  }
-});
+for (const definition of EXECUTABLE_CASES.filter((item) => item.dataOrigin === "PUBLIC")) {
+  test(`${definition.id} rejects rehashed raw-source or cleaning-parameter tampering`, async () => {
+    const bundle = JSON.parse(await readFile(path.join(CASES, definition.id, "evidence-package.json"), "utf8"));
+    assert.equal((await verifyEvidencePackage(bundle)).valid, true);
+    for (const mutate of [
+      (copy: typeof bundle) => { copy.externalSource.rawArtifacts[0].text += " "; },
+      (copy: typeof bundle) => { copy.externalSource.cleaning.parameters.decimalPlaces += 1; },
+    ]) {
+      const copy = structuredClone(bundle);
+      mutate(copy);
+      copy.integrity.sectionHashes.provenance = await sha256Canonical(copy.externalSource);
+      const payload = Object.fromEntries(Object.entries(copy).filter(([key]) => key !== "integrity"));
+      copy.integrity.payloadHash = await sha256Canonical(payload);
+      const verification = await verifyEvidencePackage(copy);
+      assert.equal(verification.valid, false);
+      assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
+    }
+  });
+}
 
 test("population-health upstream lineage rejects rehashed aggregation and raw-source tampering", async () => {
   const bundle = JSON.parse(await readFile(path.join(CASES, "population-health", "evidence-package.json"), "utf8"));

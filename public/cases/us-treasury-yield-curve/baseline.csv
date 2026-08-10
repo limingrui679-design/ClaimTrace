@@ -1,0 +1,10 @@
+maturity_code,maturity,observation_date,yield_percent
+1M,1 month,2024-12-31,4.40
+3M,3 months,2024-12-31,4.37
+6M,6 months,2024-12-31,4.24
+1Y,1 year,2024-12-31,4.16
+2Y,2 years,2024-12-31,4.25
+5Y,5 years,2024-12-31,4.38
+10Y,10 years,2024-12-31,4.58
+20Y,20 years,2024-12-31,4.86
+30Y,30 years,2024-12-31,4.78

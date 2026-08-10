@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "claimtrace-external-source-config/2.0.0",
+  "sourceType": "CFPB_COMPLAINT_TRENDS_V1",
+  "publisher": "U.S. Consumer Financial Protection Bureau",
+  "dataset": "Consumer Complaint Database trends API",
+  "measure": {
+    "id": "CREDIT-CARD-ISSUE-BUCKETS",
+    "name": "Structured credit-card complaint issue records"
+  },
+  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceUrls": {
+    "baseline": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2024-01-01&date_received_max=2024-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10",
+    "current": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2025-01-01&date_received_max=2025-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10"
+  },
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "attribution": "Consumer Financial Protection Bureau, Consumer Complaint Database structured trends, credit-card product, January through June 2024 and 2025, accessed 2026-08-10; transformed by ClaimTrace.",
+  "limitations": [
+    "Complaint records are not a statistical sample of consumer experience and cannot be interpreted as incidence or company performance rates without exposure denominators.",
+    "The Bureau does not verify all facts alleged in complaints, and issue counts are not adjudicated findings.",
+    "This case uses structured aggregates only and excludes consumer narrative text."
+  ],
+  "cleaning": {
+    "implementation": "cfpb-complaint-trends-v1",
+    "scriptPath": "tools/generate-public-data-cases.ts",
+    "parameters": {
+      "baselinePeriod": "2024-H1",
+      "currentPeriod": "2025-H1",
+      "topIssues": 10,
+      "decimalPlaces": 2
+    }
+  },
+  "rawFiles": {
+    "baseline": "raw-2024-h1.json",
+    "current": "raw-2025-h1.json"
+  }
+}

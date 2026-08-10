@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "claimtrace-case-audit/1.0.0",
+  "caseId": "cfpb-credit-card-complaints",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "claims": [
+    {
+      "id": "cfpb-purchase-issue-rank",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "Problem with a purchase shown on your statement 7,243",
+      "currentValue": "Problem with a purchase shown on your statement 8,649",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "cfpb-report-issue-share",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "REVERSED",
+      "status": "REVIEW_REQUIRED",
+      "baselineValue": "11.83",
+      "currentValue": "13.89",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "cfpb-volume-stability",
+      "kind": "VERSION_COMPARISON",
+      "baselineStatus": "UNTESTABLE",
+      "status": "WEAKENED",
+      "baselineValue": "35,289",
+      "currentValue": "43,317",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "cfpb-consumer-friction-brief",
+      "previousOutcome": null,
+      "currentOutcome": "HOLD",
+      "status": "SUPPORTED",
+      "recommendedOptionId": "revise"
+    }
+  ]
+}

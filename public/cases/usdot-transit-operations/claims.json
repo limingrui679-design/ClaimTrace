@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ntd-nyct-productivity-rank",
+    "code": "NTD-001",
+    "title": "MTA New York City Transit remains the highest in riders per vehicle-revenue hour among the eight selected services",
+    "section": "Descriptive operating intensity",
+    "owner": "Public-data case reviewer",
+    "category": "Group ranking",
+    "formula": "argmax(agency, riders_per_revenue_hour) = MTA New York City Transit",
+    "rule": {
+      "type": "rank",
+      "field": "riders_per_revenue_hour",
+      "aggregation": "average",
+      "groupField": "agency",
+      "expectedGroup": "MTA New York City Transit",
+      "rank": "max",
+      "tiePolicy": "require_unique"
+    }
+  },
+  {
+    "id": "ntd-wmata-productivity-gate",
+    "code": "NTD-002",
+    "title": "WMATA reaches at least 45 riders per vehicle-revenue hour in the selected month",
+    "section": "Illustrative operating threshold",
+    "owner": "Public-data case reviewer",
+    "category": "Threshold gate",
+    "formula": "WMATA riders_per_revenue_hour >= 45",
+    "rule": {
+      "type": "threshold",
+      "field": "riders_per_revenue_hour",
+      "aggregation": "average",
+      "operator": ">=",
+      "threshold": 45,
+      "filters": [
+        {
+          "field": "ntd_id",
+          "equals": "30030"
+        }
+      ],
+      "thresholdSpec": {
+        "value": 45,
+        "unit": "absolute",
+        "source": "Illustrative operations review threshold v1",
+        "rationale": "An analyst-authored demonstration threshold; it is not an FTA service standard or causal efficiency target",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "ntd-selected-ridership-stability",
+    "code": "NTD-003",
+    "title": "Total ridership across the eight selected services changes by no more than 5%",
+    "section": "Selected-system volume comparison",
+    "owner": "Public-data case reviewer",
+    "category": "Period stability",
+    "formula": "abs(sum(2025 May ridership)-sum(2024 May ridership))/sum(2024 May ridership) <= 5%",
+    "rule": {
+      "type": "stability",
+      "field": "ridership",
+      "aggregation": "sum",
+      "supportTolerance": 5,
+      "reversalThreshold": 15,
+      "supportToleranceSpec": {
+        "value": 5,
+        "unit": "percent",
+        "source": "Illustrative monthly-monitoring rule v1",
+        "rationale": "Used to test whether a selected-system volume statement remains descriptively stable",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      },
+      "reversalThresholdSpec": {
+        "value": 15,
+        "unit": "percent",
+        "source": "Illustrative monthly-monitoring escalation v1",
+        "rationale": "At 15%, treat the original selected-system volume statement as materially invalid",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "claimtrace-case-audit/1.0.0",
+  "caseId": "usdot-transit-operations",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "claims": [
+    {
+      "id": "ntd-nyct-productivity-rank",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "MTA New York City Transit 106.04",
+      "currentValue": "MTA New York City Transit 107.9",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ntd-wmata-productivity-gate",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "REVERSED",
+      "status": "REVIEW_REQUIRED",
+      "baselineValue": "38.7",
+      "currentValue": "49.89",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ntd-selected-ridership-stability",
+      "kind": "VERSION_COMPARISON",
+      "baselineStatus": "UNTESTABLE",
+      "status": "SUPPORTED",
+      "baselineValue": "243,868,249",
+      "currentValue": "255,593,605",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "ntd-operations-brief",
+      "previousOutcome": null,
+      "currentOutcome": "REVIEW",
+      "status": "REVIEW_REQUIRED",
+      "recommendedOptionId": "annotate"
+    }
+  ]
+}

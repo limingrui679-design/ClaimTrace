@@ -1,0 +1,82 @@
+[
+  {
+    "id": "cfpb-purchase-issue-rank",
+    "code": "CFPB-001",
+    "title": "Purchase-on-statement problems remain the most frequent structured issue among the ten displayed credit-card issue buckets",
+    "section": "Issue-pattern ranking",
+    "owner": "Public-data case reviewer",
+    "category": "Issue ranking",
+    "formula": "argmax(issue, complaint_records) = Problem with a purchase shown on your statement",
+    "rule": {
+      "type": "rank",
+      "field": "complaint_records",
+      "aggregation": "average",
+      "groupField": "issue",
+      "expectedGroup": "Problem with a purchase shown on your statement",
+      "rank": "max",
+      "tiePolicy": "require_unique"
+    }
+  },
+  {
+    "id": "cfpb-report-issue-share",
+    "code": "CFPB-002",
+    "title": "Incorrect-information-on-report records reach at least 13% of matched credit-card complaint records",
+    "section": "Issue-share threshold",
+    "owner": "Public-data case reviewer",
+    "category": "Threshold gate",
+    "formula": "incorrect-information-on-your-report share_percent >= 13",
+    "rule": {
+      "type": "threshold",
+      "field": "share_percent",
+      "aggregation": "average",
+      "operator": ">=",
+      "threshold": 13,
+      "filters": [
+        {
+          "field": "issue_id",
+          "equals": "incorrect-information-on-your-report"
+        }
+      ],
+      "thresholdSpec": {
+        "value": 13,
+        "unit": "percent",
+        "source": "Illustrative complaint-monitoring threshold v1",
+        "rationale": "An analyst-authored attention threshold, not a CFPB risk standard or finding",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "cfpb-volume-stability",
+    "code": "CFPB-003",
+    "title": "Matched credit-card complaint-record volume changes by no more than 10% between the two first-half periods",
+    "section": "Record-volume comparison",
+    "owner": "Public-data case reviewer",
+    "category": "Period stability",
+    "formula": "abs(total_records_2025H1-total_records_2024H1)/total_records_2024H1 <= 10%",
+    "rule": {
+      "type": "stability",
+      "field": "period_total_records",
+      "aggregation": "average",
+      "supportTolerance": 10,
+      "reversalThreshold": 30,
+      "supportToleranceSpec": {
+        "value": 10,
+        "unit": "percent",
+        "source": "Illustrative complaint-volume monitoring rule v1",
+        "rationale": "Used to determine whether a prior descriptive volume statement needs revision",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      },
+      "reversalThresholdSpec": {
+        "value": 30,
+        "unit": "percent",
+        "source": "Illustrative complaint-volume escalation v1",
+        "rationale": "At 30%, treat the prior record-volume statement as materially invalid",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  }
+]

@@ -2,7 +2,7 @@
 
 > Versioned evidence and decision auditing for analytical claims.
 
-[Case catalog](public/cases/catalog.json) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
+[Case catalog](public/cases/catalog.json) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
 
 ![ClaimTrace real browser walkthrough](docs/claimtrace-demo.gif)
 
@@ -60,22 +60,26 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 106 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 115 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
 
 ## Reproducible cases
 
-Five cases use deterministic synthetic data. The sixth uses pinned World Bank WDI API responses for life expectancy at birth (`SP.DYN.LE00.IN`), with access date, API URL, source update date, license, raw-response SHA-256, transformation configuration, and cleaning log retained in the case and AuditBundle.
+The repository presents six official public-data studies, supported by four deterministic synthetic stress fixtures. Every public case retains two pinned source responses, retrieval URLs and time, license and attribution, limitations, source-specific cleaning parameters, raw-response SHA-256 values, cleaned snapshots, and a verifier that rebuilds the snapshots from the embedded source responses.
 
 | Domain | Audit question | Data origin |
 |---|---|---|
 | [Business operations](public/cases/business-operations/) | Should channel and service resources be reallocated after ranking and SLA changes? | Synthetic |
 | [Financial risk](public/cases/financial-risk/) | Does a portfolio gate remain executable after probability, membership, and missingness changes? | Synthetic |
 | [Population health](public/cases/population-health/) | Do revised risk, recall, and follow-up rates change pilot and allocation decisions? | Synthetic with verifiable upstream lineage |
-| [Public policy](public/cases/public-policy/) | Is expansion still supported when coverage is stable but the eligible population changes? | Synthetic |
 | [Spatial planning](public/cases/spatial-planning/) | Should a candidate site change after demand, travel-time, and risk revisions? | Synthetic |
 | [World Bank life expectancy](public/cases/world-bank-life-expectancy/) | Which descriptive claims and publication actions change between 2019 and 2024 snapshots? | External public data, CC BY 4.0 |
+| [USDOT transit operations](public/cases/usdot-transit-operations/) | Can a selected heavy-rail operating brief be reused after ridership and service intensity change? | External public data, U.S. DOT/FTA |
+| [U.S. Treasury yield curve](public/cases/us-treasury-yield-curve/) | Which curve-shape and short-end claims change between the two year-end snapshots? | External public data, U.S. Treasury |
+| [CFPB credit-card complaints](public/cases/cfpb-credit-card-complaints/) | Do structured issue rankings, shares, or matched-record volume require a consumer-friction brief to change? | External public data, CC0 |
+| [CDC PLACES depression estimates](public/cases/cdc-places-depression/) | Which selected-county descriptive statements change between two model-based estimate releases? | External public data, CDC |
+| [ONS housing affordability](public/cases/ons-housing-affordability/) | Can a selected-authority planning context note be reused after affordability ratios change? | External public data, OGL v3.0 |
 
-The external case cites the [World Bank indicator page](https://data.worldbank.org/indicator/SP.DYN.LE00.IN), [API documentation](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392), and [World Bank public license terms](https://datacatalog.worldbank.org/public-licenses). Its policy thresholds and decision inputs remain explicitly illustrative; they are not World Bank recommendations.
+The external cases use the [World Bank Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392), [USDOT Monthly Modal Time Series](https://data.transportation.gov/Public-Transit/Monthly-Modal-Time-Series/5ti2-5uiv), [U.S. Treasury yield-curve feed](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView), [CFPB Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/), [CDC PLACES](https://www.cdc.gov/places/), and [ONS housing-affordability data and methodology](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/latest). The thresholds and numerical decision options are explicitly separated from observed source data and labeled as author-defined demonstration inputs unless the source is named in the rule provenance.
 
 Regenerate every case:
 
@@ -84,19 +88,27 @@ npm run demo:generate
 npm run cases:generate
 ```
 
-Every case includes executable specifications, two snapshots, expected results, a manifest, documentation, and a verified AuditBundle. The population-health case additionally connects 4,218 follow-up and 286 validation records per version through 20 reproducible aggregations to 11 audited summary rows.
+Normal case generation is offline: it consumes the committed raw responses. Refreshing sources is an explicit networked action and can change evidence:
+
+```bash
+npm run cases:refresh-sources -- usdot-transit-operations
+```
+
+Every case includes executable specifications, two snapshots, expected results, a manifest, documentation, and a verified AuditBundle. The population-health synthetic fixture additionally connects 4,218 follow-up and 286 validation records per version through 20 reproducible aggregations to 11 audited summary rows.
 
 ## Evaluation and verification status
 
-- **107 / 107 automated tests** — 106 unit/integration tests plus 1 real-Chromium read-only acceptance test
+- **116 / 116 automated tests** — 115 unit/integration tests plus 1 real-Chromium read-only acceptance test
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
-- **97.68% statement/line coverage, 79.19% branch coverage, 99.25% function coverage** for `src/core`
-- **6 / 6 case AuditBundles regenerated and independently verified**
+- **97.02% statement/line coverage, 77.50% branch coverage, 99.33% function coverage** for `src/core`
+- **10 / 10 case AuditBundles regenerated and independently verified**
 - **0 known production dependency vulnerabilities**
 - **0 known full development-toolchain vulnerabilities**
 
 The benchmark labels are stored separately from the execution logic in [`benchmarks/labels.json`](benchmarks/labels.json). The deliberately weak line/scalar, metric-only, and keyed-diff baselines score 27/64, 35/64, and 24/64 respectively. These results establish regression behavior on committed boundaries only—not production accuracy, external validity, user impact, or superiority to mature audit platforms. See [`docs/EVALUATION.md`](docs/EVALUATION.md).
+
+The exact 0.8.0 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
 
 ## Architecture
 
@@ -109,7 +121,7 @@ src/core/decision/      action identity and option analysis
 src/core/governance/    review records and release propagation
 src/core/integrity/     canonical JSON and stable identities
 src/core/evidence/      AuditBundle, chain verification, HTML reports
-src/cases/              six executable case specifications
+src/cases/              ten executable case specifications
 ```
 
 The browser is built as a stable Vite + React SPA and can produce static Cloudflare-compatible assets. The audit core is deterministic and independent of the UI, and the repository runs locally without a hosted service. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and [`docs/EVIDENCE_MODEL.md`](docs/EVIDENCE_MODEL.md).
@@ -133,10 +145,9 @@ UUIDs, SHA-256 record chaining, and AuditBundle roots provide tamper-evident int
 
 Supported by committed artifacts:
 
-> Independently designed and implemented a local-first prototype for versioned analytical-claim auditing, connecting primary-key data changes, governed thresholds, sample denominators, SHA-256 snapshots, executable rules, decision identity, and local review records; validated it with 64 controlled scenarios, 512 deterministic property trials, five reproducible synthetic cases, and one provenance-bound public-data case.
+> Independently designed and implemented a local-first prototype for versioned analytical-claim auditing, connecting primary-key data changes, governed thresholds, sample denominators, SHA-256 snapshots, executable rules, decision identity, and local review records; validated it with 64 controlled scenarios, 512 deterministic property trials, four reproducible synthetic stress fixtures, and six provenance-bound public-data cases spanning operations, fixed income, consumer finance, population health, planning, and international indicators.
 
-Not supported: production deployment, real institutional governance, authenticated sign-off, real-user outcomes, five empirical domain studies, causal policy evaluation, portfolio backtesting, epidemiologic inference, or GIS analysis.
-
+Not supported: production deployment, real institutional governance, authenticated sign-off, real-user outcomes, causal policy or program evaluation, portfolio backtesting, investment performance, epidemiologic inference, representative consumer research, or GIS analysis.
 
 ## Implementation status
 
@@ -146,7 +157,7 @@ The current release closes four core loops:
 
 - HTML and JSON are generated from the same independently verified AuditBundle, including claims, decisions, numerical-input provenance, the review chain, completeness checks, and the canonical root hash.
 - Action change is separated from evidence refresh: an active action, recommendation, or feasible-set change produces `DECISION_CHANGED`, while unchanged action with new rule or evidence identity produces `RESIGN_REQUIRED`.
-- All six cases execute from committed specifications: five use synthetic data, and one retains World Bank source, license, access date, raw-response hashes, and cleaning lineage.
+- All ten cases execute from committed specifications: six retain official source responses, license and access metadata, declared limitations, raw-response hashes, and independently executable cleaning lineage; four remain synthetic stress fixtures for controlled failure modes.
 - Human review is always described as local and unauthenticated; a user-entered display name is never presented as a login identity, authorized role, trusted timestamp, or digital signature.
 
 The interface reports completeness as passed checks, such as `48/48`. This is not model accuracy, research effect, or business impact. The read-only portfolio build removes import and sign-off controls; those workflows remain available in the standard local repository build.

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "claimtrace-case-audit/1.0.0",
+  "caseId": "us-treasury-yield-curve",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "claims": [
+    {
+      "id": "treasury-20y-highest",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "20 years 4.86",
+      "currentValue": "30 years 4.84",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "treasury-1m-four-percent",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "4.4",
+      "currentValue": "3.74",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "treasury-selected-mean-stability",
+      "kind": "VERSION_COMPARISON",
+      "baselineStatus": "UNTESTABLE",
+      "status": "WEAKENED",
+      "baselineValue": "4.45",
+      "currentValue": "3.94",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "treasury-fixed-income-brief",
+      "previousOutcome": null,
+      "currentOutcome": "HOLD",
+      "status": "SUPPORTED",
+      "recommendedOptionId": "revise"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "claimtrace-external-source-config/2.0.0",
+  "sourceType": "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1",
+  "publisher": "Office for National Statistics",
+  "dataset": "Explore Local Statistics: housing affordability ratio",
+  "measure": {
+    "id": "HOUSING-AFFORDABILITY-RATIO",
+    "name": "Median house price to median workplace-based earnings ratio"
+  },
+  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceUrls": {
+    "baseline": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2024-04-01",
+    "current": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2025-04-01"
+  },
+  "license": "Open Government Licence v3.0",
+  "licenseUrl": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+  "attribution": "Office for National Statistics, housing affordability in England and Wales, local-authority ratio data for 2024 and 2025, accessed 2026-08-10; transformed by ClaimTrace.",
+  "limitations": [
+    "The ratio combines median transacted-property prices with median workplace-based earnings and does not measure affordability for every household or tenure.",
+    "Latest earnings inputs are provisional and the historical series can be revised annually.",
+    "The selected local authorities illustrate audit mechanics and are not a representative spatial sample or a causal planning evaluation."
+  ],
+  "cleaning": {
+    "implementation": "ons-housing-affordability-v1",
+    "scriptPath": "tools/generate-public-data-cases.ts",
+    "parameters": {
+      "baselinePeriod": "2024-04-01",
+      "currentPeriod": "2025-04-01",
+      "selectedAuthorityCodes": ["E06000002", "E06000003", "E06000004", "E06000006", "E06000023", "E07000008", "E07000178", "E08000003", "E08000025", "E08000035", "E09000007", "E09000020"],
+      "decimalPlaces": 2
+    }
+  },
+  "rawFiles": {
+    "baseline": "raw-2024.csv",
+    "current": "raw-2025.csv"
+  }
+}

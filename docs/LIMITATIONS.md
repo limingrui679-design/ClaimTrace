@@ -2,11 +2,11 @@
 
 ## Implemented boundaries
 
-- CSV only. Excel, Parquet, SQL, APIs, OpenLineage, and warehouse adapters are not implemented.
+- User project import is CSV only. Excel, Parquet, SQL, OpenLineage, and warehouse adapters are not implemented. The bundled public cases have six narrow, source-specific acquisition/cleaning adapters; these are not a general API connector framework.
 - Browser-local processing is suitable for reviewable files, not warehouse-scale lineage.
 - Raw snapshots larger than 500 KB are not embedded in the AuditBundle; external files are then required for independent hash re-verification and the self-contained verifier reports that boundary.
 - Source references are bounded at 200 per claim and changed-record exports at 500.
-- Five case packs are deterministic synthetic examples with executable claims, decisions, expected audits, evidence packages, and one-click UI loading. Four remain intentionally small fixtures rather than representative domain datasets. The sixth case uses pinned World Bank public API responses but remains a descriptive audit example, not an external effectiveness study.
+- Five case packs remain deterministic synthetic stress fixtures with executable claims, decisions, expected audits, evidence packages, and one-click UI loading. Six additional packs use pinned official public data, but each remains a bounded descriptive audit example rather than an external effectiveness study or representative domain benchmark.
 - Review records are append-only in the current browser session and export, not a durable multi-user ledger.
 - A case's `RECORDED_IDENTITY` prior decision can be compared deterministically, but that identity alone does not prove that a prior AuditBundle existed. New exports can carry `previousBundleHash`, and `verifyAuditBundleChain()` verifies exact predecessor roots only when every linked bundle is independently retained and supplied. This is still not an external transparency record.
 - The canonical AuditBundle is tamper-evident, not signed. SHA-256 proves byte identity and internal consistency, not origin authenticity, truthfulness, collection quality, lawful use, or semantic validity.
@@ -23,8 +23,9 @@
 - The controlled benchmark is synthetic and cannot establish external validity.
 - The 64 scenarios are distinct synthetic edge cases with independently stored labels, not independently collected real-world cases. The 512 property-test trials are deterministic generated checks, not an external benchmark.
 - Option scores use user-specified deterministic weights and constraints; they are not a calibrated utility model or a general mathematical-programming solver. Break-even values, score intervals, Pareto frontiers, recommendation-stability sweeps, and fixed-seed bounded Monte Carlo are sensitivity diagnostics driven by declared ranges—not confidence intervals, forecast probabilities, or uncertainty learned from data. Numerical options cannot be signed without source, version, rationale, and benefit/cost/risk/capacity units, but that provenance gate does not prove the inputs are true or well calibrated. The bundled cases label these inputs as versioned manual assumptions; they are not observed outcomes or externally validated estimates.
-- The financial case is not a portfolio backtest or calibrated risk model; the policy case is not causal inference or cost-benefit evaluation; the health case is not an epidemiologic study; and the spatial case does not model GIS geometry, network accessibility, boundary changes, or MAUP.
-- The World Bank case verifies acquisition metadata, pinned-response hashes, deterministic cleaning, and descriptive claim propagation. Its illustrative thresholds and action scores are not World Bank policy recommendations and do not establish external validity.
+- The synthetic financial fixture is not a portfolio backtest or calibrated risk model; the synthetic policy fixture is not causal inference or cost-benefit evaluation; the synthetic health fixture is not an epidemiologic study; and the synthetic spatial fixture does not model GIS geometry, network accessibility, boundary changes, or MAUP.
+- The six public cases verify acquisition metadata, pinned-response hashes, deterministic cleaning, and descriptive claim propagation. The Treasury case is not a trading strategy or return study; CFPB complaint records are not representative incidence rates or adjudicated findings; CDC PLACES values are model-based estimates rather than intervention effects or individual diagnoses; USDOT ridership per revenue hour is not causal efficiency or service quality; ONS selected-authority ratios are not a causal planning evaluation; and the World Bank comparison is cross-year, not a same-observation release-revision study.
+- Public-case thresholds and numerical decision-option scores remain rule provenance or manually declared demonstration assumptions. They are not recommendations or impact estimates supplied by the source publishers and do not establish external validity.
 
 ## Product non-claims
 

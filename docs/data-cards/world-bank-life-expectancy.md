@@ -1,4 +1,4 @@
-# Data card: World Bank life-expectancy revision case
+# Data card: World Bank life-expectancy cross-year case
 
 - **Purpose:** demonstrate how pinned public API revisions propagate through descriptive claims, publication actions, evidence references, and a verified AuditBundle.
 - **Publisher:** World Bank.
@@ -18,4 +18,4 @@ The generator parses the pinned JSON, requires the declared indicator and eight 
 
 ## Non-claims
 
-This case is a descriptive data-version audit. It is not a causal analysis, epidemiological study, country performance ranking, policy recommendation, or external validation of ClaimTrace. The threshold and decision-option values are versioned manual demonstration assumptions and are not supplied or endorsed by the World Bank.
+This case is a descriptive cross-year audit, not a same-observation release-revision audit. It is not a causal analysis, epidemiological study, country performance ranking, policy recommendation, or external validation of ClaimTrace. The threshold and decision-option values are versioned manual demonstration assumptions and are not supplied or endorsed by the World Bank.

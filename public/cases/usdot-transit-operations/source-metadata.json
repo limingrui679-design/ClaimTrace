@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "claimtrace-external-source/2.0.0",
+  "sourceType": "USDOT_NTD_SOCRATA_V1",
+  "publisher": "U.S. Department of Transportation, Federal Transit Administration",
+  "dataset": "Monthly Modal Time Series",
+  "measure": {
+    "id": "NTD-MONTHLY-HR-RIDERS-PER-REVENUE-HOUR",
+    "name": "Heavy-rail ridership and vehicle-revenue hours"
+  },
+  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceLastUpdated": "2026-07-07",
+  "sourceUrls": {
+    "baseline": "https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272024%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100",
+    "current": "https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272025%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100"
+  },
+  "license": "U.S. Government work / public data",
+  "licenseUrl": "https://www.usa.gov/government-copyright",
+  "attribution": "U.S. Department of Transportation, Federal Transit Administration, National Transit Database Monthly Modal Time Series, accessed 2026-08-10; transformed by ClaimTrace.",
+  "limitations": [
+    "The case compares one calendar month for eight selected directly operated heavy-rail services and is not a national performance ranking.",
+    "Ridership per vehicle-revenue hour is a descriptive service-intensity ratio, not a measure of causal efficiency, quality, crowding, or profitability.",
+    "National Transit Database monthly values can be revised after publication."
+  ],
+  "cleaning": {
+    "implementation": "usdot-ntd-monthly-v1",
+    "scriptPath": "tools/generate-public-data-cases.ts",
+    "parameters": {
+      "baselineYear": "2024",
+      "currentYear": "2025",
+      "month": "May",
+      "selectedNtdIds": [
+        "10003",
+        "20008",
+        "30019",
+        "30030",
+        "40034",
+        "50066",
+        "90003",
+        "90154"
+      ],
+      "decimalPlaces": 2
+    }
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2024-05.json",
+      "sha256": "31f3aad46f0a98f8465790a461cf1b7162e0477f7886fd91a3906378f4aff536",
+      "text": "[{\"_5_digit_ntd_id\":\"10003\",\"agency\":\"Massachusetts Bay Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"122070\",\"ridership\":\"7191380\"}\n,{\"_5_digit_ntd_id\":\"20008\",\"agency\":\"MTA New York City Transit\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"1871553\",\"ridership\":\"198452660\"}\n,{\"_5_digit_ntd_id\":\"30019\",\"agency\":\"Southeastern Pennsylvania Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"94901\",\"ridership\":\"5154063\"}\n,{\"_5_digit_ntd_id\":\"30030\",\"agency\":\"Washington Metropolitan Area Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"356294\",\"ridership\":\"13789248\"}\n,{\"_5_digit_ntd_id\":\"40034\",\"agency\":\"County of Miami-Dade\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"29441\",\"ridership\":\"1314112\"}\n,{\"_5_digit_ntd_id\":\"50066\",\"agency\":\"Chicago Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"340364\",\"ridership\":\"11330441\"}\n,{\"_5_digit_ntd_id\":\"90003\",\"agency\":\"San Francisco Bay Area Rapid Transit District\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"183635\",\"ridership\":\"4767259\"}\n,{\"_5_digit_ntd_id\":\"90154\",\"agency\":\"Los Angeles County Metropolitan Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2024\",\"month\":\"May\",\"month_year\":\"2024-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"23903\",\"ridership\":\"1869086\"}]\n"
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2025-05.json",
+      "sha256": "1c5fc1298f75d13e0268f8b92300be3a3940c3b30dfe80c85f0a58eab06aa2ec",
+      "text": "[{\"_5_digit_ntd_id\":\"10003\",\"agency\":\"Massachusetts Bay Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"130138\",\"ridership\":\"8681151\"}\n,{\"_5_digit_ntd_id\":\"20008\",\"agency\":\"MTA New York City Transit\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"1891988\",\"ridership\":\"204151128\"}\n,{\"_5_digit_ntd_id\":\"30019\",\"agency\":\"Southeastern Pennsylvania Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"90970\",\"ridership\":\"5413893\"}\n,{\"_5_digit_ntd_id\":\"30030\",\"agency\":\"Washington Metropolitan Area Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"345292\",\"ridership\":\"17224940\"}\n,{\"_5_digit_ntd_id\":\"40034\",\"agency\":\"County of Miami-Dade\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"28654\",\"ridership\":\"1260681\"}\n,{\"_5_digit_ntd_id\":\"50066\",\"agency\":\"Chicago Transit Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"406607\",\"ridership\":\"12064650\"}\n,{\"_5_digit_ntd_id\":\"90003\",\"agency\":\"San Francisco Bay Area Rapid Transit District\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"179279\",\"ridership\":\"5021713\"}\n,{\"_5_digit_ntd_id\":\"90154\",\"agency\":\"Los Angeles County Metropolitan Transportation Authority\",\"mode_name\":\"Heavy Rail\",\"type_of_service\":\"DO\",\"year\":\"2025\",\"month\":\"May\",\"month_year\":\"2025-05-01T00:00:00.000\",\"vehicle_revenue_hours\":\"23088\",\"ridership\":\"1775449\"}]\n"
+    }
+  ]
+}

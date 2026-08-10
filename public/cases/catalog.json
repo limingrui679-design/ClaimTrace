@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-08-10T00:00:00.000Z",
-  "description": "Six executable audit cases: five deterministic synthetic cases and one pinned public-data case with source and cleaning lineage.",
+  "description": "10 executable audit cases: 4 deterministic synthetic stress fixtures and 6 pinned public-data cases with source and cleaning lineage.",
   "cases": [
     {
       "schemaVersion": "claimtrace-case/2.0.0",
@@ -150,52 +150,6 @@
       "synthetic": true,
       "dataOrigin": "SYNTHETIC",
       "sourceMetadataFile": null,
-      "caseId": "public-policy",
-      "primaryKey": "district_id",
-      "claimCount": 3,
-      "decisionCount": 1,
-      "evidencePackageVerified": true,
-      "files": {
-        "baseline.csv": {
-          "sha256": "ad4ad8bc22316d608966f14e7df00bd6e39283e71bb41aa2c511e7174330bc03",
-          "bytes": 154
-        },
-        "current.csv": {
-          "sha256": "23bc780214141b6a86e8c4e4c89faddd3a825dfcd4db4b7d6c954621890a0d75",
-          "bytes": 154
-        },
-        "claims.json": {
-          "sha256": "77d1b6bf99dbcda09f5fc95e3ee2793f47dd20b1b87de976e0c0cc813fbc9ea6",
-          "bytes": 3004
-        },
-        "decisions.json": {
-          "sha256": "6008b23e7075dc883fb3550bc371053a25d65764a5df8c0e6902bc33dc58033a",
-          "bytes": 4141
-        },
-        "expected-audit.json": {
-          "sha256": "ba249549c282092eefa7261d3253918705abe71466e426f1cf7b7977f0b98ee5",
-          "bytes": 1377
-        },
-        "evidence-package.json": {
-          "sha256": "e9c885db1818227b0ea99395df6bfbb5378a08ba4236f0b2dc5c67cad61d0b25",
-          "bytes": 51891
-        },
-        "case.ts": {
-          "sha256": "6340669c198f75cb1a7d927cececa91042988fbc85f36f90e317d06b92b6bcc3",
-          "bytes": 7874
-        },
-        "README.md": {
-          "sha256": "abdf3777961161454c68c54b939f2b79eda1377762f347d125127227a09c6e66",
-          "bytes": 427
-        }
-      }
-    },
-    {
-      "schemaVersion": "claimtrace-case/2.0.0",
-      "generatedAt": "2026-08-08T00:00:00.000Z",
-      "synthetic": true,
-      "dataOrigin": "SYNTHETIC",
-      "sourceMetadataFile": null,
       "caseId": "spatial-planning",
       "primaryKey": "site_id",
       "claimCount": 3,
@@ -257,40 +211,40 @@
           "bytes": 392
         },
         "claims.json": {
-          "sha256": "9583bf46a25de609647fe06c38c42e810fd8fb55a45e5e05ecfae146f314b952",
-          "bytes": 2886
+          "sha256": "7adabd00bf3627eb28769c0cb51c4cba13ff191ffdb0348d93dd98ffedd3ee4f",
+          "bytes": 2927
         },
         "decisions.json": {
-          "sha256": "39c4ef81723bb99f739b1a1a600efbc025d8477ab2b507f9e497c42855d11c35",
-          "bytes": 3162
+          "sha256": "522d92572f838ee1aafdff5556bf4ad96ddb52f7f903b692818030aa852b7d3f",
+          "bytes": 3188
         },
         "expected-audit.json": {
           "sha256": "f49190afc0451ce646f87d7c28e81f29e7582405516e7ef765f081c06a6622a8",
           "bytes": 1384
         },
         "evidence-package.json": {
-          "sha256": "45a46b4d0d7533212363db17ffd7141325ece8bee47869c5bcd3fa0480a2e8bd",
-          "bytes": 67691
+          "sha256": "e18334b1b8be4fcfd972093e6a03d708add947448bee38b529c3661f3b9ab5f3",
+          "bytes": 68181
         },
         "case.ts": {
-          "sha256": "41be984647487b6ba7eec6926e5caa7298e0f65098d9c988489e03f38adb1354",
-          "bytes": 6735
+          "sha256": "ca990efc2ac7f00e019bc3bbae01f2d5987ae31a325c4ad0464c97f0c8293a44",
+          "bytes": 6805
         },
         "README.md": {
-          "sha256": "348fac1db118264b6d4f58a07bf6c18c338b565f33899024ecf53b3ab6316c03",
-          "bytes": 855
+          "sha256": "45eea5ad0559808ca088aac08b238f44c9f0c68d9d1854a89e6eb8894465f369",
+          "bytes": 1998
         },
         "source-config.json": {
-          "sha256": "11c82bb3e9b22ae52aed71ca975829bca488a2262487f3cddb4a383674b3415a",
-          "bytes": 1197
+          "sha256": "70f447adb416e85257fec5cb4d060fcea4a7ac0644b6a1537edd5c28e4e2797e",
+          "bytes": 1680
         },
         "source-metadata.json": {
-          "sha256": "31fa610e61c4166319aae1c0a3ddf4b11edf34d95ba7fecf7ba158d74686dc3c",
-          "bytes": 6353
+          "sha256": "a9a94398a6ece212327be1636d8715cd2d0b94cb1bb907be2ec4bbeb07b5ab7a",
+          "bytes": 6721
         },
         "cleaning-log.json": {
-          "sha256": "f89516f8bd9ad969f5d9498f848575f3f2394e2690e336cec78a33f9937956d4",
-          "bytes": 1362
+          "sha256": "ed8ee2cc7aab600c2ce6167ec58eda1dbe5ff436231e668f0532706fa6a36f56",
+          "bytes": 1536
         },
         "raw-2019.json": {
           "sha256": "1d3099e857c9c9458f7b7d65d760a19c9949ef9e076483d70b55aac54b3dce7f",
@@ -299,6 +253,336 @@
         "raw-2024.json": {
           "sha256": "c0bfd3f786d2ed938f0d44ab2b324e03217575f4f056b447efaf059ca6d2867d",
           "bytes": 1988
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "synthetic": false,
+      "dataOrigin": "PUBLIC",
+      "sourceMetadataFile": "/cases/usdot-transit-operations/source-metadata.json",
+      "caseId": "usdot-transit-operations",
+      "primaryKey": "ntd_id",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+          "bytes": 834
+        },
+        "current.csv": {
+          "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+          "bytes": 834
+        },
+        "claims.json": {
+          "sha256": "aaf60f3686dc8c11e3b76c23b5873496d81cfafe92e6e13d12ed519a261ab1d7",
+          "bytes": 2992
+        },
+        "decisions.json": {
+          "sha256": "d0de6803dad029a8fbd2ec90c5324a73d0bf4394a61d7abef053bba7e7c325ca",
+          "bytes": 3162
+        },
+        "expected-audit.json": {
+          "sha256": "96a21adc7610400c4d2b7a941d08a887989d1e24e61e9c0bd2baff2957cfd602",
+          "bytes": 1472
+        },
+        "evidence-package.json": {
+          "sha256": "a06a38a8109d3a36679b95f6fd06944aab1a178adafc046e8649a34c39f86cb4",
+          "bytes": 76019
+        },
+        "case.ts": {
+          "sha256": "b50a56a4e059c86acfd522c3c57c4f13dea02dfaa47b4912f921358e65082c11",
+          "bytes": 6828
+        },
+        "README.md": {
+          "sha256": "82e858af932cf43582a0ce9ad0a25f2de8b91e39234fdb44f4c899db33ef7dfa",
+          "bytes": 2942
+        },
+        "source-config.json": {
+          "sha256": "26bcb00c883f8b4edd5aef5145523035166ce684eaf3af41f1fc79f3cb9af6e5",
+          "bytes": 2627
+        },
+        "source-metadata.json": {
+          "sha256": "213d3ce53e534b2cd11b1a5997d7004edf72520013898414e95abe1c5117e3fc",
+          "bytes": 7572
+        },
+        "cleaning-log.json": {
+          "sha256": "7530afa92aa54fa2f8dd9ea24c0572067d52bccd271b39b602575f3c6b093b0c",
+          "bytes": 1659
+        },
+        "raw-2024-05.json": {
+          "sha256": "31f3aad46f0a98f8465790a461cf1b7162e0477f7886fd91a3906378f4aff536",
+          "bytes": 2000
+        },
+        "raw-2025-05.json": {
+          "sha256": "1c5fc1298f75d13e0268f8b92300be3a3940c3b30dfe80c85f0a58eab06aa2ec",
+          "bytes": 2000
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "synthetic": false,
+      "dataOrigin": "PUBLIC",
+      "sourceMetadataFile": "/cases/us-treasury-yield-curve/source-metadata.json",
+      "caseId": "us-treasury-yield-curve",
+      "primaryKey": "maturity_code",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
+          "bytes": 304
+        },
+        "current.csv": {
+          "sha256": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a",
+          "bytes": 304
+        },
+        "claims.json": {
+          "sha256": "82713b5be9c3b79dabe2f4e467ac8c0562adf0becbe4dd01e951057bef019299",
+          "bytes": 2760
+        },
+        "decisions.json": {
+          "sha256": "fcdcb25045175c0d837dc06fed6566529b2b3d3ba4cd65fc82b6eca7548882f0",
+          "bytes": 3133
+        },
+        "expected-audit.json": {
+          "sha256": "4d7fb77338657c6f055eb37357d049fd982e265c8aea1fc467336d3ec8497490",
+          "bytes": 1398
+        },
+        "evidence-package.json": {
+          "sha256": "f4d376777f38d49682cd7cd635737ad65c939142d929d15a8bddecfec6f7ec0e",
+          "bytes": 727502
+        },
+        "case.ts": {
+          "sha256": "4ad981ec49f6ad834d19908f0144c91a18bca8d5ebce4436045fff57d5cd0a04",
+          "bytes": 6573
+        },
+        "README.md": {
+          "sha256": "86cff9094130c914da166a26b29a910db5018327c16c14daf918f020046d28e9",
+          "bytes": 2121
+        },
+        "source-config.json": {
+          "sha256": "8c7c072bebd61c93006be245e8ade683a042c22f5032277f67f400401baf27d3",
+          "bytes": 2369
+        },
+        "source-metadata.json": {
+          "sha256": "3724cb4b616c70192f0c3675713c8640709feb07d2a52d01fac77b19ba794eb1",
+          "bytes": 666235
+        },
+        "cleaning-log.json": {
+          "sha256": "51d8c9f67a6b9e2e987c75006e3d3a5d69f0c6e49184ff3039a2f4f94bd7ee61",
+          "bytes": 1619
+        },
+        "raw-2024.xml": {
+          "sha256": "3d77ebdb32fba00bf4f2211af3ea8924f275518c00f2faa53698b9336d180c36",
+          "bytes": 284423
+        },
+        "raw-2025.xml": {
+          "sha256": "ac0a8ea1a70b6a22e05aa52513188076b2eddfde5e340bd17db71b48cb3df5a5",
+          "bytes": 345104
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "synthetic": false,
+      "dataOrigin": "PUBLIC",
+      "sourceMetadataFile": "/cases/cfpb-credit-card-complaints/source-metadata.json",
+      "caseId": "cfpb-credit-card-complaints",
+      "primaryKey": "issue_id",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "53d148d224d2e9c1131a5e38202ff07c5306939f9e8294d910222efcbb7bc9cc",
+          "bytes": 1026
+        },
+        "current.csv": {
+          "sha256": "8f06c5b6fcb4a6b60eda1c4b9e7a99c66765e60862e2956bf9ca016c25250b28",
+          "bytes": 1026
+        },
+        "claims.json": {
+          "sha256": "e9ec1d857180a724a73476cb0f8fcbaf8a6f45ea16bf70b729a4e3cf2ce009eb",
+          "bytes": 3048
+        },
+        "decisions.json": {
+          "sha256": "66e5fa0807aae653eab5135669948ed202e4b29e581a6d3938a90496774e1e46",
+          "bytes": 3161
+        },
+        "expected-audit.json": {
+          "sha256": "da4a8097e38ba0846d91bb4434e1f858c2f49bc5784c9b39853fd44bb4fabb92",
+          "bytes": 1489
+        },
+        "evidence-package.json": {
+          "sha256": "fe915de0305368182b3394c1c1b8bcb618c4ef4a154ea336e7f5d430435f7fe8",
+          "bytes": 157724
+        },
+        "case.ts": {
+          "sha256": "5e1b2d943bf7021459b27bbcf077923161543e1a3136f150408e884200f21d1e",
+          "bytes": 6892
+        },
+        "README.md": {
+          "sha256": "77141edb0b5ed463acbb242c280839d0d61ac8e8d39fdf89e0a2f627bf77a0e0",
+          "bytes": 2412
+        },
+        "source-config.json": {
+          "sha256": "cfdfcaaaaa0420d73a2d8a3a39d06773a2d82018f81420247140616698ef0fe1",
+          "bytes": 2008
+        },
+        "source-metadata.json": {
+          "sha256": "612c3d0e16c42bc533e87d843c228eef3587fb8f8ccace270fb736b2e2f9650e",
+          "bytes": 81897
+        },
+        "cleaning-log.json": {
+          "sha256": "76639eb78f53bd90c799fc165adbf248a4c4996921cc1377a5def06b8bee3a84",
+          "bytes": 1770
+        },
+        "raw-2024-h1.json": {
+          "sha256": "55ebe9ef006351b7f4818afd6357fec6fdc6b08223c1ae3b8a04b1e8f7eb7ed0",
+          "bytes": 36032
+        },
+        "raw-2025-h1.json": {
+          "sha256": "61a5b9a0806253916a552ba00c1f94757b08b05a4eeb654b38f87344e66b881c",
+          "bytes": 36048
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "synthetic": false,
+      "dataOrigin": "PUBLIC",
+      "sourceMetadataFile": "/cases/cdc-places-depression/source-metadata.json",
+      "caseId": "cdc-places-depression",
+      "primaryKey": "county_fips",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "bytes": 580
+        },
+        "current.csv": {
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "bytes": 580
+        },
+        "claims.json": {
+          "sha256": "a8814c229db7ba7de27ee22f24c0b735eb0e89ecb2fa7ea94124d3e1bb33376c",
+          "bytes": 3041
+        },
+        "decisions.json": {
+          "sha256": "593e0fd6aed2b4911e40c00030544389f07d313a476da476e5d1cea080a9856d",
+          "bytes": 3210
+        },
+        "expected-audit.json": {
+          "sha256": "4622e8d5ac118a591bfa67adcad2160b6fb2211e7bdabdf756c187a69f1f9b7b",
+          "bytes": 1399
+        },
+        "evidence-package.json": {
+          "sha256": "b06b085421221dc71ca7b44929d21a65bb57d8d781cabd100aec20548ff9db67",
+          "bytes": 75596
+        },
+        "case.ts": {
+          "sha256": "8f0305c834ee886f3e33608d5604f542a867efa1a3a3b0764c661cc5d3c627e3",
+          "bytes": 6924
+        },
+        "README.md": {
+          "sha256": "162e50a9fd42f8e2e247b4004b15c51e08a2280b3bbecb2bdec54ff4bc5c352f",
+          "bytes": 2880
+        },
+        "source-config.json": {
+          "sha256": "62528fc0aeb6a2fa1bfd60986305bed9945b2683a6423ee341bcdbb02b2326cc",
+          "bytes": 2557
+        },
+        "source-metadata.json": {
+          "sha256": "32d5585aef775599f7f3c4e84a22bfb7b050ad0368b2f063bc12e7c5fce6868a",
+          "bytes": 7468
+        },
+        "cleaning-log.json": {
+          "sha256": "0ef9e623d86674f888b224a7b29569ed5a9c5e1e56843b9928490aa3250904ac",
+          "bytes": 1711
+        },
+        "raw-2024-release.json": {
+          "sha256": "53d151dd44d516b58e551b09358e74577a37bda15a12b785b1f918354e122b6b",
+          "bytes": 1951
+        },
+        "raw-2025-release.json": {
+          "sha256": "a0b3372bd0aed5b9630e44b3825e444f9e414f0fcfc2804504ac7a3d45ecb1ab",
+          "bytes": 1951
+        }
+      }
+    },
+    {
+      "schemaVersion": "claimtrace-case/2.0.0",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "synthetic": false,
+      "dataOrigin": "PUBLIC",
+      "sourceMetadataFile": "/cases/ons-housing-affordability/source-metadata.json",
+      "caseId": "ons-housing-affordability",
+      "primaryKey": "authority_code",
+      "claimCount": 3,
+      "decisionCount": 1,
+      "evidencePackageVerified": true,
+      "files": {
+        "baseline.csv": {
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "bytes": 529
+        },
+        "current.csv": {
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "bytes": 529
+        },
+        "claims.json": {
+          "sha256": "ff452d4ffb8b46957ab2f62afdc4bedb4c8d00133c200b804c4e98db55890ed4",
+          "bytes": 3062
+        },
+        "decisions.json": {
+          "sha256": "cce207441818a541d1e3388f117ad46d69678bb788135fdaaccab3b648b63880",
+          "bytes": 3166
+        },
+        "expected-audit.json": {
+          "sha256": "1a89f3aa715b8b57853b284d60e1a4a0c60ac137e9ab7e8dbce33d9b9bdd66e7",
+          "bytes": 1421
+        },
+        "evidence-package.json": {
+          "sha256": "829022ac02f6396d3c4febdd5bdcf668565e9899d92ae63c047c44dde1b0c2c6",
+          "bytes": 100093
+        },
+        "case.ts": {
+          "sha256": "90e60a6eededfd6f352339880f43654898144f55d57ffe5ee4e407bcc5ca55cc",
+          "bytes": 6913
+        },
+        "README.md": {
+          "sha256": "8e9ed071ab4702dd2f92664c8e8f1e7e229ccacfd311e985551356f1f8d76ec7",
+          "bytes": 2261
+        },
+        "source-config.json": {
+          "sha256": "36b649bea4219ac5ae7cc9d7b01800d893196440df1145ffaf580e3bc8659ccd",
+          "bytes": 2017
+        },
+        "source-metadata.json": {
+          "sha256": "9d4a1a2401a8ca5c9ee5679791873a1577f83d7325cccf7c610fca6d3f3cbe79",
+          "bytes": 27187
+        },
+        "cleaning-log.json": {
+          "sha256": "da8814012b1889e63661f316c2f5b19b8924ada828f13d66b0f5dc5a09324bb3",
+          "bytes": 1655
+        },
+        "raw-2024.csv": {
+          "sha256": "2dbfaab741576f4f5d2e06e943ed7c5208ea1a6116e413442544e631052c2350",
+          "bytes": 12064
+        },
+        "raw-2025.csv": {
+          "sha256": "6f5ed40eb5f2162444f9fc7bdd0a228b983ba110c1223012bfe369845fb9ca32",
+          "bytes": 12073
         }
       }
     }

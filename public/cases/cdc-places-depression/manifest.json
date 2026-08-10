@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "synthetic": false,
+  "dataOrigin": "PUBLIC",
+  "sourceMetadataFile": "/cases/cdc-places-depression/source-metadata.json",
+  "caseId": "cdc-places-depression",
+  "primaryKey": "county_fips",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+      "bytes": 580
+    },
+    "current.csv": {
+      "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+      "bytes": 580
+    },
+    "claims.json": {
+      "sha256": "a8814c229db7ba7de27ee22f24c0b735eb0e89ecb2fa7ea94124d3e1bb33376c",
+      "bytes": 3041
+    },
+    "decisions.json": {
+      "sha256": "593e0fd6aed2b4911e40c00030544389f07d313a476da476e5d1cea080a9856d",
+      "bytes": 3210
+    },
+    "expected-audit.json": {
+      "sha256": "4622e8d5ac118a591bfa67adcad2160b6fb2211e7bdabdf756c187a69f1f9b7b",
+      "bytes": 1399
+    },
+    "evidence-package.json": {
+      "sha256": "b06b085421221dc71ca7b44929d21a65bb57d8d781cabd100aec20548ff9db67",
+      "bytes": 75596
+    },
+    "case.ts": {
+      "sha256": "8f0305c834ee886f3e33608d5604f542a867efa1a3a3b0764c661cc5d3c627e3",
+      "bytes": 6924
+    },
+    "README.md": {
+      "sha256": "162e50a9fd42f8e2e247b4004b15c51e08a2280b3bbecb2bdec54ff4bc5c352f",
+      "bytes": 2880
+    },
+    "source-config.json": {
+      "sha256": "62528fc0aeb6a2fa1bfd60986305bed9945b2683a6423ee341bcdbb02b2326cc",
+      "bytes": 2557
+    },
+    "source-metadata.json": {
+      "sha256": "32d5585aef775599f7f3c4e84a22bfb7b050ad0368b2f063bc12e7c5fce6868a",
+      "bytes": 7468
+    },
+    "cleaning-log.json": {
+      "sha256": "0ef9e623d86674f888b224a7b29569ed5a9c5e1e56843b9928490aa3250904ac",
+      "bytes": 1711
+    },
+    "raw-2024-release.json": {
+      "sha256": "53d151dd44d516b58e551b09358e74577a37bda15a12b785b1f918354e122b6b",
+      "bytes": 1951
+    },
+    "raw-2025-release.json": {
+      "sha256": "a0b3372bd0aed5b9630e44b3825e444f9e414f0fcfc2804504ac7a3d45ecb1ab",
+      "bytes": 1951
+    }
+  }
+}

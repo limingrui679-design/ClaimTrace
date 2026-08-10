@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "claimtrace-case-audit/1.0.0",
+  "caseId": "ons-housing-affordability",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "claims": [
+    {
+      "id": "ons-kensington-rank",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "SUPPORTED",
+      "baselineValue": "Kensington and Chelsea 23.82",
+      "currentValue": "Kensington and Chelsea 21.87",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ons-redcar-five-ratio",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVERSED",
+      "baselineValue": "5.39",
+      "currentValue": "4.7",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ons-selected-mean-stability",
+      "kind": "VERSION_COMPARISON",
+      "baselineStatus": "UNTESTABLE",
+      "status": "SUPPORTED",
+      "baselineValue": "9.49",
+      "currentValue": "8.86",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "ons-planning-context-note",
+      "previousOutcome": null,
+      "currentOutcome": "HOLD",
+      "status": "SUPPORTED",
+      "recommendedOptionId": "revise"
+    }
+  ]
+}

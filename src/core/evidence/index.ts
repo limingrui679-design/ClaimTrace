@@ -21,6 +21,7 @@ import { completeEvidence, recomputeClaim } from "../validation";
 import { evaluateDecision } from "../decision";
 import { applyReviewToClaim, applyReviewToDecision, enforceDecisionReleaseDependencies, verifyReviewChain } from "../governance";
 import { canonicalJson, jsonClone, sha256Canonical } from "../integrity";
+import { rebuildExternalSnapshot } from "../external-source";
 
 const MAX_EXPORTED_DIFFS = 500;
 const MAX_RAW_BYTES_PER_SNAPSHOT = 500_000;
@@ -456,63 +457,27 @@ async function verifyUpstreamLineage(dataset: DatasetVersion, lineage: UpstreamL
   return { applicable: true, valid: errors.length === 0, errors };
 }
 
-function csvCell(value: string) {
-  return /[",\n\r]/.test(value) ? `"${value.replaceAll('"', '""')}"` : value;
-}
-
-async function cleanWorldBankArtifact(provenance: ExternalSourceProvenance, side: SnapshotSide, errors: string[]) {
-  const artifact = provenance.rawArtifacts.find((candidate) => candidate.side === side);
-  if (!artifact) {
-    errors.push(`${side}: embedded World Bank raw response is missing`);
-    return null;
-  }
-  if (await sha256Text(artifact.text) !== artifact.sha256) errors.push(`${side}: World Bank raw-response SHA-256 mismatch`);
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(artifact.text);
-  } catch {
-    errors.push(`${side}: World Bank raw response is not valid JSON`);
-    return null;
-  }
-  if (!Array.isArray(parsed) || !Array.isArray(parsed[1]) || typeof parsed[0] !== "object" || parsed[0] === null) {
-    errors.push(`${side}: World Bank response structure is invalid`);
-    return null;
-  }
-  const header = parsed[0] as { lastupdated?: unknown };
-  if (header.lastupdated !== provenance.sourceLastUpdated) errors.push(`${side}: source update date does not match the provenance statement`);
-  const year = side === "baseline" ? provenance.cleaning.baselineYear : provenance.cleaning.currentYear;
-  const selected = new Set(provenance.cleaning.selectedCountryCodes);
-  const rows = (parsed[1] as Array<Record<string, unknown>>).filter((row) => row.date === year && selected.has(String(row.countryiso3code ?? "")));
-  const countryCodes = rows.map((row) => String(row.countryiso3code ?? ""));
-  if (new Set(countryCodes).size !== rows.length) errors.push(`${side}: raw response contains duplicate country codes`);
-  if (rows.length !== selected.size || [...selected].some((code) => !countryCodes.includes(code))) errors.push(`${side}: raw response does not fully cover the declared country set`);
-  const columns = ["country_code", "country", "observation_year", "life_expectancy_years", "indicator_code"];
-  const lines = rows.sort((left, right) => String(left.countryiso3code).localeCompare(String(right.countryiso3code))).map((row) => {
-    const indicator = row.indicator as { id?: unknown; value?: unknown } | undefined;
-    const country = row.country as { value?: unknown } | undefined;
-    const value = typeof row.value === "number" ? row.value : Number.NaN;
-    if (indicator?.id !== provenance.indicator.id || indicator?.value !== provenance.indicator.name) errors.push(`${side}:${String(row.countryiso3code)}: indicator identity mismatch`);
-    if (!Number.isFinite(value)) errors.push(`${side}:${String(row.countryiso3code)}: indicator value is missing or nonnumeric`);
-    return [String(row.countryiso3code ?? ""), String(country?.value ?? ""), year, Number.isFinite(value) ? value.toFixed(provenance.cleaning.decimalPlaces) : "", provenance.indicator.id].map(csvCell).join(",");
-  });
-  return `${columns.join(",")}\n${lines.join("\n")}\n`;
-}
-
 async function verifyExternalSourceLineage(dataset: DatasetVersion, provenance: ExternalSourceProvenance | null) {
   const errors: string[] = [];
   const required = dataset.dataOrigin === "PUBLIC";
   if (!provenance) return { applicable: required, valid: !required, errors: required ? ["Public-data case is missing external-source and cleaning lineage"] : errors };
-  if (provenance.schemaVersion !== "claimtrace-external-source/1.0.0" || provenance.sourceType !== "WORLD_BANK_INDICATORS_API_V2") errors.push("External-source schema or type is invalid");
+  if (provenance.schemaVersion !== "claimtrace-external-source/2.0.0") errors.push("External-source schema is invalid");
   if (!Number.isFinite(Date.parse(provenance.retrievedAt))) errors.push("External-data retrieval time is invalid");
-  if (provenance.license !== "CC BY 4.0" || !/^https:\/\//.test(provenance.licenseUrl)) errors.push("External-data license statement is incomplete");
-  if (!provenance.attribution.trim() || !provenance.publisher.trim() || !provenance.dataset.trim()) errors.push("External-data attribution or dataset information is missing");
-  if (provenance.cleaning.implementation !== "world-bank-indicator-v1" || provenance.cleaning.scriptPath !== "tools/generate-world-bank-case.mjs") errors.push("External-data cleaning implementation is not bound to the controlled script");
-  if (!Number.isInteger(provenance.cleaning.decimalPlaces) || provenance.cleaning.decimalPlaces < 0 || provenance.cleaning.decimalPlaces > 8) errors.push("Cleaning decimal-place configuration is invalid");
+  if (!provenance.license.trim() || !/^https:\/\//.test(provenance.licenseUrl)) errors.push("External-data license statement is incomplete");
+  if (!provenance.attribution.trim() || !provenance.publisher.trim() || !provenance.dataset.trim() || !provenance.measure.id.trim() || !provenance.measure.name.trim()) errors.push("External-data attribution, dataset, or measure information is missing");
+  if (!/^https:\/\//.test(provenance.sourceUrls.baseline) || !/^https:\/\//.test(provenance.sourceUrls.current)) errors.push("External source URLs must use HTTPS");
+  if (!provenance.limitations.length || provenance.limitations.some((item) => !item.trim())) errors.push("External-data limitations must be declared");
+  if (provenance.cleaning.scriptPath !== "tools/generate-public-data-cases.ts") errors.push("External-data cleaning is not bound to the controlled generator");
   if (provenance.rawArtifacts.length !== 2 || new Set(provenance.rawArtifacts.map((artifact) => artifact.side)).size !== 2) errors.push("External raw responses must cover exactly two snapshots");
-  const baseline = await cleanWorldBankArtifact(provenance, "baseline", errors);
-  const current = await cleanWorldBankArtifact(provenance, "current", errors);
-  if (baseline !== dataset.baselineRawText) errors.push("Baseline CSV cannot be rebuilt from the embedded raw response using the declared rules");
-  if (current !== dataset.currentRawText) errors.push("Current CSV cannot be rebuilt from the embedded raw response using the declared rules");
+  for (const artifact of provenance.rawArtifacts) {
+    if (!artifact.fileName.trim()) errors.push(`${artifact.side}: external raw-response file name is missing`);
+    if (await sha256Text(artifact.text) !== artifact.sha256) errors.push(`${artifact.side}: external raw-response SHA-256 mismatch`);
+  }
+  const baseline = rebuildExternalSnapshot(provenance, "baseline");
+  const current = rebuildExternalSnapshot(provenance, "current");
+  errors.push(...baseline.errors, ...current.errors);
+  if (baseline.text !== dataset.baselineRawText) errors.push("Baseline CSV cannot be rebuilt from the embedded raw response using the declared rules");
+  if (current.text !== dataset.currentRawText) errors.push("Current CSV cannot be rebuilt from the embedded raw response using the declared rules");
   return { applicable: true, valid: errors.length === 0, errors };
 }
 
@@ -620,7 +585,7 @@ export function buildHtmlReport(bundle: AuditBundle, verification: AuditBundleVe
     const shares = analysis.monteCarlo?.recommendationShares.map((item) => `${item.optionId} ${(item.share * 100).toFixed(1)}%`).join("; ") ?? "Not configured";
     return `<tr><td>${h(decision.decisionId)}</td><td>${h(analysis.paretoFrontierOptionIds.join(", ") || "None")}</td><td>Benefit multiplier ${h(stability.min)}–${h(stability.max)} preserves ${h(stability.recommendedOptionId ?? "no recommendation")} (step ${h(stability.step)})</td><td>${analysis.monteCarlo ? `${analysis.monteCarlo.trials} trials · fixed seed ${h(analysis.monteCarlo.seed)}<br>${h(shares)}` : "Not configured"}</td></tr>`;
   }).join("");
-  const externalSourceSection = bundle.externalSource ? `<section><h2>External Public-Data Provenance and Cleaning Chain</h2><div class="card"><p><b>Publisher / dataset:</b> ${h(bundle.externalSource.publisher)} / ${h(bundle.externalSource.dataset)}</p><p><b>Indicator:</b> ${h(bundle.externalSource.indicator.id)} · ${h(bundle.externalSource.indicator.name)}</p><p><b>Retrieved / source updated:</b> ${h(bundle.externalSource.retrievedAt)} / ${h(bundle.externalSource.sourceLastUpdated)}</p><p><b>License:</b> <a href="${h(bundle.externalSource.licenseUrl)}">${h(bundle.externalSource.license)}</a></p><p><b>Attribution:</b> ${h(bundle.externalSource.attribution)}</p><p><b>Cleaning:</b> ${h(bundle.externalSource.cleaning.implementation)} · ${h(bundle.externalSource.cleaning.scriptPath)} · ${h(bundle.externalSource.cleaning.decimalPlaces)} decimal places</p>${bundle.externalSource.rawArtifacts.map((artifact) => `<p><b>${h(artifact.side)} raw response:</b> <code>${h(artifact.sha256)}</code></p>`).join("")}<p class="muted">The AuditBundle embeds both raw API responses. The verifier rechecks their SHA-256 values and regenerates both CSV snapshots from the declared countries, years, indicator, and rounding rule.</p></div></section>` : "";
+  const externalSourceSection = bundle.externalSource ? `<section><h2>External Public-Data Provenance and Cleaning Chain</h2><div class="card"><p><b>Publisher / dataset:</b> ${h(bundle.externalSource.publisher)} / ${h(bundle.externalSource.dataset)}</p><p><b>Measure:</b> ${h(bundle.externalSource.measure.id)} · ${h(bundle.externalSource.measure.name)}</p><p><b>Retrieved / source updated:</b> ${h(bundle.externalSource.retrievedAt)} / ${h(bundle.externalSource.sourceLastUpdated ?? "Not separately reported")}</p><p><b>License:</b> <a href="${h(bundle.externalSource.licenseUrl)}">${h(bundle.externalSource.license)}</a></p><p><b>Attribution:</b> ${h(bundle.externalSource.attribution)}</p><p><b>Cleaning:</b> ${h(bundle.externalSource.cleaning.implementation)} · ${h(bundle.externalSource.cleaning.scriptPath)}</p>${bundle.externalSource.rawArtifacts.map((artifact) => `<p><b>${h(artifact.side)} raw response:</b> <code>${h(artifact.sha256)}</code></p>`).join("")}<p><b>Declared limitations:</b> ${h(bundle.externalSource.limitations.join(" "))}</p><p class="muted">The AuditBundle embeds both pinned official-source responses. The verifier rechecks their SHA-256 values and regenerates both CSV snapshots from the declared source-specific transformation parameters.</p></div></section>` : "";
   const summary = bundle.summary;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ClaimTrace Complete Audit Report</title><style>
   :root{color-scheme:light}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#183128;background:#f5f7f5;max-width:1240px;margin:0 auto;padding:40px 28px;font-size:14px;line-height:1.55}main{background:#fff;border:1px solid #dbe2de;border-radius:18px;padding:36px}h1{font-size:32px;margin:4px 0 8px}h2{font-size:21px;margin:0 0 14px}p{margin:7px 0}.muted,small{color:#63736d;font-size:12px}.meta{display:flex;flex-wrap:wrap;gap:8px 20px}.hero{display:grid;grid-template-columns:minmax(220px,1fr) 3fr;gap:24px;margin:28px 0}.score{font-size:32px;font-weight:700;color:#147a55}.card{border:1px solid #dbe2de;border-radius:12px;padding:18px}.notice{padding:14px 16px;background:#fff5df;border-left:4px solid #d58c20;border-radius:6px}.danger{background:#fff0ee;border-left-color:#bb4037}section{margin:34px 0;break-inside:avoid}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border:1px solid #dbe2de;padding:9px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#f1f5f2}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;overflow-wrap:anywhere}.checks{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}.checks li{border:1px solid #dbe2de;border-radius:8px;padding:10px;display:flex;flex-direction:column}.checks .pass{border-left:4px solid #147a55}.checks .fail{border-left:4px solid #bb4037}.checks span{font-size:12px;color:#7d332d}footer{margin-top:40px;padding-top:18px;border-top:1px solid #dbe2de;color:#63736d;font-size:12px}@media(max-width:760px){body{padding:12px}main{padding:18px}.hero{grid-template-columns:1fr}.table-wrap{overflow:auto}}@media print{body{background:#fff;padding:0}main{border:0;padding:0}.table-wrap{overflow:visible}}

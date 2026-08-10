@@ -31,7 +31,7 @@ flowchart LR
 - `src/core/governance`: UUID/SHA-256-chained append-only review objects, explicit local-unverified assurance fields, and separate engine/disposition/release state transitions.
 - `src/core/integrity`: canonical JSON, portable SHA-256, stable review-result hashes, semantic action/policy hashes, and decision-input provenance hashes.
 - `src/core/evidence`: computed completeness, bounded AuditBundle export, independent snapshot/claim/decision/review/upstream/public-source verification, cross-bundle-chain verification, and standalone HTML reports.
-- `src/cases`: six executable case specifications and shared browser/test runtime. Five are deterministic synthetic fixtures; one is a pinned World Bank public-data transformation. Self-contained generated packs live under `public/cases`.
+- `src/cases`: ten executable case specifications and shared browser/test runtime. Six are pinned official public-data transformations covering operations, fixed income, consumer finance, population health, planning, and international indicators; four are deterministic synthetic stress fixtures for controlled failure modes. Self-contained generated packs live under `public/cases`.
 - `benchmarks`: 64 independently labeled scenarios across eight edge-case families, multiple baselines, ablations, and committed results. Deterministic property tests live under `tests/property.test.ts`.
 
 `app/claimtrace-core.ts` is a compatibility re-export only. New core logic belongs in `src/core`.

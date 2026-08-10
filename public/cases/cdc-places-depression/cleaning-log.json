@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "claimtrace-cleaning-log/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "caseId": "cdc-places-depression",
+  "sourceType": "CDC_PLACES_SOCRATA_V1",
+  "implementation": "cdc-places-county-v1",
+  "sourceConfigSha256": "62528fc0aeb6a2fa1bfd60986305bed9945b2683a6423ee341bcdbb02b2326cc",
+  "transformations": {
+    "baseline": [
+      "Parse pinned CDC PLACES Socrata JSON",
+      "Require 2022 age-adjusted DEPRESSION estimates",
+      "Keep 8 declared county FIPS codes",
+      "Retain model-based estimate, confidence interval, and adult-population fields at 1 decimal place",
+      "Sort by county FIPS and emit stable UTF-8 CSV"
+    ],
+    "current": [
+      "Parse pinned CDC PLACES Socrata JSON",
+      "Require 2023 age-adjusted DEPRESSION estimates",
+      "Keep 8 declared county FIPS codes",
+      "Retain model-based estimate, confidence interval, and adult-population fields at 1 decimal place",
+      "Sort by county FIPS and emit stable UTF-8 CSV"
+    ]
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2024-release.json",
+      "sha256": "53d151dd44d516b58e551b09358e74577a37bda15a12b785b1f918354e122b6b",
+      "bytes": 1951
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2025-release.json",
+      "sha256": "a0b3372bd0aed5b9630e44b3825e444f9e414f0fcfc2804504ac7a3d45ecb1ab",
+      "bytes": 1951
+    }
+  ],
+  "outputs": {
+    "baseline.csv": {
+      "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+      "bytes": 580,
+      "rows": 8
+    },
+    "current.csv": {
+      "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+      "bytes": 580,
+      "rows": 8
+    }
+  }
+}

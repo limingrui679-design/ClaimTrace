@@ -51,6 +51,27 @@ export function manualDecisionInputs(source: string, rationale: string): Decisio
   };
 }
 
+export function publicConfirmedThreshold(value: number, unit: "percent" | "absolute" | "score" | "count", source: string, rationale: string) {
+  return { value, unit, source, rationale, confirmedBy: "ClaimTrace public-data case author", confirmedAt: "2026-08-10T00:00:00.000Z" } as const;
+}
+
+export function publicManualDecisionInputs(source: string, rationale: string): DecisionInputProvenance {
+  return {
+    kind: "MANUAL_ASSUMPTION",
+    source,
+    version: "1.0.0",
+    rationale,
+    units: {
+      benefit: "illustrative utility points",
+      cost: "illustrative cost points",
+      risk: "illustrative risk points",
+      capacity: "illustrative capacity points",
+    },
+    confirmedBy: "ClaimTrace public-data case author",
+    confirmedAt: "2026-08-10T00:00:00.000Z",
+  };
+}
+
 export function controlledUncertainty(seed: string): DecisionUncertainty {
   return {
     method: "BOUNDED_UNIFORM",

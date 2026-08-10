@@ -1,0 +1,120 @@
+[
+  {
+    "id": "ons-planning-context-note",
+    "title": "Can the 2024 selected-authority planning context note be reused without revision?",
+    "owner": "Public-data case reviewer",
+    "passActionId": "ons:retain-context-with-method-note",
+    "holdActionId": "ons:update-ratio-and-method-note",
+    "actionIfPass": "Retain supported descriptive context with period, geography, provisional-earnings, and revision disclosures.",
+    "actionIfFail": "Update the threshold or ranking statement and retain the ONS methodology boundary; do not infer a planning intervention effect.",
+    "conditions": [
+      {
+        "claimId": "ons-kensington-rank",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      },
+      {
+        "claimId": "ons-redcar-five-ratio",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
+      },
+      {
+        "claimId": "ons-selected-mean-stability",
+        "allowedStatuses": [
+          "SUPPORTED",
+          "WEAKENED"
+        ]
+      }
+    ],
+    "stakeholders": [
+      "Planning readers",
+      "Local-data analysts",
+      "Public-data provider"
+    ],
+    "objective": {
+      "benefitWeight": 1,
+      "costWeight": 0.2,
+      "riskWeight": 1.2
+    },
+    "riskTolerance": 18,
+    "noActionLoss": 28,
+    "inputProvenance": {
+      "kind": "MANUAL_ASSUMPTION",
+      "source": "Illustrative planning-publication assumptions v1",
+      "version": "1.0.0",
+      "rationale": "The option scores are demonstration inputs, not housing need, welfare, land value, intervention impact, or implementation cost",
+      "units": {
+        "benefit": "illustrative utility points",
+        "cost": "illustrative cost points",
+        "risk": "illustrative risk points",
+        "capacity": "illustrative capacity points"
+      },
+      "confirmedBy": "ClaimTrace public-data case author",
+      "confirmedAt": "2026-08-10T00:00:00.000Z"
+    },
+    "uncertainty": {
+      "method": "BOUNDED_UNIFORM",
+      "benefitMultiplier": [
+        0.8,
+        1.2
+      ],
+      "costMultiplier": [
+        0.85,
+        1.2
+      ],
+      "riskMultiplier": [
+        0.8,
+        1.25
+      ],
+      "capacityMultiplier": [
+        0.9,
+        1.15
+      ],
+      "trials": 512,
+      "seed": "ons-planning-context-note-v1",
+      "stabilitySweep": {
+        "parameter": "benefitMultiplier",
+        "min": 0.5,
+        "max": 1.5,
+        "step": 0.05
+      }
+    },
+    "constraints": [
+      {
+        "id": "planning-review-capacity",
+        "label": "Planning-review capacity",
+        "metric": "capacity",
+        "operator": "<=",
+        "value": 45
+      }
+    ],
+    "options": [
+      {
+        "id": "reuse",
+        "label": "Reuse unchanged",
+        "benefit": 31,
+        "cost": 6,
+        "risk": 31,
+        "capacity": 4
+      },
+      {
+        "id": "revise",
+        "label": "Revise ratios and method note",
+        "benefit": 82,
+        "cost": 25,
+        "risk": 8,
+        "capacity": 25
+      },
+      {
+        "id": "study",
+        "label": "Build a full spatial housing study",
+        "benefit": 108,
+        "cost": 92,
+        "risk": 13,
+        "capacity": 86
+      }
+    ]
+  }
+]

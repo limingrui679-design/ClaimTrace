@@ -21,7 +21,7 @@ npm run cases:generate
 git diff --exit-code -- public/demo-data public/cases app/demo-case.generated.ts benchmarks/results.json
 ```
 
-For every directory listed in `public/cases/catalog.json`, verify `manifest.json`, `expected-audit.json`, and `evidence-package.json`. The World Bank case must retain its two pinned API responses, source metadata, access date, license, cleaning configuration, and raw SHA-256 values.
+For every directory listed in `public/cases/catalog.json`, verify `manifest.json`, `expected-audit.json`, and `evidence-package.json`. Every public-data case must retain its two pinned official-source responses, source metadata, access date, license, limitations, cleaning configuration, and raw SHA-256 values. Source refresh is deliberately separate from offline case generation.
 
 ## 3. Build the two intended modes
 
@@ -44,7 +44,7 @@ The read-only build must display the read-only portfolio badge and render no imp
 Check desktop and 390 px mobile layouts. Exercise this sequence in a real browser:
 
 ```text
-overview → public-data case → keyed diff → claims → decisions → review → report
+overview → public-data case → source lineage → keyed diff → claims → decisions → review → report
 ```
 
 Confirm that the console has no warning/error entries and that the committed `docs/claimtrace-demo.gif` matches the current interface.

@@ -1,7 +1,7 @@
 // Generated from the executable source under src/cases/world-bank-life-expectancy/case.ts.
 export default {
   "id": "world-bank-life-expectancy",
-  "title": "Public Data: World Bank Life-Expectancy Version Audit",
+  "title": "Public Data: World Bank Life-Expectancy Cross-Year Audit",
   "primaryKey": "country_code",
   "claims": [
     {
@@ -47,8 +47,8 @@ export default {
           "unit": "absolute",
           "source": "Illustrative analyst review threshold v1",
           "rationale": "Used only to demonstrate how an updated public indicator can invalidate an existing threshold claim; this is not World Bank guidance or a policy standard",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       }
     },
@@ -58,7 +58,7 @@ export default {
       "title": "Mean life expectancy at birth across the eight selected countries changes by no more than 1%",
       "section": "Sample-mean stability",
       "owner": "Public-data case reviewer",
-      "category": "Version stability",
+      "category": "Period stability",
       "formula": "abs(mean(2024)-mean(2019))/mean(2019) <= 1%",
       "rule": {
         "type": "stability",
@@ -71,16 +71,16 @@ export default {
           "unit": "percent",
           "source": "Illustrative descriptive stability rule v1",
           "rationale": "Used to demonstrate a stability audit of a descriptive mean across periods; this does not imply statistical significance",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         },
         "reversalThresholdSpec": {
           "value": 3,
           "unit": "percent",
           "source": "Illustrative descriptive reversal rule v1",
           "rationale": "At 3%, treat the original stability statement as materially invalid",
-          "confirmedBy": "Synthetic case owner",
-          "confirmedAt": "2026-08-08T00:00:00.000Z"
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       }
     }
@@ -133,13 +133,13 @@ export default {
         "version": "1.0.0",
         "rationale": "Option benefits, costs, risks, and capacities are manually supplied ClaimTrace demonstration inputs; they are not World Bank data or observed communication effects",
         "units": {
-          "benefit": "synthetic utility points",
-          "cost": "synthetic cost points",
-          "risk": "synthetic risk points",
-          "capacity": "synthetic capacity points"
+          "benefit": "illustrative utility points",
+          "cost": "illustrative cost points",
+          "risk": "illustrative risk points",
+          "capacity": "illustrative capacity points"
         },
-        "confirmedBy": "Synthetic case owner",
-        "confirmedAt": "2026-08-08T00:00:00.000Z"
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
       },
       "uncertainty": {
         "method": "BOUNDED_UNIFORM",

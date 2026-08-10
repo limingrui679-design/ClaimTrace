@@ -1,16 +1,24 @@
 {
-  "schemaVersion": "claimtrace-cleaning-log/1.0.0",
+  "schemaVersion": "claimtrace-cleaning-log/2.0.0",
   "generatedAt": "2026-08-10T00:00:00.000Z",
+  "caseId": "world-bank-life-expectancy",
+  "sourceType": "WORLD_BANK_INDICATORS_API_V2",
   "implementation": "world-bank-indicator-v1",
-  "sourceConfigSha256": "11c82bb3e9b22ae52aed71ca975829bca488a2262487f3cddb4a383674b3415a",
-  "transformations": [
-    "Parse two pinned World Bank Indicators API v2 JSON responses",
-    "Require indicator SP.DYN.LE00.IN and source last-updated 2026-07-13",
-    "Keep exactly 8 declared ISO3 country codes",
-    "Map 2019 to baseline and 2024 to current",
-    "Round life expectancy to 3 decimal places with fixed-width output",
-    "Sort records by ISO3 country code and emit UTF-8 CSV with a stable column order"
-  ],
+  "sourceConfigSha256": "70f447adb416e85257fec5cb4d060fcea4a7ac0644b6a1537edd5c28e4e2797e",
+  "transformations": {
+    "baseline": [
+      "Parse pinned World Bank Indicators API JSON",
+      "Filter to 8 declared ISO3 countries and 2019",
+      "Round life expectancy to 3 decimal places",
+      "Sort by ISO3 country code and emit stable UTF-8 CSV"
+    ],
+    "current": [
+      "Parse pinned World Bank Indicators API JSON",
+      "Filter to 8 declared ISO3 countries and 2024",
+      "Round life expectancy to 3 decimal places",
+      "Sort by ISO3 country code and emit stable UTF-8 CSV"
+    ]
+  },
   "rawArtifacts": [
     {
       "side": "baseline",

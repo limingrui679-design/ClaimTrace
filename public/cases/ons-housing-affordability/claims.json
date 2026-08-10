@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ons-kensington-rank",
+    "code": "ONS-001",
+    "title": "Kensington and Chelsea remains the highest-ratio authority among the twelve selected authorities",
+    "section": "Spatial ranking",
+    "owner": "Public-data case reviewer",
+    "category": "Authority ranking",
+    "formula": "argmax(authority, housing_affordability_ratio) = Kensington and Chelsea",
+    "rule": {
+      "type": "rank",
+      "field": "housing_affordability_ratio",
+      "aggregation": "average",
+      "groupField": "authority",
+      "expectedGroup": "Kensington and Chelsea",
+      "rank": "max",
+      "tiePolicy": "require_unique"
+    }
+  },
+  {
+    "id": "ons-redcar-five-ratio",
+    "code": "ONS-002",
+    "title": "Redcar and Cleveland's workplace-based affordability ratio remains at or above 5",
+    "section": "Methodology-linked threshold audit",
+    "owner": "Public-data case reviewer",
+    "category": "Threshold gate",
+    "formula": "Redcar and Cleveland housing_affordability_ratio >= 5",
+    "rule": {
+      "type": "threshold",
+      "field": "housing_affordability_ratio",
+      "aggregation": "average",
+      "operator": ">=",
+      "threshold": 5,
+      "filters": [
+        {
+          "field": "authority_code",
+          "equals": "E06000003"
+        }
+      ],
+      "thresholdSpec": {
+        "value": 5,
+        "unit": "absolute",
+        "source": "ONS housing-affordability QMI mortgage-multiple interpretation",
+        "rationale": "ONS discusses a ratio of five in the affordability interpretation; this audit does not turn it into a local policy-performance target",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  },
+  {
+    "id": "ons-selected-mean-stability",
+    "code": "ONS-003",
+    "title": "The unweighted mean ratio across the twelve selected authorities changes by no more than 10%",
+    "section": "Selected-authority descriptive stability",
+    "owner": "Public-data case reviewer",
+    "category": "Period stability",
+    "formula": "abs(mean(2025 ratios)-mean(2024 ratios))/mean(2024 ratios) <= 10%",
+    "rule": {
+      "type": "stability",
+      "field": "housing_affordability_ratio",
+      "aggregation": "average",
+      "supportTolerance": 10,
+      "reversalThreshold": 20,
+      "supportToleranceSpec": {
+        "value": 10,
+        "unit": "percent",
+        "source": "Illustrative planning-context stability rule v1",
+        "rationale": "Used to audit whether a compact selected-authority context statement remains stable",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      },
+      "reversalThresholdSpec": {
+        "value": 20,
+        "unit": "percent",
+        "source": "Illustrative planning-context escalation v1",
+        "rationale": "At 20%, treat the compact selected-authority statement as materially invalid",
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      }
+    }
+  }
+]

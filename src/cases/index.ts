@@ -2,20 +2,39 @@ import type { CaseDefinition } from "../core";
 import { BUSINESS_OPERATIONS_CASE } from "./business-operations/case";
 import { FINANCIAL_RISK_CASE } from "./financial-risk/case";
 import { POPULATION_HEALTH_CASE } from "./population-health/case";
-import { PUBLIC_POLICY_CASE } from "./public-policy/case";
 import { SPATIAL_PLANNING_CASE } from "./spatial-planning/case";
 import { WORLD_BANK_LIFE_EXPECTANCY_CASE } from "./world-bank-life-expectancy/case";
+import { USDOT_TRANSIT_OPERATIONS_CASE } from "./usdot-transit-operations/case";
+import { US_TREASURY_YIELD_CURVE_CASE } from "./us-treasury-yield-curve/case";
+import { CFPB_CREDIT_CARD_COMPLAINTS_CASE } from "./cfpb-credit-card-complaints/case";
+import { CDC_PLACES_DEPRESSION_CASE } from "./cdc-places-depression/case";
+import { ONS_HOUSING_AFFORDABILITY_CASE } from "./ons-housing-affordability/case";
 
 export * from "./types";
 export * from "./runtime";
 export * from "./business-operations/case";
 export * from "./financial-risk/case";
 export * from "./population-health/case";
-export * from "./public-policy/case";
 export * from "./spatial-planning/case";
 export * from "./world-bank-life-expectancy/case";
+export * from "./usdot-transit-operations/case";
+export * from "./us-treasury-yield-curve/case";
+export * from "./cfpb-credit-card-complaints/case";
+export * from "./cdc-places-depression/case";
+export * from "./ons-housing-affordability/case";
 
-export const EXECUTABLE_CASES = [BUSINESS_OPERATIONS_CASE, FINANCIAL_RISK_CASE, POPULATION_HEALTH_CASE, PUBLIC_POLICY_CASE, SPATIAL_PLANNING_CASE, WORLD_BANK_LIFE_EXPECTANCY_CASE];
+export const EXECUTABLE_CASES = [
+  BUSINESS_OPERATIONS_CASE,
+  FINANCIAL_RISK_CASE,
+  POPULATION_HEALTH_CASE,
+  SPATIAL_PLANNING_CASE,
+  WORLD_BANK_LIFE_EXPECTANCY_CASE,
+  USDOT_TRANSIT_OPERATIONS_CASE,
+  US_TREASURY_YIELD_CURVE_CASE,
+  CFPB_CREDIT_CARD_COMPLAINTS_CASE,
+  CDC_PLACES_DEPRESSION_CASE,
+  ONS_HOUSING_AFFORDABILITY_CASE,
+];
 
 export const CASE_CATALOG: CaseDefinition[] = [
   {
@@ -70,23 +89,6 @@ export const CASE_CATALOG: CaseDefinition[] = [
     readmeFile: "/cases/population-health/README.md",
   },
   {
-    id: "public-policy",
-    domain: "policy",
-    title: "Public Policy: Program Coverage and Outcome Thresholds",
-    question: "Does the scale-up recommendation remain supported when coverage is stable but the eligible population changes?",
-    primaryKey: "district_id",
-    baselineFile: "/cases/public-policy/baseline.csv",
-    currentFile: "/cases/public-policy/current.csv",
-    claimCount: 3,
-    decisionCount: 1,
-    synthetic: true,
-    dataCard: "docs/data-cards/public-policy.md",
-    claimsFile: "/cases/public-policy/claims.json",
-    decisionsFile: "/cases/public-policy/decisions.json",
-    expectedAuditFile: "/cases/public-policy/expected-audit.json",
-    readmeFile: "/cases/public-policy/README.md",
-  },
-  {
     id: "spatial-planning",
     domain: "spatial",
     title: "Spatial Planning: Site Demand and Accessibility",
@@ -106,7 +108,7 @@ export const CASE_CATALOG: CaseDefinition[] = [
   {
     id: "world-bank-life-expectancy",
     domain: "public-data",
-    title: "Public Data: World Bank Life-Expectancy Version Audit",
+    title: "Public Data: World Bank Life-Expectancy Cross-Year Audit",
     question: "Which descriptive claims and publication notes must change after the 2019 and 2024 indicator snapshots are compared?",
     primaryKey: "country_code",
     baselineFile: "/cases/world-bank-life-expectancy/baseline.csv",
@@ -120,5 +122,95 @@ export const CASE_CATALOG: CaseDefinition[] = [
     decisionsFile: "/cases/world-bank-life-expectancy/decisions.json",
     expectedAuditFile: "/cases/world-bank-life-expectancy/expected-audit.json",
     readmeFile: "/cases/world-bank-life-expectancy/README.md",
+  },
+  {
+    id: "usdot-transit-operations",
+    domain: "business",
+    title: "Public Data: USDOT Transit Operations Period Audit",
+    question: "Can a prior heavy-rail operating brief be reused after ridership and service intensity change?",
+    primaryKey: "ntd_id",
+    baselineFile: "/cases/usdot-transit-operations/baseline.csv",
+    currentFile: "/cases/usdot-transit-operations/current.csv",
+    claimCount: 3,
+    decisionCount: 1,
+    synthetic: false,
+    sourceMetadataFile: "/cases/usdot-transit-operations/source-metadata.json",
+    dataCard: "/cases/usdot-transit-operations/README.md",
+    claimsFile: "/cases/usdot-transit-operations/claims.json",
+    decisionsFile: "/cases/usdot-transit-operations/decisions.json",
+    expectedAuditFile: "/cases/usdot-transit-operations/expected-audit.json",
+    readmeFile: "/cases/usdot-transit-operations/README.md",
+  },
+  {
+    id: "us-treasury-yield-curve",
+    domain: "finance",
+    title: "Public Data: U.S. Treasury Yield-Curve Period Audit",
+    question: "Which curve-shape and short-end claims change between the two year-end snapshots?",
+    primaryKey: "maturity_code",
+    baselineFile: "/cases/us-treasury-yield-curve/baseline.csv",
+    currentFile: "/cases/us-treasury-yield-curve/current.csv",
+    claimCount: 3,
+    decisionCount: 1,
+    synthetic: false,
+    sourceMetadataFile: "/cases/us-treasury-yield-curve/source-metadata.json",
+    dataCard: "/cases/us-treasury-yield-curve/README.md",
+    claimsFile: "/cases/us-treasury-yield-curve/claims.json",
+    decisionsFile: "/cases/us-treasury-yield-curve/decisions.json",
+    expectedAuditFile: "/cases/us-treasury-yield-curve/expected-audit.json",
+    readmeFile: "/cases/us-treasury-yield-curve/README.md",
+  },
+  {
+    id: "cfpb-credit-card-complaints",
+    domain: "finance",
+    title: "Public Data: CFPB Credit-Card Complaint Pattern Audit",
+    question: "Do structured issue rankings, shares, or record volume require the prior consumer-friction brief to change?",
+    primaryKey: "issue_id",
+    baselineFile: "/cases/cfpb-credit-card-complaints/baseline.csv",
+    currentFile: "/cases/cfpb-credit-card-complaints/current.csv",
+    claimCount: 3,
+    decisionCount: 1,
+    synthetic: false,
+    sourceMetadataFile: "/cases/cfpb-credit-card-complaints/source-metadata.json",
+    dataCard: "/cases/cfpb-credit-card-complaints/README.md",
+    claimsFile: "/cases/cfpb-credit-card-complaints/claims.json",
+    decisionsFile: "/cases/cfpb-credit-card-complaints/decisions.json",
+    expectedAuditFile: "/cases/cfpb-credit-card-complaints/expected-audit.json",
+    readmeFile: "/cases/cfpb-credit-card-complaints/README.md",
+  },
+  {
+    id: "cdc-places-depression",
+    domain: "health",
+    title: "Public Data: CDC PLACES Model-Based Estimate Audit",
+    question: "Which selected-county descriptive statements need revision when the model-based estimates update?",
+    primaryKey: "county_fips",
+    baselineFile: "/cases/cdc-places-depression/baseline.csv",
+    currentFile: "/cases/cdc-places-depression/current.csv",
+    claimCount: 3,
+    decisionCount: 1,
+    synthetic: false,
+    sourceMetadataFile: "/cases/cdc-places-depression/source-metadata.json",
+    dataCard: "/cases/cdc-places-depression/README.md",
+    claimsFile: "/cases/cdc-places-depression/claims.json",
+    decisionsFile: "/cases/cdc-places-depression/decisions.json",
+    expectedAuditFile: "/cases/cdc-places-depression/expected-audit.json",
+    readmeFile: "/cases/cdc-places-depression/README.md",
+  },
+  {
+    id: "ons-housing-affordability",
+    domain: "spatial",
+    title: "Public Data: ONS Housing-Affordability Period Audit",
+    question: "Can the selected-authority planning context note be reused after affordability ratios change?",
+    primaryKey: "authority_code",
+    baselineFile: "/cases/ons-housing-affordability/baseline.csv",
+    currentFile: "/cases/ons-housing-affordability/current.csv",
+    claimCount: 3,
+    decisionCount: 1,
+    synthetic: false,
+    sourceMetadataFile: "/cases/ons-housing-affordability/source-metadata.json",
+    dataCard: "/cases/ons-housing-affordability/README.md",
+    claimsFile: "/cases/ons-housing-affordability/claims.json",
+    decisionsFile: "/cases/ons-housing-affordability/decisions.json",
+    expectedAuditFile: "/cases/ons-housing-affordability/expected-audit.json",
+    readmeFile: "/cases/ons-housing-affordability/README.md",
   },
 ];

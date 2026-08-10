@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "claimtrace-external-source/2.0.0",
+  "sourceType": "CDC_PLACES_SOCRATA_V1",
+  "publisher": "U.S. Centers for Disease Control and Prevention",
+  "dataset": "PLACES: Local Data for Better Health, County Data",
+  "measure": {
+    "id": "DEPRESSION-AGE-ADJUSTED-PREVALENCE",
+    "name": "Age-adjusted prevalence of depression among adults"
+  },
+  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceUrls": {
+    "baseline": "https://data.cdc.gov/resource/fu4u-a9bh.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid",
+    "current": "https://data.cdc.gov/resource/swc5-untb.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid"
+  },
+  "license": "U.S. Government public data; CDC data-use terms apply",
+  "licenseUrl": "https://www.cdc.gov/other/agencymaterials.html",
+  "attribution": "Centers for Disease Control and Prevention, PLACES County Data 2024 and 2025 releases, age-adjusted depression estimates for data years 2022 and 2023, accessed 2026-08-10; transformed by ClaimTrace.",
+  "limitations": [
+    "PLACES values are model-based small-area estimates with uncertainty intervals, not direct county survey estimates.",
+    "Overlapping confidence intervals and model changes limit interpretation of year-to-year differences.",
+    "The selected counties are illustrative; the case does not estimate intervention effects, diagnose individuals, or support clinical decisions."
+  ],
+  "cleaning": {
+    "implementation": "cdc-places-county-v1",
+    "scriptPath": "tools/generate-public-data-cases.ts",
+    "parameters": {
+      "baselineDataYear": "2022",
+      "currentDataYear": "2023",
+      "selectedCountyFips": [
+        "04013",
+        "06037",
+        "06075",
+        "17031",
+        "25017",
+        "36061",
+        "48201",
+        "53033"
+      ],
+      "decimalPlaces": 1
+    }
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2024-release.json",
+      "sha256": "53d151dd44d516b58e551b09358e74577a37bda15a12b785b1f918354e122b6b",
+      "text": "[{\"year\":\"2022\",\"stateabbr\":\"AZ\",\"locationname\":\"Maricopa\",\"locationid\":\"04013\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.9\",\"low_confidence_limit\":\"18.8\",\"high_confidence_limit\":\"23.1\",\"totalpop18plus\":\"3532288\"}\n,{\"year\":\"2022\",\"stateabbr\":\"CA\",\"locationname\":\"Los Angeles\",\"locationid\":\"06037\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.4\",\"low_confidence_limit\":\"18.4\",\"high_confidence_limit\":\"22.4\",\"totalpop18plus\":\"7737357\"}\n,{\"year\":\"2022\",\"stateabbr\":\"CA\",\"locationname\":\"San Francisco\",\"locationid\":\"06075\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"18.7\",\"low_confidence_limit\":\"16.2\",\"high_confidence_limit\":\"21.3\",\"totalpop18plus\":\"697737\"}\n,{\"year\":\"2022\",\"stateabbr\":\"IL\",\"locationname\":\"Cook\",\"locationid\":\"17031\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"17.5\",\"low_confidence_limit\":\"15.4\",\"high_confidence_limit\":\"19.9\",\"totalpop18plus\":\"4039681\"}\n,{\"year\":\"2022\",\"stateabbr\":\"MA\",\"locationname\":\"Middlesex\",\"locationid\":\"25017\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"23.4\",\"low_confidence_limit\":\"21.1\",\"high_confidence_limit\":\"25.6\",\"totalpop18plus\":\"1305661\"}\n,{\"year\":\"2022\",\"stateabbr\":\"NY\",\"locationname\":\"New York\",\"locationid\":\"36061\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.8\",\"low_confidence_limit\":\"18.9\",\"high_confidence_limit\":\"23.0\",\"totalpop18plus\":\"1372389\"}\n,{\"year\":\"2022\",\"stateabbr\":\"TX\",\"locationname\":\"Harris\",\"locationid\":\"48201\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"20.1\",\"low_confidence_limit\":\"17.7\",\"high_confidence_limit\":\"22.5\",\"totalpop18plus\":\"3550425\"}\n,{\"year\":\"2022\",\"stateabbr\":\"WA\",\"locationname\":\"King\",\"locationid\":\"53033\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"23.0\",\"low_confidence_limit\":\"21.4\",\"high_confidence_limit\":\"24.6\",\"totalpop18plus\":\"1831091\"}]\n"
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2025-release.json",
+      "sha256": "a0b3372bd0aed5b9630e44b3825e444f9e414f0fcfc2804504ac7a3d45ecb1ab",
+      "text": "[{\"year\":\"2023\",\"stateabbr\":\"AZ\",\"locationname\":\"Maricopa\",\"locationid\":\"04013\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"18.9\",\"low_confidence_limit\":\"17.0\",\"high_confidence_limit\":\"20.9\",\"totalpop18plus\":\"3572375\"}\n,{\"year\":\"2023\",\"stateabbr\":\"CA\",\"locationname\":\"Los Angeles\",\"locationid\":\"06037\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.3\",\"low_confidence_limit\":\"17.5\",\"high_confidence_limit\":\"21.3\",\"totalpop18plus\":\"7710575\"}\n,{\"year\":\"2023\",\"stateabbr\":\"CA\",\"locationname\":\"San Francisco\",\"locationid\":\"06075\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.8\",\"low_confidence_limit\":\"17.1\",\"high_confidence_limit\":\"22.8\",\"totalpop18plus\":\"698599\"}\n,{\"year\":\"2023\",\"stateabbr\":\"IL\",\"locationname\":\"Cook\",\"locationid\":\"17031\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.0\",\"low_confidence_limit\":\"16.8\",\"high_confidence_limit\":\"21.3\",\"totalpop18plus\":\"4031580\"}\n,{\"year\":\"2023\",\"stateabbr\":\"MA\",\"locationname\":\"Middlesex\",\"locationid\":\"25017\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"24.1\",\"low_confidence_limit\":\"21.7\",\"high_confidence_limit\":\"26.6\",\"totalpop18plus\":\"1310019\"}\n,{\"year\":\"2023\",\"stateabbr\":\"NY\",\"locationname\":\"New York\",\"locationid\":\"36061\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"18.6\",\"low_confidence_limit\":\"16.8\",\"high_confidence_limit\":\"20.7\",\"totalpop18plus\":\"1381420\"}\n,{\"year\":\"2023\",\"stateabbr\":\"TX\",\"locationname\":\"Harris\",\"locationid\":\"48201\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"19.5\",\"low_confidence_limit\":\"17.0\",\"high_confidence_limit\":\"22.1\",\"totalpop18plus\":\"3595915\"}\n,{\"year\":\"2023\",\"stateabbr\":\"WA\",\"locationname\":\"King\",\"locationid\":\"53033\",\"measureid\":\"DEPRESSION\",\"datavaluetypeid\":\"AgeAdjPrv\",\"data_value\":\"23.4\",\"low_confidence_limit\":\"21.7\",\"high_confidence_limit\":\"25.3\",\"totalpop18plus\":\"1836529\"}]\n"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 import type { ExecutableCaseDefinition } from "../types";
-import { confirmedThreshold, controlledUncertainty, filter, manualDecisionInputs } from "../types";
+import { controlledUncertainty, filter, publicConfirmedThreshold, publicManualDecisionInputs } from "../types";
 
 export const WORLD_BANK_LIFE_EXPECTANCY_CASE: ExecutableCaseDefinition = {
   id: "world-bank-life-expectancy",
-  title: "Public Data: World Bank Life-Expectancy Version Audit",
+  title: "Public Data: World Bank Life-Expectancy Cross-Year Audit",
   projectName: "World Bank WDI Eight-Country Life-Expectancy Audit",
   primaryKey: "country_code",
   baselineFile: "/cases/world-bank-life-expectancy/baseline.csv",
@@ -30,7 +30,7 @@ export const WORLD_BANK_LIFE_EXPECTANCY_CASE: ExecutableCaseDefinition = {
       owner: "Public-data case reviewer",
       category: "Threshold gate",
       formula: "Germany life_expectancy_years >= 81",
-      rule: { type: "threshold", field: "life_expectancy_years", aggregation: "average", operator: ">=", threshold: 81, filters: [filter("country_code", "DEU")], thresholdSpec: confirmedThreshold(81, "absolute", "Illustrative analyst review threshold v1", "Used only to demonstrate how an updated public indicator can invalidate an existing threshold claim; this is not World Bank guidance or a policy standard") },
+      rule: { type: "threshold", field: "life_expectancy_years", aggregation: "average", operator: ">=", threshold: 81, filters: [filter("country_code", "DEU")], thresholdSpec: publicConfirmedThreshold(81, "absolute", "Illustrative analyst review threshold v1", "Used only to demonstrate how an updated public indicator can invalidate an existing threshold claim; this is not World Bank guidance or a policy standard") },
     },
     {
       id: "wdi-eight-country-stability",
@@ -38,9 +38,9 @@ export const WORLD_BANK_LIFE_EXPECTANCY_CASE: ExecutableCaseDefinition = {
       title: "Mean life expectancy at birth across the eight selected countries changes by no more than 1%",
       section: "Sample-mean stability",
       owner: "Public-data case reviewer",
-      category: "Version stability",
+      category: "Period stability",
       formula: "abs(mean(2024)-mean(2019))/mean(2019) <= 1%",
-      rule: { type: "stability", field: "life_expectancy_years", aggregation: "average", supportTolerance: 1, reversalThreshold: 3, supportToleranceSpec: confirmedThreshold(1, "percent", "Illustrative descriptive stability rule v1", "Used to demonstrate a stability audit of a descriptive mean across periods; this does not imply statistical significance"), reversalThresholdSpec: confirmedThreshold(3, "percent", "Illustrative descriptive reversal rule v1", "At 3%, treat the original stability statement as materially invalid") },
+      rule: { type: "stability", field: "life_expectancy_years", aggregation: "average", supportTolerance: 1, reversalThreshold: 3, supportToleranceSpec: publicConfirmedThreshold(1, "percent", "Illustrative descriptive stability rule v1", "Used to demonstrate a stability audit of a descriptive mean across periods; this does not imply statistical significance"), reversalThresholdSpec: publicConfirmedThreshold(3, "percent", "Illustrative descriptive reversal rule v1", "At 3%, treat the original stability statement as materially invalid") },
     },
   ],
   decisions: [{
@@ -56,7 +56,7 @@ export const WORLD_BANK_LIFE_EXPECTANCY_CASE: ExecutableCaseDefinition = {
     objective: { benefitWeight: 1, costWeight: 0.2, riskWeight: 1.1 },
     riskTolerance: 20,
     noActionLoss: 24,
-    inputProvenance: manualDecisionInputs("Illustrative publication-governance assumptions v1", "Option benefits, costs, risks, and capacities are manually supplied ClaimTrace demonstration inputs; they are not World Bank data or observed communication effects"),
+    inputProvenance: publicManualDecisionInputs("Illustrative publication-governance assumptions v1", "Option benefits, costs, risks, and capacities are manually supplied ClaimTrace demonstration inputs; they are not World Bank data or observed communication effects"),
     uncertainty: controlledUncertainty("world-bank-publication-note-v1"),
     constraints: [{ id: "editorial-capacity", label: "Editorial capacity", metric: "capacity", operator: "<=", value: 45 }],
     options: [

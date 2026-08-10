@@ -46,13 +46,13 @@
       "version": "1.0.0",
       "rationale": "Option benefits, costs, risks, and capacities are manually supplied ClaimTrace demonstration inputs; they are not World Bank data or observed communication effects",
       "units": {
-        "benefit": "synthetic utility points",
-        "cost": "synthetic cost points",
-        "risk": "synthetic risk points",
-        "capacity": "synthetic capacity points"
+        "benefit": "illustrative utility points",
+        "cost": "illustrative cost points",
+        "risk": "illustrative risk points",
+        "capacity": "illustrative capacity points"
       },
-      "confirmedBy": "Synthetic case owner",
-      "confirmedAt": "2026-08-08T00:00:00.000Z"
+      "confirmedBy": "ClaimTrace public-data case author",
+      "confirmedAt": "2026-08-10T00:00:00.000Z"
     },
     "uncertainty": {
       "method": "BOUNDED_UNIFORM",

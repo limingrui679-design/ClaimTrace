@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "synthetic": false,
+  "dataOrigin": "PUBLIC",
+  "sourceMetadataFile": "/cases/ons-housing-affordability/source-metadata.json",
+  "caseId": "ons-housing-affordability",
+  "primaryKey": "authority_code",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+      "bytes": 529
+    },
+    "current.csv": {
+      "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+      "bytes": 529
+    },
+    "claims.json": {
+      "sha256": "ff452d4ffb8b46957ab2f62afdc4bedb4c8d00133c200b804c4e98db55890ed4",
+      "bytes": 3062
+    },
+    "decisions.json": {
+      "sha256": "cce207441818a541d1e3388f117ad46d69678bb788135fdaaccab3b648b63880",
+      "bytes": 3166
+    },
+    "expected-audit.json": {
+      "sha256": "1a89f3aa715b8b57853b284d60e1a4a0c60ac137e9ab7e8dbce33d9b9bdd66e7",
+      "bytes": 1421
+    },
+    "evidence-package.json": {
+      "sha256": "829022ac02f6396d3c4febdd5bdcf668565e9899d92ae63c047c44dde1b0c2c6",
+      "bytes": 100093
+    },
+    "case.ts": {
+      "sha256": "90e60a6eededfd6f352339880f43654898144f55d57ffe5ee4e407bcc5ca55cc",
+      "bytes": 6913
+    },
+    "README.md": {
+      "sha256": "8e9ed071ab4702dd2f92664c8e8f1e7e229ccacfd311e985551356f1f8d76ec7",
+      "bytes": 2261
+    },
+    "source-config.json": {
+      "sha256": "36b649bea4219ac5ae7cc9d7b01800d893196440df1145ffaf580e3bc8659ccd",
+      "bytes": 2017
+    },
+    "source-metadata.json": {
+      "sha256": "9d4a1a2401a8ca5c9ee5679791873a1577f83d7325cccf7c610fca6d3f3cbe79",
+      "bytes": 27187
+    },
+    "cleaning-log.json": {
+      "sha256": "da8814012b1889e63661f316c2f5b19b8924ada828f13d66b0f5dc5a09324bb3",
+      "bytes": 1655
+    },
+    "raw-2024.csv": {
+      "sha256": "2dbfaab741576f4f5d2e06e943ed7c5208ea1a6116e413442544e631052c2350",
+      "bytes": 12064
+    },
+    "raw-2025.csv": {
+      "sha256": "6f5ed40eb5f2162444f9fc7bdd0a228b983ba110c1223012bfe369845fb9ca32",
+      "bytes": 12073
+    }
+  }
+}

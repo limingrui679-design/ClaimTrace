@@ -29,8 +29,9 @@ test("builds the ClaimTrace SPA shell and product bundle", async () => {
   assert.match(script, /286 validation samples/);
   assert.match(script, /adds 9 false negatives/);
   assert.match(script, /Baseline SHA-256/);
-  assert.match(script, /Six Executable Cases/);
-  assert.match(script, /World Bank WDI/);
+  assert.match(script, /Ten Executable Cases/);
+  assert.match(script, /Six Public-Data Studies/i);
+  assert.match(script, /U\.S\. Treasury Yield-Curve Period Audit/);
   assert.doesNotMatch(script, /adds 17 false negatives/);
   assert.doesNotMatch(script, /baseline evidence snapshot is locked/i);
   assert.doesNotMatch(script, /Your site is taking shape/);

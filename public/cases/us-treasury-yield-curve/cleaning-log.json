@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "claimtrace-cleaning-log/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "caseId": "us-treasury-yield-curve",
+  "sourceType": "US_TREASURY_YIELD_CURVE_XML_V1",
+  "implementation": "treasury-yield-curve-v1",
+  "sourceConfigSha256": "8c7c072bebd61c93006be245e8ade683a042c22f5032277f67f400401baf27d3",
+  "transformations": {
+    "baseline": [
+      "Parse pinned U.S. Treasury Atom/XML yield-curve feed",
+      "Select the official observation dated 2024-12-31",
+      "Project 9 declared maturities",
+      "Format yields to 2 decimal places",
+      "Emit stable UTF-8 CSV in declared maturity order"
+    ],
+    "current": [
+      "Parse pinned U.S. Treasury Atom/XML yield-curve feed",
+      "Select the official observation dated 2025-12-31",
+      "Project 9 declared maturities",
+      "Format yields to 2 decimal places",
+      "Emit stable UTF-8 CSV in declared maturity order"
+    ]
+  },
+  "rawArtifacts": [
+    {
+      "side": "baseline",
+      "fileName": "raw-2024.xml",
+      "sha256": "3d77ebdb32fba00bf4f2211af3ea8924f275518c00f2faa53698b9336d180c36",
+      "bytes": 284423
+    },
+    {
+      "side": "current",
+      "fileName": "raw-2025.xml",
+      "sha256": "ac0a8ea1a70b6a22e05aa52513188076b2eddfde5e340bd17db71b48cb3df5a5",
+      "bytes": 345104
+    }
+  ],
+  "outputs": {
+    "baseline.csv": {
+      "sha256": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
+      "bytes": 304,
+      "rows": 9
+    },
+    "current.csv": {
+      "sha256": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a",
+      "bytes": 304,
+      "rows": 9
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# Public Data: USDOT Transit Operations Period Audit
+
+Reproducible public-data case based on **U.S. Department of Transportation, Federal Transit Administration — Monthly Modal Time Series**. The package pins both official-source responses and their SHA-256 hashes, retrieval metadata, license and attribution, declared limitations, source-specific deterministic cleaning parameters, two cleaned CSV snapshots, executable claim and decision specifications, expected output, and a self-verifiable AuditBundle.
+
+The observed rows and derived descriptive measures come from the pinned public source. Every decision-option benefit, cost, risk, and capacity value is separately labeled as a manual demonstration assumption; it is not an observed outcome or a recommendation from the source publisher.
+
+## Reproduce and verify
+
+```bash
+npm run cases:generate
+npm run test:unit
+```
+
+Normal generation is offline and rebuilds the CSV snapshots from the committed raw responses. A deliberate source refresh is a separate networked action: `npm run cases:refresh-sources -- usdot-transit-operations`.
+
+## Source and scope
+
+- Publisher: U.S. Department of Transportation, Federal Transit Administration
+- Dataset: Monthly Modal Time Series
+- Measure: NTD-MONTHLY-HR-RIDERS-PER-REVENUE-HOUR — Heavy-rail ridership and vehicle-revenue hours
+- Retrieved: 2026-08-10T00:00:00.000Z
+- License: U.S. Government work / public data (https://www.usa.gov/government-copyright)
+- Baseline source: https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272024%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100
+- Current source: https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272025%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100
+
+## Declared limitations
+
+- The case compares one calendar month for eight selected directly operated heavy-rail services and is not a national performance ranking.
+- Ridership per vehicle-revenue hour is a descriptive service-intensity ratio, not a measure of causal efficiency, quality, crowding, or profitability.
+- National Transit Database monthly values can be revised after publication.
+
+ClaimTrace indicates transformations and does not imply publisher endorsement.

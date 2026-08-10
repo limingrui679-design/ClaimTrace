@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "claimtrace-case/2.0.0",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "synthetic": false,
+  "dataOrigin": "PUBLIC",
+  "sourceMetadataFile": "/cases/usdot-transit-operations/source-metadata.json",
+  "caseId": "usdot-transit-operations",
+  "primaryKey": "ntd_id",
+  "claimCount": 3,
+  "decisionCount": 1,
+  "evidencePackageVerified": true,
+  "files": {
+    "baseline.csv": {
+      "sha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
+      "bytes": 834
+    },
+    "current.csv": {
+      "sha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
+      "bytes": 834
+    },
+    "claims.json": {
+      "sha256": "aaf60f3686dc8c11e3b76c23b5873496d81cfafe92e6e13d12ed519a261ab1d7",
+      "bytes": 2992
+    },
+    "decisions.json": {
+      "sha256": "d0de6803dad029a8fbd2ec90c5324a73d0bf4394a61d7abef053bba7e7c325ca",
+      "bytes": 3162
+    },
+    "expected-audit.json": {
+      "sha256": "96a21adc7610400c4d2b7a941d08a887989d1e24e61e9c0bd2baff2957cfd602",
+      "bytes": 1472
+    },
+    "evidence-package.json": {
+      "sha256": "a06a38a8109d3a36679b95f6fd06944aab1a178adafc046e8649a34c39f86cb4",
+      "bytes": 76019
+    },
+    "case.ts": {
+      "sha256": "b50a56a4e059c86acfd522c3c57c4f13dea02dfaa47b4912f921358e65082c11",
+      "bytes": 6828
+    },
+    "README.md": {
+      "sha256": "82e858af932cf43582a0ce9ad0a25f2de8b91e39234fdb44f4c899db33ef7dfa",
+      "bytes": 2942
+    },
+    "source-config.json": {
+      "sha256": "26bcb00c883f8b4edd5aef5145523035166ce684eaf3af41f1fc79f3cb9af6e5",
+      "bytes": 2627
+    },
+    "source-metadata.json": {
+      "sha256": "213d3ce53e534b2cd11b1a5997d7004edf72520013898414e95abe1c5117e3fc",
+      "bytes": 7572
+    },
+    "cleaning-log.json": {
+      "sha256": "7530afa92aa54fa2f8dd9ea24c0572067d52bccd271b39b602575f3c6b093b0c",
+      "bytes": 1659
+    },
+    "raw-2024-05.json": {
+      "sha256": "31f3aad46f0a98f8465790a461cf1b7162e0477f7886fd91a3906378f4aff536",
+      "bytes": 2000
+    },
+    "raw-2025-05.json": {
+      "sha256": "1c5fc1298f75d13e0268f8b92300be3a3940c3b30dfe80c85f0a58eab06aa2ec",
+      "bytes": 2000
+    }
+  }
+}

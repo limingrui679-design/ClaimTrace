@@ -1,0 +1,2283 @@
+{
+  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "bundleType": "AuditBundle",
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "previousBundleHash": null,
+  "project": "ONS Selected-Authority Housing-Affordability Ratio Audit",
+  "primaryKey": "authority_code",
+  "ruleVersion": "claimtrace-rule/6.1.2",
+  "isDemo": true,
+  "dataOrigin": "PUBLIC",
+  "snapshots": {
+    "baseline": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "baseline-cd3f0d433ec73a23",
+      "side": "baseline",
+      "fileName": "baseline.csv",
+      "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+      "normalizedSha256": "56a404f70eb800c4b3051212f16cf7409692bcdfa48215aa87e764fca2aebcc7",
+      "rowCount": 12,
+      "byteSize": 529,
+      "columns": [
+        "authority_code",
+        "authority",
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "primaryKey": "authority_code",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "verifiedAt": "2026-08-10T00:00:00.000Z",
+      "verificationStatus": "verified"
+    },
+    "current": {
+      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "snapshotId": "current-8d9006a4cb84ddbb",
+      "side": "current",
+      "fileName": "current.csv",
+      "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+      "normalizedSha256": "92edc8d96f55386fef33c22d3cc544fc8e4106ea44d4f8cc253d601a3e368bbb",
+      "rowCount": 12,
+      "byteSize": 529,
+      "columns": [
+        "authority_code",
+        "authority",
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "primaryKey": "authority_code",
+      "generatedAt": "2026-08-10T00:00:00.000Z",
+      "verifiedAt": "2026-08-10T00:00:00.000Z",
+      "verificationStatus": "verified"
+    }
+  },
+  "snapshotPayloads": {
+    "baseline": {
+      "fileName": "baseline.csv",
+      "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+      "normalizedSha256": "56a404f70eb800c4b3051212f16cf7409692bcdfa48215aa87e764fca2aebcc7",
+      "text": "authority_code,authority,period,housing_affordability_ratio\nE06000002,Middlesbrough,2024-04-01,4.73\nE06000003,Redcar and Cleveland,2024-04-01,5.39\nE06000004,Stockton-on-Tees,2024-04-01,5.10\nE06000006,Halton,2024-04-01,5.06\nE06000023,\"Bristol, City of\",2024-04-01,8.60\nE07000008,Cambridge,2024-04-01,10.98\nE07000178,Oxford,2024-04-01,11.39\nE08000003,Manchester,2024-04-01,7.88\nE08000025,Birmingham,2024-04-01,6.77\nE08000035,Leeds,2024-04-01,6.58\nE09000007,Camden,2024-04-01,17.60\nE09000020,Kensington and Chelsea,2024-04-01,23.82\n",
+      "rawBytesBase64": "YXV0aG9yaXR5X2NvZGUsYXV0aG9yaXR5LHBlcmlvZCxob3VzaW5nX2FmZm9yZGFiaWxpdHlfcmF0aW8KRTA2MDAwMDAyLE1pZGRsZXNicm91Z2gsMjAyNC0wNC0wMSw0LjczCkUwNjAwMDAwMyxSZWRjYXIgYW5kIENsZXZlbGFuZCwyMDI0LTA0LTAxLDUuMzkKRTA2MDAwMDA0LFN0b2NrdG9uLW9uLVRlZXMsMjAyNC0wNC0wMSw1LjEwCkUwNjAwMDAwNixIYWx0b24sMjAyNC0wNC0wMSw1LjA2CkUwNjAwMDAyMywiQnJpc3RvbCwgQ2l0eSBvZiIsMjAyNC0wNC0wMSw4LjYwCkUwNzAwMDAwOCxDYW1icmlkZ2UsMjAyNC0wNC0wMSwxMC45OApFMDcwMDAxNzgsT3hmb3JkLDIwMjQtMDQtMDEsMTEuMzkKRTA4MDAwMDAzLE1hbmNoZXN0ZXIsMjAyNC0wNC0wMSw3Ljg4CkUwODAwMDAyNSxCaXJtaW5naGFtLDIwMjQtMDQtMDEsNi43NwpFMDgwMDAwMzUsTGVlZHMsMjAyNC0wNC0wMSw2LjU4CkUwOTAwMDAwNyxDYW1kZW4sMjAyNC0wNC0wMSwxNy42MApFMDkwMDAwMjAsS2Vuc2luZ3RvbiBhbmQgQ2hlbHNlYSwyMDI0LTA0LTAxLDIzLjgyCg=="
+    },
+    "current": {
+      "fileName": "current.csv",
+      "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+      "normalizedSha256": "92edc8d96f55386fef33c22d3cc544fc8e4106ea44d4f8cc253d601a3e368bbb",
+      "text": "authority_code,authority,period,housing_affordability_ratio\nE06000002,Middlesbrough,2025-04-01,4.36\nE06000003,Redcar and Cleveland,2025-04-01,4.70\nE06000004,Stockton-on-Tees,2025-04-01,4.66\nE06000006,Halton,2025-04-01,5.56\nE06000023,\"Bristol, City of\",2025-04-01,8.88\nE07000008,Cambridge,2025-04-01,11.32\nE07000178,Oxford,2025-04-01,10.40\nE08000003,Manchester,2025-04-01,6.82\nE08000025,Birmingham,2025-04-01,6.53\nE08000035,Leeds,2025-04-01,6.67\nE09000007,Camden,2025-04-01,14.49\nE09000020,Kensington and Chelsea,2025-04-01,21.87\n",
+      "rawBytesBase64": "YXV0aG9yaXR5X2NvZGUsYXV0aG9yaXR5LHBlcmlvZCxob3VzaW5nX2FmZm9yZGFiaWxpdHlfcmF0aW8KRTA2MDAwMDAyLE1pZGRsZXNicm91Z2gsMjAyNS0wNC0wMSw0LjM2CkUwNjAwMDAwMyxSZWRjYXIgYW5kIENsZXZlbGFuZCwyMDI1LTA0LTAxLDQuNzAKRTA2MDAwMDA0LFN0b2NrdG9uLW9uLVRlZXMsMjAyNS0wNC0wMSw0LjY2CkUwNjAwMDAwNixIYWx0b24sMjAyNS0wNC0wMSw1LjU2CkUwNjAwMDAyMywiQnJpc3RvbCwgQ2l0eSBvZiIsMjAyNS0wNC0wMSw4Ljg4CkUwNzAwMDAwOCxDYW1icmlkZ2UsMjAyNS0wNC0wMSwxMS4zMgpFMDcwMDAxNzgsT3hmb3JkLDIwMjUtMDQtMDEsMTAuNDAKRTA4MDAwMDAzLE1hbmNoZXN0ZXIsMjAyNS0wNC0wMSw2LjgyCkUwODAwMDAyNSxCaXJtaW5naGFtLDIwMjUtMDQtMDEsNi41MwpFMDgwMDAwMzUsTGVlZHMsMjAyNS0wNC0wMSw2LjY3CkUwOTAwMDAwNyxDYW1kZW4sMjAyNS0wNC0wMSwxNC40OQpFMDkwMDAwMjAsS2Vuc2luZ3RvbiBhbmQgQ2hlbHNlYSwyMDI1LTA0LTAxLDIxLjg3Cg=="
+    }
+  },
+  "summary": {
+    "total": 3,
+    "supported": 2,
+    "weakened": 0,
+    "reversed": 1,
+    "untestable": 0,
+    "reviewRequired": 0,
+    "completenessChecksPassed": 48,
+    "completenessChecksTotal": 48,
+    "evidenceCoverage": 100,
+    "changedRecords": 12
+  },
+  "diffSummary": {
+    "totalChanged": 12,
+    "exported": 12,
+    "truncated": false,
+    "limit": 500
+  },
+  "diffs": [
+    {
+      "key": "E06000002",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E06000002",
+        "authority": "Middlesbrough",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "4.73"
+      },
+      "current": {
+        "authority_code": "E06000002",
+        "authority": "Middlesbrough",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "4.36"
+      },
+      "baselineLine": 2,
+      "currentLine": 2
+    },
+    {
+      "key": "E06000003",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E06000003",
+        "authority": "Redcar and Cleveland",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "5.39"
+      },
+      "current": {
+        "authority_code": "E06000003",
+        "authority": "Redcar and Cleveland",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "4.70"
+      },
+      "baselineLine": 3,
+      "currentLine": 3
+    },
+    {
+      "key": "E06000004",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E06000004",
+        "authority": "Stockton-on-Tees",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "5.10"
+      },
+      "current": {
+        "authority_code": "E06000004",
+        "authority": "Stockton-on-Tees",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "4.66"
+      },
+      "baselineLine": 4,
+      "currentLine": 4
+    },
+    {
+      "key": "E06000006",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E06000006",
+        "authority": "Halton",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "5.06"
+      },
+      "current": {
+        "authority_code": "E06000006",
+        "authority": "Halton",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "5.56"
+      },
+      "baselineLine": 5,
+      "currentLine": 5
+    },
+    {
+      "key": "E06000023",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E06000023",
+        "authority": "Bristol, City of",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "8.60"
+      },
+      "current": {
+        "authority_code": "E06000023",
+        "authority": "Bristol, City of",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "8.88"
+      },
+      "baselineLine": 6,
+      "currentLine": 6
+    },
+    {
+      "key": "E07000008",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E07000008",
+        "authority": "Cambridge",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "10.98"
+      },
+      "current": {
+        "authority_code": "E07000008",
+        "authority": "Cambridge",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "11.32"
+      },
+      "baselineLine": 7,
+      "currentLine": 7
+    },
+    {
+      "key": "E07000178",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E07000178",
+        "authority": "Oxford",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "11.39"
+      },
+      "current": {
+        "authority_code": "E07000178",
+        "authority": "Oxford",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "10.40"
+      },
+      "baselineLine": 8,
+      "currentLine": 8
+    },
+    {
+      "key": "E08000003",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E08000003",
+        "authority": "Manchester",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "7.88"
+      },
+      "current": {
+        "authority_code": "E08000003",
+        "authority": "Manchester",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "6.82"
+      },
+      "baselineLine": 9,
+      "currentLine": 9
+    },
+    {
+      "key": "E08000025",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E08000025",
+        "authority": "Birmingham",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "6.77"
+      },
+      "current": {
+        "authority_code": "E08000025",
+        "authority": "Birmingham",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "6.53"
+      },
+      "baselineLine": 10,
+      "currentLine": 10
+    },
+    {
+      "key": "E08000035",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E08000035",
+        "authority": "Leeds",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "6.58"
+      },
+      "current": {
+        "authority_code": "E08000035",
+        "authority": "Leeds",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "6.67"
+      },
+      "baselineLine": 11,
+      "currentLine": 11
+    },
+    {
+      "key": "E09000007",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E09000007",
+        "authority": "Camden",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "17.60"
+      },
+      "current": {
+        "authority_code": "E09000007",
+        "authority": "Camden",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "14.49"
+      },
+      "baselineLine": 12,
+      "currentLine": 12
+    },
+    {
+      "key": "E09000020",
+      "kind": "changed",
+      "changedFields": [
+        "period",
+        "housing_affordability_ratio"
+      ],
+      "baseline": {
+        "authority_code": "E09000020",
+        "authority": "Kensington and Chelsea",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "23.82"
+      },
+      "current": {
+        "authority_code": "E09000020",
+        "authority": "Kensington and Chelsea",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "21.87"
+      },
+      "baselineLine": 13,
+      "currentLine": 13
+    }
+  ],
+  "queryTrace": [
+    {
+      "claimId": "ons-kensington-rank",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "housing_affordability_ratio",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {
+            "Middlesbrough": 1,
+            "Redcar and Cleveland": 1,
+            "Stockton-on-Tees": 1,
+            "Halton": 1,
+            "Bristol, City of": 1,
+            "Cambridge": 1,
+            "Oxford": 1,
+            "Manchester": 1,
+            "Birmingham": 1,
+            "Leeds": 1,
+            "Camden": 1,
+            "Kensington and Chelsea": 1
+          }
+        },
+        "current": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {
+            "Middlesbrough": 1,
+            "Redcar and Cleveland": 1,
+            "Stockton-on-Tees": 1,
+            "Halton": 1,
+            "Bristol, City of": 1,
+            "Cambridge": 1,
+            "Oxford": 1,
+            "Manchester": 1,
+            "Birmingham": 1,
+            "Leeds": 1,
+            "Camden": 1,
+            "Kensington and Chelsea": 1
+          }
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 24,
+        "exportedReferences": 24,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ons-kensington-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 12,
+        "sides": {
+          "baseline": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "ons-redcar-five-ratio",
+      "filters": [
+        {
+          "field": "authority_code",
+          "equals": "E06000003"
+        }
+      ],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "housing_affordability_ratio",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 12,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 11,
+          "includedKeyCount": 1,
+          "includedKeysHash": "e2316f0f",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 12,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 11,
+          "includedKeyCount": 1,
+          "includedKeysHash": "e2316f0f",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "ons-selected-mean-stability",
+      "filters": [],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "housing_affordability_ratio",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 24,
+        "exportedReferences": 24,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ons-selected-mean-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 12,
+        "sides": {
+          "baseline": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          }
+        }
+      }
+    }
+  ],
+  "dataPreview": {
+    "columns": [
+      "authority_code",
+      "authority",
+      "period",
+      "housing_affordability_ratio"
+    ],
+    "baselineRows": [
+      {
+        "authority_code": "E06000002",
+        "authority": "Middlesbrough",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "4.73"
+      },
+      {
+        "authority_code": "E06000003",
+        "authority": "Redcar and Cleveland",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "5.39"
+      },
+      {
+        "authority_code": "E06000004",
+        "authority": "Stockton-on-Tees",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "5.10"
+      },
+      {
+        "authority_code": "E06000006",
+        "authority": "Halton",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "5.06"
+      },
+      {
+        "authority_code": "E06000023",
+        "authority": "Bristol, City of",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "8.60"
+      },
+      {
+        "authority_code": "E07000008",
+        "authority": "Cambridge",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "10.98"
+      },
+      {
+        "authority_code": "E07000178",
+        "authority": "Oxford",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "11.39"
+      },
+      {
+        "authority_code": "E08000003",
+        "authority": "Manchester",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "7.88"
+      },
+      {
+        "authority_code": "E08000025",
+        "authority": "Birmingham",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "6.77"
+      },
+      {
+        "authority_code": "E08000035",
+        "authority": "Leeds",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "6.58"
+      },
+      {
+        "authority_code": "E09000007",
+        "authority": "Camden",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "17.60"
+      },
+      {
+        "authority_code": "E09000020",
+        "authority": "Kensington and Chelsea",
+        "period": "2024-04-01",
+        "housing_affordability_ratio": "23.82"
+      }
+    ],
+    "currentRows": [
+      {
+        "authority_code": "E06000002",
+        "authority": "Middlesbrough",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "4.36"
+      },
+      {
+        "authority_code": "E06000003",
+        "authority": "Redcar and Cleveland",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "4.70"
+      },
+      {
+        "authority_code": "E06000004",
+        "authority": "Stockton-on-Tees",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "4.66"
+      },
+      {
+        "authority_code": "E06000006",
+        "authority": "Halton",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "5.56"
+      },
+      {
+        "authority_code": "E06000023",
+        "authority": "Bristol, City of",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "8.88"
+      },
+      {
+        "authority_code": "E07000008",
+        "authority": "Cambridge",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "11.32"
+      },
+      {
+        "authority_code": "E07000178",
+        "authority": "Oxford",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "10.40"
+      },
+      {
+        "authority_code": "E08000003",
+        "authority": "Manchester",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "6.82"
+      },
+      {
+        "authority_code": "E08000025",
+        "authority": "Birmingham",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "6.53"
+      },
+      {
+        "authority_code": "E08000035",
+        "authority": "Leeds",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "6.67"
+      },
+      {
+        "authority_code": "E09000007",
+        "authority": "Camden",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "14.49"
+      },
+      {
+        "authority_code": "E09000020",
+        "authority": "Kensington and Chelsea",
+        "period": "2025-04-01",
+        "housing_affordability_ratio": "21.87"
+      }
+    ],
+    "previewLimit": 20
+  },
+  "scaleBoundary": {
+    "maxExportedDiffs": 500,
+    "maxRawBytesPerSnapshot": 500000,
+    "maxReferencesPerClaim": 200,
+    "note": "Above the size limits, preserve hashes, manifests, changed records, and required samples instead of copying full tables."
+  },
+  "claimSpecs": [
+    {
+      "id": "ons-kensington-rank",
+      "code": "ONS-001",
+      "title": "Kensington and Chelsea remains the highest-ratio authority among the twelve selected authorities",
+      "section": "Spatial ranking",
+      "owner": "Public-data case reviewer",
+      "category": "Authority ranking",
+      "formula": "argmax(authority, housing_affordability_ratio) = Kensington and Chelsea",
+      "rule": {
+        "type": "rank",
+        "field": "housing_affordability_ratio",
+        "aggregation": "average",
+        "groupField": "authority",
+        "expectedGroup": "Kensington and Chelsea",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      }
+    },
+    {
+      "id": "ons-redcar-five-ratio",
+      "code": "ONS-002",
+      "title": "Redcar and Cleveland's workplace-based affordability ratio remains at or above 5",
+      "section": "Methodology-linked threshold audit",
+      "owner": "Public-data case reviewer",
+      "category": "Threshold gate",
+      "formula": "Redcar and Cleveland housing_affordability_ratio >= 5",
+      "rule": {
+        "type": "threshold",
+        "field": "housing_affordability_ratio",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 5,
+        "filters": [
+          {
+            "field": "authority_code",
+            "equals": "E06000003"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 5,
+          "unit": "absolute",
+          "source": "ONS housing-affordability QMI mortgage-multiple interpretation",
+          "rationale": "ONS discusses a ratio of five in the affordability interpretation; this audit does not turn it into a local policy-performance target",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
+    },
+    {
+      "id": "ons-selected-mean-stability",
+      "code": "ONS-003",
+      "title": "The unweighted mean ratio across the twelve selected authorities changes by no more than 10%",
+      "section": "Selected-authority descriptive stability",
+      "owner": "Public-data case reviewer",
+      "category": "Period stability",
+      "formula": "abs(mean(2025 ratios)-mean(2024 ratios))/mean(2024 ratios) <= 10%",
+      "rule": {
+        "type": "stability",
+        "field": "housing_affordability_ratio",
+        "aggregation": "average",
+        "supportTolerance": 10,
+        "reversalThreshold": 20,
+        "supportToleranceSpec": {
+          "value": 10,
+          "unit": "percent",
+          "source": "Illustrative planning-context stability rule v1",
+          "rationale": "Used to audit whether a compact selected-authority context statement remains stable",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 20,
+          "unit": "percent",
+          "source": "Illustrative planning-context escalation v1",
+          "rationale": "At 20%, treat the compact selected-authority statement as materially invalid",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
+    }
+  ],
+  "claimResults": [
+    {
+      "id": "ons-kensington-rank",
+      "code": "ONS-001",
+      "title": "Kensington and Chelsea remains the highest-ratio authority among the twelve selected authorities",
+      "section": "Spatial ranking",
+      "owner": "Public-data case reviewer",
+      "category": "Authority ranking",
+      "formula": "argmax(authority, housing_affordability_ratio) = Kensington and Chelsea",
+      "rule": {
+        "type": "rank",
+        "field": "housing_affordability_ratio",
+        "aggregation": "average",
+        "groupField": "authority",
+        "expectedGroup": "Kensington and Chelsea",
+        "rank": "max",
+        "tiePolicy": "require_unique"
+      },
+      "kind": "SNAPSHOT",
+      "status": "SUPPORTED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "Kensington and Chelsea 23.82",
+      "currentValue": "Kensington and Chelsea 21.87",
+      "reason": "Kensington and Chelsea is the unique extreme group.",
+      "action": "The claim may continue to be cited.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000002",
+          "lineNumber": 2,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000003",
+          "lineNumber": 3,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000004",
+          "lineNumber": 4,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000006",
+          "lineNumber": 5,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000023",
+          "lineNumber": 6,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E07000008",
+          "lineNumber": 7,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E07000178",
+          "lineNumber": 8,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E08000003",
+          "lineNumber": 9,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E08000025",
+          "lineNumber": 10,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E08000035",
+          "lineNumber": 11,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E09000007",
+          "lineNumber": 12,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E09000020",
+          "lineNumber": 13,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000002",
+          "lineNumber": 2,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000003",
+          "lineNumber": 3,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000004",
+          "lineNumber": 4,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000006",
+          "lineNumber": 5,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000023",
+          "lineNumber": 6,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E07000008",
+          "lineNumber": 7,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E07000178",
+          "lineNumber": 8,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E08000003",
+          "lineNumber": 9,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E08000025",
+          "lineNumber": 10,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E08000035",
+          "lineNumber": 11,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E09000007",
+          "lineNumber": 12,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E09000020",
+          "lineNumber": 13,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio",
+            "authority"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Kensington and Chelsea remains the highest-ratio authority among the twelve selected authorities",
+          "kind": "Claim",
+          "title": "Kensington and Chelsea remains the highest-ratio authority among the twelve selected authorities",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:ons-kensington-rank:8406789e1998e26683c7b450",
+          "kind": "Comparison result",
+          "title": "housing_affordability_ratio version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:housing_affordability_ratio",
+          "kind": "Metric",
+          "title": "housing_affordability_ratio",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:housing_affordability_ratio",
+          "kind": "Field",
+          "title": "housing_affordability_ratio",
+          "detail": "Primary key: authority_code",
+          "bound": true
+        },
+        {
+          "id": "records:authority_code",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+        "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 24,
+        "exportedReferences": 24,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ons-kensington-rank|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 12,
+        "sides": {
+          "baseline": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {
+            "Middlesbrough": 1,
+            "Redcar and Cleveland": 1,
+            "Stockton-on-Tees": 1,
+            "Halton": 1,
+            "Bristol, City of": 1,
+            "Cambridge": 1,
+            "Oxford": 1,
+            "Manchester": 1,
+            "Birmingham": 1,
+            "Leeds": 1,
+            "Camden": 1,
+            "Kensington and Chelsea": 1
+          }
+        },
+        "current": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {
+            "Middlesbrough": 1,
+            "Redcar and Cleveland": 1,
+            "Stockton-on-Tees": 1,
+            "Halton": 1,
+            "Bristol, City of": 1,
+            "Cambridge": 1,
+            "Oxford": 1,
+            "Manchester": 1,
+            "Birmingham": 1,
+            "Leeds": 1,
+            "Camden": 1,
+            "Kensington and Chelsea": 1
+          }
+        }
+      },
+      "resultId": "claim-result:ons-kensington-rank:8406789e1998e26683c7b450",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ons-redcar-five-ratio",
+      "code": "ONS-002",
+      "title": "Redcar and Cleveland's workplace-based affordability ratio remains at or above 5",
+      "section": "Methodology-linked threshold audit",
+      "owner": "Public-data case reviewer",
+      "category": "Threshold gate",
+      "formula": "Redcar and Cleveland housing_affordability_ratio >= 5",
+      "rule": {
+        "type": "threshold",
+        "field": "housing_affordability_ratio",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 5,
+        "filters": [
+          {
+            "field": "authority_code",
+            "equals": "E06000003"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 5,
+          "unit": "absolute",
+          "source": "ONS housing-affordability QMI mortgage-multiple interpretation",
+          "rationale": "ONS discusses a ratio of five in the affordability interpretation; this audit does not turn it into a local policy-performance target",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVERSED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "5.39",
+      "currentValue": "4.7",
+      "reason": "Current average is 4.7 and does not satisfy rule >= 5.",
+      "action": "Stop citing this claim and inspect linked decisions.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000003",
+          "lineNumber": 3,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000003",
+          "lineNumber": 3,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Redcar and Cleveland's workplace-based affordability ratio remains at or above 5",
+          "kind": "Claim",
+          "title": "Redcar and Cleveland's workplace-based affordability ratio remains at or above 5",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:ons-redcar-five-ratio:5a3fc518c1a1da2d02aeb804",
+          "kind": "Comparison result",
+          "title": "housing_affordability_ratio version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:housing_affordability_ratio",
+          "kind": "Metric",
+          "title": "housing_affordability_ratio",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:housing_affordability_ratio",
+          "kind": "Field",
+          "title": "housing_affordability_ratio",
+          "detail": "Primary key: authority_code",
+          "bound": true
+        },
+        {
+          "id": "records:authority_code",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVERSED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+        "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 12,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 11,
+          "includedKeyCount": 1,
+          "includedKeysHash": "e2316f0f",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 12,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 11,
+          "includedKeyCount": 1,
+          "includedKeysHash": "e2316f0f",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:ons-redcar-five-ratio:5a3fc518c1a1da2d02aeb804",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "ons-selected-mean-stability",
+      "code": "ONS-003",
+      "title": "The unweighted mean ratio across the twelve selected authorities changes by no more than 10%",
+      "section": "Selected-authority descriptive stability",
+      "owner": "Public-data case reviewer",
+      "category": "Period stability",
+      "formula": "abs(mean(2025 ratios)-mean(2024 ratios))/mean(2024 ratios) <= 10%",
+      "rule": {
+        "type": "stability",
+        "field": "housing_affordability_ratio",
+        "aggregation": "average",
+        "supportTolerance": 10,
+        "reversalThreshold": 20,
+        "supportToleranceSpec": {
+          "value": 10,
+          "unit": "percent",
+          "source": "Illustrative planning-context stability rule v1",
+          "rationale": "Used to audit whether a compact selected-authority context statement remains stable",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        },
+        "reversalThresholdSpec": {
+          "value": 20,
+          "unit": "percent",
+          "source": "Illustrative planning-context escalation v1",
+          "rationale": "At 20%, treat the compact selected-authority statement as materially invalid",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      },
+      "kind": "VERSION_COMPARISON",
+      "status": "SUPPORTED",
+      "baselineStatus": "UNTESTABLE",
+      "baselineValue": "9.49",
+      "currentValue": "8.86",
+      "reason": "average of housing_affordability_ratio changed 6.71%, within the confirmed support tolerance of 10%.",
+      "action": "The claim may continue to be cited.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000002",
+          "lineNumber": 2,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000003",
+          "lineNumber": 3,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000004",
+          "lineNumber": 4,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000006",
+          "lineNumber": 5,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E06000023",
+          "lineNumber": 6,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E07000008",
+          "lineNumber": 7,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E07000178",
+          "lineNumber": 8,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E08000003",
+          "lineNumber": 9,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E08000025",
+          "lineNumber": 10,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E08000035",
+          "lineNumber": 11,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E09000007",
+          "lineNumber": 12,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "keyField": "authority_code",
+          "keyValue": "E09000020",
+          "lineNumber": 13,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000002",
+          "lineNumber": 2,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000003",
+          "lineNumber": 3,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000004",
+          "lineNumber": 4,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000006",
+          "lineNumber": 5,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E06000023",
+          "lineNumber": 6,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E07000008",
+          "lineNumber": 7,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E07000178",
+          "lineNumber": 8,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E08000003",
+          "lineNumber": 9,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E08000025",
+          "lineNumber": 10,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E08000035",
+          "lineNumber": 11,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E09000007",
+          "lineNumber": 12,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+          "keyField": "authority_code",
+          "keyValue": "E09000020",
+          "lineNumber": 13,
+          "fields": [
+            "authority_code",
+            "housing_affordability_ratio"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:The unweighted mean ratio across the twelve selected authorities changes by no more than 10%",
+          "kind": "Claim",
+          "title": "The unweighted mean ratio across the twelve selected authorities changes by no more than 10%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:ons-selected-mean-stability:d420b343b0fabfa3894fbbf4",
+          "kind": "Comparison result",
+          "title": "housing_affordability_ratio version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:housing_affordability_ratio",
+          "kind": "Metric",
+          "title": "housing_affordability_ratio",
+          "detail": "Aggregation: average",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.1.2",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.1.2",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:housing_affordability_ratio",
+          "kind": "Field",
+          "title": "housing_affordability_ratio",
+          "detail": "Primary key: authority_code",
+          "bound": true
+        },
+        {
+          "id": "records:authority_code",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+        "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 24,
+        "exportedReferences": 24,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "ons-selected-mean-stability|claimtrace-rule/6.1.2",
+        "pairedChangedKeys": 12,
+        "sides": {
+          "baseline": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 12,
+            "exportedReferences": 12,
+            "changedCandidates": 12,
+            "pairedChangedReferences": 12,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 2,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 12,
+          "filteredRows": 12,
+          "effectiveRows": 12,
+          "missingRows": 0,
+          "excludedRows": 0,
+          "includedKeyCount": 12,
+          "includedKeysHash": "153b8e1b",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:ons-selected-mean-stability:d420b343b0fabfa3894fbbf4",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    }
+  ],
+  "decisionSpecs": [
+    {
+      "id": "ons-planning-context-note",
+      "title": "Can the 2024 selected-authority planning context note be reused without revision?",
+      "owner": "Public-data case reviewer",
+      "passActionId": "ons:retain-context-with-method-note",
+      "holdActionId": "ons:update-ratio-and-method-note",
+      "actionIfPass": "Retain supported descriptive context with period, geography, provisional-earnings, and revision disclosures.",
+      "actionIfFail": "Update the threshold or ranking statement and retain the ONS methodology boundary; do not infer a planning intervention effect.",
+      "conditions": [
+        {
+          "claimId": "ons-kensington-rank",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "ons-redcar-five-ratio",
+          "allowedStatuses": [
+            "SUPPORTED"
+          ]
+        },
+        {
+          "claimId": "ons-selected-mean-stability",
+          "allowedStatuses": [
+            "SUPPORTED",
+            "WEAKENED"
+          ]
+        }
+      ],
+      "stakeholders": [
+        "Planning readers",
+        "Local-data analysts",
+        "Public-data provider"
+      ],
+      "objective": {
+        "benefitWeight": 1,
+        "costWeight": 0.2,
+        "riskWeight": 1.2
+      },
+      "riskTolerance": 18,
+      "noActionLoss": 28,
+      "inputProvenance": {
+        "kind": "MANUAL_ASSUMPTION",
+        "source": "Illustrative planning-publication assumptions v1",
+        "version": "1.0.0",
+        "rationale": "The option scores are demonstration inputs, not housing need, welfare, land value, intervention impact, or implementation cost",
+        "units": {
+          "benefit": "illustrative utility points",
+          "cost": "illustrative cost points",
+          "risk": "illustrative risk points",
+          "capacity": "illustrative capacity points"
+        },
+        "confirmedBy": "ClaimTrace public-data case author",
+        "confirmedAt": "2026-08-10T00:00:00.000Z"
+      },
+      "uncertainty": {
+        "method": "BOUNDED_UNIFORM",
+        "benefitMultiplier": [
+          0.8,
+          1.2
+        ],
+        "costMultiplier": [
+          0.85,
+          1.2
+        ],
+        "riskMultiplier": [
+          0.8,
+          1.25
+        ],
+        "capacityMultiplier": [
+          0.9,
+          1.15
+        ],
+        "trials": 512,
+        "seed": "ons-planning-context-note-v1",
+        "stabilitySweep": {
+          "parameter": "benefitMultiplier",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05
+        }
+      },
+      "constraints": [
+        {
+          "id": "planning-review-capacity",
+          "label": "Planning-review capacity",
+          "metric": "capacity",
+          "operator": "<=",
+          "value": 45
+        }
+      ],
+      "options": [
+        {
+          "id": "reuse",
+          "label": "Reuse unchanged",
+          "benefit": 31,
+          "cost": 6,
+          "risk": 31,
+          "capacity": 4
+        },
+        {
+          "id": "revise",
+          "label": "Revise ratios and method note",
+          "benefit": 82,
+          "cost": 25,
+          "risk": 8,
+          "capacity": 25
+        },
+        {
+          "id": "study",
+          "label": "Build a full spatial housing study",
+          "benefit": 108,
+          "cost": 92,
+          "risk": 13,
+          "capacity": 86
+        }
+      ]
+    }
+  ],
+  "decisionResults": [
+    {
+      "decisionId": "ons-planning-context-note",
+      "previousOutcome": null,
+      "currentOutcome": "HOLD",
+      "boundClaimIds": [
+        "ons-kensington-rank",
+        "ons-redcar-five-ratio",
+        "ons-selected-mean-stability"
+      ],
+      "affectedClaimIds": [
+        "ons-redcar-five-ratio"
+      ],
+      "comparisonBasis": "NO_HISTORY",
+      "changeReasons": [],
+      "binding": {
+        "activeActionId": "ons:update-ratio-and-method-note",
+        "actionIdentityHash": "370fd13bf89ee4f5ceb9511a5152e2a586bc89362040d8d5bf7f5794830d4f43",
+        "recommendedOptionId": "revise",
+        "feasibleOptionIds": [
+          "revise"
+        ],
+        "decisionPolicyHash": "1c0bc5fc4da50cf83dcabd0e8a017e7d6f3117a2f130888b150ce67c9dc433e3",
+        "decisionInputProvenanceHash": "09e9c2f24f8fc3b89e9c0b9823fb5d83b5979812e81ec3cbdb1521ca8311376b",
+        "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
+        "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
+        "ruleVersion": "claimtrace-rule/6.1.2",
+        "claimResultIds": [
+          "claim-result:ons-kensington-rank:8406789e1998e26683c7b450",
+          "claim-result:ons-redcar-five-ratio:5a3fc518c1a1da2d02aeb804",
+          "claim-result:ons-selected-mean-stability:d420b343b0fabfa3894fbbf4"
+        ]
+      },
+      "analysis": {
+        "options": [
+          {
+            "optionId": "revise",
+            "label": "Revise ratios and method note",
+            "feasible": true,
+            "score": 67.4,
+            "failedConstraints": [],
+            "breakEvenBenefit": -13.4,
+            "scoreInterval": {
+              "min": 47.6,
+              "max": 86.47
+            },
+            "paretoEfficient": true
+          },
+          {
+            "optionId": "study",
+            "label": "Build a full spatial housing study",
+            "feasible": false,
+            "score": 74,
+            "failedConstraints": [
+              "planning-review-capacity"
+            ],
+            "breakEvenBenefit": 6,
+            "scoreInterval": {
+              "min": 44.82,
+              "max": 101.48
+            },
+            "paretoEfficient": false
+          },
+          {
+            "optionId": "reuse",
+            "label": "Reuse unchanged",
+            "feasible": false,
+            "score": -7.4,
+            "failedConstraints": [
+              "risk-tolerance"
+            ],
+            "breakEvenBenefit": 10.4,
+            "scoreInterval": {
+              "min": -23.14,
+              "max": 6.42
+            },
+            "paretoEfficient": false
+          }
+        ],
+        "recommendedOptionId": "revise",
+        "noActionScore": -28,
+        "sensitivity": [
+          {
+            "scenarioId": "benefit-down-20",
+            "label": "Benefit down 20%",
+            "recommendedOptionId": "revise"
+          },
+          {
+            "scenarioId": "cost-up-20",
+            "label": "Cost up 20%",
+            "recommendedOptionId": "revise"
+          },
+          {
+            "scenarioId": "risk-up-20",
+            "label": "Risk up 20%",
+            "recommendedOptionId": "revise"
+          }
+        ],
+        "paretoFrontierOptionIds": [
+          "revise"
+        ],
+        "recommendationStability": {
+          "parameter": "benefitMultiplier",
+          "recommendedOptionId": "revise",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.05,
+          "evaluatedPoints": 21
+        },
+        "monteCarlo": {
+          "method": "DETERMINISTIC_SEEDED_BOUNDED_UNIFORM",
+          "seed": "ons-planning-context-note-v1",
+          "trials": 512,
+          "recommendationShares": [
+            {
+              "optionId": "revise",
+              "count": 512,
+              "share": 1
+            }
+          ],
+          "options": [
+            {
+              "optionId": "reuse",
+              "feasibilityRate": 0,
+              "scoreP05": -17.998414,
+              "scoreP50": -8.204933,
+              "scoreP95": 2.579839
+            },
+            {
+              "optionId": "revise",
+              "feasibilityRate": 1,
+              "scoreP05": 52.49866,
+              "scoreP50": 67.746426,
+              "scoreP95": 82.761748
+            },
+            {
+              "optionId": "study",
+              "feasibilityRate": 0,
+              "scoreP05": 54.018428,
+              "scoreP50": 74.197788,
+              "scoreP95": 94.372966
+            }
+          ]
+        }
+      },
+      "status": "SUPPORTED",
+      "reason": "Update the threshold or ranking statement and retain the ONS methodology boundary; do not infer a planning intervention effect. Recommended option: revise. No prior signed decision is recorded, so no version-change classification is made.",
+      "governance": {
+        "engineStatus": "SUPPORTED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "resultId": "decision-result:ons-planning-context-note:e58ee808055a036f6ca0340f"
+    }
+  ],
+  "reviews": [],
+  "reviewChain": {
+    "count": 0,
+    "headRecordId": null,
+    "headRecordHash": null
+  },
+  "externalSource": {
+    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "sourceType": "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1",
+    "publisher": "Office for National Statistics",
+    "dataset": "Explore Local Statistics: housing affordability ratio",
+    "measure": {
+      "id": "HOUSING-AFFORDABILITY-RATIO",
+      "name": "Median house price to median workplace-based earnings ratio"
+    },
+    "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "sourceUrls": {
+      "baseline": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2024-04-01",
+      "current": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2025-04-01"
+    },
+    "license": "Open Government Licence v3.0",
+    "licenseUrl": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "attribution": "Office for National Statistics, housing affordability in England and Wales, local-authority ratio data for 2024 and 2025, accessed 2026-08-10; transformed by ClaimTrace.",
+    "limitations": [
+      "The ratio combines median transacted-property prices with median workplace-based earnings and does not measure affordability for every household or tenure.",
+      "Latest earnings inputs are provisional and the historical series can be revised annually.",
+      "The selected local authorities illustrate audit mechanics and are not a representative spatial sample or a causal planning evaluation."
+    ],
+    "cleaning": {
+      "implementation": "ons-housing-affordability-v1",
+      "scriptPath": "tools/generate-public-data-cases.ts",
+      "parameters": {
+        "baselinePeriod": "2024-04-01",
+        "currentPeriod": "2025-04-01",
+        "selectedAuthorityCodes": [
+          "E06000002",
+          "E06000003",
+          "E06000004",
+          "E06000006",
+          "E06000023",
+          "E07000008",
+          "E07000178",
+          "E08000003",
+          "E08000025",
+          "E08000035",
+          "E09000007",
+          "E09000020"
+        ],
+        "decimalPlaces": 2
+      }
+    },
+    "rawArtifacts": [
+      {
+        "side": "baseline",
+        "fileName": "raw-2024.csv",
+        "sha256": "2dbfaab741576f4f5d2e06e943ed7c5208ea1a6116e413442544e631052c2350",
+        "text": "areacd,areanm,period,value\nE06000001,Hartlepool,2024-04-01,4.78\nE06000002,Middlesbrough,2024-04-01,4.73\nE06000003,Redcar and Cleveland,2024-04-01,5.39\nE06000004,Stockton-on-Tees,2024-04-01,5.1\nE06000005,Darlington,2024-04-01,4.94\nE06000006,Halton,2024-04-01,5.06\nE06000007,Warrington,2024-04-01,6.71\nE06000008,Blackburn with Darwen,2024-04-01,5.47\nE06000009,Blackpool,2024-04-01,4.26\nE06000010,\"Kingston upon Hull, City of\",2024-04-01,4.39\nE06000011,East Riding of Yorkshire,2024-04-01,6.14\nE06000012,North East Lincolnshire,2024-04-01,4.64\nE06000013,North Lincolnshire,2024-04-01,4.91\nE06000014,York,2024-04-01,8.53\nE06000015,Derby,2024-04-01,6\nE06000016,Leicester,2024-04-01,7.95\nE06000017,Rutland,2024-04-01,8.86\nE06000018,Nottingham,2024-04-01,6.34\nE06000019,\"Herefordshire, County of\",2024-04-01,8.72\nE06000020,Telford and Wrekin,2024-04-01,6.7\nE06000021,Stoke-on-Trent,2024-04-01,4.9\nE06000022,Bath and North East Somerset,2024-04-01,9.92\nE06000023,\"Bristol, City of\",2024-04-01,8.6\nE06000024,North Somerset,2024-04-01,8.29\nE06000025,South Gloucestershire,2024-04-01,8.66\nE06000026,Plymouth,2024-04-01,6.39\nE06000027,Torbay,2024-04-01,8.22\nE06000030,Swindon,2024-04-01,7.24\nE06000031,Peterborough,2024-04-01,6.91\nE06000032,Luton,2024-04-01,9.05\nE06000033,Southend-on-Sea,2024-04-01,7.72\nE06000034,Thurrock,2024-04-01,8.72\nE06000035,Medway,2024-04-01,7.96\nE06000036,Bracknell Forest,2024-04-01,9.55\nE06000037,West Berkshire,2024-04-01,8.96\nE06000038,Reading,2024-04-01,8.45\nE06000039,Slough,2024-04-01,9.95\nE06000040,Windsor and Maidenhead,2024-04-01,11.18\nE06000041,Wokingham,2024-04-01,10.57\nE06000042,Milton Keynes,2024-04-01,8.78\nE06000043,Brighton and Hove,2024-04-01,10.68\nE06000044,Portsmouth,2024-04-01,7.26\nE06000045,Southampton,2024-04-01,7.23\nE06000046,Isle of Wight,2024-04-01,7.52\nE06000047,County Durham,2024-04-01,4.23\nE06000049,Cheshire East,2024-04-01,7.71\nE06000050,Cheshire West and Chester,2024-04-01,6.48\nE06000051,Shropshire,2024-04-01,7.4\nE06000052,Cornwall,2024-04-01,8.43\nE06000054,Wiltshire,2024-04-01,8.65\nE06000055,Bedford,2024-04-01,8.48\nE06000056,Central Bedfordshire,2024-04-01,8.6\nE06000057,Northumberland,2024-04-01,5.83\nE06000058,\"Bournemouth, Christchurch and Poole\",2024-04-01,9.34\nE06000059,Dorset,2024-04-01,9.91\nE06000060,Buckinghamshire,2024-04-01,10.39\nE06000061,North Northamptonshire,2024-04-01,7.14\nE06000062,West Northamptonshire,2024-04-01,7.94\nE06000063,Cumberland,2024-04-01,4.49\nE06000064,Westmorland and Furness,2024-04-01,5.9\nE06000065,North Yorkshire,2024-04-01,7.47\nE06000066,Somerset,2024-04-01,7.88\nE07000008,Cambridge,2024-04-01,10.98\nE07000009,East Cambridgeshire,2024-04-01,9.5\nE07000010,Fenland,2024-04-01,6.71\nE07000011,Huntingdonshire,2024-04-01,8.63\nE07000012,South Cambridgeshire,2024-04-01,10\nE07000032,Amber Valley,2024-04-01,6.57\nE07000033,Bolsover,2024-04-01,5.65\nE07000034,Chesterfield,2024-04-01,5.81\nE07000035,Derbyshire Dales,2024-04-01,8.05\nE07000036,Erewash,2024-04-01,5.91\nE07000037,High Peak,2024-04-01,7.6\nE07000038,North East Derbyshire,2024-04-01,6.89\nE07000039,South Derbyshire,2024-04-01,6.75\nE07000040,East Devon,2024-04-01,8.63\nE07000041,Exeter,2024-04-01,8.46\nE07000042,Mid Devon,2024-04-01,8.07\nE07000043,North Devon,2024-04-01,9.2\nE07000044,South Hams,2024-04-01,10.27\nE07000045,Teignbridge,2024-04-01,9.23\nE07000046,Torridge,2024-04-01,8.74\nE07000047,West Devon,2024-04-01,8.76\nE07000061,Eastbourne,2024-04-01,7.81\nE07000062,Hastings,2024-04-01,8.42\nE07000063,Lewes,2024-04-01,10.94\nE07000064,Rother,2024-04-01,10.33\nE07000065,Wealden,2024-04-01,10.51\nE07000066,Basildon,2024-04-01,8.47\nE07000067,Braintree,2024-04-01,8.56\nE07000068,Brentwood,2024-04-01,9.79\nE07000069,Castle Point,2024-04-01,8.84\nE07000070,Chelmsford,2024-04-01,9.8\nE07000071,Colchester,2024-04-01,8.36\nE07000072,Epping Forest,2024-04-01,10.6\nE07000073,Harlow,2024-04-01,9.1\nE07000074,Maldon,2024-04-01,10.22\nE07000075,Rochford,2024-04-01,8.85\nE07000076,Tendring,2024-04-01,7.65\nE07000077,Uttlesford,2024-04-01,9.8\nE07000078,Cheltenham,2024-04-01,8.12\nE07000079,Cotswold,2024-04-01,10.94\nE07000080,Forest of Dean,2024-04-01,7.47\nE07000081,Gloucester,2024-04-01,7.26\nE07000082,Stroud,2024-04-01,9.45\nE07000083,Tewkesbury,2024-04-01,8.82\nE07000084,Basingstoke and Deane,2024-04-01,8.55\nE07000085,East Hampshire,2024-04-01,10\nE07000086,Eastleigh,2024-04-01,8.51\nE07000087,Fareham,2024-04-01,8.16\nE07000088,Gosport,2024-04-01,6.95\nE07000089,Hart,2024-04-01,9.58\nE07000090,Havant,2024-04-01,8.65\nE07000091,New Forest,2024-04-01,10.58\nE07000092,Rushmoor,2024-04-01,8.95\nE07000093,Test Valley,2024-04-01,9.03\nE07000094,Winchester,2024-04-01,10.29\nE07000095,Broxbourne,2024-04-01,10.23\nE07000096,Dacorum,2024-04-01,10.94\nE07000098,Hertsmere,2024-04-01,12.4\nE07000099,North Hertfordshire,2024-04-01,9.14\nE07000102,Three Rivers,2024-04-01,11.55\nE07000103,Watford,2024-04-01,9.58\nE07000105,Ashford,2024-04-01,9.72\nE07000106,Canterbury,2024-04-01,9.59\nE07000107,Dartford,2024-04-01,8.24\nE07000108,Dover,2024-04-01,7.49\nE07000109,Gravesham,2024-04-01,9.21\nE07000110,Maidstone,2024-04-01,9.74\nE07000111,Sevenoaks,2024-04-01,10.41\nE07000112,Folkestone and Hythe,2024-04-01,8.52\nE07000113,Swale,2024-04-01,8.02\nE07000114,Thanet,2024-04-01,7.91\nE07000115,Tonbridge and Malling,2024-04-01,10.36\nE07000116,Tunbridge Wells,2024-04-01,9.71\nE07000117,Burnley,2024-04-01,3.93\nE07000118,Chorley,2024-04-01,5.59\nE07000119,Fylde,2024-04-01,6.29\nE07000120,Hyndburn,2024-04-01,4.23\nE07000121,Lancaster,2024-04-01,5.93\nE07000122,Pendle,2024-04-01,4.79\nE07000123,Preston,2024-04-01,5.52\nE07000124,Ribble Valley,2024-04-01,6.66\nE07000125,Rossendale,2024-04-01,5.54\nE07000126,South Ribble,2024-04-01,5.41\nE07000127,West Lancashire,2024-04-01,6.51\nE07000128,Wyre,2024-04-01,5.36\nE07000129,Blaby,2024-04-01,7.6\nE07000130,Charnwood,2024-04-01,7.1\nE07000131,Harborough,2024-04-01,8.52\nE07000132,Hinckley and Bosworth,2024-04-01,7.86\nE07000133,Melton,2024-04-01,8.92\nE07000134,North West Leicestershire,2024-04-01,7.05\nE07000135,Oadby and Wigston,2024-04-01,8.32\nE07000136,Boston,2024-04-01,6.8\nE07000137,East Lindsey,2024-04-01,6.93\nE07000138,Lincoln,2024-04-01,5.39\nE07000139,North Kesteven,2024-04-01,6.26\nE07000140,South Holland,2024-04-01,7.12\nE07000141,South Kesteven,2024-04-01,7.37\nE07000142,West Lindsey,2024-04-01,6.45\nE07000143,Breckland,2024-04-01,8.31\nE07000144,Broadland,2024-04-01,7.95\nE07000145,Great Yarmouth,2024-04-01,6.66\nE07000146,King's Lynn and West Norfolk,2024-04-01,7.49\nE07000147,North Norfolk,2024-04-01,10\nE07000148,Norwich,2024-04-01,6.72\nE07000149,South Norfolk,2024-04-01,8.08\nE07000170,Ashfield,2024-04-01,6.09\nE07000171,Bassetlaw,2024-04-01,6.08\nE07000172,Broxtowe,2024-04-01,6.46\nE07000173,Gedling,2024-04-01,7.18\nE07000174,Mansfield,2024-04-01,5.61\nE07000175,Newark and Sherwood,2024-04-01,6.5\nE07000176,Rushcliffe,2024-04-01,8.7\nE07000177,Cherwell,2024-04-01,8.38\nE07000178,Oxford,2024-04-01,11.39\nE07000179,South Oxfordshire,2024-04-01,10.2\nE07000180,Vale of White Horse,2024-04-01,9.31\nE07000181,West Oxfordshire,2024-04-01,8.56\nE07000192,Cannock Chase,2024-04-01,6.85\nE07000193,East Staffordshire,2024-04-01,6.4\nE07000194,Lichfield,2024-04-01,7.84\nE07000195,Newcastle-under-Lyme,2024-04-01,5.23\nE07000196,South Staffordshire,2024-04-01,7.27\nE07000197,Stafford,2024-04-01,6.01\nE07000198,Staffordshire Moorlands,2024-04-01,6.04\nE07000199,Tamworth,2024-04-01,6.66\nE07000200,Babergh,2024-04-01,8.97\nE07000202,Ipswich,2024-04-01,6.85\nE07000203,Mid Suffolk,2024-04-01,8.21\nE07000207,Elmbridge,2024-04-01,12.94\nE07000208,Epsom and Ewell,2024-04-01,12.2\nE07000209,Guildford,2024-04-01,11.13\nE07000210,Mole Valley,2024-04-01,11.96\nE07000211,Reigate and Banstead,2024-04-01,10.73\nE07000212,Runnymede,2024-04-01,9.9\nE07000213,Spelthorne,2024-04-01,11.12\nE07000214,Surrey Heath,2024-04-01,9.78\nE07000215,Tandridge,2024-04-01,12.04\nE07000216,Waverley,2024-04-01,10.9\nE07000217,Woking,2024-04-01,9.78\nE07000218,North Warwickshire,2024-04-01,6.65\nE07000219,Nuneaton and Bedworth,2024-04-01,6.78\nE07000220,Rugby,2024-04-01,7.39\nE07000221,Stratford-on-Avon,2024-04-01,9.31\nE07000222,Warwick,2024-04-01,8.5\nE07000223,Adur,2024-04-01,10.09\nE07000224,Arun,2024-04-01,9.35\nE07000225,Chichester,2024-04-01,11.67\nE07000226,Crawley,2024-04-01,8.76\nE07000227,Horsham,2024-04-01,10.36\nE07000228,Mid Sussex,2024-04-01,10.88\nE07000229,Worthing,2024-04-01,9.49\nE07000234,Bromsgrove,2024-04-01,8.57\nE07000235,Malvern Hills,2024-04-01,8.18\nE07000236,Redditch,2024-04-01,7.49\nE07000237,Worcester,2024-04-01,7.14\nE07000238,Wychavon,2024-04-01,9.65\nE07000239,Wyre Forest,2024-04-01,7.2\nE07000240,St Albans,2024-04-01,11.46\nE07000241,Welwyn Hatfield,2024-04-01,10.23\nE07000242,East Hertfordshire,2024-04-01,9.3\nE07000243,Stevenage,2024-04-01,8.95\nE07000244,East Suffolk,2024-04-01,8.31\nE07000245,West Suffolk,2024-04-01,8.12\nE08000001,Bolton,2024-04-01,5.82\nE08000002,Bury,2024-04-01,6.71\nE08000003,Manchester,2024-04-01,7.88\nE08000004,Oldham,2024-04-01,5.89\nE08000005,Rochdale,2024-04-01,5.74\nE08000006,Salford,2024-04-01,6.54\nE08000007,Stockport,2024-04-01,7.73\nE08000008,Tameside,2024-04-01,6.24\nE08000009,Trafford,2024-04-01,8.64\nE08000010,Wigan,2024-04-01,5.37\nE08000011,Knowsley,2024-04-01,5.54\nE08000012,Liverpool,2024-04-01,4.61\nE08000013,St. Helens,2024-04-01,5.22\nE08000014,Sefton,2024-04-01,5.84\nE08000015,Wirral,2024-04-01,5.78\nE08000017,Doncaster,2024-04-01,4.86\nE08000018,Rotherham,2024-04-01,5.47\nE08000021,Newcastle upon Tyne,2024-04-01,5.6\nE08000022,North Tyneside,2024-04-01,5.24\nE08000023,South Tyneside,2024-04-01,4.78\nE08000024,Sunderland,2024-04-01,4.59\nE08000025,Birmingham,2024-04-01,6.77\nE08000026,Coventry,2024-04-01,6.28\nE08000027,Dudley,2024-04-01,6.47\nE08000028,Sandwell,2024-04-01,6.42\nE08000029,Solihull,2024-04-01,7.76\nE08000030,Walsall,2024-04-01,6.52\nE08000031,Wolverhampton,2024-04-01,6.29\nE08000032,Bradford,2024-04-01,5.29\nE08000033,Calderdale,2024-04-01,4.77\nE08000034,Kirklees,2024-04-01,5.82\nE08000035,Leeds,2024-04-01,6.58\nE08000036,Wakefield,2024-04-01,5.96\nE08000037,Gateshead,2024-04-01,4.9\nE08000038,Barnsley,2024-04-01,4.9\nE08000039,Sheffield,2024-04-01,5.73\nE09000002,Barking and Dagenham,2024-04-01,9.42\nE09000003,Barnet,2024-04-01,12.99\nE09000004,Bexley,2024-04-01,9.43\nE09000005,Brent,2024-04-01,14.31\nE09000006,Bromley,2024-04-01,10.53\nE09000007,Camden,2024-04-01,17.6\nE09000008,Croydon,2024-04-01,9.46\nE09000009,Ealing,2024-04-01,12.42\nE09000010,Enfield,2024-04-01,10.71\nE09000011,Greenwich,2024-04-01,10.24\nE09000012,Hackney,2024-04-01,12.91\nE09000013,Hammersmith and Fulham,2024-04-01,16.52\nE09000014,Haringey,2024-04-01,12.62\nE09000015,Harrow,2024-04-01,12.43\nE09000016,Havering,2024-04-01,9.71\nE09000017,Hillingdon,2024-04-01,11.5\nE09000018,Hounslow,2024-04-01,12.15\nE09000019,Islington,2024-04-01,14.46\nE09000020,Kensington and Chelsea,2024-04-01,23.82\nE09000021,Kingston upon Thames,2024-04-01,12.23\nE09000022,Lambeth,2024-04-01,11.01\nE09000023,Lewisham,2024-04-01,10.15\nE09000024,Merton,2024-04-01,11.68\nE09000025,Newham,2024-04-01,11.52\nE09000026,Redbridge,2024-04-01,11.45\nE09000027,Richmond upon Thames,2024-04-01,12.77\nE09000028,Southwark,2024-04-01,12.81\nE09000029,Sutton,2024-04-01,10.42\nE09000030,Tower Hamlets,2024-04-01,10.74\nE09000031,Waltham Forest,2024-04-01,11.36\nE09000032,Wandsworth,2024-04-01,13.1\nE09000033,Westminster,2024-04-01,19.25\nW06000001,Isle of Anglesey,2024-04-01,6\nW06000002,Gwynedd,2024-04-01,6.24\nW06000003,Conwy,2024-04-01,6.04\nW06000004,Denbighshire,2024-04-01,6.12\nW06000005,Flintshire,2024-04-01,5.55\nW06000006,Wrexham,2024-04-01,5.66\nW06000008,Ceredigion,2024-04-01,6.77\nW06000009,Pembrokeshire,2024-04-01,6.75\nW06000010,Carmarthenshire,2024-04-01,5.09\nW06000011,Swansea,2024-04-01,5.62\nW06000012,Neath Port Talbot,2024-04-01,4.38\nW06000013,Bridgend,2024-04-01,5.99\nW06000014,Vale of Glamorgan,2024-04-01,7.25\nW06000015,Cardiff,2024-04-01,7.16\nW06000016,Rhondda Cynon Taf,2024-04-01,4.52\nW06000018,Caerphilly,2024-04-01,5.64\nW06000019,Blaenau Gwent,2024-04-01,3.7\nW06000020,Torfaen,2024-04-01,5.7\nW06000021,Monmouthshire,2024-04-01,8.44\nW06000022,Newport,2024-04-01,6.27\nW06000023,Powys,2024-04-01,6.84\nW06000024,Merthyr Tydfil,2024-04-01,4.41"
+      },
+      {
+        "side": "current",
+        "fileName": "raw-2025.csv",
+        "sha256": "6f5ed40eb5f2162444f9fc7bdd0a228b983ba110c1223012bfe369845fb9ca32",
+        "text": "areacd,areanm,period,value\nE06000001,Hartlepool,2025-04-01,4.86\nE06000002,Middlesbrough,2025-04-01,4.36\nE06000003,Redcar and Cleveland,2025-04-01,4.7\nE06000004,Stockton-on-Tees,2025-04-01,4.66\nE06000005,Darlington,2025-04-01,4.92\nE06000006,Halton,2025-04-01,5.56\nE06000007,Warrington,2025-04-01,6.32\nE06000008,Blackburn with Darwen,2025-04-01,5.14\nE06000009,Blackpool,2025-04-01,4.27\nE06000010,\"Kingston upon Hull, City of\",2025-04-01,4.46\nE06000011,East Riding of Yorkshire,2025-04-01,5.98\nE06000012,North East Lincolnshire,2025-04-01,4.71\nE06000013,North Lincolnshire,2025-04-01,5.12\nE06000014,York,2025-04-01,7.53\nE06000015,Derby,2025-04-01,6.04\nE06000016,Leicester,2025-04-01,7.59\nE06000017,Rutland,2025-04-01,7.94\nE06000018,Nottingham,2025-04-01,6.49\nE06000019,\"Herefordshire, County of\",2025-04-01,8.49\nE06000020,Telford and Wrekin,2025-04-01,6.38\nE06000021,Stoke-on-Trent,2025-04-01,4.73\nE06000022,Bath and North East Somerset,2025-04-01,9.77\nE06000023,\"Bristol, City of\",2025-04-01,8.88\nE06000024,North Somerset,2025-04-01,7.88\nE06000025,South Gloucestershire,2025-04-01,8.35\nE06000026,Plymouth,2025-04-01,6.39\nE06000027,Torbay,2025-04-01,7.46\nE06000030,Swindon,2025-04-01,7.2\nE06000031,Peterborough,2025-04-01,6.88\nE06000032,Luton,2025-04-01,9.07\nE06000033,Southend-on-Sea,2025-04-01,8.18\nE06000034,Thurrock,2025-04-01,8.45\nE06000035,Medway,2025-04-01,7.82\nE06000036,Bracknell Forest,2025-04-01,9.49\nE06000037,West Berkshire,2025-04-01,9.02\nE06000038,Reading,2025-04-01,8.6\nE06000039,Slough,2025-04-01,10.13\nE06000040,Windsor and Maidenhead,2025-04-01,11.61\nE06000041,Wokingham,2025-04-01,9.38\nE06000042,Milton Keynes,2025-04-01,8.46\nE06000043,Brighton and Hove,2025-04-01,10.55\nE06000044,Portsmouth,2025-04-01,7.22\nE06000045,Southampton,2025-04-01,7\nE06000046,Isle of Wight,2025-04-01,8.5\nE06000047,County Durham,2025-04-01,4.28\nE06000049,Cheshire East,2025-04-01,7.32\nE06000050,Cheshire West and Chester,2025-04-01,6.21\nE06000051,Shropshire,2025-04-01,7.43\nE06000052,Cornwall,2025-04-01,8.29\nE06000054,Wiltshire,2025-04-01,8.46\nE06000055,Bedford,2025-04-01,8.37\nE06000056,Central Bedfordshire,2025-04-01,8.36\nE06000057,Northumberland,2025-04-01,5.37\nE06000058,\"Bournemouth, Christchurch and Poole\",2025-04-01,9.07\nE06000059,Dorset,2025-04-01,9.32\nE06000060,Buckinghamshire,2025-04-01,10.51\nE06000061,North Northamptonshire,2025-04-01,6.85\nE06000062,West Northamptonshire,2025-04-01,7.89\nE06000063,Cumberland,2025-04-01,4.18\nE06000064,Westmorland and Furness,2025-04-01,5.73\nE06000065,North Yorkshire,2025-04-01,7.44\nE06000066,Somerset,2025-04-01,7.86\nE07000008,Cambridge,2025-04-01,11.32\nE07000009,East Cambridgeshire,2025-04-01,8.2\nE07000010,Fenland,2025-04-01,6.8\nE07000011,Huntingdonshire,2025-04-01,8.45\nE07000012,South Cambridgeshire,2025-04-01,8.75\nE07000032,Amber Valley,2025-04-01,6.22\nE07000033,Bolsover,2025-04-01,5.47\nE07000034,Chesterfield,2025-04-01,5.43\nE07000035,Derbyshire Dales,2025-04-01,7.31\nE07000036,Erewash,2025-04-01,5.92\nE07000037,High Peak,2025-04-01,6.99\nE07000038,North East Derbyshire,2025-04-01,6.64\nE07000039,South Derbyshire,2025-04-01,6.17\nE07000040,East Devon,2025-04-01,8.36\nE07000041,Exeter,2025-04-01,8.69\nE07000042,Mid Devon,2025-04-01,8.03\nE07000043,North Devon,2025-04-01,9.03\nE07000044,South Hams,2025-04-01,9.45\nE07000045,Teignbridge,2025-04-01,8.47\nE07000046,Torridge,2025-04-01,8.06\nE07000047,West Devon,2025-04-01,7.82\nE07000061,Eastbourne,2025-04-01,7.39\nE07000062,Hastings,2025-04-01,8.06\nE07000063,Lewes,2025-04-01,9.42\nE07000064,Rother,2025-04-01,9.95\nE07000065,Wealden,2025-04-01,8.72\nE07000066,Basildon,2025-04-01,9.12\nE07000067,Braintree,2025-04-01,8.69\nE07000068,Brentwood,2025-04-01,10.53\nE07000069,Castle Point,2025-04-01,8.62\nE07000070,Chelmsford,2025-04-01,8.88\nE07000071,Colchester,2025-04-01,8.31\nE07000072,Epping Forest,2025-04-01,11.29\nE07000073,Harlow,2025-04-01,8.73\nE07000074,Maldon,2025-04-01,8.87\nE07000075,Rochford,2025-04-01,9.05\nE07000076,Tendring,2025-04-01,7.26\nE07000077,Uttlesford,2025-04-01,9.22\nE07000078,Cheltenham,2025-04-01,7.73\nE07000079,Cotswold,2025-04-01,11.03\nE07000080,Forest of Dean,2025-04-01,6.5\nE07000081,Gloucester,2025-04-01,7.22\nE07000082,Stroud,2025-04-01,8.55\nE07000083,Tewkesbury,2025-04-01,8.28\nE07000084,Basingstoke and Deane,2025-04-01,8.12\nE07000085,East Hampshire,2025-04-01,8.86\nE07000086,Eastleigh,2025-04-01,8.13\nE07000087,Fareham,2025-04-01,7.89\nE07000088,Gosport,2025-04-01,6.82\nE07000089,Hart,2025-04-01,10\nE07000090,Havant,2025-04-01,8.67\nE07000091,New Forest,2025-04-01,9.85\nE07000092,Rushmoor,2025-04-01,9.5\nE07000093,Test Valley,2025-04-01,9\nE07000094,Winchester,2025-04-01,10.05\nE07000095,Broxbourne,2025-04-01,9.28\nE07000096,Dacorum,2025-04-01,10.12\nE07000098,Hertsmere,2025-04-01,12.27\nE07000099,North Hertfordshire,2025-04-01,8.63\nE07000102,Three Rivers,2025-04-01,12.39\nE07000103,Watford,2025-04-01,9.83\nE07000105,Ashford,2025-04-01,9.21\nE07000106,Canterbury,2025-04-01,9.16\nE07000107,Dartford,2025-04-01,8.51\nE07000108,Dover,2025-04-01,7.35\nE07000109,Gravesham,2025-04-01,8.53\nE07000110,Maidstone,2025-04-01,9.56\nE07000111,Sevenoaks,2025-04-01,10.77\nE07000112,Folkestone and Hythe,2025-04-01,8.11\nE07000113,Swale,2025-04-01,7.94\nE07000114,Thanet,2025-04-01,8.13\nE07000115,Tonbridge and Malling,2025-04-01,9.78\nE07000116,Tunbridge Wells,2025-04-01,8.98\nE07000117,Burnley,2025-04-01,3.91\nE07000118,Chorley,2025-04-01,5.59\nE07000119,Fylde,2025-04-01,5.46\nE07000120,Hyndburn,2025-04-01,3.86\nE07000121,Lancaster,2025-04-01,5.73\nE07000122,Pendle,2025-04-01,4.62\nE07000123,Preston,2025-04-01,5.16\nE07000124,Ribble Valley,2025-04-01,6.73\nE07000125,Rossendale,2025-04-01,5.24\nE07000126,South Ribble,2025-04-01,5.75\nE07000127,West Lancashire,2025-04-01,6.34\nE07000128,Wyre,2025-04-01,5.13\nE07000129,Blaby,2025-04-01,7.31\nE07000130,Charnwood,2025-04-01,7.22\nE07000131,Harborough,2025-04-01,7.83\nE07000132,Hinckley and Bosworth,2025-04-01,7.29\nE07000133,Melton,2025-04-01,7.96\nE07000134,North West Leicestershire,2025-04-01,6.96\nE07000135,Oadby and Wigston,2025-04-01,6.83\nE07000136,Boston,2025-04-01,6.88\nE07000137,East Lindsey,2025-04-01,6.98\nE07000138,Lincoln,2025-04-01,5.36\nE07000139,North Kesteven,2025-04-01,6.49\nE07000140,South Holland,2025-04-01,7.27\nE07000141,South Kesteven,2025-04-01,7.59\nE07000142,West Lindsey,2025-04-01,5.98\nE07000143,Breckland,2025-04-01,7.7\nE07000144,Broadland,2025-04-01,8.04\nE07000145,Great Yarmouth,2025-04-01,6.32\nE07000146,King's Lynn and West Norfolk,2025-04-01,7.33\nE07000147,North Norfolk,2025-04-01,8.73\nE07000148,Norwich,2025-04-01,6.66\nE07000149,South Norfolk,2025-04-01,7.66\nE07000170,Ashfield,2025-04-01,6.04\nE07000171,Bassetlaw,2025-04-01,5.76\nE07000172,Broxtowe,2025-04-01,6.57\nE07000173,Gedling,2025-04-01,6.63\nE07000174,Mansfield,2025-04-01,5.78\nE07000175,Newark and Sherwood,2025-04-01,6.4\nE07000176,Rushcliffe,2025-04-01,7.51\nE07000177,Cherwell,2025-04-01,8.54\nE07000178,Oxford,2025-04-01,10.4\nE07000179,South Oxfordshire,2025-04-01,9.27\nE07000180,Vale of White Horse,2025-04-01,9.05\nE07000181,West Oxfordshire,2025-04-01,8.99\nE07000192,Cannock Chase,2025-04-01,6.29\nE07000193,East Staffordshire,2025-04-01,6.38\nE07000194,Lichfield,2025-04-01,7.65\nE07000195,Newcastle-under-Lyme,2025-04-01,5.46\nE07000196,South Staffordshire,2025-04-01,7.48\nE07000197,Stafford,2025-04-01,6.54\nE07000198,Staffordshire Moorlands,2025-04-01,5.89\nE07000199,Tamworth,2025-04-01,6.23\nE07000200,Babergh,2025-04-01,9.67\nE07000202,Ipswich,2025-04-01,6.55\nE07000203,Mid Suffolk,2025-04-01,7.62\nE07000207,Elmbridge,2025-04-01,12.52\nE07000208,Epsom and Ewell,2025-04-01,10.67\nE07000209,Guildford,2025-04-01,10.58\nE07000210,Mole Valley,2025-04-01,13.51\nE07000211,Reigate and Banstead,2025-04-01,11.05\nE07000212,Runnymede,2025-04-01,9.69\nE07000213,Spelthorne,2025-04-01,10.49\nE07000214,Surrey Heath,2025-04-01,10.77\nE07000215,Tandridge,2025-04-01,12.32\nE07000216,Waverley,2025-04-01,11.01\nE07000217,Woking,2025-04-01,9.95\nE07000218,North Warwickshire,2025-04-01,6.57\nE07000219,Nuneaton and Bedworth,2025-04-01,6.92\nE07000220,Rugby,2025-04-01,6.25\nE07000221,Stratford-on-Avon,2025-04-01,8.96\nE07000222,Warwick,2025-04-01,7.55\nE07000223,Adur,2025-04-01,9.61\nE07000224,Arun,2025-04-01,10.13\nE07000225,Chichester,2025-04-01,11.77\nE07000226,Crawley,2025-04-01,9.05\nE07000227,Horsham,2025-04-01,10.05\nE07000228,Mid Sussex,2025-04-01,9.92\nE07000229,Worthing,2025-04-01,9.57\nE07000234,Bromsgrove,2025-04-01,7.95\nE07000235,Malvern Hills,2025-04-01,9.17\nE07000236,Redditch,2025-04-01,7.23\nE07000237,Worcester,2025-04-01,6.69\nE07000238,Wychavon,2025-04-01,9.04\nE07000239,Wyre Forest,2025-04-01,7.5\nE07000240,St Albans,2025-04-01,10.98\nE07000241,Welwyn Hatfield,2025-04-01,9.75\nE07000242,East Hertfordshire,2025-04-01,8.62\nE07000243,Stevenage,2025-04-01,8.06\nE07000244,East Suffolk,2025-04-01,7.88\nE07000245,West Suffolk,2025-04-01,7.24\nE08000001,Bolton,2025-04-01,6\nE08000002,Bury,2025-04-01,6.91\nE08000003,Manchester,2025-04-01,6.82\nE08000004,Oldham,2025-04-01,6.11\nE08000005,Rochdale,2025-04-01,5.91\nE08000006,Salford,2025-04-01,6.58\nE08000007,Stockport,2025-04-01,7.76\nE08000008,Tameside,2025-04-01,6.22\nE08000009,Trafford,2025-04-01,8.67\nE08000010,Wigan,2025-04-01,5.28\nE08000011,Knowsley,2025-04-01,5.19\nE08000012,Liverpool,2025-04-01,4.85\nE08000013,St. Helens,2025-04-01,5.09\nE08000014,Sefton,2025-04-01,6.23\nE08000015,Wirral,2025-04-01,5.72\nE08000017,Doncaster,2025-04-01,5\nE08000018,Rotherham,2025-04-01,5.53\nE08000021,Newcastle upon Tyne,2025-04-01,5.89\nE08000022,North Tyneside,2025-04-01,5.67\nE08000023,South Tyneside,2025-04-01,4.89\nE08000024,Sunderland,2025-04-01,4.64\nE08000025,Birmingham,2025-04-01,6.53\nE08000026,Coventry,2025-04-01,6.04\nE08000027,Dudley,2025-04-01,6.76\nE08000028,Sandwell,2025-04-01,6.57\nE08000029,Solihull,2025-04-01,7.04\nE08000030,Walsall,2025-04-01,6.55\nE08000031,Wolverhampton,2025-04-01,6.14\nE08000032,Bradford,2025-04-01,5.43\nE08000033,Calderdale,2025-04-01,5.28\nE08000034,Kirklees,2025-04-01,5.85\nE08000035,Leeds,2025-04-01,6.67\nE08000036,Wakefield,2025-04-01,5.81\nE08000037,Gateshead,2025-04-01,4.8\nE08000038,Barnsley,2025-04-01,4.91\nE08000039,Sheffield,2025-04-01,5.75\nE09000002,Barking and Dagenham,2025-04-01,9.77\nE09000003,Barnet,2025-04-01,12.07\nE09000004,Bexley,2025-04-01,9.78\nE09000005,Brent,2025-04-01,13.89\nE09000006,Bromley,2025-04-01,10.25\nE09000007,Camden,2025-04-01,14.49\nE09000008,Croydon,2025-04-01,9.59\nE09000009,Ealing,2025-04-01,13.21\nE09000010,Enfield,2025-04-01,10.85\nE09000011,Greenwich,2025-04-01,10.12\nE09000012,Hackney,2025-04-01,11.72\nE09000013,Hammersmith and Fulham,2025-04-01,14.83\nE09000014,Haringey,2025-04-01,13.02\nE09000015,Harrow,2025-04-01,12.16\nE09000016,Havering,2025-04-01,9.77\nE09000017,Hillingdon,2025-04-01,12.07\nE09000018,Hounslow,2025-04-01,11.87\nE09000019,Islington,2025-04-01,12.33\nE09000020,Kensington and Chelsea,2025-04-01,21.87\nE09000021,Kingston upon Thames,2025-04-01,11.49\nE09000022,Lambeth,2025-04-01,10.97\nE09000023,Lewisham,2025-04-01,10.44\nE09000024,Merton,2025-04-01,10.72\nE09000025,Newham,2025-04-01,10.56\nE09000026,Redbridge,2025-04-01,11.19\nE09000027,Richmond upon Thames,2025-04-01,12.58\nE09000028,Southwark,2025-04-01,11.09\nE09000029,Sutton,2025-04-01,10.25\nE09000030,Tower Hamlets,2025-04-01,9.62\nE09000031,Waltham Forest,2025-04-01,11.86\nE09000032,Wandsworth,2025-04-01,11.59\nE09000033,Westminster,2025-04-01,16.44\nW06000001,Isle of Anglesey,2025-04-01,6.24\nW06000002,Gwynedd,2025-04-01,5.86\nW06000003,Conwy,2025-04-01,6.21\nW06000004,Denbighshire,2025-04-01,5.96\nW06000005,Flintshire,2025-04-01,5.69\nW06000006,Wrexham,2025-04-01,5.53\nW06000008,Ceredigion,2025-04-01,6.8\nW06000009,Pembrokeshire,2025-04-01,6.15\nW06000010,Carmarthenshire,2025-04-01,5.08\nW06000011,Swansea,2025-04-01,5.38\nW06000012,Neath Port Talbot,2025-04-01,4.54\nW06000013,Bridgend,2025-04-01,5.81\nW06000014,Vale of Glamorgan,2025-04-01,7.17\nW06000015,Cardiff,2025-04-01,7.2\nW06000016,Rhondda Cynon Taf,2025-04-01,4.59\nW06000018,Caerphilly,2025-04-01,5.39\nW06000019,Blaenau Gwent,2025-04-01,4.02\nW06000020,Torfaen,2025-04-01,5.11\nW06000021,Monmouthshire,2025-04-01,7.46\nW06000022,Newport,2025-04-01,6.35\nW06000023,Powys,2025-04-01,6.82\nW06000024,Merthyr Tydfil,2025-04-01,3.98"
+      }
+    ]
+  },
+  "upstreamLineage": null,
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "claimtrace-json-c14n/1.0.0",
+    "payloadHash": "a4da9b226d6d4d2f0b0f477f078feabfd40e597df1afcfaf06c1f0a08e82d2bd",
+    "sectionHashes": {
+      "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
+      "snapshots": "04ccbb06b17cf16bc23be52a3c71e9ab2d9bd4791874c31532fa55078bed9044",
+      "claims": "9fd3b768b260b023972f8a55eb39ae86dcf5d4488bc0f86e99dfd4539efa8bbf",
+      "decisions": "817e3ec0083dfdb34f0dd63b3bf43257a57f6afbe61cc8f973894f3dfa93fe32",
+      "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
+      "provenance": "4f495ef33288b5d9357d6ef93a846cfc127981ccf76bbdb22da6b5d7b78105ec",
+      "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    }
+  }
+}
