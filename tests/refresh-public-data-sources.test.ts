@@ -1,12 +1,15 @@
 import assert from "node:assert/strict";
-import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
+import { spawnSync } from "node:child_process";
+import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, rmdir, unlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { refreshPublicDataSources } from "../tools/refresh-public-data-sources";
 
 const REFRESHED_AT = "2026-08-11T01:02:03.000Z";
 const LAST_UPDATED = "2026-07-13";
+const TEST_FILE_OPERATIONS = { lstat, mkdir, readFile, readdir, rename, rmdir, unlink, writeFile };
 
 function worldBankResponse(year: string, value: number) {
   return JSON.stringify([
@@ -178,11 +181,12 @@ test("source refresh preserves every target after staging, backup, or replacemen
           )) as typeof fetch,
           now: () => new Date(REFRESHED_AT),
           fileOperations: {
-            lstat,
-            unlink,
+            ...TEST_FILE_OPERATIONS,
             writeFile: async (target, content, encoding) => {
-              stagedWrites += 1;
-              if (failure.phase === "staging" && stagedWrites === failure.at) throw new Error("injected staging failure");
+              if (String(target).endsWith(".new")) {
+                stagedWrites += 1;
+                if (failure.phase === "staging" && stagedWrites === failure.at) throw new Error("injected staging failure");
+              }
               await writeFile(target, content, encoding);
             },
             rename: async (source, target) => {
@@ -207,6 +211,114 @@ test("source refresh preserves every target after staging, backup, or replacemen
     } finally {
       await rm(fixture.casesDirectory, { recursive: true, force: true });
     }
+  }
+});
+
+test("source refresh reports committed cleanup failures and completes cleanup on the next run", async () => {
+  const fixture = await makeFixture();
+  try {
+    const newBaseline = worldBankResponse("2019", 79.1);
+    const newCurrent = worldBankResponse("2024", 79.4);
+    const fetcher = (async (input: string | URL | Request) => new Response(
+      String(input).endsWith("baseline") ? newBaseline : newCurrent,
+      { status: 200 },
+    )) as typeof fetch;
+    let failedBackupUnlinks = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher,
+        now: () => new Date(REFRESHED_AT),
+        fileOperations: {
+          ...TEST_FILE_OPERATIONS,
+          unlink: async (target) => {
+            if (String(target).endsWith(".backup")) {
+              failedBackupUnlinks += 1;
+              throw new Error("injected committed cleanup failure");
+            }
+            await unlink(target);
+          },
+        },
+      }),
+      /Source refresh committed but transaction cleanup failed/,
+    );
+    assert.equal(failedBackupUnlinks, 3);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), newBaseline);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), newCurrent);
+    const committedConfig = JSON.parse(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"));
+    assert.equal(committedConfig.retrievedAt, REFRESHED_AT);
+    assert.equal((await readdir(fixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")).length, 1);
+
+    const result = await refreshPublicDataSources({
+      casesDirectory: fixture.casesDirectory,
+      requestedCaseIds: ["public-case"],
+      fetcher,
+      now: () => new Date(REFRESHED_AT),
+    });
+    assert.deepEqual(result, { refreshed: 1, retrievedCaseIds: ["public-case"] });
+    assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh restores an interrupted transaction before reading the case again", async () => {
+  const fixture = await makeFixture();
+  try {
+    const newBaseline = worldBankResponse("2019", 79.1);
+    const newCurrent = worldBankResponse("2024", 79.4);
+    const refreshModuleUrl = new URL("../tools/refresh-public-data-sources.ts", import.meta.url).href;
+    const childProgram = `
+      import { lstat, mkdir, readFile, readdir, rename, rmdir, unlink, writeFile } from "node:fs/promises";
+      import { refreshPublicDataSources } from ${JSON.stringify(refreshModuleUrl)};
+      let promotions = 0;
+      await refreshPublicDataSources({
+        casesDirectory: process.env.CLAIMTRACE_CRASH_CASES,
+        requestedCaseIds: ["public-case"],
+        fetcher: async (input) => new Response(String(input).endsWith("baseline")
+          ? ${JSON.stringify(newBaseline)}
+          : ${JSON.stringify(newCurrent)}, { status: 200 }),
+        now: () => new Date(${JSON.stringify(REFRESHED_AT)}),
+        fileOperations: {
+          lstat, mkdir, readFile, readdir, rmdir, unlink, writeFile,
+          rename: async (source, target) => {
+            await rename(source, target);
+            if (String(source).endsWith(".new")) {
+              promotions += 1;
+              if (promotions === 1) process.exit(86);
+            }
+          },
+        },
+      });
+    `;
+    const child = spawnSync(process.execPath, ["--import", "tsx", "--input-type=module", "--eval", childProgram], {
+      cwd: path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
+      env: { ...process.env, CLAIMTRACE_CRASH_CASES: fixture.casesDirectory },
+      encoding: "utf8",
+      timeout: 30_000,
+    });
+    assert.equal(child.status, 86, `child stderr:\n${child.stderr}`);
+    await assert.rejects(readFile(path.join(fixture.directory, "source-config.json"), "utf8"), { code: "ENOENT" });
+    assert.equal((await readdir(fixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")).length, 1);
+
+    const result = await refreshPublicDataSources({
+      casesDirectory: fixture.casesDirectory,
+      requestedCaseIds: ["public-case"],
+      fetcher: (async (input: string | URL | Request) => new Response(
+        String(input).endsWith("baseline") ? newBaseline : newCurrent,
+        { status: 200 },
+      )) as typeof fetch,
+      now: () => new Date(REFRESHED_AT),
+    });
+    assert.deepEqual(result, { refreshed: 1, retrievedCaseIds: ["public-case"] });
+    assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), newBaseline);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), newCurrent);
+    const config = JSON.parse(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"));
+    assert.equal(config.retrievedAt, REFRESHED_AT);
+    assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
   }
 });
 
