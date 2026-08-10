@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, rename, rmdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -39,12 +39,20 @@ const DEFAULT_FILE_OPERATIONS: RefreshFileOperations = { lstat, mkdir, readFile,
 
 type RefreshTransactionPhase = "prepared" | "backed-up" | "committed";
 
+interface RefreshTransactionFile {
+  target: string;
+  temporary: string;
+  backup: string;
+  originalSha256?: string;
+  committedSha256?: string;
+}
+
 interface RefreshTransactionManifest {
-  schemaVersion: "claimtrace-source-refresh-transaction/1.0.0";
+  schemaVersion: "claimtrace-source-refresh-transaction/1.0.0" | "claimtrace-source-refresh-transaction/2.0.0";
   transactionId: string;
   ownerPid: number;
   phase: RefreshTransactionPhase;
-  files: Array<{ target: string; temporary: string; backup: string }>;
+  files: RefreshTransactionFile[];
 }
 
 interface TransactionDirectoryIdentity {
@@ -55,6 +63,25 @@ interface TransactionDirectoryIdentity {
 
 const TRANSACTION_MANIFEST = "transaction.json";
 const ACTIVE_TRANSACTIONS = new Set<string>();
+
+interface SourceRefreshLockManifest {
+  schemaVersion: "claimtrace-source-refresh-lock/1.0.0";
+  lockId: string;
+  ownerPid: number;
+}
+
+interface SourceRefreshLock {
+  directory: string;
+  manifest: SourceRefreshLockManifest;
+}
+
+const SOURCE_REFRESH_LOCK_DIRECTORY = ".claimtrace-refresh-lock";
+const SOURCE_REFRESH_LOCK_MANIFEST = "lock.json";
+const SOURCE_REFRESH_LOCK_PREPARING_PREFIX = ".claimtrace-refresh-lock-preparing-";
+const SOURCE_REFRESH_LOCK_STALE_PREFIX = ".claimtrace-refresh-lock-stale-";
+const ACTIVE_SOURCE_REFRESH_LOCKS = new Set<string>();
+const SOURCE_REFRESH_LOCK_ID_PATTERN = /^(\d+)-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
+const SHA256_PATTERN = /^[0-9a-f]{64}$/;
 
 interface AvailableSource {
   directory: string;
@@ -73,6 +100,23 @@ function errnoCode(error: unknown) {
   return (error as NodeJS.ErrnoException).code;
 }
 
+function sha256(content: string | NodeJS.ArrayBufferView) {
+  return createHash("sha256").update(content).digest("hex");
+}
+
+async function fileSha256(filePath: string, operations: RefreshFileOperations) {
+  return sha256(await operations.readFile(filePath));
+}
+
+async function verifyRegularFile(filePath: string, expectedSha256: string | null, description: string, operations: RefreshFileOperations) {
+  const stats = await operations.lstat(filePath);
+  if (!stats.isFile()) throw new Error(`${filePath}: ${description} must be a regular file`);
+  if (expectedSha256) {
+    const actualSha256 = await fileSha256(filePath, operations);
+    if (actualSha256 !== expectedSha256) throw new Error(`${filePath}: ${description} hash mismatch; expected ${expectedSha256}, received ${actualSha256}`);
+  }
+}
+
 async function lstatIfExists(filePath: string, operations: RefreshFileOperations) {
   try {
     return await operations.lstat(filePath);
@@ -87,6 +131,152 @@ async function unlinkIfExists(filePath: string, operations: RefreshFileOperation
     await operations.unlink(filePath);
   } catch (error) {
     if (errnoCode(error) !== "ENOENT") throw error;
+  }
+}
+
+function sourceRefreshOwnerIsActive(ownerPid: number, lockId: string) {
+  if (ACTIVE_SOURCE_REFRESH_LOCKS.has(lockId)) return true;
+  if (ownerPid === process.pid) return false;
+  try {
+    process.kill(ownerPid, 0);
+    return true;
+  } catch (error) {
+    return errnoCode(error) !== "ESRCH";
+  }
+}
+
+function sourceRefreshLockDirectoryIdentity(name: string) {
+  const match = name.match(/^\.claimtrace-refresh-lock-(?:preparing|stale)-(\d+)-([0-9a-f-]+)$/i);
+  if (!match) return null;
+  return { ownerPid: Number(match[1]), lockId: `${match[1]}-${match[2]}` };
+}
+
+function validateSourceRefreshLockManifest(lockDirectory: string, value: unknown, expectedLockId?: string) {
+  if (!value || typeof value !== "object") throw new Error(`${lockDirectory}: invalid source-refresh lock manifest`);
+  const manifest = value as SourceRefreshLockManifest;
+  if (manifest.schemaVersion !== "claimtrace-source-refresh-lock/1.0.0") throw new Error(`${lockDirectory}: unsupported source-refresh lock schema`);
+  if (!Number.isSafeInteger(manifest.ownerPid) || manifest.ownerPid <= 0 || typeof manifest.lockId !== "string") throw new Error(`${lockDirectory}: invalid source-refresh lock identity`);
+  const lockIdMatch = manifest.lockId.match(SOURCE_REFRESH_LOCK_ID_PATTERN);
+  if (!lockIdMatch || Number(lockIdMatch[1]) !== manifest.ownerPid) throw new Error(`${lockDirectory}: invalid source-refresh lock identity`);
+  if (expectedLockId && manifest.lockId !== expectedLockId) throw new Error(`${lockDirectory}: source-refresh lock identity mismatch`);
+  return manifest;
+}
+
+async function readSourceRefreshLockManifest(lockDirectory: string, operations: RefreshFileOperations, expectedLockId?: string) {
+  const text = await operations.readFile(path.join(lockDirectory, SOURCE_REFRESH_LOCK_MANIFEST), "utf8") as string;
+  return validateSourceRefreshLockManifest(lockDirectory, JSON.parse(text), expectedLockId);
+}
+
+async function removeSourceRefreshLockDirectory(lockDirectory: string, operations: RefreshFileOperations) {
+  let entries: string[];
+  try {
+    entries = await operations.readdir(lockDirectory) as string[];
+  } catch (error) {
+    if (errnoCode(error) === "ENOENT") return;
+    throw error;
+  }
+  const unexpected = entries.filter((name) => name !== SOURCE_REFRESH_LOCK_MANIFEST);
+  if (unexpected.length) throw new Error(`${lockDirectory}: unexpected source-refresh lock artifacts remain: ${unexpected.join(", ")}`);
+  if (entries.includes(SOURCE_REFRESH_LOCK_MANIFEST)) {
+    const manifestPath = path.join(lockDirectory, SOURCE_REFRESH_LOCK_MANIFEST);
+    const stats = await operations.lstat(manifestPath);
+    if (!stats.isFile()) throw new Error(`${manifestPath}: source-refresh lock manifest must be a regular file`);
+    await operations.unlink(manifestPath);
+  }
+  try {
+    await operations.rmdir(lockDirectory);
+  } catch (error) {
+    if (errnoCode(error) !== "ENOENT") throw error;
+  }
+}
+
+async function cleanupOrphanedSourceRefreshLockDirectories(casesDirectory: string, operations: RefreshFileOperations) {
+  const entries = await operations.readdir(casesDirectory, { withFileTypes: true });
+  for (const entry of entries.filter((item) => item.isDirectory())) {
+    const identity = sourceRefreshLockDirectoryIdentity(entry.name);
+    if (!identity || sourceRefreshOwnerIsActive(identity.ownerPid, identity.lockId)) continue;
+    await removeSourceRefreshLockDirectory(path.join(casesDirectory, entry.name), operations);
+  }
+}
+
+async function releaseSourceRefreshLock(lock: SourceRefreshLock, operations: RefreshFileOperations) {
+  try {
+    const current = await readSourceRefreshLockManifest(lock.directory, operations, lock.manifest.lockId);
+    if (current.ownerPid !== lock.manifest.ownerPid) throw new Error(`${lock.directory}: source-refresh lock owner changed before release`);
+    await removeSourceRefreshLockDirectory(lock.directory, operations);
+  } finally {
+    ACTIVE_SOURCE_REFRESH_LOCKS.delete(lock.manifest.lockId);
+  }
+}
+
+async function acquireSourceRefreshLock(casesDirectory: string, operations: RefreshFileOperations) {
+  const resolvedCasesDirectory = path.resolve(casesDirectory);
+  await cleanupOrphanedSourceRefreshLockDirectories(resolvedCasesDirectory, operations);
+  const lockId = `${process.pid}-${randomUUID()}`;
+  const manifest: SourceRefreshLockManifest = {
+    schemaVersion: "claimtrace-source-refresh-lock/1.0.0",
+    lockId,
+    ownerPid: process.pid,
+  };
+  const preparingDirectory = path.join(resolvedCasesDirectory, `${SOURCE_REFRESH_LOCK_PREPARING_PREFIX}${lockId}`);
+  const lockDirectory = path.join(resolvedCasesDirectory, SOURCE_REFRESH_LOCK_DIRECTORY);
+  const quarantinedDirectories: string[] = [];
+  let preparingExists = false;
+  let acquired = false;
+
+  ACTIVE_SOURCE_REFRESH_LOCKS.add(lockId);
+  try {
+    await operations.mkdir(preparingDirectory);
+    preparingExists = true;
+    await operations.writeFile(path.join(preparingDirectory, SOURCE_REFRESH_LOCK_MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+    while (!acquired) {
+      try {
+        await operations.rename(preparingDirectory, lockDirectory);
+        preparingExists = false;
+        acquired = true;
+      } catch (error) {
+        if (!(["EEXIST", "ENOTEMPTY"] as Array<string | undefined>).includes(errnoCode(error))) throw error;
+        const existing = await readSourceRefreshLockManifest(lockDirectory, operations);
+        if (sourceRefreshOwnerIsActive(existing.ownerPid, existing.lockId)) throw new Error(`${lockDirectory}: another source refresh is already active`);
+        const quarantineDirectory = path.join(resolvedCasesDirectory, `${SOURCE_REFRESH_LOCK_STALE_PREFIX}${existing.lockId}`);
+        try {
+          await operations.rename(lockDirectory, quarantineDirectory);
+          quarantinedDirectories.push(quarantineDirectory);
+        } catch (takeoverError) {
+          if (!(["ENOENT", "EEXIST", "ENOTEMPTY"] as Array<string | undefined>).includes(errnoCode(takeoverError))) throw takeoverError;
+          await cleanupOrphanedSourceRefreshLockDirectories(resolvedCasesDirectory, operations);
+        }
+      }
+    }
+    for (const directory of quarantinedDirectories) await removeSourceRefreshLockDirectory(directory, operations);
+    return { directory: lockDirectory, manifest } satisfies SourceRefreshLock;
+  } catch (error) {
+    const cleanupErrors: unknown[] = [];
+    if (acquired) {
+      try {
+        await releaseSourceRefreshLock({ directory: lockDirectory, manifest }, operations);
+      } catch (cleanupError) {
+        cleanupErrors.push(cleanupError);
+      }
+    } else {
+      ACTIVE_SOURCE_REFRESH_LOCKS.delete(lockId);
+    }
+    if (preparingExists) {
+      try {
+        await removeSourceRefreshLockDirectory(preparingDirectory, operations);
+      } catch (cleanupError) {
+        cleanupErrors.push(cleanupError);
+      }
+    }
+    for (const directory of quarantinedDirectories) {
+      try {
+        await removeSourceRefreshLockDirectory(directory, operations);
+      } catch (cleanupError) {
+        cleanupErrors.push(cleanupError);
+      }
+    }
+    if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], "Source refresh lock acquisition failed and cleanup was incomplete");
+    throw error;
   }
 }
 
@@ -121,17 +311,27 @@ function runtimeTransactionFiles(caseDirectory: string, transactionDirectory: st
     target: caseFile(caseDirectory, file.target),
     temporary: transactionArtifact(transactionDirectory, file.temporary),
     backup: transactionArtifact(transactionDirectory, file.backup),
+    originalSha256: file.originalSha256 ?? null,
+    committedSha256: file.committedSha256 ?? null,
   }));
+}
+
+function manifestHasContentHashes(manifest: RefreshTransactionManifest) {
+  return manifest.schemaVersion === "claimtrace-source-refresh-transaction/2.0.0";
 }
 
 function validateTransactionManifest(caseDirectory: string, transactionDirectory: string, value: unknown) {
   if (!value || typeof value !== "object") throw new Error(`${transactionDirectory}: invalid source-refresh transaction manifest`);
   const manifest = value as RefreshTransactionManifest;
-  if (manifest.schemaVersion !== "claimtrace-source-refresh-transaction/1.0.0") throw new Error(`${transactionDirectory}: unsupported source-refresh transaction schema`);
+  if (!(manifest.schemaVersion === "claimtrace-source-refresh-transaction/1.0.0" || manifest.schemaVersion === "claimtrace-source-refresh-transaction/2.0.0")) throw new Error(`${transactionDirectory}: unsupported source-refresh transaction schema`);
   const identity = transactionDirectoryIdentity(path.basename(transactionDirectory));
   if (!identity || manifest.transactionId !== identity.transactionId || manifest.ownerPid !== identity.ownerPid) throw new Error(`${transactionDirectory}: transaction identity mismatch`);
   if (!(["prepared", "backed-up", "committed"] as unknown[]).includes(manifest.phase)) throw new Error(`${transactionDirectory}: invalid transaction phase`);
   if (!Array.isArray(manifest.files) || manifest.files.length !== 3) throw new Error(`${transactionDirectory}: transaction must contain exactly three files`);
+  for (const file of manifest.files) {
+    if (!file || typeof file !== "object" || typeof file.target !== "string" || typeof file.temporary !== "string" || typeof file.backup !== "string") throw new Error(`${transactionDirectory}: invalid transaction file entry`);
+    if (manifestHasContentHashes(manifest) && (!SHA256_PATTERN.test(file.originalSha256 ?? "") || !SHA256_PATTERN.test(file.committedSha256 ?? ""))) throw new Error(`${transactionDirectory}: transaction content hashes are missing or invalid`);
+  }
   const runtimeFiles = runtimeTransactionFiles(caseDirectory, transactionDirectory, manifest);
   if (new Set(runtimeFiles.map((file) => file.target)).size !== runtimeFiles.length) throw new Error(`${transactionDirectory}: transaction targets must be distinct`);
   if (new Set(runtimeFiles.flatMap((file) => [file.temporary, file.backup])).size !== runtimeFiles.length * 2) throw new Error(`${transactionDirectory}: transaction artifacts must be distinct`);
@@ -169,11 +369,14 @@ async function rollbackTransaction(caseDirectory: string, transactionDirectory: 
       const backupStats = await lstatIfExists(file.backup, operations);
       const targetStats = await lstatIfExists(file.target, operations);
       if (backupStats) {
-        if (!backupStats.isFile()) throw new Error(`${file.backup}: transaction backup must be a regular file`);
+        if (!backupStats.isFile()) throw new Error(`${file.backup}: original source-refresh backup must be a regular file`);
         if (targetStats && !targetStats.isFile()) throw new Error(`${file.target}: source refresh target must be a regular file`);
+        await verifyRegularFile(file.backup, file.originalSha256, "original source-refresh backup", operations);
         await operations.rename(file.backup, file.target);
       } else if (!targetStats || !targetStats.isFile()) {
         throw new Error(`${file.target}: original target and transaction backup are both unavailable`);
+      } else {
+        await verifyRegularFile(file.target, file.originalSha256, "original source-refresh target", operations);
       }
     } catch (error) {
       rollbackErrors.push(error);
@@ -183,16 +386,19 @@ async function rollbackTransaction(caseDirectory: string, transactionDirectory: 
 }
 
 async function verifyCommittedTargets(caseDirectory: string, transactionDirectory: string, manifest: RefreshTransactionManifest, operations: RefreshFileOperations) {
+  if (!manifestHasContentHashes(manifest)) throw new Error(`${transactionDirectory}: legacy committed transaction lacks content hashes; refusing automatic cleanup`);
   const verificationErrors: unknown[] = [];
   for (const file of runtimeTransactionFiles(caseDirectory, transactionDirectory, manifest)) {
     try {
-      const stats = await operations.lstat(file.target);
-      if (!stats.isFile()) throw new Error(`${file.target}: committed source-refresh target must be a regular file`);
+      await verifyRegularFile(file.target, file.committedSha256, "committed source-refresh target", operations);
     } catch (error) {
       verificationErrors.push(error);
     }
   }
-  if (verificationErrors.length) throw new AggregateError(verificationErrors, `${transactionDirectory}: committed source-refresh targets are incomplete`);
+  if (verificationErrors.length) {
+    const details = verificationErrors.map((error) => error instanceof Error ? error.message : String(error)).join("; ");
+    throw new AggregateError(verificationErrors, `${transactionDirectory}: committed source-refresh targets are incomplete: ${details}`);
+  }
 }
 
 async function recoverTransactionDirectory(caseDirectory: string, transactionDirectory: string, identity: TransactionDirectoryIdentity, operations: RefreshFileOperations) {
@@ -234,9 +440,10 @@ async function replaceFiles(caseDirectory: string, files: Array<{ target: string
   if (normalizedFiles.length !== 3) throw new Error("Source refresh transactions must contain exactly three files");
   for (const file of normalizedFiles) caseFile(resolvedCaseDirectory, path.relative(resolvedCaseDirectory, file.target));
   if (new Set(normalizedFiles.map((file) => file.target)).size !== normalizedFiles.length) throw new Error("Source refresh targets must be distinct");
-  await Promise.all(normalizedFiles.map(async (file) => {
+  const originalSha256Values = await Promise.all(normalizedFiles.map(async (file) => {
     const stats = await operations.lstat(file.target);
     if (!stats.isFile()) throw new Error(`${file.target}: source refresh target must be a regular file`);
+    return fileSha256(file.target, operations);
   }));
 
   const transactionId = `${process.pid}-${randomUUID()}`;
@@ -245,7 +452,7 @@ async function replaceFiles(caseDirectory: string, files: Array<{ target: string
   let activeDirectory = preparingDirectory;
   let directoryCreated = false;
   let manifest: RefreshTransactionManifest = {
-    schemaVersion: "claimtrace-source-refresh-transaction/1.0.0",
+    schemaVersion: "claimtrace-source-refresh-transaction/2.0.0",
     transactionId,
     ownerPid: process.pid,
     phase: "prepared",
@@ -253,6 +460,8 @@ async function replaceFiles(caseDirectory: string, files: Array<{ target: string
       target: path.relative(resolvedCaseDirectory, file.target),
       temporary: `${index}.new`,
       backup: `${index}.backup`,
+      originalSha256: originalSha256Values[index],
+      committedSha256: sha256(file.content),
     })),
   };
 
@@ -268,11 +477,16 @@ async function replaceFiles(caseDirectory: string, files: Array<{ target: string
       const writeResults = await Promise.allSettled(runtimeFiles.map((file, index) => operations.writeFile(file.temporary, normalizedFiles[index].content, "utf8")));
       const writeErrors = writeResults.filter((result): result is PromiseRejectedResult => result.status === "rejected").map((result) => result.reason);
       if (writeErrors.length) throw new AggregateError(writeErrors, "Source refresh staging failed");
-      for (const file of runtimeFiles) await operations.rename(file.target, file.backup);
+      await Promise.all(runtimeFiles.map((file) => verifyRegularFile(file.temporary, file.committedSha256, "staged source-refresh target", operations)));
+      for (const file of runtimeFiles) {
+        await operations.rename(file.target, file.backup);
+        await verifyRegularFile(file.backup, file.originalSha256, "original source-refresh backup", operations);
+      }
       const backedUpManifest: RefreshTransactionManifest = { ...manifest, phase: "backed-up" };
       await writeTransactionManifest(transactionDirectory, backedUpManifest, operations);
       manifest = backedUpManifest;
       for (const file of runtimeFiles) await operations.rename(file.temporary, file.target);
+      await verifyCommittedTargets(resolvedCaseDirectory, transactionDirectory, manifest, operations);
       const committedManifest: RefreshTransactionManifest = { ...manifest, phase: "committed" };
       await writeTransactionManifest(transactionDirectory, committedManifest, operations);
       manifest = committedManifest;
@@ -325,16 +539,14 @@ function validateDownloadedContent(caseId: string, provenance: ExternalSourcePro
   }
 }
 
-export async function refreshPublicDataSources(options: RefreshPublicDataSourcesOptions = {}) {
-  const casesDirectory = options.casesDirectory ?? CASES;
+async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSourcesOptions, casesDirectory: string, fileOperations: RefreshFileOperations) {
   const requested = new Set(options.requestedCaseIds ?? []);
   const fetcher = options.fetcher ?? fetch;
   const now = options.now ?? (() => new Date());
-  const fileOperations = options.fileOperations ?? DEFAULT_FILE_OPERATIONS;
   const available = new Map<string, AvailableSource>();
 
   const entries = await fileOperations.readdir(casesDirectory, { withFileTypes: true });
-  for (const entry of entries.filter((item) => item.isDirectory())) {
+  for (const entry of entries.filter((item) => item.isDirectory() && item.name !== SOURCE_REFRESH_LOCK_DIRECTORY && !sourceRefreshLockDirectoryIdentity(item.name))) {
     const directory = path.join(casesDirectory, entry.name);
     await recoverInterruptedTransactions(directory, fileOperations);
     const configPath = path.join(directory, "source-config.json");
@@ -383,6 +595,29 @@ export async function refreshPublicDataSources(options: RefreshPublicDataSources
     refreshed += 1;
   }
   return { refreshed, retrievedCaseIds: caseIds };
+}
+
+export async function refreshPublicDataSources(options: RefreshPublicDataSourcesOptions = {}) {
+  const casesDirectory = options.casesDirectory ?? CASES;
+  const fileOperations = options.fileOperations ?? DEFAULT_FILE_OPERATIONS;
+  const lock = await acquireSourceRefreshLock(casesDirectory, fileOperations);
+  let operationError: unknown;
+  let result: Awaited<ReturnType<typeof refreshPublicDataSourcesUnlocked>> | undefined;
+  try {
+    result = await refreshPublicDataSourcesUnlocked(options, casesDirectory, fileOperations);
+  } catch (error) {
+    operationError = error;
+  }
+  let releaseError: unknown;
+  try {
+    await releaseSourceRefreshLock(lock, fileOperations);
+  } catch (error) {
+    releaseError = error;
+  }
+  if (operationError && releaseError) throw new AggregateError([operationError, releaseError], "Source refresh failed and its exclusive lock could not be released");
+  if (operationError) throw operationError;
+  if (releaseError) throw releaseError;
+  return result!;
 }
 
 if (path.resolve(process.argv[1] ?? "") === fileURLToPath(import.meta.url)) {

@@ -263,6 +263,128 @@ test("source refresh reports committed cleanup failures and completes cleanup on
   }
 });
 
+test("source refresh retains committed backups when a target no longer matches its transaction hash", async () => {
+  const fixture = await makeFixture();
+  try {
+    const newBaseline = worldBankResponse("2019", 79.1);
+    const newCurrent = worldBankResponse("2024", 79.4);
+    const fetcher = (async (input: string | URL | Request) => new Response(
+      String(input).endsWith("baseline") ? newBaseline : newCurrent,
+      { status: 200 },
+    )) as typeof fetch;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher,
+        now: () => new Date(REFRESHED_AT),
+        fileOperations: {
+          ...TEST_FILE_OPERATIONS,
+          unlink: async (target) => {
+            if (String(target).endsWith(".backup")) throw new Error("injected committed cleanup failure");
+            await unlink(target);
+          },
+        },
+      }),
+      /Source refresh committed but transaction cleanup failed/,
+    );
+    const baselinePath = path.join(fixture.directory, "raw-baseline.json");
+    await writeFile(baselinePath, "corrupted-but-regular", "utf8");
+    await assert.rejects(
+      refreshPublicDataSources({ casesDirectory: fixture.casesDirectory, requestedCaseIds: ["missing-for-recovery-only"] }),
+      /committed source-refresh target hash mismatch/,
+    );
+    assert.equal(await readFile(baselinePath, "utf8"), "corrupted-but-regular");
+    const transactionNames = (await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-"));
+    assert.equal(transactionNames.length, 1);
+    const transactionEntries = await readdir(path.join(fixture.directory, transactionNames[0]));
+    assert.equal(transactionEntries.filter((name) => name.endsWith(".backup")).length, 3);
+
+    await writeFile(baselinePath, newBaseline, "utf8");
+    const result = await refreshPublicDataSources({
+      casesDirectory: fixture.casesDirectory,
+      requestedCaseIds: ["public-case"],
+      fetcher,
+      now: () => new Date(REFRESHED_AT),
+    });
+    assert.deepEqual(result, { refreshed: 1, retrievedCaseIds: ["public-case"] });
+    assert.deepEqual((await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh serializes concurrent invocations before the second one downloads", async () => {
+  const fixture = await makeFixture();
+  let releaseFirstFetch: () => void = () => undefined;
+  let firstRefresh: Promise<Awaited<ReturnType<typeof refreshPublicDataSources>>> | undefined;
+  try {
+    const newBaseline = worldBankResponse("2019", 79.1);
+    const newCurrent = worldBankResponse("2024", 79.4);
+    let signalFirstFetch!: () => void;
+    const firstFetchStarted = new Promise<void>((resolve) => { signalFirstFetch = resolve; });
+    const firstFetchGate = new Promise<void>((resolve) => { releaseFirstFetch = resolve; });
+    firstRefresh = refreshPublicDataSources({
+      casesDirectory: fixture.casesDirectory,
+      requestedCaseIds: ["public-case"],
+      fetcher: (async (input: string | URL | Request) => {
+        signalFirstFetch();
+        await firstFetchGate;
+        return new Response(String(input).endsWith("baseline") ? newBaseline : newCurrent, { status: 200 });
+      }) as typeof fetch,
+      now: () => new Date(REFRESHED_AT),
+    });
+    await firstFetchStarted;
+    let secondDownloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          secondDownloads += 1;
+          return new Response(newBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /another source refresh is already active/,
+    );
+    assert.equal(secondDownloads, 0);
+    releaseFirstFetch();
+    assert.deepEqual(await firstRefresh, { refreshed: 1, retrievedCaseIds: ["public-case"] });
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+    assert.deepEqual((await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    releaseFirstFetch();
+    await firstRefresh?.catch(() => undefined);
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects an unsafe lock identity without resolving it as a path", async () => {
+  const fixture = await makeFixture();
+  try {
+    const lockDirectory = path.join(fixture.casesDirectory, ".claimtrace-refresh-lock");
+    const neighboringDirectory = path.join(fixture.casesDirectory, "neighboring-directory");
+    const sentinelPath = path.join(neighboringDirectory, "sentinel.txt");
+    await mkdir(lockDirectory);
+    await mkdir(neighboringDirectory);
+    await writeFile(sentinelPath, "must remain untouched", "utf8");
+    await writeFile(path.join(lockDirectory, "lock.json"), `${JSON.stringify({
+      schemaVersion: "claimtrace-source-refresh-lock/1.0.0",
+      lockId: `${process.pid}-../neighboring-directory`,
+      ownerPid: process.pid,
+    }, null, 2)}\n`, "utf8");
+
+    await assert.rejects(
+      refreshPublicDataSources({ casesDirectory: fixture.casesDirectory, requestedCaseIds: ["public-case"] }),
+      /invalid source-refresh lock identity/,
+    );
+    assert.equal(await readFile(sentinelPath, "utf8"), "must remain untouched");
+    assert.deepEqual(await readdir(lockDirectory), ["lock.json"]);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
 test("source refresh restores an interrupted transaction before reading the case again", async () => {
   const fixture = await makeFixture();
   try {
@@ -317,6 +439,7 @@ test("source refresh restores an interrupted transaction before reading the case
     const config = JSON.parse(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"));
     assert.equal(config.retrievedAt, REFRESHED_AT);
     assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")), []);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((file) => file.startsWith(".claimtrace-refresh-lock")), []);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }
