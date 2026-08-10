@@ -6,6 +6,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { computeEvidenceCompleteness, sha256Canonical, verifyEvidencePackage } from "../app/claimtrace-core";
 import { EXECUTABLE_CASES, runExecutableCase } from "../src/cases";
+import { rebuildExternalSnapshot } from "../src/core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CASES = path.join(ROOT, "public", "cases");
@@ -69,6 +70,18 @@ for (const definition of EXECUTABLE_CASES.filter((item) => item.dataOrigin === "
     }
   });
 }
+
+test("external cleaners reject out-of-range integer parameters without throwing", async () => {
+  const worldBank = JSON.parse(await readFile(path.join(CASES, "world-bank-life-expectancy", "source-metadata.json"), "utf8"));
+  worldBank.cleaning.parameters.decimalPlaces = 101;
+  const worldBankResult = rebuildExternalSnapshot(worldBank, "baseline");
+  assert.match(worldBankResult.errors.join("; "), /decimalPlaces must be an integer from 0 to 20/);
+
+  const cfpb = JSON.parse(await readFile(path.join(CASES, "cfpb-credit-card-complaints", "source-metadata.json"), "utf8"));
+  cfpb.cleaning.parameters.topIssues = 0;
+  const cfpbResult = rebuildExternalSnapshot(cfpb, "baseline");
+  assert.match(cfpbResult.errors.join("; "), /topIssues must be an integer from 1 to 1000/);
+});
 
 test("population-health upstream lineage rejects rehashed aggregation and raw-source tampering", async () => {
   const bundle = JSON.parse(await readFile(path.join(CASES, "population-health", "evidence-package.json"), "utf8"));

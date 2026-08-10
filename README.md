@@ -60,11 +60,11 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 115 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 119 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
 
 ## Reproducible cases
 
-The repository presents six official public-data studies, supported by four deterministic synthetic stress fixtures. Every public case retains two pinned source responses, retrieval URLs and time, license and attribution, limitations, source-specific cleaning parameters, raw-response SHA-256 values, cleaned snapshots, and a verifier that rebuilds the snapshots from the embedded source responses.
+The repository presents six official public-data audit cases, supported by four deterministic synthetic stress fixtures. Every public case retains two pinned source responses, retrieval URLs and time, license and attribution, limitations, source-specific cleaning parameters, raw-response SHA-256 values, cleaned snapshots, and a verifier that rebuilds the snapshots from the embedded source responses.
 
 | Domain | Audit question | Data origin |
 |---|---|---|
@@ -79,7 +79,7 @@ The repository presents six official public-data studies, supported by four dete
 | [CDC PLACES depression estimates](public/cases/cdc-places-depression/) | Which selected-county descriptive statements change between two model-based estimate releases? | External public data, CDC |
 | [ONS housing affordability](public/cases/ons-housing-affordability/) | Can a selected-authority planning context note be reused after affordability ratios change? | External public data, OGL v3.0 |
 
-The external cases use the [World Bank Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392), [USDOT Monthly Modal Time Series](https://data.transportation.gov/Public-Transit/Monthly-Modal-Time-Series/5ti2-5uiv), [U.S. Treasury yield-curve feed](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView), [CFPB Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/), [CDC PLACES](https://www.cdc.gov/places/), and [ONS housing-affordability data and methodology](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/latest). The thresholds and numerical decision options are explicitly separated from observed source data and labeled as author-defined demonstration inputs unless the source is named in the rule provenance.
+The external cases use the [World Bank Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392), [USDOT Monthly Modal Time Series](https://data.transportation.gov/Public-Transit/Monthly-Modal-Time-Series/5ti2-5uiv), [U.S. Treasury yield-curve feed](https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve), [CFPB Consumer Complaint Database](https://www.consumerfinance.gov/data-research/consumer-complaints/), [CDC PLACES](https://www.cdc.gov/places/), and [ONS housing-affordability data and methodology](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/bulletins/housingaffordabilityinenglandandwales/latest). The thresholds and numerical decision options are explicitly separated from observed source data and labeled as author-defined demonstration inputs unless the source is named in the rule provenance.
 
 Regenerate every case:
 
@@ -94,14 +94,16 @@ Normal case generation is offline: it consumes the committed raw responses. Refr
 npm run cases:refresh-sources -- usdot-transit-operations
 ```
 
+For each selected case, the refresh command downloads and validates both source responses before replacing either pinned response, then records the actual retrieval time in `source-config.json`. If either request fails or is empty, the case files remain unchanged. Run `npm run cases:generate` afterward to rebuild and verify the derived snapshots, manifests, and AuditBundles.
+
 Every case includes executable specifications, two snapshots, expected results, a manifest, documentation, and a verified AuditBundle. The population-health synthetic fixture additionally connects 4,218 follow-up and 286 validation records per version through 20 reproducible aggregations to 11 audited summary rows.
 
 ## Evaluation and verification status
 
-- **116 / 116 automated tests** — 115 unit/integration tests plus 1 real-Chromium read-only acceptance test
+- **120 / 120 automated tests** — 119 unit/integration tests plus 1 real-Chromium read-only acceptance test
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
-- **97.02% statement/line coverage, 77.50% branch coverage, 99.33% function coverage** for `src/core`
+- **97.11% statement/line coverage, 77.68% branch coverage, 99.33% function coverage** for `src/core`
 - **10 / 10 case AuditBundles regenerated and independently verified**
 - **0 known production dependency vulnerabilities**
 - **0 known full development-toolchain vulnerabilities**

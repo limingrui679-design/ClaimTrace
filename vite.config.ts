@@ -16,6 +16,21 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              {
+                name: "react-vendor",
+                test: /node_modules[\\/](?:react|react-dom)[\\/]/,
+                priority: 10,
+              },
+            ],
+          },
+        },
+      },
+    },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
       : undefined,

@@ -28,11 +28,11 @@ function stringParameter(input: Record<string, unknown>, name: string, errors: s
   return value;
 }
 
-function numberParameter(input: Record<string, unknown>, name: string, errors: string[]) {
+function integerParameter(input: Record<string, unknown>, name: string, errors: string[], minimum: number, maximum: number) {
   const value = input[name];
-  if (typeof value !== "number" || !Number.isFinite(value)) {
-    errors.push(`Cleaning parameter ${name} must be numeric`);
-    return 0;
+  if (typeof value !== "number" || !Number.isInteger(value) || value < minimum || value > maximum) {
+    errors.push(`Cleaning parameter ${name} must be an integer from ${minimum} to ${maximum}`);
+    return minimum;
   }
   return value;
 }
@@ -86,7 +86,7 @@ function cleanWorldBank(provenance: ExternalSourceProvenance, side: SnapshotSide
   const baselineYear = stringParameter(input, "baselineYear", errors);
   const currentYear = stringParameter(input, "currentYear", errors);
   const selected = stringArrayParameter(input, "selectedCountryCodes", errors);
-  const decimalPlaces = numberParameter(input, "decimalPlaces", errors);
+  const decimalPlaces = integerParameter(input, "decimalPlaces", errors, 0, 20);
   if (!text) return { text: null, errors, transformations: [] };
   const parsed = parseJson(text, side, errors);
   if (!Array.isArray(parsed) || !Array.isArray(parsed[1]) || typeof parsed[0] !== "object" || parsed[0] === null) {
@@ -121,7 +121,7 @@ function cleanUsdot(provenance: ExternalSourceProvenance, side: SnapshotSide): E
   const year = stringParameter(input, side === "baseline" ? "baselineYear" : "currentYear", errors);
   const month = stringParameter(input, "month", errors);
   const selected = stringArrayParameter(input, "selectedNtdIds", errors);
-  const decimalPlaces = numberParameter(input, "decimalPlaces", errors);
+  const decimalPlaces = integerParameter(input, "decimalPlaces", errors, 0, 20);
   if (!text) return { text: null, errors, transformations: [] };
   const parsed = parseJson(text, side, errors);
   if (!Array.isArray(parsed)) {
@@ -153,7 +153,7 @@ function cleanTreasury(provenance: ExternalSourceProvenance, side: SnapshotSide)
   const input = params(provenance);
   const text = artifactText(provenance, side, errors);
   const date = stringParameter(input, side === "baseline" ? "baselineDate" : "currentDate", errors);
-  const decimalPlaces = numberParameter(input, "decimalPlaces", errors);
+  const decimalPlaces = integerParameter(input, "decimalPlaces", errors, 0, 20);
   const maturitiesValue = input.maturities;
   const maturities = Array.isArray(maturitiesValue) ? maturitiesValue as Array<Record<string, unknown>> : [];
   if (!maturities.length || maturities.some((item) => typeof item.code !== "string" || typeof item.label !== "string" || typeof item.xmlField !== "string")) errors.push("Cleaning parameter maturities must declare code, label, and xmlField");
@@ -186,8 +186,8 @@ function cleanCfpb(provenance: ExternalSourceProvenance, side: SnapshotSide): Ex
   const input = params(provenance);
   const text = artifactText(provenance, side, errors);
   const period = stringParameter(input, side === "baseline" ? "baselinePeriod" : "currentPeriod", errors);
-  const topIssues = numberParameter(input, "topIssues", errors);
-  const decimalPlaces = numberParameter(input, "decimalPlaces", errors);
+  const topIssues = integerParameter(input, "topIssues", errors, 1, 1_000);
+  const decimalPlaces = integerParameter(input, "decimalPlaces", errors, 0, 20);
   if (!text) return { text: null, errors, transformations: [] };
   const parsed = parseJson(text, side, errors) as { aggregations?: { issue?: { doc_count?: unknown; issue?: { buckets?: unknown } } } } | null;
   const issueAggregation = parsed?.aggregations?.issue;
@@ -219,7 +219,7 @@ function cleanCdc(provenance: ExternalSourceProvenance, side: SnapshotSide): Ext
   const text = artifactText(provenance, side, errors);
   const year = stringParameter(input, side === "baseline" ? "baselineDataYear" : "currentDataYear", errors);
   const selected = stringArrayParameter(input, "selectedCountyFips", errors);
-  const decimalPlaces = numberParameter(input, "decimalPlaces", errors);
+  const decimalPlaces = integerParameter(input, "decimalPlaces", errors, 0, 20);
   if (!text) return { text: null, errors, transformations: [] };
   const parsed = parseJson(text, side, errors);
   if (!Array.isArray(parsed)) {
@@ -247,7 +247,7 @@ function cleanOns(provenance: ExternalSourceProvenance, side: SnapshotSide): Ext
   const text = artifactText(provenance, side, errors);
   const period = stringParameter(input, side === "baseline" ? "baselinePeriod" : "currentPeriod", errors);
   const selected = stringArrayParameter(input, "selectedAuthorityCodes", errors);
-  const decimalPlaces = numberParameter(input, "decimalPlaces", errors);
+  const decimalPlaces = integerParameter(input, "decimalPlaces", errors, 0, 20);
   if (!text) return { text: null, errors, transformations: [] };
   let parsed;
   try {

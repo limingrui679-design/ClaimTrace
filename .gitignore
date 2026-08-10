@@ -8,4 +8,5 @@ artifacts/
 .vinext/
 .wrangler/
 node_modules/
+coverage/
 *.tsbuildinfo

@@ -28,7 +28,7 @@ ClaimTrace should remain one coherent project: a local-first system for testing 
 2. Select one primary public case for the target program; add at most one secondary case when it proves a distinct capability.
 3. State the exact observed result from the generated audit, then state the decision consequence separately.
 4. Name the strongest limitation before proposing future work. This is more credible than presenting every case as a complete empirical study.
-5. Present the six public-data studies first; keep the four synthetic cases clearly labeled as adversarial regression fixtures rather than evidence of real-world outcomes.
+5. Present the six public-data audit cases first; keep the four synthetic cases clearly labeled as adversarial regression fixtures rather than evidence of real-world outcomes.
 
 ## Remaining high-value gaps
 

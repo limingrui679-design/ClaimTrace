@@ -17,6 +17,11 @@ async function expectInsideViewport(page: Page, buttonName: string) {
 }
 
 test("public build renders no import, claim, review, or sign-off controls", async ({ page }) => {
+  const pageErrors: string[] = [];
+  const failedRequests: string[] = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("requestfailed", (request) => failedRequests.push(`${request.method()} ${request.url()}: ${request.failure()?.errorText ?? "unknown failure"}`));
+
   await page.goto("/");
   await expect(page.getByText("Read-only portfolio mode · controls disabled")).toBeVisible();
   await expect(page.locator(".executive-brief")).toBeVisible();
@@ -24,6 +29,18 @@ test("public build renders no import, claim, review, or sign-off controls", asyn
   await expect(page.getByRole("button", { name: "Import your project" })).toHaveCount(0);
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expectNoMutationControls(page);
+
+  const caseCards = page.locator(".case-library article");
+  await expect(caseCards).toHaveCount(10);
+  await expect(caseCards.filter({ hasText: "Synthetic data" })).toHaveCount(4);
+  await expect(caseCards.filter({ hasText: "External public data" })).toHaveCount(6);
+  for (let index = 0; index < 10; index += 1) {
+    const card = caseCards.nth(index);
+    await card.getByRole("button", { name: /Load and audit|Rerun case/ }).click();
+    await expect(card).toHaveClass(/active/);
+    await expect(card.getByRole("button", { name: "Rerun case" })).toBeVisible();
+    await expect(page.locator(".case-library article.active")).toHaveCount(1);
+  }
 
   await page.getByRole("button", { name: /Data Versions/ }).click();
   await expect(page.locator(".diff-intelligence")).toBeVisible();
@@ -67,4 +84,7 @@ test("public build renders no import, claim, review, or sign-off controls", asyn
     }));
     expect(horizontalFit.documentWidth, `${route.name} must not overflow the ${horizontalFit.viewportWidth}px viewport`).toBeLessThanOrEqual(horizontalFit.viewportWidth);
   }
+
+  expect(pageErrors).toEqual([]);
+  expect(failedRequests).toEqual([]);
 });

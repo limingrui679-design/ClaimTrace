@@ -5,8 +5,11 @@
 - expanded the executable catalog from six to ten curated cases by adding five public-data audits for U.S. transit operations, Treasury yield curves, CFPB credit-card complaint trends, CDC PLACES depression estimates, and ONS housing affordability, while retiring the overlapping synthetic public-policy showcase;
 - generalized external-source provenance so all six public cases retain pinned raw responses, source URLs, retrieval metadata, attribution, limitations, source-specific cleaning parameters, and exact SHA-256 verification;
 - separated offline deterministic regeneration from explicit network refresh, and added source-tamper and cleaning-parameter-tamper rejection tests for every public case;
+- made source refresh validate both responses before replacement, record the actual retrieval timestamp, reject unknown case IDs, and preserve case files on request failure;
+- bounded integer cleaning parameters, split React into a dedicated production chunk, corrected the Treasury reference URL, and aligned public-case wording and release documentation with the ten-case catalog;
+- expanded the Chromium acceptance flow to load and execute all ten catalog cases and reject page errors or failed asset and data requests;
 - added a 15-program alignment matrix grounded in official curricula while separating documented program facts from portfolio-fit interpretation and disclosing current modeling gaps;
-- regenerated and independently verified all 10 AuditBundles and passed the complete unit/integration suite, one real-Chromium acceptance test, 64/64 controlled scenarios, and the enforced core coverage thresholds.
+- regenerated and independently verified all 10 AuditBundles and passed 119/119 unit/integration tests, one real-Chromium acceptance test, 64/64 controlled scenarios, and the enforced core coverage thresholds.
 
 ## 0.7.0 — 2026-08-10
 

@@ -58,7 +58,7 @@ npm run test:browser
 ## 5. Package and identify the release
 
 - Exclude `node_modules`, `dist`, coverage output, caches, logs, environment files, secrets, and unrelated workspace projects.
-- Include source, lockfile, all six case packs, benchmark labels/results, the real-browser GIF, LICENSE, and release documentation.
+- Include source, lockfile, all ten case packs, benchmark labels/results, the real-browser GIF, LICENSE, and release documentation.
 - Record the ZIP SHA-256 after packaging.
 - Create a version tag only after the tag name, `package.json`, changelog heading, generated artifacts, tested archive, and repository commit refer to the same source version.
 

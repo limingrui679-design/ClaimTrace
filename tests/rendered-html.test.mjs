@@ -7,9 +7,16 @@ async function builtProduct() {
   const dist = new URL("../dist/", import.meta.url);
   const html = await readFile(new URL("index.html", dist), "utf8");
   const assetNames = await readdir(new URL("assets/", dist));
-  const scriptName = assetNames.find((name) => /^index-.*\.js$/.test(name));
-  assert.ok(scriptName, "production JavaScript bundle must exist");
-  const script = await readFile(join(dist.pathname, "assets", scriptName), "utf8");
+  const scriptNames = assetNames.filter((name) => name.endsWith(".js")).sort();
+  assert.ok(
+    scriptNames.some((name) => /^index-.*\.js$/.test(name)),
+    "production JavaScript entry must exist",
+  );
+  const script = (
+    await Promise.all(
+      scriptNames.map((name) => readFile(join(dist.pathname, "assets", name), "utf8")),
+    )
+  ).join("\n");
   return { html, script };
 }
 
@@ -30,7 +37,7 @@ test("builds the ClaimTrace SPA shell and product bundle", async () => {
   assert.match(script, /adds 9 false negatives/);
   assert.match(script, /Baseline SHA-256/);
   assert.match(script, /Ten Executable Cases/);
-  assert.match(script, /Six Public-Data Studies/i);
+  assert.match(script, /Six Public-Data Audits/i);
   assert.match(script, /U\.S\. Treasury Yield-Curve Period Audit/);
   assert.doesNotMatch(script, /adds 17 false negatives/);
   assert.doesNotMatch(script, /baseline evidence snapshot is locked/i);

@@ -1,7 +1,14 @@
 {
   "name": "claimtrace",
   "version": "0.8.0",
+  "description": "Local-first auditing for versioned analytical claims, evidence, decisions, and review records.",
   "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/limingrui679-design/ClaimTrace.git"
+  },
+  "homepage": "https://github.com/limingrui679-design/ClaimTrace",
   "engines": {
     "node": ">=22.13.0"
   },
@@ -15,7 +22,7 @@
     "cases:refresh-sources": "node --import tsx tools/refresh-public-data-sources.ts",
     "cases:generate": "node --import tsx tools/generate-public-data-cases.ts && node tools/generate-case-fixtures.mjs && node --import tsx tools/generate-case-audits.ts",
     "benchmark": "node --import tsx tools/run-benchmark.ts",
-    "test:unit": "node --import tsx --test tests/core.test.ts tests/demo-data.test.ts tests/cases.test.ts tests/benchmark.test.ts tests/property.test.ts tests/rendered-html.test.mjs tests/english-only.test.mjs",
+    "test:unit": "node --import tsx --test tests/core.test.ts tests/demo-data.test.ts tests/cases.test.ts tests/refresh-public-data-sources.test.ts tests/benchmark.test.ts tests/property.test.ts tests/rendered-html.test.mjs tests/english-only.test.mjs",
     "test:browser": "playwright test",
     "test:coverage": "c8 --all --include='src/core/**/*.ts' --reporter=text --reporter=html --reporter=lcov --check-coverage --statements=95 --lines=95 --functions=95 --branches=75 node --import tsx --test tests/core.test.ts tests/cases.test.ts tests/benchmark.test.ts tests/property.test.ts",
     "test": "npm run build && npm run test:unit",
