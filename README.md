@@ -60,7 +60,7 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 119 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 120 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
 
 ## Reproducible cases
 
@@ -94,13 +94,13 @@ Normal case generation is offline: it consumes the committed raw responses. Refr
 npm run cases:refresh-sources -- usdot-transit-operations
 ```
 
-For each selected case, the refresh command downloads and validates both source responses before replacing either pinned response, then records the actual retrieval time in `source-config.json`. If either request fails or is empty, the case files remain unchanged. Run `npm run cases:generate` afterward to rebuild and verify the derived snapshots, manifests, and AuditBundles.
+For each selected case, the refresh command downloads both source responses and runs the declared source-specific cleaner against each one before replacing either pinned response, then records the actual retrieval time in `source-config.json`. If either request fails, is empty, or does not satisfy the source schema and cleaning parameters, the case files remain unchanged. Run `npm run cases:generate` afterward to rebuild and verify the derived snapshots, manifests, and AuditBundles.
 
 Every case includes executable specifications, two snapshots, expected results, a manifest, documentation, and a verified AuditBundle. The population-health synthetic fixture additionally connects 4,218 follow-up and 286 validation records per version through 20 reproducible aggregations to 11 audited summary rows.
 
 ## Evaluation and verification status
 
-- **120 / 120 automated tests** — 119 unit/integration tests plus 1 real-Chromium read-only acceptance test
+- **121 / 121 automated tests** — 120 unit/integration tests plus 1 real-Chromium read-only acceptance test
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
 - **97.11% statement/line coverage, 77.68% branch coverage, 99.33% function coverage** for `src/core`
