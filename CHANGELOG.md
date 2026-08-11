@@ -7,6 +7,7 @@
 - corrected verification results so passed checks always carry an empty error list and standalone HTML reports render diagnostic text only for failed checks, while preserving precise failure reasons for tampered bundles;
 - added last-intent-wins request handling for delayed case and file loads plus serialized review and export operations in the writable browser workspace;
 - added a committed writable Chromium flow covering delayed selection races, reordered-column import, review deduplication, two independently verified chained AuditBundle exports, and verified HTML output; kept the public read-only Chromium flow as a separate release gate;
+- upgraded the three pinned official GitHub Actions to immutable Node 24 releases, added the writable Playwright configuration to workflow path triggers, and retained both browser reports and failure traces as CI artifacts;
 - split unit/integration and built-artifact scripts so their build prerequisite is explicit, versioned the CSV dialect and normalization contract in snapshot manifests, and regenerated all ten verified case AuditBundles under the updated schemas;
 - passed 148/148 unit/integration tests, 2/2 built-artifact checks, 2/2 real-Chromium flows, 64/64 controlled scenarios, 512 deterministic property trials, and the enforced core coverage thresholds.
 

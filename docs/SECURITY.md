@@ -29,7 +29,7 @@ Audit date: 2026-08-11.
 - Production dependencies: `npm audit --omit=dev --audit-level=high` reports 0 known vulnerabilities.
 - Full development toolchain: `npm audit --audit-level=high` reports 0 known vulnerabilities.
 
-The browser shell was migrated from beta Vinext/RSC tooling to stable Vite + React static assets, removing the previously disclosed indirect `image-size` findings. ClaimTrace CI runs both audits and pins checkout, Node setup, and coverage-artifact actions to complete commit SHAs. This is a point-in-time result, not a promise that future advisories cannot affect the same lockfile.
+The browser shell was migrated from beta Vinext/RSC tooling to stable Vite + React static assets, removing the previously disclosed indirect `image-size` findings. ClaimTrace CI runs both audits and pins the official checkout, Node setup, and artifact-upload actions to complete commits from Node 24-compatible releases. This is a point-in-time result, not a promise that future advisories cannot affect the same lockfile.
 
 ## Reporting
 
