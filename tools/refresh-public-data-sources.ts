@@ -82,6 +82,7 @@ const SOURCE_REFRESH_LOCK_STALE_PREFIX = ".claimtrace-refresh-lock-stale-";
 const ACTIVE_SOURCE_REFRESH_LOCKS = new Set<string>();
 const SOURCE_REFRESH_LOCK_ID_PATTERN = /^(\d+)-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const SHA256_PATTERN = /^[0-9a-f]{64}$/;
+const MAX_SOURCE_RESPONSE_BYTES = 8 * 1024 * 1024;
 
 interface AvailableSource {
   directory: string;
@@ -165,6 +166,13 @@ function sourceRefreshLockDirectoryIdentity(name: string) {
   return { ownerPid: Number(match[1]), lockId: `${match[1]}-${match[2]}` };
 }
 
+async function verifySourceRefreshLockDirectory(lockDirectory: string, operations: RefreshFileOperations) {
+  const stats = await lstatIfExists(lockDirectory, operations);
+  if (!stats) return false;
+  if (!stats.isDirectory()) throw new Error(`${lockDirectory}: source-refresh lock must be a directory and cannot be a symbolic link`);
+  return true;
+}
+
 function validateSourceRefreshLockManifest(lockDirectory: string, value: unknown, expectedLockId?: string) {
   if (!value || typeof value !== "object") throw new Error(`${lockDirectory}: invalid source-refresh lock manifest`);
   const manifest = value as SourceRefreshLockManifest;
@@ -177,6 +185,7 @@ function validateSourceRefreshLockManifest(lockDirectory: string, value: unknown
 }
 
 async function readSourceRefreshLockManifest(lockDirectory: string, operations: RefreshFileOperations, expectedLockId?: string) {
+  if (!(await verifySourceRefreshLockDirectory(lockDirectory, operations))) throw new Error(`${lockDirectory}: source-refresh lock directory is missing`);
   const manifestPath = path.join(lockDirectory, SOURCE_REFRESH_LOCK_MANIFEST);
   await verifyRegularFile(manifestPath, null, "source-refresh lock manifest", operations);
   const text = await operations.readFile(manifestPath, "utf8") as string;
@@ -184,6 +193,7 @@ async function readSourceRefreshLockManifest(lockDirectory: string, operations: 
 }
 
 async function removeSourceRefreshLockDirectory(lockDirectory: string, operations: RefreshFileOperations) {
+  if (!(await verifySourceRefreshLockDirectory(lockDirectory, operations))) return;
   let entries: string[];
   try {
     entries = await operations.readdir(lockDirectory) as string[];
@@ -246,11 +256,13 @@ async function acquireSourceRefreshLock(casesDirectory: string, operations: Refr
     preparingExists = true;
     await operations.writeFile(path.join(preparingDirectory, SOURCE_REFRESH_LOCK_MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     while (!acquired) {
+      await verifySourceRefreshLockDirectory(lockDirectory, operations);
       try {
         await operations.rename(preparingDirectory, lockDirectory);
         preparingExists = false;
         acquired = true;
       } catch (error) {
+        await verifySourceRefreshLockDirectory(lockDirectory, operations);
         if (!(["EEXIST", "ENOTEMPTY"] as Array<string | undefined>).includes(errnoCode(error))) throw error;
         const existing = await readSourceRefreshLockManifest(lockDirectory, operations);
         if (sourceRefreshOwnerIsActive(existing.ownerPid, existing.lockId)) throw new Error(`${lockDirectory}: another source refresh is already active`);
@@ -539,10 +551,43 @@ function validateSourceDefinition(caseId: string, config: SourceConfig, provenan
     const sourceUrl = config.sourceUrls?.[side];
     const rawFile = config.rawFiles?.[side];
     if (typeof sourceUrl !== "string" || !sourceUrl.trim()) throw new Error(`${caseId}:${side}: source URL must be a nonempty string`);
+    let parsedSourceUrl: URL;
+    try {
+      parsedSourceUrl = new URL(sourceUrl);
+    } catch {
+      throw new Error(`${caseId}:${side}: source URL must be a valid HTTPS URL`);
+    }
+    if (parsedSourceUrl.protocol !== "https:" || parsedSourceUrl.username || parsedSourceUrl.password) throw new Error(`${caseId}:${side}: source URL must use HTTPS without embedded credentials`);
     if (typeof rawFile !== "string" || !rawFile.trim()) throw new Error(`${caseId}:${side}: raw file must be a nonempty string`);
     if (provenance.sourceUrls?.[side] !== sourceUrl) throw new Error(`${caseId}:${side}: source URL differs between source-config and source-metadata`);
     const artifacts = provenance.rawArtifacts.filter((artifact) => artifact.side === side);
     if (artifacts.length !== 1 || artifacts[0].fileName !== rawFile) throw new Error(`${caseId}:${side}: raw file differs between source-config and source-metadata`);
+  }
+}
+
+async function readBoundedSourceResponse(response: Response, label: string) {
+  const declaredLength = Number(response.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_SOURCE_RESPONSE_BYTES) throw new Error(`${label}: source response exceeds the ${MAX_SOURCE_RESPONSE_BYTES}-byte limit`);
+  if (!response.body) return "";
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  const chunks: string[] = [];
+  let byteLength = 0;
+  try {
+    while (true) {
+      const chunk = await reader.read();
+      if (chunk.done) break;
+      byteLength += chunk.value.byteLength;
+      if (byteLength > MAX_SOURCE_RESPONSE_BYTES) {
+        await reader.cancel().catch(() => undefined);
+        throw new Error(`${label}: source response exceeds the ${MAX_SOURCE_RESPONSE_BYTES}-byte limit`);
+      }
+      chunks.push(decoder.decode(chunk.value, { stream: true }));
+    }
+    chunks.push(decoder.decode());
+    return chunks.join("");
+  } finally {
+    reader.releaseLock();
   }
 }
 
@@ -605,7 +650,7 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
           signal: AbortSignal.any([pairController.signal, AbortSignal.timeout(30_000)]),
         });
         if (!response.ok) throw new Error(`${caseId}:${side}: ${response.status} ${response.statusText}`);
-        const text = await response.text();
+        const text = await readBoundedSourceResponse(response, `${caseId}:${side}`);
         if (!text.trim()) throw new Error(`${caseId}:${side}: source returned an empty body`);
         return [side, text] as const;
       } catch (error) {

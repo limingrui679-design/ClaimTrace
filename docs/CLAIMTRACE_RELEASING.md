@@ -12,7 +12,7 @@ npm audit --omit=dev --audit-level=high
 npm audit --audit-level=high
 ```
 
-`npm run ci` must finish with generated fixtures unchanged, 106 passing unit/integration tests, one passing Chromium acceptance test, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
+`npm run ci` must finish with generated fixtures unchanged, 141 passing unit/integration tests, one passing Chromium acceptance test, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
 
 ## 2. Inspect generated evidence
 

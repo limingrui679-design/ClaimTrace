@@ -1035,7 +1035,34 @@ test("80 links independently verifiable AuditBundles through exact previous root
   assert.match(broken.errors.join("; "), /not linked/);
 });
 
-test("81 anchors recommendation stability at an inserted exact 1.0 point", () => {
+test("81 reports malformed AuditBundle-chain entries without throwing or passing a missing link", async () => {
+  const malformed = {} as Awaited<ReturnType<typeof createEvidencePackage>>;
+  const one = await verifyAuditBundleChain([malformed]);
+  assert.equal(one.valid, false);
+  assert.equal(one.bundleChecks.length, 1);
+  assert.equal(one.bundleChecks[0].hash, null);
+  assert.match(one.errors.join("; "), /genesis bundle.*no previous root hash/i);
+  assert.match(one.errors.join("; "), /failed independent verification/);
+  assert.match(one.errors.join("; "), /no valid root hash/);
+
+  const empty = await verifyAuditBundleChain([]);
+  assert.equal(empty.valid, false);
+  assert.deepEqual(empty.errors, ["Bundle chain cannot be empty"]);
+
+  const dataset = await makeVerifiableDataset("id,score\nA,90\n", "id,score\nA,91\n");
+  const claim = recomputeClaim(makeClaim({ type: "threshold", field: "score", aggregation: "average", operator: ">=", threshold: 80 }), dataset, RUN_AT);
+  const first = await createEvidencePackage(dataset, [claim], RUN_AT);
+  const two = await verifyAuditBundleChain([first, malformed]);
+  assert.equal(two.valid, false);
+  assert.equal(two.links[0].passed, false);
+  assert.match(two.errors.join("; "), /not linked/);
+
+  const notAnArray = await verifyAuditBundleChain(null as unknown as Awaited<ReturnType<typeof createEvidencePackage>>[]);
+  assert.equal(notAnArray.valid, false);
+  assert.deepEqual(notAnArray.errors, ["AuditBundle chain must be an array"]);
+});
+
+test("82 anchors recommendation stability at an inserted exact 1.0 point", () => {
   const claim = recomputeClaim(
     makeClaim({ type: "threshold", field: "score", aggregation: "average", operator: ">=", threshold: 80 }),
     makeDataset([{ id: "A", score: 90 }], [{ id: "A", score: 90 }]),

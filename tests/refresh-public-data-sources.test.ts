@@ -214,6 +214,57 @@ test("source refresh rejects malformed nonempty content before replacing any cas
   }
 });
 
+test("source refresh rejects non-HTTPS source URLs and oversized responses before replacement", async () => {
+  const unsafeUrlFixture = await makeFixture();
+  try {
+    const configPath = path.join(unsafeUrlFixture.directory, "source-config.json");
+    const metadataPath = path.join(unsafeUrlFixture.directory, "source-metadata.json");
+    const config = JSON.parse(await readFile(configPath, "utf8"));
+    const metadata = JSON.parse(await readFile(metadataPath, "utf8"));
+    config.sourceUrls.baseline = "http://example.test/baseline";
+    metadata.sourceUrls.baseline = config.sourceUrls.baseline;
+    await writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`, "utf8");
+    await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: unsafeUrlFixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(unsafeUrlFixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /source URL must use HTTPS without embedded credentials/,
+    );
+    assert.equal(downloads, 0);
+  } finally {
+    await rm(unsafeUrlFixture.casesDirectory, { recursive: true, force: true });
+  }
+
+  const oversizedFixture = await makeFixture();
+  try {
+    const originalConfig = await readFile(path.join(oversizedFixture.directory, "source-config.json"), "utf8");
+    const oversizedBody = "x".repeat(8 * 1024 * 1024 + 1);
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: oversizedFixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async (input: string | URL | Request) => new Response(
+          String(input).endsWith("baseline") ? oversizedBody : oversizedFixture.oldCurrent,
+          { status: 200 },
+        )) as typeof fetch,
+      }),
+      /source response exceeds the 8388608-byte limit/,
+    );
+    assert.equal(await readFile(path.join(oversizedFixture.directory, "raw-baseline.json"), "utf8"), oversizedFixture.oldBaseline);
+    assert.equal(await readFile(path.join(oversizedFixture.directory, "raw-current.json"), "utf8"), oversizedFixture.oldCurrent);
+    assert.equal(await readFile(path.join(oversizedFixture.directory, "source-config.json"), "utf8"), originalConfig);
+  } finally {
+    await rm(oversizedFixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
 test("source refresh preserves every target after staging, backup, or replacement failures", async () => {
   const failures = [
     { phase: "staging", at: 2 },
@@ -592,6 +643,38 @@ test("source refresh rejects an unsafe lock identity without resolving it as a p
     );
     assert.equal(await readFile(sentinelPath, "utf8"), "must remain untouched");
     assert.deepEqual(await readdir(lockDirectory), ["lock.json"]);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects a symlinked lock directory without reading or modifying its target", async () => {
+  const fixture = await makeFixture();
+  try {
+    const outsideDirectory = path.join(fixture.casesDirectory, "outside-lock-directory");
+    const outsideManifestPath = path.join(outsideDirectory, "lock.json");
+    const sentinelPath = path.join(outsideDirectory, "sentinel.txt");
+    await mkdir(outsideDirectory);
+    await writeFile(outsideManifestPath, "outside manifest must remain unread", "utf8");
+    await writeFile(sentinelPath, "outside sentinel must remain untouched", "utf8");
+    await symlink(outsideDirectory, path.join(fixture.casesDirectory, ".claimtrace-refresh-lock"));
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(fixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /source-refresh lock must be a directory and cannot be a symbolic link/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(outsideManifestPath, "utf8"), "outside manifest must remain unread");
+    assert.equal(await readFile(sentinelPath, "utf8"), "outside sentinel must remain untouched");
+    assert.equal((await lstat(path.join(fixture.casesDirectory, ".claimtrace-refresh-lock"))).isSymbolicLink(), true);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }

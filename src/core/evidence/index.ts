@@ -532,23 +532,40 @@ export async function verifyAuditBundle(pkg: AuditBundle) {
 
 export async function verifyAuditBundleChain(bundles: AuditBundle[]) {
   const errors: string[] = [];
-  const bundleChecks = await Promise.all(bundles.map(async (bundle, index) => ({ index, hash: bundle.integrity.payloadHash, verification: await verifyAuditBundle(bundle) })));
+  if (!Array.isArray(bundles)) return { valid: false, errors: ["AuditBundle chain must be an array"], bundleChecks: [], links: [] };
+  const record = (value: unknown) => value && typeof value === "object" ? value as Record<string, unknown> : null;
+  const stringField = (value: unknown, field: string) => {
+    const candidate = record(value)?.[field];
+    return typeof candidate === "string" ? candidate : null;
+  };
+  const rootHash = (value: unknown) => {
+    const integrity = record(record(value)?.integrity);
+    const candidate = integrity?.payloadHash;
+    return typeof candidate === "string" && /^[a-f0-9]{64}$/i.test(candidate) ? candidate : null;
+  };
+  const bundleChecks = await Promise.all(bundles.map(async (bundle, index) => ({ index, hash: rootHash(bundle), verification: await verifyAuditBundle(bundle) })));
   if (!bundles.length) errors.push("Bundle chain cannot be empty");
-  if (bundles[0]?.previousBundleHash !== null) errors.push("The bundle chain must begin with a genesis bundle that has no previous root hash");
+  if (bundles.length && record(bundles[0])?.previousBundleHash !== null) errors.push("The bundle chain must begin with a genesis bundle that has no previous root hash");
   const seen = new Set<string>();
   const links = bundles.slice(1).map((bundle, offset) => {
     const index = offset + 1;
-    const expected = bundles[index - 1].integrity.payloadHash;
-    const actual = bundle.previousBundleHash;
-    const passed = actual === expected;
+    const previous = bundles[index - 1];
+    const expected = rootHash(previous);
+    const actual = stringField(bundle, "previousBundleHash");
+    const passed = expected !== null && actual === expected;
     if (!passed) errors.push(`Bundle ${index + 1} is not linked to the root hash of bundle ${index}`);
-    if (bundle.project !== bundles[index - 1].project || bundle.primaryKey !== bundles[index - 1].primaryKey) errors.push(`Bundle ${index + 1} does not share the same project and primary key as the preceding bundle`);
+    const project = stringField(bundle, "project");
+    const previousProject = stringField(previous, "project");
+    const primaryKey = stringField(bundle, "primaryKey");
+    const previousPrimaryKey = stringField(previous, "primaryKey");
+    if (project === null || previousProject === null || primaryKey === null || previousPrimaryKey === null || project !== previousProject || primaryKey !== previousPrimaryKey) errors.push(`Bundle ${index + 1} does not share the same project and primary key as the preceding bundle`);
     return { fromIndex: index - 1, toIndex: index, expected, actual, passed };
   });
   for (const check of bundleChecks) {
     if (!check.verification.valid) errors.push(`Bundle ${check.index + 1} failed independent verification`);
-    if (seen.has(check.hash)) errors.push(`Bundle ${check.index + 1} has a duplicate root hash`);
-    seen.add(check.hash);
+    if (check.hash === null) errors.push(`Bundle ${check.index + 1} has no valid root hash`);
+    else if (seen.has(check.hash)) errors.push(`Bundle ${check.index + 1} has a duplicate root hash`);
+    else seen.add(check.hash);
   }
   return { valid: errors.length === 0, errors, bundleChecks, links };
 }
