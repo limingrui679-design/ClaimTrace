@@ -83,6 +83,34 @@ test("external cleaners reject out-of-range integer parameters without throwing"
   assert.match(cfpbResult.errors.join("; "), /topIssues must be an integer from 1 to 1000/);
 });
 
+test("AuditBundle verification isolates malformed upstream and external lineage structures", async () => {
+  const externalBundle = JSON.parse(await readFile(path.join(CASES, "world-bank-life-expectancy", "evidence-package.json"), "utf8"));
+  externalBundle.externalSource.cleaning = null;
+  externalBundle.integrity.sectionHashes.provenance = await sha256Canonical(externalBundle.externalSource);
+  const externalPayload = Object.fromEntries(Object.entries(externalBundle).filter(([key]) => key !== "integrity"));
+  externalBundle.integrity.payloadHash = await sha256Canonical(externalPayload);
+  const externalVerification = await verifyEvidencePackage(externalBundle);
+  const externalChecks = externalVerification.checks.filter((check: { name: string }) => ["derived-recomputation", "upstream-lineage", "external-source-lineage"].includes(check.name));
+  assert.deepEqual(externalChecks.map((check: { name: string }) => check.name), ["derived-recomputation", "upstream-lineage", "external-source-lineage"]);
+  assert.equal(externalChecks[0].passed, true);
+  assert.equal(externalChecks[1].passed, true);
+  assert.equal(externalChecks[2].passed, false);
+  assert.match(externalChecks[2].errors.join("; "), /External-source structure is invalid/);
+
+  const upstreamBundle = JSON.parse(await readFile(path.join(CASES, "population-health", "evidence-package.json"), "utf8"));
+  upstreamBundle.upstreamLineage.aggregations[0].filters = null;
+  upstreamBundle.integrity.sectionHashes.upstream = await sha256Canonical(upstreamBundle.upstreamLineage);
+  const upstreamPayload = Object.fromEntries(Object.entries(upstreamBundle).filter(([key]) => key !== "integrity"));
+  upstreamBundle.integrity.payloadHash = await sha256Canonical(upstreamPayload);
+  const upstreamVerification = await verifyEvidencePackage(upstreamBundle);
+  const upstreamChecks = upstreamVerification.checks.filter((check: { name: string }) => ["derived-recomputation", "upstream-lineage", "external-source-lineage"].includes(check.name));
+  assert.deepEqual(upstreamChecks.map((check: { name: string }) => check.name), ["derived-recomputation", "upstream-lineage", "external-source-lineage"]);
+  assert.equal(upstreamChecks[0].passed, true);
+  assert.equal(upstreamChecks[1].passed, false);
+  assert.equal(upstreamChecks[2].passed, true);
+  assert.match(upstreamChecks[1].errors.join("; "), /Upstream-lineage structure is invalid/);
+});
+
 test("population-health upstream lineage rejects rehashed aggregation and raw-source tampering", async () => {
   const bundle = JSON.parse(await readFile(path.join(CASES, "population-health", "evidence-package.json"), "utf8"));
   assert.equal((await verifyEvidencePackage(bundle)).valid, true);

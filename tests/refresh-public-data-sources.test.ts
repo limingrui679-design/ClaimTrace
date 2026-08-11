@@ -214,7 +214,7 @@ test("source refresh rejects malformed nonempty content before replacing any cas
   }
 });
 
-test("source refresh rejects non-HTTPS source URLs and oversized responses before replacement", async () => {
+test("source refresh rejects unsafe URLs, redirects, and oversized responses before replacement", async () => {
   const unsafeUrlFixture = await makeFixture();
   try {
     const configPath = path.join(unsafeUrlFixture.directory, "source-config.json");
@@ -240,6 +240,31 @@ test("source refresh rejects non-HTTPS source URLs and oversized responses befor
     assert.equal(downloads, 0);
   } finally {
     await rm(unsafeUrlFixture.casesDirectory, { recursive: true, force: true });
+  }
+
+  const redirectedFixture = await makeFixture();
+  try {
+    const originalConfig = await readFile(path.join(redirectedFixture.directory, "source-config.json"), "utf8");
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: redirectedFixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async (input: string | URL | Request) => {
+          const response = new Response(String(input).endsWith("baseline") ? redirectedFixture.oldBaseline : redirectedFixture.oldCurrent, { status: 200 });
+          Object.defineProperties(response, {
+            redirected: { value: true },
+            url: { value: "https://redirected.example.test/final" },
+          });
+          return response;
+        }) as typeof fetch,
+      }),
+      /source request was redirected; pin the final HTTPS URL explicitly/,
+    );
+    assert.equal(await readFile(path.join(redirectedFixture.directory, "raw-baseline.json"), "utf8"), redirectedFixture.oldBaseline);
+    assert.equal(await readFile(path.join(redirectedFixture.directory, "raw-current.json"), "utf8"), redirectedFixture.oldCurrent);
+    assert.equal(await readFile(path.join(redirectedFixture.directory, "source-config.json"), "utf8"), originalConfig);
+  } finally {
+    await rm(redirectedFixture.casesDirectory, { recursive: true, force: true });
   }
 
   const oversizedFixture = await makeFixture();

@@ -505,19 +505,31 @@ export async function verifyAuditBundle(pkg: AuditBundle) {
     const reconstructed = await datasetFromBundle(pkg);
     add("snapshots", Boolean(reconstructed.dataset) && reconstructed.errors.length === 0, reconstructed.errors);
     if (reconstructed.dataset) {
+      let expected: Awaited<ReturnType<typeof buildAuditBundlePayload>> | undefined;
       try {
-        const expected = await buildAuditBundlePayload(reconstructed.dataset, pkg.claimSpecs, pkg.decisionSpecs, pkg.reviews, pkg.generatedAt, pkg.previousBundleHash);
+        const recomputed = await buildAuditBundlePayload(reconstructed.dataset, pkg.claimSpecs, pkg.decisionSpecs, pkg.reviews, pkg.generatedAt, pkg.previousBundleHash);
+        expected = recomputed;
         const derivedFields = ["summary", "diffSummary", "diffs", "claimResults", "queryTrace", "dataPreview", "decisionResults", "reviewChain"] as const;
-        const mismatched = derivedFields.filter((field) => canonicalJson(pkg[field]) !== canonicalJson(expected[field]));
+        const mismatched = derivedFields.filter((field) => canonicalJson(pkg[field]) !== canonicalJson(recomputed[field]));
         add("derived-recomputation", mismatched.length === 0, mismatched.map((field) => `${field} does not match the recomputed result`));
-        const upstream = await verifyUpstreamLineage(reconstructed.dataset, pkg.upstreamLineage, expected.claimResults);
-        add("upstream-lineage", upstream.valid, upstream.errors);
+      } catch (error) {
+        add("derived-recomputation", false, [error instanceof Error ? error.message : "Derived results could not be recomputed"]);
+      }
+      if (expected) {
+        try {
+          const upstream = await verifyUpstreamLineage(reconstructed.dataset, pkg.upstreamLineage, expected.claimResults);
+          add("upstream-lineage", upstream.valid, upstream.errors);
+        } catch (error) {
+          add("upstream-lineage", false, [`Upstream-lineage structure is invalid: ${error instanceof Error ? error.message : "unknown structural error"}`]);
+        }
+      } else {
+        add("upstream-lineage", false, ["Derived-result recomputation failed, so upstream lineage cannot be verified"]);
+      }
+      try {
         const externalSource = await verifyExternalSourceLineage(reconstructed.dataset, pkg.externalSource);
         add("external-source-lineage", externalSource.valid, externalSource.errors);
       } catch (error) {
-        add("derived-recomputation", false, [error instanceof Error ? error.message : "Derived results could not be recomputed"]);
-        add("upstream-lineage", false, ["Derived-result recomputation failed, so upstream lineage cannot be verified"]);
-        add("external-source-lineage", false, ["Derived-result recomputation failed, so external-source lineage cannot be verified"]);
+        add("external-source-lineage", false, [`External-source structure is invalid: ${error instanceof Error ? error.message : "unknown structural error"}`]);
       }
     } else {
       add("derived-recomputation", false, ["Snapshots are invalid, so claims and decisions cannot be recomputed"]);

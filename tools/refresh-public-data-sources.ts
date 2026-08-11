@@ -558,6 +558,7 @@ function validateSourceDefinition(caseId: string, config: SourceConfig, provenan
       throw new Error(`${caseId}:${side}: source URL must be a valid HTTPS URL`);
     }
     if (parsedSourceUrl.protocol !== "https:" || parsedSourceUrl.username || parsedSourceUrl.password) throw new Error(`${caseId}:${side}: source URL must use HTTPS without embedded credentials`);
+    if (parsedSourceUrl.hash) throw new Error(`${caseId}:${side}: source URL must not contain a fragment that is omitted from the request`);
     if (typeof rawFile !== "string" || !rawFile.trim()) throw new Error(`${caseId}:${side}: raw file must be a nonempty string`);
     if (provenance.sourceUrls?.[side] !== sourceUrl) throw new Error(`${caseId}:${side}: source URL differs between source-config and source-metadata`);
     const artifacts = provenance.rawArtifacts.filter((artifact) => artifact.side === side);
@@ -649,6 +650,8 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
           },
           signal: AbortSignal.any([pairController.signal, AbortSignal.timeout(30_000)]),
         });
+        const requestedUrl = new URL(item.config.sourceUrls[side]).href;
+        if (response.redirected || (response.url && new URL(response.url).href !== requestedUrl)) throw new Error(`${caseId}:${side}: source request was redirected; pin the final HTTPS URL explicitly`);
         if (!response.ok) throw new Error(`${caseId}:${side}: ${response.status} ${response.statusText}`);
         const text = await readBoundedSourceResponse(response, `${caseId}:${side}`);
         if (!text.trim()) throw new Error(`${caseId}:${side}: source returned an empty body`);
