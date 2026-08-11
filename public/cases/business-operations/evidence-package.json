@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-08T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "Synthetic Channel Resource-Allocation Audit",
   "primaryKey": "channel_id",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "SYNTHETIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-d3d7cb0ae80886b7",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -31,7 +33,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-7c9de810429a84fd",
       "side": "current",
       "fileName": "current.csv",
@@ -231,7 +235,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "business-referral-rank|claimtrace-rule/6.1.2",
+        "seed": "business-referral-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -289,7 +293,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "business-service-gate|claimtrace-rule/6.1.2",
+        "seed": "business-service-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -347,7 +351,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "business-lead-stability|claimtrace-rule/6.1.2",
+        "seed": "business-lead-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -664,7 +668,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:business-referral-rank:04cc0b3bdfed5e2dec674a1c",
+          "id": "claim-result:business-referral-rank:1d7a36c76055d5ca7904322e",
           "kind": "Comparison result",
           "title": "conversion_rate version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -678,9 +682,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -712,7 +716,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
         "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
@@ -724,7 +728,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "business-referral-rank|claimtrace-rule/6.1.2",
+        "seed": "business-referral-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -779,7 +783,7 @@
           }
         }
       },
-      "resultId": "claim-result:business-referral-rank:04cc0b3bdfed5e2dec674a1c",
+      "resultId": "claim-result:business-referral-rank:1d7a36c76055d5ca7904322e",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -924,7 +928,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:business-service-gate:1e60c5010c9a3d7933c4c618",
+          "id": "claim-result:business-service-gate:bacb44279cf43c84ac50d92f",
           "kind": "Comparison result",
           "title": "ticket_hours version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -938,9 +942,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -972,7 +976,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
         "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
@@ -984,7 +988,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "business-service-gate|claimtrace-rule/6.1.2",
+        "seed": "business-service-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -1029,7 +1033,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:business-service-gate:1e60c5010c9a3d7933c4c618",
+      "resultId": "claim-result:business-service-gate:bacb44279cf43c84ac50d92f",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1182,7 +1186,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:business-lead-stability:aa73f2bb336458809643f186",
+          "id": "claim-result:business-lead-stability:e86a1652a8db50cb59a2e692",
           "kind": "Comparison result",
           "title": "eligible_leads version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1196,9 +1200,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1230,7 +1234,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
         "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
@@ -1242,7 +1246,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "business-lead-stability|claimtrace-rule/6.1.2",
+        "seed": "business-lead-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -1287,7 +1291,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:business-lead-stability:aa73f2bb336458809643f186",
+      "resultId": "claim-result:business-lead-stability:e86a1652a8db50cb59a2e692",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1480,10 +1484,10 @@
         "decisionInputProvenanceHash": "86def82e7aacbd26f2b417f1a23d915123dca5aa23d220213d58a994c430e30f",
         "baselineSha256": "d3d7cb0ae80886b78c7c9b2e783c9fb67f1dbc42a26d4cfa532c9b384565b98d",
         "currentSha256": "7c9de810429a84fdb97a8238290b3b288ace4b665ddcd736339a7c0a913f3681",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:business-referral-rank:04cc0b3bdfed5e2dec674a1c",
-          "claim-result:business-service-gate:1e60c5010c9a3d7933c4c618"
+          "claim-result:business-referral-rank:1d7a36c76055d5ca7904322e",
+          "claim-result:business-service-gate:bacb44279cf43c84ac50d92f"
         ]
       },
       "analysis": {
@@ -1617,7 +1621,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:business-channel-allocation:0f542757ec6837bd0f18b8ed"
+      "resultId": "decision-result:business-channel-allocation:38f562a3fc827662e5fd39d4"
     }
   ],
   "reviews": [],
@@ -1631,12 +1635,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "46c60f96822b1fd57c8cff077cd524fc4581b5f3d99572dc96a4314186dee7c6",
+    "payloadHash": "3157c32936b29830e3e24b3d19d82052b578d1c8a21e88e78d225014c2ed55e4",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "ea25ac3d9c9d33e9f7c4629a474db9855f8fa16350931752c3cda0e1cc195031",
-      "claims": "eb5f51160ef7f2c7743a650997d3cd1fe990677cd28f67e52ee108780ef56216",
-      "decisions": "5d5aedb1b41bd5520841abaf46060d580a3646a03699c39bb0f1079e79bac183",
+      "snapshots": "0435770f0c78f9cbd3661a8e00348bfd5fc1e96fe48cf7314f363a174f96005d",
+      "claims": "4da4b751b4cfa8440f4d8bb96b273224618d2bb8f2209ce36631c08101b497fa",
+      "decisions": "8cb6fc29b57dedb3439ddc09f164ad5ea6ea6b48ba24ccf4182d6e535221d119",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

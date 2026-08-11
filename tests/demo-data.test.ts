@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { parseCSV, valueToNumber } from "../app/claimtrace-core";
+import { RULE_ENGINE_VERSION, parseCSV, valueToNumber } from "../app/claimtrace-core";
 import { DEMO_DATASET } from "../app/demo-case.generated";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -26,6 +26,7 @@ test("44 manifest hashes and row counts match every generated artifact", async (
   assert.equal(DEMO_DATASET.currentMeta?.sha256, manifest.files["summary-revision.csv"].sha256);
   assert.equal(DEMO_DATASET.baselineRows.length, manifest.files["summary-baseline.csv"].dataRows);
   assert.equal(DEMO_DATASET.currentRows?.length, manifest.files["summary-revision.csv"].dataRows);
+  assert.equal(DEMO_DATASET.ruleVersion, RULE_ENGINE_VERSION);
 });
 
 test("45 followup detail contains exactly 4,218 uniquely keyed records", async () => {

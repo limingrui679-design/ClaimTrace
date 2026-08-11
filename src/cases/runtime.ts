@@ -1,5 +1,6 @@
 import {
   RULE_ENGINE_VERSION,
+  alignParsedCsvColumns,
   bytesToBase64,
   canonicalizeRows,
   createEvidencePackage,
@@ -40,11 +41,11 @@ function claimSeed(definition: CaseClaimDefinition, dataset: DatasetVersion, run
 
 export async function datasetFromCaseCsv(definition: ExecutableCaseDefinition, baselineText: string, currentText: string, generatedAt = definition.expectedGeneratedAt, upstreamLineage?: UpstreamLineage, externalSource?: ExternalSourceProvenance) {
   const baseline = parseCSV(baselineText);
-  const current = parseCSV(currentText);
+  const current = alignParsedCsvColumns(parseCSV(currentText), baseline.columns);
   const baselineSha256 = await sha256Text(baselineText);
   const currentSha256 = await sha256Text(currentText);
   const baselineNormalized = await sha256Text(canonicalizeRows(baseline.columns, baseline.rows));
-  const currentNormalized = await sha256Text(canonicalizeRows(current.columns, current.rows));
+  const currentNormalized = await sha256Text(canonicalizeRows(baseline.columns, current.rows));
   const makeMeta = (fileName: string, text: string, rows: number, sha256: string, normalizedSha256: string) => ({
     fileName,
     sha256,

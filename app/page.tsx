@@ -25,6 +25,7 @@ import {
   type ReviewRecord,
   type SnapshotMeta,
   type UpstreamLineage,
+  alignParsedCsvColumns,
   auditSummary,
   appendReviewRecord,
   applyReviewToClaim,
@@ -50,6 +51,7 @@ import {
   recomputeClaim,
   sha256Hex,
   sha256Text,
+  sameColumnSet,
   uniqueKeyCandidates,
   validatePrimaryKey,
   verifyDataset,
@@ -157,8 +159,24 @@ async function readCsvFile(file: File): Promise<FileSnapshot> {
   };
 }
 
-function sameColumns(left: string[], right: string[]) {
-  return left.length === right.length && left.every((column) => right.includes(column));
+async function alignFileSnapshotColumns(snapshot: FileSnapshot, canonicalColumns: string[]): Promise<FileSnapshot> {
+  const aligned = alignParsedCsvColumns(snapshot, canonicalColumns);
+  const normalizedSha256 = await sha256Text(canonicalizeRows(canonicalColumns, aligned.rows));
+  return {
+    ...snapshot,
+    ...aligned,
+    meta: {
+      ...snapshot.meta,
+      normalizedSha256,
+      verification: {
+        ...snapshot.meta.verification,
+        status: "verified",
+        method: "raw-bytes+normalized-rows",
+        recomputedSha256: snapshot.meta.sha256,
+        recomputedNormalizedSha256: normalizedSha256,
+      },
+    },
+  };
 }
 
 function percent(part: number, total: number) {
@@ -189,8 +207,16 @@ export default function Home() {
   const [decisionSpecs, setDecisionSpecs] = useState<DecisionSpec[]>(DEMO_DECISIONS);
   const [decisionReviewOverrides, setDecisionReviewOverrides] = useState<Record<string, DecisionResult["governance"]>>({});
   const [activeCaseId, setActiveCaseId] = useState<string | null>("population-health");
+  const [caseLoadingId, setCaseLoadingId] = useState<string | null>(null);
+  const [operationBusy, setOperationBusy] = useState(false);
   const [claimDraft, setClaimDraft] = useState({ title: "", field: "", aggregation: "average" as Aggregation, operator: ">=" as Operator, threshold: "", thresholdSource: "", rationale: "", confirmedBy: "" });
   const revisionInputRef = useRef<HTMLInputElement>(null);
+  const caseLoadRequestRef = useRef(0);
+  const caseLoadAbortRef = useRef<AbortController | null>(null);
+  const baselineReadRequestRef = useRef(0);
+  const currentReadRequestRef = useRef(0);
+  const revisionReadRequestRef = useRef(0);
+  const operationInFlightRef = useRef(false);
 
   const summary = useMemo(() => auditSummary(claims, dataset), [claims, dataset]);
   const counts: Record<ClaimStatus, number> = {
@@ -230,7 +256,24 @@ export default function Home() {
     window.setTimeout(() => setToast(""), 3000);
   }
 
+  async function runExclusiveOperation(operation: () => Promise<void>) {
+    if (operationInFlightRef.current) {
+      showToast("Another audit, export, or review operation is still in progress");
+      return;
+    }
+    operationInFlightRef.current = true;
+    setOperationBusy(true);
+    try {
+      await operation();
+    } finally {
+      operationInFlightRef.current = false;
+      setOperationBusy(false);
+    }
+  }
+
   function resetImport() {
+    baselineReadRequestRef.current += 1;
+    currentReadRequestRef.current += 1;
     setBaselineFile(null);
     setCurrentFile(null);
     setBaselinePreview(null);
@@ -241,6 +284,10 @@ export default function Home() {
   }
 
   function loadDemo() {
+    caseLoadAbortRef.current?.abort();
+    caseLoadRequestRef.current += 1;
+    revisionReadRequestRef.current += 1;
+    setCaseLoadingId(null);
     setDataset(DEMO_DATASET);
     setClaims(DEMO_CLAIMS);
     setSelectedClaimId(DEMO_CLAIMS[0].id);
@@ -258,12 +305,18 @@ export default function Home() {
   async function loadCase(caseId: string) {
     const definition = EXECUTABLE_CASES.find((item) => item.id === caseId);
     if (!definition) return;
+    const requestId = caseLoadRequestRef.current + 1;
+    caseLoadRequestRef.current = requestId;
+    caseLoadAbortRef.current?.abort();
+    const controller = new AbortController();
+    caseLoadAbortRef.current = controller;
+    setCaseLoadingId(caseId);
     try {
       const [baselineResponse, currentResponse, upstreamResponse, sourceResponse] = await Promise.all([
-        fetch(definition.baselineFile),
-        fetch(definition.currentFile),
-        definition.upstreamLineageFile ? fetch(definition.upstreamLineageFile) : Promise.resolve(null),
-        definition.sourceMetadataFile ? fetch(definition.sourceMetadataFile) : Promise.resolve(null),
+        fetch(definition.baselineFile, { signal: controller.signal }),
+        fetch(definition.currentFile, { signal: controller.signal }),
+        definition.upstreamLineageFile ? fetch(definition.upstreamLineageFile, { signal: controller.signal }) : Promise.resolve(null),
+        definition.sourceMetadataFile ? fetch(definition.sourceMetadataFile, { signal: controller.signal }) : Promise.resolve(null),
       ]);
       if (!baselineResponse.ok || !currentResponse.ok) throw new Error("Case snapshots could not be loaded");
       if (upstreamResponse && !upstreamResponse.ok) throw new Error("Case upstream lineage could not be loaded");
@@ -271,6 +324,7 @@ export default function Home() {
       const upstreamLineage = upstreamResponse ? await upstreamResponse.json() as UpstreamLineage : undefined;
       const externalSource = sourceResponse ? await sourceResponse.json() as ExternalSourceProvenance : undefined;
       const run = await runExecutableCase(definition, await baselineResponse.text(), await currentResponse.text(), upstreamLineage, externalSource);
+      if (requestId !== caseLoadRequestRef.current) return;
       setDataset(run.dataset);
       setClaims(run.claims);
       setDecisionSpecs(run.decisionSpecs);
@@ -284,11 +338,20 @@ export default function Home() {
       setActiveView("overview");
       showToast(`Loaded and executed: ${definition.title}`);
     } catch (error) {
-      showToast(error instanceof Error ? error.message : "Case loading failed");
+      if (requestId === caseLoadRequestRef.current && !(error instanceof DOMException && error.name === "AbortError")) {
+        showToast(error instanceof Error ? error.message : "Case loading failed");
+      }
+    } finally {
+      if (requestId === caseLoadRequestRef.current) {
+        setCaseLoadingId(null);
+        if (caseLoadAbortRef.current === controller) caseLoadAbortRef.current = null;
+      }
     }
   }
 
   async function selectBaseline(event: ChangeEvent<HTMLInputElement>) {
+    const requestId = baselineReadRequestRef.current + 1;
+    baselineReadRequestRef.current = requestId;
     const file = event.target.files?.[0] ?? null;
     setBaselineFile(file);
     setBaselinePreview(null);
@@ -297,25 +360,30 @@ export default function Home() {
     if (!file) return;
     try {
       const preview = await readCsvFile(file);
+      if (requestId !== baselineReadRequestRef.current) return;
       setBaselinePreview(preview);
       if (!uniqueKeyCandidates(preview.columns, preview.rows, preview.lineNumbers).length) {
         setImportError("No unique, nonempty candidate primary key was found. Add a unique identifier column to the CSV first.");
       }
     } catch (error) {
-      setImportError(error instanceof Error ? error.message : "Baseline could not be read");
+      if (requestId === baselineReadRequestRef.current) setImportError(error instanceof Error ? error.message : "Baseline could not be read");
     }
   }
 
   async function selectCurrent(event: ChangeEvent<HTMLInputElement>) {
+    const requestId = currentReadRequestRef.current + 1;
+    currentReadRequestRef.current = requestId;
     const file = event.target.files?.[0] ?? null;
     setCurrentFile(file);
     setCurrentPreview(null);
     setImportError("");
     if (!file) return;
     try {
-      setCurrentPreview(await readCsvFile(file));
+      const preview = await readCsvFile(file);
+      if (requestId !== currentReadRequestRef.current) return;
+      setCurrentPreview(preview);
     } catch (error) {
-      setImportError(error instanceof Error ? error.message : "Current version could not be read");
+      if (requestId === currentReadRequestRef.current) setImportError(error instanceof Error ? error.message : "Current version could not be read");
     }
   }
 
@@ -342,20 +410,22 @@ export default function Home() {
       if (!primaryKey) throw new Error("Select a unique primary key before creating the project.");
       assertValidKey(baselinePreview, primaryKey, "Baseline");
       if (currentFile && !currentPreview) throw new Error("The current-version CSV has not been read successfully.");
+      let alignedCurrent = currentPreview;
       if (currentPreview) {
-        if (!sameColumns(baselinePreview.columns, currentPreview.columns)) throw new Error("Baseline and current versions must have exactly the same set of columns.");
-        assertValidKey(currentPreview, primaryKey, "Current version");
+        if (!sameColumnSet(baselinePreview.columns, currentPreview.columns)) throw new Error("Baseline and current versions must have exactly the same set of columns.");
+        alignedCurrent = await alignFileSnapshotColumns(currentPreview, baselinePreview.columns);
+        assertValidKey(alignedCurrent, primaryKey, "Current version");
       }
       const nextDataset = await verifyDataset({
         projectName: projectName.trim() || baselineFile.name.replace(/\.csv$/i, ""),
         baselineName: `Baseline · ${baselineFile.name}`,
         currentName: currentFile ? `Current · ${currentFile.name}` : undefined,
         baselineRows: baselinePreview.rows,
-        currentRows: currentPreview?.rows,
+        currentRows: alignedCurrent?.rows,
         baselineLineNumbers: baselinePreview.lineNumbers,
-        currentLineNumbers: currentPreview?.lineNumbers,
+        currentLineNumbers: alignedCurrent?.lineNumbers,
         baselineMeta: baselinePreview.meta,
-        currentMeta: currentPreview?.meta,
+        currentMeta: alignedCurrent?.meta,
         baselineRawText: baselinePreview.rawText,
         currentRawText: currentPreview?.rawText,
         baselineRawBytesBase64: baselinePreview.rawBytesBase64,
@@ -396,20 +466,25 @@ export default function Home() {
     }
     const file = event.target.files?.[0];
     if (!file) return;
+    const requestId = revisionReadRequestRef.current + 1;
+    revisionReadRequestRef.current = requestId;
     try {
       const parsed = await readCsvFile(file);
-      if (!sameColumns(dataset.columns, parsed.columns)) throw new Error("The current-version columns do not match the baseline columns.");
-      assertValidKey(parsed, dataset.primaryKey, "Current version");
+      if (requestId !== revisionReadRequestRef.current) return;
+      if (!sameColumnSet(dataset.columns, parsed.columns)) throw new Error("The current-version columns do not match the baseline columns.");
+      const aligned = await alignFileSnapshotColumns(parsed, dataset.columns);
+      assertValidKey(aligned, dataset.primaryKey, "Current version");
       const nextDataset: DatasetVersion = {
         ...dataset,
         currentName: `Current · ${file.name}`,
-        currentRows: parsed.rows,
-        currentLineNumbers: parsed.lineNumbers,
-        currentMeta: parsed.meta,
-        currentRawText: parsed.rawText,
-        currentRawBytesBase64: parsed.rawBytesBase64,
+        currentRows: aligned.rows,
+        currentLineNumbers: aligned.lineNumbers,
+        currentMeta: aligned.meta,
+        currentRawText: aligned.rawText,
+        currentRawBytesBase64: aligned.rawBytesBase64,
       };
       const verifiedDataset = await verifyDataset(nextDataset);
+      if (requestId !== revisionReadRequestRef.current) return;
       const runAt = new Date().toISOString();
       setDataset(verifiedDataset);
       setClaims((currentClaims) => currentClaims.map((claim) => recomputeClaim(claim, verifiedDataset, runAt)));
@@ -419,21 +494,23 @@ export default function Home() {
       setLastAuditAt(runAt);
       showToast(`Current version aligned by primary key ${dataset.primaryKey} and re-audited`);
     } catch (error) {
-      showToast(error instanceof Error ? error.message : "Current version could not be read");
+      if (requestId === revisionReadRequestRef.current) showToast(error instanceof Error ? error.message : "Current version could not be read");
     } finally {
       event.target.value = "";
     }
   }
 
   async function runAudit() {
-    const runAt = new Date().toISOString();
-    const verifiedDataset = await verifyDataset(dataset, runAt);
-    setDataset(verifiedDataset);
-    setClaims((currentClaims) => currentClaims.map((claim) => recomputeClaim(claim, verifiedDataset, runAt)));
-    setDecisionReviewOverrides({});
-    setLastAuditAt(runAt);
-    setActiveView("claims");
-    showToast(`Deterministic recomputation completed with ${dataset.ruleVersion}`);
+    await runExclusiveOperation(async () => {
+      const runAt = new Date().toISOString();
+      const verifiedDataset = await verifyDataset(dataset, runAt);
+      setDataset(verifiedDataset);
+      setClaims((currentClaims) => currentClaims.map((claim) => recomputeClaim(claim, verifiedDataset, runAt)));
+      setDecisionReviewOverrides({});
+      setLastAuditAt(runAt);
+      setActiveView("claims");
+      showToast(`Deterministic recomputation completed with ${dataset.ruleVersion}`);
+    });
   }
 
   function addClaim(event: FormEvent) {
@@ -514,26 +591,30 @@ export default function Home() {
   }
 
   async function exportEvidencePackage() {
-    const generatedAt = new Date().toISOString();
-    try {
-      const { bundle } = await prepareVerifiedBundle(generatedAt);
-      downloadFile("claimtrace-audit-bundle.json", JSON.stringify(bundle, null, 2), "application/json;charset=utf-8");
-      setLastExportedBundleHash(bundle.integrity.payloadHash);
-      showToast(bundle.previousBundleHash ? "AuditBundle verified and linked to the previous bundle root hash" : "Genesis AuditBundle recomputed, independently verified, and sealed with a root hash");
-    } catch (error) {
-      showToast(error instanceof Error ? error.message : "AuditBundle export failed");
-    }
+    await runExclusiveOperation(async () => {
+      const generatedAt = new Date().toISOString();
+      try {
+        const { bundle } = await prepareVerifiedBundle(generatedAt);
+        downloadFile("claimtrace-audit-bundle.json", JSON.stringify(bundle, null, 2), "application/json;charset=utf-8");
+        setLastExportedBundleHash(bundle.integrity.payloadHash);
+        showToast(bundle.previousBundleHash ? "AuditBundle verified and linked to the previous bundle root hash" : "Genesis AuditBundle recomputed, independently verified, and sealed with a root hash");
+      } catch (error) {
+        showToast(error instanceof Error ? error.message : "AuditBundle export failed");
+      }
+    });
   }
 
   async function exportReport() {
-    const generatedAt = new Date().toISOString();
-    try {
-      const { bundle, verification } = await prepareVerifiedBundle(generatedAt);
-      downloadFile("ClaimTrace-Audit-Report.html", buildHtmlReport(bundle, verification), "text/html;charset=utf-8");
-      showToast("HTML report generated with claims, decisions, review chain, and root-hash verification");
-    } catch (error) {
-      showToast(error instanceof Error ? error.message : "HTML report export failed");
-    }
+    await runExclusiveOperation(async () => {
+      const generatedAt = new Date().toISOString();
+      try {
+        const { bundle, verification } = await prepareVerifiedBundle(generatedAt);
+        downloadFile("ClaimTrace-Audit-Report.html", buildHtmlReport(bundle, verification), "text/html;charset=utf-8");
+        showToast("HTML report generated with claims, decisions, review chain, and root-hash verification");
+      } catch (error) {
+        showToast(error instanceof Error ? error.message : "HTML report export failed");
+      }
+    });
   }
 
   function copySummary() {
@@ -551,39 +632,43 @@ export default function Home() {
   }
 
   async function recordReview(claimId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) {
-    try {
-      if (READ_ONLY_DEMO) throw new Error("Read-only portfolio mode cannot create sign-off records");
-      const claim = claims.find((item) => item.id === claimId);
-      if (!claim?.resultId) throw new Error("The claim result has not been generated");
-      const previous = reviewRecords.at(-1);
-      const record = await createReviewRecord({ claimId, reviewer, disposition, note, createdAt: new Date().toISOString(), targetResultId: claim.resultId, targetResultHash: await hashClaimResult(claim) }, previous);
-      const reviewed = await applyReviewToClaim(claim, record);
-      setReviewRecords((records) => appendReviewRecord(records, record));
-      setClaims((currentClaims) => currentClaims.map((item) => item.id === claimId ? reviewed : item));
-      showToast(disposition === "APPROVED" ? "Sign-off appended and release status updated" : disposition === "RISK_ACCEPTED" ? "Risk acceptance recorded and release status marked" : "Returned and blocked from release");
-    } catch (error) {
-      showToast(error instanceof Error ? error.message : "Review record could not be created");
-    }
+    await runExclusiveOperation(async () => {
+      try {
+        if (READ_ONLY_DEMO) throw new Error("Read-only portfolio mode cannot create sign-off records");
+        const claim = claims.find((item) => item.id === claimId);
+        if (!claim?.resultId) throw new Error("The claim result has not been generated");
+        const previous = reviewRecords.at(-1);
+        const record = await createReviewRecord({ claimId, reviewer, disposition, note, createdAt: new Date().toISOString(), targetResultId: claim.resultId, targetResultHash: await hashClaimResult(claim) }, previous);
+        const reviewed = await applyReviewToClaim(claim, record);
+        setReviewRecords((records) => appendReviewRecord(records, record));
+        setClaims((currentClaims) => currentClaims.map((item) => item.id === claimId ? reviewed : item));
+        showToast(disposition === "APPROVED" ? "Sign-off appended and release status updated" : disposition === "RISK_ACCEPTED" ? "Risk acceptance recorded and release status marked" : "Returned and blocked from release");
+      } catch (error) {
+        showToast(error instanceof Error ? error.message : "Review record could not be created");
+      }
+    });
   }
 
   async function recordDecisionReview(decisionId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) {
-    try {
-      if (READ_ONLY_DEMO) throw new Error("Read-only portfolio mode cannot create decision sign-off records");
-      const result = decisionResults.find((item) => item.decisionId === decisionId);
-      if (!result) throw new Error("Decision result does not exist");
-      const previous = reviewRecords.at(-1);
-      const record = await createReviewRecord({ decisionId, reviewer, disposition, note, createdAt: new Date().toISOString(), targetResultId: result.resultId, targetResultHash: await hashDecisionResult(result) }, previous);
-      const reviewed = await applyReviewToDecision(result, record, claims);
-      setReviewRecords((records) => appendReviewRecord(records, record));
-      setDecisionReviewOverrides((current) => ({ ...current, [decisionId]: reviewed.governance }));
-      showToast(disposition === "APPROVED" ? "Decision signed off" : disposition === "RESIGNED" ? "New decision identity re-signed" : disposition === "RISK_ACCEPTED" ? "Risk acceptance recorded for the decision change" : "Decision returned and blocked from release");
-    } catch (error) {
-      showToast(error instanceof Error ? error.message : "Decision review failed");
-    }
+    await runExclusiveOperation(async () => {
+      try {
+        if (READ_ONLY_DEMO) throw new Error("Read-only portfolio mode cannot create decision sign-off records");
+        const result = decisionResults.find((item) => item.decisionId === decisionId);
+        if (!result) throw new Error("Decision result does not exist");
+        const previous = reviewRecords.at(-1);
+        const record = await createReviewRecord({ decisionId, reviewer, disposition, note, createdAt: new Date().toISOString(), targetResultId: result.resultId, targetResultHash: await hashDecisionResult(result) }, previous);
+        const reviewed = await applyReviewToDecision(result, record, claims);
+        setReviewRecords((records) => appendReviewRecord(records, record));
+        setDecisionReviewOverrides((current) => ({ ...current, [decisionId]: reviewed.governance }));
+        showToast(disposition === "APPROVED" ? "Decision signed off" : disposition === "RESIGNED" ? "New decision identity re-signed" : disposition === "RISK_ACCEPTED" ? "Risk acceptance recorded for the decision change" : "Decision returned and blocked from release");
+      } catch (error) {
+        showToast(error instanceof Error ? error.message : "Decision review failed");
+      }
+    });
   }
 
   return (
-    <main className="app-shell">
+    <main className="app-shell" aria-busy={operationBusy}>
       <aside className="sidebar">
         <button className="brand" onClick={() => setActiveView("overview")} aria-label="Return to audit overview">
           <span className="brand-mark"><i /><i /><i /></span>
@@ -606,19 +691,20 @@ export default function Home() {
         <header className="topbar">
           <div className="topbar-context"><span className="mobile-brand">ClaimTrace</span><span className="breadcrumb"><b>CONTROL ROOM</b><i /> {NAV_ITEMS.find((item) => item.id === activeView)?.label}</span>{READ_ONLY_DEMO ? <span className="readonly-badge">Read-only portfolio mode · controls disabled</span> : null}</div>
           <div className="topbar-actions">
+            {operationBusy ? <span className="readonly-badge" role="status">Operation in progress</span> : null}
             <button className="version-switch" onClick={() => setRevisionVisible((value) => !value)} disabled={!dataset.currentRows}><span className={revisionVisible ? "version-dot current" : "version-dot"} />Showing: {revisionVisible && dataset.currentRows ? "Current" : "Baseline"}<b>⌄</b></button>
-            <button className="button ghost" onClick={exportEvidencePackage}>Export AuditBundle</button>
-            <button className="button primary" onClick={runAudit}>Rerun audit</button>
+            <button className="button ghost" onClick={exportEvidencePackage} disabled={operationBusy}>Export AuditBundle</button>
+            <button className="button primary" onClick={runAudit} disabled={operationBusy}>Rerun audit</button>
           </div>
         </header>
 
         <div className="content">
-          {activeView === "overview" ? <Overview dataset={dataset} claims={claims} selectedClaim={selectedClaim} counts={counts} healthScore={healthScore} completenessChecksPassed={completenessChecksPassed} completenessChecksTotal={completenessChecksTotal} changedRows={changedRows} displayLabel={displayLabel} lastAuditAt={lastAuditAt} sourceTraceability={sourceTraceability} calculationReproducibility={calculationReproducibility} snapshotVerification={snapshotVerification} auditFreshness={auditFreshness} activeCaseId={activeCaseId} onLoadCase={loadCase} onSelectClaim={(id) => { setSelectedClaimId(id); setActiveView("claims"); }} onImport={() => setShowImport(true)} onOpenClaims={() => setActiveView("claims")} onExport={exportReport} /> : null}
-          {activeView === "claims" ? <ClaimsView claims={filteredClaims} selectedClaim={selectedClaim} dataset={dataset} filter={filter} search={search} counts={counts} onFilter={setFilter} onSearch={setSearch} onSelect={setSelectedClaimId} onAdd={openAddClaim} onExport={exportReport} /> : null}
+          {activeView === "overview" ? <Overview dataset={dataset} claims={claims} selectedClaim={selectedClaim} counts={counts} healthScore={healthScore} completenessChecksPassed={completenessChecksPassed} completenessChecksTotal={completenessChecksTotal} changedRows={changedRows} displayLabel={displayLabel} lastAuditAt={lastAuditAt} sourceTraceability={sourceTraceability} calculationReproducibility={calculationReproducibility} snapshotVerification={snapshotVerification} auditFreshness={auditFreshness} activeCaseId={activeCaseId} caseLoadingId={caseLoadingId} operationBusy={operationBusy} onLoadCase={loadCase} onSelectClaim={(id) => { setSelectedClaimId(id); setActiveView("claims"); }} onImport={() => setShowImport(true)} onOpenClaims={() => setActiveView("claims")} onExport={exportReport} /> : null}
+          {activeView === "claims" ? <ClaimsView claims={filteredClaims} selectedClaim={selectedClaim} dataset={dataset} filter={filter} search={search} counts={counts} operationBusy={operationBusy} onFilter={setFilter} onSearch={setSearch} onSelect={setSelectedClaimId} onAdd={openAddClaim} onExport={exportReport} /> : null}
           {activeView === "data" ? <DataView dataset={dataset} changedRows={changedRows} revisionVisible={revisionVisible} onToggleRevision={() => setRevisionVisible((value) => !value)} onImport={() => revisionInputRef.current?.click()} onNewProject={() => setShowImport(true)} /> : null}
           {activeView === "decision" ? <DecisionView decisions={decisions} results={decisionResults} claims={claims} /> : null}
-          {activeView === "review" ? <ReviewView claims={claims} decisions={decisionResults} records={reviewRecords} onReview={recordReview} onDecisionReview={recordDecisionReview} /> : null}
-          {activeView === "report" ? <ReportView dataset={dataset} claims={claims} counts={counts} completenessChecksPassed={completenessChecksPassed} completenessChecksTotal={completenessChecksTotal} displayLabel={displayLabel} lastAuditAt={lastAuditAt} onExport={exportReport} onCopy={copySummary} /> : null}
+          {activeView === "review" ? <ReviewView claims={claims} decisions={decisionResults} records={reviewRecords} operationBusy={operationBusy} onReview={recordReview} onDecisionReview={recordDecisionReview} /> : null}
+          {activeView === "report" ? <ReportView dataset={dataset} claims={claims} counts={counts} completenessChecksPassed={completenessChecksPassed} completenessChecksTotal={completenessChecksTotal} displayLabel={displayLabel} lastAuditAt={lastAuditAt} operationBusy={operationBusy} onExport={exportReport} onCopy={copySummary} /> : null}
         </div>
       </section>
 
@@ -683,8 +769,8 @@ function ExecutiveBrief({ dataset, counts, healthScore, changedRows, lastAuditAt
   </section>;
 }
 
-function Overview({ dataset, claims, selectedClaim, counts, healthScore, completenessChecksPassed, completenessChecksTotal, changedRows, displayLabel, lastAuditAt, sourceTraceability, calculationReproducibility, snapshotVerification, auditFreshness, activeCaseId, onLoadCase, onSelectClaim, onImport, onOpenClaims, onExport }: {
-  dataset: DatasetVersion; claims: Claim[]; selectedClaim?: Claim; counts: Record<ClaimStatus, number>; healthScore: number; completenessChecksPassed: number; completenessChecksTotal: number; changedRows: number; displayLabel: string; lastAuditAt: string; sourceTraceability: number; calculationReproducibility: number; snapshotVerification: number; auditFreshness: number; activeCaseId: string | null; onLoadCase: (id: string) => void; onSelectClaim: (id: string) => void; onImport: () => void; onOpenClaims: () => void; onExport: () => void | Promise<void>;
+function Overview({ dataset, claims, selectedClaim, counts, healthScore, completenessChecksPassed, completenessChecksTotal, changedRows, displayLabel, lastAuditAt, sourceTraceability, calculationReproducibility, snapshotVerification, auditFreshness, activeCaseId, caseLoadingId, operationBusy, onLoadCase, onSelectClaim, onImport, onOpenClaims, onExport }: {
+  dataset: DatasetVersion; claims: Claim[]; selectedClaim?: Claim; counts: Record<ClaimStatus, number>; healthScore: number; completenessChecksPassed: number; completenessChecksTotal: number; changedRows: number; displayLabel: string; lastAuditAt: string; sourceTraceability: number; calculationReproducibility: number; snapshotVerification: number; auditFreshness: number; activeCaseId: string | null; caseLoadingId: string | null; operationBusy: boolean; onLoadCase: (id: string) => void; onSelectClaim: (id: string) => void; onImport: () => void; onOpenClaims: () => void; onExport: () => void | Promise<void>;
 }) {
   const activeCase = CASE_CATALOG.find((item) => item.id === activeCaseId);
   return <>
@@ -700,8 +786,8 @@ function Overview({ dataset, claims, selectedClaim, counts, healthScore, complet
     </div>
     <div className="overview-grid"><section className="panel health-panel"><div className="panel-head"><div><span className="eyebrow">AUDIT RUN STATUS</span><h2>Evidence Completeness Checks</h2></div><span className="live-badge"><i /> Computed</span></div><div className="health-body"><div className="health-ring" style={{ "--score": `${healthScore * 3.6}deg` } as CSSProperties}><div><strong>{completenessChecksPassed}/{completenessChecksTotal}</strong><span>checks passed</span></div></div><div className="health-bars"><HealthBar label="Source traceability" value={sourceTraceability} /><HealthBar label="Calculation reproducibility" value={calculationReproducibility} /><HealthBar label="Snapshot verification" value={snapshotVerification} /><HealthBar label="Audit-result freshness" value={auditFreshness} tone={auditFreshness < 100 ? "warning" : "normal"} /></div></div><div className="health-foot"><span>Last recomputation</span><b>{new Date(lastAuditAt).toLocaleString("en-US")}</b><span className="spacer" /><span>Rule</span><b>{dataset.ruleVersion}</b></div></section>
       <section className="panel claim-health-panel"><div className="panel-head"><div><span className="eyebrow">CLAIM HEALTH</span><h2>Change-Impact Queue</h2></div><button className="text-button" onClick={onOpenClaims}>View all →</button></div><div className="claim-queue">{claims.slice(0, 5).map((claim) => <button key={claim.id} className={selectedClaim?.id === claim.id ? "selected" : ""} onClick={() => onSelectClaim(claim.id)}><span className={`queue-symbol ${STATUS_META[claim.status].className}`}>{STATUS_META[claim.status].symbol}</span><span className="queue-copy"><b>{claim.title}</b><small>{claim.code} · {claim.section}</small></span><StatusPill status={claim.status} /></button>)}</div></section></div>
-    <div className="bottom-grid"><section className="panel evidence-preview"><div className="panel-head"><div><span className="eyebrow">EVIDENCE-CHAIN PREVIEW</span><h2>{selectedClaim?.code ?? "—"}</h2></div></div>{selectedClaim ? <EvidenceChain claim={selectedClaim} dataset={dataset} compact /> : <EmptyState text="No claims yet" />}</section><section className="panel change-log"><div className="panel-head"><div><span className="eyebrow">VERSION FACTS</span><h2>Integrity Record</h2></div></div><ol><li className="danger"><i /><div><b>{counts.REVERSED} claims should no longer be cited</b><span>From the latest full recomputation</span></div><time>AUDIT</time></li><li className="amber"><i /><div><b>{changedRows} records changed</b><span>{displayLabel}</span></div><time>KEY</time></li><li><i /><div><b>Baseline SHA-256 {isSnapshotVerified(dataset, "baseline") ? "reverified" : "not yet reverified"}</b><span>{dataset.baselineMeta.sha256.slice(0, 16)}…</span></div><time>HASH</time></li></ol><button className="button report-button" onClick={onExport}>Generate audit report</button></section></div>
-    <section className="case-library"><div className="panel-head"><div><span className="eyebrow">EXECUTABLE CASE PACKS</span><h2>Ten Executable Cases: Six Public-Data Audits and Four Synthetic Stress Fixtures</h2></div><a href="/cases/catalog.json" download>Download catalog</a></div><div>{CASE_CATALOG.map((item) => <article key={item.id} className={activeCaseId === item.id ? "active" : ""}><span>{item.domain.toUpperCase()}</span><h3>{item.title}</h3><p>{item.question}</p><small>{item.synthetic ? "Synthetic data" : "External public data"} · {item.claimCount} executable rules · {item.decisionCount} decisions · primary key {item.primaryKey}</small><button className="button primary" onClick={() => onLoadCase(item.id)}>{activeCaseId === item.id ? "Rerun case" : "Load and audit"}</button><div><a href={item.expectedAuditFile} download>Expected results</a><a href={`/cases/${item.id}/evidence-package.json`} download>AuditBundle</a>{item.sourceMetadataFile ? <a href={item.sourceMetadataFile} download>Source and license</a> : null}<a href={item.readmeFile} download>Documentation</a></div></article>)}</div></section>
+    <div className="bottom-grid"><section className="panel evidence-preview"><div className="panel-head"><div><span className="eyebrow">EVIDENCE-CHAIN PREVIEW</span><h2>{selectedClaim?.code ?? "—"}</h2></div></div>{selectedClaim ? <EvidenceChain claim={selectedClaim} dataset={dataset} compact /> : <EmptyState text="No claims yet" />}</section><section className="panel change-log"><div className="panel-head"><div><span className="eyebrow">VERSION FACTS</span><h2>Integrity Record</h2></div></div><ol><li className="danger"><i /><div><b>{counts.REVERSED} claims should no longer be cited</b><span>From the latest full recomputation</span></div><time>AUDIT</time></li><li className="amber"><i /><div><b>{changedRows} records changed</b><span>{displayLabel}</span></div><time>KEY</time></li><li><i /><div><b>Baseline SHA-256 {isSnapshotVerified(dataset, "baseline") ? "reverified" : "not yet reverified"}</b><span>{dataset.baselineMeta.sha256.slice(0, 16)}…</span></div><time>HASH</time></li></ol><button className="button report-button" onClick={onExport} disabled={operationBusy}>Generate audit report</button></section></div>
+    <section className="case-library"><div className="panel-head"><div><span className="eyebrow">EXECUTABLE CASE PACKS</span><h2>Ten Executable Cases: Six Public-Data Audits and Four Synthetic Stress Fixtures</h2></div><a href="/cases/catalog.json" download>Download catalog</a></div><div>{CASE_CATALOG.map((item) => <article key={item.id} className={activeCaseId === item.id ? "active" : ""}><span>{item.domain.toUpperCase()}</span><h3>{item.title}</h3><p>{item.question}</p><small>{item.synthetic ? "Synthetic data" : "External public data"} · {item.claimCount} executable rules · {item.decisionCount} decisions · primary key {item.primaryKey}</small><button className="button primary" aria-busy={caseLoadingId === item.id} onClick={() => onLoadCase(item.id)}>{caseLoadingId === item.id ? "Loading latest request…" : activeCaseId === item.id ? "Rerun case" : "Load and audit"}</button><div><a href={item.expectedAuditFile} download>Expected results</a><a href={`/cases/${item.id}/evidence-package.json`} download>AuditBundle</a>{item.sourceMetadataFile ? <a href={item.sourceMetadataFile} download>Source and license</a> : null}<a href={item.readmeFile} download>Documentation</a></div></article>)}</div></section>
   </>;
 }
 
@@ -709,7 +795,7 @@ function HealthBar({ label, value, tone = "normal" }: { label: string; value: nu
   return <div className="health-bar"><span>{label}</span><b>{value === 100 ? "Passed" : "Review"}</b><div><i className={tone} style={{ width: `${value}%` }} /></div></div>;
 }
 
-function ClaimsView({ claims, selectedClaim, dataset, filter, search, counts, onFilter, onSearch, onSelect, onAdd, onExport }: { claims: Claim[]; selectedClaim?: Claim; dataset: DatasetVersion; filter: "all" | ClaimStatus; search: string; counts: Record<ClaimStatus, number>; onFilter: (value: "all" | ClaimStatus) => void; onSearch: (value: string) => void; onSelect: (id: string) => void; onAdd: () => void; onExport: () => void }) {
+function ClaimsView({ claims, selectedClaim, dataset, filter, search, counts, operationBusy, onFilter, onSearch, onSelect, onAdd, onExport }: { claims: Claim[]; selectedClaim?: Claim; dataset: DatasetVersion; filter: "all" | ClaimStatus; search: string; counts: Record<ClaimStatus, number>; operationBusy: boolean; onFilter: (value: "all" | ClaimStatus) => void; onSearch: (value: string) => void; onSelect: (id: string) => void; onAdd: () => void; onExport: () => void }) {
   const filterItems: Array<{ id: "all" | ClaimStatus; label: string; count: number }> = [
     { id: "all", label: "All", count: Object.values(counts).reduce((a, b) => a + b, 0) },
     { id: "REVERSED", label: "Reversed", count: counts.REVERSED },
@@ -718,7 +804,7 @@ function ClaimsView({ claims, selectedClaim, dataset, filter, search, counts, on
     { id: "UNTESTABLE", label: "Untestable", count: counts.UNTESTABLE },
     { id: "REVIEW_REQUIRED", label: "Review required", count: counts.REVIEW_REQUIRED },
   ];
-  return <><PageIntro eyebrow="CLAIM-LEVEL TRACEABILITY" title="Claims and Evidence" description="Claim status always comes from the latest complete audit. Switching data views does not rewrite status, and exports never inherit presentation state." actions={<><button className="button ghost" onClick={onExport}>Export audit report</button>{!READ_ONLY_DEMO ? <button data-claimtrace-mutation="create-claim" className="button primary" onClick={onAdd}>＋ Add testable claim</button> : null}</>} />
+  return <><PageIntro eyebrow="CLAIM-LEVEL TRACEABILITY" title="Claims and Evidence" description="Claim status always comes from the latest complete audit. Switching data views does not rewrite status, and exports never inherit presentation state." actions={<><button className="button ghost" onClick={onExport} disabled={operationBusy}>Export audit report</button>{!READ_ONLY_DEMO ? <button data-claimtrace-mutation="create-claim" className="button primary" onClick={onAdd}>＋ Add testable claim</button> : null}</>} />
     <section className="claim-portfolio-summary"><div><span className="eyebrow">PORTFOLIO SIGNAL</span><h2>{counts.REVERSED ? `${counts.REVERSED} claims are no longer safe to cite` : counts.REVIEW_REQUIRED ? `${counts.REVIEW_REQUIRED} claims need human review` : "No reversed claims in the current run"}</h2><p>Filter the portfolio without changing the computed result identity.</p></div><StatusMix counts={counts} compact /><div className="portfolio-kpis"><span><b>{Object.values(counts).reduce((sum, count) => sum + count, 0)}</b>Total</span><span className="critical"><b>{counts.REVERSED + counts.WEAKENED}</b>Material</span><span><b>{counts.SUPPORTED}</b>Supported</span></div></section>
     <div className="claim-toolbar"><div className="filter-tabs">{filterItems.map((item) => <button key={item.id} className={filter === item.id ? "active" : ""} onClick={() => onFilter(item.id)}>{item.label}<span>{item.count}</span></button>)}</div><label className="search-box"><span>⌕</span><input value={search} onChange={(event) => onSearch(event.target.value)} placeholder="Search claim, code, or category" /></label></div><div className="claims-layout"><section className="claim-list" aria-label="Claim list">{claims.length ? claims.map((claim) => <button key={claim.id} className={selectedClaim?.id === claim.id ? "active" : ""} onClick={() => onSelect(claim.id)}><div className="claim-list-top"><span>{claim.code}</span><StatusPill status={claim.status} /></div><h3>{claim.title}</h3><p>{claim.section} · {claim.owner}</p><div className="value-shift"><span>{claim.baselineValue}</span><b>→</b><span>{claim.currentValue}</span></div></button>) : <EmptyState text="No matching claims" />}</section>{selectedClaim ? <ClaimDetail claim={selectedClaim} dataset={dataset} /> : <section className="panel"><EmptyState text="Select a claim to inspect its evidence" /></section>}</div></>;
 }
@@ -790,7 +876,7 @@ function DecisionView({ decisions, results, claims }: { decisions: DecisionSpec[
   </>;
 }
 
-function ReviewView({ claims, decisions, records, onReview, onDecisionReview }: { claims: Claim[]; decisions: DecisionResult[]; records: ReviewRecord[]; onReview: (claimId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) => void; onDecisionReview: (decisionId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) => void }) {
+function ReviewView({ claims, decisions, records, operationBusy, onReview, onDecisionReview }: { claims: Claim[]; decisions: DecisionResult[]; records: ReviewRecord[]; operationBusy: boolean; onReview: (claimId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) => void; onDecisionReview: (decisionId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) => void }) {
   const [reviewer, setReviewer] = useState("");
   const [notes, setNotes] = useState<Record<string, string>>({});
   const pending = claims.filter((claim) => claim.governance.releaseStatus === "BLOCKED");
@@ -814,7 +900,7 @@ function ReviewView({ claims, decisions, records, onReview, onDecisionReview }: 
         {pending.length ? pending.map((claim) => {
           const canApprove = ["SUPPORTED", "WEAKENED"].includes(claim.status);
           const canRiskAccept = claim.status === "REVERSED";
-          return <article key={claim.id}><div><span>{claim.code} · {claim.kind === "SNAPSHOT" ? "Snapshot claim" : "Version-comparison claim"}</span><h3>{claim.title}</h3><p>{claim.reason}</p><small>Engine: {claim.governance.engineStatus} · review: {claim.governance.reviewDisposition} · release: {claim.governance.releaseStatus}</small>{READ_ONLY_DEMO ? <p className="readonly-review-copy">Read-only portfolio mode does not accept review notes or sign-off actions.</p> : <textarea data-claimtrace-mutation="claim-review-note" value={notes[claim.id] ?? ""} onChange={(event) => setNotes((current) => ({ ...current, [claim.id]: event.target.value }))} placeholder={canRiskAccept ? "State the business rationale for accepting reversal risk (at least 10 characters)" : "Document the threshold, denominator, evidence, and sign-off judgment"} />}</div><StatusPill status={claim.status} />{!READ_ONLY_DEMO ? <div className="review-actions"><button data-claimtrace-mutation="claim-return" onClick={() => submit(claim, "CHANGES_REQUESTED")}>Return for changes</button>{canApprove ? <button data-claimtrace-mutation="claim-approve" className="approve" onClick={() => submit(claim, "APPROVED")}>Confirm local sign-off</button> : null}{canRiskAccept ? <button data-claimtrace-mutation="claim-risk-accept" className="risk" onClick={() => submit(claim, "RISK_ACCEPTED")}>Accept risk and override</button> : null}</div> : null}</article>;
+          return <article key={claim.id}><div><span>{claim.code} · {claim.kind === "SNAPSHOT" ? "Snapshot claim" : "Version-comparison claim"}</span><h3>{claim.title}</h3><p>{claim.reason}</p><small>Engine: {claim.governance.engineStatus} · review: {claim.governance.reviewDisposition} · release: {claim.governance.releaseStatus}</small>{READ_ONLY_DEMO ? <p className="readonly-review-copy">Read-only portfolio mode does not accept review notes or sign-off actions.</p> : <textarea data-claimtrace-mutation="claim-review-note" value={notes[claim.id] ?? ""} onChange={(event) => setNotes((current) => ({ ...current, [claim.id]: event.target.value }))} placeholder={canRiskAccept ? "State the business rationale for accepting reversal risk (at least 10 characters)" : "Document the threshold, denominator, evidence, and sign-off judgment"} />}</div><StatusPill status={claim.status} />{!READ_ONLY_DEMO ? <div className="review-actions"><button data-claimtrace-mutation="claim-return" disabled={operationBusy} onClick={() => submit(claim, "CHANGES_REQUESTED")}>Return for changes</button>{canApprove ? <button data-claimtrace-mutation="claim-approve" disabled={operationBusy} className="approve" onClick={() => submit(claim, "APPROVED")}>Confirm local sign-off</button> : null}{canRiskAccept ? <button data-claimtrace-mutation="claim-risk-accept" disabled={operationBusy} className="risk" onClick={() => submit(claim, "RISK_ACCEPTED")}>Accept risk and override</button> : null}</div> : null}</article>;
         }) : <EmptyState text="No claims currently require review" />}
         {pendingDecisions.map((decision) => {
           const canApprove = decision.status === "SUPPORTED";
@@ -823,7 +909,7 @@ function ReviewView({ claims, decisions, records, onReview, onDecisionReview }: 
           const unreleased = decision.boundClaimIds.filter((claimId) => !["APPROVED_FOR_USE", "APPROVED_WITH_RISK"].includes(claims.find((claim) => claim.id === claimId)?.governance.releaseStatus ?? "BLOCKED"));
           const noteKey = `decision:${decision.decisionId}`;
           const placeholder = decision.status === "RESIGN_REQUIRED" ? "Confirm that the new snapshot, rule, or evidence identity was checked" : needsResign ? "Explain why the new recommendation, feasible set, or decision outcome is being signed" : "Enter a reason to sign off or return the decision";
-          return <article key={noteKey} className="decision-review"><div><span>DECISION · {decision.decisionId}</span><h3>{decision.previousOutcome ?? "No sign-off history"} → {decision.currentOutcome}</h3><p>{decision.reason}</p>{unreleased.length ? <p className="completeness-warning">Upstream claims not released: {unreleased.join(", ")}. This decision cannot currently be signed off.</p> : null}<small>Engine: {decision.governance.engineStatus} · review: {decision.governance.reviewDisposition} · release: {decision.governance.releaseStatus}</small>{READ_ONLY_DEMO ? <p className="readonly-review-copy">Read-only portfolio mode does not accept decision-review notes or sign-off actions.</p> : <textarea data-claimtrace-mutation="decision-review-note" value={notes[noteKey] ?? ""} onChange={(event) => setNotes((current) => ({ ...current, [noteKey]: event.target.value }))} placeholder={placeholder} />}</div>{!READ_ONLY_DEMO ? <div className="review-actions"><button data-claimtrace-mutation="decision-return" onClick={() => submitDecision(decision, "CHANGES_REQUESTED")}>Return decision</button>{canApprove ? <button data-claimtrace-mutation="decision-approve" disabled={unreleased.length > 0} className="approve" onClick={() => submitDecision(decision, "APPROVED")}>Sign off decision</button> : null}{needsResign ? <button data-claimtrace-mutation="decision-resign" disabled={unreleased.length > 0} className="approve" onClick={() => submitDecision(decision, "RESIGNED")}>Re-sign</button> : null}{canRiskAccept ? <button data-claimtrace-mutation="decision-risk-accept" disabled={unreleased.length > 0} className="risk" onClick={() => submitDecision(decision, "RISK_ACCEPTED")}>Accept change risk</button> : null}</div> : null}</article>;
+          return <article key={noteKey} className="decision-review"><div><span>DECISION · {decision.decisionId}</span><h3>{decision.previousOutcome ?? "No sign-off history"} → {decision.currentOutcome}</h3><p>{decision.reason}</p>{unreleased.length ? <p className="completeness-warning">Upstream claims not released: {unreleased.join(", ")}. This decision cannot currently be signed off.</p> : null}<small>Engine: {decision.governance.engineStatus} · review: {decision.governance.reviewDisposition} · release: {decision.governance.releaseStatus}</small>{READ_ONLY_DEMO ? <p className="readonly-review-copy">Read-only portfolio mode does not accept decision-review notes or sign-off actions.</p> : <textarea data-claimtrace-mutation="decision-review-note" value={notes[noteKey] ?? ""} onChange={(event) => setNotes((current) => ({ ...current, [noteKey]: event.target.value }))} placeholder={placeholder} />}</div>{!READ_ONLY_DEMO ? <div className="review-actions"><button data-claimtrace-mutation="decision-return" disabled={operationBusy} onClick={() => submitDecision(decision, "CHANGES_REQUESTED")}>Return decision</button>{canApprove ? <button data-claimtrace-mutation="decision-approve" disabled={operationBusy || unreleased.length > 0} className="approve" onClick={() => submitDecision(decision, "APPROVED")}>Sign off decision</button> : null}{needsResign ? <button data-claimtrace-mutation="decision-resign" disabled={operationBusy || unreleased.length > 0} className="approve" onClick={() => submitDecision(decision, "RESIGNED")}>Re-sign</button> : null}{canRiskAccept ? <button data-claimtrace-mutation="decision-risk-accept" disabled={operationBusy || unreleased.length > 0} className="risk" onClick={() => submitDecision(decision, "RISK_ACCEPTED")}>Accept change risk</button> : null}</div> : null}</article>;
         })}
       </section>
       <section className="panel audit-log"><div className="panel-head"><div><span className="eyebrow">APPEND-ONLY LOG</span><h2>Local, Unauthenticated Sign-Off Records</h2></div><span>{records.length} records</span></div>{records.length ? <ol>{[...records].reverse().map((record) => <li key={record.id}><b>{record.disposition === "APPROVED" ? "Signed off locally" : record.disposition === "RESIGNED" ? "Re-signed locally" : record.disposition === "RISK_ACCEPTED" ? "Risk accepted" : "Returned"} · {record.claimId ?? record.decisionId}</b><span>{record.reviewer} (identity not verified) · {new Date(record.createdAt).toLocaleString("en-US")}</span><p>{record.note}</p><code>uuid:{record.id} · result:{record.targetResultId.slice(0, 24)}… · sha256:{record.recordHash.slice(0, 16)}…</code></li>)}</ol> : <EmptyState text="No local, unauthenticated sign-off records yet" />}</section>
@@ -831,8 +917,8 @@ function ReviewView({ claims, decisions, records, onReview, onDecisionReview }: 
   </>;
 }
 
-function ReportView({ dataset, claims, counts, completenessChecksPassed, completenessChecksTotal, displayLabel, lastAuditAt, onExport, onCopy }: { dataset: DatasetVersion; claims: Claim[]; counts: Record<ClaimStatus, number>; completenessChecksPassed: number; completenessChecksTotal: number; displayLabel: string; lastAuditAt: string; onExport: () => void | Promise<void>; onCopy: () => void }) {
-  return <><PageIntro eyebrow="AUDIT HANDOFF" title="Audit Report" description="The HTML report is generated from the same independently verified AuditBundle and covers claims, decisions, input provenance, the local unauthenticated review chain, and the canonical root hash." actions={<><button className="button ghost" onClick={onCopy}>Copy summary</button><button className="button primary" onClick={onExport}>Download complete HTML report</button></>} /><article className="report-sheet"><header><div className="report-brand"><span className="brand-mark dark"><i /><i /><i /></span><b>ClaimTrace</b></div><span className="report-label">EVIDENCE & DECISION AUDIT / {new Date().getFullYear()}</span></header><div className="report-title"><span>VERSIONED EVIDENCE AND DECISION AUDIT REPORT</span><h1>{dataset.projectName}</h1><p>Showing: {displayLabel} · primary key: {dataset.primaryKey} · rule: {dataset.ruleVersion}</p></div><div className="report-summary"><div className="report-score"><strong>{completenessChecksPassed}/{completenessChecksTotal}</strong><span>completeness<br />checks passed</span></div><div><h2>Executive Summary</h2><p>Audited <b>{claims.length}</b> claims: <b className="red-text">{counts.REVERSED} reversed</b>, <b className="amber-text">{counts.WEAKENED} weakened</b>, {counts.UNTESTABLE} untestable, {counts.REVIEW_REQUIRED} requiring review, and {counts.SUPPORTED} supported. The ratio comes from 16 completeness checks per claim; it is not model accuracy or business impact.</p></div></div><div className="report-status-visual"><div><span>CLAIM PORTFOLIO</span><b>Current audit distribution</b></div><StatusMix counts={counts} compact /></div><section className="report-section"><h2>Immediate Action Required</h2><div className="report-alerts">{claims.filter((claim) => claim.status === "REVERSED").map((claim) => <div key={claim.id}><span>{claim.code}</span><div><b>{claim.title}</b><p>{claim.action}</p></div></div>)}{!counts.REVERSED ? <p className="all-clear">No claims are currently reversed.</p> : null}</div></section><section className="report-section"><h2>Claim-by-Claim Audit Results</h2><div className="report-table"><div className="report-row heading"><span>Code</span><span>Claim</span><span>Baseline</span><span>Current</span><span>Status</span></div>{claims.map((claim) => <div className="report-row" key={claim.id}><span>{claim.code}</span><span>{claim.title}</span><span>{claim.baselineValue}</span><span>{claim.currentValue}</span><span><StatusPill status={claim.status} /></span></div>)}</div></section><footer><p>Engine status, human disposition, and release status are stored separately; local display names are not authenticated.</p><div><span>Last recomputation: {new Date(lastAuditAt).toLocaleString("en-US")}</span><span>Baseline SHA-256: {dataset.baselineMeta.sha256.slice(0, 16)}…</span></div></footer></article></>;
+function ReportView({ dataset, claims, counts, completenessChecksPassed, completenessChecksTotal, displayLabel, lastAuditAt, operationBusy, onExport, onCopy }: { dataset: DatasetVersion; claims: Claim[]; counts: Record<ClaimStatus, number>; completenessChecksPassed: number; completenessChecksTotal: number; displayLabel: string; lastAuditAt: string; operationBusy: boolean; onExport: () => void | Promise<void>; onCopy: () => void }) {
+  return <><PageIntro eyebrow="AUDIT HANDOFF" title="Audit Report" description="The HTML report is generated from the same independently verified AuditBundle and covers claims, decisions, input provenance, the local unauthenticated review chain, and the canonical root hash." actions={<><button className="button ghost" onClick={onCopy}>Copy summary</button><button className="button primary" onClick={onExport} disabled={operationBusy}>Download complete HTML report</button></>} /><article className="report-sheet"><header><div className="report-brand"><span className="brand-mark dark"><i /><i /><i /></span><b>ClaimTrace</b></div><span className="report-label">EVIDENCE & DECISION AUDIT / {new Date().getFullYear()}</span></header><div className="report-title"><span>VERSIONED EVIDENCE AND DECISION AUDIT REPORT</span><h1>{dataset.projectName}</h1><p>Showing: {displayLabel} · primary key: {dataset.primaryKey} · rule: {dataset.ruleVersion}</p></div><div className="report-summary"><div className="report-score"><strong>{completenessChecksPassed}/{completenessChecksTotal}</strong><span>completeness<br />checks passed</span></div><div><h2>Executive Summary</h2><p>Audited <b>{claims.length}</b> claims: <b className="red-text">{counts.REVERSED} reversed</b>, <b className="amber-text">{counts.WEAKENED} weakened</b>, {counts.UNTESTABLE} untestable, {counts.REVIEW_REQUIRED} requiring review, and {counts.SUPPORTED} supported. The ratio comes from 16 completeness checks per claim; it is not model accuracy or business impact.</p></div></div><div className="report-status-visual"><div><span>CLAIM PORTFOLIO</span><b>Current audit distribution</b></div><StatusMix counts={counts} compact /></div><section className="report-section"><h2>Immediate Action Required</h2><div className="report-alerts">{claims.filter((claim) => claim.status === "REVERSED").map((claim) => <div key={claim.id}><span>{claim.code}</span><div><b>{claim.title}</b><p>{claim.action}</p></div></div>)}{!counts.REVERSED ? <p className="all-clear">No claims are currently reversed.</p> : null}</div></section><section className="report-section"><h2>Claim-by-Claim Audit Results</h2><div className="report-table"><div className="report-row heading"><span>Code</span><span>Claim</span><span>Baseline</span><span>Current</span><span>Status</span></div>{claims.map((claim) => <div className="report-row" key={claim.id}><span>{claim.code}</span><span>{claim.title}</span><span>{claim.baselineValue}</span><span>{claim.currentValue}</span><span><StatusPill status={claim.status} /></span></div>)}</div></section><footer><p>Engine status, human disposition, and release status are stored separately; local display names are not authenticated.</p><div><span>Last recomputation: {new Date(lastAuditAt).toLocaleString("en-US")}</span><span>Baseline SHA-256: {dataset.baselineMeta.sha256.slice(0, 16)}…</span></div></footer></article></>;
 }
 
 function EmptyState({ text }: { text: string }) {

@@ -1,6 +1,8 @@
-export const RULE_ENGINE_VERSION = "claimtrace-rule/6.1.2";
-export const EVIDENCE_SCHEMA_VERSION = "claimtrace-audit-bundle/2.2.0";
-export const SNAPSHOT_SCHEMA_VERSION = "claimtrace-snapshot/1.0.0";
+export const RULE_ENGINE_VERSION = "claimtrace-rule/6.2.0";
+export const EVIDENCE_SCHEMA_VERSION = "claimtrace-audit-bundle/2.3.0";
+export const SNAPSHOT_SCHEMA_VERSION = "claimtrace-snapshot/1.1.0";
+export const CSV_DIALECT_VERSION = "claimtrace-csv-strict/1.0.0";
+export const NORMALIZED_ROWS_VERSION = "claimtrace-normalized-rows/1.0.0";
 
 export type ClaimStatus =
   | "SUPPORTED"
@@ -49,6 +51,8 @@ export interface SnapshotMeta {
 
 export interface SnapshotManifest {
   schemaVersion: string;
+  csvDialectVersion: typeof CSV_DIALECT_VERSION;
+  normalizationVersion: typeof NORMALIZED_ROWS_VERSION;
   snapshotId: string;
   side: SnapshotSide;
   fileName: string;

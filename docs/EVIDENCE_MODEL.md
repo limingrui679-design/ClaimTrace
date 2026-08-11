@@ -2,7 +2,11 @@
 
 ## SnapshotManifest
 
-Each snapshot records its side, file name, raw SHA-256, normalized-record SHA-256, row count, byte size, columns, primary key, generation time, verification time, and verification status. A 64-character string alone is not treated as proof: verification recomputes the digest from retained raw CSV and the canonical row representation.
+Each snapshot records its side, file name, raw SHA-256, normalized-record SHA-256, row count, byte size, columns, primary key, CSV-dialect version, normalization-policy version, generation time, verification time, and verification status. A 64-character string alone is not treated as proof: verification recomputes the digest from retained raw CSV and the canonical row representation.
+
+`claimtrace-csv-strict/1.0.0` uses explicit unquoted, quoted, and after-quote parser states. It rejects a bare quote inside an unquoted field, non-delimiter content after a closing quote, unterminated quoted fields, duplicate headers, and inconsistent row widths. It preserves leading and trailing whitespace inside quoted fields, trims unquoted cells, treats doubled quotes as one literal quote, retains embedded newlines, and accepts LF or CRLF record endings.
+
+`claimtrace-normalized-rows/1.0.0` uses the baseline manifest's column order as the canonical order for both snapshots. A current file with the same exact case-sensitive column set may arrive in a different order and is aligned before normalized hashing and execution. Missing, additional, differently cased, or duplicate columns are rejected. AuditBundle reconstruction and verification apply the same versioned contracts rather than a separate import-only interpretation.
 
 ## Claim rule
 
@@ -95,7 +99,7 @@ For every public-data case, verification additionally rehashes both retained off
 
 `verifyAuditBundleChain()` accepts bundles in oldest-to-newest order, verifies each package independently, and then checks genesis, exact predecessor roots, duplicate or malformed roots, project continuity, and primary-key continuity. Structurally malformed entries produce failed checks and link results instead of an exception. Within each bundle, derived-result, upstream-lineage, and external-source-lineage verification report exactly one independent result each, so malformed provenance does not duplicate or mask unrelated diagnostics. A single bundle validates only the format of its link; proving a prior bundle requires retaining and supplying that bundle. The chain is not digitally signed or externally anchored.
 
-The standalone HTML report accepts only a verified bundle plus its verification result. It includes claim/result IDs, evidence counts, decision action identity, recommendation and feasible sets, change reasons, numerical provenance, sensitivity analysis, governance state, local unauthenticated review records, record hashes, AuditBundle root and section checks, optional external-source metadata, and limitations.
+The standalone HTML report accepts only a verified bundle plus its verification result. It includes claim/result IDs, evidence counts, decision action identity, recommendation and feasible sets, change reasons, numerical provenance, sensitivity analysis, governance state, local unauthenticated review records, record hashes, AuditBundle root and section checks, optional external-source metadata, and limitations. A passed verification check always has an empty error list; the report renders diagnostic messages only for failed checks.
 
 ## Completeness
 

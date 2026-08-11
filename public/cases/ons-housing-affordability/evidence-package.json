@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "ONS Selected-Authority Housing-Affordability Ratio Audit",
   "primaryKey": "authority_code",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-cd3f0d433ec73a23",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -30,7 +32,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-8d9006a4cb84ddbb",
       "side": "current",
       "fileName": "current.csv",
@@ -411,7 +415,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-kensington-rank|claimtrace-rule/6.1.2",
+        "seed": "ons-kensington-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -474,7 +478,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.1.2",
+        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -532,7 +536,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-selected-mean-stability|claimtrace-rule/6.1.2",
+        "seed": "ons-selected-mean-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -1150,7 +1154,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ons-kensington-rank:8406789e1998e26683c7b450",
+          "id": "claim-result:ons-kensington-rank:1182c2f58e5dca7af5a7ffdd",
           "kind": "Comparison result",
           "title": "housing_affordability_ratio version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1164,9 +1168,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1198,7 +1202,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
@@ -1210,7 +1214,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-kensington-rank|claimtrace-rule/6.1.2",
+        "seed": "ons-kensington-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -1281,7 +1285,7 @@
           }
         }
       },
-      "resultId": "claim-result:ons-kensington-rank:8406789e1998e26683c7b450",
+      "resultId": "claim-result:ons-kensington-rank:1182c2f58e5dca7af5a7ffdd",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1360,7 +1364,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ons-redcar-five-ratio:5a3fc518c1a1da2d02aeb804",
+          "id": "claim-result:ons-redcar-five-ratio:43dfab90bdd95338541038a6",
           "kind": "Comparison result",
           "title": "housing_affordability_ratio version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1374,9 +1378,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1408,7 +1412,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
@@ -1420,7 +1424,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.1.2",
+        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1465,7 +1469,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ons-redcar-five-ratio:5a3fc518c1a1da2d02aeb804",
+      "resultId": "claim-result:ons-redcar-five-ratio:43dfab90bdd95338541038a6",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1810,7 +1814,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ons-selected-mean-stability:d420b343b0fabfa3894fbbf4",
+          "id": "claim-result:ons-selected-mean-stability:b7320fc0a8b3ff8ce60c5163",
           "kind": "Comparison result",
           "title": "housing_affordability_ratio version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1824,9 +1828,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1858,7 +1862,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
@@ -1870,7 +1874,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-selected-mean-stability|claimtrace-rule/6.1.2",
+        "seed": "ons-selected-mean-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -1915,7 +1919,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ons-selected-mean-stability:d420b343b0fabfa3894fbbf4",
+      "resultId": "claim-result:ons-selected-mean-stability:b7320fc0a8b3ff8ce60c5163",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -2070,11 +2074,11 @@
         "decisionInputProvenanceHash": "09e9c2f24f8fc3b89e9c0b9823fb5d83b5979812e81ec3cbdb1521ca8311376b",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:ons-kensington-rank:8406789e1998e26683c7b450",
-          "claim-result:ons-redcar-five-ratio:5a3fc518c1a1da2d02aeb804",
-          "claim-result:ons-selected-mean-stability:d420b343b0fabfa3894fbbf4"
+          "claim-result:ons-kensington-rank:1182c2f58e5dca7af5a7ffdd",
+          "claim-result:ons-redcar-five-ratio:43dfab90bdd95338541038a6",
+          "claim-result:ons-selected-mean-stability:b7320fc0a8b3ff8ce60c5163"
         ]
       },
       "analysis": {
@@ -2196,7 +2200,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:ons-planning-context-note:e58ee808055a036f6ca0340f"
+      "resultId": "decision-result:ons-planning-context-note:8f9e58caacc38e7a7942d25f"
     }
   ],
   "reviews": [],
@@ -2269,12 +2273,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "a4da9b226d6d4d2f0b0f477f078feabfd40e597df1afcfaf06c1f0a08e82d2bd",
+    "payloadHash": "efc58e24b7f9a6bf5f2156f32b52a24eee6488399d7516b519c45ee1d04abe8a",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "04ccbb06b17cf16bc23be52a3c71e9ab2d9bd4791874c31532fa55078bed9044",
-      "claims": "9fd3b768b260b023972f8a55eb39ae86dcf5d4488bc0f86e99dfd4539efa8bbf",
-      "decisions": "817e3ec0083dfdb34f0dd63b3bf43257a57f6afbe61cc8f973894f3dfa93fe32",
+      "snapshots": "b560b1b2fc13e16169a88bef6c7a1d59dce3062e6104900f8c3a8d36202a7393",
+      "claims": "af689a428c80141f892e91d9fee17718a1175fc5ed78e7bad75859688335e46b",
+      "decisions": "6e7fa1c5a8ca1e3408022c7459214a3bf2ac223c91f2a834970731acfbafefa2",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "4f495ef33288b5d9357d6ef93a846cfc127981ccf76bbdb22da6b5d7b78105ec",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

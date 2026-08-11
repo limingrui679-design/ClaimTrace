@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "USDOT NTD Selected Heavy-Rail Operations Audit",
   "primaryKey": "ntd_id",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-6de76fae9d280d03",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -34,7 +36,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-47243affc422e851",
       "side": "current",
       "fileName": "current.csv",
@@ -403,7 +407,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.1.2",
+        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -466,7 +470,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.1.2",
+        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -524,7 +528,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.1.2",
+        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1058,7 +1062,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ntd-nyct-productivity-rank:0bf76d6700658cdff0da09b5",
+          "id": "claim-result:ntd-nyct-productivity-rank:f41bc618b3ee301e8aa8556a",
           "kind": "Comparison result",
           "title": "riders_per_revenue_hour version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1072,9 +1076,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1106,7 +1110,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
@@ -1118,7 +1122,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.1.2",
+        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1181,7 +1185,7 @@
           }
         }
       },
-      "resultId": "claim-result:ntd-nyct-productivity-rank:0bf76d6700658cdff0da09b5",
+      "resultId": "claim-result:ntd-nyct-productivity-rank:f41bc618b3ee301e8aa8556a",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1260,7 +1264,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ntd-wmata-productivity-gate:93b1dad498fefaf616fa3dbd",
+          "id": "claim-result:ntd-wmata-productivity-gate:1412c5c5d3a3dd62e70ea92f",
           "kind": "Comparison result",
           "title": "riders_per_revenue_hour version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1274,9 +1278,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1308,7 +1312,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
@@ -1320,7 +1324,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.1.2",
+        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1365,7 +1369,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ntd-wmata-productivity-gate:93b1dad498fefaf616fa3dbd",
+      "resultId": "claim-result:ntd-wmata-productivity-gate:1412c5c5d3a3dd62e70ea92f",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1614,7 +1618,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ntd-selected-ridership-stability:a23d976ac2b6da7680171334",
+          "id": "claim-result:ntd-selected-ridership-stability:b97e9cc974a648478974e87e",
           "kind": "Comparison result",
           "title": "ridership version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1628,9 +1632,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1662,7 +1666,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
@@ -1674,7 +1678,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.1.2",
+        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1719,7 +1723,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ntd-selected-ridership-stability:a23d976ac2b6da7680171334",
+      "resultId": "claim-result:ntd-selected-ridership-stability:b97e9cc974a648478974e87e",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1874,11 +1878,11 @@
         "decisionInputProvenanceHash": "2bd7ea1fdfb75390a04d9583307f32dca4b12013a9b0d7833a3eba78f1ae7caa",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:ntd-nyct-productivity-rank:0bf76d6700658cdff0da09b5",
-          "claim-result:ntd-selected-ridership-stability:a23d976ac2b6da7680171334",
-          "claim-result:ntd-wmata-productivity-gate:93b1dad498fefaf616fa3dbd"
+          "claim-result:ntd-nyct-productivity-rank:f41bc618b3ee301e8aa8556a",
+          "claim-result:ntd-selected-ridership-stability:b97e9cc974a648478974e87e",
+          "claim-result:ntd-wmata-productivity-gate:1412c5c5d3a3dd62e70ea92f"
         ]
       },
       "analysis": {
@@ -2000,7 +2004,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:ntd-operations-brief:3c49271db4fd4d22af2f3a93"
+      "resultId": "decision-result:ntd-operations-brief:787846d06627e9e07d4dacf0"
     }
   ],
   "reviews": [],
@@ -2071,12 +2075,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "1eacdc3220a8394b9ec065cdc8b4144c865421b11d6233ad5d8332e689a14850",
+    "payloadHash": "edb85d8c9ee6f76f03c3f9b4849933c450ad7164831b2c46f66552bfe29aa6b2",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "f1e1929fea9adc155b63997f7efc9713f6d566aed9dff7b3101c6e8af85cbfe0",
-      "claims": "9b9a5d4e9ec266ed2b5af91dd43ee9c28152e656dc9f1c8aab6aca2ba9060899",
-      "decisions": "78be5543dc1e7c540901582c29432fa4694d01992aaf2cdc1a71cfc13fec0f46",
+      "snapshots": "c65b436105029d5bc9bc0a9d45cf1a6beb51a783d5ffc0cd0127aad2ba2fb3eb",
+      "claims": "acacf001dbf4bd2f2b4275239c67b13ef639094b9b48808581ce82b4c0122667",
+      "decisions": "4918f0e7c106ca8bafba1c687c98d3efbfedf1a84d117eceab5e0a40e551c821",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "d4a286cb041f23948ef55b2f432cada18fd1f65722148edc6d3530a244aa9162",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

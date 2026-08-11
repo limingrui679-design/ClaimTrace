@@ -1,4 +1,6 @@
 import {
+  CSV_DIALECT_VERSION,
+  NORMALIZED_ROWS_VERSION,
   SNAPSHOT_SCHEMA_VERSION,
   type CsvRow,
   type CsvValue,
@@ -76,49 +78,80 @@ export function parseCSV(text: string): ParsedCSV {
   const lineNumbers: number[] = [];
   let row: string[] = [];
   let cell = "";
-  let quoted = false;
+  let state: "unquoted" | "quoted" | "after-quote" = "unquoted";
+  let cellWasQuoted = false;
   let physicalLine = 1;
   let rowStartLine = 1;
 
+  const finishCell = () => {
+    row.push(cellWasQuoted ? cell : cell.trim());
+    cell = "";
+    cellWasQuoted = false;
+    state = "unquoted";
+  };
+
   const finishRow = () => {
-    row.push(cell.trim());
+    finishCell();
     if (row.some((entry) => entry.length > 0)) {
       matrix.push(row);
       lineNumbers.push(rowStartLine);
     }
     row = [];
-    cell = "";
   };
 
   for (let index = 0; index < text.length; index += 1) {
     const char = text[index];
     const next = text[index + 1];
-    if (char === '"' && quoted && next === '"') {
-      cell += '"';
-      index += 1;
-    } else if (char === '"') {
-      quoted = !quoted;
-    } else if (char === "," && !quoted) {
-      row.push(cell.trim());
-      cell = "";
-    } else if ((char === "\n" || char === "\r") && !quoted) {
+    if (state === "quoted") {
+      if (char === '"' && next === '"') {
+        cell += '"';
+        index += 1;
+      } else if (char === '"') {
+        state = "after-quote";
+      } else {
+        cell += char;
+        if (char === "\n" || char === "\r") {
+          if (char === "\r" && next === "\n") {
+            cell += next;
+            index += 1;
+          }
+          physicalLine += 1;
+        }
+      }
+      continue;
+    }
+
+    if (state === "after-quote") {
+      if (char === ",") {
+        finishCell();
+      } else if (char === "\n" || char === "\r") {
+        finishRow();
+        if (char === "\r" && next === "\n") index += 1;
+        physicalLine += 1;
+        rowStartLine = physicalLine;
+      } else {
+        throw new Error(`Line ${physicalLine} contains an unexpected character after a closing quote`);
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      if (cell.length > 0) throw new Error(`Line ${physicalLine} contains a quote inside an unquoted field`);
+      state = "quoted";
+      cellWasQuoted = true;
+    } else if (char === ",") {
+      finishCell();
+    } else if (char === "\n" || char === "\r") {
       finishRow();
       if (char === "\r" && next === "\n") index += 1;
       physicalLine += 1;
       rowStartLine = physicalLine;
     } else {
       cell += char;
-      if ((char === "\n" || char === "\r") && quoted) {
-        if (char === "\r" && next === "\n") {
-          cell += next;
-          index += 1;
-        }
-        physicalLine += 1;
-      }
     }
   }
-  if (quoted) throw new Error(`Line ${rowStartLine} contains an unclosed quote`);
-  if (row.length || cell.length) finishRow();
+  if (state === "quoted") throw new Error(`Line ${rowStartLine} contains an unclosed quote`);
+  if (row.length || cell.length || cellWasQuoted) finishRow();
   if (matrix.length < 2) throw new Error("CSV requires a header and at least one data row");
 
   const columns = matrix[0].map((column) => column.replace(/^\uFEFF/, "").trim());
@@ -155,6 +188,22 @@ export function validatePrimaryKey(rows: CsvRow[], lineNumbers: number[], primar
 
 export function uniqueKeyCandidates(columns: string[], rows: CsvRow[], lineNumbers: number[]) {
   return columns.filter((column) => validatePrimaryKey(rows, lineNumbers, column).valid);
+}
+
+export function sameColumnSet(left: string[], right: string[]) {
+  if (left.length !== right.length) return false;
+  const leftColumns = new Set(left);
+  const rightColumns = new Set(right);
+  return leftColumns.size === left.length
+    && rightColumns.size === right.length
+    && left.every((column) => rightColumns.has(column));
+}
+
+export function alignParsedCsvColumns(parsed: ParsedCSV, canonicalColumns: string[]): ParsedCSV {
+  if (!sameColumnSet(canonicalColumns, parsed.columns)) {
+    throw new Error("CSV columns do not match the required canonical column set");
+  }
+  return { ...parsed, columns: [...canonicalColumns] };
 }
 
 export function canonicalizeRows(columns: string[], rows: CsvRow[]) {
@@ -223,6 +272,8 @@ export function buildSnapshotManifest(dataset: DatasetVersion, side: SnapshotSid
   if (!meta) return null;
   return {
     schemaVersion: SNAPSHOT_SCHEMA_VERSION,
+    csvDialectVersion: CSV_DIALECT_VERSION,
+    normalizationVersion: NORMALIZED_ROWS_VERSION,
     snapshotId: `${side}-${meta.sha256.slice(0, 16)}`,
     side,
     fileName: meta.fileName,

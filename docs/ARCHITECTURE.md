@@ -23,7 +23,7 @@ flowchart LR
 
 ## Module boundaries
 
-- `src/core/snapshot`: decoding, CSV parsing, exact physical lines, canonical rows, raw and normalized SHA-256, primary-key validation, and snapshot manifests.
+- `src/core/snapshot`: decoding, strict versioned CSV parsing, exact physical lines, baseline-ordered canonical rows, raw and normalized SHA-256, primary-key validation, and snapshot manifests.
 - `src/core/claim-spec`: independent support/reversal threshold provenance and confirmation checks.
 - `src/core/statistics`: filtering, aggregation, effective denominators, missingness, sample-composition fingerprints, keyed row diffs, and tie-aware rankings.
 - `src/core/validation`: snapshot/comparison claim status computation, balanced two-sided source-reference extraction, boundary sampling, canonical content-derived result identities, and imported diagnostic claims.
@@ -40,7 +40,7 @@ flowchart LR
 
 CSV decoding, keyed alignment, upstream aggregation, status assignment, decision propagation, completeness, and AuditBundle verification are deterministic. A future LLM may propose a draft claim or mapping, but it must not assign the final status or bypass the same deterministic validator.
 
-The application shell is a stable Vite + React SPA. The public build can set `VITE_PUBLIC_READ_ONLY=true`, which omits import, claim-creation, review, and sign-off controls and dialogs from the rendered interface while preserving navigation, case execution, evidence inspection, and downloads. There is no application upload endpoint.
+The application shell is a stable Vite + React SPA. Delayed case and file reads use request identities and cancellation so the latest user selection wins; review and export operations are serialized so repeated activation cannot fork a review chain or duplicate one export operation. The public build can set `VITE_PUBLIC_READ_ONLY=true`, which omits import, claim-creation, review, and sign-off controls and dialogs from the rendered interface while preserving navigation, case execution, evidence inspection, and downloads. Separate real-browser suites verify the public read-only mode and the full writable workflow. There is no application upload endpoint.
 
 ## Scale boundary
 

@@ -1,5 +1,8 @@
 import {
+  CSV_DIALECT_VERSION,
   EVIDENCE_SCHEMA_VERSION,
+  NORMALIZED_ROWS_VERSION,
+  SNAPSHOT_SCHEMA_VERSION,
   type AuditSummary,
   type Claim,
   type ClaimSpec,
@@ -15,7 +18,7 @@ import {
   type UpstreamLineage,
 } from "../types";
 import { isThresholdConfirmed, stabilityReversalIsGoverned, thresholdSpecForRule } from "../claim-spec";
-import { base64ToBuffer, buildSnapshotManifest, bytesToBase64, canonicalizeRows, decodeBuffer, isSnapshotVerified, parseCSV, sha256Hex, sha256Text, validatePrimaryKey, valueToNumber } from "../snapshot";
+import { alignParsedCsvColumns, base64ToBuffer, buildSnapshotManifest, bytesToBase64, canonicalizeRows, decodeBuffer, isSnapshotVerified, parseCSV, sha256Hex, sha256Text, validatePrimaryKey, valueToNumber } from "../snapshot";
 import { compareRows, diffRowsByKey } from "../statistics";
 import { completeEvidence, recomputeClaim } from "../validation";
 import { evaluateDecision } from "../decision";
@@ -335,6 +338,12 @@ async function datasetFromBundle(pkg: AuditBundle) {
       return null;
     }
     try {
+      if (manifest.schemaVersion !== SNAPSHOT_SCHEMA_VERSION) errors.push(`${side}: snapshot schema version is invalid`);
+      if (manifest.csvDialectVersion !== CSV_DIALECT_VERSION) errors.push(`${side}: CSV dialect version is invalid`);
+      if (manifest.normalizationVersion !== NORMALIZED_ROWS_VERSION) errors.push(`${side}: normalized-row version is invalid`);
+      if (side === "current" && pkg.snapshots.baseline && canonicalJson(manifest.columns) !== canonicalJson(pkg.snapshots.baseline.columns)) {
+        errors.push("current: canonical column order does not match the baseline manifest");
+      }
       const rawBuffer = payload.rawBytesBase64 ? base64ToBuffer(payload.rawBytesBase64) : new TextEncoder().encode(payload.text ?? "").buffer as ArrayBuffer;
       const decodedText = payload.rawBytesBase64 ? decodeBuffer(rawBuffer) : payload.text ?? "";
       const rawHash = await sha256Hex(rawBuffer);
@@ -342,11 +351,10 @@ async function datasetFromBundle(pkg: AuditBundle) {
       if (rawBuffer.byteLength !== manifest.byteSize) errors.push(`${side}: raw byte count mismatch`);
       if (payload.fileName !== manifest.fileName) errors.push(`${side}: file name mismatch`);
       if (payload.rawBytesBase64 && payload.text !== undefined && payload.text !== decodedText) errors.push(`${side}: raw bytes and decoded text do not match`);
-      const parsed = parseCSV(decodedText);
-      const normalizedHash = await sha256Text(canonicalizeRows(parsed.columns, parsed.rows));
+      const parsed = alignParsedCsvColumns(parseCSV(decodedText), manifest.columns);
+      const normalizedHash = await sha256Text(canonicalizeRows(manifest.columns, parsed.rows));
       if (manifest.normalizedSha256 && normalizedHash !== manifest.normalizedSha256) errors.push(`${side}: normalized-record SHA-256 mismatch`);
       if (parsed.rows.length !== manifest.rowCount) errors.push(`${side}: row count mismatch`);
-      if (canonicalJson(parsed.columns) !== canonicalJson(manifest.columns)) errors.push(`${side}: column manifest mismatch`);
       if (manifest.primaryKey !== pkg.primaryKey || !validatePrimaryKey(parsed.rows, parsed.lineNumbers, pkg.primaryKey).valid) errors.push(`${side}: unique primary-key validation failed`);
       return { manifest, payload, parsed, decodedText, rawBytesBase64: payload.rawBytesBase64 ?? bytesToBase64(rawBuffer), normalizedHash };
     } catch (error) {
@@ -488,10 +496,18 @@ async function verifyExternalSourceLineage(dataset: DatasetVersion, provenance: 
 
 export async function verifyAuditBundle(pkg: AuditBundle) {
   const checks: Array<{ name: string; passed: boolean; errors: string[] }> = [];
-  const add = (name: string, passed: boolean, errors: string[] = []) => checks.push({ name, passed, errors });
+  const add = (name: string, passed: boolean, errors: string[] = []) => checks.push({
+    name,
+    passed,
+    errors: passed ? [] : errors.length ? errors : [`${name} check failed`],
+  });
   try {
     const { integrity, ...payload } = pkg;
-    add("schema", pkg.schemaVersion === EVIDENCE_SCHEMA_VERSION && pkg.bundleType === "AuditBundle", pkg.schemaVersion === EVIDENCE_SCHEMA_VERSION ? [] : ["AuditBundle version mismatch"]);
+    const schemaErrors = [
+      ...(pkg.schemaVersion === EVIDENCE_SCHEMA_VERSION ? [] : ["AuditBundle version mismatch"]),
+      ...(pkg.bundleType === "AuditBundle" ? [] : ["AuditBundle type mismatch"]),
+    ];
+    add("schema", schemaErrors.length === 0, schemaErrors);
     const previousLinkValid = pkg.previousBundleHash === null || /^[a-f0-9]{64}$/i.test(pkg.previousBundleHash);
     add("previous-bundle-link", previousLinkValid && pkg.previousBundleHash !== integrity?.payloadHash, previousLinkValid ? (pkg.previousBundleHash === integrity?.payloadHash ? ["Previous root hash cannot point to the current bundle"] : []) : ["Previous root-hash format is invalid"]);
     const payloadHash = await sha256Canonical(payload);
@@ -609,7 +625,7 @@ export function buildHtmlReport(bundle: AuditBundle, verification: AuditBundleVe
     return `<tr><td>${h(spec.id)}</td><td>${h(provenance?.kind ?? "Missing")}</td><td>${h(provenance?.source ?? "Not declared")}</td><td>${h(provenance?.version ?? "Not declared")}</td><td>${h(provenance?.rationale ?? "Not declared")}</td><td>${provenance ? `Benefit: ${h(provenance.units.benefit)}; cost: ${h(provenance.units.cost)}; risk: ${h(provenance.units.risk)}; capacity: ${h(provenance.units.capacity)}` : "Not declared"}</td></tr>`;
   }).join("");
   const reviewRows = bundle.reviews.map((review) => `<tr><td>${h(review.createdAt)}<br><small>${h(review.assurance.timestamp)}</small></td><td>${h(review.reviewer)}<br><small>${h(review.assurance.identity)} · ${h(review.assurance.authorization)} · signature ${h(review.assurance.cryptographicSignature)}</small></td><td>${h(review.claimId ?? review.decisionId)}</td><td>${h(review.disposition)}</td><td>${h(review.note)}</td><td><small>Record ${h(review.id)}<br>Target ${h(review.targetResultHash)}<br>Previous ${h(review.previousRecordHash ?? "GENESIS")}<br>Current ${h(review.recordHash)}</small></td></tr>`).join("");
-  const verificationRows = verification.checks.map((check) => `<li class="${check.passed ? "pass" : "fail"}"><b>${check.passed ? "PASS" : "FAIL"} · ${h(check.name)}</b>${check.errors.length ? `<span>${h(check.errors.join("; "))}</span>` : ""}</li>`).join("");
+  const verificationRows = verification.checks.map((check) => `<li class="${check.passed ? "pass" : "fail"}"><b>${check.passed ? "PASS" : "FAIL"} · ${h(check.name)}</b>${!check.passed && check.errors.length ? `<span>${h(check.errors.join("; "))}</span>` : ""}</li>`).join("");
   const sensitivityRows = bundle.decisionResults.flatMap((decision) => (decision.analysis?.sensitivity ?? []).map((scenario) => `<tr><td>${h(decision.decisionId)}</td><td>${h(scenario.label)}</td><td>${h(scenario.recommendedOptionId ?? "No feasible option")}</td></tr>`)).join("");
   const optionAnalysisRows = bundle.decisionResults.flatMap((decision) => (decision.analysis?.options ?? []).map((option) => `<tr><td>${h(decision.decisionId)}</td><td>${h(option.label)}<br><small>${h(option.optionId)}</small></td><td>${option.feasible ? "Feasible" : `Eliminated: ${h(option.failedConstraints.join(", "))}`}</td><td>${h(option.score)}</td><td>${h(option.scoreInterval?.min ?? "—")} to ${h(option.scoreInterval?.max ?? "—")}</td><td>${h(option.breakEvenBenefit ?? "—")}</td><td>${option.paretoEfficient ? "Yes" : "No"}</td></tr>`)).join("");
   const uncertaintyRows = bundle.decisionResults.map((decision) => {

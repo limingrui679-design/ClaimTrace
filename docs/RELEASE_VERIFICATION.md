@@ -1,6 +1,6 @@
 # Release verification
 
-## ClaimTrace 0.8.0 — 2026-08-11
+## ClaimTrace 0.9.0 — 2026-08-11
 
 This record describes a local release-candidate verification on Darwin arm64 with Node.js 22.20.0 and npm 10.9.3. It is a reproducibility receipt, not evidence of a hosted deployment, external adoption, or real-world impact.
 
@@ -9,14 +9,16 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Check | Result |
 |---|---|
 | `npm run ci` | Passed |
-| Unit and integration tests | 144/144 passed |
+| Unit and integration tests | 148/148 passed |
+| Built-artifact checks | 2/2 passed |
 | Real-Chromium read-only acceptance test | 1/1 passed |
+| Real-Chromium writable workflow and race test | 1/1 passed |
 | Executable cases loaded and run in Chromium | 10/10 passed |
 | Controlled benchmark | 64/64 exact labels |
 | Deterministic property trials | 512 across four seeded properties |
-| Core statement and line coverage | 97.22% |
-| Core function coverage | 99.34% |
-| Core branch coverage | 78.68% |
+| Core statement and line coverage | 97.29% |
+| Core function coverage | 99.35% |
+| Core branch coverage | 79.23% |
 | Executable case regeneration and AuditBundle verification | 10/10 passed |
 | Public-source raw-content and cleaning-parameter tamper tests | 6/6 passed |
 | Source-refresh consistency, locking, recovery, and failure-path tests | 25/25 passed |
@@ -25,6 +27,8 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Repository English-only artifact test | Passed |
 | Read-only UI mutation-control count | 0 |
 | Local CSV pre-read size boundary | 10 MiB per file |
+| Strict CSV and canonical-column adversarial regressions | Passed |
+| Passed checks carrying diagnostic errors | 0 |
 
 ### Public-data coverage
 

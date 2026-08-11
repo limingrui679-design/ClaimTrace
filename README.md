@@ -49,7 +49,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. CSV input supports UTF-8, UTF-8 with BOM, UTF-16LE with BOM, and UTF-16BE with BOM. The local browser workspace rejects files above 10 MiB before reading their bytes. ClaimTrace does not upload those files. An AuditBundle export embeds raw data up to 500 KB per snapshot. Verified AuditBundle and HTML report generation both require snapshots within that limit; larger files can still be analyzed, but detached raw-file verification and verified export are not implemented. Inspect exports before sharing them.
+Open the local URL printed by Vite. CSV input supports UTF-8, UTF-8 with BOM, UTF-16LE with BOM, and UTF-16BE with BOM. The versioned strict dialect rejects bare quotes in unquoted fields and non-delimiter content after a closing quote, preserves whitespace inside quoted fields, trims unquoted cells, and supports escaped quotes, multiline fields, CRLF, and empty trailing cells. Baseline column order is canonical for normalized hashes; a current file may reorder columns only when its exact case-sensitive column set is unchanged. The local browser workspace rejects files above 10 MiB before reading their bytes. ClaimTrace does not upload those files. An AuditBundle export embeds raw data up to 500 KB per snapshot. Verified AuditBundle and HTML report generation both require snapshots within that limit; larger files can still be analyzed, but detached raw-file verification and verified export are not implemented. Inspect exports before sharing them.
 
 Full verification:
 
@@ -60,7 +60,7 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 144 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 148 unit/integration tests, 2 built-artifact checks, separate read-only and writable real-Chromium acceptance flows, and coverage thresholds.
 
 ## Reproducible cases
 
@@ -100,17 +100,17 @@ Every case includes executable specifications, two snapshots, expected results, 
 
 ## Evaluation and verification status
 
-- **145 / 145 automated tests** — 144 unit/integration tests plus 1 real-Chromium read-only acceptance test
+- **152 / 152 automated checks** — 148 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
-- **97.22% statement/line coverage, 78.68% branch coverage, 99.34% function coverage** for `src/core`
+- **97.29% statement/line coverage, 79.23% branch coverage, 99.35% function coverage** for `src/core`
 - **10 / 10 case AuditBundles regenerated and independently verified**
 - **0 known production dependency vulnerabilities**
 - **0 known full development-toolchain vulnerabilities**
 
 The benchmark labels are stored separately from the execution logic in [`benchmarks/labels.json`](benchmarks/labels.json). The deliberately weak line/scalar, metric-only, and keyed-diff baselines score 27/64, 35/64, and 24/64 respectively. These results establish regression behavior on committed boundaries only—not production accuracy, external validity, user impact, or superiority to mature audit platforms. See [`docs/EVALUATION.md`](docs/EVALUATION.md).
 
-The exact 0.8.0 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
+The exact 0.9.0 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
 
 ## Architecture
 

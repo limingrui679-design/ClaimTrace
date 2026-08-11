@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-08T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "Synthetic Credit-Portfolio Decision Audit",
   "primaryKey": "account_id",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "SYNTHETIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-6d00c82527100f1c",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -31,7 +33,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-25bfce2950dc7481",
       "side": "current",
       "fileName": "current.csv",
@@ -255,7 +259,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "finance-pd-gate|claimtrace-rule/6.1.2",
+        "seed": "finance-pd-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -313,7 +317,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "finance-pd-stability|claimtrace-rule/6.1.2",
+        "seed": "finance-pd-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -371,7 +375,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "finance-label-gate|claimtrace-rule/6.1.2",
+        "seed": "finance-label-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -730,7 +734,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:finance-pd-gate:bac3d2036331e65348ca0f69",
+          "id": "claim-result:finance-pd-gate:a5f93df2e912e264a926de7d",
           "kind": "Comparison result",
           "title": "pd_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -744,9 +748,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -778,7 +782,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
         "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
@@ -790,7 +794,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "finance-pd-gate|claimtrace-rule/6.1.2",
+        "seed": "finance-pd-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -835,7 +839,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:finance-pd-gate:bac3d2036331e65348ca0f69",
+      "resultId": "claim-result:finance-pd-gate:a5f93df2e912e264a926de7d",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1012,7 +1016,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:finance-pd-stability:2c13438fe5b51e05ddfccee8",
+          "id": "claim-result:finance-pd-stability:04390b147d7452fbfe69dd8d",
           "kind": "Comparison result",
           "title": "pd_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1026,9 +1030,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1060,7 +1064,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
         "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
@@ -1072,7 +1076,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "finance-pd-stability|claimtrace-rule/6.1.2",
+        "seed": "finance-pd-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -1117,7 +1121,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:finance-pd-stability:2c13438fe5b51e05ddfccee8",
+      "resultId": "claim-result:finance-pd-stability:04390b147d7452fbfe69dd8d",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1286,7 +1290,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:finance-label-gate:d4d05697b084001aee02ce70",
+          "id": "claim-result:finance-label-gate:23907004ed1239c645bcbb02",
           "kind": "Comparison result",
           "title": "observed_label version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1300,9 +1304,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1334,7 +1338,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
         "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
@@ -1346,7 +1350,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "finance-label-gate|claimtrace-rule/6.1.2",
+        "seed": "finance-label-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -1391,7 +1395,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:finance-label-gate:d4d05697b084001aee02ce70",
+      "resultId": "claim-result:finance-label-gate:23907004ed1239c645bcbb02",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1586,10 +1590,10 @@
         "decisionInputProvenanceHash": "f76da6a9fa5263f83441f07558c903acff0eedc7e20c033e7065d0b18c247755",
         "baselineSha256": "6d00c82527100f1cb033dea5a5c1d5be44cf985c9d0d238fcaf6c4e83d1aa0dc",
         "currentSha256": "25bfce2950dc7481365de621dc440889b3dd490fa44b1de2488488d7e387cbdf",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:finance-label-gate:d4d05697b084001aee02ce70",
-          "claim-result:finance-pd-gate:bac3d2036331e65348ca0f69"
+          "claim-result:finance-label-gate:23907004ed1239c645bcbb02",
+          "claim-result:finance-pd-gate:a5f93df2e912e264a926de7d"
         ]
       },
       "analysis": {
@@ -1715,7 +1719,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:finance-underwriting:1bd06dee49b297df00233c3e"
+      "resultId": "decision-result:finance-underwriting:dbbf0d34f7961b7356af340a"
     }
   ],
   "reviews": [],
@@ -1729,12 +1733,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "de1e11df67d16b24782d6fa062f2f1225c1af97a6440290eaf4ac4390c9e9877",
+    "payloadHash": "0b224514e07503df8b908a20a3c6679deb2b994c3b82e34d585500cb8f5340d6",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "e8059132f1b0986cc9847dacfe8a4c940b2244d8b4efe34bcae3edf21577c0da",
-      "claims": "d8d9565274c65852bfe57c1402908c215af95a05a45a36d1cb9216a1d5c5f20b",
-      "decisions": "4313e667056459a0f71ace1a5107c9cae75ff2551f8736aac6d049e3a1b31ab1",
+      "snapshots": "ca7a751fe3cdb8fc56ac3699ceb40bde6228e9a461bd9ffd188e03cb064685a0",
+      "claims": "574751edecced81c893711eb5b434ee06df52944f1e012fd7315f8dcffa53c61",
+      "decisions": "013ce0d38258330dbdd958d280e5af981f6aa399de3657aeabb2f88e2882c565",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

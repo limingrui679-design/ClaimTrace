@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-08T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "Synthetic Population-Health Evidence Audit",
   "primaryKey": "row_id",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "SYNTHETIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-994c6ae22ac32fec",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -33,7 +35,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-566b484168184546",
       "side": "current",
       "fileName": "current.csv",
@@ -422,7 +426,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "north-risk|claimtrace-rule/6.1.2",
+        "seed": "north-risk|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -489,7 +493,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "recall-gate|claimtrace-rule/6.1.2",
+        "seed": "recall-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -556,7 +560,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "followup-gap|claimtrace-rule/6.1.2",
+        "seed": "followup-gap|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -634,7 +638,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "east-completion|claimtrace-rule/6.1.2",
+        "seed": "east-completion|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -707,7 +711,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "west-risk|claimtrace-rule/6.1.2",
+        "seed": "west-risk|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -1250,7 +1254,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:north-risk:29ce87c9f9b317c69c3a5273",
+          "id": "claim-result:north-risk:ee7c151282c5bb42fb749b39",
           "kind": "Comparison result",
           "title": "value version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1264,9 +1268,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1305,7 +1309,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
         "currentSha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
@@ -1317,7 +1321,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "north-risk|claimtrace-rule/6.1.2",
+        "seed": "north-risk|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -1372,7 +1376,7 @@
           }
         }
       },
-      "resultId": "claim-result:north-risk:29ce87c9f9b317c69c3a5273",
+      "resultId": "claim-result:north-risk:ee7c151282c5bb42fb749b39",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1459,7 +1463,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:recall-gate:a7ad954abcfa481f0777f9ee",
+          "id": "claim-result:recall-gate:18617d404b7fee9bd0840372",
           "kind": "Comparison result",
           "title": "value version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1473,9 +1477,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1514,7 +1518,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
         "currentSha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
@@ -1526,7 +1530,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "recall-gate|claimtrace-rule/6.1.2",
+        "seed": "recall-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1571,7 +1575,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:recall-gate:a7ad954abcfa481f0777f9ee",
+      "resultId": "claim-result:recall-gate:18617d404b7fee9bd0840372",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1658,7 +1662,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:followup-gap:1777250b662198deda9672f9",
+          "id": "claim-result:followup-gap:d57cd681d07235807f13f720",
           "kind": "Comparison result",
           "title": "value version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1672,9 +1676,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1713,7 +1717,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
         "currentSha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
@@ -1725,7 +1729,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "followup-gap|claimtrace-rule/6.1.2",
+        "seed": "followup-gap|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1770,7 +1774,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:followup-gap:1777250b662198deda9672f9",
+      "resultId": "claim-result:followup-gap:d57cd681d07235807f13f720",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1936,7 +1940,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:east-completion:e084c096d0c5ecf17fc57fe9",
+          "id": "claim-result:east-completion:ee17bafc7fe57d1d8ad9adc2",
           "kind": "Comparison result",
           "title": "value version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1950,9 +1954,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1991,7 +1995,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
         "currentSha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
@@ -2003,7 +2007,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "east-completion|claimtrace-rule/6.1.2",
+        "seed": "east-completion|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -2058,7 +2062,7 @@
           }
         }
       },
-      "resultId": "claim-result:east-completion:e084c096d0c5ecf17fc57fe9",
+      "resultId": "claim-result:east-completion:ee17bafc7fe57d1d8ad9adc2",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -2218,7 +2222,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:west-risk:efb88d040b9daac365744710",
+          "id": "claim-result:west-risk:584cce11e414989de2f8a450",
           "kind": "Comparison result",
           "title": "value version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -2232,9 +2236,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -2273,7 +2277,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
         "currentSha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
@@ -2285,7 +2289,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "west-risk|claimtrace-rule/6.1.2",
+        "seed": "west-risk|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 4,
         "sides": {
           "baseline": {
@@ -2340,7 +2344,7 @@
           }
         }
       },
-      "resultId": "claim-result:west-risk:efb88d040b9daac365744710",
+      "resultId": "claim-result:west-risk:584cce11e414989de2f8a450",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -2655,9 +2659,9 @@
         "decisionInputProvenanceHash": "3bdbaaca89a63cdfe25b072c96d81d5702ac36076d5daf33e69ec7b6e1a8809c",
         "baselineSha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
         "currentSha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:recall-gate:a7ad954abcfa481f0777f9ee"
+          "claim-result:recall-gate:18617d404b7fee9bd0840372"
         ]
       },
       "analysis": {
@@ -2785,7 +2789,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:decision-model-pilot:34885791123ddd283c44b637"
+      "resultId": "decision-result:decision-model-pilot:430cfed6f2cc590154820bab"
     },
     {
       "decisionId": "decision-followup-allocation",
@@ -2824,9 +2828,9 @@
         "decisionInputProvenanceHash": "7ef493fcc63d39a2b1ce478f5485554a9d6695845f23a4cd1753a43a265bcfd0",
         "baselineSha256": "994c6ae22ac32fec9220ba37e4215fcaa61407c5e17f0ad2ed0babc67be8f76f",
         "currentSha256": "566b484168184546a7c6bb3826608567af57976710d930bd195d026cfddd39d3",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:north-risk:29ce87c9f9b317c69c3a5273"
+          "claim-result:north-risk:ee7c151282c5bb42fb749b39"
         ]
       },
       "analysis": {
@@ -2947,7 +2951,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:decision-followup-allocation:d04f95d75f6abba314bc2e43"
+      "resultId": "decision-result:decision-followup-allocation:bb313c246ec6560e5536f080"
     }
   ],
   "reviews": [],
@@ -3478,12 +3482,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "1ba6dd6e07ea1efb4973a97f7690f9e93eecebeca8b79f744ce2f6933a1e46ea",
+    "payloadHash": "94e76839ab615ba35d3c4fa1bb4c9140e5db013c417e0aa19ad7c9417a764a15",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "f669402fee733709f05354551bfdc5bedcf65b25d8089e19a3950f41a64edcc9",
-      "claims": "8c5626642aad530c99c7843217888a39200799d06c1f6a610a838bf605ac739d",
-      "decisions": "807c6d12a310f1e598ed97852b319cdcfdf799f4dffcdcd325238b17f8d0097a",
+      "snapshots": "eedff1b1fffae6ac107d8ffb70dec4eb6c06b64e37d7e7a0c9fa40df960a4996",
+      "claims": "62c8e9315a5fef0a716243847366661ff91ce1843c3ccc967c4d1fa71c0e2b3d",
+      "decisions": "1be526507fd6dc00d4b2c57cc49f4c681a703cf5894525cb52bb5f684a0984b1",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
       "upstream": "33883886e8b967635d2af0ce4b51f9268ac9479a663aa42b7735968eb7581250"

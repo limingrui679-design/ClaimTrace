@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "CFPB Structured Credit-Card Complaint Pattern Audit",
   "primaryKey": "issue_id",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-53d148d224d2e9c1",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -32,7 +34,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-8f06c5b6fcb4a6b6",
       "side": "current",
       "fileName": "current.csv",
@@ -427,7 +431,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "cfpb-purchase-issue-rank|claimtrace-rule/6.1.2",
+        "seed": "cfpb-purchase-issue-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 10,
         "sides": {
           "baseline": {
@@ -490,7 +494,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "cfpb-report-issue-share|claimtrace-rule/6.1.2",
+        "seed": "cfpb-report-issue-share|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -548,7 +552,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "cfpb-volume-stability|claimtrace-rule/6.1.2",
+        "seed": "cfpb-volume-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 10,
         "sides": {
           "baseline": {
@@ -1132,7 +1136,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:cfpb-purchase-issue-rank:89b35c0a8154775f0f5bb562",
+          "id": "claim-result:cfpb-purchase-issue-rank:e61f137af9169a1bf5565bfa",
           "kind": "Comparison result",
           "title": "complaint_records version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1146,9 +1150,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1180,7 +1184,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "53d148d224d2e9c1131a5e38202ff07c5306939f9e8294d910222efcbb7bc9cc",
         "currentSha256": "8f06c5b6fcb4a6b60eda1c4b9e7a99c66765e60862e2956bf9ca016c25250b28",
@@ -1192,7 +1196,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "cfpb-purchase-issue-rank|claimtrace-rule/6.1.2",
+        "seed": "cfpb-purchase-issue-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 10,
         "sides": {
           "baseline": {
@@ -1259,7 +1263,7 @@
           }
         }
       },
-      "resultId": "claim-result:cfpb-purchase-issue-rank:89b35c0a8154775f0f5bb562",
+      "resultId": "claim-result:cfpb-purchase-issue-rank:e61f137af9169a1bf5565bfa",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1338,7 +1342,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:cfpb-report-issue-share:ccf2ca8903bb66464c104749",
+          "id": "claim-result:cfpb-report-issue-share:99e488bdb49246352de64075",
           "kind": "Comparison result",
           "title": "share_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1352,9 +1356,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1386,7 +1390,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "53d148d224d2e9c1131a5e38202ff07c5306939f9e8294d910222efcbb7bc9cc",
         "currentSha256": "8f06c5b6fcb4a6b60eda1c4b9e7a99c66765e60862e2956bf9ca016c25250b28",
@@ -1398,7 +1402,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "cfpb-report-issue-share|claimtrace-rule/6.1.2",
+        "seed": "cfpb-report-issue-share|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1443,7 +1447,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:cfpb-report-issue-share:ccf2ca8903bb66464c104749",
+      "resultId": "claim-result:cfpb-report-issue-share:99e488bdb49246352de64075",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1740,7 +1744,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:cfpb-volume-stability:0242169b7bc0ef41c0fa43a0",
+          "id": "claim-result:cfpb-volume-stability:9a713af09178ad34f40f26df",
           "kind": "Comparison result",
           "title": "period_total_records version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1754,9 +1758,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1788,7 +1792,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "53d148d224d2e9c1131a5e38202ff07c5306939f9e8294d910222efcbb7bc9cc",
         "currentSha256": "8f06c5b6fcb4a6b60eda1c4b9e7a99c66765e60862e2956bf9ca016c25250b28",
@@ -1800,7 +1804,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "cfpb-volume-stability|claimtrace-rule/6.1.2",
+        "seed": "cfpb-volume-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 10,
         "sides": {
           "baseline": {
@@ -1845,7 +1849,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:cfpb-volume-stability:0242169b7bc0ef41c0fa43a0",
+      "resultId": "claim-result:cfpb-volume-stability:9a713af09178ad34f40f26df",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -2000,11 +2004,11 @@
         "decisionInputProvenanceHash": "1d0a94564bd86eeedd616a5a1689c219d92e336203c1732ed03afe2003911921",
         "baselineSha256": "53d148d224d2e9c1131a5e38202ff07c5306939f9e8294d910222efcbb7bc9cc",
         "currentSha256": "8f06c5b6fcb4a6b60eda1c4b9e7a99c66765e60862e2956bf9ca016c25250b28",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:cfpb-purchase-issue-rank:89b35c0a8154775f0f5bb562",
-          "claim-result:cfpb-report-issue-share:ccf2ca8903bb66464c104749",
-          "claim-result:cfpb-volume-stability:0242169b7bc0ef41c0fa43a0"
+          "claim-result:cfpb-purchase-issue-rank:e61f137af9169a1bf5565bfa",
+          "claim-result:cfpb-report-issue-share:99e488bdb49246352de64075",
+          "claim-result:cfpb-volume-stability:9a713af09178ad34f40f26df"
         ]
       },
       "analysis": {
@@ -2126,7 +2130,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:cfpb-consumer-friction-brief:f230f1e4e61586028b73ab4e"
+      "resultId": "decision-result:cfpb-consumer-friction-brief:ccb0cb0e136f79f1460a4e26"
     }
   ],
   "reviews": [],
@@ -2186,12 +2190,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "bc2fec2d2c6bca034fc7d53645ba520c3daf03bd8d5fa33c427ad48cbbfcf2c2",
+    "payloadHash": "392f97d25492c2e67f74ee193c44cf601adae226a6f53f8c18a6b5eb245f37ee",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "a9f907ff7decd2e87a258d42701829815cb05594a7b6b5741c35dd5a6bcf474e",
-      "claims": "a59affc9cb9b8b754144a380513d9af45a1dcdcdfd25a7f5827a92f35e654c9d",
-      "decisions": "f7ed48d0c74fa8db6bc7bbf1d236fa481b2f76921aa81cfd2e9538541a7e0ca2",
+      "snapshots": "ceff67aafa6535e2089a6e06648969bfbae1be5945edbd8838cddc8ff06d2e24",
+      "claims": "4199f26e1070154457ad7dcabebdd362dc98c2d38e7e0f3ed5b8fb4211561a85",
+      "decisions": "569d4d6546bf71073f2f2bf748c69e41fc82000d2f9ee1b24fc940e05204fd6c",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "86014b11048bbb9d2f3a9174f4e2bc921761c11406f954a7b59a70d7c471c836",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

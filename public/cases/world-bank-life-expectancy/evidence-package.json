@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "World Bank WDI Eight-Country Life-Expectancy Audit",
   "primaryKey": "country_code",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-3f1204b0a9493a63",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -31,7 +33,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-88dd522a8ca931e7",
       "side": "current",
       "fileName": "current.csv",
@@ -333,7 +337,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "wdi-japan-rank|claimtrace-rule/6.1.2",
+        "seed": "wdi-japan-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -396,7 +400,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "wdi-germany-threshold|claimtrace-rule/6.1.2",
+        "seed": "wdi-germany-threshold|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -454,7 +458,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "wdi-eight-country-stability|claimtrace-rule/6.1.2",
+        "seed": "wdi-eight-country-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -937,7 +941,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:wdi-japan-rank:dc34875584b036d33de038c9",
+          "id": "claim-result:wdi-japan-rank:d1e727d6c18c0c1085f7d5a5",
           "kind": "Comparison result",
           "title": "life_expectancy_years version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -951,9 +955,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -985,7 +989,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "3f1204b0a9493a639aaf67aadafc55e15f5aaf69ea0ed33d44596538ea1cffd8",
         "currentSha256": "88dd522a8ca931e79f790a9a47c80d0e58ef071c1c6c7c2e46c0e666329e2b14",
@@ -997,7 +1001,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "wdi-japan-rank|claimtrace-rule/6.1.2",
+        "seed": "wdi-japan-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1060,7 +1064,7 @@
           }
         }
       },
-      "resultId": "claim-result:wdi-japan-rank:dc34875584b036d33de038c9",
+      "resultId": "claim-result:wdi-japan-rank:d1e727d6c18c0c1085f7d5a5",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1139,7 +1143,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:wdi-germany-threshold:60234e464e35011a08174635",
+          "id": "claim-result:wdi-germany-threshold:da2b50bc57673e8501d23bfa",
           "kind": "Comparison result",
           "title": "life_expectancy_years version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1153,9 +1157,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1187,7 +1191,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "3f1204b0a9493a639aaf67aadafc55e15f5aaf69ea0ed33d44596538ea1cffd8",
         "currentSha256": "88dd522a8ca931e79f790a9a47c80d0e58ef071c1c6c7c2e46c0e666329e2b14",
@@ -1199,7 +1203,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "wdi-germany-threshold|claimtrace-rule/6.1.2",
+        "seed": "wdi-germany-threshold|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1244,7 +1248,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:wdi-germany-threshold:60234e464e35011a08174635",
+      "resultId": "claim-result:wdi-germany-threshold:da2b50bc57673e8501d23bfa",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1493,7 +1497,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:wdi-eight-country-stability:9c6929d9a31e89b9abf51bd9",
+          "id": "claim-result:wdi-eight-country-stability:246d63e7d30b2b7dbfe585c1",
           "kind": "Comparison result",
           "title": "life_expectancy_years version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1507,9 +1511,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1541,7 +1545,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "3f1204b0a9493a639aaf67aadafc55e15f5aaf69ea0ed33d44596538ea1cffd8",
         "currentSha256": "88dd522a8ca931e79f790a9a47c80d0e58ef071c1c6c7c2e46c0e666329e2b14",
@@ -1553,7 +1557,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "wdi-eight-country-stability|claimtrace-rule/6.1.2",
+        "seed": "wdi-eight-country-stability|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1598,7 +1602,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:wdi-eight-country-stability:9c6929d9a31e89b9abf51bd9",
+      "resultId": "claim-result:wdi-eight-country-stability:246d63e7d30b2b7dbfe585c1",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1753,11 +1757,11 @@
         "decisionInputProvenanceHash": "7d2f2a68b280a0eea3350141393eed51c90c96124d53da05bc9f3a6a205c59e2",
         "baselineSha256": "3f1204b0a9493a639aaf67aadafc55e15f5aaf69ea0ed33d44596538ea1cffd8",
         "currentSha256": "88dd522a8ca931e79f790a9a47c80d0e58ef071c1c6c7c2e46c0e666329e2b14",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:wdi-eight-country-stability:9c6929d9a31e89b9abf51bd9",
-          "claim-result:wdi-germany-threshold:60234e464e35011a08174635",
-          "claim-result:wdi-japan-rank:dc34875584b036d33de038c9"
+          "claim-result:wdi-eight-country-stability:246d63e7d30b2b7dbfe585c1",
+          "claim-result:wdi-germany-threshold:da2b50bc57673e8501d23bfa",
+          "claim-result:wdi-japan-rank:d1e727d6c18c0c1085f7d5a5"
         ]
       },
       "analysis": {
@@ -1879,7 +1883,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:wdi-publication-note:67446b7c9743c40291e9a303"
+      "resultId": "decision-result:wdi-publication-note:ef7991976d8245c5cbb3f892"
     }
   ],
   "reviews": [],
@@ -1949,12 +1953,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "b66e357199e80eaba195e44fd4cc36403214b8eb24eca8fecebd33dc0b15c6be",
+    "payloadHash": "f59d5c59dd5ea9ae46de8b7b40d50195a35eedba8a22fab1fc5361fa721f422c",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "2423668a9c6b16dba5250353712b41482b2ce488ba875515b3f197b3aecf7aac",
-      "claims": "36d94c5a27601069aacffbf898d66429c7c5d08971f602d1207b24818c9d69a5",
-      "decisions": "6e76d7d74bfabbf0e552798c37f949b9496db4481a109b32a215e18d1a5f793c",
+      "snapshots": "8e1cf1d7dc32ebba89e1d11cc62744dd2bdb29f8c42b014fd5b7a8d53e070277",
+      "claims": "1d8b4f961a872fbabef0639a105850af47350d5d260fc283008076fad78d465f",
+      "decisions": "29b9affac2f385b04d048251d842abe0f49abe8eba2a378b2b531ba49dba1984",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "a8e8746806a3ff32ab82b009e9c59698b539de6feb471fc3386e549ab76a71e8",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

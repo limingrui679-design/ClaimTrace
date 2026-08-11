@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  CSV_DIALECT_VERSION,
+  NORMALIZED_ROWS_VERSION,
   RULE_ENGINE_VERSION,
+  SNAPSHOT_SCHEMA_VERSION,
   type Claim,
   type CsvRow,
   type DecisionSpec,
@@ -12,6 +15,7 @@ import {
   applyReviewToClaim,
   applyReviewToDecision,
   aggregate,
+  alignParsedCsvColumns,
   auditSummary,
   buildHtmlReport,
   bytesToBase64,
@@ -36,6 +40,7 @@ import {
   sha256Canonical,
   sha256CanonicalSync,
   sha256Text,
+  sameColumnSet,
   uniqueKeyCandidates,
   validatePrimaryKey,
   verifyEvidencePackage,
@@ -154,11 +159,11 @@ function signedHistoryFor(
 
 async function makeVerifiableDataset(baselineRaw: string, currentRaw?: string) {
   const baseline = parseCSV(baselineRaw);
-  const current = currentRaw ? parseCSV(currentRaw) : undefined;
+  const current = currentRaw ? alignParsedCsvColumns(parseCSV(currentRaw), baseline.columns) : undefined;
   const baselineHash = await sha256Text(baselineRaw);
   const currentHash = currentRaw ? await sha256Text(currentRaw) : undefined;
   const baselineNormalized = await sha256Text(JSON.stringify(baseline.rows.map((row) => baseline.columns.map((column) => String(row[column] ?? "")))));
-  const currentNormalized = current ? await sha256Text(JSON.stringify(current.rows.map((row) => current.columns.map((column) => String(row[column] ?? ""))))) : undefined;
+  const currentNormalized = current ? await sha256Text(JSON.stringify(current.rows.map((row) => baseline.columns.map((column) => String(row[column] ?? ""))))) : undefined;
   return makeDataset(baseline.rows, current?.rows, {
     columns: baseline.columns,
     baselineLineNumbers: baseline.lineNumbers,
@@ -208,6 +213,42 @@ test("07 rejects rows with extra cells", () => {
 
 test("08 rejects an unclosed quote", () => {
   assert.throws(() => parseCSV('id,note\nA,"broken\n'), /unclosed quote/);
+});
+
+test("08a rejects quotes inside unquoted fields instead of deleting them", () => {
+  assert.throws(() => parseCSV('id,note\nA,a"b"c\n'), /quote inside an unquoted field/);
+});
+
+test("08b rejects content after a closing quote", () => {
+  assert.throws(() => parseCSV('id,note\nA,"quoted"suffix\n'), /unexpected character after a closing quote/);
+  assert.throws(() => parseCSV('id,note\nA,"quoted" \n'), /unexpected character after a closing quote/);
+});
+
+test("08c preserves quoted whitespace while trimming unquoted fields", () => {
+  const parsed = parseCSV('id,note,plain\nA,"  keep me  ",  trim me  \n');
+  assert.equal(parsed.rows[0].note, "  keep me  ");
+  assert.equal(parsed.rows[0].plain, "trim me");
+});
+
+test("08d handles escaped quotes, CRLF, empty trailing cells, and long quoted fields", () => {
+  const longValue = "x".repeat(100_000);
+  const parsed = parseCSV(`id,note,tail\r\nA,"say ""hello""",\r\nB,"${longValue}",end\r\n`);
+  assert.equal(parsed.rows[0].note, 'say "hello"');
+  assert.equal(parsed.rows[0].tail, "");
+  assert.equal(parsed.rows[1].note, longValue);
+  assert.deepEqual(parsed.lineNumbers, [2, 3]);
+});
+
+test("08e aligns equal column sets to an explicit canonical order", () => {
+  const current = parseCSV("b,id,a\n20,1,10\n");
+  const aligned = alignParsedCsvColumns(current, ["id", "a", "b"]);
+  assert.deepEqual(aligned.columns, ["id", "a", "b"]);
+  assert.equal(aligned.rows[0].id, "1");
+  assert.equal(sameColumnSet(["id", "a"], ["a", "id"]), true);
+  assert.equal(sameColumnSet(["id", "a"], ["ID", "a"]), false);
+  assert.equal(sameColumnSet(["id", "id"], ["id", "a"]), false);
+  assert.equal(sameColumnSet(["id", "a"], ["id", "id"]), false);
+  assert.throws(() => alignParsedCsvColumns(current, ["id", "a"]), /canonical column set/);
 });
 
 test("09 decodes an UTF-8 BOM", () => {
@@ -406,6 +447,7 @@ test("39 exports an escaped conclusion-decision-review-integrity HTML report", a
   const bundle = await createEvidencePackage(dataset, [claim], RUN_AT, { decisionSpecs: [decisionSpec], reviews: [claimReview, decisionReview] });
   const verification = await verifyEvidencePackage(bundle);
   assert.equal(verification.valid, true);
+  assert.equal(verification.checks.every((check) => !check.passed || check.errors.length === 0), true);
   const report = buildHtmlReport(bundle, verification);
   assert.doesNotMatch(report, /<img src=x/);
   assert.doesNotMatch(report, /<Reviewer>/);
@@ -422,6 +464,17 @@ test("39 exports an escaped conclusion-decision-review-integrity HTML report", a
   assert.match(report, /Locally Recorded, Unauthenticated Sign-Offs/);
   assert.match(report, new RegExp(bundle.integrity.payloadHash));
   assert.match(report, /Independent recomputation:<\/b> PASS/);
+  assert.doesNotMatch(report, /PASS · bundle-root<\/b><span>.*mismatch/i);
+  assert.doesNotMatch(report, /PASS · section-hashes<\/b><span>.*mismatch/i);
+
+  const tampered = structuredClone(bundle);
+  tampered.integrity.payloadHash = "0".repeat(64);
+  const failedVerification = await verifyEvidencePackage(tampered);
+  assert.equal(failedVerification.checks.filter((check) => !check.passed).every((check) => check.errors.length > 0), true);
+  const rootCheck = failedVerification.checks.find((check) => check.name === "bundle-root");
+  assert.equal(rootCheck?.passed, false);
+  assert.deepEqual(rootCheck?.errors, ["Canonical bundle root hash mismatch"]);
+  assert.match(buildHtmlReport(tampered, failedVerification), /FAIL · bundle-root<\/b><span>Canonical bundle root hash mismatch<\/span>/);
 });
 
 test("40 excludes identifier columns from automatic numeric claims", () => {
@@ -601,6 +654,26 @@ test("58 detects a normalized-record hash mismatch", async () => {
   const verification = await verifySnapshot(dataset, "baseline", RUN_AT);
   assert.equal(verification.status, "failed");
   assert.match(verification.errors?.join(" ") ?? "", /normalized-record/i);
+});
+
+test("58a verifies reordered raw columns against the baseline canonical order", async () => {
+  const dataset = await makeVerifiableDataset(
+    "id,a,b\n1,10,20\n",
+    "b,id,a\n20,1,10\n",
+  );
+  const snapshotVerification = await verifySnapshot(dataset, "current", RUN_AT);
+  assert.equal(snapshotVerification.status, "verified");
+  const claim = recomputeClaim(
+    makeClaim({ type: "threshold", field: "a", aggregation: "average", operator: ">=", threshold: 10 }),
+    dataset,
+    RUN_AT,
+  );
+  const bundle = await createEvidencePackage(dataset, [claim], RUN_AT);
+  assert.deepEqual(bundle.snapshots.current?.columns, ["id", "a", "b"]);
+  assert.equal(bundle.snapshots.current?.schemaVersion, SNAPSHOT_SCHEMA_VERSION);
+  assert.equal(bundle.snapshots.current?.csvDialectVersion, CSV_DIALECT_VERSION);
+  assert.equal(bundle.snapshots.current?.normalizationVersion, NORMALIZED_ROWS_VERSION);
+  assert.equal((await verifyEvidencePackage(bundle)).valid, true);
 });
 
 test("59 marks a package unverifiable when scale policy omits raw snapshots", async () => {

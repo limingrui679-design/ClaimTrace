@@ -1,16 +1,18 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.2.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-08T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "Synthetic Site-Selection Audit",
   "primaryKey": "site_id",
-  "ruleVersion": "claimtrace-rule/6.1.2",
+  "ruleVersion": "claimtrace-rule/6.2.0",
   "isDemo": true,
   "dataOrigin": "SYNTHETIC",
   "snapshots": {
     "baseline": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "baseline-58ecc52ea5956dc0",
       "side": "baseline",
       "fileName": "baseline.csv",
@@ -31,7 +33,9 @@
       "verificationStatus": "verified"
     },
     "current": {
-      "schemaVersion": "claimtrace-snapshot/1.0.0",
+      "schemaVersion": "claimtrace-snapshot/1.1.0",
+      "csvDialectVersion": "claimtrace-csv-strict/1.0.0",
+      "normalizationVersion": "claimtrace-normalized-rows/1.0.0",
       "snapshotId": "current-c0ee909924202eb7",
       "side": "current",
       "fileName": "current.csv",
@@ -206,7 +210,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-demand-rank|claimtrace-rule/6.1.2",
+        "seed": "spatial-demand-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -264,7 +268,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-travel-gate|claimtrace-rule/6.1.2",
+        "seed": "spatial-travel-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -322,7 +326,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-flood-gate|claimtrace-rule/6.1.2",
+        "seed": "spatial-flood-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -631,7 +635,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:spatial-demand-rank:b2222c376fc24aabc1ed97d1",
+          "id": "claim-result:spatial-demand-rank:95038996fc1ecd793d061893",
           "kind": "Comparison result",
           "title": "demand_index version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -645,9 +649,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -679,7 +683,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
@@ -691,7 +695,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-demand-rank|claimtrace-rule/6.1.2",
+        "seed": "spatial-demand-rank|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -746,7 +750,7 @@
           }
         }
       },
-      "resultId": "claim-result:spatial-demand-rank:b2222c376fc24aabc1ed97d1",
+      "resultId": "claim-result:spatial-demand-rank:95038996fc1ecd793d061893",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -891,7 +895,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:spatial-travel-gate:47dc3fe75455142c867d8760",
+          "id": "claim-result:spatial-travel-gate:15f868c31eb8cea13dcc25f2",
           "kind": "Comparison result",
           "title": "travel_minutes version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -905,9 +909,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -939,7 +943,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
@@ -951,7 +955,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-travel-gate|claimtrace-rule/6.1.2",
+        "seed": "spatial-travel-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -996,7 +1000,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:spatial-travel-gate:47dc3fe75455142c867d8760",
+      "resultId": "claim-result:spatial-travel-gate:15f868c31eb8cea13dcc25f2",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1141,7 +1145,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:spatial-flood-gate:a2b830d73b95aa74a583071d",
+          "id": "claim-result:spatial-flood-gate:97e11d3d87fd74ddcecbee93",
           "kind": "Comparison result",
           "title": "flood_risk version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1155,9 +1159,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.1.2",
+          "id": "rule:claimtrace-rule/6.2.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.1.2",
+          "title": "claimtrace-rule/6.2.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1189,7 +1193,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
@@ -1201,7 +1205,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-flood-gate|claimtrace-rule/6.1.2",
+        "seed": "spatial-flood-gate|claimtrace-rule/6.2.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -1246,7 +1250,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:spatial-flood-gate:a2b830d73b95aa74a583071d",
+      "resultId": "claim-result:spatial-flood-gate:97e11d3d87fd74ddcecbee93",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1438,10 +1442,10 @@
         "decisionInputProvenanceHash": "4290dfd68668fa8c94ffdf67043bab2f7a2afdfb12ebddb7a3f9d5687a1534a3",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
-        "ruleVersion": "claimtrace-rule/6.1.2",
+        "ruleVersion": "claimtrace-rule/6.2.0",
         "claimResultIds": [
-          "claim-result:spatial-demand-rank:b2222c376fc24aabc1ed97d1",
-          "claim-result:spatial-flood-gate:a2b830d73b95aa74a583071d"
+          "claim-result:spatial-demand-rank:95038996fc1ecd793d061893",
+          "claim-result:spatial-flood-gate:97e11d3d87fd74ddcecbee93"
         ]
       },
       "analysis": {
@@ -1574,7 +1578,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:spatial-site-choice:af61fd92784e0444a21708e5"
+      "resultId": "decision-result:spatial-site-choice:a96aeb6879fb0abfdf2df5de"
     }
   ],
   "reviews": [],
@@ -1588,12 +1592,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "9d85425c72e291611151dab65733ed9c36deebc09fe5498b92f84ad85d46eaad",
+    "payloadHash": "b9a473da8e6154cf598acfd481c70f29b5ff9f1d888c1628eb4063fbea4ff5a0",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
-      "snapshots": "847f706c6c419310e94f240b13ad961fc085db97e928901363ebbed0acbcd5e4",
-      "claims": "3f2d5a6b63cb1a6e67923161f101b5b2e67f7002ac8fd605623d179ff7191eb8",
-      "decisions": "9b191986ea037ee8878f4ae7a0dad258f845d0c3bdb6a52768c06529e54d02b5",
+      "snapshots": "6ec3f64588f2411b04d6792999e57345c1258cea0a0e797099834f449cdaf20f",
+      "claims": "9d3dac5fd815f2482c47d733403286f0c356d984aec56447016c4fed14f4f0b4",
+      "decisions": "4088299959c846c163c115e9dcdd563c98b960c20a7918d3fd0f0c4c52111cc7",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

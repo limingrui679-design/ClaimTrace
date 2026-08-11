@@ -12,7 +12,7 @@ npm audit --omit=dev --audit-level=high
 npm audit --audit-level=high
 ```
 
-`npm run ci` must finish with generated fixtures unchanged, 144 passing unit/integration tests, one passing Chromium acceptance test, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
+`npm run ci` must finish with generated fixtures unchanged, 148 passing unit/integration tests, 2 passing built-artifact checks, separate passing read-only and writable Chromium flows, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
 
 ## 2. Inspect generated evidence
 
@@ -49,7 +49,7 @@ overview → public-data case → source lineage → keyed diff → claims → d
 
 Confirm that the console has no warning/error entries and that the committed `docs/claimtrace-demo.gif` matches the current interface.
 
-The committed Playwright test is a required release gate:
+Both committed Playwright modes are required release gates. The read-only flow runs all ten catalog cases and the responsive navigation checks. The writable flow covers delayed case/file selection, canonical column alignment, review/export serialization, two chained JSON exports, independent verification, and verified HTML output:
 
 ```bash
 npm run test:browser
