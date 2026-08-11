@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.0 — 2026-08-11
+
+- split the former 952-line UI and asynchronous workspace file into a 610-line application orchestrator, a 220-line view module, shared workspace configuration, and dedicated dataset-intent, case-loading, CSV-import, and verified-export services;
+- moved the monotonic dataset generation into a directly tested coordinator that aborts superseded case requests and invalidates unfinished baseline/current reads while preserving the committed cross-flow Chromium contract;
+- added build identity to the interface so a compiled artifact displays the package version, commit prefix, and read-only or local-writable mode; the repository still does not claim a currently hosted deployment;
+- required every public source to distinguish a publisher-reported update date from a date not separately reported, required an explicit reason rather than a guessed date for CFPB, CDC, and ONS, and versioned the resulting external-source and AuditBundle contracts as `2.1.0` and `2.4.0`;
+- regenerated and independently verified all ten case packs under the additive provenance fields and retained six public-data cases plus four synthetic stress fixtures;
+- expanded the suite to 150 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows while retaining 64/64 controlled scenarios, 512 fixed-seed property iterations, and enforced core coverage thresholds.
+
 ## 0.9.1 — 2026-08-11
 
 - unified case loading, whole-project import, revision import, and demo restoration under one monotonic dataset-intent generation, aborting pending case fetches and invalidating unfinished file reads whenever a newer dataset replacement begins;

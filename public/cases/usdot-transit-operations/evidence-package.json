@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -2014,7 +2014,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "schemaVersion": "claimtrace-external-source/2.1.0",
     "sourceType": "USDOT_NTD_SOCRATA_V1",
     "publisher": "U.S. Department of Transportation, Federal Transit Administration",
     "dataset": "Monthly Modal Time Series",
@@ -2024,6 +2024,7 @@
     },
     "retrievedAt": "2026-08-10T00:00:00.000Z",
     "sourceLastUpdated": "2026-07-07",
+    "sourceLastUpdatedBasis": "PUBLISHER_REPORTED",
     "sourceUrls": {
       "baseline": "https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272024%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100",
       "current": "https://data.transportation.gov/resource/5ti2-5uiv.json?$select=_5_digit_ntd_id%2Cagency%2Cmode_name%2Ctype_of_service%2Cyear%2Cmonth%2Cmonth_year%2Cvehicle_revenue_hours%2Cridership&$where=year%3D%272025%27%20AND%20month%3D%27May%27%20AND%20mode_name%3D%27Heavy%20Rail%27%20AND%20type_of_service%3D%27DO%27%20AND%20_5_digit_ntd_id%20in%28%2710003%27%2C%2720008%27%2C%2730019%27%2C%2730030%27%2C%2740034%27%2C%2750066%27%2C%2790003%27%2C%2790154%27%29&$order=_5_digit_ntd_id&$limit=100"
@@ -2075,14 +2076,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "edb85d8c9ee6f76f03c3f9b4849933c450ad7164831b2c46f66552bfe29aa6b2",
+    "payloadHash": "aceaecce69ed960cf934725365052f2bac53b913778aae6e8535a04dc4bf05f0",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "c65b436105029d5bc9bc0a9d45cf1a6beb51a783d5ffc0cd0127aad2ba2fb3eb",
       "claims": "acacf001dbf4bd2f2b4275239c67b13ef639094b9b48808581ce82b4c0122667",
       "decisions": "4918f0e7c106ca8bafba1c687c98d3efbfedf1a84d117eceab5e0a40e551c821",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "d4a286cb041f23948ef55b2f432cada18fd1f65722148edc6d3530a244aa9162",
+      "provenance": "115a0b34ab1d16af4252906aac050493b0a4ef90a8eaec99f477415f63a20095",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

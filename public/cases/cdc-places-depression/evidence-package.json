@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -2057,7 +2057,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "schemaVersion": "claimtrace-external-source/2.1.0",
     "sourceType": "CDC_PLACES_SOCRATA_V1",
     "publisher": "U.S. Centers for Disease Control and Prevention",
     "dataset": "PLACES: Local Data for Better Health, County Data",
@@ -2066,6 +2066,8 @@
       "name": "Age-adjusted prevalence of depression among adults"
     },
     "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
+    "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
     "sourceUrls": {
       "baseline": "https://data.cdc.gov/resource/fu4u-a9bh.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid",
       "current": "https://data.cdc.gov/resource/swc5-untb.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid"
@@ -2116,14 +2118,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "5a55ce7d661b8c175dd88eda91f3db21073bd4df8bca354c8edb9ecba45785a9",
+    "payloadHash": "ceab444169098c399ccec48382e35a747bfd09588595c3fda7ffd4ad3047b858",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "664dd61920964b959749dbd543886483e7d4b8f22742046480793b5fbb02604a",
       "claims": "7070fa8ac7f3de309e64a030860d61546a003bd3f379a63876cf81c5b1c1892c",
       "decisions": "069a9d5bb28b9a373f97037de3048c0e5b9bbf1f9a24119db4c89e729d202173",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "9b824a9a115f5d6c4a51483718cee176eacad6bb806100d0bc84339f071d1a3e",
+      "provenance": "bc834122bf8b7a15a2ac0eec764cf94000d715f196066704f071712e0f94f24b",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

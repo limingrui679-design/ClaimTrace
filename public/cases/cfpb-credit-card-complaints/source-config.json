@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source-config/2.0.0",
+  "schemaVersion": "claimtrace-external-source-config/2.1.0",
   "sourceType": "CFPB_COMPLAINT_TRENDS_V1",
   "publisher": "U.S. Consumer Financial Protection Bureau",
   "dataset": "Consumer Complaint Database trends API",
@@ -8,6 +8,8 @@
     "name": "Structured credit-card complaint issue records"
   },
   "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
+  "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
   "sourceUrls": {
     "baseline": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2024-01-01&date_received_max=2024-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10",
     "current": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2025-01-01&date_received_max=2025-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10"

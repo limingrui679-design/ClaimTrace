@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -2140,7 +2140,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "schemaVersion": "claimtrace-external-source/2.1.0",
     "sourceType": "CFPB_COMPLAINT_TRENDS_V1",
     "publisher": "U.S. Consumer Financial Protection Bureau",
     "dataset": "Consumer Complaint Database trends API",
@@ -2149,6 +2149,8 @@
       "name": "Structured credit-card complaint issue records"
     },
     "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
+    "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
     "sourceUrls": {
       "baseline": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2024-01-01&date_received_max=2024-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10",
       "current": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2025-01-01&date_received_max=2025-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10"
@@ -2190,14 +2192,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "392f97d25492c2e67f74ee193c44cf601adae226a6f53f8c18a6b5eb245f37ee",
+    "payloadHash": "af7a2989c0d9ad053dd579e4fbf9df29141b5536b522d59a232ed31ec24a38cb",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "ceff67aafa6535e2089a6e06648969bfbae1be5945edbd8838cddc8ff06d2e24",
       "claims": "4199f26e1070154457ad7dcabebdd362dc98c2d38e7e0f3ed5b8fb4211561a85",
       "decisions": "569d4d6546bf71073f2f2bf748c69e41fc82000d2f9ee1b24fc940e05204fd6c",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "86014b11048bbb9d2f3a9174f4e2bc921761c11406f954a7b59a70d7c471c836",
+      "provenance": "e360bddb41f4abff332237c93901a7e625bd35677617ea291e31945e530e411a",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

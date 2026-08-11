@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source-config/2.0.0",
+  "schemaVersion": "claimtrace-external-source-config/2.1.0",
   "sourceType": "WORLD_BANK_INDICATORS_API_V2",
   "publisher": "World Bank",
   "dataset": "World Development Indicators",
@@ -9,6 +9,7 @@
   },
   "retrievedAt": "2026-08-10T00:00:00.000Z",
   "sourceLastUpdated": "2026-07-13",
+  "sourceLastUpdatedBasis": "PUBLISHER_REPORTED",
   "sourceUrls": {
     "baseline": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2019&format=json&per_page=1000",
     "current": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2024&format=json&per_page=1000"

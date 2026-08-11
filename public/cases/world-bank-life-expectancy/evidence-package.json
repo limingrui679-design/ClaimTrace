@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -1893,7 +1893,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "schemaVersion": "claimtrace-external-source/2.1.0",
     "sourceType": "WORLD_BANK_INDICATORS_API_V2",
     "publisher": "World Bank",
     "dataset": "World Development Indicators",
@@ -1903,6 +1903,7 @@
     },
     "retrievedAt": "2026-08-10T00:00:00.000Z",
     "sourceLastUpdated": "2026-07-13",
+    "sourceLastUpdatedBasis": "PUBLISHER_REPORTED",
     "sourceUrls": {
       "baseline": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2019&format=json&per_page=1000",
       "current": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2024&format=json&per_page=1000"
@@ -1953,14 +1954,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "f59d5c59dd5ea9ae46de8b7b40d50195a35eedba8a22fab1fc5361fa721f422c",
+    "payloadHash": "2a0aab2031e4ea7e3d382b409e1aa3a7247a8cdbf6da972c8be3c2b3a1989a9d",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "8e1cf1d7dc32ebba89e1d11cc62744dd2bdb29f8c42b014fd5b7a8d53e070277",
       "claims": "1d8b4f961a872fbabef0639a105850af47350d5d260fc283008076fad78d465f",
       "decisions": "29b9affac2f385b04d048251d842abe0f49abe8eba2a378b2b531ba49dba1984",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "a8e8746806a3ff32ab82b009e9c59698b539de6feb471fc3386e549ab76a71e8",
+      "provenance": "122fe6d9a059b867fec586cf275f1b9ae6d806b1f6af8bedad86ba1810550bb7",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

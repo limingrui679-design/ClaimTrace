@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source/2.0.0",
+  "schemaVersion": "claimtrace-external-source/2.1.0",
   "sourceType": "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1",
   "publisher": "Office for National Statistics",
   "dataset": "Explore Local Statistics: housing affordability ratio",
@@ -8,6 +8,8 @@
     "name": "Median house price to median workplace-based earnings ratio"
   },
   "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
+  "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
   "sourceUrls": {
     "baseline": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2024-04-01",
     "current": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2025-04-01"

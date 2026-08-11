@@ -82,6 +82,11 @@ test("external cleaners reject invalid parameters and source-type bindings witho
   const cfpbResult = rebuildExternalSnapshot(cfpb, "baseline");
   assert.match(cfpbResult.errors.join("; "), /topIssues must be an integer from 1 to 1000/);
 
+  const unexplainedDateGap = JSON.parse(await readFile(path.join(CASES, "cfpb-credit-card-complaints", "source-metadata.json"), "utf8"));
+  delete unexplainedDateGap.sourceLastUpdatedNotReportedReason;
+  const unexplainedDateGapResult = rebuildExternalSnapshot(unexplainedDateGap, "baseline");
+  assert.match(unexplainedDateGapResult.errors.join("; "), /requires a not-reported reason/);
+
   const mislabeled = structuredClone(worldBank);
   mislabeled.sourceType = "US_TREASURY_YIELD_CURVE_XML_V1";
   const mislabeledResult = rebuildExternalSnapshot(mislabeled, "baseline");

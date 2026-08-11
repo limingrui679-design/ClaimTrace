@@ -4,7 +4,7 @@
   "caseId": "cfpb-credit-card-complaints",
   "sourceType": "CFPB_COMPLAINT_TRENDS_V1",
   "implementation": "cfpb-complaint-trends-v1",
-  "sourceConfigSha256": "cfdfcaaaaa0420d73a2d8a3a39d06773a2d82018f81420247140616698ef0fe1",
+  "sourceConfigSha256": "147a6653f06de207c48b1fb6bf88c3e07b51222f5c13f462eee515123e2d5136",
   "transformations": {
     "baseline": [
       "Parse pinned CFPB complaint-trends aggregation JSON",

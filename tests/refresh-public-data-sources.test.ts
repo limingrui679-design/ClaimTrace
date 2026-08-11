@@ -47,9 +47,11 @@ async function makeFixture() {
     },
   };
   const config = {
-    schemaVersion: "claimtrace-external-source-config/2.0.0",
+    schemaVersion: "claimtrace-external-source-config/2.1.0",
     sourceType: "WORLD_BANK_INDICATORS_API_V2",
     retrievedAt: "2026-08-10T00:00:00.000Z",
+    sourceLastUpdated: LAST_UPDATED,
+    sourceLastUpdatedBasis: "PUBLISHER_REPORTED",
     sourceUrls: {
       baseline: "https://example.test/baseline",
       current: "https://example.test/current",
@@ -64,13 +66,14 @@ async function makeFixture() {
   const oldBaseline = worldBankResponse("2019", 78.8);
   const oldCurrent = worldBankResponse("2024", 78.9);
   const provenance = {
-    schemaVersion: "claimtrace-external-source/2.0.0",
+    schemaVersion: "claimtrace-external-source/2.1.0",
     sourceType: config.sourceType,
     publisher: "World Bank",
     dataset: "World Development Indicators",
     measure: { id: "SP.DYN.LE00.IN", name: "Life expectancy at birth, total (years)" },
     retrievedAt: config.retrievedAt,
     sourceLastUpdated: LAST_UPDATED,
+    sourceLastUpdatedBasis: "PUBLISHER_REPORTED",
     sourceUrls: config.sourceUrls,
     license: "CC BY 4.0",
     licenseUrl: "https://example.test/license",

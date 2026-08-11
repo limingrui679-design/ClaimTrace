@@ -33,6 +33,10 @@ flowchart LR
 - `src/core/evidence`: computed completeness, bounded AuditBundle export, independent snapshot/claim/decision/review/upstream/public-source verification, cross-bundle-chain verification, and standalone HTML reports.
 - `src/cases`: ten executable case specifications and shared browser/test runtime. Six are pinned official public-data transformations covering operations, fixed income, consumer finance, population health, planning, and international indicators; four are deterministic synthetic stress fixtures for controlled failure modes. Self-contained generated packs live under `public/cases`.
 - `benchmarks`: 64 independently labeled scenarios across eight edge-case families, multiple baselines, ablations, and committed results. Deterministic property tests live under `tests/property.test.ts`.
+- `app/workspace-config.ts`: shared view identifiers, demo initialization, build identity, and display metadata.
+- `app/workflows/dataset-intent.ts`: the monotonic dataset generation, case-request abortion, and baseline/current file-read invalidation contract.
+- `app/workflows/case-loader.ts`, `import-workflow.ts`, and `audit-export.ts`: case I/O, strict local CSV preparation, and independently verified handoff services.
+- `app/views.tsx`: route-level presentation components; it does not own the active dataset generation or commit asynchronous workspace state.
 
 `app/claimtrace-core.ts` is a compatibility re-export only. New core logic belongs in `src/core`.
 
@@ -40,7 +44,7 @@ flowchart LR
 
 CSV decoding, keyed alignment, upstream aggregation, status assignment, decision propagation, completeness, and AuditBundle verification are deterministic. A future LLM may propose a draft claim or mapping, but it must not assign the final status or bypass the same deterministic validator.
 
-The application shell is a stable Vite + React SPA. Case loading, whole-project import, revision import, and demo restoration share one monotonic dataset-intent generation. A newer intent aborts pending case fetches, invalidates unfinished file reads, and prevents stale audit, review, or export work from mutating or downloading results for a replacement dataset. Review and export activation is also serialized so repeated activation cannot fork a review chain or duplicate one export operation. The public build can set `VITE_PUBLIC_READ_ONLY=true`, which omits import, claim-creation, review, and sign-off controls and dialogs from the rendered interface while preserving navigation, case execution, evidence inspection, and downloads. Separate real-browser suites verify the public read-only mode and the full writable workflow. There is no application upload endpoint.
+The application shell is a stable Vite + React SPA. Case loading, whole-project import, revision import, and demo restoration share one monotonic dataset-intent generation owned by `DatasetIntentCoordinator`, rather than independent component-local request tokens. A newer intent aborts pending case fetches, invalidates unfinished file reads, and prevents stale audit, review, or export work from mutating or downloading results for a replacement dataset. Review and export activation is also serialized so repeated activation cannot fork a review chain or duplicate one export operation. The public build can set `VITE_PUBLIC_READ_ONLY=true`, which omits import, claim-creation, review, and sign-off controls and dialogs from the rendered interface while preserving navigation, case execution, evidence inspection, and downloads. `CLAIMTRACE_COMMIT` binds a compiled artifact's visible receipt to a supplied source revision; a receipt does not itself prove that the artifact is publicly hosted. Separate real-browser suites verify the public read-only mode and the full writable workflow. There is no application upload endpoint.
 
 ## Scale boundary
 

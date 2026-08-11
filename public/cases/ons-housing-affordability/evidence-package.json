@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -2210,7 +2210,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "schemaVersion": "claimtrace-external-source/2.1.0",
     "sourceType": "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1",
     "publisher": "Office for National Statistics",
     "dataset": "Explore Local Statistics: housing affordability ratio",
@@ -2219,6 +2219,8 @@
       "name": "Median house price to median workplace-based earnings ratio"
     },
     "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
+    "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
     "sourceUrls": {
       "baseline": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2024-04-01",
       "current": "https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2025-04-01"
@@ -2273,14 +2275,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "efc58e24b7f9a6bf5f2156f32b52a24eee6488399d7516b519c45ee1d04abe8a",
+    "payloadHash": "4138ca900f275096c0b5e5b8231f283c926a197ef2943ae061923b0bbf99bbb7",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "b560b1b2fc13e16169a88bef6c7a1d59dce3062e6104900f8c3a8d36202a7393",
       "claims": "af689a428c80141f892e91d9fee17718a1175fc5ed78e7bad75859688335e46b",
       "decisions": "6e7fa1c5a8ca1e3408022c7459214a3bf2ac223c91f2a834970731acfbafefa2",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "4f495ef33288b5d9357d6ef93a846cfc127981ccf76bbdb22da6b5d7b78105ec",
+      "provenance": "ac041552db2ac7cf5ddb18534643319e359f9b3b7d228291f05daaf960b35c6c",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

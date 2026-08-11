@@ -4,7 +4,7 @@
   "caseId": "world-bank-life-expectancy",
   "sourceType": "WORLD_BANK_INDICATORS_API_V2",
   "implementation": "world-bank-indicator-v1",
-  "sourceConfigSha256": "70f447adb416e85257fec5cb4d060fcea4a7ac0644b6a1537edd5c28e4e2797e",
+  "sourceConfigSha256": "23e9bf32a0a12ddcbb5cece908d0b427d431be00b4664dfb4a8fa006784e72ff",
   "transformations": {
     "baseline": [
       "Parse pinned World Bank Indicators API JSON",

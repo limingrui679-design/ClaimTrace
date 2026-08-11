@@ -547,12 +547,17 @@ async function replaceFiles(caseDirectory: string, files: Array<{ target: string
 }
 
 function validateSourceDefinition(caseId: string, config: SourceConfig, provenance: ExternalSourceProvenance) {
-  if (provenance.schemaVersion !== "claimtrace-external-source/2.0.0") throw new Error(`${caseId}: unsupported source-metadata schema`);
+  if (provenance.schemaVersion !== "claimtrace-external-source/2.1.0") throw new Error(`${caseId}: unsupported source-metadata schema`);
   if (!Array.isArray(provenance.rawArtifacts)) throw new Error(`${caseId}: source-metadata rawArtifacts must be an array`);
   if (provenance.rawArtifacts.length !== SIDES.length || provenance.rawArtifacts.some((artifact) => !artifact || !SIDES.includes(artifact.side)) || new Set(provenance.rawArtifacts.map((artifact) => artifact.side)).size !== SIDES.length) {
     throw new Error(`${caseId}: source-metadata must contain exactly one baseline and one current raw artifact`);
   }
   if (config.sourceType !== provenance.sourceType) throw new Error(`${caseId}: source type differs between source-config and source-metadata`);
+  if (config.sourceLastUpdated !== provenance.sourceLastUpdated
+    || config.sourceLastUpdatedBasis !== provenance.sourceLastUpdatedBasis
+    || config.sourceLastUpdatedNotReportedReason !== provenance.sourceLastUpdatedNotReportedReason) {
+    throw new Error(`${caseId}: source update-date basis differs between source-config and source-metadata`);
+  }
   if (!config.cleaning || typeof config.cleaning !== "object" || !provenance.cleaning || typeof provenance.cleaning !== "object" || canonicalJson(config.cleaning) !== canonicalJson(provenance.cleaning)) {
     throw new Error(`${caseId}: cleaning definition differs between source-config and source-metadata`);
   }
@@ -632,7 +637,7 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     if (!configStats.isFile()) throw new Error(`${configPath}: source-refresh configuration must be a regular file`);
     const configText = await fileOperations.readFile(configPath, "utf8") as string;
     const config = JSON.parse(configText) as SourceConfig;
-    if (config.schemaVersion !== "claimtrace-external-source-config/2.0.0") throw new Error(`${entry.name}: unsupported source-config schema`);
+    if (config.schemaVersion !== "claimtrace-external-source-config/2.1.0") throw new Error(`${entry.name}: unsupported source-config schema`);
     const provenancePath = path.join(directory, "source-metadata.json");
     await verifyRegularFile(provenancePath, null, "source-refresh metadata", fileOperations);
     const provenance = JSON.parse(await fileOperations.readFile(provenancePath, "utf8")) as ExternalSourceProvenance;

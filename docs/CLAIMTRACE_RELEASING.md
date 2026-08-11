@@ -12,7 +12,7 @@ npm audit --omit=dev --audit-level=high
 npm audit --audit-level=high
 ```
 
-`npm run ci` must finish with generated fixtures unchanged, 148 passing unit/integration tests, 2 passing built-artifact checks, separate passing read-only and writable Chromium flows, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
+`npm run ci` must finish with generated fixtures unchanged, 150 passing unit/integration tests, 2 passing built-artifact checks, separate passing read-only and writable Chromium flows, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
 
 The corresponding GitHub Actions run must point to the release commit, finish successfully, retain coverage and both browser-mode artifacts, and contain no Action-runtime deprecation annotation. Official Actions remain pinned to complete commit SHAs rather than floating tags.
 
@@ -36,10 +36,10 @@ npm run build
 Read-only portfolio build:
 
 ```bash
-VITE_PUBLIC_READ_ONLY=true npm run build
+CLAIMTRACE_COMMIT=<release-commit> VITE_PUBLIC_READ_ONLY=true npm run build
 ```
 
-The read-only build must display the read-only portfolio badge and render no import, claim-creation, review, or sign-off controls. Navigation, case execution, evidence inspection, and downloads remain available.
+The read-only build must display its package version, release-commit prefix, read-only mode, and the read-only portfolio badge, while rendering no import, claim-creation, review, or sign-off controls. Navigation, case execution, evidence inspection, and downloads remain available.
 
 ## 4. Browser acceptance
 

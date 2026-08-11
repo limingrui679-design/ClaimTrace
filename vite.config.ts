@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { sites } from "./build/sites-vite-plugin.ts";
@@ -6,6 +7,14 @@ import { sites } from "./build/sites-vite-plugin.ts";
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 
 export default defineConfig(async () => {
+  const packageMetadata = JSON.parse(
+    await readFile(new URL("./package.json", import.meta.url), "utf8"),
+  ) as { version: string };
+  const claimtraceCommit = process.env.VITE_CLAIMTRACE_COMMIT
+    ?? process.env.CLAIMTRACE_COMMIT
+    ?? process.env.GITHUB_SHA
+    ?? "local-unbound";
+
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
   // settings; application environment belongs in ignored `.env*` files.
   process.env.WRANGLER_WRITE_LOGS ??= "false";
@@ -16,6 +25,10 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    define: {
+      "import.meta.env.VITE_CLAIMTRACE_VERSION": JSON.stringify(packageMetadata.version),
+      "import.meta.env.VITE_CLAIMTRACE_COMMIT": JSON.stringify(claimtraceCommit),
+    },
     build: {
       rolldownOptions: {
         output: {

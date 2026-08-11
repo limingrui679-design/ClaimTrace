@@ -1,5 +1,5 @@
 export const RULE_ENGINE_VERSION = "claimtrace-rule/6.2.0";
-export const EVIDENCE_SCHEMA_VERSION = "claimtrace-audit-bundle/2.3.0";
+export const EVIDENCE_SCHEMA_VERSION = "claimtrace-audit-bundle/2.4.0";
 export const SNAPSHOT_SCHEMA_VERSION = "claimtrace-snapshot/1.1.0";
 export const CSV_DIALECT_VERSION = "claimtrace-csv-strict/1.0.0";
 export const NORMALIZED_ROWS_VERSION = "claimtrace-normalized-rows/1.0.0";
@@ -109,13 +109,15 @@ export type ExternalCleaningImplementation =
 export type ExternalCleaningParameter = string | number | boolean | string[] | number[] | Array<Record<string, string | number>>;
 
 export interface ExternalSourceProvenance {
-  schemaVersion: "claimtrace-external-source/2.0.0";
+  schemaVersion: "claimtrace-external-source/2.1.0";
   sourceType: ExternalSourceType;
   publisher: string;
   dataset: string;
   measure: { id: string; name: string };
   retrievedAt: string;
-  sourceLastUpdated?: string;
+  sourceLastUpdated?: string | null;
+  sourceLastUpdatedBasis: "PUBLISHER_REPORTED" | "NOT_SEPARATELY_REPORTED";
+  sourceLastUpdatedNotReportedReason?: string;
   sourceUrls: { baseline: string; current: string };
   license: string;
   licenseUrl: string;

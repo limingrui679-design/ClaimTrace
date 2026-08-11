@@ -2,7 +2,7 @@
 
 > Versioned evidence and decision auditing for analytical claims.
 
-[Case catalog](public/cases/catalog.json) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
+[Case catalog](public/cases/catalog.json) · [Portfolio handoff](docs/PORTFOLIO_HANDOFF.md) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
 
 ![ClaimTrace real browser walkthrough](docs/claimtrace-demo.gif)
 
@@ -60,7 +60,7 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 148 unit/integration tests, 2 built-artifact checks, separate read-only and writable real-Chromium acceptance flows, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 150 unit/integration tests, 2 built-artifact checks, separate read-only and writable real-Chromium acceptance flows, and coverage thresholds.
 
 ## Reproducible cases
 
@@ -100,17 +100,17 @@ Every case includes executable specifications, two snapshots, expected results, 
 
 ## Evaluation and verification status
 
-- **152 / 152 automated checks** — 148 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows
+- **154 / 154 automated checks** — 150 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
-- **97.29% statement/line coverage, 79.23% branch coverage, 99.35% function coverage** for `src/core`
+- **97.30% statement/line coverage, 78.98% branch coverage, 99.35% function coverage** for `src/core`
 - **10 / 10 case AuditBundles regenerated and independently verified**
 - **0 known production dependency vulnerabilities**
 - **0 known full development-toolchain vulnerabilities**
 
 The benchmark labels are stored separately from the execution logic in [`benchmarks/labels.json`](benchmarks/labels.json). The deliberately weak line/scalar, metric-only, and keyed-diff baselines score 27/64, 35/64, and 24/64 respectively. These results establish regression behavior on committed boundaries only—not production accuracy, external validity, user impact, or superiority to mature audit platforms. See [`docs/EVALUATION.md`](docs/EVALUATION.md).
 
-The exact 0.9.1 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
+The exact 0.10.0 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
 
 ## Architecture
 
@@ -124,6 +124,8 @@ src/core/governance/    review records and release propagation
 src/core/integrity/     canonical JSON and stable identities
 src/core/evidence/      AuditBundle, chain verification, HTML reports
 src/cases/              ten executable case specifications
+app/views.tsx           presentation-only route views
+app/workflows/          dataset intent, case loading, CSV import, verified export
 ```
 
 The browser is built as a stable Vite + React SPA and can produce static Cloudflare-compatible assets. The audit core is deterministic and independent of the UI, and the repository runs locally without a hosted service. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and [`docs/EVIDENCE_MODEL.md`](docs/EVIDENCE_MODEL.md).

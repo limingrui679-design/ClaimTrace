@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.3.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -1947,7 +1947,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.0.0",
+    "schemaVersion": "claimtrace-external-source/2.1.0",
     "sourceType": "US_TREASURY_YIELD_CURVE_XML_V1",
     "publisher": "U.S. Department of the Treasury",
     "dataset": "Daily Treasury Par Yield Curve Rates",
@@ -1957,6 +1957,7 @@
     },
     "retrievedAt": "2026-08-10T00:00:00.000Z",
     "sourceLastUpdated": "2026-08-07",
+    "sourceLastUpdatedBasis": "PUBLISHER_REPORTED",
     "sourceUrls": {
       "baseline": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2024",
       "current": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2025"
@@ -2044,14 +2045,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "37f1a1c1cee999f841dd07d2fe5024f7340dfa97dbe166d933f52233c7af7902",
+    "payloadHash": "da855f6697a678871f2695a3cb9f61263aceade895eb3227ec455b33c7aec78d",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "e0317b1b5f416c3faf9abb00991763ccd2facc66e945f64a2958823655efc609",
       "claims": "aff582dd18940643892d3da8042945ef7e7d05e94e34e48105d915b8cce4b7a2",
       "decisions": "0d96bbe61c0b0ed89bd2554819abf68cfc2b73fbb74fec3df43ed8821bbe63c3",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "734f93a30e809fcd0c73118db96b313a0a3044e1f908384761148756bf4936b0",
+      "provenance": "8b97053c8d2be9b2bc6aece687762f61383df329dc96c103f7da7011a3b0266c",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

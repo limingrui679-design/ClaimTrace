@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source-config/2.0.0",
+  "schemaVersion": "claimtrace-external-source-config/2.1.0",
   "sourceType": "CDC_PLACES_SOCRATA_V1",
   "publisher": "U.S. Centers for Disease Control and Prevention",
   "dataset": "PLACES: Local Data for Better Health, County Data",
@@ -8,6 +8,8 @@
     "name": "Age-adjusted prevalence of depression among adults"
   },
   "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
+  "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
   "sourceUrls": {
     "baseline": "https://data.cdc.gov/resource/fu4u-a9bh.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid",
     "current": "https://data.cdc.gov/resource/swc5-untb.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid"

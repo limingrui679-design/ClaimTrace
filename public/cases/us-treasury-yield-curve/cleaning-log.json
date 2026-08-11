@@ -4,7 +4,7 @@
   "caseId": "us-treasury-yield-curve",
   "sourceType": "US_TREASURY_YIELD_CURVE_XML_V1",
   "implementation": "treasury-yield-curve-v1",
-  "sourceConfigSha256": "8c7c072bebd61c93006be245e8ade683a042c22f5032277f67f400401baf27d3",
+  "sourceConfigSha256": "f564c5c7f4869b4ff347dbe5f88a288afde60bb1e1865da2786366c853dbe064",
   "transformations": {
     "baseline": [
       "Parse pinned U.S. Treasury Atom/XML yield-curve feed",

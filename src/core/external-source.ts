@@ -20,6 +20,13 @@ export function externalCleaningBindingError(provenance: ExternalSourceProvenanc
   const expected = CLEANING_IMPLEMENTATION_BY_SOURCE[provenance.sourceType];
   if (!expected) return `Unsupported external source type: ${String(provenance.sourceType)}`;
   if (provenance.cleaning.implementation !== expected) return `External source type ${provenance.sourceType} must use cleaning implementation ${expected}`;
+  if (provenance.sourceLastUpdated) {
+    if (provenance.sourceLastUpdatedBasis !== "PUBLISHER_REPORTED") return "A source last-updated date must be labeled as publisher reported";
+    if (provenance.sourceLastUpdatedNotReportedReason?.trim()) return "A reported source update date cannot also carry a not-reported reason";
+  } else {
+    if (provenance.sourceLastUpdatedBasis !== "NOT_SEPARATELY_REPORTED") return "A missing source last-updated date must be labeled as not separately reported";
+    if (!provenance.sourceLastUpdatedNotReportedReason?.trim()) return "A missing source last-updated date requires a not-reported reason";
+  }
   return null;
 }
 

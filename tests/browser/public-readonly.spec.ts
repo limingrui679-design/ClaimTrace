@@ -24,6 +24,8 @@ test("public build renders no import, claim, review, or sign-off controls", asyn
 
   await page.goto("/");
   await expect(page.getByText("Read-only portfolio mode · controls disabled")).toBeVisible();
+  await expect(page.getByTestId("build-receipt")).toContainText("v0.10.0");
+  await expect(page.getByTestId("build-receipt")).toContainText("commit readonl · read-only");
   await expect(page.locator(".executive-brief")).toBeVisible();
   await expect(page.locator(".status-mix-track").first()).toBeVisible();
   await expect(page.getByRole("button", { name: "Import your project" })).toHaveCount(0);

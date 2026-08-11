@@ -4,7 +4,7 @@
   "caseId": "cdc-places-depression",
   "sourceType": "CDC_PLACES_SOCRATA_V1",
   "implementation": "cdc-places-county-v1",
-  "sourceConfigSha256": "62528fc0aeb6a2fa1bfd60986305bed9945b2683a6423ee341bcdbb02b2326cc",
+  "sourceConfigSha256": "d14d2d873ebcc379bd53b5d0c1c33221f76600466a8ab94976b0dc1e618de434",
   "transformations": {
     "baseline": [
       "Parse pinned CDC PLACES Socrata JSON",

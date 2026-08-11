@@ -4,7 +4,7 @@
   "caseId": "usdot-transit-operations",
   "sourceType": "USDOT_NTD_SOCRATA_V1",
   "implementation": "usdot-ntd-monthly-v1",
-  "sourceConfigSha256": "26bcb00c883f8b4edd5aef5145523035166ce684eaf3af41f1fc79f3cb9af6e5",
+  "sourceConfigSha256": "69e2aab6ec3d7c34c3280442d08018449a27ba3baccb573d68b6c758b062e59d",
   "transformations": {
     "baseline": [
       "Parse pinned USDOT Socrata JSON",

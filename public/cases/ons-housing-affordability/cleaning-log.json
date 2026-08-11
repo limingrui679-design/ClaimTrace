@@ -4,7 +4,7 @@
   "caseId": "ons-housing-affordability",
   "sourceType": "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1",
   "implementation": "ons-housing-affordability-v1",
-  "sourceConfigSha256": "36b649bea4219ac5ae7cc9d7b01800d893196440df1145ffaf580e3bc8659ccd",
+  "sourceConfigSha256": "3a8dafb65a5f274abaa36b583db0961788eeb08c8ad5f6768282c7752b9ec65f",
   "transformations": {
     "baseline": [
       "Parse pinned ONS Explore Local Statistics CSV",

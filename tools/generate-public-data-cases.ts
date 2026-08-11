@@ -11,7 +11,7 @@ const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const sha256 = (content: string | Buffer) => createHash("sha256").update(content).digest("hex");
 
 interface SourceConfig extends Omit<ExternalSourceProvenance, "schemaVersion" | "rawArtifacts"> {
-  schemaVersion: "claimtrace-external-source-config/2.0.0";
+  schemaVersion: "claimtrace-external-source-config/2.1.0";
   rawFiles: Record<SnapshotSide, string>;
 }
 
@@ -30,20 +30,22 @@ for (const caseId of caseIds) {
     continue;
   }
   const config = JSON.parse(configText) as SourceConfig;
-  if (config.schemaVersion !== "claimtrace-external-source-config/2.0.0") throw new Error(`${caseId}: unsupported source-config schema`);
+  if (config.schemaVersion !== "claimtrace-external-source-config/2.1.0") throw new Error(`${caseId}: unsupported source-config schema`);
   const rawArtifacts = await Promise.all(SIDES.map(async (side) => {
     const fileName = config.rawFiles[side];
     const text = await readFile(path.join(directory, fileName), "utf8");
     return { side, fileName, sha256: sha256(text), text };
   }));
   const provenance: ExternalSourceProvenance = {
-    schemaVersion: "claimtrace-external-source/2.0.0",
+    schemaVersion: "claimtrace-external-source/2.1.0",
     sourceType: config.sourceType,
     publisher: config.publisher,
     dataset: config.dataset,
     measure: config.measure,
     retrievedAt: config.retrievedAt,
     sourceLastUpdated: config.sourceLastUpdated,
+    sourceLastUpdatedBasis: config.sourceLastUpdatedBasis,
+    sourceLastUpdatedNotReportedReason: config.sourceLastUpdatedNotReportedReason,
     sourceUrls: config.sourceUrls,
     license: config.license,
     licenseUrl: config.licenseUrl,

@@ -72,6 +72,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .breadcrumb b { color: #25455a; font-size: 10px; letter-spacing: .14em; }
 .breadcrumb i { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
 .mobile-brand { display: none; }
+.topbar-context { min-width: 0; display: flex; align-items: center; gap: 9px; }
+.build-receipt { display: inline-flex; padding: 5px 9px; color: #526b77; background: #edf4f5; border: 1px solid #d4e2e5; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
 .topbar-actions { display: flex; align-items: center; gap: 9px; }
 .readonly-badge { display: inline-flex; margin-left: 12px; padding: 5px 10px; border: 1px solid #d9bd8d; border-radius: 999px; background: #fff9ed; color: #7f5a20; font-size: 11px; font-weight: 750; }
 .version-switch { min-height: 38px; padding: 0 13px; display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--line); border-radius: 8px; font-size: 13px; cursor: pointer; }
@@ -680,7 +682,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .workspace { width: 100%; margin-left: 0; padding-bottom: 62px; }
   .topbar { height: 60px; padding: 0 18px; }
   .mobile-brand { display: block; font-weight: 800; }
-  .breadcrumb { display: none; }
+  .breadcrumb, .build-receipt, .topbar-context .readonly-badge { display: none; }
   .topbar .button.ghost { display: none; }
   .content { padding: 28px 20px 60px; }
   .page-intro { display: block; }
