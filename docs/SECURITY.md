@@ -2,7 +2,7 @@
 
 ## Local data handling
 
-CSV files are decoded and processed in the browser. The application has no upload endpoint in this prototype. The full local workspace rejects each CSV above 10 MiB before reading its bytes, reducing accidental browser-memory exhaustion; this is a prototype boundary, not warehouse-scale streaming. Exporting creates local JSON or HTML files. Users should still avoid loading sensitive data into an untrusted hosted origin and should review generated packages before sharing them.
+CSV files are decoded and processed in the browser. The application has no upload endpoint in this prototype. The full local workspace rejects each CSV above 10 MiB before reading its bytes, reducing accidental browser-memory exhaustion; this is a prototype boundary, not warehouse-scale streaming. Exporting creates local JSON or HTML files. An AuditBundle JSON export may embed raw snapshot text or base64-encoded bytes for each snapshot up to the 500 KB self-contained-verification limit, together with hashes and bounded row-level evidence; it is not a hash-only export. Users should still avoid loading sensitive data into an untrusted hosted origin and should inspect every generated file before sharing it.
 
 ## Integrity guarantees and boundaries
 

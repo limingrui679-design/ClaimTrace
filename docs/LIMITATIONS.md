@@ -4,7 +4,7 @@
 
 - User project import is CSV only and limited to 10 MiB per file before browser-side reading. Excel, Parquet, SQL, OpenLineage, and warehouse adapters are not implemented. The bundled public cases have six narrow, source-specific acquisition/cleaning adapters; these are not a general API connector framework.
 - Browser-local processing is suitable for reviewable files, not warehouse-scale lineage.
-- Raw snapshots larger than 500 KB are not embedded in the AuditBundle; external files are then required for independent hash re-verification and the self-contained verifier reports that boundary.
+- Raw snapshots at or below 500 KB may be embedded in the AuditBundle as text or base64-encoded bytes so the package can be verified on its own. Larger raw snapshots are not embedded; external files are then required for independent hash re-verification and the self-contained verifier reports that boundary.
 - Source references are bounded at 200 per claim and changed-record exports at 500.
 - Four case packs remain deterministic synthetic stress fixtures with executable claims, decisions, expected audits, evidence packages, and one-click UI loading. Six additional packs use pinned official public data, but each remains a bounded descriptive audit example rather than an external effectiveness study or representative domain benchmark.
 - Review records are append-only in the current browser session and export, not a durable multi-user ledger.

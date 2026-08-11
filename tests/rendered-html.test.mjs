@@ -39,7 +39,9 @@ test("builds the ClaimTrace SPA shell and product bundle", async () => {
   assert.match(script, /Ten Executable Cases/);
   assert.match(script, /Six Public-Data Audits/i);
   assert.match(script, /U\.S\. Treasury Yield-Curve Period Audit/);
+  assert.match(script, /AuditBundle exports may embed up to 500 KB of raw data per snapshot/);
   assert.doesNotMatch(script, /adds 17 false negatives/);
+  assert.doesNotMatch(script, /Exports contain raw snapshot hashes, not upload activity/);
   assert.doesNotMatch(script, /baseline evidence snapshot is locked/i);
   assert.doesNotMatch(script, /Your site is taking shape/);
 });
