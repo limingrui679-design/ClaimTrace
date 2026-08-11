@@ -1,10 +1,26 @@
-import type { ExternalSourceProvenance, SnapshotSide } from "./types";
+import type { ExternalCleaningImplementation, ExternalSourceProvenance, ExternalSourceType, SnapshotSide } from "./types";
 import { parseCSV } from "./snapshot";
 
 export interface ExternalSnapshotRebuild {
   text: string | null;
   errors: string[];
   transformations: string[];
+}
+
+const CLEANING_IMPLEMENTATION_BY_SOURCE: Record<ExternalSourceType, ExternalCleaningImplementation> = {
+  WORLD_BANK_INDICATORS_API_V2: "world-bank-indicator-v1",
+  USDOT_NTD_SOCRATA_V1: "usdot-ntd-monthly-v1",
+  US_TREASURY_YIELD_CURVE_XML_V1: "treasury-yield-curve-v1",
+  CFPB_COMPLAINT_TRENDS_V1: "cfpb-complaint-trends-v1",
+  CDC_PLACES_SOCRATA_V1: "cdc-places-county-v1",
+  ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1: "ons-housing-affordability-v1",
+};
+
+export function externalCleaningBindingError(provenance: ExternalSourceProvenance) {
+  const expected = CLEANING_IMPLEMENTATION_BY_SOURCE[provenance.sourceType];
+  if (!expected) return `Unsupported external source type: ${String(provenance.sourceType)}`;
+  if (provenance.cleaning.implementation !== expected) return `External source type ${provenance.sourceType} must use cleaning implementation ${expected}`;
+  return null;
 }
 
 function csvCell(value: string) {
@@ -272,6 +288,8 @@ function cleanOns(provenance: ExternalSourceProvenance, side: SnapshotSide): Ext
 }
 
 export function rebuildExternalSnapshot(provenance: ExternalSourceProvenance, side: SnapshotSide): ExternalSnapshotRebuild {
+  const bindingError = externalCleaningBindingError(provenance);
+  if (bindingError) return { text: null, errors: [bindingError], transformations: [] };
   switch (provenance.cleaning.implementation) {
     case "world-bank-indicator-v1": return cleanWorldBank(provenance, side);
     case "usdot-ntd-monthly-v1": return cleanUsdot(provenance, side);

@@ -71,7 +71,7 @@ for (const definition of EXECUTABLE_CASES.filter((item) => item.dataOrigin === "
   });
 }
 
-test("external cleaners reject out-of-range integer parameters without throwing", async () => {
+test("external cleaners reject invalid parameters and source-type bindings without throwing", async () => {
   const worldBank = JSON.parse(await readFile(path.join(CASES, "world-bank-life-expectancy", "source-metadata.json"), "utf8"));
   worldBank.cleaning.parameters.decimalPlaces = 101;
   const worldBankResult = rebuildExternalSnapshot(worldBank, "baseline");
@@ -81,6 +81,12 @@ test("external cleaners reject out-of-range integer parameters without throwing"
   cfpb.cleaning.parameters.topIssues = 0;
   const cfpbResult = rebuildExternalSnapshot(cfpb, "baseline");
   assert.match(cfpbResult.errors.join("; "), /topIssues must be an integer from 1 to 1000/);
+
+  const mislabeled = structuredClone(worldBank);
+  mislabeled.sourceType = "US_TREASURY_YIELD_CURVE_XML_V1";
+  const mislabeledResult = rebuildExternalSnapshot(mislabeled, "baseline");
+  assert.equal(mislabeledResult.text, null);
+  assert.match(mislabeledResult.errors.join("; "), /must use cleaning implementation treasury-yield-curve-v1/);
 });
 
 test("AuditBundle verification isolates malformed upstream and external lineage structures", async () => {
@@ -96,6 +102,16 @@ test("AuditBundle verification isolates malformed upstream and external lineage 
   assert.equal(externalChecks[1].passed, true);
   assert.equal(externalChecks[2].passed, false);
   assert.match(externalChecks[2].errors.join("; "), /External-source structure is invalid/);
+
+  const mislabeledBundle = JSON.parse(await readFile(path.join(CASES, "world-bank-life-expectancy", "evidence-package.json"), "utf8"));
+  mislabeledBundle.externalSource.sourceType = "US_TREASURY_YIELD_CURVE_XML_V1";
+  mislabeledBundle.integrity.sectionHashes.provenance = await sha256Canonical(mislabeledBundle.externalSource);
+  const mislabeledPayload = Object.fromEntries(Object.entries(mislabeledBundle).filter(([key]) => key !== "integrity"));
+  mislabeledBundle.integrity.payloadHash = await sha256Canonical(mislabeledPayload);
+  const mislabeledVerification = await verifyEvidencePackage(mislabeledBundle);
+  const mislabeledCheck = mislabeledVerification.checks.find((check: { name: string }) => check.name === "external-source-lineage");
+  assert.equal(mislabeledCheck?.passed, false);
+  assert.match(mislabeledCheck?.errors.join("; ") ?? "", /must use cleaning implementation treasury-yield-curve-v1/);
 
   const upstreamBundle = JSON.parse(await readFile(path.join(CASES, "population-health", "evidence-package.json"), "utf8"));
   upstreamBundle.upstreamLineage.aggregations[0].filters = null;

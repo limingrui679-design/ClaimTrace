@@ -2,7 +2,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, rename, rmdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
+import { canonicalJson, externalCleaningBindingError, rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CASES = path.join(ROOT, "public", "cases");
@@ -11,8 +11,10 @@ const SIDES: SnapshotSide[] = ["baseline", "current"];
 interface SourceConfig {
   schemaVersion: string;
   retrievedAt: string;
+  sourceType: ExternalSourceProvenance["sourceType"];
   sourceUrls: Record<SnapshotSide, string>;
   rawFiles: Record<SnapshotSide, string>;
+  cleaning: ExternalSourceProvenance["cleaning"];
   [key: string]: unknown;
 }
 
@@ -547,6 +549,16 @@ async function replaceFiles(caseDirectory: string, files: Array<{ target: string
 function validateSourceDefinition(caseId: string, config: SourceConfig, provenance: ExternalSourceProvenance) {
   if (provenance.schemaVersion !== "claimtrace-external-source/2.0.0") throw new Error(`${caseId}: unsupported source-metadata schema`);
   if (!Array.isArray(provenance.rawArtifacts)) throw new Error(`${caseId}: source-metadata rawArtifacts must be an array`);
+  if (provenance.rawArtifacts.length !== SIDES.length || provenance.rawArtifacts.some((artifact) => !artifact || !SIDES.includes(artifact.side)) || new Set(provenance.rawArtifacts.map((artifact) => artifact.side)).size !== SIDES.length) {
+    throw new Error(`${caseId}: source-metadata must contain exactly one baseline and one current raw artifact`);
+  }
+  if (config.sourceType !== provenance.sourceType) throw new Error(`${caseId}: source type differs between source-config and source-metadata`);
+  if (!config.cleaning || typeof config.cleaning !== "object" || !provenance.cleaning || typeof provenance.cleaning !== "object" || canonicalJson(config.cleaning) !== canonicalJson(provenance.cleaning)) {
+    throw new Error(`${caseId}: cleaning definition differs between source-config and source-metadata`);
+  }
+  if (config.cleaning.scriptPath !== "tools/generate-public-data-cases.ts") throw new Error(`${caseId}: source cleaning is not bound to the controlled generator`);
+  const cleaningBindingError = externalCleaningBindingError(provenance);
+  if (cleaningBindingError) throw new Error(`${caseId}: ${cleaningBindingError}`);
   for (const side of SIDES) {
     const sourceUrl = config.sourceUrls?.[side];
     const rawFile = config.rawFiles?.[side];

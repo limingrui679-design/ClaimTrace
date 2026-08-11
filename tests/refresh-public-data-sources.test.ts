@@ -36,8 +36,19 @@ async function makeFixture() {
   const casesDirectory = await mkdtemp(path.join(os.tmpdir(), "claimtrace-refresh-test-"));
   const directory = path.join(casesDirectory, "public-case");
   await mkdir(directory);
+  const cleaning = {
+    implementation: "world-bank-indicator-v1",
+    scriptPath: "tools/generate-public-data-cases.ts",
+    parameters: {
+      baselineYear: "2019",
+      currentYear: "2024",
+      selectedCountryCodes: ["USA"],
+      decimalPlaces: 3,
+    },
+  };
   const config = {
     schemaVersion: "claimtrace-external-source-config/2.0.0",
+    sourceType: "WORLD_BANK_INDICATORS_API_V2",
     retrievedAt: "2026-08-10T00:00:00.000Z",
     sourceUrls: {
       baseline: "https://example.test/baseline",
@@ -47,13 +58,14 @@ async function makeFixture() {
       baseline: "raw-baseline.json",
       current: "raw-current.json",
     },
+    cleaning,
     retainedField: "preserved",
   };
   const oldBaseline = worldBankResponse("2019", 78.8);
   const oldCurrent = worldBankResponse("2024", 78.9);
   const provenance = {
     schemaVersion: "claimtrace-external-source/2.0.0",
-    sourceType: "WORLD_BANK_INDICATORS_API_V2",
+    sourceType: config.sourceType,
     publisher: "World Bank",
     dataset: "World Development Indicators",
     measure: { id: "SP.DYN.LE00.IN", name: "Life expectancy at birth, total (years)" },
@@ -64,16 +76,7 @@ async function makeFixture() {
     licenseUrl: "https://example.test/license",
     attribution: "World Bank test fixture",
     limitations: ["Test fixture only."],
-    cleaning: {
-      implementation: "world-bank-indicator-v1",
-      scriptPath: "tools/generate-public-data-cases.ts",
-      parameters: {
-        baselineYear: "2019",
-        currentYear: "2024",
-        selectedCountryCodes: ["USA"],
-        decimalPlaces: 3,
-      },
-    },
+    cleaning: config.cleaning,
     rawArtifacts: [
       { side: "baseline", fileName: config.rawFiles.baseline, sha256: "fixture-baseline", text: oldBaseline },
       { side: "current", fileName: config.rawFiles.current, sha256: "fixture-current", text: oldCurrent },
@@ -211,6 +214,58 @@ test("source refresh rejects malformed nonempty content before replacing any cas
     assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects malformed or inconsistent source metadata before downloading", async () => {
+  const fixture = await makeFixture();
+  try {
+    const metadataPath = path.join(fixture.directory, "source-metadata.json");
+    const metadata = JSON.parse(await readFile(metadataPath, "utf8"));
+    metadata.rawArtifacts.push({ side: "other", fileName: "source-metadata.json", sha256: "not-governed", text: "not governed" });
+    await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(fixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /source-metadata must contain exactly one baseline and one current raw artifact/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+
+  const mismatchedFixture = await makeFixture();
+  try {
+    const metadataPath = path.join(mismatchedFixture.directory, "source-metadata.json");
+    const metadata = JSON.parse(await readFile(metadataPath, "utf8"));
+    metadata.cleaning.parameters.decimalPlaces += 1;
+    await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: mismatchedFixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(mismatchedFixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /cleaning definition differs between source-config and source-metadata/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(path.join(mismatchedFixture.directory, "raw-baseline.json"), "utf8"), mismatchedFixture.oldBaseline);
+    assert.equal(await readFile(path.join(mismatchedFixture.directory, "raw-current.json"), "utf8"), mismatchedFixture.oldCurrent);
+  } finally {
+    await rm(mismatchedFixture.casesDirectory, { recursive: true, force: true });
   }
 });
 

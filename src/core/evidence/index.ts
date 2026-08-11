@@ -21,7 +21,7 @@ import { completeEvidence, recomputeClaim } from "../validation";
 import { evaluateDecision } from "../decision";
 import { applyReviewToClaim, applyReviewToDecision, enforceDecisionReleaseDependencies, verifyReviewChain } from "../governance";
 import { canonicalJson, jsonClone, sha256Canonical } from "../integrity";
-import { rebuildExternalSnapshot } from "../external-source";
+import { externalCleaningBindingError, rebuildExternalSnapshot } from "../external-source";
 
 const MAX_EXPORTED_DIFFS = 500;
 const MAX_RAW_BYTES_PER_SNAPSHOT = 500_000;
@@ -472,6 +472,11 @@ async function verifyExternalSourceLineage(dataset: DatasetVersion, provenance: 
   for (const artifact of provenance.rawArtifacts) {
     if (!artifact.fileName.trim()) errors.push(`${artifact.side}: external raw-response file name is missing`);
     if (await sha256Text(artifact.text) !== artifact.sha256) errors.push(`${artifact.side}: external raw-response SHA-256 mismatch`);
+  }
+  const cleaningBindingError = externalCleaningBindingError(provenance);
+  if (cleaningBindingError) {
+    errors.push(cleaningBindingError);
+    return { applicable: true, valid: false, errors };
   }
   const baseline = rebuildExternalSnapshot(provenance, "baseline");
   const current = rebuildExternalSnapshot(provenance, "current");
