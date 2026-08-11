@@ -24,7 +24,7 @@ import { canonicalJson, jsonClone, sha256Canonical } from "../integrity";
 import { externalCleaningBindingError, rebuildExternalSnapshot } from "../external-source";
 
 const MAX_EXPORTED_DIFFS = 500;
-const MAX_RAW_BYTES_PER_SNAPSHOT = 500_000;
+export const MAX_RAW_BYTES_PER_SNAPSHOT = 500_000;
 const PREVIEW_ROWS = 20;
 
 function snapshotMeta(dataset: DatasetVersion, side: SnapshotSide) {

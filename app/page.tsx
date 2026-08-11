@@ -57,7 +57,7 @@ import {
 } from "./claimtrace-core";
 import { CASE_CATALOG, EXECUTABLE_CASES, POPULATION_HEALTH_CASE, runExecutableCase } from "../src/cases";
 import { DEMO_DATASET } from "./demo-case.generated";
-import { assertLocalCsvFileSize } from "./import-policy";
+import { assertLocalCsvFileSize, assertSelfContainedExportSizes } from "./import-policy";
 
 type View = "overview" | "data" | "claims" | "decision" | "review" | "report";
 
@@ -494,6 +494,10 @@ export default function Home() {
   }
 
   async function prepareVerifiedBundle(generatedAt: string) {
+    assertSelfContainedExportSizes([
+      { label: "Baseline", size: dataset.baselineMeta.byteSize },
+      ...(dataset.currentMeta ? [{ label: "Current", size: dataset.currentMeta.byteSize }] : []),
+    ]);
     const verifiedDataset = await verifyDataset(dataset, generatedAt);
     const verifiedClaims = claims.map((claim) => recomputeClaim(claim, verifiedDataset, generatedAt));
     const bundle = await createEvidencePackage(verifiedDataset, verifiedClaims, generatedAt, { decisionSpecs, reviews: reviewRecords, previousBundleHash: lastExportedBundleHash });
@@ -624,7 +628,7 @@ export default function Home() {
         <label className="field-label">Project name<input value={projectName} onChange={(event) => setProjectName(event.target.value)} placeholder="Example: 2026 Customer Retention Analysis" /></label>
         <div className="file-grid"><label className={`file-drop ${baselinePreview ? "ready" : ""}`}><input type="file" accept=".csv,text/csv" onChange={selectBaseline} /><span className="file-step">01</span><b>Baseline CSV</b><small>{baselineFile ? baselineFile.name : "Required · establish initial evidence"}</small></label><label className={`file-drop ${currentPreview ? "ready" : ""}`}><input type="file" accept=".csv,text/csv" onChange={selectCurrent} /><span className="file-step">02</span><b>Current CSV</b><small>{currentFile ? currentFile.name : "Optional · inspect version changes"}</small></label></div>
         {baselinePreview ? <div className="key-picker"><label className="field-label">Unique primary key (required)<select value={primaryKey} onChange={(event) => setPrimaryKey(event.target.value)}><option value="">Select explicitly; no automatic guessing</option>{keyCandidates.map((column) => <option key={column} value={column}>{column}</option>)}</select></label><p>{baselinePreview.rows.length} rows · {keyCandidates.length} candidate unique fields · SHA-256 {baselinePreview.meta.sha256.slice(0, 12)}…</p></div> : null}
-        <div className="privacy-note"><span>LOCK</span><p><b>Local analysis</b><br />CSV files stay in this browser, are limited to 10 MiB each, and are not uploaded by ClaimTrace. AuditBundle exports may embed up to 500 KB of raw data per snapshot plus hashes for self-contained verification; inspect every export before sharing.</p></div>{importError ? <div className="form-error" role="alert">{importError}</div> : null}<div className="modal-actions"><button type="button" className="button ghost" onClick={() => { setShowImport(false); resetImport(); }}>Cancel</button><button type="submit" className="button primary">Validate key and create</button></div>
+        <div className="privacy-note"><span>LOCK</span><p><b>Local analysis</b><br />CSV files stay in this browser, are limited to 10 MiB each, and are not uploaded by ClaimTrace. AuditBundle export embeds raw data up to 500 KB per snapshot. Verified AuditBundle and HTML report generation both require snapshots within that limit; larger files can still be analyzed, but detached verification is not implemented. Inspect every export before sharing.</p></div>{importError ? <div className="form-error" role="alert">{importError}</div> : null}<div className="modal-actions"><button type="button" className="button ghost" onClick={() => { setShowImport(false); resetImport(); }}>Cancel</button><button type="submit" className="button primary">Validate key and create</button></div>
       </form></section></div> : null}
 
       {!READ_ONLY_DEMO && showAddClaim ? <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setShowAddClaim(false); }}><section className="modal compact" role="dialog" aria-modal="true" aria-labelledby="claim-title"><button className="modal-close" onClick={() => setShowAddClaim(false)} aria-label="Close">×</button><span className="eyebrow accent">TESTABLE CLAIM</span><h2 id="claim-title">Add a Testable Claim</h2><p>Bind the claim to a field, aggregation rule, and threshold. Both versions will be recomputed from source records.</p><form onSubmit={addClaim}>

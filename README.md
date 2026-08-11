@@ -49,7 +49,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. CSV input supports UTF-8, UTF-8 with BOM, UTF-16LE with BOM, and UTF-16BE with BOM. The local browser workspace rejects files above 10 MiB before reading their bytes. ClaimTrace does not upload those files, but an exported AuditBundle may embed up to 500 KB of raw data per snapshot, plus hashes and bounded evidence, for self-contained verification; inspect exports before sharing them.
+Open the local URL printed by Vite. CSV input supports UTF-8, UTF-8 with BOM, UTF-16LE with BOM, and UTF-16BE with BOM. The local browser workspace rejects files above 10 MiB before reading their bytes. ClaimTrace does not upload those files. An AuditBundle export embeds raw data up to 500 KB per snapshot. Verified AuditBundle and HTML report generation both require snapshots within that limit; larger files can still be analyzed, but detached raw-file verification and verified export are not implemented. Inspect exports before sharing them.
 
 Full verification:
 

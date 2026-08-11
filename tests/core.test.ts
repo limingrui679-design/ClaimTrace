@@ -526,11 +526,13 @@ test("51 fails evidence-package verification after raw snapshot tampering", asyn
 });
 
 test("52 bounds large evidence exports instead of copying every record", async () => {
-  const baseline = Array.from({ length: 700 }, (_, index) => ({ id: `R-${index}`, score: index }));
+  const baseline = Array.from({ length: 20000 }, (_, index) => ({ id: `R-${index}`, score: index }));
   const current = baseline.map((row) => ({ ...row, score: Number(row.score) + 1 }));
   const dataset = makeDataset(baseline, current);
-  const claim = recomputeClaim(makeClaim({ type: "threshold", field: "score", aggregation: "average", operator: ">=", threshold: 1 }), dataset, RUN_AT);
+  const startedAt = performance.now();
+  const claim = recomputeClaim(makeClaim({ type: "stability", field: "score", aggregation: "average", supportTolerance: 5 }), dataset, RUN_AT);
   const pkg = await createEvidencePackage(dataset, [claim], RUN_AT);
+  assert.ok(performance.now() - startedAt < 10000, "20,000-row evidence selection should remain within the browser-scale regression budget");
   assert.equal(pkg.diffs.length, 500);
   assert.equal(pkg.diffSummary.truncated, true);
   assert.equal(claim.sourceRefs.length, 200);

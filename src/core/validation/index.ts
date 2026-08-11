@@ -41,25 +41,35 @@ function stableScore(value: string) {
   return hash >>> 0;
 }
 
-function boundaryScore(dataset: DatasetVersion, side: SnapshotSide, rule: Rule, row: Record<string, string | number>) {
-  const value = valueToNumber(row[rule.field]);
-  if (value === null) return Number.POSITIVE_INFINITY;
-  if (rule.type === "threshold") return Math.abs(value - rule.threshold);
+function boundaryScorer(dataset: DatasetVersion, side: SnapshotSide, rule: Rule) {
   if (rule.type === "stability") {
     const baselineMetric = aggregate(rowsForRule(dataset.baselineRows, rule), rule.field, rule.aggregation);
-    if (baselineMetric === null) return Number.POSITIVE_INFINITY;
-    if (side === "baseline" || baselineMetric === 0) return Math.abs(value - baselineMetric);
+    if (baselineMetric === null) return () => Number.POSITIVE_INFINITY;
+    if (side === "baseline" || baselineMetric === 0) return (row: Record<string, string | number>) => {
+      const value = valueToNumber(row[rule.field]);
+      return value === null ? Number.POSITIVE_INFINITY : Math.abs(value - baselineMetric);
+    };
     const scale = rule.supportTolerance / 100;
     const lower = baselineMetric * (1 - scale);
     const upper = baselineMetric * (1 + scale);
-    return Math.min(Math.abs(value - lower), Math.abs(value - upper));
+    return (row: Record<string, string | number>) => {
+      const value = valueToNumber(row[rule.field]);
+      return value === null ? Number.POSITIVE_INFINITY : Math.min(Math.abs(value - lower), Math.abs(value - upper));
+    };
   }
-  const ranked = rankGroups(snapshotRows(dataset, side), rule);
-  const group = String(row[rule.groupField] ?? "");
-  const groupIndex = ranked?.groups.findIndex((item) => item.group === group) ?? -1;
-  const groupValue = ranked?.groups.find((item) => item.group === group)?.value;
-  if (groupIndex < 0 || groupValue === undefined) return Number.POSITIVE_INFINITY;
-  return groupIndex * 1_000_000_000 + Math.abs(value - groupValue);
+  if (rule.type === "rank") {
+    const groups = new Map((rankGroups(snapshotRows(dataset, side), rule)?.groups ?? []).map((item, index) => [item.group, { index, value: item.value }]));
+    return (row: Record<string, string | number>) => {
+      const value = valueToNumber(row[rule.field]);
+      const group = groups.get(String(row[rule.groupField] ?? ""));
+      if (value === null || !group) return Number.POSITIVE_INFINITY;
+      return group.index * 1_000_000_000 + Math.abs(value - group.value);
+    };
+  }
+  return (row: Record<string, string | number>) => {
+    const value = valueToNumber(row[rule.field]);
+    return value === null ? Number.POSITIVE_INFINITY : Math.abs(value - rule.threshold);
+  };
 }
 
 function candidateReferences(dataset: DatasetVersion, side: SnapshotSide, rule: Rule) {
@@ -71,6 +81,7 @@ function candidateReferences(dataset: DatasetVersion, side: SnapshotSide, rule: 
   if (rule.type === "rank") fields.push(rule.groupField);
   const uniqueFields = [...new Set(fields)];
   const changedKeys = new Set(diffRowsByKey(dataset).filter((diff) => diff.kind !== "unchanged").map((diff) => diff.key));
+  const scoreBoundary = boundaryScorer(dataset, side, rule);
   return rows
     .map((row, index) => ({ row, index }))
     .filter(({ row }) => rowsForRule([row], rule).length > 0)
@@ -83,7 +94,7 @@ function candidateReferences(dataset: DatasetVersion, side: SnapshotSide, rule: 
       lineNumber: lineNumbers[index] ?? index + 2,
       fields: uniqueFields,
       changed: changedKeys.has(String(row[dataset.primaryKey])),
-      boundaryScore: boundaryScore(dataset, side, rule, row),
+      boundaryScore: scoreBoundary(row),
     }))
     .sort((left, right) => left.lineNumber - right.lineNumber);
 }
@@ -192,9 +203,11 @@ function sourceReferences(dataset: DatasetVersion, rule: Rule, claimId: string):
   const quotas = sideQuotas(baseline.length, current.length);
   const pairLimit = Math.max(0, Math.min(quotas.baseline, quotas.current, pairCandidates.length));
   const boundaryPairLimit = Math.min(20, Math.floor(Math.min(quotas.baseline, quotas.current) * 0.2), pairLimit);
+  const baselineBoundaryScores = new Map(baseline.map((item) => [item.keyValue, item.boundaryScore]));
+  const currentBoundaryScores = new Map(current.map((item) => [item.keyValue, item.boundaryScore]));
   const pairBoundaryScore = (key: string) => {
-    const baselineScore = baseline.find((item) => item.keyValue === key)?.boundaryScore ?? Number.POSITIVE_INFINITY;
-    const currentScore = current.find((item) => item.keyValue === key)?.boundaryScore ?? Number.POSITIVE_INFINITY;
+    const baselineScore = baselineBoundaryScores.get(key) ?? Number.POSITIVE_INFINITY;
+    const currentScore = currentBoundaryScores.get(key) ?? Number.POSITIVE_INFINITY;
     return Math.min(baselineScore, currentScore);
   };
   const boundaryPairs = [...pairCandidates]
