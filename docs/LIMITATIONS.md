@@ -2,7 +2,7 @@
 
 ## Implemented boundaries
 
-- User project import is CSV only. Excel, Parquet, SQL, OpenLineage, and warehouse adapters are not implemented. The bundled public cases have six narrow, source-specific acquisition/cleaning adapters; these are not a general API connector framework.
+- User project import is CSV only and limited to 10 MiB per file before browser-side reading. Excel, Parquet, SQL, OpenLineage, and warehouse adapters are not implemented. The bundled public cases have six narrow, source-specific acquisition/cleaning adapters; these are not a general API connector framework.
 - Browser-local processing is suitable for reviewable files, not warehouse-scale lineage.
 - Raw snapshots larger than 500 KB are not embedded in the AuditBundle; external files are then required for independent hash re-verification and the self-contained verifier reports that boundary.
 - Source references are bounded at 200 per claim and changed-record exports at 500.

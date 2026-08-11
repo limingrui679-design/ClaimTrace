@@ -49,7 +49,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. CSV input supports UTF-8, UTF-8 with BOM, UTF-16LE with BOM, and UTF-16BE with BOM.
+Open the local URL printed by Vite. CSV input supports UTF-8, UTF-8 with BOM, UTF-16LE with BOM, and UTF-16BE with BOM. The local browser workspace rejects files above 10 MiB before reading their bytes.
 
 Full verification:
 
@@ -60,7 +60,7 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 143 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 144 unit/integration tests, one real-Chromium read-only acceptance test, and coverage thresholds.
 
 ## Reproducible cases
 
@@ -100,7 +100,7 @@ Every case includes executable specifications, two snapshots, expected results, 
 
 ## Evaluation and verification status
 
-- **144 / 144 automated tests** — 143 unit/integration tests plus 1 real-Chromium read-only acceptance test
+- **145 / 145 automated tests** — 144 unit/integration tests plus 1 real-Chromium read-only acceptance test
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
 - **97.22% statement/line coverage, 78.68% branch coverage, 99.34% function coverage** for `src/core`

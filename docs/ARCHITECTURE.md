@@ -44,4 +44,4 @@ The application shell is a stable Vite + React SPA. The public build can set `VI
 
 ## Scale boundary
 
-The browser prototype exports at most 500 changed-record entries, 200 source references per claim, 20 preview rows per snapshot, and 500 KB of raw text per embedded snapshot. At the reference boundary, baseline/current quotas, paired changes, rule-specific boundary records, and fixed-seed samples are recorded explicitly. This is an explicit prototype boundary, not a warehouse-scale claim.
+The browser prototype rejects local CSV files above 10 MiB before reading, and exports at most 500 changed-record entries, 200 source references per claim, 20 preview rows per snapshot, and 500 KB of raw text per embedded snapshot. At the reference boundary, baseline/current quotas, paired changes, rule-specific boundary records, and fixed-seed samples are recorded explicitly. This is an explicit prototype boundary, not a warehouse-scale claim.

@@ -9,7 +9,7 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Check | Result |
 |---|---|
 | `npm run ci` | Passed |
-| Unit and integration tests | 143/143 passed |
+| Unit and integration tests | 144/144 passed |
 | Real-Chromium read-only acceptance test | 1/1 passed |
 | Executable cases loaded and run in Chromium | 10/10 passed |
 | Controlled benchmark | 64/64 exact labels |
@@ -24,6 +24,7 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | `npm audit` | 0 known vulnerabilities |
 | Repository English-only artifact test | Passed |
 | Read-only UI mutation-control count | 0 |
+| Local CSV pre-read size boundary | 10 MiB per file |
 
 ### Public-data coverage
 
