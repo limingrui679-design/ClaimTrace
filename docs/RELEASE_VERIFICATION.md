@@ -1,8 +1,8 @@
 # Release verification
 
-## ClaimTrace 0.10.1 — 2026-08-11
+## ClaimTrace 0.10.2 — 2026-08-11
 
-This record describes a local release-candidate verification on Darwin arm64 with Node.js 22.20.0 and npm 10.9.3. It is a reproducibility receipt, not evidence of a hosted deployment, external adoption, or real-world impact.
+This record describes a local release-candidate verification on Darwin arm64 with Node.js 22.20.0 and npm 10.9.3. It is a reproducibility receipt, not evidence of external adoption or real-world impact.
 
 ### Executed checks
 
@@ -10,7 +10,7 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 |---|---|
 | `npm run ci` | Passed |
 | Unit and integration tests | 155/155 passed |
-| Built-artifact checks | 2/2 passed |
+| Built-artifact and release-package checks | 3/3 passed |
 | Real-Chromium read-only acceptance test | 1/1 passed |
 | Real-Chromium writable workflow and race test | 1/1 passed |
 | Dataset-intent cross-flow matrix | case→import, import read→case, revision→case, case→demo passed |
@@ -23,11 +23,12 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Deterministic property trials | 512 across four seeded properties |
 | Core statement and line coverage | 96.99% |
 | Core function coverage | 99.37% |
-| Core branch coverage | 78.74% |
+| Core branch coverage | 78.75% |
 | Executable case regeneration and AuditBundle verification | 10/10 passed |
 | Public-source raw-content and cleaning-parameter tamper tests | 6/6 passed |
 | Public-source update-date basis | 6/6 declare publisher-reported or not-separately-reported; World Bank and Treasury bind both response headers, USDOT binds official Socrata metadata, and all three missing dates carry an explicit reason |
 | Publisher-date adversarial checks | Invalid ISO dates, two-response disagreement, wrong Socrata dataset identity, invalid `rowsUpdatedAt`, and fully rehashed date tampering rejected |
+| Publisher-date diagnostic isolation | Each invalid or mismatched declared date produces one root-cause diagnostic, no duplicate message, and no derivative baseline/current CSV-rebuild failure |
 | Current evidence contracts | AuditBundle `2.5.0`; external-source metadata `2.2.0` |
 | Source-refresh consistency, locking, recovery, and failure-path tests | 28/28 passed, including four-file Socrata commit and rollback |
 | `npm audit --omit=dev` | 0 known vulnerabilities |
@@ -37,6 +38,8 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Local CSV pre-read size boundary | 10 MiB per file |
 | Strict CSV and canonical-column adversarial regressions | Passed |
 | Passed checks carrying diagnostic errors | 0 |
+| Release checksum portability | SHA-256 sidecar records the ZIP base name only; no local absolute path |
+| Sites build package | Project metadata, static Worker entry, and read-only assets packaged together; public deployment requires a separate receipt check |
 
 ### Public-data coverage
 
@@ -48,5 +51,5 @@ Normal `npm run cases:generate` execution is offline and deterministic. `npm run
 
 - Public observations are not represented as causal effects, business impact, policy outcomes, investment performance, or clinical conclusions.
 - Decision thresholds and numerical option inputs are author-defined demonstration assumptions unless their provenance explicitly names another source.
-- The public interface is a local read-only portfolio build; this verification does not claim a public deployment or authenticated enterprise workflow.
+- The public interface is compiled as a read-only portfolio build. Hosting metadata does not establish a deployment; any public URL must show this package version and exact release-commit prefix before it is cited. The interface is not an authenticated enterprise workflow.
 - The controlled benchmark is a committed regression set, not an external accuracy study.

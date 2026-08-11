@@ -1,6 +1,6 @@
 {
   "name": "claimtrace",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Local-first auditing for versioned analytical claims, evidence, decisions, and review records.",
   "private": true,
   "license": "MIT",
@@ -17,6 +17,7 @@
     "build": "vite build",
     "start": "vite preview",
     "preview": "vite preview",
+    "release:checksum": "node tools/write-release-checksum.mjs",
     "demo:generate": "node tools/generate-demo-data.mjs",
     "demo:capture": "node tools/capture-demo.mjs",
     "cases:refresh-sources": "node --import tsx tools/refresh-public-data-sources.ts",

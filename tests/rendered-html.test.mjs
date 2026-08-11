@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
+import { writeReleaseChecksum } from "../tools/write-release-checksum.mjs";
 
 async function builtProduct() {
   const dist = new URL("../dist/", import.meta.url);
@@ -73,4 +75,23 @@ test("packages a Sites-compatible static Worker entry", async () => {
   assert.equal(workerConfig.main, "index.js");
   assert.equal(workerConfig.no_bundle, true);
   assert.equal(workerConfig.assets.directory, "../client");
+  assert.deepEqual(
+    JSON.parse(await readFile(new URL("../dist/.openai/hosting.json", import.meta.url), "utf8")),
+    JSON.parse(await readFile(new URL("../.openai/hosting.json", import.meta.url), "utf8")),
+  );
+});
+
+test("writes a portable release checksum sidecar without a local path", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "claimtrace-checksum-"));
+  const archivePath = join(directory, "ClaimTrace Test.zip");
+  try {
+    await writeFile(archivePath, "portable checksum fixture", "utf8");
+    const result = await writeReleaseChecksum(archivePath);
+    const sidecar = await readFile(result.sidecarPath, "utf8");
+    assert.equal(sidecar, `${result.digest}  ClaimTrace Test.zip\n`);
+    assert.equal(result.archiveName, "ClaimTrace Test.zip");
+    assert.doesNotMatch(sidecar, new RegExp(directory.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });

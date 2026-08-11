@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
+import { externalSourceUpdateBindingErrors, rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CASES = path.join(ROOT, "public", "cases");
@@ -69,6 +69,8 @@ for (const caseId of caseIds) {
     cleaning: config.cleaning,
     rawArtifacts,
   };
+  const sourceUpdateErrors = externalSourceUpdateBindingErrors(provenance);
+  if (sourceUpdateErrors.length) throw new Error(`${caseId}: ${sourceUpdateErrors.join("; ")}`);
   const outputs: Record<string, { sha256: string; bytes: number; rows: number }> = {};
   const transformations: Record<SnapshotSide, string[]> = { baseline: [], current: [] };
   for (const side of SIDES) {

@@ -2,7 +2,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, rename, rmdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { canonicalJson, externalCleaningBindingError, extractPublisherSourceLastUpdated, rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
+import { canonicalJson, externalCleaningBindingError, externalSourceUpdateBindingErrors, extractPublisherSourceLastUpdated, rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CASES = path.join(ROOT, "public", "cases");
@@ -585,6 +585,8 @@ function validateSourceDefinition(caseId: string, config: SourceConfig, provenan
     throw new Error(`${caseId}: cleaning definition differs between source-config and source-metadata`);
   }
   if (config.cleaning.scriptPath !== "tools/generate-public-data-cases.ts") throw new Error(`${caseId}: source cleaning is not bound to the controlled generator`);
+  const sourceUpdateErrors = externalSourceUpdateBindingErrors(provenance);
+  if (sourceUpdateErrors.length) throw new Error(`${caseId}: ${sourceUpdateErrors.join("; ")}`);
   const cleaningBindingError = externalCleaningBindingError(provenance);
   if (cleaningBindingError) throw new Error(`${caseId}: ${cleaningBindingError}`);
   for (const side of SIDES) {

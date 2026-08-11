@@ -6,7 +6,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { computeEvidenceCompleteness, sha256Canonical, verifyEvidencePackage } from "../app/claimtrace-core";
 import { EXECUTABLE_CASES, runExecutableCase } from "../src/cases";
-import { rebuildExternalSnapshot } from "../src/core";
+import { externalSourceUpdateBindingErrors, rebuildExternalSnapshot } from "../src/core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CASES = path.join(ROOT, "public", "cases");
@@ -82,7 +82,11 @@ test("publisher-reported update dates remain bound after a full bundle rehash", 
       copy.integrity.payloadHash = await sha256Canonical(payload);
       const verification = await verifyEvidencePackage(copy);
       assert.equal(verification.valid, false, `${caseId}:${sourceLastUpdated}`);
-      assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
+      const lineage = verification.checks.find((check: { name: string }) => check.name === "external-source-lineage");
+      assert.equal(lineage?.passed, false);
+      assert.equal(new Set(lineage?.errors).size, lineage?.errors.length, `${caseId}:${sourceLastUpdated}: duplicate diagnostics`);
+      assert.doesNotMatch(lineage?.errors.join("; ") ?? "", /CSV cannot be rebuilt|cleaner returned no output/, `${caseId}:${sourceLastUpdated}: misleading rebuild diagnostic`);
+      assert.equal(lineage?.errors.length, 1, `${caseId}:${sourceLastUpdated}: expected one root-cause diagnostic`);
     }
   }
 
@@ -97,7 +101,10 @@ test("publisher-reported update dates remain bound after a full bundle rehash", 
     copy.integrity.payloadHash = await sha256Canonical(payload);
     const verification = await verifyEvidencePackage(copy);
     assert.equal(verification.valid, false, replacement);
-    assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
+    const lineage = verification.checks.find((check: { name: string }) => check.name === "external-source-lineage");
+    assert.equal(lineage?.passed, false);
+    assert.equal(new Set(lineage?.errors).size, lineage?.errors.length, `${replacement}: duplicate diagnostics`);
+    assert.doesNotMatch(lineage?.errors.join("; ") ?? "", /CSV cannot be rebuilt|cleaner returned no output/, `${replacement}: misleading rebuild diagnostic`);
   }
 });
 
@@ -132,8 +139,11 @@ test("external cleaners reject invalid parameters and source-type bindings witho
 
   const unexplainedDateGap = JSON.parse(await readFile(path.join(CASES, "cfpb-credit-card-complaints", "source-metadata.json"), "utf8"));
   delete unexplainedDateGap.sourceLastUpdatedNotReportedReason;
+  const unexplainedDateGapErrors = externalSourceUpdateBindingErrors(unexplainedDateGap);
+  assert.deepEqual(unexplainedDateGapErrors, ["A missing source last-updated date requires a not-reported reason"]);
   const unexplainedDateGapResult = rebuildExternalSnapshot(unexplainedDateGap, "baseline");
-  assert.match(unexplainedDateGapResult.errors.join("; "), /requires a not-reported reason/);
+  assert.ok(unexplainedDateGapResult.text);
+  assert.deepEqual(unexplainedDateGapResult.errors, []);
 
   const mislabeled = structuredClone(worldBank);
   mislabeled.sourceType = "US_TREASURY_YIELD_CURVE_XML_V1";

@@ -116,12 +116,13 @@ export function extractPublisherSourceLastUpdated(provenance: ExternalSourceProv
 export function externalSourceUpdateBindingErrors(provenance: ExternalSourceProvenance) {
   const errors: string[] = [];
   if (provenance.sourceLastUpdated) {
+    const declaredDateIsValid = isIsoCalendarDate(provenance.sourceLastUpdated);
     if (provenance.sourceLastUpdatedBasis !== "PUBLISHER_REPORTED") errors.push("A source last-updated date must be labeled as publisher reported");
-    if (!isIsoCalendarDate(provenance.sourceLastUpdated)) errors.push("A publisher-reported source update date must be a valid ISO calendar date");
+    if (!declaredDateIsValid) errors.push("A publisher-reported source update date must be a valid ISO calendar date");
     if (provenance.sourceLastUpdatedNotReportedReason?.trim()) errors.push("A reported source update date cannot also carry a not-reported reason");
     const extracted = extractPublisherSourceLastUpdated(provenance);
     errors.push(...extracted.errors);
-    if (extracted.value && extracted.value !== provenance.sourceLastUpdated) errors.push("Publisher update evidence does not match the declared source update date");
+    if (declaredDateIsValid && extracted.value && extracted.value !== provenance.sourceLastUpdated) errors.push("Publisher update evidence does not match the declared source update date");
   } else {
     if (provenance.sourceLastUpdatedBasis !== "NOT_SEPARATELY_REPORTED") errors.push("A missing source last-updated date must be labeled as not separately reported");
     if (!provenance.sourceLastUpdatedNotReportedReason?.trim()) errors.push("A missing source last-updated date requires a not-reported reason");
@@ -134,8 +135,6 @@ export function externalCleaningBindingError(provenance: ExternalSourceProvenanc
   const expected = CLEANING_IMPLEMENTATION_BY_SOURCE[provenance.sourceType];
   if (!expected) return `Unsupported external source type: ${String(provenance.sourceType)}`;
   if (provenance.cleaning.implementation !== expected) return `External source type ${provenance.sourceType} must use cleaning implementation ${expected}`;
-  const sourceUpdateError = externalSourceUpdateBindingErrors(provenance)[0];
-  if (sourceUpdateError) return sourceUpdateError;
   return null;
 }
 

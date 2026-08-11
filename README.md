@@ -60,7 +60,7 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 155 unit/integration tests, 2 built-artifact checks, separate read-only and writable real-Chromium acceptance flows, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 155 unit/integration tests, 3 built-artifact and release-package checks, separate read-only and writable real-Chromium acceptance flows, and coverage thresholds.
 
 ## Reproducible cases
 
@@ -100,17 +100,17 @@ Every case includes executable specifications, two snapshots, expected results, 
 
 ## Evaluation and verification status
 
-- **159 / 159 automated checks** — 155 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows
+- **160 / 160 automated checks** — 155 unit/integration tests, 3 built-artifact and release-package checks, and 2 real-Chromium flows
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
-- **96.99% statement/line coverage, 78.74% branch coverage, 99.37% function coverage** for `src/core`
+- **96.99% statement/line coverage, 78.75% branch coverage, 99.37% function coverage** for `src/core`
 - **10 / 10 case AuditBundles regenerated and independently verified**
 - **0 known production dependency vulnerabilities**
 - **0 known full development-toolchain vulnerabilities**
 
 The benchmark labels are stored separately from the execution logic in [`benchmarks/labels.json`](benchmarks/labels.json). The deliberately weak line/scalar, metric-only, and keyed-diff baselines score 27/64, 35/64, and 24/64 respectively. These results establish regression behavior on committed boundaries only—not production accuracy, external validity, user impact, or superiority to mature audit platforms. See [`docs/EVALUATION.md`](docs/EVALUATION.md).
 
-The exact 0.10.1 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
+The exact 0.10.2 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
 
 ## Architecture
 

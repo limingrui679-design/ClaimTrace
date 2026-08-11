@@ -4,10 +4,10 @@ ClaimTrace is a locally runnable, read-only-capable portfolio prototype. This fi
 
 ## Current evidence boundary
 
-- Source release: package `0.10.1`; the release tag and attached ZIP must resolve to the same commit before they are cited.
+- Source release: package `0.10.2`; the release tag and attached ZIP must resolve to the same commit before they are cited.
 - Reproducible scope: six bounded official public-data audit cases and four deterministic synthetic stress fixtures.
 - Review assurance: local, unauthenticated display names; local clock; self-asserted authorization; no cryptographic signature.
-- Delivery status: public source and a reproducible local/read-only build. No public hosted URL is claimed here until one is independently opened and bound to the release commit.
+- Delivery status: public source, a reproducible local/read-only build, and versioned hosting-project metadata. No public hosted URL is claimed here until one is independently opened and its visible version/commit receipt is bound to the release commit.
 - External validity: no users, institutional adoption, customer delivery, causal effect, ROI, health outcome, investment return, or policy impact is claimed.
 
 ## Short verification path
@@ -20,7 +20,7 @@ ClaimTrace is a locally runnable, read-only-capable portfolio prototype. This fi
 
 ## Supported application wording
 
-> Built a local-first TypeScript/React prototype that binds versioned CSV evidence, governed analytical claims, decision identities, and local unauthenticated review records into independently recomputable AuditBundles; validated it with six bounded public-data cases, four synthetic stress fixtures, 155 unit/integration tests, two built-artifact checks, and two Chromium flows.
+> Built a local-first TypeScript/React prototype that binds versioned CSV evidence, governed analytical claims, decision identities, and local unauthenticated review records into independently recomputable AuditBundles; validated it with six bounded public-data cases, four synthetic stress fixtures, 155 unit/integration tests, three built-artifact and release-package checks, and two Chromium flows.
 
 Use first person only for modules and design decisions that the applicant can explain and support with commit history or retained process evidence. If contribution was shared, identify the applicant's exact scope instead of claiming sole authorship.
 

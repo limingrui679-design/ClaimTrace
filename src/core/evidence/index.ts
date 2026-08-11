@@ -484,10 +484,11 @@ async function verifyExternalSourceLineage(dataset: DatasetVersion, provenance: 
   if (provenance.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA") {
     if (await sha256Text(provenance.sourceLastUpdatedEvidence.text) !== provenance.sourceLastUpdatedEvidence.sha256) errors.push("Publisher update metadata SHA-256 mismatch");
   }
-  errors.push(...externalSourceUpdateBindingErrors(provenance));
+  const sourceUpdateErrors = externalSourceUpdateBindingErrors(provenance);
+  errors.push(...sourceUpdateErrors);
   const cleaningBindingError = externalCleaningBindingError(provenance);
-  if (cleaningBindingError && !errors.includes(cleaningBindingError)) {
-    errors.push(cleaningBindingError);
+  if (cleaningBindingError) errors.push(cleaningBindingError);
+  if (sourceUpdateErrors.length || cleaningBindingError) {
     return { applicable: true, valid: false, errors };
   }
   const baseline = rebuildExternalSnapshot(provenance, "baseline");

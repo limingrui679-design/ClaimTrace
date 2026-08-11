@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.2 — 2026-08-11
+
+- separated publisher update-date governance from source-specific CSV cleaning so an invalid or evidence-mismatched date stops lineage verification before snapshot rebuilding and produces only its root-cause diagnostic;
+- suppressed the secondary evidence-mismatch message when the declared date is itself invalid, and added regressions that reject duplicate or misleading CSV-rebuild diagnostics across all publisher-date tamper cases;
+- retained independent update-date validation in offline generation and networked source refresh after separating it from the cleaning dispatcher;
+- made release checksum sidecars portable by hashing from the archive directory, recording only the ZIP base name, and explicitly verifying that no machine-specific absolute path is emitted;
+- pinned the existing ClaimTrace Sites project in the repository and verified that production builds package its hosting metadata with the static Worker entry; this configuration does not by itself claim that the current release is publicly deployed;
+- retained 155 unit/integration tests and 2 real-Chromium flows, expanded to 3 built-artifact and release-package checks, and kept 64/64 controlled scenarios plus 512 fixed-seed property iterations.
+
 ## 0.10.1 — 2026-08-11
 
 - required every publisher-reported update date to be a valid ISO calendar date and independently recomputable from retained source evidence rather than merely present inside a rehashed provenance object;
