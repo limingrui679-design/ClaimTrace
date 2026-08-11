@@ -43,12 +43,12 @@ interface RefreshTransactionFile {
   target: string;
   temporary: string;
   backup: string;
-  originalSha256?: string;
-  committedSha256?: string;
+  originalSha256: string;
+  committedSha256: string;
 }
 
 interface RefreshTransactionManifest {
-  schemaVersion: "claimtrace-source-refresh-transaction/1.0.0" | "claimtrace-source-refresh-transaction/2.0.0";
+  schemaVersion: "claimtrace-source-refresh-transaction/2.0.0";
   transactionId: string;
   ownerPid: number;
   phase: RefreshTransactionPhase;
@@ -315,26 +315,24 @@ function runtimeTransactionFiles(caseDirectory: string, transactionDirectory: st
     target: caseFile(caseDirectory, file.target),
     temporary: transactionArtifact(transactionDirectory, file.temporary),
     backup: transactionArtifact(transactionDirectory, file.backup),
-    originalSha256: file.originalSha256 ?? null,
-    committedSha256: file.committedSha256 ?? null,
+    originalSha256: file.originalSha256,
+    committedSha256: file.committedSha256,
   }));
-}
-
-function manifestHasContentHashes(manifest: RefreshTransactionManifest) {
-  return manifest.schemaVersion === "claimtrace-source-refresh-transaction/2.0.0";
 }
 
 function validateTransactionManifest(caseDirectory: string, transactionDirectory: string, value: unknown) {
   if (!value || typeof value !== "object") throw new Error(`${transactionDirectory}: invalid source-refresh transaction manifest`);
+  const schemaVersion = (value as { schemaVersion?: unknown }).schemaVersion;
+  if (schemaVersion === "claimtrace-source-refresh-transaction/1.0.0") throw new Error(`${transactionDirectory}: legacy source-refresh transaction lacks content hashes; refusing automatic recovery`);
+  if (schemaVersion !== "claimtrace-source-refresh-transaction/2.0.0") throw new Error(`${transactionDirectory}: unsupported source-refresh transaction schema`);
   const manifest = value as RefreshTransactionManifest;
-  if (!(manifest.schemaVersion === "claimtrace-source-refresh-transaction/1.0.0" || manifest.schemaVersion === "claimtrace-source-refresh-transaction/2.0.0")) throw new Error(`${transactionDirectory}: unsupported source-refresh transaction schema`);
   const identity = transactionDirectoryIdentity(path.basename(transactionDirectory));
   if (!identity || manifest.transactionId !== identity.transactionId || manifest.ownerPid !== identity.ownerPid) throw new Error(`${transactionDirectory}: transaction identity mismatch`);
   if (!(["prepared", "backed-up", "committed"] as unknown[]).includes(manifest.phase)) throw new Error(`${transactionDirectory}: invalid transaction phase`);
   if (!Array.isArray(manifest.files) || manifest.files.length !== 3) throw new Error(`${transactionDirectory}: transaction must contain exactly three files`);
   for (const file of manifest.files) {
     if (!file || typeof file !== "object" || typeof file.target !== "string" || typeof file.temporary !== "string" || typeof file.backup !== "string") throw new Error(`${transactionDirectory}: invalid transaction file entry`);
-    if (manifestHasContentHashes(manifest) && (!SHA256_PATTERN.test(file.originalSha256 ?? "") || !SHA256_PATTERN.test(file.committedSha256 ?? ""))) throw new Error(`${transactionDirectory}: transaction content hashes are missing or invalid`);
+    if (!SHA256_PATTERN.test(file.originalSha256) || !SHA256_PATTERN.test(file.committedSha256)) throw new Error(`${transactionDirectory}: transaction content hashes are missing or invalid`);
   }
   const runtimeFiles = runtimeTransactionFiles(caseDirectory, transactionDirectory, manifest);
   if (new Set(runtimeFiles.map((file) => file.target)).size !== runtimeFiles.length) throw new Error(`${transactionDirectory}: transaction targets must be distinct`);
@@ -390,7 +388,6 @@ async function rollbackTransaction(caseDirectory: string, transactionDirectory: 
 }
 
 async function verifyCommittedTargets(caseDirectory: string, transactionDirectory: string, manifest: RefreshTransactionManifest, operations: RefreshFileOperations) {
-  if (!manifestHasContentHashes(manifest)) throw new Error(`${transactionDirectory}: legacy committed transaction lacks content hashes; refusing automatic cleanup`);
   const verificationErrors: unknown[] = [];
   for (const file of runtimeTransactionFiles(caseDirectory, transactionDirectory, manifest)) {
     try {
@@ -576,19 +573,36 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
   let refreshed = 0;
   for (const caseId of caseIds) {
     const item = available.get(caseId)!;
-    const downloads = Object.fromEntries(await Promise.all(SIDES.map(async (side) => {
-      const response = await fetcher(item.config.sourceUrls[side], {
-        headers: {
-          Accept: "application/json, text/csv, application/xml, text/xml;q=0.9, */*;q=0.1",
-          "User-Agent": "ClaimTrace/0.8 public-data portfolio research (https://github.com/limingrui679-design/ClaimTrace)",
-        },
-        signal: AbortSignal.timeout(30_000),
-      });
-      if (!response.ok) throw new Error(`${caseId}:${side}: ${response.status} ${response.statusText}`);
-      const text = await response.text();
-      if (!text.trim()) throw new Error(`${caseId}:${side}: source returned an empty body`);
-      return [side, text] as const;
-    }))) as Record<SnapshotSide, string>;
+    const pairController = new AbortController();
+    let pairFailed = false;
+    let firstDownloadError: unknown;
+    const downloadResults = await Promise.allSettled(SIDES.map(async (side) => {
+      try {
+        const response = await fetcher(item.config.sourceUrls[side], {
+          headers: {
+            Accept: "application/json, text/csv, application/xml, text/xml;q=0.9, */*;q=0.1",
+            "User-Agent": "ClaimTrace/0.8 public-data portfolio research (https://github.com/limingrui679-design/ClaimTrace)",
+          },
+          signal: AbortSignal.any([pairController.signal, AbortSignal.timeout(30_000)]),
+        });
+        if (!response.ok) throw new Error(`${caseId}:${side}: ${response.status} ${response.statusText}`);
+        const text = await response.text();
+        if (!text.trim()) throw new Error(`${caseId}:${side}: source returned an empty body`);
+        return [side, text] as const;
+      } catch (error) {
+        if (!pairFailed) {
+          pairFailed = true;
+          firstDownloadError = error;
+          pairController.abort();
+        }
+        throw error;
+      }
+    }));
+    if (pairFailed) throw firstDownloadError;
+    const downloads = Object.fromEntries(downloadResults.map((result) => {
+      if (result.status !== "fulfilled") throw result.reason;
+      return result.value;
+    })) as Record<SnapshotSide, string>;
 
     validateDownloadedContent(caseId, item.provenance, downloads);
     const retrievedAt = now().toISOString();

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, rmdir, symlink, unlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -126,6 +127,61 @@ test("source refresh leaves the case untouched when either download fails", asyn
     assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
     assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
   } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh aborts the peer request and retains its lock until the pair settles", async () => {
+  const fixture = await makeFixture();
+  let releaseAbortedFetch: () => void = () => undefined;
+  let firstRefresh: ReturnType<typeof refreshPublicDataSources> | undefined;
+  try {
+    let signalAbortObserved!: () => void;
+    const abortObserved = new Promise<void>((resolve) => { signalAbortObserved = resolve; });
+    const abortedFetchGate = new Promise<void>((resolve) => { releaseAbortedFetch = resolve; });
+    let peerAborted = false;
+    firstRefresh = refreshPublicDataSources({
+      casesDirectory: fixture.casesDirectory,
+      requestedCaseIds: ["public-case"],
+      fetcher: (async (input: string | URL | Request, init?: RequestInit) => {
+        if (String(input).endsWith("baseline")) {
+          const signal = init?.signal;
+          assert.ok(signal);
+          return new Promise<Response>((_resolve, reject) => {
+            signal.addEventListener("abort", () => {
+              peerAborted = true;
+              signalAbortObserved();
+              void abortedFetchGate.then(() => reject(signal.reason ?? new DOMException("Aborted", "AbortError")));
+            }, { once: true });
+          });
+        }
+        return new Response("unavailable", { status: 503, statusText: "Unavailable" });
+      }) as typeof fetch,
+    });
+
+    await abortObserved;
+    let concurrentDownloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          concurrentDownloads += 1;
+          return new Response(fixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /another source refresh is already active/,
+    );
+    assert.equal(concurrentDownloads, 0);
+
+    releaseAbortedFetch();
+    await assert.rejects(firstRefresh, /public-case:current: 503 Unavailable/);
+    assert.equal(peerAborted, true);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+    assert.deepEqual((await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    releaseAbortedFetch();
+    await firstRefresh?.catch(() => undefined);
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }
 });
@@ -309,6 +365,49 @@ test("source refresh retains committed backups when a target no longer matches i
     });
     assert.deepEqual(result, { refreshed: 1, retrievedCaseIds: ["public-case"] });
     assert.deepEqual((await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh refuses automatic recovery of a legacy transaction without content hashes", async () => {
+  const fixture = await makeFixture();
+  try {
+    const baselinePath = path.join(fixture.directory, "raw-baseline.json");
+    const transactionId = `${process.pid}-${randomUUID()}`;
+    const transactionDirectory = path.join(fixture.directory, `.claimtrace-refresh-${transactionId}`);
+    const backupPath = path.join(transactionDirectory, "0.backup");
+    await mkdir(transactionDirectory);
+    await writeFile(path.join(transactionDirectory, "transaction.json"), `${JSON.stringify({
+      schemaVersion: "claimtrace-source-refresh-transaction/1.0.0",
+      transactionId,
+      ownerPid: process.pid,
+      phase: "prepared",
+      files: ["raw-baseline.json", "raw-current.json", "source-config.json"].map((target, index) => ({
+        target,
+        temporary: `${index}.new`,
+        backup: `${index}.backup`,
+      })),
+    }, null, 2)}\n`, "utf8");
+    await writeFile(backupPath, "corrupted legacy backup", "utf8");
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["recovery-probe-only"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(fixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /legacy source-refresh transaction lacks content hashes; refusing automatic recovery/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(baselinePath, "utf8"), fixture.oldBaseline);
+    assert.equal(await readFile(backupPath, "utf8"), "corrupted legacy backup");
+    assert.deepEqual((await readdir(transactionDirectory)).sort(), ["0.backup", "transaction.json"]);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }
