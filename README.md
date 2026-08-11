@@ -2,7 +2,7 @@
 
 > Versioned evidence and decision auditing for analytical claims.
 
-[Latest release](https://github.com/limingrui679-design/ClaimTrace/releases/latest) · [Case catalog](public/cases/catalog.json) · [Portfolio handoff](docs/PORTFOLIO_HANDOFF.md) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
+[Public read-only demo](https://claimtrace-audit.limingrui2.chatgpt.site) · [Latest release](https://github.com/limingrui679-design/ClaimTrace/releases/latest) · [Case catalog](public/cases/catalog.json) · [Portfolio handoff](docs/PORTFOLIO_HANDOFF.md) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
 
 ![ClaimTrace real browser walkthrough](docs/claimtrace-demo.gif)
 
@@ -13,7 +13,7 @@ When a revised dataset arrives, ClaimTrace aligns records by key and answers two
 1. Is the analytical claim still supported?
 2. Did the action change, or does unchanged action merely require a new sign-off?
 
-The repository includes a separately compiled read-only portfolio mode. The standard local build keeps import, rule creation, review, and export workflows available without an account or server-side data upload. No hosted deployment is required to review or run the project.
+The [public demo](https://claimtrace-audit.limingrui2.chatgpt.site) is a separately compiled read-only portfolio build bound to release `v0.10.2` and visible receipt `92d741b`. The standard local build keeps import, rule creation, review, and export workflows available without an account or server-side data upload. Reviewers can use the public demo or run the project locally; the hosted demo does not add authentication, durable collaboration, or production governance.
 
 ## Why it is different
 
