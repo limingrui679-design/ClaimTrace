@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, rmdir, symlink, unlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -26,6 +26,10 @@ function worldBankResponse(year: string, value: number) {
       decimal: 0,
     }],
   ]);
+}
+
+function textSha256(value: string) {
+  return createHash("sha256").update(value).digest("hex");
 }
 
 async function makeFixture() {
@@ -413,6 +417,115 @@ test("source refresh refuses automatic recovery of a legacy transaction without 
   }
 });
 
+test("source refresh rejects a version-2 transaction that targets case metadata", async () => {
+  const fixture = await makeFixture();
+  try {
+    const metadataPath = path.join(fixture.directory, "source-metadata.json");
+    const configPath = path.join(fixture.directory, "source-config.json");
+    const originalMetadata = await readFile(metadataPath, "utf8");
+    const originalConfig = await readFile(configPath, "utf8");
+    const forgedBackup = "forged metadata backup";
+    const transactionId = `${process.pid}-${randomUUID()}`;
+    const transactionDirectory = path.join(fixture.directory, `.claimtrace-refresh-${transactionId}`);
+    const backupPath = path.join(transactionDirectory, "0.backup");
+    await mkdir(transactionDirectory);
+    await writeFile(path.join(transactionDirectory, "transaction.json"), `${JSON.stringify({
+      schemaVersion: "claimtrace-source-refresh-transaction/2.0.0",
+      transactionId,
+      ownerPid: process.pid,
+      phase: "prepared",
+      files: [
+        { target: "source-metadata.json", temporary: "0.new", backup: "0.backup", originalSha256: textSha256(forgedBackup), committedSha256: textSha256("next metadata") },
+        { target: "raw-current.json", temporary: "1.new", backup: "1.backup", originalSha256: textSha256(fixture.oldCurrent), committedSha256: textSha256("next current") },
+        { target: "source-config.json", temporary: "2.new", backup: "2.backup", originalSha256: textSha256(originalConfig), committedSha256: textSha256("next config") },
+      ],
+    }, null, 2)}\n`, "utf8");
+    await writeFile(backupPath, forgedBackup, "utf8");
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["recovery-probe-only"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(fixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /transaction target layout is invalid/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(metadataPath, "utf8"), originalMetadata);
+    assert.equal(await readFile(backupPath, "utf8"), forgedBackup);
+    assert.deepEqual((await readdir(transactionDirectory)).sort(), ["0.backup", "transaction.json"]);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects a noncanonical version-2 transaction artifact layout", async () => {
+  const fixture = await makeFixture();
+  try {
+    const originalConfig = await readFile(path.join(fixture.directory, "source-config.json"), "utf8");
+    const transactionId = `${process.pid}-${randomUUID()}`;
+    const transactionDirectory = path.join(fixture.directory, `.claimtrace-refresh-${transactionId}`);
+    await mkdir(transactionDirectory);
+    await writeFile(path.join(transactionDirectory, "transaction.json"), `${JSON.stringify({
+      schemaVersion: "claimtrace-source-refresh-transaction/2.0.0",
+      transactionId,
+      ownerPid: process.pid,
+      phase: "prepared",
+      files: [
+        { target: "raw-baseline.json", temporary: "transaction.json.next", backup: "0.backup", originalSha256: textSha256(fixture.oldBaseline), committedSha256: textSha256("next baseline") },
+        { target: "raw-current.json", temporary: "1.new", backup: "1.backup", originalSha256: textSha256(fixture.oldCurrent), committedSha256: textSha256("next current") },
+        { target: "source-config.json", temporary: "2.new", backup: "2.backup", originalSha256: textSha256(originalConfig), committedSha256: textSha256("next config") },
+      ],
+    }, null, 2)}\n`, "utf8");
+
+    await assert.rejects(
+      refreshPublicDataSources({ casesDirectory: fixture.casesDirectory, requestedCaseIds: ["recovery-probe-only"] }),
+      /transaction artifact layout is invalid/,
+    );
+    assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
+    assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
+    assert.deepEqual(await readdir(transactionDirectory), ["transaction.json"]);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects a symlinked transaction manifest without reading it", async () => {
+  const fixture = await makeFixture();
+  try {
+    const transactionId = `${process.pid}-${randomUUID()}`;
+    const transactionDirectory = path.join(fixture.directory, `.claimtrace-refresh-${transactionId}`);
+    const outsideManifestPath = path.join(fixture.casesDirectory, "outside-transaction.json");
+    await mkdir(transactionDirectory);
+    await writeFile(outsideManifestPath, "not a transaction manifest", "utf8");
+    await symlink(outsideManifestPath, path.join(transactionDirectory, "transaction.json"));
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(fixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /source-refresh transaction manifest must be a regular file/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(outsideManifestPath, "utf8"), "not a transaction manifest");
+    assert.deepEqual(await readdir(transactionDirectory), ["transaction.json"]);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
 test("source refresh serializes concurrent invocations before the second one downloads", async () => {
   const fixture = await makeFixture();
   let releaseFirstFetch: () => void = () => undefined;
@@ -479,6 +592,35 @@ test("source refresh rejects an unsafe lock identity without resolving it as a p
     );
     assert.equal(await readFile(sentinelPath, "utf8"), "must remain untouched");
     assert.deepEqual(await readdir(lockDirectory), ["lock.json"]);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects a symlinked lock manifest without reading it", async () => {
+  const fixture = await makeFixture();
+  try {
+    const lockDirectory = path.join(fixture.casesDirectory, ".claimtrace-refresh-lock");
+    const outsideManifestPath = path.join(fixture.casesDirectory, "outside-lock.json");
+    await mkdir(lockDirectory);
+    await writeFile(outsideManifestPath, "not a lock manifest", "utf8");
+    await symlink(outsideManifestPath, path.join(lockDirectory, "lock.json"));
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(fixture.oldBaseline, { status: 200 });
+        }) as typeof fetch,
+      }),
+      /source-refresh lock manifest must be a regular file/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(outsideManifestPath, "utf8"), "not a lock manifest");
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), [".claimtrace-refresh-lock"]);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }

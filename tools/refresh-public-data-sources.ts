@@ -100,9 +100,13 @@ function caseFile(directory: string, fileName: string) {
   return resolved;
 }
 
+function isRawCaseFileName(fileName: string) {
+  return fileName.startsWith("raw-") && fileName !== "raw-";
+}
+
 function rawCaseFile(directory: string, fileName: string) {
   const resolved = caseFile(directory, fileName);
-  if (!fileName.startsWith("raw-") || fileName === "raw-") throw new Error(`${fileName}: raw-response file name must use the raw-* namespace`);
+  if (!isRawCaseFileName(fileName)) throw new Error(`${fileName}: raw-response file name must use the raw-* namespace`);
   return resolved;
 }
 
@@ -173,7 +177,9 @@ function validateSourceRefreshLockManifest(lockDirectory: string, value: unknown
 }
 
 async function readSourceRefreshLockManifest(lockDirectory: string, operations: RefreshFileOperations, expectedLockId?: string) {
-  const text = await operations.readFile(path.join(lockDirectory, SOURCE_REFRESH_LOCK_MANIFEST), "utf8") as string;
+  const manifestPath = path.join(lockDirectory, SOURCE_REFRESH_LOCK_MANIFEST);
+  await verifyRegularFile(manifestPath, null, "source-refresh lock manifest", operations);
+  const text = await operations.readFile(manifestPath, "utf8") as string;
   return validateSourceRefreshLockManifest(lockDirectory, JSON.parse(text), expectedLockId);
 }
 
@@ -291,12 +297,14 @@ async function acquireSourceRefreshLock(casesDirectory: string, operations: Refr
 }
 
 function transactionDirectoryIdentity(name: string): TransactionDirectoryIdentity | null {
-  const match = name.match(/^\.claimtrace-refresh-(preparing-)?(\d+)-([0-9a-f-]+)$/i);
+  const match = name.match(/^\.claimtrace-refresh-(preparing-)?(.+)$/i);
   if (!match) return null;
+  const transactionIdMatch = match[2].match(SOURCE_REFRESH_LOCK_ID_PATTERN);
+  if (!transactionIdMatch) return null;
   return {
     preparing: Boolean(match[1]),
-    ownerPid: Number(match[2]),
-    transactionId: `${match[2]}-${match[3]}`,
+    ownerPid: Number(transactionIdMatch[1]),
+    transactionId: match[2],
   };
 }
 
@@ -336,10 +344,13 @@ function validateTransactionManifest(caseDirectory: string, transactionDirectory
   if (!identity || manifest.transactionId !== identity.transactionId || manifest.ownerPid !== identity.ownerPid) throw new Error(`${transactionDirectory}: transaction identity mismatch`);
   if (!(["prepared", "backed-up", "committed"] as unknown[]).includes(manifest.phase)) throw new Error(`${transactionDirectory}: invalid transaction phase`);
   if (!Array.isArray(manifest.files) || manifest.files.length !== 3) throw new Error(`${transactionDirectory}: transaction must contain exactly three files`);
-  for (const file of manifest.files) {
+  for (const [index, file] of manifest.files.entries()) {
     if (!file || typeof file !== "object" || typeof file.target !== "string" || typeof file.temporary !== "string" || typeof file.backup !== "string") throw new Error(`${transactionDirectory}: invalid transaction file entry`);
     if (!SHA256_PATTERN.test(file.originalSha256) || !SHA256_PATTERN.test(file.committedSha256)) throw new Error(`${transactionDirectory}: transaction content hashes are missing or invalid`);
+    if (file.temporary !== `${index}.new` || file.backup !== `${index}.backup`) throw new Error(`${transactionDirectory}: transaction artifact layout is invalid`);
   }
+  if (!manifest.files.slice(0, 2).every((file) => isRawCaseFileName(file.target)) || manifest.files[2].target !== "source-config.json") throw new Error(`${transactionDirectory}: transaction target layout is invalid`);
+  for (const file of manifest.files.slice(0, 2)) rawCaseFile(caseDirectory, file.target);
   const runtimeFiles = runtimeTransactionFiles(caseDirectory, transactionDirectory, manifest);
   if (new Set(runtimeFiles.map((file) => file.target)).size !== runtimeFiles.length) throw new Error(`${transactionDirectory}: transaction targets must be distinct`);
   if (new Set(runtimeFiles.flatMap((file) => [file.temporary, file.backup])).size !== runtimeFiles.length * 2) throw new Error(`${transactionDirectory}: transaction artifacts must be distinct`);
@@ -411,11 +422,8 @@ async function verifyCommittedTargets(caseDirectory: string, transactionDirector
 async function recoverTransactionDirectory(caseDirectory: string, transactionDirectory: string, identity: TransactionDirectoryIdentity, operations: RefreshFileOperations) {
   if (ownerIsActive(identity)) throw new Error(`${transactionDirectory}: another source refresh transaction is still active`);
   const manifestPath = path.join(transactionDirectory, TRANSACTION_MANIFEST);
-  let manifestText: string;
-  try {
-    manifestText = await operations.readFile(manifestPath, "utf8") as string;
-  } catch (error) {
-    if (errnoCode(error) !== "ENOENT") throw error;
+  const manifestStats = await lstatIfExists(manifestPath, operations);
+  if (!manifestStats) {
     const entries = await operations.readdir(transactionDirectory) as string[];
     if (!identity.preparing && entries.length) throw new Error(`${transactionDirectory}: transaction manifest is missing`);
     for (const entry of entries) {
@@ -427,6 +435,8 @@ async function recoverTransactionDirectory(caseDirectory: string, transactionDir
     await operations.rmdir(transactionDirectory);
     return;
   }
+  if (!manifestStats.isFile()) throw new Error(`${manifestPath}: source-refresh transaction manifest must be a regular file`);
+  const manifestText = await operations.readFile(manifestPath, "utf8") as string;
   const manifest = validateTransactionManifest(caseDirectory, transactionDirectory, JSON.parse(manifestText));
   if (manifest.phase === "committed") await verifyCommittedTargets(caseDirectory, transactionDirectory, manifest, operations);
   else await rollbackTransaction(caseDirectory, transactionDirectory, manifest, operations);
@@ -436,8 +446,10 @@ async function recoverTransactionDirectory(caseDirectory: string, transactionDir
 async function recoverInterruptedTransactions(caseDirectory: string, operations: RefreshFileOperations) {
   const entries = await operations.readdir(caseDirectory, { withFileTypes: true });
   for (const entry of entries.filter((item) => item.isDirectory()).sort((left, right) => left.name.localeCompare(right.name))) {
+    if (!entry.name.startsWith(".claimtrace-refresh-")) continue;
     const identity = transactionDirectoryIdentity(entry.name);
-    if (identity) await recoverTransactionDirectory(caseDirectory, path.join(caseDirectory, entry.name), identity, operations);
+    if (!identity) throw new Error(`${path.join(caseDirectory, entry.name)}: invalid source-refresh transaction directory identity`);
+    await recoverTransactionDirectory(caseDirectory, path.join(caseDirectory, entry.name), identity, operations);
   }
 }
 
