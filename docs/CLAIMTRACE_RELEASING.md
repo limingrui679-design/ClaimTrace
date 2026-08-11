@@ -51,7 +51,7 @@ overview → public-data case → source lineage → keyed diff → claims → d
 
 Confirm that the console has no warning/error entries and that the committed `docs/claimtrace-demo.gif` matches the current interface.
 
-Both committed Playwright modes are required release gates. The read-only flow runs all ten catalog cases and the responsive navigation checks. The writable flow covers delayed case/file selection, canonical column alignment, review/export serialization, two chained JSON exports, independent verification, and verified HTML output:
+Both committed Playwright modes are required release gates. The read-only flow runs all ten catalog cases and the responsive navigation checks. The writable flow covers delayed case-to-case, case-to-import, import-read-to-case, revision-to-case, and case-to-demo intent races; stale review/export isolation across dataset replacement; canonical column alignment; review/export activation serialization; two chained JSON exports; independent verification; and verified HTML output:
 
 ```bash
 npm run test:browser

@@ -211,11 +211,10 @@ export default function Home() {
   const [operationBusy, setOperationBusy] = useState(false);
   const [claimDraft, setClaimDraft] = useState({ title: "", field: "", aggregation: "average" as Aggregation, operator: ">=" as Operator, threshold: "", thresholdSource: "", rationale: "", confirmedBy: "" });
   const revisionInputRef = useRef<HTMLInputElement>(null);
-  const caseLoadRequestRef = useRef(0);
+  const datasetIntentRef = useRef(0);
   const caseLoadAbortRef = useRef<AbortController | null>(null);
   const baselineReadRequestRef = useRef(0);
   const currentReadRequestRef = useRef(0);
-  const revisionReadRequestRef = useRef(0);
   const operationInFlightRef = useRef(false);
 
   const summary = useMemo(() => auditSummary(claims, dataset), [claims, dataset]);
@@ -256,19 +255,35 @@ export default function Home() {
     window.setTimeout(() => setToast(""), 3000);
   }
 
-  async function runExclusiveOperation(operation: () => Promise<void>) {
+  async function runExclusiveOperation(operation: (datasetIntent: number) => Promise<void>) {
     if (operationInFlightRef.current) {
       showToast("Another audit, export, or review operation is still in progress");
       return;
     }
     operationInFlightRef.current = true;
     setOperationBusy(true);
+    const datasetIntent = datasetIntentRef.current;
     try {
-      await operation();
+      await operation(datasetIntent);
     } finally {
       operationInFlightRef.current = false;
       setOperationBusy(false);
     }
+  }
+
+  function beginDatasetIntent() {
+    const datasetIntent = datasetIntentRef.current + 1;
+    datasetIntentRef.current = datasetIntent;
+    caseLoadAbortRef.current?.abort();
+    caseLoadAbortRef.current = null;
+    baselineReadRequestRef.current += 1;
+    currentReadRequestRef.current += 1;
+    setCaseLoadingId(null);
+    return datasetIntent;
+  }
+
+  function isCurrentDatasetIntent(datasetIntent: number) {
+    return datasetIntent === datasetIntentRef.current;
   }
 
   function resetImport() {
@@ -284,10 +299,7 @@ export default function Home() {
   }
 
   function loadDemo() {
-    caseLoadAbortRef.current?.abort();
-    caseLoadRequestRef.current += 1;
-    revisionReadRequestRef.current += 1;
-    setCaseLoadingId(null);
+    beginDatasetIntent();
     setDataset(DEMO_DATASET);
     setClaims(DEMO_CLAIMS);
     setSelectedClaimId(DEMO_CLAIMS[0].id);
@@ -299,15 +311,15 @@ export default function Home() {
     setDecisionReviewOverrides({});
     setActiveCaseId("population-health");
     setActiveView("overview");
+    setShowImport(false);
+    resetImport();
     showToast("Reproducible synthetic demonstration restored");
   }
 
   async function loadCase(caseId: string) {
     const definition = EXECUTABLE_CASES.find((item) => item.id === caseId);
     if (!definition) return;
-    const requestId = caseLoadRequestRef.current + 1;
-    caseLoadRequestRef.current = requestId;
-    caseLoadAbortRef.current?.abort();
+    const datasetIntent = beginDatasetIntent();
     const controller = new AbortController();
     caseLoadAbortRef.current = controller;
     setCaseLoadingId(caseId);
@@ -324,7 +336,7 @@ export default function Home() {
       const upstreamLineage = upstreamResponse ? await upstreamResponse.json() as UpstreamLineage : undefined;
       const externalSource = sourceResponse ? await sourceResponse.json() as ExternalSourceProvenance : undefined;
       const run = await runExecutableCase(definition, await baselineResponse.text(), await currentResponse.text(), upstreamLineage, externalSource);
-      if (requestId !== caseLoadRequestRef.current) return;
+      if (!isCurrentDatasetIntent(datasetIntent)) return;
       setDataset(run.dataset);
       setClaims(run.claims);
       setDecisionSpecs(run.decisionSpecs);
@@ -336,13 +348,15 @@ export default function Home() {
       setLastExportedBundleHash(null);
       setActiveCaseId(caseId);
       setActiveView("overview");
+      setShowImport(false);
+      resetImport();
       showToast(`Loaded and executed: ${definition.title}`);
     } catch (error) {
-      if (requestId === caseLoadRequestRef.current && !(error instanceof DOMException && error.name === "AbortError")) {
+      if (isCurrentDatasetIntent(datasetIntent) && !(error instanceof DOMException && error.name === "AbortError")) {
         showToast(error instanceof Error ? error.message : "Case loading failed");
       }
     } finally {
-      if (requestId === caseLoadRequestRef.current) {
+      if (isCurrentDatasetIntent(datasetIntent)) {
         setCaseLoadingId(null);
         if (caseLoadAbortRef.current === controller) caseLoadAbortRef.current = null;
       }
@@ -405,11 +419,13 @@ export default function Home() {
       return;
     }
     setImportError("");
+    let datasetIntent: number | null = null;
     try {
       if (!baselineFile || !baselinePreview) throw new Error("Select and successfully read a baseline CSV.");
       if (!primaryKey) throw new Error("Select a unique primary key before creating the project.");
       assertValidKey(baselinePreview, primaryKey, "Baseline");
       if (currentFile && !currentPreview) throw new Error("The current-version CSV has not been read successfully.");
+      datasetIntent = beginDatasetIntent();
       let alignedCurrent = currentPreview;
       if (currentPreview) {
         if (!sameColumnSet(baselinePreview.columns, currentPreview.columns)) throw new Error("Baseline and current versions must have exactly the same set of columns.");
@@ -436,6 +452,7 @@ export default function Home() {
         isDemo: false,
         dataOrigin: "USER",
       });
+      if (!isCurrentDatasetIntent(datasetIntent)) return;
       const runAt = new Date().toISOString();
       const autoClaims = makeImportedClaims(nextDataset, runAt);
       if (!autoClaims.length) throw new Error("No computable numeric field was found. Check the CSV content.");
@@ -454,7 +471,9 @@ export default function Home() {
       setActiveView("overview");
       showToast(`Created ${autoClaims.length} evidence chains using primary key ${primaryKey}`);
     } catch (error) {
-      setImportError(error instanceof Error ? error.message : "Import failed. Check the CSV files.");
+      if (datasetIntent === null || isCurrentDatasetIntent(datasetIntent)) {
+        setImportError(error instanceof Error ? error.message : "Import failed. Check the CSV files.");
+      }
     }
   }
 
@@ -466,11 +485,10 @@ export default function Home() {
     }
     const file = event.target.files?.[0];
     if (!file) return;
-    const requestId = revisionReadRequestRef.current + 1;
-    revisionReadRequestRef.current = requestId;
+    const datasetIntent = beginDatasetIntent();
     try {
       const parsed = await readCsvFile(file);
-      if (requestId !== revisionReadRequestRef.current) return;
+      if (!isCurrentDatasetIntent(datasetIntent)) return;
       if (!sameColumnSet(dataset.columns, parsed.columns)) throw new Error("The current-version columns do not match the baseline columns.");
       const aligned = await alignFileSnapshotColumns(parsed, dataset.columns);
       assertValidKey(aligned, dataset.primaryKey, "Current version");
@@ -484,7 +502,7 @@ export default function Home() {
         currentRawBytesBase64: aligned.rawBytesBase64,
       };
       const verifiedDataset = await verifyDataset(nextDataset);
-      if (requestId !== revisionReadRequestRef.current) return;
+      if (!isCurrentDatasetIntent(datasetIntent)) return;
       const runAt = new Date().toISOString();
       setDataset(verifiedDataset);
       setClaims((currentClaims) => currentClaims.map((claim) => recomputeClaim(claim, verifiedDataset, runAt)));
@@ -494,16 +512,17 @@ export default function Home() {
       setLastAuditAt(runAt);
       showToast(`Current version aligned by primary key ${dataset.primaryKey} and re-audited`);
     } catch (error) {
-      if (requestId === revisionReadRequestRef.current) showToast(error instanceof Error ? error.message : "Current version could not be read");
+      if (isCurrentDatasetIntent(datasetIntent)) showToast(error instanceof Error ? error.message : "Current version could not be read");
     } finally {
       event.target.value = "";
     }
   }
 
   async function runAudit() {
-    await runExclusiveOperation(async () => {
+    await runExclusiveOperation(async (datasetIntent) => {
       const runAt = new Date().toISOString();
       const verifiedDataset = await verifyDataset(dataset, runAt);
+      if (!isCurrentDatasetIntent(datasetIntent)) return;
       setDataset(verifiedDataset);
       setClaims((currentClaims) => currentClaims.map((claim) => recomputeClaim(claim, verifiedDataset, runAt)));
       setDecisionReviewOverrides({});
@@ -570,7 +589,7 @@ export default function Home() {
     showToast("The new claim was computed and linked to record-level evidence");
   }
 
-  async function prepareVerifiedBundle(generatedAt: string) {
+  async function prepareVerifiedBundle(generatedAt: string, datasetIntent: number) {
     assertSelfContainedExportSizes([
       { label: "Baseline", size: dataset.baselineMeta.byteSize },
       ...(dataset.currentMeta ? [{ label: "Current", size: dataset.currentMeta.byteSize }] : []),
@@ -583,6 +602,7 @@ export default function Home() {
       const failed = verification.checks.filter((check) => !check.passed).map((check) => check.name).join(", ");
       throw new Error(`AuditBundle independent verification failed: ${failed || "unknown check"}`);
     }
+    if (!isCurrentDatasetIntent(datasetIntent)) return null;
     setDataset(verifiedDataset);
     setClaims(bundle.claimResults);
     setDecisionReviewOverrides(Object.fromEntries(bundle.decisionResults.map((decision) => [decision.decisionId, decision.governance])));
@@ -591,28 +611,32 @@ export default function Home() {
   }
 
   async function exportEvidencePackage() {
-    await runExclusiveOperation(async () => {
+    await runExclusiveOperation(async (datasetIntent) => {
       const generatedAt = new Date().toISOString();
       try {
-        const { bundle } = await prepareVerifiedBundle(generatedAt);
+        const prepared = await prepareVerifiedBundle(generatedAt, datasetIntent);
+        if (!prepared) return;
+        const { bundle } = prepared;
         downloadFile("claimtrace-audit-bundle.json", JSON.stringify(bundle, null, 2), "application/json;charset=utf-8");
         setLastExportedBundleHash(bundle.integrity.payloadHash);
         showToast(bundle.previousBundleHash ? "AuditBundle verified and linked to the previous bundle root hash" : "Genesis AuditBundle recomputed, independently verified, and sealed with a root hash");
       } catch (error) {
-        showToast(error instanceof Error ? error.message : "AuditBundle export failed");
+        if (isCurrentDatasetIntent(datasetIntent)) showToast(error instanceof Error ? error.message : "AuditBundle export failed");
       }
     });
   }
 
   async function exportReport() {
-    await runExclusiveOperation(async () => {
+    await runExclusiveOperation(async (datasetIntent) => {
       const generatedAt = new Date().toISOString();
       try {
-        const { bundle, verification } = await prepareVerifiedBundle(generatedAt);
+        const prepared = await prepareVerifiedBundle(generatedAt, datasetIntent);
+        if (!prepared) return;
+        const { bundle, verification } = prepared;
         downloadFile("ClaimTrace-Audit-Report.html", buildHtmlReport(bundle, verification), "text/html;charset=utf-8");
         showToast("HTML report generated with claims, decisions, review chain, and root-hash verification");
       } catch (error) {
-        showToast(error instanceof Error ? error.message : "HTML report export failed");
+        if (isCurrentDatasetIntent(datasetIntent)) showToast(error instanceof Error ? error.message : "HTML report export failed");
       }
     });
   }
@@ -632,7 +656,7 @@ export default function Home() {
   }
 
   async function recordReview(claimId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) {
-    await runExclusiveOperation(async () => {
+    await runExclusiveOperation(async (datasetIntent) => {
       try {
         if (READ_ONLY_DEMO) throw new Error("Read-only portfolio mode cannot create sign-off records");
         const claim = claims.find((item) => item.id === claimId);
@@ -640,17 +664,18 @@ export default function Home() {
         const previous = reviewRecords.at(-1);
         const record = await createReviewRecord({ claimId, reviewer, disposition, note, createdAt: new Date().toISOString(), targetResultId: claim.resultId, targetResultHash: await hashClaimResult(claim) }, previous);
         const reviewed = await applyReviewToClaim(claim, record);
+        if (!isCurrentDatasetIntent(datasetIntent)) return;
         setReviewRecords((records) => appendReviewRecord(records, record));
         setClaims((currentClaims) => currentClaims.map((item) => item.id === claimId ? reviewed : item));
         showToast(disposition === "APPROVED" ? "Sign-off appended and release status updated" : disposition === "RISK_ACCEPTED" ? "Risk acceptance recorded and release status marked" : "Returned and blocked from release");
       } catch (error) {
-        showToast(error instanceof Error ? error.message : "Review record could not be created");
+        if (isCurrentDatasetIntent(datasetIntent)) showToast(error instanceof Error ? error.message : "Review record could not be created");
       }
     });
   }
 
   async function recordDecisionReview(decisionId: string, disposition: ReviewRecord["disposition"], reviewer: string, note: string) {
-    await runExclusiveOperation(async () => {
+    await runExclusiveOperation(async (datasetIntent) => {
       try {
         if (READ_ONLY_DEMO) throw new Error("Read-only portfolio mode cannot create decision sign-off records");
         const result = decisionResults.find((item) => item.decisionId === decisionId);
@@ -658,11 +683,12 @@ export default function Home() {
         const previous = reviewRecords.at(-1);
         const record = await createReviewRecord({ decisionId, reviewer, disposition, note, createdAt: new Date().toISOString(), targetResultId: result.resultId, targetResultHash: await hashDecisionResult(result) }, previous);
         const reviewed = await applyReviewToDecision(result, record, claims);
+        if (!isCurrentDatasetIntent(datasetIntent)) return;
         setReviewRecords((records) => appendReviewRecord(records, record));
         setDecisionReviewOverrides((current) => ({ ...current, [decisionId]: reviewed.governance }));
         showToast(disposition === "APPROVED" ? "Decision signed off" : disposition === "RESIGNED" ? "New decision identity re-signed" : disposition === "RISK_ACCEPTED" ? "Risk acceptance recorded for the decision change" : "Decision returned and blocked from release");
       } catch (error) {
-        showToast(error instanceof Error ? error.message : "Decision review failed");
+        if (isCurrentDatasetIntent(datasetIntent)) showToast(error instanceof Error ? error.message : "Decision review failed");
       }
     });
   }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.1 — 2026-08-11
+
+- unified case loading, whole-project import, revision import, and demo restoration under one monotonic dataset-intent generation, aborting pending case fetches and invalidating unfinished file reads whenever a newer dataset replacement begins;
+- bound audit, review, JSON export, and HTML export work to the dataset generation on which it started, so an older asynchronous operation cannot mutate a replacement project, append a cross-project review record, trigger a stale download, or seed the new project's `previousBundleHash` chain;
+- expanded the committed writable Chromium flow with delayed case-to-import, import-read-to-case, revision-to-case, and case-to-demo races plus review/export replacement isolation, while retaining reordered-column import, activation deduplication, verified chained bundles, and verified HTML output;
+- retained the documented local-prototype boundaries: no hosted deployment, authenticated identity, authorization, trusted time, external adoption, or measured impact is claimed.
+
 ## 0.9.0 — 2026-08-11
 
 - replaced permissive quote toggling with a versioned strict CSV state machine that rejects bare quotes and content after closing quotes, preserves quoted whitespace, trims unquoted cells, and handles escaped quotes, multiline CRLF records, empty trailing cells, and long fields;

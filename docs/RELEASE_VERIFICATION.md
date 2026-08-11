@@ -1,6 +1,6 @@
 # Release verification
 
-## ClaimTrace 0.9.0 — 2026-08-11
+## ClaimTrace 0.9.1 — 2026-08-11
 
 This record describes a local release-candidate verification on Darwin arm64 with Node.js 22.20.0 and npm 10.9.3. It is a reproducibility receipt, not evidence of a hosted deployment, external adoption, or real-world impact.
 
@@ -13,6 +13,8 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Built-artifact checks | 2/2 passed |
 | Real-Chromium read-only acceptance test | 1/1 passed |
 | Real-Chromium writable workflow and race test | 1/1 passed |
+| Dataset-intent cross-flow matrix | case→import, import read→case, revision→case, case→demo passed |
+| Review/export isolation during dataset replacement | Passed; no stale record, download, or predecessor root |
 | Executable cases loaded and run in Chromium | 10/10 passed |
 | Controlled benchmark | 64/64 exact labels |
 | Deterministic property trials | 512 across four seeded properties |
