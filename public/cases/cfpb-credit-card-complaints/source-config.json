@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source-config/2.1.0",
+  "schemaVersion": "claimtrace-external-source-config/2.2.0",
   "sourceType": "CFPB_COMPLAINT_TRENDS_V1",
   "publisher": "U.S. Consumer Financial Protection Bureau",
   "dataset": "Consumer Complaint Database trends API",
@@ -7,7 +7,7 @@
     "id": "CREDIT-CARD-ISSUE-BUCKETS",
     "name": "Structured credit-card complaint issue records"
   },
-  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "retrievedAt": "2026-08-11T11:07:44.743Z",
   "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
   "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
   "sourceUrls": {
@@ -35,5 +35,6 @@
   "rawFiles": {
     "baseline": "raw-2024-h1.json",
     "current": "raw-2025-h1.json"
-  }
+  },
+  "sourceLastUpdated": null
 }

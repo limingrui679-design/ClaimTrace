@@ -16,17 +16,126 @@ const CLEANING_IMPLEMENTATION_BY_SOURCE: Record<ExternalSourceType, ExternalClea
   ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1: "ons-housing-affordability-v1",
 };
 
+const ISO_CALENDAR_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
+const SHA256 = /^[0-9a-f]{64}$/;
+
+export function isIsoCalendarDate(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  const match = value.match(ISO_CALENDAR_DATE);
+  if (!match) return false;
+  const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+function utcCalendarDate(value: unknown, label: string, errors: string[]) {
+  const match = typeof value === "string" ? value.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?Z$/) : null;
+  const parsed = match ? new Date(value as string) : null;
+  if (!match || !parsed || !Number.isFinite(parsed.getTime())
+    || parsed.getUTCFullYear() !== Number(match[1])
+    || parsed.getUTCMonth() + 1 !== Number(match[2])
+    || parsed.getUTCDate() !== Number(match[3])
+    || parsed.getUTCHours() !== Number(match[4])
+    || parsed.getUTCMinutes() !== Number(match[5])
+    || parsed.getUTCSeconds() !== Number(match[6])) {
+    errors.push(`${label}: publisher update timestamp is not a valid UTC ISO 8601 value`);
+    return null;
+  }
+  return parsed.toISOString().slice(0, 10);
+}
+
+function rawArtifact(provenance: ExternalSourceProvenance, side: SnapshotSide, errors: string[]) {
+  const matches = provenance.rawArtifacts.filter((artifact) => artifact.side === side);
+  if (matches.length !== 1) {
+    errors.push(`${side}: exactly one raw response is required to bind the publisher update date`);
+    return null;
+  }
+  return matches[0];
+}
+
+export function extractPublisherSourceLastUpdated(provenance: ExternalSourceProvenance) {
+  const errors: string[] = [];
+  if (provenance.sourceLastUpdatedBasis !== "PUBLISHER_REPORTED") return { value: null, errors };
+  const evidence = provenance.sourceLastUpdatedEvidence;
+  if (!evidence) return { value: null, errors: ["A publisher-reported source update date requires independently recomputable evidence"] };
+
+  const values: string[] = [];
+  if (evidence.method === "RAW_RESPONSE_PAIR") {
+    if (!["WORLD_BANK_INDICATORS_API_V2", "US_TREASURY_YIELD_CURVE_XML_V1"].includes(provenance.sourceType)) {
+      errors.push(`${provenance.sourceType}: raw-response publisher-date extraction is unsupported`);
+      return { value: null, errors };
+    }
+    for (const side of ["baseline", "current"] as SnapshotSide[]) {
+      const artifact = rawArtifact(provenance, side, errors);
+      if (!artifact) continue;
+      if (provenance.sourceType === "WORLD_BANK_INDICATORS_API_V2") {
+        const parsed = parseJson(artifact.text, side, errors);
+        const value = Array.isArray(parsed) && parsed[0] && typeof parsed[0] === "object"
+          ? (parsed[0] as { lastupdated?: unknown }).lastupdated
+          : null;
+        if (!isIsoCalendarDate(value)) errors.push(`${side}: World Bank lastupdated is not a valid ISO calendar date`);
+        else values.push(value);
+      } else {
+        const feedHeader = artifact.text.split(/<entry>/, 1)[0];
+        const match = feedHeader.match(/<updated>\s*([^<]+?)\s*<\/updated>/);
+        const value = utcCalendarDate(match?.[1], `${side}: Treasury feed`, errors);
+        if (value) values.push(value);
+      }
+    }
+  } else if (evidence.method === "PUBLISHER_METADATA") {
+    if (provenance.sourceType !== "USDOT_NTD_SOCRATA_V1") {
+      errors.push(`${provenance.sourceType}: publisher-metadata date extraction is unsupported`);
+      return { value: null, errors };
+    }
+    try {
+      const sourceUrl = new URL(evidence.sourceUrl);
+      if (sourceUrl.protocol !== "https:" || sourceUrl.username || sourceUrl.password || sourceUrl.hash) errors.push("Publisher update metadata URL must use HTTPS without credentials or a fragment");
+    } catch {
+      errors.push("Publisher update metadata URL must be a valid HTTPS URL");
+    }
+    if (!evidence.fileName || evidence.fileName === "." || evidence.fileName === ".." || /[\\/]/.test(evidence.fileName)) errors.push("Publisher update metadata file name must be a direct child file");
+    if (!SHA256.test(evidence.sha256)) errors.push("Publisher update metadata SHA-256 is invalid");
+    const parsed = parseJson(evidence.text, "current", errors) as { id?: unknown; rowsUpdatedAt?: unknown } | null;
+    const datasetIds = new Set(Object.values(provenance.sourceUrls).map((url) => url.match(/\/resource\/([a-z0-9-]+)\.json/i)?.[1]).filter(Boolean));
+    if (datasetIds.size !== 1 || !datasetIds.has(String(parsed?.id ?? ""))) errors.push("Socrata publisher metadata does not identify the configured dataset");
+    const epochSeconds = parsed?.rowsUpdatedAt;
+    const timestamp = typeof epochSeconds === "number" && Number.isSafeInteger(epochSeconds) && epochSeconds > 0
+      ? new Date(epochSeconds * 1_000)
+      : null;
+    if (!timestamp || !Number.isFinite(timestamp.getTime())) errors.push("Socrata publisher metadata rowsUpdatedAt is invalid");
+    else values.push(timestamp.toISOString().slice(0, 10));
+  } else {
+    errors.push("Publisher update evidence method is unsupported");
+  }
+
+  if (!errors.length && (values.length !== (evidence.method === "RAW_RESPONSE_PAIR" ? 2 : 1) || new Set(values).size !== 1)) {
+    errors.push("Publisher update evidence does not resolve to one date across the governed source responses");
+  }
+  return { value: errors.length ? null : values[0], errors };
+}
+
+export function externalSourceUpdateBindingErrors(provenance: ExternalSourceProvenance) {
+  const errors: string[] = [];
+  if (provenance.sourceLastUpdated) {
+    if (provenance.sourceLastUpdatedBasis !== "PUBLISHER_REPORTED") errors.push("A source last-updated date must be labeled as publisher reported");
+    if (!isIsoCalendarDate(provenance.sourceLastUpdated)) errors.push("A publisher-reported source update date must be a valid ISO calendar date");
+    if (provenance.sourceLastUpdatedNotReportedReason?.trim()) errors.push("A reported source update date cannot also carry a not-reported reason");
+    const extracted = extractPublisherSourceLastUpdated(provenance);
+    errors.push(...extracted.errors);
+    if (extracted.value && extracted.value !== provenance.sourceLastUpdated) errors.push("Publisher update evidence does not match the declared source update date");
+  } else {
+    if (provenance.sourceLastUpdatedBasis !== "NOT_SEPARATELY_REPORTED") errors.push("A missing source last-updated date must be labeled as not separately reported");
+    if (!provenance.sourceLastUpdatedNotReportedReason?.trim()) errors.push("A missing source last-updated date requires a not-reported reason");
+    if (provenance.sourceLastUpdatedEvidence) errors.push("A source without a reported update date cannot carry publisher update evidence");
+  }
+  return errors;
+}
+
 export function externalCleaningBindingError(provenance: ExternalSourceProvenance) {
   const expected = CLEANING_IMPLEMENTATION_BY_SOURCE[provenance.sourceType];
   if (!expected) return `Unsupported external source type: ${String(provenance.sourceType)}`;
   if (provenance.cleaning.implementation !== expected) return `External source type ${provenance.sourceType} must use cleaning implementation ${expected}`;
-  if (provenance.sourceLastUpdated) {
-    if (provenance.sourceLastUpdatedBasis !== "PUBLISHER_REPORTED") return "A source last-updated date must be labeled as publisher reported";
-    if (provenance.sourceLastUpdatedNotReportedReason?.trim()) return "A reported source update date cannot also carry a not-reported reason";
-  } else {
-    if (provenance.sourceLastUpdatedBasis !== "NOT_SEPARATELY_REPORTED") return "A missing source last-updated date must be labeled as not separately reported";
-    if (!provenance.sourceLastUpdatedNotReportedReason?.trim()) return "A missing source last-updated date requires a not-reported reason";
-  }
+  const sourceUpdateError = externalSourceUpdateBindingErrors(provenance)[0];
+  if (sourceUpdateError) return sourceUpdateError;
   return null;
 }
 

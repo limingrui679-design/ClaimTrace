@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -2057,7 +2057,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.1.0",
+    "schemaVersion": "claimtrace-external-source/2.2.0",
     "sourceType": "CDC_PLACES_SOCRATA_V1",
     "publisher": "U.S. Centers for Disease Control and Prevention",
     "dataset": "PLACES: Local Data for Better Health, County Data",
@@ -2065,7 +2065,8 @@
       "id": "DEPRESSION-AGE-ADJUSTED-PREVALENCE",
       "name": "Age-adjusted prevalence of depression among adults"
     },
-    "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "retrievedAt": "2026-08-11T11:07:43.655Z",
+    "sourceLastUpdated": null,
     "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
     "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
     "sourceUrls": {
@@ -2118,14 +2119,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "ceab444169098c399ccec48382e35a747bfd09588595c3fda7ffd4ad3047b858",
+    "payloadHash": "4a975b4eda2f112001246a9864cc1bc85e2a258607621f5c4f07a7874af9d070",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "664dd61920964b959749dbd543886483e7d4b8f22742046480793b5fbb02604a",
       "claims": "7070fa8ac7f3de309e64a030860d61546a003bd3f379a63876cf81c5b1c1892c",
       "decisions": "069a9d5bb28b9a373f97037de3048c0e5b9bbf1f9a24119db4c89e729d202173",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "bc834122bf8b7a15a2ac0eec764cf94000d715f196066704f071712e0f94f24b",
+      "provenance": "2b5eb830d70348ba65beda9f2a429ee91a4b5d2c8eea3a8752bc3b3c8a19a99c",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

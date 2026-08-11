@@ -18,7 +18,7 @@ Normal generation is offline and rebuilds the CSV snapshots from the committed r
 - Publisher: U.S. Centers for Disease Control and Prevention
 - Dataset: PLACES: Local Data for Better Health, County Data
 - Measure: DEPRESSION-AGE-ADJUSTED-PREVALENCE — Age-adjusted prevalence of depression among adults
-- Retrieved: 2026-08-10T00:00:00.000Z
+- Retrieved: 2026-08-11T11:07:43.655Z
 - License: U.S. Government public data; CDC data-use terms apply (https://www.cdc.gov/other/agencymaterials.html)
 - Baseline source: https://data.cdc.gov/resource/fu4u-a9bh.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid
 - Current source: https://data.cdc.gov/resource/swc5-untb.json?$select=year%2Cstateabbr%2Clocationname%2Clocationid%2Cmeasureid%2Cdatavaluetypeid%2Cdata_value%2Clow_confidence_limit%2Chigh_confidence_limit%2Ctotalpop18plus&$where=measureid%3D%27DEPRESSION%27%20AND%20datavaluetypeid%3D%27AgeAdjPrv%27%20AND%20locationid%20in%28%2706037%27%2C%2706075%27%2C%2717031%27%2C%2725017%27%2C%2736061%27%2C%2748201%27%2C%2704013%27%2C%2753033%27%29&$order=locationid

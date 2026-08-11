@@ -10,9 +10,14 @@ const SIDES: SnapshotSide[] = ["baseline", "current"];
 const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const sha256 = (content: string | Buffer) => createHash("sha256").update(content).digest("hex");
 
-interface SourceConfig extends Omit<ExternalSourceProvenance, "schemaVersion" | "rawArtifacts"> {
-  schemaVersion: "claimtrace-external-source-config/2.1.0";
+type SourceLastUpdatedEvidenceConfig =
+  | { method: "RAW_RESPONSE_PAIR" }
+  | { method: "PUBLISHER_METADATA"; sourceUrl: string; fileName: string };
+
+interface SourceConfig extends Omit<ExternalSourceProvenance, "schemaVersion" | "rawArtifacts" | "sourceLastUpdatedEvidence"> {
+  schemaVersion: "claimtrace-external-source-config/2.2.0";
   rawFiles: Record<SnapshotSide, string>;
+  sourceLastUpdatedEvidence?: SourceLastUpdatedEvidenceConfig;
 }
 
 const caseIds = (await readdir(CASES, { withFileTypes: true }))
@@ -30,14 +35,23 @@ for (const caseId of caseIds) {
     continue;
   }
   const config = JSON.parse(configText) as SourceConfig;
-  if (config.schemaVersion !== "claimtrace-external-source-config/2.1.0") throw new Error(`${caseId}: unsupported source-config schema`);
+  if (config.schemaVersion !== "claimtrace-external-source-config/2.2.0") throw new Error(`${caseId}: unsupported source-config schema`);
   const rawArtifacts = await Promise.all(SIDES.map(async (side) => {
     const fileName = config.rawFiles[side];
     const text = await readFile(path.join(directory, fileName), "utf8");
     return { side, fileName, sha256: sha256(text), text };
   }));
+  let sourceLastUpdatedEvidence: ExternalSourceProvenance["sourceLastUpdatedEvidence"];
+  if (config.sourceLastUpdatedEvidence?.method === "RAW_RESPONSE_PAIR") {
+    sourceLastUpdatedEvidence = { method: "RAW_RESPONSE_PAIR" };
+  } else if (config.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA") {
+    const { sourceUrl, fileName } = config.sourceLastUpdatedEvidence;
+    if (!fileName || fileName === "." || fileName === ".." || path.basename(fileName) !== fileName) throw new Error(`${caseId}: publisher update metadata file must be a direct child file`);
+    const text = await readFile(path.join(directory, fileName), "utf8");
+    sourceLastUpdatedEvidence = { method: "PUBLISHER_METADATA", sourceUrl, fileName, sha256: sha256(text), text };
+  }
   const provenance: ExternalSourceProvenance = {
-    schemaVersion: "claimtrace-external-source/2.1.0",
+    schemaVersion: "claimtrace-external-source/2.2.0",
     sourceType: config.sourceType,
     publisher: config.publisher,
     dataset: config.dataset,
@@ -46,6 +60,7 @@ for (const caseId of caseIds) {
     sourceLastUpdated: config.sourceLastUpdated,
     sourceLastUpdatedBasis: config.sourceLastUpdatedBasis,
     sourceLastUpdatedNotReportedReason: config.sourceLastUpdatedNotReportedReason,
+    sourceLastUpdatedEvidence,
     sourceUrls: config.sourceUrls,
     license: config.license,
     licenseUrl: config.licenseUrl,

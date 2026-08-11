@@ -10,11 +10,12 @@ import { refreshPublicDataSources } from "../tools/refresh-public-data-sources";
 
 const REFRESHED_AT = "2026-08-11T01:02:03.000Z";
 const LAST_UPDATED = "2026-07-13";
+const NEW_LAST_UPDATED = "2026-08-10";
 const TEST_FILE_OPERATIONS = { lstat, mkdir, readFile, readdir, rename, rmdir, unlink, writeFile };
 
-function worldBankResponse(year: string, value: number) {
+function worldBankResponse(year: string, value: number, lastUpdated = LAST_UPDATED) {
   return JSON.stringify([
-    { page: 1, pages: 1, per_page: 1000, total: 1, sourceid: "2", lastupdated: LAST_UPDATED },
+    { page: 1, pages: 1, per_page: 1000, total: 1, sourceid: "2", lastupdated: lastUpdated },
     [{
       indicator: { id: "SP.DYN.LE00.IN", value: "Life expectancy at birth, total (years)" },
       country: { id: "US", value: "United States" },
@@ -47,11 +48,12 @@ async function makeFixture() {
     },
   };
   const config = {
-    schemaVersion: "claimtrace-external-source-config/2.1.0",
+    schemaVersion: "claimtrace-external-source-config/2.2.0",
     sourceType: "WORLD_BANK_INDICATORS_API_V2",
     retrievedAt: "2026-08-10T00:00:00.000Z",
     sourceLastUpdated: LAST_UPDATED,
     sourceLastUpdatedBasis: "PUBLISHER_REPORTED",
+    sourceLastUpdatedEvidence: { method: "RAW_RESPONSE_PAIR" },
     sourceUrls: {
       baseline: "https://example.test/baseline",
       current: "https://example.test/current",
@@ -66,7 +68,7 @@ async function makeFixture() {
   const oldBaseline = worldBankResponse("2019", 78.8);
   const oldCurrent = worldBankResponse("2024", 78.9);
   const provenance = {
-    schemaVersion: "claimtrace-external-source/2.1.0",
+    schemaVersion: "claimtrace-external-source/2.2.0",
     sourceType: config.sourceType,
     publisher: "World Bank",
     dataset: "World Development Indicators",
@@ -74,6 +76,7 @@ async function makeFixture() {
     retrievedAt: config.retrievedAt,
     sourceLastUpdated: LAST_UPDATED,
     sourceLastUpdatedBasis: "PUBLISHER_REPORTED",
+    sourceLastUpdatedEvidence: { method: "RAW_RESPONSE_PAIR" },
     sourceUrls: config.sourceUrls,
     license: "CC BY 4.0",
     licenseUrl: "https://example.test/license",
@@ -92,11 +95,95 @@ async function makeFixture() {
   return { casesDirectory, directory, oldBaseline, oldCurrent };
 }
 
-test("source refresh replaces both snapshots and records the actual retrieval time", async () => {
+function usdotResponse(year: string, ridership: number) {
+  return JSON.stringify([{
+    _5_digit_ntd_id: "10003",
+    agency: "Test Transit",
+    mode_name: "Heavy Rail",
+    type_of_service: "DO",
+    year,
+    month: "May",
+    month_year: `${year}-05-01T00:00:00.000`,
+    vehicle_revenue_hours: "100",
+    ridership: String(ridership),
+  }]);
+}
+
+function socrataMetadata(date: string) {
+  return JSON.stringify({ id: "5ti2-5uiv", name: "Monthly Modal Time Series", rowsUpdatedAt: Date.parse(`${date}T12:00:00Z`) / 1_000 });
+}
+
+async function makeSocrataFixture() {
+  const casesDirectory = await mkdtemp(path.join(os.tmpdir(), "claimtrace-socrata-refresh-test-"));
+  const directory = path.join(casesDirectory, "public-case");
+  await mkdir(directory);
+  const oldDate = "2026-07-07";
+  const oldBaseline = usdotResponse("2024", 1_000);
+  const oldCurrent = usdotResponse("2025", 1_100);
+  const oldMetadata = socrataMetadata(oldDate);
+  const sourceUrls = {
+    baseline: "https://example.test/resource/5ti2-5uiv.json?side=baseline",
+    current: "https://example.test/resource/5ti2-5uiv.json?side=current",
+  };
+  const rawFiles = { baseline: "raw-baseline.json", current: "raw-current.json" };
+  const sourceLastUpdatedEvidence = {
+    method: "PUBLISHER_METADATA",
+    sourceUrl: "https://example.test/api/views/5ti2-5uiv",
+    fileName: "raw-source-metadata.json",
+  };
+  const cleaning = {
+    implementation: "usdot-ntd-monthly-v1",
+    scriptPath: "tools/generate-public-data-cases.ts",
+    parameters: { baselineYear: "2024", currentYear: "2025", month: "May", selectedNtdIds: ["10003"], decimalPlaces: 2 },
+  };
+  const config = {
+    schemaVersion: "claimtrace-external-source-config/2.2.0",
+    sourceType: "USDOT_NTD_SOCRATA_V1",
+    retrievedAt: "2026-08-10T00:00:00.000Z",
+    sourceLastUpdated: oldDate,
+    sourceLastUpdatedBasis: "PUBLISHER_REPORTED",
+    sourceLastUpdatedEvidence,
+    sourceUrls,
+    rawFiles,
+    cleaning,
+  };
+  const provenance = {
+    schemaVersion: "claimtrace-external-source/2.2.0",
+    sourceType: config.sourceType,
+    publisher: "Federal Transit Administration",
+    dataset: "Monthly Modal Time Series",
+    measure: { id: "ridership", name: "Ridership per vehicle-revenue hour" },
+    retrievedAt: config.retrievedAt,
+    sourceLastUpdated: oldDate,
+    sourceLastUpdatedBasis: "PUBLISHER_REPORTED",
+    sourceLastUpdatedEvidence: { ...sourceLastUpdatedEvidence, sha256: textSha256(oldMetadata), text: oldMetadata },
+    sourceUrls,
+    license: "U.S. Government public data",
+    licenseUrl: "https://example.test/license",
+    attribution: "USDOT test fixture",
+    limitations: ["Test fixture only."],
+    cleaning,
+    rawArtifacts: [
+      { side: "baseline", fileName: rawFiles.baseline, sha256: textSha256(oldBaseline), text: oldBaseline },
+      { side: "current", fileName: rawFiles.current, sha256: textSha256(oldCurrent), text: oldCurrent },
+    ],
+  };
+  const files = {
+    "source-config.json": `${JSON.stringify(config, null, 2)}\n`,
+    "source-metadata.json": `${JSON.stringify(provenance, null, 2)}\n`,
+    [rawFiles.baseline]: oldBaseline,
+    [rawFiles.current]: oldCurrent,
+    [sourceLastUpdatedEvidence.fileName]: oldMetadata,
+  };
+  await Promise.all(Object.entries(files).map(([fileName, content]) => writeFile(path.join(directory, fileName), content, "utf8")));
+  return { casesDirectory, directory, files };
+}
+
+test("source refresh replaces both snapshots and atomically records retrieval and publisher dates", async () => {
   const fixture = await makeFixture();
   try {
-    const newBaseline = worldBankResponse("2019", 79.1);
-    const newCurrent = worldBankResponse("2024", 79.4);
+    const newBaseline = worldBankResponse("2019", 79.1, NEW_LAST_UPDATED);
+    const newCurrent = worldBankResponse("2024", 79.4, NEW_LAST_UPDATED);
     const fetcher = (async (input: string | URL | Request) => {
       return new Response(String(input).endsWith("baseline") ? newBaseline : newCurrent, { status: 200 });
     }) as typeof fetch;
@@ -111,7 +198,102 @@ test("source refresh replaces both snapshots and records the actual retrieval ti
     assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), newCurrent);
     const config = JSON.parse(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"));
     assert.equal(config.retrievedAt, REFRESHED_AT);
+    assert.equal(config.sourceLastUpdated, NEW_LAST_UPDATED);
     assert.equal(config.retainedField, "preserved");
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects invalid or disagreeing publisher dates before replacing any file", async () => {
+  for (const [label, baselineDate, currentDate, expected] of [
+    ["invalid", "not-a-date", NEW_LAST_UPDATED, /World Bank lastupdated is not a valid ISO calendar date/],
+    ["mismatch", LAST_UPDATED, NEW_LAST_UPDATED, /does not resolve to one date/],
+  ] as const) {
+    const fixture = await makeFixture();
+    try {
+      const originalConfig = await readFile(path.join(fixture.directory, "source-config.json"), "utf8");
+      await assert.rejects(
+        refreshPublicDataSources({
+          casesDirectory: fixture.casesDirectory,
+          requestedCaseIds: ["public-case"],
+          fetcher: (async (input: string | URL | Request) => new Response(
+            String(input).endsWith("baseline")
+              ? worldBankResponse("2019", 79.1, baselineDate)
+              : worldBankResponse("2024", 79.4, currentDate),
+            { status: 200 },
+          )) as typeof fetch,
+        }),
+        expected,
+        label,
+      );
+      assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
+      assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
+      assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
+    } finally {
+      await rm(fixture.casesDirectory, { recursive: true, force: true });
+    }
+  }
+});
+
+test("Socrata metadata, source pair, and publisher date commit as one four-file transaction", async () => {
+  const fixture = await makeSocrataFixture();
+  try {
+    const nextDate = "2026-08-10";
+    const nextBaseline = usdotResponse("2024", 1_200);
+    const nextCurrent = usdotResponse("2025", 1_300);
+    const nextMetadata = socrataMetadata(nextDate);
+    await refreshPublicDataSources({
+      casesDirectory: fixture.casesDirectory,
+      requestedCaseIds: ["public-case"],
+      fetcher: (async (input: string | URL | Request) => {
+        const url = String(input);
+        if (url.includes("/api/views/")) return new Response(nextMetadata, { status: 200 });
+        return new Response(url.includes("side=baseline") ? nextBaseline : nextCurrent, { status: 200 });
+      }) as typeof fetch,
+      now: () => new Date(REFRESHED_AT),
+    });
+    assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), nextBaseline);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), nextCurrent);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-source-metadata.json"), "utf8"), nextMetadata);
+    const config = JSON.parse(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"));
+    assert.equal(config.retrievedAt, REFRESHED_AT);
+    assert.equal(config.sourceLastUpdated, nextDate);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("Socrata four-file refresh rolls back the source pair, metadata, and dates together", async () => {
+  const fixture = await makeSocrataFixture();
+  try {
+    let promotions = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async (input: string | URL | Request) => {
+          const url = String(input);
+          if (url.includes("/api/views/")) return new Response(socrataMetadata("2026-08-10"), { status: 200 });
+          return new Response(url.includes("side=baseline") ? usdotResponse("2024", 1_200) : usdotResponse("2025", 1_300), { status: 200 });
+        }) as typeof fetch,
+        fileOperations: {
+          ...TEST_FILE_OPERATIONS,
+          rename: async (source, target) => {
+            if (String(source).endsWith(".new")) {
+              promotions += 1;
+              if (promotions === 4) throw new Error("injected fourth-file replacement failure");
+            }
+            await rename(source, target);
+          },
+        },
+      }),
+      /injected fourth-file replacement failure/,
+    );
+    for (const [fileName, content] of Object.entries(fixture.files)) {
+      assert.equal(await readFile(path.join(fixture.directory, fileName), "utf8"), content, fileName);
+    }
+    assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.includes(".claimtrace-refresh-")), []);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
   }
@@ -210,7 +392,7 @@ test("source refresh rejects malformed nonempty content before replacing any cas
         fetcher,
         now: () => new Date(REFRESHED_AT),
       }),
-      /public-case:baseline: source content failed cleaning validation/,
+      /public-case: publisher update-date extraction failed|public-case:baseline: source content failed cleaning validation/,
     );
     assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
     assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
@@ -298,6 +480,33 @@ test("source refresh rejects unsafe URLs, redirects, and oversized responses bef
     assert.equal(downloads, 0);
   } finally {
     await rm(unsafeUrlFixture.casesDirectory, { recursive: true, force: true });
+  }
+
+  const unsafeMetadataUrlFixture = await makeSocrataFixture();
+  try {
+    const configPath = path.join(unsafeMetadataUrlFixture.directory, "source-config.json");
+    const metadataPath = path.join(unsafeMetadataUrlFixture.directory, "source-metadata.json");
+    const config = JSON.parse(await readFile(configPath, "utf8"));
+    const metadata = JSON.parse(await readFile(metadataPath, "utf8"));
+    config.sourceLastUpdatedEvidence.sourceUrl = "http://example.test/api/views/5ti2-5uiv";
+    metadata.sourceLastUpdatedEvidence.sourceUrl = config.sourceLastUpdatedEvidence.sourceUrl;
+    await writeFile(configPath, `${JSON.stringify(config, null, 2)}\n`, "utf8");
+    await writeFile(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: unsafeMetadataUrlFixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response("not reached", { status: 200 });
+        }) as typeof fetch,
+      }),
+      /publisher update metadata URL must use HTTPS without embedded credentials/,
+    );
+    assert.equal(downloads, 0);
+  } finally {
+    await rm(unsafeMetadataUrlFixture.casesDirectory, { recursive: true, force: true });
   }
 
   const redirectedFixture = await makeFixture();
@@ -975,8 +1184,9 @@ test("source refresh rejects a symlinked final raw target before downloading", a
   }
 });
 
-test("source refresh restores an interrupted transaction before reading the case again", async () => {
+test("source refresh restores interrupted three- and four-file transactions before reading the case again", async () => {
   const fixture = await makeFixture();
+  const socrataFixture = await makeSocrataFixture();
   try {
     const newBaseline = worldBankResponse("2019", 79.1);
     const newCurrent = worldBankResponse("2024", 79.4);
@@ -1030,8 +1240,65 @@ test("source refresh restores an interrupted transaction before reading the case
     assert.equal(config.retrievedAt, REFRESHED_AT);
     assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")), []);
     assert.deepEqual((await readdir(fixture.casesDirectory)).filter((file) => file.startsWith(".claimtrace-refresh-lock")), []);
+
+    const nextSocrataBaseline = usdotResponse("2024", 1_200);
+    const nextSocrataCurrent = usdotResponse("2025", 1_300);
+    const nextSocrataMetadata = socrataMetadata("2026-08-10");
+    const socrataChildProgram = `
+      import { lstat, mkdir, readFile, readdir, rename, rmdir, unlink, writeFile } from "node:fs/promises";
+      import { refreshPublicDataSources } from ${JSON.stringify(refreshModuleUrl)};
+      let promotions = 0;
+      await refreshPublicDataSources({
+        casesDirectory: process.env.CLAIMTRACE_CRASH_CASES,
+        requestedCaseIds: ["public-case"],
+        fetcher: async (input) => {
+          const url = String(input);
+          if (url.includes("/api/views/")) return new Response(${JSON.stringify(nextSocrataMetadata)}, { status: 200 });
+          return new Response(url.includes("side=baseline") ? ${JSON.stringify(nextSocrataBaseline)} : ${JSON.stringify(nextSocrataCurrent)}, { status: 200 });
+        },
+        now: () => new Date(${JSON.stringify(REFRESHED_AT)}),
+        fileOperations: {
+          lstat, mkdir, readFile, readdir, rmdir, unlink, writeFile,
+          rename: async (source, target) => {
+            await rename(source, target);
+            if (String(source).endsWith(".new")) {
+              promotions += 1;
+              if (promotions === 1) process.exit(86);
+            }
+          },
+        },
+      });
+    `;
+    const socrataChild = spawnSync(process.execPath, ["--import", "tsx", "--input-type=module", "--eval", socrataChildProgram], {
+      cwd: path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
+      env: { ...process.env, CLAIMTRACE_CRASH_CASES: socrataFixture.casesDirectory },
+      encoding: "utf8",
+      timeout: 30_000,
+    });
+    assert.equal(socrataChild.status, 86, `child stderr:\n${socrataChild.stderr}`);
+    await assert.rejects(readFile(path.join(socrataFixture.directory, "source-config.json"), "utf8"), { code: "ENOENT" });
+    assert.equal((await readdir(socrataFixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")).length, 1);
+
+    const socrataResult = await refreshPublicDataSources({
+      casesDirectory: socrataFixture.casesDirectory,
+      requestedCaseIds: ["public-case"],
+      fetcher: (async (input: string | URL | Request) => {
+        const url = String(input);
+        if (url.includes("/api/views/")) return new Response(nextSocrataMetadata, { status: 200 });
+        return new Response(url.includes("side=baseline") ? nextSocrataBaseline : nextSocrataCurrent, { status: 200 });
+      }) as typeof fetch,
+      now: () => new Date(REFRESHED_AT),
+    });
+    assert.deepEqual(socrataResult, { refreshed: 1, retrievedCaseIds: ["public-case"] });
+    assert.equal(await readFile(path.join(socrataFixture.directory, "raw-baseline.json"), "utf8"), nextSocrataBaseline);
+    assert.equal(await readFile(path.join(socrataFixture.directory, "raw-current.json"), "utf8"), nextSocrataCurrent);
+    assert.equal(await readFile(path.join(socrataFixture.directory, "raw-source-metadata.json"), "utf8"), nextSocrataMetadata);
+    const socrataConfig = JSON.parse(await readFile(path.join(socrataFixture.directory, "source-config.json"), "utf8"));
+    assert.equal(socrataConfig.sourceLastUpdated, "2026-08-10");
+    assert.deepEqual((await readdir(socrataFixture.directory)).filter((file) => file.startsWith(".claimtrace-refresh-")), []);
   } finally {
     await rm(fixture.casesDirectory, { recursive: true, force: true });
+    await rm(socrataFixture.casesDirectory, { recursive: true, force: true });
   }
 });
 

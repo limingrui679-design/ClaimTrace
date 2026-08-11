@@ -1,10 +1,10 @@
 {
   "schemaVersion": "claimtrace-cleaning-log/2.0.0",
-  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatedAt": "2026-08-11T11:07:55.527Z",
   "caseId": "us-treasury-yield-curve",
   "sourceType": "US_TREASURY_YIELD_CURVE_XML_V1",
   "implementation": "treasury-yield-curve-v1",
-  "sourceConfigSha256": "f564c5c7f4869b4ff347dbe5f88a288afde60bb1e1865da2786366c853dbe064",
+  "sourceConfigSha256": "6f043bf39840d5a98ac78e3443abb04c3c37880e6d017981a326b2200194435e",
   "transformations": {
     "baseline": [
       "Parse pinned U.S. Treasury Atom/XML yield-curve feed",
@@ -25,13 +25,13 @@
     {
       "side": "baseline",
       "fileName": "raw-2024.xml",
-      "sha256": "3d77ebdb32fba00bf4f2211af3ea8924f275518c00f2faa53698b9336d180c36",
+      "sha256": "b5ce6157ede50096bf7b05e513918762c137e627eff1342b414f637fb82098dd",
       "bytes": 284423
     },
     {
       "side": "current",
       "fileName": "raw-2025.xml",
-      "sha256": "ac0a8ea1a70b6a22e05aa52513188076b2eddfde5e340bd17db71b48cb3df5a5",
+      "sha256": "2157ae09266ef8bea40aaad92ff6851ed08ee3fb41262b0a7cb6f2733a968f04",
       "bytes": 345104
     }
   ],

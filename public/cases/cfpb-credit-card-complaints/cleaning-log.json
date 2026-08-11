@@ -1,10 +1,10 @@
 {
   "schemaVersion": "claimtrace-cleaning-log/2.0.0",
-  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatedAt": "2026-08-11T11:07:44.743Z",
   "caseId": "cfpb-credit-card-complaints",
   "sourceType": "CFPB_COMPLAINT_TRENDS_V1",
   "implementation": "cfpb-complaint-trends-v1",
-  "sourceConfigSha256": "147a6653f06de207c48b1fb6bf88c3e07b51222f5c13f462eee515123e2d5136",
+  "sourceConfigSha256": "11a23b0b6c9dc2c064ac620ca1c74d80fab36a58a872ed9fed4f1276e4a8d223",
   "transformations": {
     "baseline": [
       "Parse pinned CFPB complaint-trends aggregation JSON",
@@ -25,13 +25,13 @@
     {
       "side": "baseline",
       "fileName": "raw-2024-h1.json",
-      "sha256": "55ebe9ef006351b7f4818afd6357fec6fdc6b08223c1ae3b8a04b1e8f7eb7ed0",
+      "sha256": "9c7926796ed8ac400dca5d1b3e2e07116fa91069d489352ef4fa2bfd865fd67b",
       "bytes": 36032
     },
     {
       "side": "current",
       "fileName": "raw-2025-h1.json",
-      "sha256": "61a5b9a0806253916a552ba00c1f94757b08b05a4eeb654b38f87344e66b881c",
+      "sha256": "f5636859874bf581cd8265c5c914f815e459d3d26c218a39a284503878a67da2",
       "bytes": 36048
     }
   ],

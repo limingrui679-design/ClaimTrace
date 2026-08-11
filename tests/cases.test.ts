@@ -71,6 +71,54 @@ for (const definition of EXECUTABLE_CASES.filter((item) => item.dataOrigin === "
   });
 }
 
+test("publisher-reported update dates remain bound after a full bundle rehash", async () => {
+  for (const caseId of ["world-bank-life-expectancy", "usdot-transit-operations", "us-treasury-yield-curve"]) {
+    const bundle = JSON.parse(await readFile(path.join(CASES, caseId, "evidence-package.json"), "utf8"));
+    for (const sourceLastUpdated of ["not-a-date", "2000-01-01"]) {
+      const copy = structuredClone(bundle);
+      copy.externalSource.sourceLastUpdated = sourceLastUpdated;
+      copy.integrity.sectionHashes.provenance = await sha256Canonical(copy.externalSource);
+      const payload = Object.fromEntries(Object.entries(copy).filter(([key]) => key !== "integrity"));
+      copy.integrity.payloadHash = await sha256Canonical(payload);
+      const verification = await verifyEvidencePackage(copy);
+      assert.equal(verification.valid, false, `${caseId}:${sourceLastUpdated}`);
+      assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
+    }
+  }
+
+  const treasury = JSON.parse(await readFile(path.join(CASES, "us-treasury-yield-curve", "evidence-package.json"), "utf8"));
+  for (const replacement of ["2026-02-31T15:47:41Z", "2026-08-09T15:47:41Z"]) {
+    const copy = structuredClone(treasury);
+    const artifact = copy.externalSource.rawArtifacts.find((item: { side: string }) => item.side === "baseline");
+    artifact.text = artifact.text.replace(/<updated>[^<]+<\/updated>/, `<updated>${replacement}</updated>`);
+    artifact.sha256 = createHash("sha256").update(artifact.text).digest("hex");
+    copy.integrity.sectionHashes.provenance = await sha256Canonical(copy.externalSource);
+    const payload = Object.fromEntries(Object.entries(copy).filter(([key]) => key !== "integrity"));
+    copy.integrity.payloadHash = await sha256Canonical(payload);
+    const verification = await verifyEvidencePackage(copy);
+    assert.equal(verification.valid, false, replacement);
+    assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
+  }
+});
+
+test("USDOT publisher metadata identity, timestamp, and hash remain independently bound", async () => {
+  const bundle = JSON.parse(await readFile(path.join(CASES, "usdot-transit-operations", "evidence-package.json"), "utf8"));
+  for (const mutate of [
+    (copy: typeof bundle) => { copy.externalSource.sourceLastUpdatedEvidence.text = copy.externalSource.sourceLastUpdatedEvidence.text.replace(/"id"\s*:\s*"5ti2-5uiv"/, '"id":"wrong-id"'); },
+    (copy: typeof bundle) => { copy.externalSource.sourceLastUpdatedEvidence.text = copy.externalSource.sourceLastUpdatedEvidence.text.replace(/"rowsUpdatedAt"\s*:\s*\d+/, '"rowsUpdatedAt":0'); },
+  ]) {
+    const copy = structuredClone(bundle);
+    mutate(copy);
+    copy.externalSource.sourceLastUpdatedEvidence.sha256 = createHash("sha256").update(copy.externalSource.sourceLastUpdatedEvidence.text).digest("hex");
+    copy.integrity.sectionHashes.provenance = await sha256Canonical(copy.externalSource);
+    const payload = Object.fromEntries(Object.entries(copy).filter(([key]) => key !== "integrity"));
+    copy.integrity.payloadHash = await sha256Canonical(payload);
+    const verification = await verifyEvidencePackage(copy);
+    assert.equal(verification.valid, false);
+    assert.equal(verification.checks.find((check: { name: string }) => check.name === "external-source-lineage")?.passed, false);
+  }
+});
+
 test("external cleaners reject invalid parameters and source-type bindings without throwing", async () => {
   const worldBank = JSON.parse(await readFile(path.join(CASES, "world-bank-life-expectancy", "source-metadata.json"), "utf8"));
   worldBank.cleaning.parameters.decimalPlaces = 101;

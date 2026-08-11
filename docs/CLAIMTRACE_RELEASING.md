@@ -12,7 +12,7 @@ npm audit --omit=dev --audit-level=high
 npm audit --audit-level=high
 ```
 
-`npm run ci` must finish with generated fixtures unchanged, 150 passing unit/integration tests, 2 passing built-artifact checks, separate passing read-only and writable Chromium flows, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
+`npm run ci` must finish with generated fixtures unchanged, 155 passing unit/integration tests, 2 passing built-artifact checks, separate passing read-only and writable Chromium flows, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
 
 The corresponding GitHub Actions run must point to the release commit, finish successfully, retain coverage and both browser-mode artifacts, and contain no Action-runtime deprecation annotation. Official Actions remain pinned to complete commit SHAs rather than floating tags.
 
@@ -64,4 +64,18 @@ npm run test:browser
 - Record the ZIP SHA-256 after packaging.
 - Create a version tag only after the tag name, `package.json`, changelog heading, generated artifacts, tested archive, and repository commit refer to the same source version.
 
-An unpushed local tag is not a GitHub Release. A hosted preview is not evidence of production use, authenticated governance, or institutional deployment.
+An unpushed local tag is not a GitHub Release. After the exact release commit passes both local clean-archive verification and GitHub Actions, create a commit-bound archive and publish it with its checksum and `docs/RELEASE_NOTES.md`:
+
+```bash
+release_tag="v0.10.1"
+release_sha="$(git rev-parse "$release_tag^{commit}")"
+short_sha="${release_sha:0:7}"
+archive="ClaimTrace-GitHub_${release_tag}_${short_sha}.zip"
+git archive --format=zip --prefix=ClaimTrace-GitHub/ --output="$archive" "$release_sha"
+unzip -t "$archive"
+test "$(unzip -z "$archive" | sed -n '2p')" = "$release_sha"
+shasum -a 256 "$archive" > "$archive.sha256"
+gh release create "$release_tag" "$archive" "$archive.sha256" --verify-tag --title "ClaimTrace $release_tag" --notes-file docs/RELEASE_NOTES.md
+```
+
+Re-open the public release and independently download and checksum both assets before treating the handoff as complete. A GitHub Release or hosted preview is not evidence of production use, authenticated governance, external adoption, or institutional deployment.

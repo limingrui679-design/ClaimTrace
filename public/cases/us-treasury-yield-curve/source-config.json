@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source-config/2.1.0",
+  "schemaVersion": "claimtrace-external-source-config/2.2.0",
   "sourceType": "US_TREASURY_YIELD_CURVE_XML_V1",
   "publisher": "U.S. Department of the Treasury",
   "dataset": "Daily Treasury Par Yield Curve Rates",
@@ -7,9 +7,12 @@
     "id": "DAILY-TREASURY-PAR-YIELD-CURVE",
     "name": "Year-end Treasury par yields by maturity"
   },
-  "retrievedAt": "2026-08-10T00:00:00.000Z",
-  "sourceLastUpdated": "2026-08-07",
+  "retrievedAt": "2026-08-11T11:07:55.527Z",
+  "sourceLastUpdated": "2026-08-10",
   "sourceLastUpdatedBasis": "PUBLISHER_REPORTED",
+  "sourceLastUpdatedEvidence": {
+    "method": "RAW_RESPONSE_PAIR"
+  },
   "sourceUrls": {
     "baseline": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2024",
     "current": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2025"
@@ -30,15 +33,51 @@
       "currentDate": "2025-12-31",
       "decimalPlaces": 2,
       "maturities": [
-        {"code": "1M", "label": "1 month", "xmlField": "BC_1MONTH"},
-        {"code": "3M", "label": "3 months", "xmlField": "BC_3MONTH"},
-        {"code": "6M", "label": "6 months", "xmlField": "BC_6MONTH"},
-        {"code": "1Y", "label": "1 year", "xmlField": "BC_1YEAR"},
-        {"code": "2Y", "label": "2 years", "xmlField": "BC_2YEAR"},
-        {"code": "5Y", "label": "5 years", "xmlField": "BC_5YEAR"},
-        {"code": "10Y", "label": "10 years", "xmlField": "BC_10YEAR"},
-        {"code": "20Y", "label": "20 years", "xmlField": "BC_20YEAR"},
-        {"code": "30Y", "label": "30 years", "xmlField": "BC_30YEAR"}
+        {
+          "code": "1M",
+          "label": "1 month",
+          "xmlField": "BC_1MONTH"
+        },
+        {
+          "code": "3M",
+          "label": "3 months",
+          "xmlField": "BC_3MONTH"
+        },
+        {
+          "code": "6M",
+          "label": "6 months",
+          "xmlField": "BC_6MONTH"
+        },
+        {
+          "code": "1Y",
+          "label": "1 year",
+          "xmlField": "BC_1YEAR"
+        },
+        {
+          "code": "2Y",
+          "label": "2 years",
+          "xmlField": "BC_2YEAR"
+        },
+        {
+          "code": "5Y",
+          "label": "5 years",
+          "xmlField": "BC_5YEAR"
+        },
+        {
+          "code": "10Y",
+          "label": "10 years",
+          "xmlField": "BC_10YEAR"
+        },
+        {
+          "code": "20Y",
+          "label": "20 years",
+          "xmlField": "BC_20YEAR"
+        },
+        {
+          "code": "30Y",
+          "label": "30 years",
+          "xmlField": "BC_30YEAR"
+        }
       ]
     }
   },

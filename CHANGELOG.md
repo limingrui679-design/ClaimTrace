@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.1 — 2026-08-11
+
+- required every publisher-reported update date to be a valid ISO calendar date and independently recomputable from retained source evidence rather than merely present inside a rehashed provenance object;
+- bound World Bank dates to both pinned API response headers, Treasury dates to both pinned Atom feed headers, and USDOT dates to a pinned official Socrata metadata response whose dataset identity, SHA-256, and `rowsUpdatedAt` value are verified;
+- extended source refresh so the source pair, optional publisher-metadata response, retrieval time, and extracted publisher date commit or roll back together under the existing content-hashed transaction protocol;
+- versioned the external-source and AuditBundle contracts as `2.2.0` and `2.5.0`, refreshed all six official sources, and regenerated all ten independently verified case packs;
+- added release notes and a formal GitHub Release handoff for a commit-bound source ZIP and SHA-256 file after complete local, clean-archive, and GitHub Actions verification; a public hosted demo is still not claimed;
+- expanded the suite to 155 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows while retaining 64/64 controlled scenarios and 512 fixed-seed property iterations.
+
 ## 0.10.0 — 2026-08-11
 
 - split the former 952-line UI and asynchronous workspace file into a 610-line application orchestrator, a 220-line view module, shared workspace configuration, and dedicated dataset-intent, case-loading, CSV-import, and verified-export services;

@@ -24,7 +24,7 @@ import { completeEvidence, recomputeClaim } from "../validation";
 import { evaluateDecision } from "../decision";
 import { applyReviewToClaim, applyReviewToDecision, enforceDecisionReleaseDependencies, verifyReviewChain } from "../governance";
 import { canonicalJson, jsonClone, sha256Canonical } from "../integrity";
-import { externalCleaningBindingError, rebuildExternalSnapshot } from "../external-source";
+import { externalCleaningBindingError, externalSourceUpdateBindingErrors, rebuildExternalSnapshot } from "../external-source";
 
 const MAX_EXPORTED_DIFFS = 500;
 export const MAX_RAW_BYTES_PER_SNAPSHOT = 500_000;
@@ -469,7 +469,7 @@ async function verifyExternalSourceLineage(dataset: DatasetVersion, provenance: 
   const errors: string[] = [];
   const required = dataset.dataOrigin === "PUBLIC";
   if (!provenance) return { applicable: required, valid: !required, errors: required ? ["Public-data case is missing external-source and cleaning lineage"] : errors };
-  if (provenance.schemaVersion !== "claimtrace-external-source/2.1.0") errors.push("External-source schema is invalid");
+  if (provenance.schemaVersion !== "claimtrace-external-source/2.2.0") errors.push("External-source schema is invalid");
   if (!Number.isFinite(Date.parse(provenance.retrievedAt))) errors.push("External-data retrieval time is invalid");
   if (!provenance.license.trim() || !/^https:\/\//.test(provenance.licenseUrl)) errors.push("External-data license statement is incomplete");
   if (!provenance.attribution.trim() || !provenance.publisher.trim() || !provenance.dataset.trim() || !provenance.measure.id.trim() || !provenance.measure.name.trim()) errors.push("External-data attribution, dataset, or measure information is missing");
@@ -481,8 +481,12 @@ async function verifyExternalSourceLineage(dataset: DatasetVersion, provenance: 
     if (!artifact.fileName.trim()) errors.push(`${artifact.side}: external raw-response file name is missing`);
     if (await sha256Text(artifact.text) !== artifact.sha256) errors.push(`${artifact.side}: external raw-response SHA-256 mismatch`);
   }
+  if (provenance.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA") {
+    if (await sha256Text(provenance.sourceLastUpdatedEvidence.text) !== provenance.sourceLastUpdatedEvidence.sha256) errors.push("Publisher update metadata SHA-256 mismatch");
+  }
+  errors.push(...externalSourceUpdateBindingErrors(provenance));
   const cleaningBindingError = externalCleaningBindingError(provenance);
-  if (cleaningBindingError) {
+  if (cleaningBindingError && !errors.includes(cleaningBindingError)) {
     errors.push(cleaningBindingError);
     return { applicable: true, valid: false, errors };
   }

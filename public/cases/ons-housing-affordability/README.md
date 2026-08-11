@@ -18,7 +18,7 @@ Normal generation is offline and rebuilds the CSV snapshots from the committed r
 - Publisher: Office for National Statistics
 - Dataset: Explore Local Statistics: housing affordability ratio
 - Measure: HOUSING-AFFORDABILITY-RATIO — Median house price to median workplace-based earnings ratio
-- Retrieved: 2026-08-10T00:00:00.000Z
+- Retrieved: 2026-08-11T11:07:45.932Z
 - License: Open Government Licence v3.0 (https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
 - Baseline source: https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2024-04-01
 - Current source: https://www.ons.gov.uk/explore-local-statistics/api/v1/data.csv?indicator=housing-affordability-ratio&geo=ltla&time=2025-04-01

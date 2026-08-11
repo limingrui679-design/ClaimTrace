@@ -1,10 +1,10 @@
 {
   "schemaVersion": "claimtrace-cleaning-log/2.0.0",
-  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatedAt": "2026-08-11T11:07:59.712Z",
   "caseId": "world-bank-life-expectancy",
   "sourceType": "WORLD_BANK_INDICATORS_API_V2",
   "implementation": "world-bank-indicator-v1",
-  "sourceConfigSha256": "23e9bf32a0a12ddcbb5cece908d0b427d431be00b4664dfb4a8fa006784e72ff",
+  "sourceConfigSha256": "f3c40c6e1a6f5257e35092883e7c492917604e383e6553e799560d05031c91c2",
   "transformations": {
     "baseline": [
       "Parse pinned World Bank Indicators API JSON",
@@ -23,14 +23,14 @@
     {
       "side": "baseline",
       "fileName": "raw-2019.json",
-      "sha256": "1d3099e857c9c9458f7b7d65d760a19c9949ef9e076483d70b55aac54b3dce7f",
-      "bytes": 1988
+      "sha256": "e3c17115c353b1dd9e391ba9bdf3ccec74ee48890e650e3fbad511eb0c6a23ec",
+      "bytes": 1898
     },
     {
       "side": "current",
       "fileName": "raw-2024.json",
-      "sha256": "c0bfd3f786d2ed938f0d44ab2b324e03217575f4f056b447efaf059ca6d2867d",
-      "bytes": 1988
+      "sha256": "0383ae17f52d3ebd701fc7a766f49f11c8980a827fb4f51cdfc96bb7a0b90a54",
+      "bytes": 1898
     }
   ],
   "outputs": {

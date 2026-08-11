@@ -1,10 +1,10 @@
 {
   "schemaVersion": "claimtrace-cleaning-log/2.0.0",
-  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatedAt": "2026-08-11T11:07:43.655Z",
   "caseId": "cdc-places-depression",
   "sourceType": "CDC_PLACES_SOCRATA_V1",
   "implementation": "cdc-places-county-v1",
-  "sourceConfigSha256": "d14d2d873ebcc379bd53b5d0c1c33221f76600466a8ab94976b0dc1e618de434",
+  "sourceConfigSha256": "0f1d7787b67b617c8dc0c918f6ad67efbf4a1ed6988d2b1035d05212a327ba99",
   "transformations": {
     "baseline": [
       "Parse pinned CDC PLACES Socrata JSON",

@@ -2,7 +2,7 @@
 
 > Versioned evidence and decision auditing for analytical claims.
 
-[Case catalog](public/cases/catalog.json) · [Portfolio handoff](docs/PORTFOLIO_HANDOFF.md) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
+[Latest release](https://github.com/limingrui679-design/ClaimTrace/releases/latest) · [Case catalog](public/cases/catalog.json) · [Portfolio handoff](docs/PORTFOLIO_HANDOFF.md) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) · [Controlled benchmark](benchmarks/results.json) · [Implementation status](#implementation-status) · [Release checklist](docs/CLAIMTRACE_RELEASING.md)
 
 ![ClaimTrace real browser walkthrough](docs/claimtrace-demo.gif)
 
@@ -60,7 +60,7 @@ npm audit --omit=dev
 npm audit
 ```
 
-`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 150 unit/integration tests, 2 built-artifact checks, separate read-only and writable real-Chromium acceptance flows, and coverage thresholds.
+`npm run ci` runs lint, TypeScript checking, deterministic fixture generation, the benchmark, a production build, 155 unit/integration tests, 2 built-artifact checks, separate read-only and writable real-Chromium acceptance flows, and coverage thresholds.
 
 ## Reproducible cases
 
@@ -94,23 +94,23 @@ Normal case generation is offline: it consumes the committed raw responses. Refr
 npm run cases:refresh-sources -- usdot-transit-operations
 ```
 
-For each selected case, the refresh command holds an exclusive refresh lock and restricts distinct raw-response targets to direct, regular files in the case-local `raw-*` namespace, preventing them from aliasing metadata or derived artifacts. Before downloading, it requires exactly one baseline and one current raw artifact, identical source type and cleaning definitions in `source-config.json` and `source-metadata.json`, and the registered cleaner for that source type. The source configuration, source metadata, final raw targets, lock directory, lock manifest, and transaction manifest are checked without following symbolic links. Source URLs must be valid HTTPS URLs without embedded credentials or fragments; redirects are rejected so the final endpoint must be pinned explicitly; and each downloaded response is capped at 8 MiB. The command downloads both source responses, runs the declared source-specific cleaner against each one before replacing either pinned response, and records the actual retrieval time in `source-config.json`. A concurrent invocation is rejected before it downloads; symbolic-linked lock paths, malformed lock or transaction identities, and nested raw paths, including paths through a symlinked parent, are likewise rejected before any network request. If either request fails, the peer request is aborted and the lock remains held until the pair settles. If either response fails, redirects, is empty, exceeds the response limit, or does not satisfy the source schema and cleaning parameters, the case files remain unchanged. The three-file replacement persists a version-2 per-case transaction manifest with the original and committed SHA-256 values. Automatic recovery accepts only the generated layout—two `raw-*` targets followed by `source-config.json`, with fixed indexed staging and backup names—so a forged manifest cannot redirect rollback into metadata or derived artifacts. An uncommitted refresh interrupted during replacement is hash-checked and restored before that case is read on the next invocation, while a committed refresh with unfinished cleanup is content-verified and cleaned. Legacy version-1 transaction state lacks those hashes, so it is reported and left untouched for manual resolution instead of being restored automatically. Cleanup failures and hash mismatches are reported instead of being treated as success. Run `npm run cases:generate` afterward to rebuild and verify the derived snapshots, manifests, and AuditBundles.
+For each selected case, the refresh command holds an exclusive refresh lock and restricts distinct raw-response targets to direct, regular files in the case-local `raw-*` namespace, preventing them from aliasing metadata or derived artifacts. Before downloading, it requires exactly one baseline and one current raw artifact, identical source type and cleaning definitions in `source-config.json` and `source-metadata.json`, and the registered cleaner for that source type. The source configuration, source metadata, final raw targets, lock directory, lock manifest, and transaction manifest are checked without following symbolic links. Source URLs must be valid HTTPS URLs without embedded credentials or fragments; redirects are rejected so the final endpoint must be pinned explicitly; and each downloaded response is capped at 8 MiB. The command downloads both source responses plus the official Socrata dataset metadata used by the USDOT case, runs the declared source-specific cleaner, extracts publisher dates from both World Bank or Treasury responses or the pinned USDOT metadata, and rejects invalid, mismatched, or wrong-dataset dates. A concurrent invocation is rejected before it downloads; symbolic-linked lock paths, malformed lock or transaction identities, and nested raw paths, including paths through a symlinked parent, are likewise rejected before any network request. If any required request fails, the others are aborted and the lock remains held until all settle. The three- or four-file replacement commits the source pair, optional publisher metadata, actual retrieval time, and extracted publisher date together under a version-2 manifest with original and committed SHA-256 values. An interrupted replacement is hash-checked and restored before that case is read on the next invocation, while committed work with unfinished cleanup is content-verified and cleaned. Legacy version-1 state lacks those hashes, so it is reported and left untouched for manual resolution. Cleanup failures and hash mismatches are reported instead of being treated as success. Run `npm run cases:generate` afterward to rebuild and verify the derived snapshots, manifests, and AuditBundles.
 
 Every case includes executable specifications, two snapshots, expected results, a manifest, documentation, and a verified AuditBundle. The population-health synthetic fixture additionally connects 4,218 follow-up and 286 validation records per version through 20 reproducible aggregations to 11 audited summary rows.
 
 ## Evaluation and verification status
 
-- **154 / 154 automated checks** — 150 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows
+- **159 / 159 automated checks** — 155 unit/integration tests, 2 built-artifact checks, and 2 real-Chromium flows
 - **64 / 64 distinct controlled benchmark scenarios** across eight edge-case families
 - **512 deterministic property-test trials** across four seeded properties
-- **97.30% statement/line coverage, 78.98% branch coverage, 99.35% function coverage** for `src/core`
+- **96.99% statement/line coverage, 78.74% branch coverage, 99.37% function coverage** for `src/core`
 - **10 / 10 case AuditBundles regenerated and independently verified**
 - **0 known production dependency vulnerabilities**
 - **0 known full development-toolchain vulnerabilities**
 
 The benchmark labels are stored separately from the execution logic in [`benchmarks/labels.json`](benchmarks/labels.json). The deliberately weak line/scalar, metric-only, and keyed-diff baselines score 27/64, 35/64, and 24/64 respectively. These results establish regression behavior on committed boundaries only—not production accuracy, external validity, user impact, or superiority to mature audit platforms. See [`docs/EVALUATION.md`](docs/EVALUATION.md).
 
-The exact 0.10.0 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
+The exact 0.10.1 release-candidate checks and claim boundaries are recorded in [`docs/RELEASE_VERIFICATION.md`](docs/RELEASE_VERIFICATION.md). Program-specific portfolio bridges and their limitations are kept separately in [`docs/PROGRAM_ALIGNMENT.md`](docs/PROGRAM_ALIGNMENT.md).
 
 ## Architecture
 

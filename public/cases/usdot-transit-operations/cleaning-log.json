@@ -1,10 +1,10 @@
 {
   "schemaVersion": "claimtrace-cleaning-log/2.0.0",
-  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "generatedAt": "2026-08-11T11:07:57.541Z",
   "caseId": "usdot-transit-operations",
   "sourceType": "USDOT_NTD_SOCRATA_V1",
   "implementation": "usdot-ntd-monthly-v1",
-  "sourceConfigSha256": "69e2aab6ec3d7c34c3280442d08018449a27ba3baccb573d68b6c758b062e59d",
+  "sourceConfigSha256": "180afaa2cf465300548980f5125e4d0ec7af3b91eae7628693819494e6d4ebe9",
   "transformations": {
     "baseline": [
       "Parse pinned USDOT Socrata JSON",

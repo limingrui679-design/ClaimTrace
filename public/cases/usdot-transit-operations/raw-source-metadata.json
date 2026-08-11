@@ -1,0 +1,4949 @@
+{
+  "id" : "5ti2-5uiv",
+  "name" : "Monthly Modal Time Series",
+  "assetType" : "dataset",
+  "averageRating" : 0,
+  "category" : "Public Transit",
+  "createdAt" : 1534771790,
+  "description" : "Modal Service data and Safety & Security (S&S) public transit time series data delineated by transit/agency/mode/year/month. Includes all Full Reporters--transit agencies operating modes with more than 30 vehicles in maximum service--to the National Transit Database (NTD). This dataset will be updated monthly. \n\nThe monthly ridership data is released one month after the month in which the service is provided. Records with null monthly service data reflect late reporting. \n\nThe S&S statistics provided include both Major and Non-Major Events where applicable. Events occurring in the past three months are excluded from the corresponding monthly ridership rows in this dataset while they undergo validation. This dataset is the only NTD publication in which all Major and Non-Major S&S data are presented without any adjustment for historical continuity.",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "domainCName" : "data.transportation.gov",
+  "downloadCount" : 12851,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "licenseId" : "PUBLIC_DOMAIN",
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 42115238,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1778092967,
+  "publicationGroup" : 15462723,
+  "publicationStage" : "published",
+  "rowsUpdatedAt" : 1786044525,
+  "rowsUpdatedBy" : "wjqh-6sh7",
+  "tableId" : 20367985,
+  "totalTimesRated" : 0,
+  "viewCount" : 22745,
+  "viewLastModified" : 1786044425,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1562872739,
+    "reviewedAutomatically" : true,
+    "state" : "approved",
+    "submissionId" : 7459384,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1562872739,
+    "targetAudience" : "public",
+    "workflowId" : 568,
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "endedAt" : 1562872739,
+      "failureCount" : 0,
+      "startedAt" : 1562872739,
+      "status" : "success"
+    },
+    "submitter" : {
+      "displayName" : "Deleted User",
+      "flags" : [ "deleted" ]
+    }
+  }, {
+    "message" : "The `strict_permissions` flag must be on to enable internal approvals.",
+    "state" : "unsubmittable",
+    "targetAudience" : "internal",
+    "workflowId" : 5258
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 632055094,
+    "name" : "NTD ID",
+    "dataTypeName" : "text",
+    "description" : "A five-digit identifying number for each agency used in the current NTD system.",
+    "fieldName" : "_5_digit_ntd_id",
+    "position" : 1,
+    "renderTypeName" : "text",
+    "tableColumnId" : 68537124,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "99479",
+      "null" : "0",
+      "top" : [ {
+        "item" : "60008",
+        "count" : "1229"
+      }, {
+        "item" : "00001",
+        "count" : "1176"
+      }, {
+        "item" : "10003",
+        "count" : "1152"
+      }, {
+        "item" : "20080",
+        "count" : "1051"
+      }, {
+        "item" : "80001",
+        "count" : "1050"
+      }, {
+        "item" : "30034",
+        "count" : "1017"
+      }, {
+        "item" : "40034",
+        "count" : "968"
+      }, {
+        "item" : "90154",
+        "count" : "968"
+      }, {
+        "item" : "90036",
+        "count" : "949"
+      }, {
+        "item" : "50113",
+        "count" : "943"
+      }, {
+        "item" : "30083",
+        "count" : "932"
+      }, {
+        "item" : "50015",
+        "count" : "932"
+      }, {
+        "item" : "90015",
+        "count" : "918"
+      }, {
+        "item" : "00007",
+        "count" : "912"
+      }, {
+        "item" : "40008",
+        "count" : "899"
+      }, {
+        "item" : "70005",
+        "count" : "899"
+      }, {
+        "item" : "30019",
+        "count" : "879"
+      }, {
+        "item" : "60056",
+        "count" : "852"
+      }, {
+        "item" : "90026",
+        "count" : "846"
+      }, {
+        "item" : "90196",
+        "count" : "842"
+      } ],
+      "smallest" : "00001",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055096,
+    "name" : "Agency",
+    "dataTypeName" : "text",
+    "description" : "The legal name of the entity reporting to the NTD.",
+    "fieldName" : "agency",
+    "position" : 3,
+    "renderTypeName" : "text",
+    "tableColumnId" : 68537120,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "Yuma County Intergovernmental Public Transportation Authority",
+      "null" : "0",
+      "top" : [ {
+        "item" : "Pace, the Suburban Bus Division of the Regional Transportation Authority",
+        "count" : "1286"
+      }, {
+        "item" : "Metropolitan Transit Authority of Harris County, Texas",
+        "count" : "1229"
+      }, {
+        "item" : "King County",
+        "count" : "1176"
+      }, {
+        "item" : "Massachusetts Bay Transportation Authority",
+        "count" : "1152"
+      }, {
+        "item" : "New Jersey Transit Corporation",
+        "count" : "1051"
+      }, {
+        "item" : "Utah Transit Authority",
+        "count" : "1050"
+      }, {
+        "item" : "Maryland Transit Administration",
+        "count" : "1017"
+      }, {
+        "item" : "County of Miami-Dade",
+        "count" : "968"
+      }, {
+        "item" : "Los Angeles County Metropolitan Transportation Authority",
+        "count" : "968"
+      }, {
+        "item" : "Orange County Transportation Authority",
+        "count" : "949"
+      }, {
+        "item" : "The Greater Cleveland Regional Transit Authority",
+        "count" : "932"
+      }, {
+        "item" : "Transportation District Commission of Hampton Roads",
+        "count" : "932"
+      }, {
+        "item" : "City and County of San Francisco",
+        "count" : "918"
+      }, {
+        "item" : "Lane Transit District",
+        "count" : "912"
+      }, {
+        "item" : "City of Charlotte North Carolina",
+        "count" : "899"
+      }, {
+        "item" : "Kansas City Area Transportation Authority",
+        "count" : "899"
+      }, {
+        "item" : "Southeastern Pennsylvania Transportation Authority",
+        "count" : "879"
+      }, {
+        "item" : "Dallas Area Rapid Transit",
+        "count" : "852"
+      }, {
+        "item" : "San Diego Metropolitan Transit System",
+        "count" : "846"
+      }, {
+        "item" : "County of Placer",
+        "count" : "842"
+      } ],
+      "smallest" : "Academy Lines, Inc.",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055097,
+    "name" : "Organization Type",
+    "dataTypeName" : "text",
+    "description" : "The organization type, as defined by FTA and reported by transit agencies on the most recent annual report, of the agency.",
+    "fieldName" : "organization_type",
+    "position" : 4,
+    "renderTypeName" : "text",
+    "tableColumnId" : 68537155,
+    "cachedContents" : {
+      "non_null" : "185685",
+      "largest" : "University",
+      "null" : "5381",
+      "top" : [ {
+        "item" : "Public Agency or Authority of Transit Service",
+        "count" : "98273"
+      }, {
+        "item" : "County or Local Government Unit or Department of Transportation",
+        "count" : "66071"
+      }, {
+        "item" : "Corporation",
+        "count" : "5098"
+      }, {
+        "item" : "COG or Other Planning Agency",
+        "count" : "4150"
+      }, {
+        "item" : "Government Unit or Department of Transportation",
+        "count" : "3368"
+      }, {
+        "item" : "Publicly-Owned or Privately Chartered Corporation",
+        "count" : "2971"
+      }, {
+        "item" : "Unit of a Transit Agency, Reporting Separately",
+        "count" : "2176"
+      }, {
+        "item" : "University",
+        "count" : "1938"
+      }, {
+        "item" : "Provider Reporting on Behalf of a Public Entity",
+        "count" : "1411"
+      }, {
+        "item" : "Reporter",
+        "count" : "115"
+      }, {
+        "item" : "Other",
+        "count" : "114"
+      } ],
+      "smallest" : "COG or Other Planning Agency",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055270,
+    "name" : "Rail/Bus/Ferry",
+    "dataTypeName" : "text",
+    "description" : "Groups modes based on whether they are:  Rail, Running Non-Rail Surface Transportation, or Ferryboat.",
+    "fieldName" : "rail_bus_ferry",
+    "position" : 5,
+    "renderTypeName" : "text",
+    "tableColumnId" : 167444658,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "Rail",
+      "null" : "0",
+      "top" : [ {
+        "item" : "Bus",
+        "count" : "176081"
+      }, {
+        "item" : "Rail",
+        "count" : "10816"
+      }, {
+        "item" : "Ferry",
+        "count" : "4169"
+      } ],
+      "smallest" : "Bus",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055269,
+    "name" : "Mode Name",
+    "dataTypeName" : "text",
+    "description" : "A system for carrying transit passengers described by specific right-of-way (ROW), technology and operational features.",
+    "fieldName" : "mode_name",
+    "position" : 6,
+    "renderTypeName" : "text",
+    "tableColumnId" : 167444657,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "Vanpool",
+      "null" : "0",
+      "top" : [ {
+        "item" : "Demand Response",
+        "count" : "77940"
+      }, {
+        "item" : "Bus",
+        "count" : "69593"
+      }, {
+        "item" : "Commuter Bus",
+        "count" : "13182"
+      }, {
+        "item" : "Vanpool",
+        "count" : "12463"
+      }, {
+        "item" : "Ferryboat",
+        "count" : "4169"
+      }, {
+        "item" : "Light Rail",
+        "count" : "3450"
+      }, {
+        "item" : "Street Car Rail",
+        "count" : "3122"
+      }, {
+        "item" : "Heavy Rail",
+        "count" : "2156"
+      }, {
+        "item" : "Bus Rapid Transit",
+        "count" : "2063"
+      }, {
+        "item" : "Monorail/Automated Guideway",
+        "count" : "938"
+      }, {
+        "item" : "Trolleybus",
+        "count" : "702"
+      }, {
+        "item" : "Inclined Plane",
+        "count" : "450"
+      }, {
+        "item" : "Hybrid Rail",
+        "count" : "400"
+      }, {
+        "item" : "Aerial Tramway",
+        "count" : "150"
+      }, {
+        "item" : "Cable Car",
+        "count" : "150"
+      }, {
+        "item" : "Publico",
+        "count" : "138"
+      } ],
+      "smallest" : "Aerial Tramway",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055098,
+    "name" : "Mode",
+    "dataTypeName" : "text",
+    "description" : "A system for carrying transit passengers described by specific right-of-way (ROW), technology and operational features.",
+    "fieldName" : "mode",
+    "position" : 7,
+    "renderTypeName" : "text",
+    "tableColumnId" : 68537128,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "YR",
+      "null" : "0",
+      "top" : [ {
+        "item" : "DR",
+        "count" : "77940"
+      }, {
+        "item" : "MB",
+        "count" : "69593"
+      }, {
+        "item" : "CB",
+        "count" : "13182"
+      }, {
+        "item" : "VP",
+        "count" : "12463"
+      }, {
+        "item" : "FB",
+        "count" : "4169"
+      }, {
+        "item" : "LR",
+        "count" : "3450"
+      }, {
+        "item" : "SR",
+        "count" : "3122"
+      }, {
+        "item" : "HR",
+        "count" : "2156"
+      }, {
+        "item" : "RB",
+        "count" : "2063"
+      }, {
+        "item" : "MG",
+        "count" : "938"
+      }, {
+        "item" : "TB",
+        "count" : "702"
+      }, {
+        "item" : "IP",
+        "count" : "450"
+      }, {
+        "item" : "YR",
+        "count" : "400"
+      }, {
+        "item" : "TR",
+        "count" : "150"
+      }, {
+        "item" : "CC",
+        "count" : "150"
+      }, {
+        "item" : "PB",
+        "count" : "138"
+      } ],
+      "smallest" : "CB",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055099,
+    "name" : "Type of Service",
+    "dataTypeName" : "text",
+    "description" : "Describes how public transportation services are provided by the transit agency: directly operated (DO) or purchased transportation which also includes from Taxi Operators and Transportation Network Companies (PT, TX, TN) services.",
+    "fieldName" : "type_of_service",
+    "position" : 8,
+    "renderTypeName" : "text",
+    "tableColumnId" : 68537139,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "TX",
+      "null" : "0",
+      "top" : [ {
+        "item" : "DO",
+        "count" : "100053"
+      }, {
+        "item" : "PT",
+        "count" : "80901"
+      }, {
+        "item" : "TX",
+        "count" : "9055"
+      }, {
+        "item" : "TN",
+        "count" : "1057"
+      } ],
+      "smallest" : "DO",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055271,
+    "name" : "Fixed Route Flag",
+    "dataTypeName" : "checkbox",
+    "description" : "Flag that identifies whether the mode is fixed-route or non-fixed route.",
+    "fieldName" : "fixed_route_flag",
+    "position" : 9,
+    "renderTypeName" : "checkbox",
+    "tableColumnId" : 167444659,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "null" : "0",
+      "top" : [ {
+        "item" : true,
+        "count" : "100663"
+      }, {
+        "item" : false,
+        "count" : "90403"
+      } ],
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055100,
+    "name" : "Rail (True/False)",
+    "dataTypeName" : "checkbox",
+    "description" : "Separates Rail (True) from Non-Rail (False) modes.",
+    "fieldName" : "rail_y_n",
+    "position" : 10,
+    "renderTypeName" : "checkbox",
+    "tableColumnId" : 68537140,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "null" : "0",
+      "top" : [ {
+        "item" : false,
+        "count" : "180400"
+      }, {
+        "item" : true,
+        "count" : "10666"
+      } ],
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055101,
+    "name" : "Primary UZA UACE Code",
+    "dataTypeName" : "text",
+    "description" : "The Census Bureau's Urban Area Census Code (UACE). This five-digit code uniquely identifies an urban area and remains unchanged from census to census.",
+    "fieldName" : "uace_code",
+    "position" : 11,
+    "renderTypeName" : "text",
+    "tableColumnId" : 147807726,
+    "cachedContents" : {
+      "non_null" : "186263",
+      "largest" : "99999",
+      "null" : "4803",
+      "top" : [ {
+        "item" : "63217",
+        "count" : "8008"
+      }, {
+        "item" : "51445",
+        "count" : "7146"
+      }, {
+        "item" : "78904",
+        "count" : "4121"
+      }, {
+        "item" : "80389",
+        "count" : "3875"
+      }, {
+        "item" : "92242",
+        "count" : "3432"
+      }, {
+        "item" : "09271",
+        "count" : "2871"
+      }, {
+        "item" : "22042",
+        "count" : "2482"
+      }, {
+        "item" : "16264",
+        "count" : "2426"
+      }, {
+        "item" : "77068",
+        "count" : "2420"
+      }, {
+        "item" : "56602",
+        "count" : "2240"
+      }, {
+        "item" : "03817",
+        "count" : "2233"
+      }, {
+        "item" : "71317",
+        "count" : "2079"
+      }, {
+        "item" : "57628",
+        "count" : "2037"
+      }, {
+        "item" : "04843",
+        "count" : "1989"
+      }, {
+        "item" : "69076",
+        "count" : "1893"
+      }, {
+        "item" : "86599",
+        "count" : "1843"
+      }, {
+        "item" : "17668",
+        "count" : "1838"
+      }, {
+        "item" : "40429",
+        "count" : "1818"
+      }, {
+        "item" : "69697",
+        "count" : "1740"
+      }, {
+        "item" : "69184",
+        "count" : "1623"
+      } ],
+      "smallest" : "00042",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055103,
+    "name" : "Primary UZA Name",
+    "dataTypeName" : "text",
+    "description" : "The name of the Census-designated Urbanized Area, from the most recent census, in which the system primarily operates. ",
+    "fieldName" : "primary_uza_name",
+    "position" : 13,
+    "renderTypeName" : "text",
+    "tableColumnId" : 68537177,
+    "cachedContents" : {
+      "non_null" : "186263",
+      "largest" : "Yuma, AZ--CA",
+      "null" : "4803",
+      "top" : [ {
+        "item" : "New York--Jersey City--Newark, NY--NJ",
+        "count" : "8008"
+      }, {
+        "item" : "Los Angeles--Long Beach--Anaheim, CA",
+        "count" : "7146"
+      }, {
+        "item" : "San Francisco--Oakland, CA",
+        "count" : "4121"
+      }, {
+        "item" : "Seattle--Tacoma, WA",
+        "count" : "3875"
+      }, {
+        "item" : "Washington--Arlington, DC--VA--MD",
+        "count" : "3432"
+      }, {
+        "item" : "Boston, MA--NH",
+        "count" : "2871"
+      }, {
+        "item" : "Dallas--Fort Worth--Arlington, TX",
+        "count" : "2482"
+      }, {
+        "item" : "Chicago, IL--IN",
+        "count" : "2426"
+      }, {
+        "item" : "Sacramento, CA",
+        "count" : "2420"
+      }, {
+        "item" : "Miami--Fort Lauderdale, FL",
+        "count" : "2240"
+      }, {
+        "item" : "Atlanta, GA",
+        "count" : "2233"
+      }, {
+        "item" : "Portland, OR--WA",
+        "count" : "2079"
+      }, {
+        "item" : "Minneapolis--St. Paul, MN",
+        "count" : "2037"
+      }, {
+        "item" : "Baltimore, MD",
+        "count" : "1989"
+      }, {
+        "item" : "Philadelphia, PA--NJ--DE--MD",
+        "count" : "1893"
+      }, {
+        "item" : "Tampa--St. Petersburg, FL",
+        "count" : "1843"
+      }, {
+        "item" : "Cleveland, OH",
+        "count" : "1838"
+      }, {
+        "item" : "Houston, TX",
+        "count" : "1818"
+      }, {
+        "item" : "Pittsburgh, PA",
+        "count" : "1740"
+      }, {
+        "item" : "Phoenix--Mesa--Scottsdale, AZ",
+        "count" : "1623"
+      } ],
+      "smallest" : "Akron, OH",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055104,
+    "name" : "Primary UZA Sq Miles",
+    "dataTypeName" : "number",
+    "description" : "The square miles of the primary UZA from the most recent decennial Census.",
+    "fieldName" : "primary_uza_sq_miles",
+    "position" : 14,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537165,
+    "cachedContents" : {
+      "non_null" : "186263",
+      "largest" : "3248.12",
+      "null" : "4803",
+      "top" : [ {
+        "item" : "3248.12",
+        "count" : "8008"
+      }, {
+        "item" : "1636.83",
+        "count" : "7146"
+      }, {
+        "item" : "513.80",
+        "count" : "4121"
+      }, {
+        "item" : "982.52",
+        "count" : "3875"
+      }, {
+        "item" : "1294.51",
+        "count" : "3432"
+      }, {
+        "item" : "1655.89",
+        "count" : "2871"
+      }, {
+        "item" : "1746.90",
+        "count" : "2482"
+      }, {
+        "item" : "2337.89",
+        "count" : "2426"
+      }, {
+        "item" : "467.58",
+        "count" : "2420"
+      }, {
+        "item" : "1244.18",
+        "count" : "2240"
+      }, {
+        "item" : "2553.04",
+        "count" : "2233"
+      }, {
+        "item" : "519.30",
+        "count" : "2079"
+      }, {
+        "item" : "1014.79",
+        "count" : "2037"
+      }, {
+        "item" : "654.93",
+        "count" : "1989"
+      }, {
+        "item" : "1898.19",
+        "count" : "1893"
+      }, {
+        "item" : "968.94",
+        "count" : "1843"
+      }, {
+        "item" : "713.81",
+        "count" : "1838"
+      }, {
+        "item" : "1752.69",
+        "count" : "1818"
+      }, {
+        "item" : "906.64",
+        "count" : "1740"
+      }, {
+        "item" : "1110.48",
+        "count" : "1623"
+      } ],
+      "smallest" : "0.00",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055105,
+    "name" : "Primary UZA Population",
+    "dataTypeName" : "number",
+    "description" : "The population of the primary UZA from the most recent decennial Census.",
+    "fieldName" : "primary_uza_population",
+    "position" : 15,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537121,
+    "cachedContents" : {
+      "non_null" : "186263",
+      "largest" : "19426449",
+      "null" : "4803",
+      "top" : [ {
+        "item" : "19426449",
+        "count" : "8008"
+      }, {
+        "item" : "12237376",
+        "count" : "7146"
+      }, {
+        "item" : "3515933",
+        "count" : "4121"
+      }, {
+        "item" : "3544011",
+        "count" : "3875"
+      }, {
+        "item" : "5174759",
+        "count" : "3432"
+      }, {
+        "item" : "4382009",
+        "count" : "2871"
+      }, {
+        "item" : "5732354",
+        "count" : "2482"
+      }, {
+        "item" : "8671746",
+        "count" : "2426"
+      }, {
+        "item" : "1946618",
+        "count" : "2420"
+      }, {
+        "item" : "6077522",
+        "count" : "2240"
+      }, {
+        "item" : "5100112",
+        "count" : "2233"
+      }, {
+        "item" : "2104238",
+        "count" : "2079"
+      }, {
+        "item" : "2914866",
+        "count" : "2037"
+      }, {
+        "item" : "2212038",
+        "count" : "1989"
+      }, {
+        "item" : "5696125",
+        "count" : "1893"
+      }, {
+        "item" : "2783045",
+        "count" : "1843"
+      }, {
+        "item" : "1712178",
+        "count" : "1838"
+      }, {
+        "item" : "5853575",
+        "count" : "1818"
+      }, {
+        "item" : "1745039",
+        "count" : "1740"
+      }, {
+        "item" : "3976313",
+        "count" : "1623"
+      } ],
+      "smallest" : "50254",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055106,
+    "name" : "Service Area Sq Miles",
+    "dataTypeName" : "number",
+    "description" : "The service area as measured in square miles for the agency as of the most recently concluded report year.",
+    "fieldName" : "service_area_sq_miles",
+    "position" : 16,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537130,
+    "cachedContents" : {
+      "non_null" : "185709",
+      "largest" : "121697.00",
+      "null" : "5357",
+      "top" : [ {
+        "item" : "45.00",
+        "count" : "1992"
+      }, {
+        "item" : "27.00",
+        "count" : "1704"
+      }, {
+        "item" : "78.00",
+        "count" : "1573"
+      }, {
+        "item" : "80.00",
+        "count" : "1363"
+      }, {
+        "item" : "13.00",
+        "count" : "1326"
+      }, {
+        "item" : "396.00",
+        "count" : "1315"
+      }, {
+        "item" : "65.00",
+        "count" : "1259"
+      }, {
+        "item" : "49.00",
+        "count" : "1224"
+      }, {
+        "item" : "77.00",
+        "count" : "1222"
+      }, {
+        "item" : "59.00",
+        "count" : "1208"
+      }, {
+        "item" : "458.00",
+        "count" : "1184"
+      }, {
+        "item" : "26.00",
+        "count" : "1158"
+      }, {
+        "item" : "34.00",
+        "count" : "1140"
+      }, {
+        "item" : "2134.00",
+        "count" : "1128"
+      }, {
+        "item" : "43.00",
+        "count" : "1115"
+      }, {
+        "item" : "25.00",
+        "count" : "1062"
+      }, {
+        "item" : "33.00",
+        "count" : "1026"
+      }, {
+        "item" : "28.00",
+        "count" : "1024"
+      }, {
+        "item" : "46.00",
+        "count" : "1020"
+      }, {
+        "item" : "5325.00",
+        "count" : "1009"
+      } ],
+      "smallest" : "1.00",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055107,
+    "name" : "Service Area Population",
+    "dataTypeName" : "number",
+    "description" : "The population residing within the service area for the agency as of the most recently concluded report year.",
+    "fieldName" : "service_area_population",
+    "position" : 17,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537142,
+    "cachedContents" : {
+      "non_null" : "185709",
+      "largest" : "21962125",
+      "null" : "5357",
+      "top" : [ {
+        "item" : "7811145",
+        "count" : "977"
+      }, {
+        "item" : "3109308",
+        "count" : "852"
+      }, {
+        "item" : "10594013",
+        "count" : "756"
+      }, {
+        "item" : "254183",
+        "count" : "690"
+      }, {
+        "item" : "1412140",
+        "count" : "608"
+      }, {
+        "item" : "141642",
+        "count" : "601"
+      }, {
+        "item" : "120378",
+        "count" : "600"
+      }, {
+        "item" : "494593",
+        "count" : "585"
+      }, {
+        "item" : "1048319",
+        "count" : "583"
+      }, {
+        "item" : "4849476",
+        "count" : "576"
+      }, {
+        "item" : "2462707",
+        "count" : "528"
+      }, {
+        "item" : "127473",
+        "count" : "522"
+      }, {
+        "item" : "1150833",
+        "count" : "504"
+      }, {
+        "item" : "1883504",
+        "count" : "504"
+      }, {
+        "item" : "2496435",
+        "count" : "476"
+      }, {
+        "item" : "64925",
+        "count" : "474"
+      }, {
+        "item" : "3424477",
+        "count" : "456"
+      }, {
+        "item" : "232298",
+        "count" : "450"
+      }, {
+        "item" : "2849712",
+        "count" : "444"
+      }, {
+        "item" : "783134",
+        "count" : "440"
+      } ],
+      "smallest" : "5443",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055108,
+    "name" : "Year",
+    "dataTypeName" : "number",
+    "description" : "The calendar year in which the events occurred.",
+    "fieldName" : "year",
+    "position" : 18,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537144,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "2026",
+      "null" : "0",
+      "top" : [ {
+        "item" : "2016",
+        "count" : "15402"
+      }, {
+        "item" : "2017",
+        "count" : "15398"
+      }, {
+        "item" : "2015",
+        "count" : "15368"
+      }, {
+        "item" : "2025",
+        "count" : "15312"
+      }, {
+        "item" : "2018",
+        "count" : "15310"
+      }, {
+        "item" : "2020",
+        "count" : "15305"
+      }, {
+        "item" : "2021",
+        "count" : "15278"
+      }, {
+        "item" : "2024",
+        "count" : "15260"
+      }, {
+        "item" : "2023",
+        "count" : "15240"
+      }, {
+        "item" : "2014",
+        "count" : "15217"
+      }, {
+        "item" : "2019",
+        "count" : "15176"
+      }, {
+        "item" : "2022",
+        "count" : "15124"
+      }, {
+        "item" : "2026",
+        "count" : "7676"
+      } ],
+      "smallest" : "2014",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : {
+      "noCommas" : "true"
+    }
+  }, {
+    "id" : 632055109,
+    "name" : "Month",
+    "dataTypeName" : "text",
+    "description" : "The month in which the events occurred.",
+    "fieldName" : "month",
+    "position" : 19,
+    "renderTypeName" : "text",
+    "tableColumnId" : 155029167,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "September",
+      "null" : "0",
+      "top" : [ {
+        "item" : "June",
+        "count" : "16567"
+      }, {
+        "item" : "May",
+        "count" : "16555"
+      }, {
+        "item" : "April",
+        "count" : "16551"
+      }, {
+        "item" : "March",
+        "count" : "16549"
+      }, {
+        "item" : "January",
+        "count" : "16544"
+      }, {
+        "item" : "February",
+        "count" : "16537"
+      }, {
+        "item" : "December",
+        "count" : "15313"
+      }, {
+        "item" : "October",
+        "count" : "15309"
+      }, {
+        "item" : "November",
+        "count" : "15299"
+      }, {
+        "item" : "September",
+        "count" : "15289"
+      }, {
+        "item" : "August",
+        "count" : "15280"
+      }, {
+        "item" : "July",
+        "count" : "15273"
+      } ],
+      "smallest" : "April",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055110,
+    "name" : "Month_Year (timestamp)",
+    "dataTypeName" : "calendar_date",
+    "description" : "The beginning of the month in which the S&S events occurred in date timestamp format.",
+    "fieldName" : "month_year",
+    "position" : 20,
+    "renderTypeName" : "calendar_date",
+    "tableColumnId" : 167154833,
+    "cachedContents" : {
+      "non_null" : "191066",
+      "largest" : "2026-06-01T00:00:00.000",
+      "null" : "0",
+      "top" : [ {
+        "item" : "2017-08-01T00:00:00.000",
+        "count" : "1287"
+      }, {
+        "item" : "2015-07-01T00:00:00.000",
+        "count" : "1287"
+      }, {
+        "item" : "2016-11-01T00:00:00.000",
+        "count" : "1287"
+      }, {
+        "item" : "2015-08-01T00:00:00.000",
+        "count" : "1286"
+      }, {
+        "item" : "2016-05-01T00:00:00.000",
+        "count" : "1286"
+      }, {
+        "item" : "2016-10-01T00:00:00.000",
+        "count" : "1286"
+      }, {
+        "item" : "2017-09-01T00:00:00.000",
+        "count" : "1286"
+      }, {
+        "item" : "2015-11-01T00:00:00.000",
+        "count" : "1286"
+      }, {
+        "item" : "2017-07-01T00:00:00.000",
+        "count" : "1285"
+      }, {
+        "item" : "2015-09-01T00:00:00.000",
+        "count" : "1285"
+      }, {
+        "item" : "2016-12-01T00:00:00.000",
+        "count" : "1285"
+      }, {
+        "item" : "2025-12-01T00:00:00.000",
+        "count" : "1285"
+      }, {
+        "item" : "2017-04-01T00:00:00.000",
+        "count" : "1284"
+      }, {
+        "item" : "2015-12-01T00:00:00.000",
+        "count" : "1284"
+      }, {
+        "item" : "2023-10-01T00:00:00.000",
+        "count" : "1284"
+      }, {
+        "item" : "2017-05-01T00:00:00.000",
+        "count" : "1284"
+      }, {
+        "item" : "2016-09-01T00:00:00.000",
+        "count" : "1283"
+      }, {
+        "item" : "2016-02-01T00:00:00.000",
+        "count" : "1283"
+      }, {
+        "item" : "2016-03-01T00:00:00.000",
+        "count" : "1283"
+      }, {
+        "item" : "2016-04-01T00:00:00.000",
+        "count" : "1283"
+      } ],
+      "smallest" : "2014-01-01T00:00:00.000",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : {
+      "view" : "date_my"
+    }
+  }, {
+    "id" : 632055111,
+    "name" : "VOMS",
+    "dataTypeName" : "number",
+    "description" : "The number of revenue vehicles operated by the given mode and type of service to meet the annual maximum service requirement. This is the revenue vehicle count during the peak season of the reporting period; on the week and day that maximum service is provided. Vehicles operated in maximum service (VOMS) exclude atypical days and one-time special events.",
+    "fieldName" : "vehicles",
+    "position" : 21,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537181,
+    "cachedContents" : {
+      "non_null" : "190580",
+      "largest" : "5491",
+      "null" : "486",
+      "top" : [ {
+        "item" : "2",
+        "count" : "6849"
+      }, {
+        "item" : "6",
+        "count" : "5698"
+      }, {
+        "item" : "8",
+        "count" : "5608"
+      }, {
+        "item" : "4",
+        "count" : "5243"
+      }, {
+        "item" : "3",
+        "count" : "5184"
+      }, {
+        "item" : "5",
+        "count" : "5070"
+      }, {
+        "item" : "7",
+        "count" : "5012"
+      }, {
+        "item" : "9",
+        "count" : "4918"
+      }, {
+        "item" : "10",
+        "count" : "4897"
+      }, {
+        "item" : "14",
+        "count" : "4173"
+      }, {
+        "item" : "12",
+        "count" : "4043"
+      }, {
+        "item" : "16",
+        "count" : "3933"
+      }, {
+        "item" : "15",
+        "count" : "3898"
+      }, {
+        "item" : "17",
+        "count" : "3669"
+      }, {
+        "item" : "1",
+        "count" : "3601"
+      }, {
+        "item" : "13",
+        "count" : "3534"
+      }, {
+        "item" : "18",
+        "count" : "3492"
+      }, {
+        "item" : "11",
+        "count" : "3326"
+      }, {
+        "item" : "19",
+        "count" : "3157"
+      }, {
+        "item" : "20",
+        "count" : "3039"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055112,
+    "name" : "Vehicle Revenue Miles",
+    "dataTypeName" : "number",
+    "description" : "The number of miles traveled by transit vehicles in revenue service, as reported by the system for the same calendar year.  The value is year to date for calendar years that are not yet complete. For rail modes, \"passenger car revenue miles\" is used.",
+    "fieldName" : "vehicle_revenue_miles",
+    "position" : 22,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537136,
+    "cachedContents" : {
+      "non_null" : "190580",
+      "largest" : "31113873",
+      "null" : "486",
+      "top" : [ {
+        "item" : "0",
+        "count" : "1747"
+      }, {
+        "item" : "4112",
+        "count" : "35"
+      }, {
+        "item" : "4308",
+        "count" : "30"
+      }, {
+        "item" : "1877",
+        "count" : "22"
+      }, {
+        "item" : "1787",
+        "count" : "22"
+      }, {
+        "item" : "3916",
+        "count" : "20"
+      }, {
+        "item" : "761",
+        "count" : "18"
+      }, {
+        "item" : "1966",
+        "count" : "17"
+      }, {
+        "item" : "22583",
+        "count" : "16"
+      }, {
+        "item" : "19074",
+        "count" : "16"
+      }, {
+        "item" : "1705",
+        "count" : "16"
+      }, {
+        "item" : "20312",
+        "count" : "15"
+      }, {
+        "item" : "1786",
+        "count" : "15"
+      }, {
+        "item" : "8474",
+        "count" : "15"
+      }, {
+        "item" : "10328",
+        "count" : "14"
+      }, {
+        "item" : "16008",
+        "count" : "14"
+      }, {
+        "item" : "20490",
+        "count" : "14"
+      }, {
+        "item" : "16760",
+        "count" : "13"
+      }, {
+        "item" : "8070",
+        "count" : "13"
+      }, {
+        "item" : "28994",
+        "count" : "13"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055113,
+    "name" : "Vehicle Revenue Hours",
+    "dataTypeName" : "number",
+    "description" : "The number of hours operated by transit vehicles in revenue service, as reported by the system for the same calendar year.  The value is year to date for calendar years that are not yet complete.",
+    "fieldName" : "vehicle_revenue_hours",
+    "position" : 23,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537149,
+    "width" : 289,
+    "cachedContents" : {
+      "non_null" : "190580",
+      "largest" : "1949862",
+      "null" : "486",
+      "top" : [ {
+        "item" : "0",
+        "count" : "1752"
+      }, {
+        "item" : "357",
+        "count" : "77"
+      }, {
+        "item" : "374",
+        "count" : "70"
+      }, {
+        "item" : "500",
+        "count" : "70"
+      }, {
+        "item" : "2",
+        "count" : "68"
+      }, {
+        "item" : "3",
+        "count" : "66"
+      }, {
+        "item" : "496",
+        "count" : "66"
+      }, {
+        "item" : "681",
+        "count" : "65"
+      }, {
+        "item" : "1",
+        "count" : "65"
+      }, {
+        "item" : "273",
+        "count" : "60"
+      }, {
+        "item" : "480",
+        "count" : "60"
+      }, {
+        "item" : "550",
+        "count" : "59"
+      }, {
+        "item" : "564",
+        "count" : "59"
+      }, {
+        "item" : "525",
+        "count" : "58"
+      }, {
+        "item" : "159",
+        "count" : "58"
+      }, {
+        "item" : "464",
+        "count" : "57"
+      }, {
+        "item" : "286",
+        "count" : "57"
+      }, {
+        "item" : "506",
+        "count" : "56"
+      }, {
+        "item" : "128",
+        "count" : "56"
+      }, {
+        "item" : "225",
+        "count" : "55"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055114,
+    "name" : "Unlinked Passenger Trips",
+    "dataTypeName" : "number",
+    "description" : "The number of boardings on transit vehicles reported by the system for the same calendar year.  The value is year to date for calendar years that are not yet complete.",
+    "fieldName" : "ridership",
+    "position" : 24,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537133,
+    "cachedContents" : {
+      "non_null" : "190580",
+      "largest" : "253609943",
+      "null" : "486",
+      "top" : [ {
+        "item" : "0",
+        "count" : "1758"
+      }, {
+        "item" : "20",
+        "count" : "38"
+      }, {
+        "item" : "2",
+        "count" : "38"
+      }, {
+        "item" : "16",
+        "count" : "29"
+      }, {
+        "item" : "18",
+        "count" : "29"
+      }, {
+        "item" : "12",
+        "count" : "27"
+      }, {
+        "item" : "1038",
+        "count" : "25"
+      }, {
+        "item" : "13",
+        "count" : "25"
+      }, {
+        "item" : "30",
+        "count" : "24"
+      }, {
+        "item" : "378",
+        "count" : "23"
+      }, {
+        "item" : "1120",
+        "count" : "23"
+      }, {
+        "item" : "279",
+        "count" : "23"
+      }, {
+        "item" : "728",
+        "count" : "23"
+      }, {
+        "item" : "35",
+        "count" : "23"
+      }, {
+        "item" : "626",
+        "count" : "22"
+      }, {
+        "item" : "15",
+        "count" : "22"
+      }, {
+        "item" : "42",
+        "count" : "22"
+      }, {
+        "item" : "823",
+        "count" : "22"
+      }, {
+        "item" : "926",
+        "count" : "22"
+      }, {
+        "item" : "356",
+        "count" : "22"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055115,
+    "name" : "Collisions with Motor Vehicle",
+    "dataTypeName" : "number",
+    "description" : "The number of collisions with a motor vehicle for the given agency/mode/month.",
+    "fieldName" : "collisions_with_motor_vehicle",
+    "position" : 25,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537157,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "55",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "163311"
+      }, {
+        "item" : "1",
+        "count" : "13002"
+      }, {
+        "item" : "2",
+        "count" : "4594"
+      }, {
+        "item" : "3",
+        "count" : "2353"
+      }, {
+        "item" : "4",
+        "count" : "1500"
+      }, {
+        "item" : "5",
+        "count" : "986"
+      }, {
+        "item" : "6",
+        "count" : "627"
+      }, {
+        "item" : "7",
+        "count" : "466"
+      }, {
+        "item" : "8",
+        "count" : "314"
+      }, {
+        "item" : "9",
+        "count" : "223"
+      }, {
+        "item" : "10",
+        "count" : "180"
+      }, {
+        "item" : "11",
+        "count" : "112"
+      }, {
+        "item" : "13",
+        "count" : "102"
+      }, {
+        "item" : "12",
+        "count" : "100"
+      }, {
+        "item" : "14",
+        "count" : "76"
+      }, {
+        "item" : "15",
+        "count" : "68"
+      }, {
+        "item" : "17",
+        "count" : "62"
+      }, {
+        "item" : "16",
+        "count" : "59"
+      }, {
+        "item" : "19",
+        "count" : "46"
+      }, {
+        "item" : "18",
+        "count" : "45"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055116,
+    "name" : "Collisions with Person",
+    "dataTypeName" : "number",
+    "description" : "The number of collisions with a person for the given agency/mode/month.",
+    "fieldName" : "collisions_with_person",
+    "position" : 26,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537146,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "25",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "182594"
+      }, {
+        "item" : "1",
+        "count" : "4263"
+      }, {
+        "item" : "2",
+        "count" : "914"
+      }, {
+        "item" : "3",
+        "count" : "319"
+      }, {
+        "item" : "4",
+        "count" : "128"
+      }, {
+        "item" : "5",
+        "count" : "69"
+      }, {
+        "item" : "7",
+        "count" : "39"
+      }, {
+        "item" : "6",
+        "count" : "35"
+      }, {
+        "item" : "8",
+        "count" : "27"
+      }, {
+        "item" : "10",
+        "count" : "19"
+      }, {
+        "item" : "11",
+        "count" : "18"
+      }, {
+        "item" : "9",
+        "count" : "14"
+      }, {
+        "item" : "15",
+        "count" : "11"
+      }, {
+        "item" : "18",
+        "count" : "8"
+      }, {
+        "item" : "13",
+        "count" : "7"
+      }, {
+        "item" : "20",
+        "count" : "7"
+      }, {
+        "item" : "12",
+        "count" : "6"
+      }, {
+        "item" : "14",
+        "count" : "5"
+      }, {
+        "item" : "17",
+        "count" : "4"
+      }, {
+        "item" : "19",
+        "count" : "4"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055117,
+    "name" : "Collisions with Fixed Object",
+    "dataTypeName" : "number",
+    "description" : "The number of collisions with a fixed object for the given agency/mode/month.",
+    "fieldName" : "collisions_with_fixed_object",
+    "position" : 27,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537143,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "6",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "186187"
+      }, {
+        "item" : "1",
+        "count" : "2055"
+      }, {
+        "item" : "2",
+        "count" : "214"
+      }, {
+        "item" : "3",
+        "count" : "38"
+      }, {
+        "item" : "4",
+        "count" : "11"
+      }, {
+        "item" : "5",
+        "count" : "1"
+      }, {
+        "item" : "6",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055118,
+    "name" : "Collisions with Rail Vehicle",
+    "dataTypeName" : "number",
+    "description" : "The number of collisions with a rail vehicle for the given agency/mode/month.",
+    "fieldName" : "collisions_with_rail_vehicle",
+    "position" : 28,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537158,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "5",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188135"
+      }, {
+        "item" : "1",
+        "count" : "327"
+      }, {
+        "item" : "2",
+        "count" : "37"
+      }, {
+        "item" : "3",
+        "count" : "4"
+      }, {
+        "item" : "4",
+        "count" : "2"
+      }, {
+        "item" : "5",
+        "count" : "2"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055119,
+    "name" : "Collisions with Bus Vehicle",
+    "dataTypeName" : "number",
+    "description" : "The number of collisions with a bus vehicle for the given agency/mode/month.",
+    "fieldName" : "collisions_with_bus_vehicle",
+    "position" : 29,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537167,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "3",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187805"
+      }, {
+        "item" : "1",
+        "count" : "659"
+      }, {
+        "item" : "2",
+        "count" : "39"
+      }, {
+        "item" : "3",
+        "count" : "4"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055120,
+    "name" : "Collisions with Other",
+    "dataTypeName" : "number",
+    "description" : "The number of collisions with another object for the given agency/mode/month.",
+    "fieldName" : "collisions_with_other",
+    "position" : 30,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537145,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "11",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188069"
+      }, {
+        "item" : "1",
+        "count" : "413"
+      }, {
+        "item" : "2",
+        "count" : "12"
+      }, {
+        "item" : "3",
+        "count" : "8"
+      }, {
+        "item" : "4",
+        "count" : "1"
+      }, {
+        "item" : "7",
+        "count" : "1"
+      }, {
+        "item" : "8",
+        "count" : "1"
+      }, {
+        "item" : "10",
+        "count" : "1"
+      }, {
+        "item" : "11",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055121,
+    "name" : "Total Collisions",
+    "dataTypeName" : "number",
+    "description" : "The total number of collisions for the given agency/mode/month.",
+    "fieldName" : "total_collisions",
+    "position" : 31,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537170,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "64",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "160370"
+      }, {
+        "item" : "1",
+        "count" : "14132"
+      }, {
+        "item" : "2",
+        "count" : "5004"
+      }, {
+        "item" : "3",
+        "count" : "2646"
+      }, {
+        "item" : "4",
+        "count" : "1720"
+      }, {
+        "item" : "5",
+        "count" : "1152"
+      }, {
+        "item" : "6",
+        "count" : "763"
+      }, {
+        "item" : "7",
+        "count" : "526"
+      }, {
+        "item" : "8",
+        "count" : "398"
+      }, {
+        "item" : "9",
+        "count" : "289"
+      }, {
+        "item" : "10",
+        "count" : "244"
+      }, {
+        "item" : "11",
+        "count" : "163"
+      }, {
+        "item" : "12",
+        "count" : "117"
+      }, {
+        "item" : "13",
+        "count" : "109"
+      }, {
+        "item" : "14",
+        "count" : "93"
+      }, {
+        "item" : "15",
+        "count" : "89"
+      }, {
+        "item" : "16",
+        "count" : "72"
+      }, {
+        "item" : "18",
+        "count" : "72"
+      }, {
+        "item" : "17",
+        "count" : "60"
+      }, {
+        "item" : "19",
+        "count" : "51"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055122,
+    "name" : "Total Derailments",
+    "dataTypeName" : "number",
+    "description" : "Total number of main line derailments reported to NTD. Yard derailments are reported as Not-Otherwise Classified (NOC) events.",
+    "fieldName" : "total_derailments",
+    "position" : 32,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537137,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "10",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187274"
+      }, {
+        "item" : "1",
+        "count" : "972"
+      }, {
+        "item" : "2",
+        "count" : "199"
+      }, {
+        "item" : "3",
+        "count" : "40"
+      }, {
+        "item" : "4",
+        "count" : "14"
+      }, {
+        "item" : "8",
+        "count" : "2"
+      }, {
+        "item" : "7",
+        "count" : "2"
+      }, {
+        "item" : "10",
+        "count" : "1"
+      }, {
+        "item" : "5",
+        "count" : "1"
+      }, {
+        "item" : "6",
+        "count" : "1"
+      }, {
+        "item" : "9",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055123,
+    "name" : "Total Fires",
+    "dataTypeName" : "number",
+    "description" : "Total number of fires reported to NTD.",
+    "fieldName" : "total_fires",
+    "position" : 33,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537153,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "151",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "184878"
+      }, {
+        "item" : "1",
+        "count" : "2158"
+      }, {
+        "item" : "2",
+        "count" : "537"
+      }, {
+        "item" : "3",
+        "count" : "210"
+      }, {
+        "item" : "4",
+        "count" : "130"
+      }, {
+        "item" : "5",
+        "count" : "113"
+      }, {
+        "item" : "6",
+        "count" : "74"
+      }, {
+        "item" : "7",
+        "count" : "53"
+      }, {
+        "item" : "8",
+        "count" : "44"
+      }, {
+        "item" : "10",
+        "count" : "32"
+      }, {
+        "item" : "9",
+        "count" : "26"
+      }, {
+        "item" : "11",
+        "count" : "18"
+      }, {
+        "item" : "12",
+        "count" : "14"
+      }, {
+        "item" : "16",
+        "count" : "12"
+      }, {
+        "item" : "13",
+        "count" : "11"
+      }, {
+        "item" : "75",
+        "count" : "10"
+      }, {
+        "item" : "15",
+        "count" : "10"
+      }, {
+        "item" : "14",
+        "count" : "9"
+      }, {
+        "item" : "17",
+        "count" : "8"
+      }, {
+        "item" : "70",
+        "count" : "8"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055124,
+    "name" : "Total Security Events",
+    "dataTypeName" : "number",
+    "description" : "Total number of major security events reported to NTD, including assaults on transit workers and other security events.",
+    "fieldName" : "total_security_events",
+    "position" : 34,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537131,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "156",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "176531"
+      }, {
+        "item" : "1",
+        "count" : "4601"
+      }, {
+        "item" : "2",
+        "count" : "1981"
+      }, {
+        "item" : "3",
+        "count" : "1173"
+      }, {
+        "item" : "4",
+        "count" : "791"
+      }, {
+        "item" : "5",
+        "count" : "553"
+      }, {
+        "item" : "6",
+        "count" : "436"
+      }, {
+        "item" : "7",
+        "count" : "322"
+      }, {
+        "item" : "8",
+        "count" : "281"
+      }, {
+        "item" : "9",
+        "count" : "215"
+      }, {
+        "item" : "10",
+        "count" : "170"
+      }, {
+        "item" : "11",
+        "count" : "141"
+      }, {
+        "item" : "13",
+        "count" : "119"
+      }, {
+        "item" : "12",
+        "count" : "117"
+      }, {
+        "item" : "14",
+        "count" : "81"
+      }, {
+        "item" : "16",
+        "count" : "71"
+      }, {
+        "item" : "15",
+        "count" : "66"
+      }, {
+        "item" : "18",
+        "count" : "62"
+      }, {
+        "item" : "17",
+        "count" : "58"
+      }, {
+        "item" : "20",
+        "count" : "52"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055125,
+    "name" : "Total Events Not Otherwise Classified",
+    "dataTypeName" : "number",
+    "description" : "Total number of accidents \"not otherwise classified\" (NOC) reported to NTD.  These events include slips, trips and falls, electric shocks, vehicles leaving roadway, yard derailments, and other events that are not reported as a collision, derailment, or fire.",
+    "fieldName" : "total_events_not_otherwise",
+    "position" : 35,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537132,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "301",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "156675"
+      }, {
+        "item" : "1",
+        "count" : "14223"
+      }, {
+        "item" : "2",
+        "count" : "5757"
+      }, {
+        "item" : "3",
+        "count" : "3128"
+      }, {
+        "item" : "4",
+        "count" : "2025"
+      }, {
+        "item" : "5",
+        "count" : "1333"
+      }, {
+        "item" : "6",
+        "count" : "977"
+      }, {
+        "item" : "7",
+        "count" : "785"
+      }, {
+        "item" : "8",
+        "count" : "549"
+      }, {
+        "item" : "9",
+        "count" : "420"
+      }, {
+        "item" : "10",
+        "count" : "324"
+      }, {
+        "item" : "11",
+        "count" : "251"
+      }, {
+        "item" : "12",
+        "count" : "190"
+      }, {
+        "item" : "13",
+        "count" : "176"
+      }, {
+        "item" : "14",
+        "count" : "127"
+      }, {
+        "item" : "15",
+        "count" : "118"
+      }, {
+        "item" : "16",
+        "count" : "101"
+      }, {
+        "item" : "17",
+        "count" : "99"
+      }, {
+        "item" : "19",
+        "count" : "82"
+      }, {
+        "item" : "20",
+        "count" : "77"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055126,
+    "name" : "Total Events",
+    "dataTypeName" : "number",
+    "description" : "Total number reportable major and non-major events for the given agency/mode/type of service/month.",
+    "fieldName" : "total_events",
+    "position" : 36,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537180,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "456",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "141154"
+      }, {
+        "item" : "1",
+        "count" : "18622"
+      }, {
+        "item" : "2",
+        "count" : "7650"
+      }, {
+        "item" : "3",
+        "count" : "4252"
+      }, {
+        "item" : "4",
+        "count" : "2864"
+      }, {
+        "item" : "5",
+        "count" : "2118"
+      }, {
+        "item" : "6",
+        "count" : "1587"
+      }, {
+        "item" : "7",
+        "count" : "1201"
+      }, {
+        "item" : "8",
+        "count" : "1028"
+      }, {
+        "item" : "9",
+        "count" : "890"
+      }, {
+        "item" : "10",
+        "count" : "827"
+      }, {
+        "item" : "11",
+        "count" : "670"
+      }, {
+        "item" : "12",
+        "count" : "540"
+      }, {
+        "item" : "13",
+        "count" : "508"
+      }, {
+        "item" : "14",
+        "count" : "384"
+      }, {
+        "item" : "15",
+        "count" : "322"
+      }, {
+        "item" : "16",
+        "count" : "317"
+      }, {
+        "item" : "18",
+        "count" : "249"
+      }, {
+        "item" : "17",
+        "count" : "248"
+      }, {
+        "item" : "19",
+        "count" : "182"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055127,
+    "name" : "Passenger Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of passenger fatalities.  Passengers include individuals onboard a transit vehicle (including between cars or on top of vehicle).",
+    "fieldName" : "passenger_fatalities",
+    "position" : 37,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537152,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "4",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188264"
+      }, {
+        "item" : "1",
+        "count" : "218"
+      }, {
+        "item" : "2",
+        "count" : "18"
+      }, {
+        "item" : "3",
+        "count" : "5"
+      }, {
+        "item" : "4",
+        "count" : "2"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055128,
+    "name" : "People Waiting or Leaving Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of revenue facility occupant fatalities.  Revenue facility occupants include individuals waiting for or leaving transit.",
+    "fieldName" : "people_waiting_or_leaving",
+    "position" : 38,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537173,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "5",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188091"
+      }, {
+        "item" : "1",
+        "count" : "360"
+      }, {
+        "item" : "2",
+        "count" : "44"
+      }, {
+        "item" : "3",
+        "count" : "10"
+      }, {
+        "item" : "4",
+        "count" : "1"
+      }, {
+        "item" : "5",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055129,
+    "name" : "Operator Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of transit operator fatalities.  This data point is not collected prior to 2008. ",
+    "fieldName" : "operator_fatalities",
+    "position" : 39,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537175,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "1",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188463"
+      }, {
+        "item" : "1",
+        "count" : "44"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055130,
+    "name" : "Other Employee Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of non-operator transit employee fatalities.  This data point is not collected prior to 2008.",
+    "fieldName" : "other_employee_fatalities",
+    "position" : 40,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537122,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "9",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188479"
+      }, {
+        "item" : "1",
+        "count" : "23"
+      }, {
+        "item" : "2",
+        "count" : "4"
+      }, {
+        "item" : "9",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055131,
+    "name" : "Total Employee Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Total Employee Fatalities (Other Employee and Operator aggregated)",
+    "fieldName" : "total_employee_fatalities",
+    "position" : 41,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537178,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "9",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188435"
+      }, {
+        "item" : "1",
+        "count" : "67"
+      }, {
+        "item" : "2",
+        "count" : "4"
+      }, {
+        "item" : "9",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055132,
+    "name" : "Other Worker Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of non-transit employee fatalities.",
+    "fieldName" : "other_worker_fatalities",
+    "position" : 42,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537148,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "1",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188499"
+      }, {
+        "item" : "1",
+        "count" : "8"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055133,
+    "name" : "Bicyclist Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of cyclist fatalities.  This data point is not collected prior to 2008.",
+    "fieldName" : "bicyclist_fatalities",
+    "position" : 43,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537160,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "2",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188420"
+      }, {
+        "item" : "1",
+        "count" : "84"
+      }, {
+        "item" : "2",
+        "count" : "3"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055134,
+    "name" : "Pedestrian in Crosswalk Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian fatalities in crosswalks.  This data point is not collected prior to 2008.",
+    "fieldName" : "pedestrian_in_crosswalk",
+    "position" : 44,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537127,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "3",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188340"
+      }, {
+        "item" : "1",
+        "count" : "161"
+      }, {
+        "item" : "2",
+        "count" : "5"
+      }, {
+        "item" : "3",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055135,
+    "name" : "Pedestrian Not in Crosswalk Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian fatalities not in crosswalks.  This data point is not collected prior to 2008.",
+    "fieldName" : "pedestrian_not_in_crosswalk",
+    "position" : 45,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537135,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "3",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188345"
+      }, {
+        "item" : "1",
+        "count" : "160"
+      }, {
+        "item" : "2",
+        "count" : "1"
+      }, {
+        "item" : "3",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055136,
+    "name" : "Pedestrian Crossing Tracks Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian fatalities crossing tracks.  This data point is not collected prior to 2008 or after 2015.",
+    "fieldName" : "pedestrian_crossing_tracks",
+    "position" : 46,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537141,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "2",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188488"
+      }, {
+        "item" : "1",
+        "count" : "18"
+      }, {
+        "item" : "2",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055137,
+    "name" : "Pedestrian Walking Along Tracks Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian fatalities walking along tracks.  This data point is not collected prior to 2008 or after 2015.",
+    "fieldName" : "pedestrian_walking_along",
+    "position" : 47,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537172,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "10",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188383"
+      }, {
+        "item" : "1",
+        "count" : "87"
+      }, {
+        "item" : "3",
+        "count" : "11"
+      }, {
+        "item" : "2",
+        "count" : "10"
+      }, {
+        "item" : "5",
+        "count" : "5"
+      }, {
+        "item" : "4",
+        "count" : "4"
+      }, {
+        "item" : "9",
+        "count" : "3"
+      }, {
+        "item" : "10",
+        "count" : "2"
+      }, {
+        "item" : "6",
+        "count" : "1"
+      }, {
+        "item" : "8",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055138,
+    "name" : "Other Vehicle Occupant Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of occupants of other vehicle fatalities.  This data point is not collected prior to 2008.",
+    "fieldName" : "other_vehicle_occupant",
+    "position" : 48,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537123,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "5",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187916"
+      }, {
+        "item" : "1",
+        "count" : "548"
+      }, {
+        "item" : "2",
+        "count" : "34"
+      }, {
+        "item" : "3",
+        "count" : "7"
+      }, {
+        "item" : "4",
+        "count" : "1"
+      }, {
+        "item" : "5",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055139,
+    "name" : "Other Fatalities",
+    "dataTypeName" : "number",
+    "description" : "For 2002-2007, included the sum of \"Bicyclist,\" \"Ped in Crossing,\" \"Ped Not In Crossing,\" \"Ped Crossing Tracks,\" \"Ped Walking Along Tracks,\" and \"Other Vehicle Occupant.\"  For 2008 and later, includes other members of the public not specified. ",
+    "fieldName" : "other_fatalities",
+    "position" : 49,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537166,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "10",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188138"
+      }, {
+        "item" : "1",
+        "count" : "290"
+      }, {
+        "item" : "2",
+        "count" : "38"
+      }, {
+        "item" : "3",
+        "count" : "13"
+      }, {
+        "item" : "4",
+        "count" : "12"
+      }, {
+        "item" : "5",
+        "count" : "9"
+      }, {
+        "item" : "6",
+        "count" : "4"
+      }, {
+        "item" : "7",
+        "count" : "1"
+      }, {
+        "item" : "8",
+        "count" : "1"
+      }, {
+        "item" : "10",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055140,
+    "name" : "Trespasser Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of trespasser fatalities.",
+    "fieldName" : "trespasser_fatalities",
+    "position" : 50,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537171,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "14",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187910"
+      }, {
+        "item" : "1",
+        "count" : "399"
+      }, {
+        "item" : "2",
+        "count" : "82"
+      }, {
+        "item" : "3",
+        "count" : "23"
+      }, {
+        "item" : "5",
+        "count" : "21"
+      }, {
+        "item" : "4",
+        "count" : "17"
+      }, {
+        "item" : "7",
+        "count" : "14"
+      }, {
+        "item" : "9",
+        "count" : "11"
+      }, {
+        "item" : "6",
+        "count" : "7"
+      }, {
+        "item" : "10",
+        "count" : "7"
+      }, {
+        "item" : "8",
+        "count" : "6"
+      }, {
+        "item" : "11",
+        "count" : "4"
+      }, {
+        "item" : "13",
+        "count" : "3"
+      }, {
+        "item" : "12",
+        "count" : "2"
+      }, {
+        "item" : "14",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055141,
+    "name" : "Suicide Fatalities",
+    "dataTypeName" : "number",
+    "description" : "Number of suicides.",
+    "fieldName" : "suicide_fatalities",
+    "position" : 51,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537126,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "8",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187929"
+      }, {
+        "item" : "1",
+        "count" : "423"
+      }, {
+        "item" : "2",
+        "count" : "90"
+      }, {
+        "item" : "3",
+        "count" : "29"
+      }, {
+        "item" : "4",
+        "count" : "21"
+      }, {
+        "item" : "5",
+        "count" : "10"
+      }, {
+        "item" : "6",
+        "count" : "3"
+      }, {
+        "item" : "7",
+        "count" : "1"
+      }, {
+        "item" : "8",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055142,
+    "name" : "Total Other Fatalities",
+    "dataTypeName" : "number",
+    "description" : "For 2002-2007, the sum of \"Other,\" \"Trespasser,\" and \"Suicide.\" For 2008-2016, the sum of \"Bicyclist,\" \"Ped in Crossing,\" \"Ped not in Crossing,\" \"Ped Crossing Tracks,\" \"Ped Walking Along Tracks,\" \"Other Vehicle Occupant,\" \"Other,\" and \"Suicide.\"",
+    "fieldName" : "total_other_fatalities",
+    "position" : 52,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537147,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "13",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "186651"
+      }, {
+        "item" : "1",
+        "count" : "1516"
+      }, {
+        "item" : "2",
+        "count" : "182"
+      }, {
+        "item" : "3",
+        "count" : "40"
+      }, {
+        "item" : "4",
+        "count" : "34"
+      }, {
+        "item" : "5",
+        "count" : "21"
+      }, {
+        "item" : "7",
+        "count" : "18"
+      }, {
+        "item" : "6",
+        "count" : "16"
+      }, {
+        "item" : "9",
+        "count" : "9"
+      }, {
+        "item" : "8",
+        "count" : "8"
+      }, {
+        "item" : "10",
+        "count" : "5"
+      }, {
+        "item" : "12",
+        "count" : "4"
+      }, {
+        "item" : "11",
+        "count" : "2"
+      }, {
+        "item" : "13",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055143,
+    "name" : "Total Fatalities",
+    "dataTypeName" : "number",
+    "description" : "All fatalities - \"Passenger,\" \"People Waiting or Leaving,\" \"Total Employee,\" \"Other Worker,\" and \"Total Other.\"",
+    "fieldName" : "total_fatalities",
+    "position" : 53,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537138,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "15",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "186200"
+      }, {
+        "item" : "1",
+        "count" : "1835"
+      }, {
+        "item" : "2",
+        "count" : "260"
+      }, {
+        "item" : "3",
+        "count" : "66"
+      }, {
+        "item" : "5",
+        "count" : "29"
+      }, {
+        "item" : "4",
+        "count" : "25"
+      }, {
+        "item" : "7",
+        "count" : "23"
+      }, {
+        "item" : "8",
+        "count" : "15"
+      }, {
+        "item" : "6",
+        "count" : "15"
+      }, {
+        "item" : "10",
+        "count" : "12"
+      }, {
+        "item" : "9",
+        "count" : "9"
+      }, {
+        "item" : "12",
+        "count" : "5"
+      }, {
+        "item" : "13",
+        "count" : "5"
+      }, {
+        "item" : "11",
+        "count" : "4"
+      }, {
+        "item" : "15",
+        "count" : "2"
+      }, {
+        "item" : "14",
+        "count" : "2"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055144,
+    "name" : "Passenger Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of passenger injuries.  Passengers include individuals onboard a transit vehicle (including between cars or on top of vehicle).",
+    "fieldName" : "passenger_injuries",
+    "position" : 54,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537151,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "106",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "164405"
+      }, {
+        "item" : "1",
+        "count" : "9873"
+      }, {
+        "item" : "2",
+        "count" : "4282"
+      }, {
+        "item" : "3",
+        "count" : "2415"
+      }, {
+        "item" : "4",
+        "count" : "1604"
+      }, {
+        "item" : "5",
+        "count" : "1086"
+      }, {
+        "item" : "6",
+        "count" : "833"
+      }, {
+        "item" : "7",
+        "count" : "667"
+      }, {
+        "item" : "8",
+        "count" : "508"
+      }, {
+        "item" : "9",
+        "count" : "392"
+      }, {
+        "item" : "10",
+        "count" : "323"
+      }, {
+        "item" : "11",
+        "count" : "250"
+      }, {
+        "item" : "12",
+        "count" : "190"
+      }, {
+        "item" : "13",
+        "count" : "176"
+      }, {
+        "item" : "14",
+        "count" : "153"
+      }, {
+        "item" : "15",
+        "count" : "125"
+      }, {
+        "item" : "16",
+        "count" : "99"
+      }, {
+        "item" : "17",
+        "count" : "96"
+      }, {
+        "item" : "19",
+        "count" : "77"
+      }, {
+        "item" : "18",
+        "count" : "77"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055145,
+    "name" : "People Waiting or Leaving Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of revenue facility occupant injuries.  Revenue facility occupants include individuals waiting for or leaving transit.",
+    "fieldName" : "people_waiting_or_leaving_1",
+    "position" : 55,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537174,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "287",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "166611"
+      }, {
+        "item" : "1",
+        "count" : "11374"
+      }, {
+        "item" : "2",
+        "count" : "4081"
+      }, {
+        "item" : "3",
+        "count" : "1997"
+      }, {
+        "item" : "4",
+        "count" : "1110"
+      }, {
+        "item" : "5",
+        "count" : "719"
+      }, {
+        "item" : "6",
+        "count" : "481"
+      }, {
+        "item" : "7",
+        "count" : "338"
+      }, {
+        "item" : "8",
+        "count" : "263"
+      }, {
+        "item" : "9",
+        "count" : "200"
+      }, {
+        "item" : "10",
+        "count" : "159"
+      }, {
+        "item" : "11",
+        "count" : "116"
+      }, {
+        "item" : "12",
+        "count" : "111"
+      }, {
+        "item" : "13",
+        "count" : "94"
+      }, {
+        "item" : "14",
+        "count" : "88"
+      }, {
+        "item" : "15",
+        "count" : "86"
+      }, {
+        "item" : "17",
+        "count" : "62"
+      }, {
+        "item" : "18",
+        "count" : "61"
+      }, {
+        "item" : "16",
+        "count" : "52"
+      }, {
+        "item" : "20",
+        "count" : "47"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055146,
+    "name" : "Operator Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of transit operator injuries.  This data point is not collected prior to 2008. ",
+    "fieldName" : "operator_injuries",
+    "position" : 56,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537179,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "36",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "178568"
+      }, {
+        "item" : "1",
+        "count" : "6545"
+      }, {
+        "item" : "2",
+        "count" : "1504"
+      }, {
+        "item" : "3",
+        "count" : "584"
+      }, {
+        "item" : "4",
+        "count" : "345"
+      }, {
+        "item" : "5",
+        "count" : "175"
+      }, {
+        "item" : "6",
+        "count" : "148"
+      }, {
+        "item" : "7",
+        "count" : "104"
+      }, {
+        "item" : "8",
+        "count" : "82"
+      }, {
+        "item" : "10",
+        "count" : "60"
+      }, {
+        "item" : "9",
+        "count" : "60"
+      }, {
+        "item" : "11",
+        "count" : "43"
+      }, {
+        "item" : "12",
+        "count" : "36"
+      }, {
+        "item" : "14",
+        "count" : "29"
+      }, {
+        "item" : "15",
+        "count" : "29"
+      }, {
+        "item" : "13",
+        "count" : "29"
+      }, {
+        "item" : "17",
+        "count" : "25"
+      }, {
+        "item" : "16",
+        "count" : "24"
+      }, {
+        "item" : "21",
+        "count" : "20"
+      }, {
+        "item" : "18",
+        "count" : "16"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055147,
+    "name" : "Other Employee Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of non-operator transit employee fatalities.  This data point is not collected prior to 2008.",
+    "fieldName" : "other_employee_injuries",
+    "position" : 57,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537182,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "30",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "184892"
+      }, {
+        "item" : "1",
+        "count" : "2492"
+      }, {
+        "item" : "2",
+        "count" : "564"
+      }, {
+        "item" : "3",
+        "count" : "200"
+      }, {
+        "item" : "4",
+        "count" : "117"
+      }, {
+        "item" : "5",
+        "count" : "66"
+      }, {
+        "item" : "6",
+        "count" : "50"
+      }, {
+        "item" : "7",
+        "count" : "29"
+      }, {
+        "item" : "9",
+        "count" : "19"
+      }, {
+        "item" : "8",
+        "count" : "13"
+      }, {
+        "item" : "13",
+        "count" : "11"
+      }, {
+        "item" : "11",
+        "count" : "10"
+      }, {
+        "item" : "10",
+        "count" : "9"
+      }, {
+        "item" : "20",
+        "count" : "6"
+      }, {
+        "item" : "14",
+        "count" : "4"
+      }, {
+        "item" : "12",
+        "count" : "4"
+      }, {
+        "item" : "18",
+        "count" : "4"
+      }, {
+        "item" : "16",
+        "count" : "3"
+      }, {
+        "item" : "22",
+        "count" : "3"
+      }, {
+        "item" : "19",
+        "count" : "2"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055148,
+    "name" : "Total Employee Injuries",
+    "dataTypeName" : "number",
+    "description" : "Total Employee Injuries (Other Employee and Operator aggregated)",
+    "fieldName" : "total_employee_injuries",
+    "position" : 58,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537176,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "36",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "176433"
+      }, {
+        "item" : "1",
+        "count" : "7669"
+      }, {
+        "item" : "2",
+        "count" : "1913"
+      }, {
+        "item" : "3",
+        "count" : "748"
+      }, {
+        "item" : "4",
+        "count" : "422"
+      }, {
+        "item" : "5",
+        "count" : "225"
+      }, {
+        "item" : "6",
+        "count" : "192"
+      }, {
+        "item" : "7",
+        "count" : "157"
+      }, {
+        "item" : "8",
+        "count" : "109"
+      }, {
+        "item" : "9",
+        "count" : "85"
+      }, {
+        "item" : "11",
+        "count" : "64"
+      }, {
+        "item" : "10",
+        "count" : "63"
+      }, {
+        "item" : "12",
+        "count" : "56"
+      }, {
+        "item" : "13",
+        "count" : "53"
+      }, {
+        "item" : "16",
+        "count" : "38"
+      }, {
+        "item" : "14",
+        "count" : "36"
+      }, {
+        "item" : "15",
+        "count" : "34"
+      }, {
+        "item" : "18",
+        "count" : "33"
+      }, {
+        "item" : "20",
+        "count" : "31"
+      }, {
+        "item" : "17",
+        "count" : "24"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055149,
+    "name" : "Other Worker Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of non-transit employee injuries.",
+    "fieldName" : "other_worker_injuries",
+    "position" : 59,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537129,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "14",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188395"
+      }, {
+        "item" : "1",
+        "count" : "54"
+      }, {
+        "item" : "2",
+        "count" : "19"
+      }, {
+        "item" : "4",
+        "count" : "8"
+      }, {
+        "item" : "7",
+        "count" : "7"
+      }, {
+        "item" : "5",
+        "count" : "7"
+      }, {
+        "item" : "3",
+        "count" : "5"
+      }, {
+        "item" : "8",
+        "count" : "4"
+      }, {
+        "item" : "6",
+        "count" : "3"
+      }, {
+        "item" : "9",
+        "count" : "2"
+      }, {
+        "item" : "10",
+        "count" : "2"
+      }, {
+        "item" : "14",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055150,
+    "name" : "Bicyclist Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of cyclist injuries.  This data point is not collected prior to 2008.",
+    "fieldName" : "bicyclist_injuries",
+    "position" : 60,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537168,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "6",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187185"
+      }, {
+        "item" : "1",
+        "count" : "1165"
+      }, {
+        "item" : "2",
+        "count" : "110"
+      }, {
+        "item" : "3",
+        "count" : "23"
+      }, {
+        "item" : "4",
+        "count" : "18"
+      }, {
+        "item" : "5",
+        "count" : "3"
+      }, {
+        "item" : "6",
+        "count" : "3"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055151,
+    "name" : "Pedestrian in Crosswalk Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian injuries in crosswalks.  This data point is not collected prior to 2008.",
+    "fieldName" : "pedestrian_in_corsswalk",
+    "position" : 61,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537184,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "10",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187078"
+      }, {
+        "item" : "1",
+        "count" : "1172"
+      }, {
+        "item" : "2",
+        "count" : "158"
+      }, {
+        "item" : "3",
+        "count" : "54"
+      }, {
+        "item" : "4",
+        "count" : "18"
+      }, {
+        "item" : "5",
+        "count" : "13"
+      }, {
+        "item" : "6",
+        "count" : "9"
+      }, {
+        "item" : "7",
+        "count" : "3"
+      }, {
+        "item" : "8",
+        "count" : "1"
+      }, {
+        "item" : "10",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055152,
+    "name" : "Pedestrian Not in Crosswalk Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian injuries not in crosswalks.  This data point is not collected prior to 2008.",
+    "fieldName" : "pedestrian_not_in_crosswalk_1",
+    "position" : 62,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537163,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "6",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187231"
+      }, {
+        "item" : "1",
+        "count" : "1094"
+      }, {
+        "item" : "2",
+        "count" : "139"
+      }, {
+        "item" : "3",
+        "count" : "28"
+      }, {
+        "item" : "4",
+        "count" : "12"
+      }, {
+        "item" : "5",
+        "count" : "2"
+      }, {
+        "item" : "6",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055153,
+    "name" : "Pedestrian Crossing Tracks Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian injuries crossing tracks.  This data point is not collected prior to 2008 or after 2015.",
+    "fieldName" : "pedestrian_crossing_tracks_1",
+    "position" : 63,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537161,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "2",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188474"
+      }, {
+        "item" : "1",
+        "count" : "29"
+      }, {
+        "item" : "2",
+        "count" : "4"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055154,
+    "name" : "Pedestrian Walking Along Tracks Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of pedestrian injuries walking along tracks.  This data point is not collected prior to 2008 or after 2015.",
+    "fieldName" : "pedestrian_walking_along_1",
+    "position" : 64,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537169,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "7",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "188094"
+      }, {
+        "item" : "1",
+        "count" : "346"
+      }, {
+        "item" : "2",
+        "count" : "46"
+      }, {
+        "item" : "3",
+        "count" : "11"
+      }, {
+        "item" : "4",
+        "count" : "4"
+      }, {
+        "item" : "5",
+        "count" : "4"
+      }, {
+        "item" : "6",
+        "count" : "1"
+      }, {
+        "item" : "7",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055155,
+    "name" : "Other Vehicle Occupant Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of occupants of other vehicle injuries.  This data point is not collected prior to 2008.",
+    "fieldName" : "other_vehicle_occupant_1",
+    "position" : 65,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537164,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "51",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "177339"
+      }, {
+        "item" : "1",
+        "count" : "6142"
+      }, {
+        "item" : "2",
+        "count" : "2224"
+      }, {
+        "item" : "3",
+        "count" : "1031"
+      }, {
+        "item" : "4",
+        "count" : "580"
+      }, {
+        "item" : "5",
+        "count" : "324"
+      }, {
+        "item" : "6",
+        "count" : "238"
+      }, {
+        "item" : "7",
+        "count" : "129"
+      }, {
+        "item" : "8",
+        "count" : "92"
+      }, {
+        "item" : "9",
+        "count" : "78"
+      }, {
+        "item" : "10",
+        "count" : "57"
+      }, {
+        "item" : "11",
+        "count" : "45"
+      }, {
+        "item" : "12",
+        "count" : "33"
+      }, {
+        "item" : "13",
+        "count" : "24"
+      }, {
+        "item" : "14",
+        "count" : "21"
+      }, {
+        "item" : "15",
+        "count" : "16"
+      }, {
+        "item" : "17",
+        "count" : "16"
+      }, {
+        "item" : "22",
+        "count" : "14"
+      }, {
+        "item" : "16",
+        "count" : "12"
+      }, {
+        "item" : "21",
+        "count" : "11"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055156,
+    "name" : "Other Injuries",
+    "dataTypeName" : "number",
+    "description" : "For 2002-2007, included the sum of \"Bicyclist,\" \"Ped in Crossing,\" \"Ped Not In Crossing,\" \"Ped Crossing Tracks,\" \"Ped Walking Along Tracks,\" and \"Other Vehicle Occupant.\"  For 2008 and later, includes other members of the public not specified. ",
+    "fieldName" : "other_injuries",
+    "position" : 66,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537159,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "42",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "184807"
+      }, {
+        "item" : "1",
+        "count" : "2326"
+      }, {
+        "item" : "2",
+        "count" : "503"
+      }, {
+        "item" : "3",
+        "count" : "265"
+      }, {
+        "item" : "4",
+        "count" : "151"
+      }, {
+        "item" : "5",
+        "count" : "104"
+      }, {
+        "item" : "6",
+        "count" : "76"
+      }, {
+        "item" : "7",
+        "count" : "59"
+      }, {
+        "item" : "8",
+        "count" : "34"
+      }, {
+        "item" : "9",
+        "count" : "26"
+      }, {
+        "item" : "10",
+        "count" : "16"
+      }, {
+        "item" : "11",
+        "count" : "12"
+      }, {
+        "item" : "12",
+        "count" : "11"
+      }, {
+        "item" : "17",
+        "count" : "11"
+      }, {
+        "item" : "19",
+        "count" : "10"
+      }, {
+        "item" : "23",
+        "count" : "9"
+      }, {
+        "item" : "18",
+        "count" : "8"
+      }, {
+        "item" : "16",
+        "count" : "8"
+      }, {
+        "item" : "20",
+        "count" : "8"
+      }, {
+        "item" : "22",
+        "count" : "7"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055157,
+    "name" : "Trespasser Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of trespasser injuries.",
+    "fieldName" : "trespasser_injuries",
+    "position" : 67,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537156,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "12",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187785"
+      }, {
+        "item" : "1",
+        "count" : "514"
+      }, {
+        "item" : "2",
+        "count" : "79"
+      }, {
+        "item" : "3",
+        "count" : "36"
+      }, {
+        "item" : "4",
+        "count" : "25"
+      }, {
+        "item" : "6",
+        "count" : "21"
+      }, {
+        "item" : "5",
+        "count" : "14"
+      }, {
+        "item" : "7",
+        "count" : "14"
+      }, {
+        "item" : "9",
+        "count" : "7"
+      }, {
+        "item" : "8",
+        "count" : "6"
+      }, {
+        "item" : "10",
+        "count" : "3"
+      }, {
+        "item" : "11",
+        "count" : "2"
+      }, {
+        "item" : "12",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055158,
+    "name" : "Suicide Injuries",
+    "dataTypeName" : "number",
+    "description" : "Number of attempted suicides or other injuries involved in suicide events.",
+    "fieldName" : "suicide_injuries",
+    "position" : 68,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537154,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "7",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "187854"
+      }, {
+        "item" : "1",
+        "count" : "484"
+      }, {
+        "item" : "2",
+        "count" : "101"
+      }, {
+        "item" : "3",
+        "count" : "48"
+      }, {
+        "item" : "4",
+        "count" : "12"
+      }, {
+        "item" : "5",
+        "count" : "5"
+      }, {
+        "item" : "7",
+        "count" : "3"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055159,
+    "name" : "Total Other Injuries",
+    "dataTypeName" : "number",
+    "description" : "For 2002-2007, the sum of \"Other,\" \"Trespasser,\" and \"Suicide.\" For 2008-2016, the sum of \"Bicyclist,\" \"Ped in Crossing,\" \"Ped not in Crossing,\" \"Ped Crossing Tracks,\" \"Ped Walking Along Tracks,\" \"Other Vehicle Occupant,\" \"Other,\" and \"Suicide.\"",
+    "fieldName" : "total_other_injuries",
+    "position" : 69,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537125,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "57",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "173068"
+      }, {
+        "item" : "1",
+        "count" : "8385"
+      }, {
+        "item" : "2",
+        "count" : "2982"
+      }, {
+        "item" : "3",
+        "count" : "1369"
+      }, {
+        "item" : "4",
+        "count" : "736"
+      }, {
+        "item" : "5",
+        "count" : "452"
+      }, {
+        "item" : "6",
+        "count" : "286"
+      }, {
+        "item" : "7",
+        "count" : "205"
+      }, {
+        "item" : "8",
+        "count" : "142"
+      }, {
+        "item" : "9",
+        "count" : "138"
+      }, {
+        "item" : "10",
+        "count" : "108"
+      }, {
+        "item" : "11",
+        "count" : "85"
+      }, {
+        "item" : "12",
+        "count" : "54"
+      }, {
+        "item" : "13",
+        "count" : "47"
+      }, {
+        "item" : "14",
+        "count" : "44"
+      }, {
+        "item" : "16",
+        "count" : "41"
+      }, {
+        "item" : "22",
+        "count" : "29"
+      }, {
+        "item" : "17",
+        "count" : "27"
+      }, {
+        "item" : "19",
+        "count" : "26"
+      }, {
+        "item" : "15",
+        "count" : "26"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055160,
+    "name" : "Total Injuries",
+    "dataTypeName" : "number",
+    "description" : "All injuries - \"Passenger,\" \"People Waiting or Leaving,\" \"Total Employee,\" \"Other Worker,\" and \"Total Other.\"",
+    "fieldName" : "total_injuries",
+    "position" : 70,
+    "renderTypeName" : "number",
+    "tableColumnId" : 68537134,
+    "cachedContents" : {
+      "non_null" : "188507",
+      "largest" : "356",
+      "null" : "2559",
+      "top" : [ {
+        "item" : "0",
+        "count" : "148337"
+      }, {
+        "item" : "1",
+        "count" : "14771"
+      }, {
+        "item" : "2",
+        "count" : "6654"
+      }, {
+        "item" : "3",
+        "count" : "4004"
+      }, {
+        "item" : "4",
+        "count" : "2549"
+      }, {
+        "item" : "5",
+        "count" : "1908"
+      }, {
+        "item" : "6",
+        "count" : "1410"
+      }, {
+        "item" : "7",
+        "count" : "1152"
+      }, {
+        "item" : "8",
+        "count" : "975"
+      }, {
+        "item" : "9",
+        "count" : "775"
+      }, {
+        "item" : "10",
+        "count" : "645"
+      }, {
+        "item" : "11",
+        "count" : "545"
+      }, {
+        "item" : "12",
+        "count" : "473"
+      }, {
+        "item" : "13",
+        "count" : "431"
+      }, {
+        "item" : "14",
+        "count" : "327"
+      }, {
+        "item" : "15",
+        "count" : "277"
+      }, {
+        "item" : "16",
+        "count" : "258"
+      }, {
+        "item" : "18",
+        "count" : "200"
+      }, {
+        "item" : "17",
+        "count" : "187"
+      }, {
+        "item" : "21",
+        "count" : "163"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055161,
+    "name" : "Non-Major Physical Assaults on Operators",
+    "dataTypeName" : "number",
+    "description" : "Count of non-major physical assaults on transit vehicle operators.",
+    "fieldName" : "non_major_physical_assaults_on_operators",
+    "position" : 71,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807722,
+    "cachedContents" : {
+      "non_null" : "15084",
+      "largest" : "108",
+      "null" : "175982",
+      "top" : [ {
+        "item" : "0",
+        "count" : "11403"
+      }, {
+        "item" : "1",
+        "count" : "2018"
+      }, {
+        "item" : "2",
+        "count" : "704"
+      }, {
+        "item" : "3",
+        "count" : "323"
+      }, {
+        "item" : "4",
+        "count" : "181"
+      }, {
+        "item" : "5",
+        "count" : "105"
+      }, {
+        "item" : "6",
+        "count" : "85"
+      }, {
+        "item" : "7",
+        "count" : "52"
+      }, {
+        "item" : "9",
+        "count" : "44"
+      }, {
+        "item" : "8",
+        "count" : "42"
+      }, {
+        "item" : "10",
+        "count" : "26"
+      }, {
+        "item" : "12",
+        "count" : "18"
+      }, {
+        "item" : "11",
+        "count" : "15"
+      }, {
+        "item" : "16",
+        "count" : "10"
+      }, {
+        "item" : "13",
+        "count" : "9"
+      }, {
+        "item" : "14",
+        "count" : "8"
+      }, {
+        "item" : "20",
+        "count" : "5"
+      }, {
+        "item" : "15",
+        "count" : "4"
+      }, {
+        "item" : "27",
+        "count" : "4"
+      }, {
+        "item" : "17",
+        "count" : "3"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055162,
+    "name" : "Non-Major Non-Physical Assaults on Operators",
+    "dataTypeName" : "number",
+    "description" : "Count of non-major non-physical assaults on transit vehicle operators.",
+    "fieldName" : "non_major_non_physical_assaults_on_operators",
+    "position" : 72,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807721,
+    "cachedContents" : {
+      "non_null" : "15084",
+      "largest" : "131",
+      "null" : "175982",
+      "top" : [ {
+        "item" : "0",
+        "count" : "10418"
+      }, {
+        "item" : "1",
+        "count" : "1923"
+      }, {
+        "item" : "2",
+        "count" : "771"
+      }, {
+        "item" : "3",
+        "count" : "431"
+      }, {
+        "item" : "4",
+        "count" : "304"
+      }, {
+        "item" : "5",
+        "count" : "208"
+      }, {
+        "item" : "6",
+        "count" : "159"
+      }, {
+        "item" : "7",
+        "count" : "135"
+      }, {
+        "item" : "8",
+        "count" : "84"
+      }, {
+        "item" : "9",
+        "count" : "76"
+      }, {
+        "item" : "10",
+        "count" : "48"
+      }, {
+        "item" : "11",
+        "count" : "48"
+      }, {
+        "item" : "12",
+        "count" : "34"
+      }, {
+        "item" : "13",
+        "count" : "33"
+      }, {
+        "item" : "17",
+        "count" : "25"
+      }, {
+        "item" : "15",
+        "count" : "24"
+      }, {
+        "item" : "16",
+        "count" : "23"
+      }, {
+        "item" : "14",
+        "count" : "22"
+      }, {
+        "item" : "19",
+        "count" : "20"
+      }, {
+        "item" : "21",
+        "count" : "19"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055163,
+    "name" : "Non-Major Physical Assaults on Other Transit Workers",
+    "dataTypeName" : "number",
+    "description" : "Count of non-major physical assaults on transit workers who are not vehicle operators.",
+    "fieldName" : "non_major_physical_assaults_on_other_transit_workers",
+    "position" : 73,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807723,
+    "cachedContents" : {
+      "non_null" : "15084",
+      "largest" : "49",
+      "null" : "175982",
+      "top" : [ {
+        "item" : "0",
+        "count" : "13368"
+      }, {
+        "item" : "1",
+        "count" : "856"
+      }, {
+        "item" : "2",
+        "count" : "259"
+      }, {
+        "item" : "3",
+        "count" : "166"
+      }, {
+        "item" : "4",
+        "count" : "95"
+      }, {
+        "item" : "5",
+        "count" : "79"
+      }, {
+        "item" : "6",
+        "count" : "44"
+      }, {
+        "item" : "7",
+        "count" : "38"
+      }, {
+        "item" : "9",
+        "count" : "36"
+      }, {
+        "item" : "8",
+        "count" : "34"
+      }, {
+        "item" : "10",
+        "count" : "22"
+      }, {
+        "item" : "12",
+        "count" : "16"
+      }, {
+        "item" : "11",
+        "count" : "12"
+      }, {
+        "item" : "13",
+        "count" : "8"
+      }, {
+        "item" : "21",
+        "count" : "5"
+      }, {
+        "item" : "15",
+        "count" : "4"
+      }, {
+        "item" : "17",
+        "count" : "4"
+      }, {
+        "item" : "14",
+        "count" : "4"
+      }, {
+        "item" : "20",
+        "count" : "4"
+      }, {
+        "item" : "23",
+        "count" : "3"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055164,
+    "name" : "Non-Major Non-Physical Assaults on Other Transit Workers",
+    "dataTypeName" : "number",
+    "description" : "Count of non-major non-physical assaults on transit workers who are not vehicle operators.",
+    "fieldName" : "non_major_non_physical_assaults_on_other_transit_workers",
+    "position" : 74,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807720,
+    "cachedContents" : {
+      "non_null" : "15084",
+      "largest" : "36",
+      "null" : "175982",
+      "top" : [ {
+        "item" : "0",
+        "count" : "13424"
+      }, {
+        "item" : "1",
+        "count" : "719"
+      }, {
+        "item" : "2",
+        "count" : "299"
+      }, {
+        "item" : "3",
+        "count" : "185"
+      }, {
+        "item" : "4",
+        "count" : "115"
+      }, {
+        "item" : "5",
+        "count" : "74"
+      }, {
+        "item" : "6",
+        "count" : "60"
+      }, {
+        "item" : "8",
+        "count" : "40"
+      }, {
+        "item" : "7",
+        "count" : "39"
+      }, {
+        "item" : "9",
+        "count" : "28"
+      }, {
+        "item" : "11",
+        "count" : "24"
+      }, {
+        "item" : "10",
+        "count" : "16"
+      }, {
+        "item" : "12",
+        "count" : "12"
+      }, {
+        "item" : "14",
+        "count" : "10"
+      }, {
+        "item" : "13",
+        "count" : "7"
+      }, {
+        "item" : "19",
+        "count" : "5"
+      }, {
+        "item" : "16",
+        "count" : "4"
+      }, {
+        "item" : "18",
+        "count" : "4"
+      }, {
+        "item" : "17",
+        "count" : "4"
+      }, {
+        "item" : "15",
+        "count" : "3"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055165,
+    "name" : "Major Physical Assaults on Operators",
+    "dataTypeName" : "number",
+    "description" : "Count of major physical assaults on transit vehicle operators.",
+    "fieldName" : "major_physical_assaults_on_operators",
+    "position" : 75,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807718,
+    "cachedContents" : {
+      "non_null" : "39748",
+      "largest" : "17",
+      "null" : "151318",
+      "top" : [ {
+        "item" : "0",
+        "count" : "39143"
+      }, {
+        "item" : "1",
+        "count" : "378"
+      }, {
+        "item" : "2",
+        "count" : "102"
+      }, {
+        "item" : "3",
+        "count" : "38"
+      }, {
+        "item" : "5",
+        "count" : "20"
+      }, {
+        "item" : "4",
+        "count" : "18"
+      }, {
+        "item" : "6",
+        "count" : "13"
+      }, {
+        "item" : "8",
+        "count" : "10"
+      }, {
+        "item" : "7",
+        "count" : "7"
+      }, {
+        "item" : "10",
+        "count" : "6"
+      }, {
+        "item" : "9",
+        "count" : "5"
+      }, {
+        "item" : "13",
+        "count" : "2"
+      }, {
+        "item" : "11",
+        "count" : "2"
+      }, {
+        "item" : "17",
+        "count" : "1"
+      }, {
+        "item" : "12",
+        "count" : "1"
+      }, {
+        "item" : "14",
+        "count" : "1"
+      }, {
+        "item" : "15",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055166,
+    "name" : "Major Non-Physical Assaults on Operators",
+    "dataTypeName" : "number",
+    "description" : "Count of major non-physical assaults on transit vehicle operators.",
+    "fieldName" : "major_non_physical_assaults_on_operators",
+    "position" : 76,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807719,
+    "cachedContents" : {
+      "non_null" : "39748",
+      "largest" : "3",
+      "null" : "151318",
+      "top" : [ {
+        "item" : "0",
+        "count" : "39701"
+      }, {
+        "item" : "1",
+        "count" : "43"
+      }, {
+        "item" : "2",
+        "count" : "3"
+      }, {
+        "item" : "3",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055167,
+    "name" : "Major Physical Assaults on Other Transit Workers",
+    "dataTypeName" : "number",
+    "description" : "Count of major physical assaults on transit workers who are not vehicle operators.",
+    "fieldName" : "major_physical_assaults_on_other_transit_workers",
+    "position" : 77,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807717,
+    "cachedContents" : {
+      "non_null" : "39748",
+      "largest" : "21",
+      "null" : "151318",
+      "top" : [ {
+        "item" : "0",
+        "count" : "39444"
+      }, {
+        "item" : "1",
+        "count" : "211"
+      }, {
+        "item" : "2",
+        "count" : "38"
+      }, {
+        "item" : "3",
+        "count" : "12"
+      }, {
+        "item" : "4",
+        "count" : "6"
+      }, {
+        "item" : "11",
+        "count" : "6"
+      }, {
+        "item" : "12",
+        "count" : "4"
+      }, {
+        "item" : "7",
+        "count" : "4"
+      }, {
+        "item" : "10",
+        "count" : "4"
+      }, {
+        "item" : "9",
+        "count" : "3"
+      }, {
+        "item" : "5",
+        "count" : "3"
+      }, {
+        "item" : "8",
+        "count" : "3"
+      }, {
+        "item" : "15",
+        "count" : "3"
+      }, {
+        "item" : "14",
+        "count" : "2"
+      }, {
+        "item" : "13",
+        "count" : "1"
+      }, {
+        "item" : "21",
+        "count" : "1"
+      }, {
+        "item" : "17",
+        "count" : "1"
+      }, {
+        "item" : "18",
+        "count" : "1"
+      }, {
+        "item" : "6",
+        "count" : "1"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055168,
+    "name" : "Major Non-Physical Assaults on Other Transit Workers",
+    "dataTypeName" : "number",
+    "description" : "Count of major non-physical assaults on transit workers who are not vehicle operators.",
+    "fieldName" : "major_non_physical_assaults_on_other_transit_workers",
+    "position" : 78,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807724,
+    "cachedContents" : {
+      "non_null" : "39748",
+      "largest" : "1",
+      "null" : "151318",
+      "top" : [ {
+        "item" : "0",
+        "count" : "39741"
+      }, {
+        "item" : "1",
+        "count" : "7"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  }, {
+    "id" : 632055169,
+    "name" : "Total Assaults on Transit Workers",
+    "dataTypeName" : "number",
+    "description" : "Total assaults on transit workers.",
+    "fieldName" : "total_assaults_on_transit_workers",
+    "position" : 79,
+    "renderTypeName" : "number",
+    "tableColumnId" : 147807725,
+    "cachedContents" : {
+      "non_null" : "39771",
+      "largest" : "154",
+      "null" : "151295",
+      "top" : [ {
+        "item" : "0",
+        "count" : "32540"
+      }, {
+        "item" : "1",
+        "count" : "2428"
+      }, {
+        "item" : "2",
+        "count" : "1215"
+      }, {
+        "item" : "3",
+        "count" : "706"
+      }, {
+        "item" : "4",
+        "count" : "472"
+      }, {
+        "item" : "5",
+        "count" : "329"
+      }, {
+        "item" : "6",
+        "count" : "282"
+      }, {
+        "item" : "7",
+        "count" : "202"
+      }, {
+        "item" : "8",
+        "count" : "188"
+      }, {
+        "item" : "9",
+        "count" : "160"
+      }, {
+        "item" : "10",
+        "count" : "112"
+      }, {
+        "item" : "11",
+        "count" : "107"
+      }, {
+        "item" : "12",
+        "count" : "100"
+      }, {
+        "item" : "13",
+        "count" : "85"
+      }, {
+        "item" : "16",
+        "count" : "69"
+      }, {
+        "item" : "14",
+        "count" : "63"
+      }, {
+        "item" : "15",
+        "count" : "47"
+      }, {
+        "item" : "17",
+        "count" : "43"
+      }, {
+        "item" : "20",
+        "count" : "40"
+      }, {
+        "item" : "18",
+        "count" : "39"
+      } ],
+      "smallest" : "0",
+      "count" : "191066",
+      "cardinality" : "191066"
+    },
+    "format" : { }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "license" : {
+    "name" : "Public Domain"
+  },
+  "metadata" : {
+    "custom_fields" : {
+      "Common Core" : {
+        "Contact Email" : "NTDHelp@dot.gov",
+        "Language" : "en-US",
+        "Contact Name" : "NTD Program Support",
+        "Update Frequency" : "R/P1M",
+        "Temporal Applicability" : "R/2014-01-01/P1M",
+        "License" : "http://www.usa.gov/publicdomain/label/1.0/",
+        "Program Code" : "021:000",
+        "Geographic Coverage" : "United States",
+        "Publisher" : "Federal Transit Administration",
+        "Is Quality Data" : "true",
+        "Bureau Code" : "021:36",
+        "Public Access Level" : "public"
+      }
+    },
+    "availableDisplayTypes" : [ "table", "fatrow", "page" ]
+  },
+  "owner" : {
+    "id" : "cvni-9g72",
+    "createdAt" : 1709228343,
+    "displayName" : "FTA-NTD Data Team",
+    "screenName" : "FTA-NTD Data Team",
+    "type" : "team",
+    "members" : [ {
+      "id" : "pte6-s9dk",
+      "createdAt" : 1716577537,
+      "displayName" : "a.phillips.ctr",
+      "screenName" : "a.phillips.ctr",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "wjqh-6sh7",
+      "createdAt" : 1683740401,
+      "displayName" : "Walton-Hawthorne, Amanda CTR (FTA)",
+      "screenName" : "Walton-Hawthorne, Amanda CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "bnfr-p7th",
+      "createdAt" : 1717160775,
+      "displayName" : "Balakrishna Kolasani",
+      "screenName" : "Balakrishna Kolasani",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "ib8z-c8q7",
+      "createdAt" : 1771593611,
+      "displayName" : "Bailey Krouse",
+      "screenName" : "Bailey Krouse",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "ffmf-p2ua",
+      "createdAt" : 1589982645,
+      "displayName" : "Carl Eason",
+      "screenName" : "Carl Eason",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "rgry-k9x7",
+      "createdAt" : 1680197265,
+      "displayName" : "Champlin, Chelsea (FTA)",
+      "screenName" : "Champlin, Chelsea (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "owner",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "6qyz-3fwg",
+      "createdAt" : 1595956497,
+      "displayName" : "Florence Iglesias",
+      "screenName" : "Florence Iglesias",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "sgq7-emmi",
+      "createdAt" : 1769454350,
+      "displayName" : "Geoffrey Fouad",
+      "screenName" : "Geoffrey Fouad",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "dgh7-evqj",
+      "createdAt" : 1776429496,
+      "displayName" : "Hailey Sparks",
+      "screenName" : "Hailey Sparks",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "84x7-3b3t",
+      "createdAt" : 1694606629,
+      "displayName" : "Chekired, Hayet CTR (FTA)",
+      "screenName" : "Chekired, Hayet CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "qhh4-z94p",
+      "createdAt" : 1713898982,
+      "displayName" : "Janice Holcombe",
+      "screenName" : "Janice Holcombe",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "wgmx-gj5u",
+      "createdAt" : 1566248956,
+      "displayName" : "Joseph Eldredge",
+      "screenName" : "Joseph Eldredge",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "rx4j-3g9k",
+      "createdAt" : 1686768218,
+      "displayName" : "Joe Gallagher",
+      "screenName" : "Joe Gallagher",
+      "teamId" : 1582542,
+      "teamRole" : "owner",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "yhkk-phq8",
+      "createdAt" : 1712164051,
+      "displayName" : "Abdul Karim, Mohammed CTR (FTA)",
+      "screenName" : "Abdul Karim, Mohammed CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "dj7g-6u44",
+      "createdAt" : 1781206209,
+      "displayName" : "Praneeth Chandra Movva",
+      "screenName" : "Praneeth Chandra Movva",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "mn7p-43dn",
+      "createdAt" : 1562336333,
+      "displayName" : "Schrecongost, Todd CTR (FTA)",
+      "screenName" : "Schrecongost, Todd CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "gbdg-6v2w",
+      "createdAt" : 1743023675,
+      "displayName" : "Thomas Montenegro",
+      "screenName" : "Thomas Montenegro",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    } ]
+  },
+  "query" : { },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "cvni-9g72",
+    "createdAt" : 1709228343,
+    "displayName" : "FTA-NTD Data Team",
+    "screenName" : "FTA-NTD Data Team",
+    "type" : "team",
+    "members" : [ {
+      "id" : "pte6-s9dk",
+      "createdAt" : 1716577537,
+      "displayName" : "a.phillips.ctr",
+      "screenName" : "a.phillips.ctr",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "wjqh-6sh7",
+      "createdAt" : 1683740401,
+      "displayName" : "Walton-Hawthorne, Amanda CTR (FTA)",
+      "screenName" : "Walton-Hawthorne, Amanda CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "bnfr-p7th",
+      "createdAt" : 1717160775,
+      "displayName" : "Balakrishna Kolasani",
+      "screenName" : "Balakrishna Kolasani",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "ib8z-c8q7",
+      "createdAt" : 1771593611,
+      "displayName" : "Bailey Krouse",
+      "screenName" : "Bailey Krouse",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "ffmf-p2ua",
+      "createdAt" : 1589982645,
+      "displayName" : "Carl Eason",
+      "screenName" : "Carl Eason",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "rgry-k9x7",
+      "createdAt" : 1680197265,
+      "displayName" : "Champlin, Chelsea (FTA)",
+      "screenName" : "Champlin, Chelsea (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "owner",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "6qyz-3fwg",
+      "createdAt" : 1595956497,
+      "displayName" : "Florence Iglesias",
+      "screenName" : "Florence Iglesias",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "sgq7-emmi",
+      "createdAt" : 1769454350,
+      "displayName" : "Geoffrey Fouad",
+      "screenName" : "Geoffrey Fouad",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "dgh7-evqj",
+      "createdAt" : 1776429496,
+      "displayName" : "Hailey Sparks",
+      "screenName" : "Hailey Sparks",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "84x7-3b3t",
+      "createdAt" : 1694606629,
+      "displayName" : "Chekired, Hayet CTR (FTA)",
+      "screenName" : "Chekired, Hayet CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "qhh4-z94p",
+      "createdAt" : 1713898982,
+      "displayName" : "Janice Holcombe",
+      "screenName" : "Janice Holcombe",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "wgmx-gj5u",
+      "createdAt" : 1566248956,
+      "displayName" : "Joseph Eldredge",
+      "screenName" : "Joseph Eldredge",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "rx4j-3g9k",
+      "createdAt" : 1686768218,
+      "displayName" : "Joe Gallagher",
+      "screenName" : "Joe Gallagher",
+      "teamId" : 1582542,
+      "teamRole" : "owner",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "yhkk-phq8",
+      "createdAt" : 1712164051,
+      "displayName" : "Abdul Karim, Mohammed CTR (FTA)",
+      "screenName" : "Abdul Karim, Mohammed CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "dj7g-6u44",
+      "createdAt" : 1781206209,
+      "displayName" : "Praneeth Chandra Movva",
+      "screenName" : "Praneeth Chandra Movva",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "mn7p-43dn",
+      "createdAt" : 1562336333,
+      "displayName" : "Schrecongost, Todd CTR (FTA)",
+      "screenName" : "Schrecongost, Todd CTR (FTA)",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    }, {
+      "id" : "gbdg-6v2w",
+      "createdAt" : 1743023675,
+      "displayName" : "Thomas Montenegro",
+      "screenName" : "Thomas Montenegro",
+      "teamId" : 1582542,
+      "teamRole" : "member",
+      "type" : "interactive",
+      "flags" : [ "siteMember" ]
+    } ]
+  },
+  "tags" : [ "time series", "safety", "security", "ridership", "service", "vehicle revenue hours", "vehicle revenue miles", "unlinked passenger trips", "collisions" ],
+  "flags" : [ "default", "federated", "internalToPublicFederatedView", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}

@@ -2,7 +2,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, rename, rmdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { canonicalJson, externalCleaningBindingError, rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
+import { canonicalJson, externalCleaningBindingError, extractPublisherSourceLastUpdated, rebuildExternalSnapshot, type ExternalSourceProvenance, type SnapshotSide } from "../src/core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CASES = path.join(ROOT, "public", "cases");
@@ -15,6 +15,9 @@ interface SourceConfig {
   sourceUrls: Record<SnapshotSide, string>;
   rawFiles: Record<SnapshotSide, string>;
   cleaning: ExternalSourceProvenance["cleaning"];
+  sourceLastUpdatedEvidence?:
+    | { method: "RAW_RESPONSE_PAIR" }
+    | { method: "PUBLISHER_METADATA"; sourceUrl: string; fileName: string };
   [key: string]: unknown;
 }
 
@@ -357,14 +360,15 @@ function validateTransactionManifest(caseDirectory: string, transactionDirectory
   const identity = transactionDirectoryIdentity(path.basename(transactionDirectory));
   if (!identity || manifest.transactionId !== identity.transactionId || manifest.ownerPid !== identity.ownerPid) throw new Error(`${transactionDirectory}: transaction identity mismatch`);
   if (!(["prepared", "backed-up", "committed"] as unknown[]).includes(manifest.phase)) throw new Error(`${transactionDirectory}: invalid transaction phase`);
-  if (!Array.isArray(manifest.files) || manifest.files.length !== 3) throw new Error(`${transactionDirectory}: transaction must contain exactly three files`);
+  if (!Array.isArray(manifest.files) || (manifest.files.length !== 3 && manifest.files.length !== 4)) throw new Error(`${transactionDirectory}: transaction must contain exactly three or four files`);
   for (const [index, file] of manifest.files.entries()) {
     if (!file || typeof file !== "object" || typeof file.target !== "string" || typeof file.temporary !== "string" || typeof file.backup !== "string") throw new Error(`${transactionDirectory}: invalid transaction file entry`);
     if (!SHA256_PATTERN.test(file.originalSha256) || !SHA256_PATTERN.test(file.committedSha256)) throw new Error(`${transactionDirectory}: transaction content hashes are missing or invalid`);
     if (file.temporary !== `${index}.new` || file.backup !== `${index}.backup`) throw new Error(`${transactionDirectory}: transaction artifact layout is invalid`);
   }
-  if (!manifest.files.slice(0, 2).every((file) => isRawCaseFileName(file.target)) || manifest.files[2].target !== "source-config.json") throw new Error(`${transactionDirectory}: transaction target layout is invalid`);
-  for (const file of manifest.files.slice(0, 2)) rawCaseFile(caseDirectory, file.target);
+  const governedSourceFiles = manifest.files.slice(0, -1);
+  if (!governedSourceFiles.every((file) => isRawCaseFileName(file.target)) || manifest.files.at(-1)?.target !== "source-config.json") throw new Error(`${transactionDirectory}: transaction target layout is invalid`);
+  for (const file of governedSourceFiles) rawCaseFile(caseDirectory, file.target);
   const runtimeFiles = runtimeTransactionFiles(caseDirectory, transactionDirectory, manifest);
   if (new Set(runtimeFiles.map((file) => file.target)).size !== runtimeFiles.length) throw new Error(`${transactionDirectory}: transaction targets must be distinct`);
   if (new Set(runtimeFiles.flatMap((file) => [file.temporary, file.backup])).size !== runtimeFiles.length * 2) throw new Error(`${transactionDirectory}: transaction artifacts must be distinct`);
@@ -470,7 +474,7 @@ async function recoverInterruptedTransactions(caseDirectory: string, operations:
 async function replaceFiles(caseDirectory: string, files: Array<{ target: string; content: string }>, operations: RefreshFileOperations) {
   const resolvedCaseDirectory = path.resolve(caseDirectory);
   const normalizedFiles = files.map((file) => ({ ...file, target: path.resolve(file.target) }));
-  if (normalizedFiles.length !== 3) throw new Error("Source refresh transactions must contain exactly three files");
+  if (normalizedFiles.length !== 3 && normalizedFiles.length !== 4) throw new Error("Source refresh transactions must contain one source pair, an optional publisher-metadata response, and one config file");
   for (const file of normalizedFiles) caseFile(resolvedCaseDirectory, path.relative(resolvedCaseDirectory, file.target));
   if (new Set(normalizedFiles.map((file) => file.target)).size !== normalizedFiles.length) throw new Error("Source refresh targets must be distinct");
   const originalSha256Values = await Promise.all(normalizedFiles.map(async (file) => {
@@ -547,7 +551,7 @@ async function replaceFiles(caseDirectory: string, files: Array<{ target: string
 }
 
 function validateSourceDefinition(caseId: string, config: SourceConfig, provenance: ExternalSourceProvenance) {
-  if (provenance.schemaVersion !== "claimtrace-external-source/2.1.0") throw new Error(`${caseId}: unsupported source-metadata schema`);
+  if (provenance.schemaVersion !== "claimtrace-external-source/2.2.0") throw new Error(`${caseId}: unsupported source-metadata schema`);
   if (!Array.isArray(provenance.rawArtifacts)) throw new Error(`${caseId}: source-metadata rawArtifacts must be an array`);
   if (provenance.rawArtifacts.length !== SIDES.length || provenance.rawArtifacts.some((artifact) => !artifact || !SIDES.includes(artifact.side)) || new Set(provenance.rawArtifacts.map((artifact) => artifact.side)).size !== SIDES.length) {
     throw new Error(`${caseId}: source-metadata must contain exactly one baseline and one current raw artifact`);
@@ -557,6 +561,25 @@ function validateSourceDefinition(caseId: string, config: SourceConfig, provenan
     || config.sourceLastUpdatedBasis !== provenance.sourceLastUpdatedBasis
     || config.sourceLastUpdatedNotReportedReason !== provenance.sourceLastUpdatedNotReportedReason) {
     throw new Error(`${caseId}: source update-date basis differs between source-config and source-metadata`);
+  }
+  const provenanceEvidenceConfig = provenance.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA"
+    ? { method: provenance.sourceLastUpdatedEvidence.method, sourceUrl: provenance.sourceLastUpdatedEvidence.sourceUrl, fileName: provenance.sourceLastUpdatedEvidence.fileName }
+    : provenance.sourceLastUpdatedEvidence;
+  if (canonicalJson(config.sourceLastUpdatedEvidence ?? null) !== canonicalJson(provenanceEvidenceConfig ?? null)) {
+    throw new Error(`${caseId}: publisher update evidence differs between source-config and source-metadata`);
+  }
+  if (config.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA") {
+    let metadataUrl: URL;
+    try {
+      metadataUrl = new URL(config.sourceLastUpdatedEvidence.sourceUrl);
+    } catch {
+      throw new Error(`${caseId}: publisher update metadata URL must be a valid HTTPS URL`);
+    }
+    if (metadataUrl.protocol !== "https:" || metadataUrl.username || metadataUrl.password) throw new Error(`${caseId}: publisher update metadata URL must use HTTPS without embedded credentials`);
+    if (metadataUrl.hash) throw new Error(`${caseId}: publisher update metadata URL must not contain a fragment that is omitted from the request`);
+    if (provenance.sourceLastUpdatedEvidence?.method !== "PUBLISHER_METADATA" || sha256(provenance.sourceLastUpdatedEvidence.text) !== provenance.sourceLastUpdatedEvidence.sha256) {
+      throw new Error(`${caseId}: publisher update metadata hash is invalid`);
+    }
   }
   if (!config.cleaning || typeof config.cleaning !== "object" || !provenance.cleaning || typeof provenance.cleaning !== "object" || canonicalJson(config.cleaning) !== canonicalJson(provenance.cleaning)) {
     throw new Error(`${caseId}: cleaning definition differs between source-config and source-metadata`);
@@ -609,9 +632,7 @@ async function readBoundedSourceResponse(response: Response, label: string) {
   }
 }
 
-function validateDownloadedContent(caseId: string, provenance: ExternalSourceProvenance, downloads: Record<SnapshotSide, string>) {
-  const candidate = structuredClone(provenance);
-  for (const artifact of candidate.rawArtifacts) artifact.text = downloads[artifact.side];
+function validateDownloadedContent(caseId: string, candidate: ExternalSourceProvenance) {
   for (const side of SIDES) {
     const rebuilt = rebuildExternalSnapshot(candidate, side);
     if (rebuilt.text === null || rebuilt.errors.length) {
@@ -637,7 +658,7 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     if (!configStats.isFile()) throw new Error(`${configPath}: source-refresh configuration must be a regular file`);
     const configText = await fileOperations.readFile(configPath, "utf8") as string;
     const config = JSON.parse(configText) as SourceConfig;
-    if (config.schemaVersion !== "claimtrace-external-source-config/2.1.0") throw new Error(`${entry.name}: unsupported source-config schema`);
+    if (config.schemaVersion !== "claimtrace-external-source-config/2.2.0") throw new Error(`${entry.name}: unsupported source-config schema`);
     const provenancePath = path.join(directory, "source-metadata.json");
     await verifyRegularFile(provenancePath, null, "source-refresh metadata", fileOperations);
     const provenance = JSON.parse(await fileOperations.readFile(provenancePath, "utf8")) as ExternalSourceProvenance;
@@ -645,6 +666,12 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     const rawTargets = SIDES.map((side) => rawCaseFile(directory, config.rawFiles[side]));
     if (new Set(rawTargets).size !== rawTargets.length) throw new Error(`${entry.name}: raw-response targets must be distinct`);
     await Promise.all(rawTargets.map((target) => verifyRegularFile(target, null, "raw-response target", fileOperations)));
+    if (config.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA") {
+      const metadataTarget = rawCaseFile(directory, config.sourceLastUpdatedEvidence.fileName);
+      if (rawTargets.includes(metadataTarget)) throw new Error(`${entry.name}: publisher update metadata target must be distinct from the source pair`);
+      const expectedMetadataSha256 = provenance.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA" ? provenance.sourceLastUpdatedEvidence.sha256 : null;
+      await verifyRegularFile(metadataTarget, expectedMetadataSha256, "publisher update metadata target", fileOperations);
+    }
     available.set(entry.name, { directory, configPath, config, provenance });
   }
 
@@ -658,21 +685,25 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     const pairController = new AbortController();
     let pairFailed = false;
     let firstDownloadError: unknown;
-    const downloadResults = await Promise.allSettled(SIDES.map(async (side) => {
+    const downloadDefinitions: Array<{ id: SnapshotSide | "publisher-metadata"; url: string }> = SIDES.map((side) => ({ id: side, url: item.config.sourceUrls[side] }));
+    if (item.config.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA") {
+      downloadDefinitions.push({ id: "publisher-metadata", url: item.config.sourceLastUpdatedEvidence.sourceUrl });
+    }
+    const downloadResults = await Promise.allSettled(downloadDefinitions.map(async ({ id, url }) => {
       try {
-        const response = await fetcher(item.config.sourceUrls[side], {
+        const response = await fetcher(url, {
           headers: {
             Accept: "application/json, text/csv, application/xml, text/xml;q=0.9, */*;q=0.1",
-            "User-Agent": "ClaimTrace/0.8 public-data portfolio research (https://github.com/limingrui679-design/ClaimTrace)",
+            "User-Agent": "ClaimTrace/0.10 public-data portfolio research (https://github.com/limingrui679-design/ClaimTrace)",
           },
           signal: AbortSignal.any([pairController.signal, AbortSignal.timeout(30_000)]),
         });
-        const requestedUrl = new URL(item.config.sourceUrls[side]).href;
-        if (response.redirected || (response.url && new URL(response.url).href !== requestedUrl)) throw new Error(`${caseId}:${side}: source request was redirected; pin the final HTTPS URL explicitly`);
-        if (!response.ok) throw new Error(`${caseId}:${side}: ${response.status} ${response.statusText}`);
-        const text = await readBoundedSourceResponse(response, `${caseId}:${side}`);
-        if (!text.trim()) throw new Error(`${caseId}:${side}: source returned an empty body`);
-        return [side, text] as const;
+        const requestedUrl = new URL(url).href;
+        if (response.redirected || (response.url && new URL(response.url).href !== requestedUrl)) throw new Error(`${caseId}:${id}: source request was redirected; pin the final HTTPS URL explicitly`);
+        if (!response.ok) throw new Error(`${caseId}:${id}: ${response.status} ${response.statusText}`);
+        const text = await readBoundedSourceResponse(response, `${caseId}:${id}`);
+        if (!text.trim()) throw new Error(`${caseId}:${id}: source returned an empty body`);
+        return [id, text] as const;
       } catch (error) {
         if (!pairFailed) {
           pairFailed = true;
@@ -686,13 +717,36 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     const downloads = Object.fromEntries(downloadResults.map((result) => {
       if (result.status !== "fulfilled") throw result.reason;
       return result.value;
-    })) as Record<SnapshotSide, string>;
+    })) as Record<SnapshotSide | "publisher-metadata", string>;
 
-    validateDownloadedContent(caseId, item.provenance, downloads);
     const retrievedAt = now().toISOString();
-    const nextConfig = { ...item.config, retrievedAt };
+    const candidate = structuredClone(item.provenance);
+    candidate.retrievedAt = retrievedAt;
+    for (const artifact of candidate.rawArtifacts) {
+      artifact.text = downloads[artifact.side];
+      artifact.sha256 = sha256(artifact.text);
+    }
+    if (item.config.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA") {
+      const text = downloads["publisher-metadata"];
+      candidate.sourceLastUpdatedEvidence = {
+        method: "PUBLISHER_METADATA",
+        sourceUrl: item.config.sourceLastUpdatedEvidence.sourceUrl,
+        fileName: item.config.sourceLastUpdatedEvidence.fileName,
+        sha256: sha256(text),
+        text,
+      };
+    }
+    const extracted = extractPublisherSourceLastUpdated(candidate);
+    if (extracted.errors.length) throw new Error(`${caseId}: publisher update-date extraction failed: ${extracted.errors.join("; ")}`);
+    candidate.sourceLastUpdated = extracted.value;
+    validateDownloadedContent(caseId, candidate);
+    const nextConfig = { ...item.config, retrievedAt, sourceLastUpdated: candidate.sourceLastUpdated };
+    const metadataReplacement = item.config.sourceLastUpdatedEvidence?.method === "PUBLISHER_METADATA"
+      ? [{ target: rawCaseFile(item.directory, item.config.sourceLastUpdatedEvidence.fileName), content: downloads["publisher-metadata"] }]
+      : [];
     await replaceFiles(item.directory, [
       ...SIDES.map((side) => ({ target: rawCaseFile(item.directory, item.config.rawFiles[side]), content: downloads[side] })),
+      ...metadataReplacement,
       { target: item.configPath, content: `${JSON.stringify(nextConfig, null, 2)}\n` },
     ], fileOperations);
     refreshed += 1;

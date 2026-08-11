@@ -18,7 +18,7 @@ Normal generation is offline and rebuilds the CSV snapshots from the committed r
 - Publisher: U.S. Consumer Financial Protection Bureau
 - Dataset: Consumer Complaint Database trends API
 - Measure: CREDIT-CARD-ISSUE-BUCKETS — Structured credit-card complaint issue records
-- Retrieved: 2026-08-10T00:00:00.000Z
+- Retrieved: 2026-08-11T11:07:44.743Z
 - License: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
 - Baseline source: https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2024-01-01&date_received_max=2024-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10
 - Current source: https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/trends?date_received_min=2025-01-01&date_received_max=2025-06-30&lens=product&focus=Credit%20card&sub_lens=issue&trend_interval=month&trend_depth=10&sub_lens_depth=10

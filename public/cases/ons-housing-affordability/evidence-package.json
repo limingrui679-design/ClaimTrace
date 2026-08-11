@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
@@ -2210,7 +2210,7 @@
     "headRecordHash": null
   },
   "externalSource": {
-    "schemaVersion": "claimtrace-external-source/2.1.0",
+    "schemaVersion": "claimtrace-external-source/2.2.0",
     "sourceType": "ONS_EXPLORE_LOCAL_STATISTICS_CSV_V1",
     "publisher": "Office for National Statistics",
     "dataset": "Explore Local Statistics: housing affordability ratio",
@@ -2218,7 +2218,8 @@
       "id": "HOUSING-AFFORDABILITY-RATIO",
       "name": "Median house price to median workplace-based earnings ratio"
     },
-    "retrievedAt": "2026-08-10T00:00:00.000Z",
+    "retrievedAt": "2026-08-11T11:07:45.932Z",
+    "sourceLastUpdated": null,
     "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
     "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
     "sourceUrls": {
@@ -2275,14 +2276,14 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "4138ca900f275096c0b5e5b8231f283c926a197ef2943ae061923b0bbf99bbb7",
+    "payloadHash": "f877f97c8d2e117ad563cac896458a686e1d3e1c257ec9c14a381b2a930e772e",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "b560b1b2fc13e16169a88bef6c7a1d59dce3062e6104900f8c3a8d36202a7393",
       "claims": "af689a428c80141f892e91d9fee17718a1175fc5ed78e7bad75859688335e46b",
       "decisions": "6e7fa1c5a8ca1e3408022c7459214a3bf2ac223c91f2a834970731acfbafefa2",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
-      "provenance": "ac041552db2ac7cf5ddb18534643319e359f9b3b7d228291f05daaf960b35c6c",
+      "provenance": "96b92afbae9fca682d6e871bc98f876eb8f3c230209556d5da4cc4c8a6d17160",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
     }
   }

@@ -18,7 +18,7 @@ Normal generation is offline and rebuilds the CSV snapshots from the committed r
 - Publisher: World Bank
 - Dataset: World Development Indicators
 - Measure: SP.DYN.LE00.IN — Life expectancy at birth, total (years)
-- Retrieved: 2026-08-10T00:00:00.000Z
+- Retrieved: 2026-08-11T11:07:59.712Z
 - License: CC BY 4.0 (https://datacatalog.worldbank.org/public-licenses)
 - Baseline source: https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2019&format=json&per_page=1000
 - Current source: https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2024&format=json&per_page=1000

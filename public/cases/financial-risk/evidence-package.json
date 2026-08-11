@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.4.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-08T00:00:00.000Z",
   "previousBundleHash": null,
@@ -1733,7 +1733,7 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "c83a24a08a585a6ab7d3e67d885ad563e4aa5a20403d862d1732af4b5831eebb",
+    "payloadHash": "9d799c55bc11f4cce6a95b3cbc67f0f11a98780e5e0f7732ef7997548af50bc9",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "ca7a751fe3cdb8fc56ac3699ceb40bde6228e9a461bd9ffd188e03cb064685a0",

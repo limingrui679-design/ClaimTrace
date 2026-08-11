@@ -18,7 +18,7 @@ Normal generation is offline and rebuilds the CSV snapshots from the committed r
 - Publisher: U.S. Department of the Treasury
 - Dataset: Daily Treasury Par Yield Curve Rates
 - Measure: DAILY-TREASURY-PAR-YIELD-CURVE — Year-end Treasury par yields by maturity
-- Retrieved: 2026-08-10T00:00:00.000Z
+- Retrieved: 2026-08-11T11:07:55.527Z
 - License: U.S. Government work / public data (https://www.usa.gov/government-copyright)
 - Baseline source: https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2024
 - Current source: https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2025

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source-config/2.1.0",
+  "schemaVersion": "claimtrace-external-source-config/2.2.0",
   "sourceType": "WORLD_BANK_INDICATORS_API_V2",
   "publisher": "World Bank",
   "dataset": "World Development Indicators",
@@ -7,9 +7,12 @@
     "id": "SP.DYN.LE00.IN",
     "name": "Life expectancy at birth, total (years)"
   },
-  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "retrievedAt": "2026-08-11T11:07:59.712Z",
   "sourceLastUpdated": "2026-07-13",
   "sourceLastUpdatedBasis": "PUBLISHER_REPORTED",
+  "sourceLastUpdatedEvidence": {
+    "method": "RAW_RESPONSE_PAIR"
+  },
   "sourceUrls": {
     "baseline": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2019&format=json&per_page=1000",
     "current": "https://api.worldbank.org/v2/country/CHN;JPN;USA;GBR;FRA;DEU;BRA;IND/indicator/SP.DYN.LE00.IN?date=2024&format=json&per_page=1000"
@@ -28,7 +31,16 @@
     "parameters": {
       "baselineYear": "2019",
       "currentYear": "2024",
-      "selectedCountryCodes": ["BRA", "CHN", "DEU", "FRA", "GBR", "IND", "JPN", "USA"],
+      "selectedCountryCodes": [
+        "BRA",
+        "CHN",
+        "DEU",
+        "FRA",
+        "GBR",
+        "IND",
+        "JPN",
+        "USA"
+      ],
       "decimalPlaces": 3
     }
   },

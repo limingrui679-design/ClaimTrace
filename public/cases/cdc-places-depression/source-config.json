@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "claimtrace-external-source-config/2.1.0",
+  "schemaVersion": "claimtrace-external-source-config/2.2.0",
   "sourceType": "CDC_PLACES_SOCRATA_V1",
   "publisher": "U.S. Centers for Disease Control and Prevention",
   "dataset": "PLACES: Local Data for Better Health, County Data",
@@ -7,7 +7,7 @@
     "id": "DEPRESSION-AGE-ADJUSTED-PREVALENCE",
     "name": "Age-adjusted prevalence of depression among adults"
   },
-  "retrievedAt": "2026-08-10T00:00:00.000Z",
+  "retrievedAt": "2026-08-11T11:07:43.655Z",
   "sourceLastUpdatedBasis": "NOT_SEPARATELY_REPORTED",
   "sourceLastUpdatedNotReportedReason": "The publisher endpoint did not report a separate source last-updated date for the selected response.",
   "sourceUrls": {
@@ -28,12 +28,22 @@
     "parameters": {
       "baselineDataYear": "2022",
       "currentDataYear": "2023",
-      "selectedCountyFips": ["04013", "06037", "06075", "17031", "25017", "36061", "48201", "53033"],
+      "selectedCountyFips": [
+        "04013",
+        "06037",
+        "06075",
+        "17031",
+        "25017",
+        "36061",
+        "48201",
+        "53033"
+      ],
       "decimalPlaces": 1
     }
   },
   "rawFiles": {
     "baseline": "raw-2024-release.json",
     "current": "raw-2025-release.json"
-  }
+  },
+  "sourceLastUpdated": null
 }
