@@ -100,6 +100,12 @@ function caseFile(directory: string, fileName: string) {
   return resolved;
 }
 
+function rawCaseFile(directory: string, fileName: string) {
+  const resolved = caseFile(directory, fileName);
+  if (!fileName.startsWith("raw-") || fileName === "raw-") throw new Error(`${fileName}: raw-response file name must use the raw-* namespace`);
+  return resolved;
+}
+
 function errnoCode(error: unknown) {
   return (error as NodeJS.ErrnoException).code;
 }
@@ -551,18 +557,19 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     const directory = path.join(casesDirectory, entry.name);
     await recoverInterruptedTransactions(directory, fileOperations);
     const configPath = path.join(directory, "source-config.json");
-    let configText: string;
-    try {
-      configText = await fileOperations.readFile(configPath, "utf8");
-    } catch (error) {
-      if (errnoCode(error) === "ENOENT") continue;
-      throw error;
-    }
+    const configStats = await lstatIfExists(configPath, fileOperations);
+    if (!configStats) continue;
+    if (!configStats.isFile()) throw new Error(`${configPath}: source-refresh configuration must be a regular file`);
+    const configText = await fileOperations.readFile(configPath, "utf8") as string;
     const config = JSON.parse(configText) as SourceConfig;
     if (config.schemaVersion !== "claimtrace-external-source-config/2.0.0") throw new Error(`${entry.name}: unsupported source-config schema`);
-    const provenance = JSON.parse(await fileOperations.readFile(path.join(directory, "source-metadata.json"), "utf8")) as ExternalSourceProvenance;
+    const provenancePath = path.join(directory, "source-metadata.json");
+    await verifyRegularFile(provenancePath, null, "source-refresh metadata", fileOperations);
+    const provenance = JSON.parse(await fileOperations.readFile(provenancePath, "utf8")) as ExternalSourceProvenance;
     validateSourceDefinition(entry.name, config, provenance);
-    for (const side of SIDES) caseFile(directory, config.rawFiles[side]);
+    const rawTargets = SIDES.map((side) => rawCaseFile(directory, config.rawFiles[side]));
+    if (new Set(rawTargets).size !== rawTargets.length) throw new Error(`${entry.name}: raw-response targets must be distinct`);
+    await Promise.all(rawTargets.map((target) => verifyRegularFile(target, null, "raw-response target", fileOperations)));
     available.set(entry.name, { directory, configPath, config, provenance });
   }
 
@@ -608,7 +615,7 @@ async function refreshPublicDataSourcesUnlocked(options: RefreshPublicDataSource
     const retrievedAt = now().toISOString();
     const nextConfig = { ...item.config, retrievedAt };
     await replaceFiles(item.directory, [
-      ...SIDES.map((side) => ({ target: caseFile(item.directory, item.config.rawFiles[side]), content: downloads[side] })),
+      ...SIDES.map((side) => ({ target: rawCaseFile(item.directory, item.config.rawFiles[side]), content: downloads[side] })),
       { target: item.configPath, content: `${JSON.stringify(nextConfig, null, 2)}\n` },
     ], fileOperations);
     refreshed += 1;

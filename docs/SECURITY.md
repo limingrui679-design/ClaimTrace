@@ -20,7 +20,7 @@ Review records use UUIDs plus hashes of their bound result, each record, and the
 
 Standalone HTML reports escape user-controlled text. CSV is parsed as data and never executed. JSON evidence exports remain data files; downstream consumers must not execute their contents.
 
-The public-source refresh command accepts raw-response targets only as direct file names inside each case directory. It rejects nested paths, including paths through a symlinked parent, before downloading; final targets must also pass a non-symlink regular-file check before the replacement transaction begins. A failed request aborts its peer, and the exclusive lock remains held until the pair settles. Automatic interrupted-transaction recovery requires version-2 manifests with valid original and committed SHA-256 values; legacy unhashed state is reported and left untouched for manual resolution.
+The public-source refresh command accepts distinct raw-response targets only as direct regular files in the case-local `raw-*` namespace, preventing a raw response from aliasing configuration, metadata, or derived case artifacts. It rejects nested paths, paths through a symlinked parent, symbolic-link configuration or final targets, duplicate targets, and non-file targets before downloading, then repeats the final target checks before the replacement transaction begins. A failed request aborts its peer, and the exclusive lock remains held until the pair settles. Automatic interrupted-transaction recovery requires version-2 manifests with valid original and committed SHA-256 values; legacy unhashed state is reported and left untouched for manual resolution.
 
 ## Dependency and CI audit
 

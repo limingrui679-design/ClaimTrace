@@ -527,6 +527,146 @@ test("source refresh rejects a raw path through a symlinked parent before downlo
   }
 });
 
+test("source refresh rejects a raw target alias to case metadata before downloading", async () => {
+  const fixture = await makeFixture();
+  try {
+    const configPath = path.join(fixture.directory, "source-config.json");
+    const metadataPath = path.join(fixture.directory, "source-metadata.json");
+    const config = JSON.parse(await readFile(configPath, "utf8"));
+    const metadata = JSON.parse(await readFile(metadataPath, "utf8"));
+    config.rawFiles.baseline = "source-metadata.json";
+    metadata.rawArtifacts.find((artifact: { side: string }) => artifact.side === "baseline").fileName = "source-metadata.json";
+    const configuredText = `${JSON.stringify(config, null, 2)}\n`;
+    const metadataText = `${JSON.stringify(metadata, null, 2)}\n`;
+    await writeFile(configPath, configuredText, "utf8");
+    await writeFile(metadataPath, metadataText, "utf8");
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(worldBankResponse("2019", 79.1), { status: 200 });
+        }) as typeof fetch,
+      }),
+      /raw-response file name must use the raw-\* namespace/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(configPath, "utf8"), configuredText);
+    assert.equal(await readFile(metadataPath, "utf8"), metadataText);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+    assert.deepEqual((await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects duplicate raw targets before downloading", async () => {
+  const fixture = await makeFixture();
+  try {
+    const configPath = path.join(fixture.directory, "source-config.json");
+    const metadataPath = path.join(fixture.directory, "source-metadata.json");
+    const config = JSON.parse(await readFile(configPath, "utf8"));
+    const metadata = JSON.parse(await readFile(metadataPath, "utf8"));
+    config.rawFiles.current = config.rawFiles.baseline;
+    metadata.rawArtifacts.find((artifact: { side: string }) => artifact.side === "current").fileName = config.rawFiles.baseline;
+    const configuredText = `${JSON.stringify(config, null, 2)}\n`;
+    const metadataText = `${JSON.stringify(metadata, null, 2)}\n`;
+    await writeFile(configPath, configuredText, "utf8");
+    await writeFile(metadataPath, metadataText, "utf8");
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(worldBankResponse("2019", 79.1), { status: 200 });
+        }) as typeof fetch,
+      }),
+      /raw-response targets must be distinct/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(configPath, "utf8"), configuredText);
+    assert.equal(await readFile(metadataPath, "utf8"), metadataText);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects a symlinked source configuration before reading or downloading", async () => {
+  const fixture = await makeFixture();
+  try {
+    const configPath = path.join(fixture.directory, "source-config.json");
+    const outsideConfigPath = path.join(fixture.casesDirectory, "outside-source-config.json");
+    const outsideConfig = await readFile(configPath, "utf8");
+    await writeFile(outsideConfigPath, outsideConfig, "utf8");
+    await unlink(configPath);
+    await symlink(outsideConfigPath, configPath);
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(worldBankResponse("2019", 79.1), { status: 200 });
+        }) as typeof fetch,
+      }),
+      /source-refresh configuration must be a regular file/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(outsideConfigPath, "utf8"), outsideConfig);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-baseline.json"), "utf8"), fixture.oldBaseline);
+    assert.equal(await readFile(path.join(fixture.directory, "raw-current.json"), "utf8"), fixture.oldCurrent);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
+test("source refresh rejects a symlinked final raw target before downloading", async () => {
+  const fixture = await makeFixture();
+  try {
+    const baselinePath = path.join(fixture.directory, "raw-baseline.json");
+    const currentPath = path.join(fixture.directory, "raw-current.json");
+    const configPath = path.join(fixture.directory, "source-config.json");
+    const originalCurrent = await readFile(currentPath, "utf8");
+    const originalConfig = await readFile(configPath, "utf8");
+    const outsidePath = path.join(fixture.casesDirectory, "outside-baseline.json");
+    await writeFile(outsidePath, "outside baseline must remain untouched", "utf8");
+    await unlink(baselinePath);
+    await symlink(outsidePath, baselinePath);
+
+    let downloads = 0;
+    await assert.rejects(
+      refreshPublicDataSources({
+        casesDirectory: fixture.casesDirectory,
+        requestedCaseIds: ["public-case"],
+        fetcher: (async () => {
+          downloads += 1;
+          return new Response(worldBankResponse("2019", 79.1), { status: 200 });
+        }) as typeof fetch,
+      }),
+      /raw-response target must be a regular file/,
+    );
+    assert.equal(downloads, 0);
+    assert.equal(await readFile(outsidePath, "utf8"), "outside baseline must remain untouched");
+    assert.equal(await readFile(currentPath, "utf8"), originalCurrent);
+    assert.equal(await readFile(configPath, "utf8"), originalConfig);
+    assert.deepEqual((await readdir(fixture.casesDirectory)).filter((name) => name.startsWith(".claimtrace-refresh-lock")), []);
+    assert.deepEqual((await readdir(fixture.directory)).filter((name) => name.startsWith(".claimtrace-refresh-")), []);
+  } finally {
+    await rm(fixture.casesDirectory, { recursive: true, force: true });
+  }
+});
+
 test("source refresh restores an interrupted transaction before reading the case again", async () => {
   const fixture = await makeFixture();
   try {
@@ -587,7 +727,7 @@ test("source refresh restores an interrupted transaction before reading the case
   }
 });
 
-test("source refresh rejects a non-file target before staging replacements", async () => {
+test("source refresh rejects a non-file target before downloading or staging replacements", async () => {
   const fixture = await makeFixture();
   try {
     const baselinePath = path.join(fixture.directory, "raw-baseline.json");
@@ -595,17 +735,22 @@ test("source refresh rejects a non-file target before staging replacements", asy
     const originalConfig = await readFile(path.join(fixture.directory, "source-config.json"), "utf8");
     await rm(currentPath);
     await mkdir(currentPath);
+    let downloads = 0;
     await assert.rejects(
       refreshPublicDataSources({
         casesDirectory: fixture.casesDirectory,
         requestedCaseIds: ["public-case"],
-        fetcher: (async (input: string | URL | Request) => new Response(
-          String(input).endsWith("baseline") ? worldBankResponse("2019", 79.1) : worldBankResponse("2024", 79.4),
-          { status: 200 },
-        )) as typeof fetch,
+        fetcher: (async (input: string | URL | Request) => {
+          downloads += 1;
+          return new Response(
+            String(input).endsWith("baseline") ? worldBankResponse("2019", 79.1) : worldBankResponse("2024", 79.4),
+            { status: 200 },
+          );
+        }) as typeof fetch,
       }),
-      /source refresh target must be a regular file/,
+      /raw-response target must be a regular file/,
     );
+    assert.equal(downloads, 0);
     assert.equal(await readFile(baselinePath, "utf8"), fixture.oldBaseline);
     assert.equal(await readFile(path.join(fixture.directory, "source-config.json"), "utf8"), originalConfig);
     assert.deepEqual((await readdir(fixture.directory)).filter((file) => file.includes(".claimtrace-refresh-")), []);
