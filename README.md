@@ -81,27 +81,27 @@ Most diff tools answer **what changed in the data**. ClaimTrace continues the ch
 
 ```mermaid
 flowchart TD
-    A["1 · Evidence<br/> catalog case or two local CSV versions"] --> B["2 · Snapshots<br/> validate schema, key, encoding, and hashes"]
-    B --> C["3 · Keyed diff<br/> added · removed · modified · unchanged"]
-    C --> D["4 · Governed claims<br/> formula · cohort · denominator · threshold"]
+    A["1 · Evidence · catalog case or two local CSV versions"] --> B["2 · Snapshots · validate schema, key, encoding, and hashes"]
+    B --> C["3 · Keyed diff · added · removed · modified · unchanged"]
+    C --> D["4 · Governed claims · formula · cohort · denominator · threshold"]
     D --> E{"5 · Claim status"}
-    E -->|"testable"| F["Bind exact<br/> claim-result identity"]
-    E -->|"unresolved"| G["Bind unresolved result<br/> block release · request review"]
-    F --> H["6 · Decision recomputation<br/> outcome · recommendation · feasible set"]
+    E -->|"testable"| F["Bind exact claim-result identity"]
+    E -->|"unresolved"| G["Bind unresolved result · block release · request review"]
+    F --> H["6 · Decision recomputation · outcome · recommendation · feasible set"]
     G --> H
     H --> I{"Decision status"}
     I -->|"action changed"| J["DECISION_CHANGED"]
     I -->|"evidence changed"| K["RESIGN_REQUIRED"]
     I -->|"stable"| L["SUPPORTED"]
-    I -->|"unresolved"| R["REVIEW_REQUIRED<br/> release blocked"]
-    J --> M["7 · Local review chain<br/> append-only · explicitly unauthenticated"]
+    I -->|"unresolved"| R["REVIEW_REQUIRED · release blocked"]
+    J --> M["7 · Local review chain · append-only · explicitly unauthenticated"]
     K --> M
     L --> M
     R --> M
-    M --> N["8 · Canonical AuditBundle<br/> snapshots · diffs · claims · decisions · reviews"]
+    M --> N["8 · Canonical AuditBundle · snapshots · diffs · claims · decisions · reviews"]
     N --> O{"9 · Independent rerun"}
-    O -->|"PASS"| P["Verified JSON + HTML<br/> optional previousBundleHash link"]
-    O -->|"FAIL"| Q["Reject export<br/> surface failed checks"]
+    O -->|"PASS"| P["Verified JSON + HTML · optional previousBundleHash link"]
+    O -->|"FAIL"| Q["Reject export · surface failed checks"]
 ```
 
 ClaimTrace never treats an unchanged recommendation as inherited approval. `DECISION_CHANGED` means the executable action identity changed; `RESIGN_REQUIRED` means the action stayed the same while its evidence, policy, or bound result identity changed. JSON and HTML are emitted only from independently reverified AuditBundles, while local review names, times, authorization, and signatures remain explicitly unverified.
