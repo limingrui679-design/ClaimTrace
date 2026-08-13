@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- reorganized the repository entry points around a visual-first README, a dedicated documentation hub, a concise getting-started guide, and a canonical ten-case catalog while preserving the existing evidence-chain and case-landscape graphics;
+- added an accessible system-architecture diagram that maps versioned inputs through deterministic core modules to independently verifiable outputs without implying production deployment or external adoption;
+- added contributor and development guides, GitHub issue and pull-request templates, citation metadata, and a proposal-only roadmap so evaluation, contribution, and future intent remain clearly separated;
+- added a documentation-reference check to the local and GitHub Actions quality gates, and consolidated data-card navigation so public-data cards remain co-located with their evidence packs rather than duplicated in a stale central file.
+
 ## 0.10.2 — 2026-08-11
 
 - separated publisher update-date governance from source-specific CSV cleaning so an invalid or evidence-mismatched date stops lineage verification before snapshot rebuilding and produces only its root-cause diagnostic;

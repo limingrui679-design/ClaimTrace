@@ -1,0 +1,37 @@
+name: Feature request
+description: Propose a scoped extension to the evidence or workflow model.
+title: "[Feature]: "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What audit or reproducibility gap cannot be handled today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the smallest complete behavior, including inputs, outputs, and terminal states.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Verification evidence
+      description: What tests, fixtures, public sources, or independent checks would prove completion?
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Trust and scope boundary
+      description: Explain effects on identity, provenance, authentication, scale, privacy, or external-validity claims.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

@@ -1,0 +1,52 @@
+name: Bug report
+description: Report reproducible behavior that differs from the documented contract.
+title: "[Bug]: "
+labels: []
+body:
+  - type: dropdown
+    id: build
+    attributes:
+      label: Build mode
+      options:
+        - Local writable workspace
+        - Public read-only demo
+        - Generated AuditBundle or HTML report
+        - Development or test tooling
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and commit receipt
+      description: Copy the visible version and commit when available.
+      placeholder: "v0.10.2 · commit 92d741b"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: List exact steps and use synthetic or already-public data only.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Reference the rule, guide, or evidence contract that defines the expectation.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: Include the complete error and a redacted screenshot or bundle excerpt when useful.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data safety
+      options:
+        - label: I removed credentials, private data, and personal information from this report.
+          required: true

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use ClaimTrace in research or teaching, please cite the software using this metadata."
+title: "ClaimTrace: Versioned Evidence and Decision Auditing"
+type: software
+authors:
+  - family-names: "Li"
+    given-names: "Mingrui"
+version: 0.10.2
+date-released: 2026-08-11
+license: MIT
+repository-code: "https://github.com/limingrui679-design/ClaimTrace"
+url: "https://claimtrace-audit.limingrui2.chatgpt.site"
+keywords:
+  - evidence governance
+  - data lineage
+  - analytical claims
+  - decision auditing
+  - reproducibility

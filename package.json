@@ -23,6 +23,7 @@
     "cases:refresh-sources": "node --import tsx tools/refresh-public-data-sources.ts",
     "cases:generate": "node --import tsx tools/generate-public-data-cases.ts && node tools/generate-case-fixtures.mjs && node --import tsx tools/generate-case-audits.ts",
     "benchmark": "node --import tsx tools/run-benchmark.ts",
+    "test:docs": "node tools/check-doc-links.mjs",
     "test:unit": "node --import tsx --test tests/core.test.ts tests/demo-data.test.ts tests/cases.test.ts tests/refresh-public-data-sources.test.ts tests/benchmark.test.ts tests/property.test.ts tests/import-policy.test.ts tests/workspace-workflows.test.ts tests/english-only.test.mjs",
     "test:built-artifact": "node --test tests/rendered-html.test.mjs",
     "test:browser:readonly": "playwright test --config playwright.config.ts",
@@ -30,7 +31,7 @@
     "test:browser": "npm run test:browser:readonly && npm run test:browser:writable",
     "test:coverage": "c8 --all --include='src/core/**/*.ts' --reporter=text --reporter=html --reporter=lcov --check-coverage --statements=95 --lines=95 --functions=95 --branches=75 node --import tsx --test tests/core.test.ts tests/cases.test.ts tests/benchmark.test.ts tests/property.test.ts",
     "test": "npm run build && npm run test:unit && npm run test:built-artifact",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern coverage",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern coverage && npm run test:docs",
     "typecheck": "tsc --noEmit",
     "ci": "npm run lint && npm run typecheck && npm run demo:generate && npm run cases:generate && npm run benchmark && npm test && npm run test:browser && npm run test:coverage"
   },

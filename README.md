@@ -2,25 +2,29 @@
   <img src="public/og.png" alt="ClaimTrace — versioned evidence and decision audit" width="100%">
 </p>
 
-# ClaimTrace
+<h1 align="center">ClaimTrace</h1>
 
 <p align="center">
-  <strong>When data changes, which claims survive—and which decisions must change or be signed again?</strong>
-</p>
-
-<p align="center">
-  <a href="https://claimtrace-audit.limingrui2.chatgpt.site"><strong>Open the public demo</strong></a>
-  · <a href="https://github.com/limingrui679-design/ClaimTrace/releases/latest">Latest release</a>
-  · <a href="docs/EVIDENCE_MODEL.md">Evidence model</a>
-  · <a href="docs/LIMITATIONS.md">Limits</a>
-  · <a href="docs/PORTFOLIO_HANDOFF.md">Portfolio handoff</a>
+  <strong>Trace a changed dataset through the claims, decisions, and review records that depend on it.</strong>
 </p>
 
 <p align="center">
   <a href="https://github.com/limingrui679-design/ClaimTrace/actions/workflows/claimtrace-ci.yml"><img src="https://github.com/limingrui679-design/ClaimTrace/actions/workflows/claimtrace-ci.yml/badge.svg" alt="ClaimTrace CI"></a>
+  <a href="https://github.com/limingrui679-design/ClaimTrace/actions/workflows/codeql.yml"><img src="https://github.com/limingrui679-design/ClaimTrace/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
+  <a href="https://github.com/limingrui679-design/ClaimTrace/releases/latest"><img src="https://img.shields.io/github/v/release/limingrui679-design/ClaimTrace?color=0b8f79" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/limingrui679-design/ClaimTrace?color=3074a7" alt="MIT License"></a>
+  <a href="package.json"><img src="https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white" alt="TypeScript 5.9"></a>
 </p>
 
-ClaimTrace is a local-first prototype for auditing analytical claims across data versions. It joins source provenance, primary-key changes, sample denominators, governed thresholds, executable rules, downstream decisions, and local review records in one reproducible chain.
+<p align="center">
+  <a href="https://claimtrace-audit.limingrui2.chatgpt.site"><strong>Live read-only demo</strong></a>
+  · <a href="#quick-start">Quick start</a>
+  · <a href="docs/README.md">Documentation</a>
+  · <a href="docs/CASE_CATALOG.md">Case catalog</a>
+  · <a href="CONTRIBUTING.md">Contributing</a>
+</p>
+
+ClaimTrace is a local-first TypeScript and React prototype for versioned analytical-claim auditing. It binds natural-language conclusions to primary-key-aligned records, denominators, governed thresholds, exact evidence references, downstream decisions, and explicit local review state—then independently rebuilds the complete audit package before export.
 
 <table>
   <tr>
@@ -31,109 +35,127 @@ ClaimTrace is a local-first prototype for auditing analytical claims across data
   </tr>
 </table>
 
-<p align="center">
-  <img src="docs/claimtrace-demo.gif" alt="ClaimTrace real-browser walkthrough" width="100%">
-</p>
-<p align="center"><em>Real-browser walkthrough of the read-only portfolio build.</em></p>
+> **Project status:** the public site is a read-only portfolio build bound to release `v0.10.2` and visible receipt `92d741b`. The repository also runs as a local writable workspace. Neither mode claims authenticated sign-off, durable collaboration, institutional adoption, or production governance.
 
-The [public demo](https://claimtrace-audit.limingrui2.chatgpt.site) is a separately compiled, read-only portfolio build bound to release `v0.10.2` and visible receipt `92d741b`. The local build adds CSV import, rule creation, review, and verified export. Neither build claims authenticated sign-off, durable collaboration, or production governance.
+<details>
+<summary><strong>Table of contents</strong></summary>
 
-## From changed data to reviewable action
+- [Why ClaimTrace](#why-claimtrace)
+- [See it in action](#see-it-in-action)
+- [Quick start](#quick-start)
+- [Core capabilities](#core-capabilities)
+- [Reproducible case portfolio](#reproducible-case-portfolio)
+- [Architecture](#architecture)
+- [Verification](#verification)
+- [Trust boundary](#trust-boundary)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+
+</details>
+
+## Why ClaimTrace
+
+Most diff tools answer **what changed in the data**. ClaimTrace continues the chain:
+
+- Is the analytical claim still supported?
+- Did the executable action change?
+- If the action is unchanged, does refreshed evidence still require a new sign-off?
+- Can another reviewer reconstruct the snapshots and rerun the result from the exported package?
 
 <p align="center">
   <img src="docs/readme/evidence-chain.svg" alt="ClaimTrace pipeline from source data to a verified AuditBundle" width="100%">
 </p>
 
-ClaimTrace answers two questions separately:
-
-1. Is the analytical claim still supported?
-2. Did the action change, or does unchanged action merely require a new sign-off?
-
-That separation prevents a refreshed dataset from inheriting stale approval just because the final recommendation happened to remain the same.
-
-## What the audit chain protects
-
-| Risk | ClaimTrace control |
+| Common failure | ClaimTrace control |
 |---|---|
-| Row order masquerades as change | Records align by a user-selected primary key. |
-| A number loses its evidence | Both versions retain keys, physical lines, fields, denominators, and snapshot hashes. |
-| A threshold looks authoritative without provenance | Value, unit, source, rationale, confirmer, and confirmation time are part of the rule. |
-| Zero baselines, ties, or missing groups silently pass | Explicit edge-case states route unsupported comparisons to review. |
-| Evidence changes but an old approval survives | Stable claim-result and decision identities invalidate stale release state. |
-| An action changes without being noticed | Outcome, active action, recommendation, and feasible-set changes produce `DECISION_CHANGED`. |
-| A bundle trusts its own stored answer | Verification reconstructs snapshots and reruns claims, decisions, review state, transformations, and summaries. |
+| Row order looks like record change | Versions align by a user-selected primary key. |
+| A metric loses its sample and source | Evidence retains keys, physical lines, fields, denominators, and snapshot hashes. |
+| A threshold appears authoritative without provenance | Value, unit, source, rationale, confirmer, and confirmation time are rule content. |
+| Zero baselines, ties, or missing groups silently pass | Explicit edge states route unsupported comparisons to review. |
+| Refreshed evidence inherits stale approval | Stable claim-result and decision identities invalidate old release state. |
+| An export trusts its own stored answers | Verification reconstructs snapshots and reruns claims, decisions, lineage, reviews, and summaries. |
 
-See the full [evidence model](docs/EVIDENCE_MODEL.md), [architecture](docs/ARCHITECTURE.md), and [security model](docs/SECURITY.md).
+## See it in action
 
-## Ten reproducible cases
+<p align="center">
+  <img src="docs/claimtrace-demo.gif" alt="ClaimTrace real-browser walkthrough" width="100%">
+</p>
+<p align="center"><em>Real Chromium walkthrough of the compiled read-only reviewer path.</em></p>
+
+The [public demo](https://claimtrace-audit.limingrui2.chatgpt.site) executes all ten committed cases without accepting data uploads or creating sign-off records. Run the repository locally to import CSV versions, define claims, record local review state, and generate verified exports.
+
+## Quick start
+
+Requires Node.js 22.13 or newer.
+
+```bash
+git clone https://github.com/limingrui679-design/ClaimTrace.git
+cd ClaimTrace
+npm ci
+npm run dev
+```
+
+Open the local URL printed by Vite. For the first guided audit, see [Getting started](docs/GETTING_STARTED.md).
+
+<details>
+<summary><strong>CSV and export limits</strong></summary>
+
+The local workspace accepts UTF-8 and BOM-marked UTF-8/UTF-16 CSV files, rejects malformed quote boundaries, and requires the same exact case-sensitive column set across versions. Each imported CSV is limited to 10 MiB before reading. Verified JSON and HTML export embed up to 500 KB of raw data per snapshot; larger files can be analyzed locally, but detached raw-file verification is not implemented.
+
+</details>
+
+## Core capabilities
+
+| Layer | What is governed | Terminal evidence |
+|---|---|---|
+| Versioned snapshots | Encoding, strict CSV dialect, schema, primary key, raw and normalized SHA-256 | Added, removed, modified, and unchanged keyed records |
+| Analytical claims | Formula, filters, denominator, threshold provenance, evidence scope | `SUPPORTED`, `WEAKENED`, `REVERSED`, `UNTESTABLE`, or `REVIEW_REQUIRED` |
+| Decision impact | Action identity, feasible options, recommendation, assumptions, constraints, stability | `DECISION_CHANGED`, `RESIGN_REQUIRED`, or review state |
+| Local review | Target result, disposition, note, previous-record hash, explicit assurance fields | Hash-chained but unauthenticated review record |
+| Portable export | Snapshots, diffs, claims, decisions, lineage, reviews, summaries, canonical root | Independently verified AuditBundle JSON and matching HTML report |
+| Cross-bundle history | Exact predecessor root | Verifiable `previousBundleHash` chain when prior bundles are retained |
+
+See the [evidence model](docs/EVIDENCE_MODEL.md) for the complete object and identity contracts.
+
+## Reproducible case portfolio
 
 <p align="center">
   <img src="docs/readme/case-landscape.svg" alt="Four synthetic stress fixtures and six public-data cases" width="100%">
 </p>
 
-The four synthetic fixtures isolate controlled failure modes. The six public-data cases test source-bound cleaning and provenance against pinned official responses. These roles are complementary; synthetic cases are not presented as external validation, and public-data cases are descriptive demonstrations rather than real-world impact studies.
-
-| Case | Audit focus | Origin |
-|---|---|---|
-| [Business operations](public/cases/business-operations/) | Ranking, SLA changes, resource allocation | Deterministic synthetic |
-| [Financial risk](public/cases/financial-risk/) | Probability, membership, missingness, thresholds | Deterministic synthetic |
-| [Population health](public/cases/population-health/) | Risk, recall, follow-up, model gating | Synthetic with verifiable upstream lineage |
-| [Spatial planning](public/cases/spatial-planning/) | Demand, travel time, risk, site selection | Deterministic synthetic |
-| [World Bank life expectancy](public/cases/world-bank-life-expectancy/) | Cross-year indicator claims | Public data · CC BY 4.0 |
-| [USDOT transit operations](public/cases/usdot-transit-operations/) | Ridership and service intensity | Public data · U.S. DOT/FTA |
-| [U.S. Treasury yield curve](public/cases/us-treasury-yield-curve/) | Period and curve-shape claims | Public data · U.S. Treasury |
-| [CFPB credit-card complaints](public/cases/cfpb-credit-card-complaints/) | Issue ranking, shares, matched volume | Public data · CC0 |
-| [CDC PLACES depression estimates](public/cases/cdc-places-depression/) | Selected-county release changes | Public data · CDC |
-| [ONS housing affordability](public/cases/ons-housing-affordability/) | Selected-authority period changes | Public data · OGL v3.0 |
-
-Every case contains executable specifications, two snapshots, expected results, a manifest, documentation, and a verified AuditBundle. The [machine-readable catalog](public/cases/catalog.json) records the generated artifacts and hashes.
-
-## Try it
-
-| Public demo | Local workspace |
+| Deterministic stress fixtures | Provenance-bound public data |
 |---|---|
-| Read-only reviewer path with preloaded cases | Writable import, rule, review, and export workflows |
-| No account or data upload | Files stay in the browser session |
-| Bound to the `v0.10.2` release receipt | Requires Node.js 22.13 or newer |
+| Business operations | World Bank life expectancy |
+| Financial risk | USDOT transit operations |
+| Population health with verified upstream lineage | U.S. Treasury yield curve |
+| Spatial planning | CFPB complaints · CDC PLACES · ONS housing affordability |
 
-```bash
-npm ci
-npm run dev
-```
+Synthetic fixtures isolate controlled failure modes. Public-data cases retain pinned publisher responses, licenses, transformations, hashes, limitations, expected results, and verified bundles. They are descriptive demonstrations—not client projects, representative studies, causal evaluations, or evidence of real-world impact.
 
-Open the local URL printed by Vite.
+Open the [case catalog](docs/CASE_CATALOG.md) for primary keys, audit questions, artifact anatomy, and direct links to every case pack.
 
-<details>
-<summary><strong>CSV behavior and verified-export limits</strong></summary>
+## Architecture
 
-CSV input supports UTF-8, UTF-8 with BOM, UTF-16LE with BOM, and UTF-16BE with BOM. The strict dialect supports escaped quotes, multiline fields, CRLF, and empty trailing cells while rejecting malformed quote boundaries. Baseline column order is canonical for normalized hashes; the current file may reorder columns only when the exact case-sensitive set is unchanged.
+<p align="center">
+  <img src="docs/readme/system-architecture.svg" alt="ClaimTrace local-first system architecture" width="100%">
+</p>
 
-The browser rejects files above 10 MiB before reading them. AuditBundle and verified HTML export embed up to 500 KB of raw data per snapshot. Larger files can still be analyzed, but detached raw-file verification and verified export are not implemented. Inspect exports before sharing them.
-</details>
+| Directory | Responsibility |
+|---|---|
+| `app/` | React views and browser workflow orchestration |
+| `src/core/` | Deterministic snapshots, statistics, claims, decisions, governance, integrity, and evidence export |
+| `src/cases/` | Ten executable case specifications and shared runtime |
+| `public/cases/` | Generated, self-contained case packs loaded by the browser |
+| `benchmarks/` | Independent labels, controlled scenarios, and committed results |
+| `tests/` | Unit, integration, property, built-artifact, and Chromium verification |
+| `tools/` | Deterministic generators, source refresh, documentation check, benchmark, and release helpers |
+| `docs/` | Guides, concepts, case catalog, evaluation, security, and release evidence |
 
-<details>
-<summary><strong>Regenerate cases and refresh an official source</strong></summary>
-
-Offline regeneration consumes the committed raw responses:
-
-```bash
-npm run demo:generate
-npm run cases:generate
-```
-
-Source refresh is an explicit networked action that can change evidence:
-
-```bash
-npm run cases:refresh-sources -- usdot-transit-operations
-npm run cases:generate
-```
-
-The refresh path uses case-local target restrictions, an exclusive lock, HTTPS URL validation, redirect rejection, response-size limits, source-specific cleaners, publisher-date checks, and hash-checked transaction recovery. See [release verification](docs/RELEASE_VERIFICATION.md) for the exact protocol.
-</details>
+The UI renders canonical core results; it does not own audit truth. Read the [architecture](docs/ARCHITECTURE.md) and [development guide](DEVELOPMENT.md) for module and workflow details.
 
 ## Verification
 
-The `v0.10.2` release gate records:
+The committed `v0.10.2` verification record includes:
 
 <table>
   <tr>
@@ -159,69 +181,40 @@ npm audit --omit=dev
 npm audit
 ```
 
-The 64-scenario benchmark and 512 deterministic property trials establish regression behavior on committed boundaries only. They do **not** establish production accuracy, external validity, user impact, or superiority to mature audit platforms. Details and baseline results are in [evaluation](docs/EVALUATION.md); exact release evidence is in [release verification](docs/RELEASE_VERIFICATION.md).
+The gate now includes local documentation-reference validation in addition to linting, type checking, deterministic generation, benchmarks, build checks, browser flows, and coverage. See [Evaluation](docs/EVALUATION.md) and [Release verification](docs/RELEASE_VERIFICATION.md) for the exact evidence and interpretation limits.
 
-## Architecture
-
-```text
-versioned data
-    ↓
-snapshot + keyed diff
-    ↓
-claim specification + deterministic validation
-    ↓
-decision identity + governance propagation
-    ↓
-verified AuditBundle → JSON / HTML / review chain
-```
-
-| Layer | Responsibility |
-|---|---|
-| `src/core` | Deterministic snapshots, statistics, claims, decisions, governance, integrity, and evidence export |
-| `src/cases` | Ten executable case specifications |
-| `app/workflows` | Dataset intent, case loading, CSV import, and verified export |
-| `app/views.tsx` | Presentation-only route views |
-
-The Vite + React interface is separate from the audit core. No decorative chart uses invented metrics.
-
-## Honest governance boundary
+## Trust boundary
 
 | Demonstrated by committed artifacts | Not demonstrated |
 |---|---|
 | Tamper-evident internal consistency | Authenticated reviewer identity |
 | Deterministic claim and decision recomputation | Trusted timestamps or digital signatures |
-| Local review-state propagation | Durable multi-user authorization |
-| Public-data cleaning lineage | Source truth or institutional adoption |
+| Local review-state propagation | Durable multi-user authorization or revocation |
+| Public-data cleaning lineage | Publisher truth, institutional adoption, or domain validity |
 | Reproducible prototype evaluation | Production deployment or real-user impact |
 
-Review records explicitly declare `LOCAL_UNVERIFIED`, `LOCAL_CLOCK_UNVERIFIED`, `SELF_ASSERTED`, and `NONE` for identity, time, authorization, and cryptographic signature. SHA-256 chains and bundle roots detect internal inconsistency; they do not turn local display names into authenticated signers. See [limitations](docs/LIMITATIONS.md).
-
-<details>
-<summary><strong>Evidence-bound portfolio wording</strong></summary>
-
-> Independently designed and implemented a local-first prototype for versioned analytical-claim auditing, connecting primary-key data changes, governed thresholds, sample denominators, SHA-256 snapshots, executable rules, decision identity, and local review records; validated it with 64 controlled scenarios, 512 deterministic property trials, four reproducible synthetic stress fixtures, and six provenance-bound public-data cases spanning operations, fixed income, consumer finance, population health, planning, and international indicators.
-
-Unsupported claims include production deployment, real institutional governance, authenticated sign-off, real-user outcomes, causal policy or program evaluation, portfolio backtesting, investment performance, epidemiologic inference, representative consumer research, and GIS analysis.
-</details>
-
-## Implementation status
-
-- JSON and HTML are generated from the same independently verified AuditBundle.
-- `DECISION_CHANGED` is separate from `RESIGN_REQUIRED`.
-- All ten committed case specifications regenerate and verify.
-- The read-only portfolio build removes import and sign-off controls; the local repository retains them.
-- Completeness such as `48/48` means passed checks—not model accuracy, research effect, or business impact.
+Review records explicitly declare `LOCAL_UNVERIFIED`, `LOCAL_CLOCK_UNVERIFIED`, `SELF_ASSERTED`, and `NONE` for identity, time, authorization, and cryptographic signature. Read [Security](docs/SECURITY.md), [Limitations](docs/LIMITATIONS.md), and the proposal-only [Roadmap](docs/ROADMAP.md) before extending these claims.
 
 ## Documentation
 
-| Need | Document |
+| Need | Entry point |
 |---|---|
-| Understand the evidence object and identities | [Evidence model](docs/EVIDENCE_MODEL.md) |
+| Run a first audit | [Getting started](docs/GETTING_STARTED.md) |
+| Browse all cases | [Case catalog](docs/CASE_CATALOG.md) |
+| Understand objects and identities | [Evidence model](docs/EVIDENCE_MODEL.md) |
 | Inspect modules and data flow | [Architecture](docs/ARCHITECTURE.md) |
-| Reproduce tests, benchmarks, and release evidence | [Evaluation](docs/EVALUATION.md) · [Release verification](docs/RELEASE_VERIFICATION.md) |
+| Reproduce quality evidence | [Evaluation](docs/EVALUATION.md) · [Release verification](docs/RELEASE_VERIFICATION.md) |
 | Review security and non-goals | [Security](docs/SECURITY.md) · [Limitations](docs/LIMITATIONS.md) |
-| Reuse the project in an application portfolio | [Portfolio handoff](docs/PORTFOLIO_HANDOFF.md) · [15-program alignment](docs/PROGRAM_ALIGNMENT.md) |
-| Publish a new version | [Release checklist](docs/CLAIMTRACE_RELEASING.md) |
+| Develop or contribute | [Development](DEVELOPMENT.md) · [Contributing](CONTRIBUTING.md) |
+| Navigate everything | [Documentation hub](docs/README.md) |
+
+## Contributing
+
+Focused bug reports, evidence-model proposals, accessibility improvements, documentation fixes, and bounded reproducible cases are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and run `npm run ci` before opening a pull request. Security issues should follow the private-reporting guidance in [docs/SECURITY.md](docs/SECURITY.md).
+
+## Citation
+
+Software citation metadata is available in [CITATION.cff](CITATION.cff).
 
 ## License
 

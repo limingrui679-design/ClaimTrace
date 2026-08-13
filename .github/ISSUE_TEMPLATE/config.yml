@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/limingrui679-design/ClaimTrace/blob/main/docs/SECURITY.md
+    about: Review the private reporting guidance before disclosing a vulnerability.
+  - name: Documentation
+    url: https://github.com/limingrui679-design/ClaimTrace/blob/main/docs/README.md
+    about: Start with the documentation map, setup guide, and current limitations.
