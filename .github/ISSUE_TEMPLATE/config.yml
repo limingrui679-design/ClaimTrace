@@ -6,3 +6,6 @@ contact_links:
   - name: Documentation
     url: https://github.com/limingrui679-design/ClaimTrace/blob/main/docs/README.md
     about: Start with the documentation map, setup guide, and current limitations.
+  - name: Private conduct report
+    url: https://github.com/limingrui679-design/ClaimTrace/security/advisories/new
+    about: Privately report behavior covered by the Code of Conduct; begin the title with Code of Conduct.

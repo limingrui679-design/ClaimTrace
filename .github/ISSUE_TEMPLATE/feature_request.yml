@@ -35,3 +35,10 @@ body:
     id: alternatives
     attributes:
       label: Alternatives considered
+  - type: checkboxes
+    id: community
+    attributes:
+      label: Community standards
+      options:
+        - label: I agree to follow the [ClaimTrace Code of Conduct](https://github.com/limingrui679-design/ClaimTrace/blob/main/CODE_OF_CONDUCT.md).
+          required: true

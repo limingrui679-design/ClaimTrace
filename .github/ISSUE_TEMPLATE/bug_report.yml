@@ -50,3 +50,5 @@ body:
       options:
         - label: I removed credentials, private data, and personal information from this report.
           required: true
+        - label: I agree to follow the [ClaimTrace Code of Conduct](https://github.com/limingrui679-design/ClaimTrace/blob/main/CODE_OF_CONDUCT.md).
+          required: true

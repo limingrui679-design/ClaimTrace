@@ -210,7 +210,7 @@ Review records explicitly declare `LOCAL_UNVERIFIED`, `LOCAL_CLOCK_UNVERIFIED`, 
 
 ## Contributing
 
-Focused bug reports, evidence-model proposals, accessibility improvements, documentation fixes, and bounded reproducible cases are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and run `npm run ci` before opening a pull request. Security issues should follow the private-reporting guidance in [docs/SECURITY.md](docs/SECURITY.md).
+Focused bug reports, evidence-model proposals, accessibility improvements, documentation fixes, and bounded reproducible cases are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), follow the [Code of Conduct](CODE_OF_CONDUCT.md), and run `npm run ci` before opening a pull request. Security issues should follow the private-reporting guidance in [docs/SECURITY.md](docs/SECURITY.md).
 
 ## Citation
 

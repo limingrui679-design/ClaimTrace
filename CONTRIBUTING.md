@@ -2,6 +2,8 @@
 
 ClaimTrace welcomes focused issues and pull requests that improve reproducibility, audit semantics, documentation, accessibility, or bounded case coverage.
 
+Participation in project spaces is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## Before starting
 
 1. Read [getting started](docs/GETTING_STARTED.md), the [evidence model](docs/EVIDENCE_MODEL.md), and [limitations](docs/LIMITATIONS.md).
@@ -9,7 +11,7 @@ ClaimTrace welcomes focused issues and pull requests that improve reproducibilit
 3. For a material rule, schema, case, or workflow change, open an issue describing the problem and the evidence needed to verify the proposed behavior.
 4. Never attach sensitive, proprietary, personal, clinical, or credential-bearing data to an issue or pull request.
 
-Security vulnerabilities should follow the private reporting guidance in [security](docs/SECURITY.md), not a public issue.
+Security vulnerabilities should follow the private reporting guidance in [security](docs/SECURITY.md), not a public issue. Conduct reports should use the private contact in the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Local setup
 

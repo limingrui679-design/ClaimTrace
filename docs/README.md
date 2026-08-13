@@ -32,6 +32,7 @@ This directory is the documentation entry point for ClaimTrace. Start with the r
 
 - [Development guide](../DEVELOPMENT.md) maps repository directories to responsibilities and defines the local quality gate.
 - [Contributing guide](../CONTRIBUTING.md) explains issue, pull-request, generated-artifact, and evidence-boundary expectations.
+- [Code of Conduct](../CODE_OF_CONDUCT.md) defines participation standards and private conduct-reporting guidance.
 - [Release checklist](CLAIMTRACE_RELEASING.md), [release notes](RELEASE_NOTES.md), and the root [changelog](../CHANGELOG.md) cover publication.
 - [Roadmap](ROADMAP.md) separates the verified baseline from possible future work; roadmap items are not shipped claims.
 

@@ -2,7 +2,7 @@ import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
-const rootGuides = ["README.md", "CONTRIBUTING.md", "DEVELOPMENT.md"];
+const rootGuides = ["README.md", "CODE_OF_CONDUCT.md", "CONTRIBUTING.md", "DEVELOPMENT.md"];
 
 async function markdownFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });

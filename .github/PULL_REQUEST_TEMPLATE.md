@@ -8,6 +8,7 @@ List the tests, generated artifacts, screenshots, or source records that verify 
 
 ## Boundary review
 
+- [ ] I agree to follow the [ClaimTrace Code of Conduct](https://github.com/limingrui679-design/ClaimTrace/blob/main/CODE_OF_CONDUCT.md).
 - [ ] I kept prototype, deployment, authentication, adoption, and impact claims distinct.
 - [ ] I kept public-source observations separate from manual or synthetic decision inputs.
 - [ ] I did not add sensitive or credential-bearing data.
