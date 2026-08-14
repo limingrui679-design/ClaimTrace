@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- rewrote the README opening in plain language and expanded the ten-case landscape with each case's primary key, governed checks, committed regression outcome, and downstream decision;
 - reorganized the repository entry points around a visual-first README, a dedicated documentation hub, a concise getting-started guide, and a canonical ten-case catalog while preserving the existing evidence-chain and case-landscape graphics;
 - added a dedicated end-to-end README workflow that visualizes snapshot validation, keyed change detection, governed claim and decision branches, local review state, AuditBundle construction, independent verification, and terminal export or rejection;
 - added an accessible system-architecture diagram that maps versioned inputs through deterministic core modules to independently verifiable outputs without implying production deployment or external adoption;

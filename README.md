@@ -5,7 +5,7 @@
 <h1 align="center">ClaimTrace</h1>
 
 <p align="center">
-  <strong>Trace a changed dataset through the claims, decisions, and review records that depend on it.</strong>
+  <strong>Compare two data versions, rerun the claims and decisions built on them, and export a verifiable audit trail.</strong>
 </p>
 
 <p align="center">
@@ -25,7 +25,16 @@
   · <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
-ClaimTrace is a local-first TypeScript and React prototype for versioned analytical-claim auditing. It binds natural-language conclusions to primary-key-aligned records, denominators, governed thresholds, exact evidence references, downstream decisions, and explicit local review state—then independently rebuilds the complete audit package before export.
+ClaimTrace answers a practical question: **when data is refreshed, can the conclusion and action built on the old version still be reused?**
+
+Give it two versions of the same CSV—or open one of the ten bundled cases. ClaimTrace matches rows by a chosen primary key, reruns explicit statements such as “Referral remains the highest-converting channel,” and follows every changed result into the decision and review records that depend on it. It shows:
+
+- which records, formulas, cohorts, denominators, and thresholds changed;
+- whether each analytical claim is still supported, weakened, reversed, or unresolved;
+- whether the action changed, stayed the same but needs a new sign-off, or must be reviewed; and
+- whether the exported JSON and HTML audit package can be independently reconstructed and verified.
+
+The writable workspace runs locally in the browser and can import CSV files, define claims and decision rules, record explicitly unauthenticated local review state, and export a tamper-evident AuditBundle. The hosted demo is read-only and uses only the ten committed cases.
 
 <table>
   <tr>
@@ -151,7 +160,7 @@ See the [evidence model](docs/EVIDENCE_MODEL.md) for the complete object and ide
 ## Reproducible case portfolio
 
 <p align="center">
-  <img src="docs/readme/case-landscape.svg" alt="Four synthetic stress fixtures and six public-data cases" width="100%">
+  <img src="docs/readme/case-landscape.svg" alt="Ten reproducible cases with their evidence role, primary key, governed checks, committed outcome, and downstream decision" width="100%">
 </p>
 
 | Deterministic stress fixtures | Provenance-bound public data |
@@ -161,7 +170,7 @@ See the [evidence model](docs/EVIDENCE_MODEL.md) for the complete object and ide
 | Population health with verified upstream lineage | U.S. Treasury yield curve |
 | Spatial planning | CFPB complaints · CDC PLACES · ONS housing affordability |
 
-Synthetic fixtures isolate controlled failure modes. Public-data cases retain pinned publisher responses, licenses, transformations, hashes, limitations, expected results, and verified bundles. They are descriptive demonstrations—not client projects, representative studies, causal evaluations, or evidence of real-world impact.
+Synthetic fixtures isolate controlled failure modes. Public-data cases retain pinned publisher responses, licenses, transformations, hashes, limitations, expected results, and verified bundles. The diagram reports committed regression expectations for these exact snapshots—not generalized accuracy or real-world impact. These cases are descriptive demonstrations, not client projects, representative studies, or causal evaluations.
 
 Open the [case catalog](docs/CASE_CATALOG.md) for primary keys, audit questions, artifact anatomy, and direct links to every case pack.
 
