@@ -1,15 +1,15 @@
-# ClaimTrace v0.10.2
+# ClaimTrace v0.10.3
 
-This patch release makes publisher-date failures and release checksums precise and portable.
+This patch release makes ClaimTrace faster to evaluate as a portfolio system while preserving its complete audit evidence and claim boundaries.
 
 ## What changed
 
-- Publisher update-date validation is now an independent lineage gate rather than a side effect of CSV cleaning.
-- Invalid and evidence-mismatched dates stop before snapshot rebuilding, so verification reports the governing root cause once without misleading baseline/current CSV-rebuild messages.
-- An invalid declared date no longer also emits a derivative evidence-mismatch message; a valid but wrong date still produces the exact mismatch diagnostic.
-- Offline generation and networked refresh retain the same publisher-date evidence checks after the separation.
-- Release checksum sidecars record only the ZIP base name, with an explicit portability assertion in the release procedure.
-- The existing Sites project identifier is versioned and production builds prove that its metadata and static Worker entry are packaged together; a deployment is claimed only after the exact release build is publicly opened and its receipt is checked.
+- Reworked the README opening around the practical versioned-evidence problem, a ten-case comparison, and a compact reviewer-facing workflow.
+- Kept the complete claim and decision-state graph and all technical evidence available in expandable sections instead of deleting audit detail.
+- Added an accessible system-architecture graphic, documentation hub, concise getting-started path, contributor guidance, issue and pull-request templates, citation metadata, and a proposal-only roadmap.
+- Added documentation-reference validation to both the local and hosted quality gates.
+- Updated the audited transitive development dependency `nanoid` and retained zero known production or development dependency findings.
+- Preserved all six bounded public-data cases, four deterministic synthetic fixtures, current publisher-date validation, portable checksums, and exact public-build provenance.
 
 ## Verified scope
 

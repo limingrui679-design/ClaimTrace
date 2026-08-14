@@ -1,6 +1,6 @@
 {
   "name": "claimtrace",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Local-first auditing for versioned analytical claims, evidence, decisions, and review records.",
   "private": true,
   "license": "MIT",

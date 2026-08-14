@@ -67,7 +67,7 @@ npm run test:browser
 An unpushed local tag is not a GitHub Release. After the exact release commit passes both local clean-archive verification and GitHub Actions, create a commit-bound archive and publish it with its checksum and `docs/RELEASE_NOTES.md`:
 
 ```bash
-release_tag="v0.10.2"
+release_tag="v0.10.3"
 release_sha="$(git rev-parse "$release_tag^{commit}")"
 short_sha="${release_sha:0:7}"
 archive="ClaimTrace-GitHub_${release_tag}_${short_sha}.zip"

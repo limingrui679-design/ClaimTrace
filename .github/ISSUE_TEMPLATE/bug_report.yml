@@ -19,7 +19,7 @@ body:
     attributes:
       label: Version and commit receipt
       description: Copy the visible version and commit when available.
-      placeholder: "v0.10.2 · commit 92d741b"
+      placeholder: "v0.10.3 · commit <visible-prefix>"
     validations:
       required: true
   - type: textarea

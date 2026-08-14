@@ -45,7 +45,7 @@ The writable workspace runs locally in the browser and can import CSV files, def
   </tr>
 </table>
 
-> **Project status:** the public site is a read-only portfolio build bound to release `v0.10.2` and visible receipt `92d741b`. The repository also runs as a local writable workspace. Neither mode claims authenticated sign-off, durable collaboration, institutional adoption, or production governance.
+> **Project status:** the public site is a read-only portfolio build bound to release `v0.10.3` and displays its exact source-commit receipt. The repository also runs as a local writable workspace. Neither mode claims authenticated sign-off, durable collaboration, institutional adoption, or production governance.
 
 <details>
 <summary><strong>Table of contents</strong></summary>
@@ -73,10 +73,6 @@ Most diff tools answer **what changed in the data**. ClaimTrace continues the ch
 - If the action is unchanged, does refreshed evidence still require a new sign-off?
 - Can another reviewer reconstruct the snapshots and rerun the result from the exported package?
 
-<p align="center">
-  <img src="docs/readme/evidence-chain.svg" alt="ClaimTrace pipeline from source data to a verified AuditBundle" width="100%">
-</p>
-
 | Common failure | ClaimTrace control |
 |---|---|
 | Row order looks like record change | Versions align by a user-selected primary key. |
@@ -87,6 +83,15 @@ Most diff tools answer **what changed in the data**. ClaimTrace continues the ch
 | An export trusts its own stored answers | Verification reconstructs snapshots and reruns claims, decisions, lineage, reviews, and summaries. |
 
 ## End-to-end workflow
+
+<p align="center">
+  <img src="docs/readme/evidence-chain.svg" alt="ClaimTrace pipeline from source data to a verified AuditBundle" width="100%">
+</p>
+
+The compact path above is the reviewer-facing workflow. The complete state-transition graph remains available below for implementers and auditors without taking over the default README view.
+
+<details>
+<summary><strong>Open the complete claim and decision-state flow</strong></summary>
 
 ```mermaid
 flowchart TD
@@ -112,6 +117,8 @@ flowchart TD
     O -->|"PASS"| P["Verified JSON + HTML · optional previousBundleHash link"]
     O -->|"FAIL"| Q["Reject export · surface failed checks"]
 ```
+
+</details>
 
 ClaimTrace never treats an unchanged recommendation as inherited approval. `DECISION_CHANGED` means the executable action identity changed; `RESIGN_REQUIRED` means the action stayed the same while its evidence, policy, or bound result identity changed. JSON and HTML are emitted only from independently reverified AuditBundles, while local review names, times, authorization, and signatures remain explicitly unverified.
 
@@ -195,7 +202,7 @@ The UI renders canonical core results; it does not own audit truth. Read the [ar
 
 ## Verification
 
-The committed `v0.10.2` verification record includes:
+The committed `v0.10.3` verification record includes:
 
 <table>
   <tr>

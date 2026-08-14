@@ -4,7 +4,7 @@ This document separates the verified baseline from possible future work. Items b
 
 ## Verified baseline
 
-The `v0.10.2` line demonstrates:
+The `v0.10.3` line demonstrates:
 
 - local browser execution for versioned CSV evidence;
 - primary-key alignment, strict parsing, raw and normalized hashes, and bounded evidence references;

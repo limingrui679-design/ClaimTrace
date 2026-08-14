@@ -1,6 +1,6 @@
 # Release verification
 
-## ClaimTrace 0.10.2 — 2026-08-11
+## ClaimTrace 0.10.3 — 2026-08-14
 
 This record describes a local release-candidate verification on Darwin arm64 with Node.js 22.20.0 and npm 10.9.3. It is a reproducibility receipt, not evidence of external adoption or real-world impact.
 

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.10.3 — 2026-08-14
+
 - rewrote the README opening in plain language and expanded the ten-case landscape with each case's primary key, governed checks, committed regression outcome, and downstream decision;
 - updated the transitive development dependency `nanoid` from 3.3.17 to 3.3.18 after a new high-severity advisory, restoring zero known production and development audit findings;
 - reorganized the repository entry points around a visual-first README, a dedicated documentation hub, a concise getting-started guide, and a canonical ten-case catalog while preserving the existing evidence-chain and case-landscape graphics;
