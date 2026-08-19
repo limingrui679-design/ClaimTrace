@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.11.0 — 2026-08-20
+
+- rewrote the repository and in-app introductions around the concrete data-refresh question, and expanded every case card plus the README landscape with method, capability, committed result, downstream action, and evidence boundary;
+- added a governed `interval-threshold` rule that distinguishes full-interval support, full-interval reversal, threshold crossing, and malformed or multi-row interval inputs, then exercised it in a fourth CDC PLACES claim using the retained 95% interval fields;
+- upgraded the rule engine to `claimtrace-rule/6.3.0` and the AuditBundle contract to `claimtrace-audit-bundle/2.6.0`, regenerated all ten case packs, and added case-level method/capability/boundary metadata;
+- published a versioned structural JSON Schema and CLI verifier for individual AuditBundles and chronological root-hash chains, with stable human/JSON output, exit codes, valid/tampered/chain tests, and structural validation of all ten generated bundles;
+- replaced stale program-alignment entries with the applicant's current Johns Hopkins BAAI and Yale Health Informatics selections, mapped all 15 programs to bounded repository evidence, and retained external-method, domain-validity, and impact gaps explicitly;
+- corrected the CDC and ONS primary keys in the case catalog, removed a duplicated hard-coded demo rule version, pinned CodeQL actions to immutable commits, and made schema changes trigger CI;
+- refreshed the social preview and real-browser Demo, declared the Demo renderer's image dependency directly, reused keyed diffs during bounded evidence selection, and fixed import-dialog intent so an older case request cannot replace an import already in progress;
+- passed 166/166 unit/integration tests, 3/3 built-artifact checks, 2/2 real-Chromium flows, 64/64 controlled scenarios, 512 deterministic property trials, and coverage of 96.83% statements/lines, 78.98% branches, and 99.39% functions with zero known dependency vulnerabilities.
+
 ## 0.10.3 — 2026-08-14
 
 - rewrote the README opening in plain language and expanded the ten-case landscape with each case's primary key, governed checks, committed regression outcome, and downstream decision;

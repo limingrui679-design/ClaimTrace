@@ -375,15 +375,22 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .case-library > .panel-head { padding: 0 0 14px; border-bottom: 0; }
 .case-library > .panel-head a { color: #39705a; font-size: 12px; font-weight: 700; }
 .case-library > div:last-child { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.case-library article { min-height: 174px; padding: 15px; display: flex; flex-direction: column; background: #f6f8f5; border: 1px solid #e2e7e4; border-radius: 9px; }
+.case-library article { min-height: 390px; padding: 15px; display: flex; flex-direction: column; background: #f6f8f5; border: 1px solid #e2e7e4; border-radius: 9px; }
 .case-library article.active { background: #edf7f1; border-color: #80aa96; box-shadow: inset 0 0 0 1px #80aa96; }
 .case-library article > span { color: #9b6b2d; font-family: "SFMono-Regular", Consolas, monospace; font-size: 12px; letter-spacing: .08em; }
 .case-library h3 { margin: 9px 0 6px; font-size: 13px; line-height: 1.4; }
 .case-library p { margin: 0; color: #718079; font-size: 12px; line-height: 1.55; }
+.case-library .case-method { margin-top: 10px; padding-top: 9px; display: grid; gap: 2px; border-top: 1px solid #e1e7e3; }
+.case-library .case-method b, .case-library .case-boundary b { color: #4b6258; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
+.case-library .case-capabilities { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 5px; }
+.case-library .case-capabilities span { padding: 3px 7px; color: #32614f; background: #e3f0e9; border: 1px solid #cee1d7; border-radius: 999px; font-size: 10px; line-height: 1.35; }
 .case-library small { margin-top: auto; padding-top: 12px; color: #86928c; font-size: 12px; line-height: 1.45; }
+.case-library .case-boundary { margin-top: 10px; padding: 9px 10px; display: grid; gap: 2px; color: #6d5b43; background: #fbf5e9; border: 1px solid #eadfc9; border-radius: 7px; }
 .case-library article > button { width: 100%; margin-top: 10px; padding: 8px 10px; font-size: 12px; }
 .case-library article div { margin-top: 9px; display: flex; gap: 10px; }
 .case-library article a { color: #39705a; font-size: 12px; font-weight: 700; }
+.case-library article > div:last-child { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; }
+.case-library article > div:last-child a { line-height: 1.4; }
 
 .decision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 14px; }
 .decision-card { padding: 22px; }

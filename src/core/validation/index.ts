@@ -12,7 +12,7 @@ import {
 import { absoluteThresholdSpecForRule, isThresholdConfirmed, ruleIsPreliminary, stabilityReversalIsGoverned, thresholdSpecForRule } from "../claim-spec";
 import { valueToNumber } from "../snapshot";
 import { sha256CanonicalSync } from "../integrity";
-import { aggregate, diffRowsByKey, evaluate, rankGroups, rowsForRule, sampleProfile, sampleProfileChanged } from "../statistics";
+import { aggregate, diffRowsByKey, evaluate, intervalThreshold, rankGroups, rowsForRule, sampleProfile, sampleProfileChanged } from "../statistics";
 
 const MAX_SOURCE_REFERENCES = 200;
 
@@ -66,25 +66,43 @@ function boundaryScorer(dataset: DatasetVersion, side: SnapshotSide, rule: Rule)
       return group.index * 1_000_000_000 + Math.abs(value - group.value);
     };
   }
+  if (rule.type === "interval-threshold") {
+    const boundaryField = rule.operator === ">" || rule.operator === ">=" ? rule.lowerField : rule.upperField;
+    return (row: Record<string, string | number>) => {
+      const value = valueToNumber(row[boundaryField]);
+      return value === null ? Number.POSITIVE_INFINITY : Math.abs(value - rule.threshold);
+    };
+  }
   return (row: Record<string, string | number>) => {
     const value = valueToNumber(row[rule.field]);
     return value === null ? Number.POSITIVE_INFINITY : Math.abs(value - rule.threshold);
   };
 }
 
-function candidateReferences(dataset: DatasetVersion, side: SnapshotSide, rule: Rule) {
+function rowMatchesRule(row: Record<string, string | number>, rule: Rule) {
+  const included = (rule.filters ?? []).every((filter) => String(row[filter.field] ?? "") === String(filter.equals));
+  const excluded = (rule.excludes ?? []).some((filter) => String(row[filter.field] ?? "") === String(filter.equals));
+  return included && !excluded;
+}
+
+function candidateReferences(dataset: DatasetVersion, side: SnapshotSide, rule: Rule, changedKeys: Set<string>) {
   const meta = snapshotMeta(dataset, side);
   if (!meta) return [];
   const rows = snapshotRows(dataset, side);
   const lineNumbers = snapshotLines(dataset, side);
-  const fields = [dataset.primaryKey, rule.field, ...(rule.filters ?? []).map((filter) => filter.field), ...(rule.excludes ?? []).map((filter) => filter.field)];
+  const fields = [
+    dataset.primaryKey,
+    rule.field,
+    ...(rule.type === "interval-threshold" ? [rule.lowerField, rule.upperField] : []),
+    ...(rule.filters ?? []).map((filter) => filter.field),
+    ...(rule.excludes ?? []).map((filter) => filter.field),
+  ];
   if (rule.type === "rank") fields.push(rule.groupField);
   const uniqueFields = [...new Set(fields)];
-  const changedKeys = new Set(diffRowsByKey(dataset).filter((diff) => diff.kind !== "unchanged").map((diff) => diff.key));
   const scoreBoundary = boundaryScorer(dataset, side, rule);
   return rows
     .map((row, index) => ({ row, index }))
-    .filter(({ row }) => rowsForRule([row], rule).length > 0)
+    .filter(({ row }) => rowMatchesRule(row, rule))
     .map(({ row, index }) => ({
       snapshot: side,
       fileName: meta.fileName,
@@ -192,10 +210,10 @@ function selectSideReferences(
 }
 
 function sourceReferences(dataset: DatasetVersion, rule: Rule, claimId: string): { refs: SourceReference[]; scope: EvidenceScope } {
-  const baseline = candidateReferences(dataset, "baseline", rule);
-  const current = dataset.currentRows ? candidateReferences(dataset, "current", rule) : [];
-  const seed = `${claimId}|${dataset.ruleVersion}`;
   const changedKeys = new Set(diffRowsByKey(dataset).filter((diff) => diff.kind !== "unchanged").map((diff) => diff.key));
+  const baseline = candidateReferences(dataset, "baseline", rule, changedKeys);
+  const current = dataset.currentRows ? candidateReferences(dataset, "current", rule, changedKeys) : [];
+  const seed = `${claimId}|${dataset.ruleVersion}`;
   const baselineKeys = new Set(baseline.map((item) => item.keyValue));
   const currentKeys = new Set(current.map((item) => item.keyValue));
   const pairCandidates = [...changedKeys].filter((key) => baselineKeys.has(key) && currentKeys.has(key));
@@ -261,7 +279,16 @@ export function makeEvidence(title: string, rule: Rule, dataset: DatasetVersion,
   return [
     { id: `claim:${title}`, kind: "Claim", title, detail: "Testable natural-language statement", bound: Boolean(title.trim()) },
     { id: resultId, kind: "Comparison result", title: `${rule.field} version comparison`, detail: "Bound to this rule execution result, not a UI label", bound: true },
-    { id: `metric:${rule.field}`, kind: "Metric", title: rule.field, detail: `Aggregation: ${rule.aggregation}`, bound: dataset.columns.includes(rule.field) },
+    {
+      id: `metric:${rule.field}`,
+      kind: "Metric",
+      title: rule.field,
+      detail: rule.type === "interval-threshold"
+        ? `${rule.intervalLabel}: ${rule.lowerField} to ${rule.upperField}; one explicitly selected estimate`
+        : `Aggregation: ${rule.aggregation}`,
+      bound: dataset.columns.includes(rule.field)
+        && (rule.type !== "interval-threshold" || (dataset.columns.includes(rule.lowerField) && dataset.columns.includes(rule.upperField))),
+    },
     { id: `rule:${dataset.ruleVersion}`, kind: "Rule", title: dataset.ruleVersion, detail: "Deterministic rule-engine version", bound: true },
     { id: `field:${rule.field}`, kind: "Field", title: rule.field, detail: `Primary key: ${dataset.primaryKey}`, bound: dataset.columns.includes(rule.field) },
     { id: `records:${dataset.primaryKey}`, kind: "Source records", title: "Primary key + exact physical line", detail: "Large samples export only changes, boundary records, and the required sample", bound: true },
@@ -283,7 +310,7 @@ function thresholdStatus(value: number | null, rule: Extract<Rule, { type: "thre
 function expectedThresholdMatchesRule(rule: Rule) {
   const spec = thresholdSpecForRule(rule);
   if (!spec) return false;
-  if (rule.type === "threshold") return Math.abs(spec.value - rule.threshold) < 1e-9;
+  if (rule.type === "threshold" || rule.type === "interval-threshold") return Math.abs(spec.value - rule.threshold) < 1e-9;
   if (rule.type === "stability") return Math.abs(spec.value - rule.supportTolerance) < 1e-9;
   return true;
 }
@@ -319,6 +346,43 @@ function rankStatus(result: ReturnType<typeof rankGroups>, rule: Extract<Rule, {
 function rankValue(result: ReturnType<typeof rankGroups>) {
   if (!result) return "Not computable";
   return result.winners.map((winner) => `${winner.group} ${formatNumber(winner.value)}`).join(" / ");
+}
+
+function intervalStatus(result: ReturnType<typeof intervalThreshold>, rule: Extract<Rule, { type: "interval-threshold" }>) {
+  if (!result) {
+    return {
+      status: "UNTESTABLE" as ClaimStatus,
+      reason: "An interval-threshold rule requires valid rule metadata and exactly one selected row with finite lower, point, and upper values ordered lower ≤ point ≤ upper.",
+    };
+  }
+  const supported = rule.operator === ">" ? result.lower > rule.threshold
+    : rule.operator === ">=" ? result.lower >= rule.threshold
+      : rule.operator === "<" ? result.upper < rule.threshold
+        : result.upper <= rule.threshold;
+  const reversed = rule.operator === ">" ? result.upper <= rule.threshold
+    : rule.operator === ">=" ? result.upper < rule.threshold
+      : rule.operator === "<" ? result.lower >= rule.threshold
+        : result.lower > rule.threshold;
+  if (supported) {
+    return {
+      status: "SUPPORTED" as ClaimStatus,
+      reason: `The complete ${rule.intervalLabel} [${formatNumber(result.lower)}, ${formatNumber(result.upper)}] satisfies rule ${rule.operator} ${formatNumber(rule.threshold)}.`,
+    };
+  }
+  if (reversed) {
+    return {
+      status: "REVERSED" as ClaimStatus,
+      reason: `The complete ${rule.intervalLabel} [${formatNumber(result.lower)}, ${formatNumber(result.upper)}] is on the opposite side of rule ${rule.operator} ${formatNumber(rule.threshold)}.`,
+    };
+  }
+  return {
+    status: "REVIEW_REQUIRED" as ClaimStatus,
+    reason: `The ${rule.intervalLabel} [${formatNumber(result.lower)}, ${formatNumber(result.upper)}] crosses rule ${rule.operator} ${formatNumber(rule.threshold)}; the point estimate alone is insufficient for automatic support or reversal.`,
+  };
+}
+
+function intervalValue(result: ReturnType<typeof intervalThreshold>) {
+  return result ? `${formatNumber(result.point)} [${formatNumber(result.lower)}, ${formatNumber(result.upper)}]` : "Not computable";
 }
 
 export function recomputeClaim(claim: Claim, dataset: DatasetVersion, runAt = new Date().toISOString()): Claim {
@@ -366,6 +430,34 @@ export function recomputeClaim(claim: Claim, dataset: DatasetVersion, runAt = ne
       reason += " The effective sample or group composition changed.";
     }
     action = status === "REVERSED" ? "Stop citing the prior ranking claim and inspect linked decisions." : status === "SUPPORTED" ? "The claim may continue to be cited." : "Review ties, missing groups, and sample composition before sign-off.";
+  } else if (rule.type === "interval-threshold") {
+    const baselineInterval = intervalThreshold(dataset.baselineRows, rule);
+    const currentInterval = dataset.currentRows ? intervalThreshold(dataset.currentRows, rule) : null;
+    const baselineResult = intervalStatus(baselineInterval, rule);
+    const currentResult = dataset.currentRows ? intervalStatus(currentInterval, rule) : baselineResult;
+    baselineValue = intervalValue(baselineInterval);
+    currentValue = dataset.currentRows ? intervalValue(currentInterval) : "No current version imported";
+    baselineStatus = baselineResult.status;
+    status = currentResult.status;
+    reason = currentResult.reason;
+    if (dataset.currentRows && baselineStatus === "REVERSED" && status === "SUPPORTED") {
+      status = "REVIEW_REQUIRED";
+      reason = `The prior interval claim changed from false to supported. ${reason}`;
+    }
+    if (status !== "UNTESTABLE") {
+      const provenance = applyPreliminaryRule(status, reason, rule);
+      status = provenance.status;
+      reason = provenance.reason;
+    }
+    if (profilesChanged && status === "SUPPORTED") {
+      status = "REVIEW_REQUIRED";
+      reason += " The selected record identity or effective sample changed.";
+    }
+    action = status === "SUPPORTED"
+      ? "The interval-aware claim may continue to be cited with its uncertainty range."
+      : status === "REVERSED"
+        ? "Stop citing the prior interval-aware claim and inspect linked decisions."
+        : "Preserve the interval and require methods review before sign-off.";
   } else {
     const baselineFiltered = rowsForRule(dataset.baselineRows, rule);
     const currentFiltered = dataset.currentRows ? rowsForRule(dataset.currentRows, rule) : undefined;

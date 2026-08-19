@@ -3,6 +3,8 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/browser",
   testMatch: "writable.spec.ts",
+  timeout: 90_000,
+  expect: { timeout: 5_000 },
   outputDir: "artifacts/playwright-writable-test-results",
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
@@ -13,6 +15,8 @@ export default defineConfig({
     : "list",
   use: {
     baseURL: "http://127.0.0.1:4174",
+    actionTimeout: 5_000,
+    navigationTimeout: 15_000,
     trace: "retain-on-failure",
   },
   webServer: {

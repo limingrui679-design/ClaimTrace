@@ -19,7 +19,7 @@
 
 - Rules are deterministic checks, not causal inference.
 - Missingness is surfaced but not imputed or modeled.
-- Rank ties use exact numeric equality within `1e-9`; domain-specific uncertainty intervals are future work.
+- Rank ties use exact numeric equality within `1e-9`. The interval-threshold rule can test one explicitly selected row only when a finite reported lower bound, point estimate, and upper bound satisfy `lower ≤ point ≤ upper`; it does not estimate an interval, compare intervals, rank with uncertainty, or infer statistical significance.
 - Stability uses user-governed thresholds. A threshold does not become valid merely because it is entered.
 - The controlled benchmark is synthetic and cannot establish external validity.
 - The 64 scenarios are distinct synthetic edge cases with independently stored labels, not independently collected real-world cases. The 512 property-test trials are deterministic generated checks, not an external benchmark.

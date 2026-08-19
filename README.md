@@ -5,7 +5,7 @@
 <h1 align="center">ClaimTrace</h1>
 
 <p align="center">
-  <strong>Compare two data versions, rerun the claims and decisions built on them, and export a verifiable audit trail.</strong>
+  <strong>Find out whether refreshed data invalidates a conclusion or decision—and export the evidence needed to verify the answer.</strong>
 </p>
 
 <p align="center">
@@ -25,27 +25,31 @@
   · <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
-ClaimTrace answers a practical question: **when data is refreshed, can the conclusion and action built on the old version still be reused?**
+ClaimTrace answers one practical question: **when a dataset is refreshed, can the conclusion and action built on the previous version still be reused?**
 
-Give it two versions of the same CSV—or open one of the ten bundled cases. ClaimTrace matches rows by a chosen primary key, reruns explicit statements such as “Referral remains the highest-converting channel,” and follows every changed result into the decision and review records that depend on it. It shows:
+For example, a report may say that one channel has the highest conversion rate and a capacity plan may depend on that statement. A new CSV arrives. A normal diff shows changed cells; ClaimTrace goes further: it matches records by primary key, reruns the exact ranking and threshold rules, classifies the old statement, recomputes the bound action, and packages the source rows, formulas, hashes, and result identities for another reviewer.
+
+Give it two versions of the same CSV—or open one of the ten bundled cases—and it tells you:
 
 - which records, formulas, cohorts, denominators, and thresholds changed;
 - whether each analytical claim is still supported, weakened, reversed, or unresolved;
 - whether the action changed, stayed the same but needs a new sign-off, or must be reviewed; and
 - whether the exported JSON and HTML audit package can be independently reconstructed and verified.
 
-The writable workspace runs locally in the browser and can import CSV files, define claims and decision rules, record explicitly unauthenticated local review state, and export a tamper-evident AuditBundle. The hosted demo is read-only and uses only the ten committed cases.
+The result is not a generic data-quality score or an AI-generated recommendation. It is a deterministic chain from **versioned evidence → executable claim → downstream decision → review state → verifiable AuditBundle**.
+
+The writable workspace runs locally in the browser and can import CSV files, define claims and decision rules, record explicitly unauthenticated local review state, and export a tamper-evident AuditBundle. The hosted demo is intentionally read-only and executes only the ten committed cases; it accepts no uploads and creates no review records.
 
 <table>
   <tr>
     <td align="center"><strong>10</strong><br>reproducible cases</td>
-    <td align="center"><strong>160 / 160</strong><br>automated checks</td>
+    <td align="center"><strong>171 / 171</strong><br>automated checks</td>
     <td align="center"><strong>64 / 64</strong><br>benchmark scenarios</td>
     <td align="center"><strong>512</strong><br>property trials</td>
   </tr>
 </table>
 
-> **Project status:** the public site is a read-only portfolio build bound to release `v0.10.3` and displays its exact source-commit receipt. The repository also runs as a local writable workspace. Neither mode claims authenticated sign-off, durable collaboration, institutional adoption, or production governance.
+> **Project status:** release `v0.11.0` supports a public read-only portfolio build with an exact source-commit receipt and a local writable workspace. A public receipt must match the release commit before the deployment is cited. Neither mode claims authenticated sign-off, durable collaboration, institutional adoption, or production governance.
 
 <details>
 <summary><strong>Table of contents</strong></summary>
@@ -156,7 +160,7 @@ The local workspace accepts UTF-8 and BOM-marked UTF-8/UTF-16 CSV files, rejects
 | Layer | What is governed | Terminal evidence |
 |---|---|---|
 | Versioned snapshots | Encoding, strict CSV dialect, schema, primary key, raw and normalized SHA-256 | Added, removed, modified, and unchanged keyed records |
-| Analytical claims | Formula, filters, denominator, threshold provenance, evidence scope | `SUPPORTED`, `WEAKENED`, `REVERSED`, `UNTESTABLE`, or `REVIEW_REQUIRED` |
+| Analytical claims | Formula, filters, denominator, point or reported-interval threshold provenance, evidence scope | `SUPPORTED`, `WEAKENED`, `REVERSED`, `UNTESTABLE`, or `REVIEW_REQUIRED` |
 | Decision impact | Action identity, feasible options, recommendation, assumptions, constraints, stability | `DECISION_CHANGED`, `RESIGN_REQUIRED`, or review state |
 | Local review | Target result, disposition, note, previous-record hash, explicit assurance fields | Hash-chained but unauthenticated review record |
 | Portable export | Snapshots, diffs, claims, decisions, lineage, reviews, summaries, canonical root | Independently verified AuditBundle JSON and matching HTML report |
@@ -167,7 +171,7 @@ See the [evidence model](docs/EVIDENCE_MODEL.md) for the complete object and ide
 ## Reproducible case portfolio
 
 <p align="center">
-  <img src="docs/readme/case-landscape.svg" alt="Ten reproducible cases with their evidence role, primary key, governed checks, committed outcome, and downstream decision" width="100%">
+  <img src="docs/readme/case-landscape.svg" alt="Ten reproducible cases with their primary key, executable method, checks, committed result, downstream action, demonstrated capability, and evidence boundary" width="100%">
 </p>
 
 | Deterministic stress fixtures | Provenance-bound public data |
@@ -177,7 +181,7 @@ See the [evidence model](docs/EVIDENCE_MODEL.md) for the complete object and ide
 | Population health with verified upstream lineage | U.S. Treasury yield curve |
 | Spatial planning | CFPB complaints · CDC PLACES · ONS housing affordability |
 
-Synthetic fixtures isolate controlled failure modes. Public-data cases retain pinned publisher responses, licenses, transformations, hashes, limitations, expected results, and verified bundles. The diagram reports committed regression expectations for these exact snapshots—not generalized accuracy or real-world impact. These cases are descriptive demonstrations, not client projects, representative studies, or causal evaluations.
+Synthetic fixtures isolate controlled failure modes. Public-data cases retain pinned publisher responses, licenses, transformations, hashes, limitations, expected results, and verified bundles. The diagram reports committed regression expectations for these exact snapshots—not generalized accuracy or real-world impact—and makes each case's method, capability, and evidence boundary visible. These cases are descriptive demonstrations, not client projects, representative studies, or causal evaluations.
 
 Open the [case catalog](docs/CASE_CATALOG.md) for primary keys, audit questions, artifact anatomy, and direct links to every case pack.
 
@@ -202,19 +206,19 @@ The UI renders canonical core results; it does not own audit truth. Read the [ar
 
 ## Verification
 
-The committed `v0.10.3` verification record includes:
+The committed `v0.11.0` verification record includes:
 
 <table>
   <tr>
-    <td align="center"><strong>155</strong><br>unit + integration</td>
+    <td align="center"><strong>166</strong><br>unit + integration</td>
     <td align="center"><strong>3</strong><br>build + release</td>
     <td align="center"><strong>2</strong><br>Chromium flows</td>
     <td align="center"><strong>10 / 10</strong><br>verified bundles</td>
   </tr>
   <tr>
-    <td align="center"><strong>96.99%</strong><br>statements + lines</td>
-    <td align="center"><strong>78.75%</strong><br>branches</td>
-    <td align="center"><strong>99.37%</strong><br>functions</td>
+    <td align="center"><strong>96.83%</strong><br>statements + lines</td>
+    <td align="center"><strong>78.98%</strong><br>branches</td>
+    <td align="center"><strong>99.39%</strong><br>functions</td>
     <td align="center"><strong>0</strong><br>known npm vulnerabilities</td>
   </tr>
 </table>
@@ -227,6 +231,14 @@ npm run ci
 npm audit --omit=dev
 npm audit
 ```
+
+Verify a committed AuditBundle without opening the browser:
+
+```bash
+npm run verify:bundle -- public/cases/cdc-places-depression/evidence-package.json
+```
+
+Use `npm run verify:chain -- bundle-1.json bundle-2.json` for a chronological bundle history. The versioned [JSON Schema](schemas/claimtrace-audit-bundle-2.6.0.schema.json) checks the interchange structure; the [CLI verifier](docs/VERIFY_BUNDLES.md) additionally reconstructs snapshots and recomputes claims, decisions, lineage, reviews, summaries, section hashes, and the canonical root.
 
 The gate now includes local documentation-reference validation in addition to linting, type checking, deterministic generation, benchmarks, build checks, browser flows, and coverage. See [Evaluation](docs/EVALUATION.md) and [Release verification](docs/RELEASE_VERIFICATION.md) for the exact evidence and interpretation limits.
 
@@ -249,6 +261,7 @@ Review records explicitly declare `LOCAL_UNVERIFIED`, `LOCAL_CLOCK_UNVERIFIED`, 
 | Run a first audit | [Getting started](docs/GETTING_STARTED.md) |
 | Browse all cases | [Case catalog](docs/CASE_CATALOG.md) |
 | Understand objects and identities | [Evidence model](docs/EVIDENCE_MODEL.md) |
+| Verify JSON bundles and linked histories | [Bundle verification](docs/VERIFY_BUNDLES.md) · [JSON Schema](schemas/claimtrace-audit-bundle-2.6.0.schema.json) |
 | Inspect modules and data flow | [Architecture](docs/ARCHITECTURE.md) |
 | Reproduce quality evidence | [Evaluation](docs/EVALUATION.md) · [Release verification](docs/RELEASE_VERIFICATION.md) |
 | Review security and non-goals | [Security](docs/SECURITY.md) · [Limitations](docs/LIMITATIONS.md) |

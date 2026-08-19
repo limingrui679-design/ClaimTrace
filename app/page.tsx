@@ -185,6 +185,12 @@ export default function Home() {
     setImportError("");
   }
 
+  function openImportDialog() {
+    beginDatasetIntent();
+    resetImport();
+    setShowImport(true);
+  }
+
   function loadDemo() {
     beginDatasetIntent();
     setDataset(DEMO_DATASET);
@@ -549,7 +555,7 @@ export default function Home() {
       <aside className="sidebar">
         <button className="brand" onClick={() => setActiveView("overview")} aria-label="Return to audit overview">
           <span className="brand-mark"><i /><i /><i /></span>
-          <span><b>ClaimTrace</b><small>Evidence intelligence</small></span>
+          <span><b>ClaimTrace</b><small>Versioned claim auditor</small></span>
         </button>
         <nav className="main-nav" aria-label="Primary navigation">
           {NAV_ITEMS.map((item) => <button key={item.id} aria-label={item.label} className={activeView === item.id ? "active" : ""} onClick={() => setActiveView(item.id)}><span className="nav-glyph">{item.short}</span><span className="nav-label"><span className="nav-label-desktop">{item.label}</span><span className="nav-label-mobile">{item.mobileLabel}</span></span>{item.id === "claims" && counts.REVERSED > 0 ? <em>{counts.REVERSED}</em> : null}</button>)}
@@ -561,7 +567,7 @@ export default function Home() {
           <div className="project-score"><span style={{ width: `${healthScore}%` }} /></div>
           <small>Completeness checks passed {completenessChecksPassed}/{completenessChecksTotal}</small>
         </div>
-        <div className="sidebar-actions">{!READ_ONLY_DEMO ? <button data-claimtrace-mutation="import-project" className="sidebar-secondary" onClick={() => setShowImport(true)}>＋ Import new project</button> : null}{!dataset.isDemo ? <button className="sidebar-link" onClick={loadDemo}>Restore demo project</button> : null}</div>
+        <div className="sidebar-actions">{!READ_ONLY_DEMO ? <button data-claimtrace-mutation="import-project" className="sidebar-secondary" onClick={openImportDialog}>＋ Import new project</button> : null}{!dataset.isDemo ? <button className="sidebar-link" onClick={loadDemo}>Restore demo project</button> : null}</div>
       </aside>
 
       <section className="workspace">
@@ -583,9 +589,9 @@ export default function Home() {
         </header>
 
         <div className="content">
-          {activeView === "overview" ? <Overview dataset={dataset} claims={claims} selectedClaim={selectedClaim} counts={counts} healthScore={healthScore} completenessChecksPassed={completenessChecksPassed} completenessChecksTotal={completenessChecksTotal} changedRows={changedRows} displayLabel={displayLabel} lastAuditAt={lastAuditAt} sourceTraceability={sourceTraceability} calculationReproducibility={calculationReproducibility} snapshotVerification={snapshotVerification} auditFreshness={auditFreshness} activeCaseId={activeCaseId} caseLoadingId={caseLoadingId} operationBusy={operationBusy} onLoadCase={loadCase} onSelectClaim={(id) => { setSelectedClaimId(id); setActiveView("claims"); }} onImport={() => setShowImport(true)} onOpenClaims={() => setActiveView("claims")} onExport={exportReport} /> : null}
+          {activeView === "overview" ? <Overview dataset={dataset} claims={claims} selectedClaim={selectedClaim} counts={counts} healthScore={healthScore} completenessChecksPassed={completenessChecksPassed} completenessChecksTotal={completenessChecksTotal} changedRows={changedRows} displayLabel={displayLabel} lastAuditAt={lastAuditAt} sourceTraceability={sourceTraceability} calculationReproducibility={calculationReproducibility} snapshotVerification={snapshotVerification} auditFreshness={auditFreshness} activeCaseId={activeCaseId} caseLoadingId={caseLoadingId} operationBusy={operationBusy} onLoadCase={loadCase} onSelectClaim={(id) => { setSelectedClaimId(id); setActiveView("claims"); }} onImport={openImportDialog} onOpenClaims={() => setActiveView("claims")} onExport={exportReport} /> : null}
           {activeView === "claims" ? <ClaimsView claims={filteredClaims} selectedClaim={selectedClaim} dataset={dataset} filter={filter} search={search} counts={counts} operationBusy={operationBusy} onFilter={setFilter} onSearch={setSearch} onSelect={setSelectedClaimId} onAdd={openAddClaim} onExport={exportReport} /> : null}
-          {activeView === "data" ? <DataView dataset={dataset} changedRows={changedRows} revisionVisible={revisionVisible} onToggleRevision={() => setRevisionVisible((value) => !value)} onImport={() => revisionInputRef.current?.click()} onNewProject={() => setShowImport(true)} /> : null}
+          {activeView === "data" ? <DataView dataset={dataset} changedRows={changedRows} revisionVisible={revisionVisible} onToggleRevision={() => setRevisionVisible((value) => !value)} onImport={() => revisionInputRef.current?.click()} onNewProject={openImportDialog} /> : null}
           {activeView === "decision" ? <DecisionView decisions={decisions} results={decisionResults} claims={claims} /> : null}
           {activeView === "review" ? <ReviewView claims={claims} decisions={decisionResults} records={reviewRecords} operationBusy={operationBusy} onReview={recordReview} onDecisionReview={recordDecisionReview} /> : null}
           {activeView === "report" ? <ReportView dataset={dataset} claims={claims} counts={counts} completenessChecksPassed={completenessChecksPassed} completenessChecksTotal={completenessChecksTotal} displayLabel={displayLabel} lastAuditAt={lastAuditAt} operationBusy={operationBusy} onExport={exportReport} onCopy={copySummary} /> : null}

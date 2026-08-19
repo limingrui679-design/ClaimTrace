@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.6.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "CDC PLACES Selected-County Depression Estimate Audit",
   "primaryKey": "county_fips",
-  "ruleVersion": "claimtrace-rule/6.2.0",
+  "ruleVersion": "claimtrace-rule/6.3.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
@@ -81,14 +81,14 @@
     }
   },
   "summary": {
-    "total": 3,
+    "total": 4,
     "supported": 2,
     "weakened": 0,
     "reversed": 1,
     "untestable": 0,
-    "reviewRequired": 0,
-    "completenessChecksPassed": 48,
-    "completenessChecksTotal": 48,
+    "reviewRequired": 1,
+    "completenessChecksPassed": 64,
+    "completenessChecksTotal": 64,
     "evidenceCoverage": 100,
     "changedRecords": 8
   },
@@ -433,7 +433,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "places-middlesex-rank|claimtrace-rule/6.2.0",
+        "seed": "places-middlesex-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -496,7 +496,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "places-maricopa-threshold|claimtrace-rule/6.2.0",
+        "seed": "places-maricopa-threshold|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -554,7 +554,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "places-selected-mean-stability|claimtrace-rule/6.2.0",
+        "seed": "places-selected-mean-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -573,6 +573,69 @@
             "pairedChangedReferences": 8,
             "unpairedChangedReferences": 0,
             "boundaryReferences": 1,
+            "sampledReferences": 0
+          }
+        }
+      }
+    },
+    {
+      "claimId": "places-maricopa-interval",
+      "filters": [
+        {
+          "field": "county_fips",
+          "equals": "04013"
+        }
+      ],
+      "excludes": [],
+      "aggregation": "average",
+      "field": "age_adjusted_depression_percent",
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        }
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-maricopa-interval|claimtrace-rule/6.3.0",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
             "sampledReferences": 0
           }
         }
@@ -859,6 +922,40 @@
           "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       }
+    },
+    {
+      "id": "places-maricopa-interval",
+      "code": "CDC-004",
+      "title": "Maricopa County's complete 95% confidence interval remains at or above 18%",
+      "section": "Interval-aware estimate gate",
+      "owner": "Public-data case reviewer",
+      "category": "Uncertainty-aware threshold",
+      "formula": "Maricopa ci_low_percent >= 18 with point estimate and 95% confidence interval retained",
+      "rule": {
+        "type": "interval-threshold",
+        "field": "age_adjusted_depression_percent",
+        "lowerField": "ci_low_percent",
+        "upperField": "ci_high_percent",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 18,
+        "intervalLevel": 0.95,
+        "intervalLabel": "95% confidence interval",
+        "filters": [
+          {
+            "field": "county_fips",
+            "equals": "04013"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 18,
+          "unit": "percent",
+          "source": "Illustrative uncertainty-review threshold v1",
+          "rationale": "Tests whether the complete reported interval, rather than only the point estimate, clears an analyst-authored descriptive threshold; this is not CDC guidance or a clinical rule",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
     }
   ],
   "claimResults": [
@@ -1105,7 +1202,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:places-middlesex-rank:bce2eaf425d5fef0939de2e3",
+          "id": "claim-result:places-middlesex-rank:8d21ca7b7d098bd86e047a84",
           "kind": "Comparison result",
           "title": "age_adjusted_depression_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1119,9 +1216,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1153,7 +1250,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
         "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
@@ -1165,7 +1262,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "places-middlesex-rank|claimtrace-rule/6.2.0",
+        "seed": "places-middlesex-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1228,7 +1325,7 @@
           }
         }
       },
-      "resultId": "claim-result:places-middlesex-rank:bce2eaf425d5fef0939de2e3",
+      "resultId": "claim-result:places-middlesex-rank:8d21ca7b7d098bd86e047a84",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1307,7 +1404,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:places-maricopa-threshold:7d59227c521e608df1fdb344",
+          "id": "claim-result:places-maricopa-threshold:5bc6b77bee4c66fea3310a67",
           "kind": "Comparison result",
           "title": "age_adjusted_depression_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1321,9 +1418,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1355,7 +1452,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
         "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
@@ -1367,7 +1464,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "places-maricopa-threshold|claimtrace-rule/6.2.0",
+        "seed": "places-maricopa-threshold|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1412,7 +1509,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:places-maricopa-threshold:7d59227c521e608df1fdb344",
+      "resultId": "claim-result:places-maricopa-threshold:5bc6b77bee4c66fea3310a67",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1661,7 +1758,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:places-selected-mean-stability:60d79042fa77781f47fea877",
+          "id": "claim-result:places-selected-mean-stability:cba4d1c2611b19a54e20bdfb",
           "kind": "Comparison result",
           "title": "age_adjusted_depression_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1675,9 +1772,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1709,7 +1806,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
         "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
@@ -1721,7 +1818,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "places-selected-mean-stability|claimtrace-rule/6.2.0",
+        "seed": "places-selected-mean-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1766,7 +1863,199 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:places-selected-mean-stability:60d79042fa77781f47fea877",
+      "resultId": "claim-result:places-selected-mean-stability:cba4d1c2611b19a54e20bdfb",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
+    },
+    {
+      "id": "places-maricopa-interval",
+      "code": "CDC-004",
+      "title": "Maricopa County's complete 95% confidence interval remains at or above 18%",
+      "section": "Interval-aware estimate gate",
+      "owner": "Public-data case reviewer",
+      "category": "Uncertainty-aware threshold",
+      "formula": "Maricopa ci_low_percent >= 18 with point estimate and 95% confidence interval retained",
+      "rule": {
+        "type": "interval-threshold",
+        "field": "age_adjusted_depression_percent",
+        "lowerField": "ci_low_percent",
+        "upperField": "ci_high_percent",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 18,
+        "intervalLevel": 0.95,
+        "intervalLabel": "95% confidence interval",
+        "filters": [
+          {
+            "field": "county_fips",
+            "equals": "04013"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 18,
+          "unit": "percent",
+          "source": "Illustrative uncertainty-review threshold v1",
+          "rationale": "Tests whether the complete reported interval, rather than only the point estimate, clears an analyst-authored descriptive threshold; this is not CDC guidance or a clinical rule",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      },
+      "kind": "SNAPSHOT",
+      "status": "REVIEW_REQUIRED",
+      "baselineStatus": "SUPPORTED",
+      "baselineValue": "20.9 [18.8, 23.1]",
+      "currentValue": "18.9 [17, 20.9]",
+      "reason": "The 95% confidence interval [17, 20.9] crosses rule >= 18; the point estimate alone is insufficient for automatic support or reversal.",
+      "action": "Preserve the interval and require methods review before sign-off.",
+      "sourceRefs": [
+        {
+          "snapshot": "baseline",
+          "fileName": "baseline.csv",
+          "sha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "ci_low_percent",
+            "ci_high_percent"
+          ]
+        },
+        {
+          "snapshot": "current",
+          "fileName": "current.csv",
+          "sha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+          "keyField": "county_fips",
+          "keyValue": "04013",
+          "lineNumber": 2,
+          "fields": [
+            "county_fips",
+            "age_adjusted_depression_percent",
+            "ci_low_percent",
+            "ci_high_percent"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "claim:Maricopa County's complete 95% confidence interval remains at or above 18%",
+          "kind": "Claim",
+          "title": "Maricopa County's complete 95% confidence interval remains at or above 18%",
+          "detail": "Testable natural-language statement",
+          "bound": true
+        },
+        {
+          "id": "claim-result:places-maricopa-interval:29aebf4a52cd883e52b14d23",
+          "kind": "Comparison result",
+          "title": "age_adjusted_depression_percent version comparison",
+          "detail": "Bound to this rule execution result, not a UI label",
+          "bound": true
+        },
+        {
+          "id": "metric:age_adjusted_depression_percent",
+          "kind": "Metric",
+          "title": "age_adjusted_depression_percent",
+          "detail": "95% confidence interval: ci_low_percent to ci_high_percent; one explicitly selected estimate",
+          "bound": true
+        },
+        {
+          "id": "rule:claimtrace-rule/6.3.0",
+          "kind": "Rule",
+          "title": "claimtrace-rule/6.3.0",
+          "detail": "Deterministic rule-engine version",
+          "bound": true
+        },
+        {
+          "id": "field:age_adjusted_depression_percent",
+          "kind": "Field",
+          "title": "age_adjusted_depression_percent",
+          "detail": "Primary key: county_fips",
+          "bound": true
+        },
+        {
+          "id": "records:county_fips",
+          "kind": "Source records",
+          "title": "Primary key + exact physical line",
+          "detail": "Large samples export only changes, boundary records, and the required sample",
+          "bound": true
+        },
+        {
+          "id": "snapshot:43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+          "kind": "Version",
+          "title": "SHA-256 snapshot",
+          "detail": "Raw bytes and normalized records are verified separately",
+          "bound": true
+        }
+      ],
+      "governance": {
+        "engineStatus": "REVIEW_REQUIRED",
+        "reviewDisposition": "PENDING",
+        "releaseStatus": "BLOCKED"
+      },
+      "audit": {
+        "ruleVersion": "claimtrace-rule/6.3.0",
+        "lastRunAt": "2026-08-10T00:00:00.000Z",
+        "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
+        "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
+        "preliminary": false
+      },
+      "evidenceScope": {
+        "matchingRows": 2,
+        "exportedReferences": 2,
+        "truncated": false,
+        "strategy": "all-matching",
+        "maxReferences": 200,
+        "seed": "places-maricopa-interval|claimtrace-rule/6.3.0",
+        "pairedChangedKeys": 1,
+        "sides": {
+          "baseline": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          },
+          "current": {
+            "matchingRows": 1,
+            "exportedReferences": 1,
+            "changedCandidates": 1,
+            "pairedChangedReferences": 1,
+            "unpairedChangedReferences": 0,
+            "boundaryReferences": 0,
+            "sampledReferences": 0
+          }
+        }
+      },
+      "sampleProfiles": {
+        "baseline": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        },
+        "current": {
+          "totalRows": 8,
+          "filteredRows": 1,
+          "effectiveRows": 1,
+          "missingRows": 0,
+          "excludedRows": 7,
+          "includedKeyCount": 1,
+          "includedKeysHash": "6210ebff",
+          "groupCounts": {}
+        }
+      },
+      "resultId": "claim-result:places-maricopa-interval:29aebf4a52cd883e52b14d23",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1802,6 +2091,12 @@
           "allowedStatuses": [
             "SUPPORTED",
             "WEAKENED"
+          ]
+        },
+        {
+          "claimId": "places-maricopa-interval",
+          "allowedStatuses": [
+            "SUPPORTED"
           ]
         }
       ],
@@ -1901,11 +2196,13 @@
       "previousOutcome": null,
       "currentOutcome": "HOLD",
       "boundClaimIds": [
+        "places-maricopa-interval",
         "places-maricopa-threshold",
         "places-middlesex-rank",
         "places-selected-mean-stability"
       ],
       "affectedClaimIds": [
+        "places-maricopa-interval",
         "places-maricopa-threshold"
       ],
       "comparisonBasis": "NO_HISTORY",
@@ -1917,15 +2214,16 @@
         "feasibleOptionIds": [
           "revise"
         ],
-        "decisionPolicyHash": "3c8e72beaa72edcf5a531137b5b109c6b54262e5cdb0e21793ba82c3c77656fd",
+        "decisionPolicyHash": "1010dabd2be682f5de32d3d4d6bbea3976fe6098d0baa91a042e4b327f362ee7",
         "decisionInputProvenanceHash": "3ef5f3ecd81c8bf728a45f4a35bfd89cf829e6314ac2ff463a7fc435035c7f3d",
         "baselineSha256": "43742e0837474322829e5e35007d88f814037415371917e003aa80765d23b7b2",
         "currentSha256": "ed1fd64345d56388efe7f390f9f09cf5c2c88d564ae99a8e3d8f43aa531d4132",
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "claimResultIds": [
-          "claim-result:places-maricopa-threshold:7d59227c521e608df1fdb344",
-          "claim-result:places-middlesex-rank:bce2eaf425d5fef0939de2e3",
-          "claim-result:places-selected-mean-stability:60d79042fa77781f47fea877"
+          "claim-result:places-maricopa-interval:29aebf4a52cd883e52b14d23",
+          "claim-result:places-maricopa-threshold:5bc6b77bee4c66fea3310a67",
+          "claim-result:places-middlesex-rank:8d21ca7b7d098bd86e047a84",
+          "claim-result:places-selected-mean-stability:cba4d1c2611b19a54e20bdfb"
         ]
       },
       "analysis": {
@@ -2047,7 +2345,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:places-surveillance-note:f5824a3adaf1a92a7c97c8fb"
+      "resultId": "decision-result:places-surveillance-note:31b2cf759cbcf9d485bd89fc"
     }
   ],
   "reviews": [],
@@ -2119,12 +2417,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "4a975b4eda2f112001246a9864cc1bc85e2a258607621f5c4f07a7874af9d070",
+    "payloadHash": "15e3a169d39b6beaaabedcd931e238c10d7bc63c43b84e4c4e2904fb60176d46",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "664dd61920964b959749dbd543886483e7d4b8f22742046480793b5fbb02604a",
-      "claims": "7070fa8ac7f3de309e64a030860d61546a003bd3f379a63876cf81c5b1c1892c",
-      "decisions": "069a9d5bb28b9a373f97037de3048c0e5b9bbf1f9a24119db4c89e729d202173",
+      "claims": "35c0c2d4572f3524098c59fcfbfd9ed2fa6076488c46d2f9db08eb14607024f4",
+      "decisions": "ed58962454e546584ca5a0074eca6379d1f686ee4a47be244454a46ea6c1d573",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "2b5eb830d70348ba65beda9f2a429ee91a4b5d2c8eea3a8752bc3b3c8a19a99c",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

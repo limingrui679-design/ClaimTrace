@@ -5,6 +5,16 @@
   "dataOrigin": "PUBLIC",
   "sourceMetadataFile": "/cases/ons-housing-affordability/source-metadata.json",
   "caseId": "ons-housing-affordability",
+  "title": "Public Data: ONS Housing-Affordability Period Audit",
+  "question": "Can the selected-authority planning context note be reused after affordability ratios change?",
+  "method": "Selected-authority ranks, affordability thresholds, and period stability",
+  "capabilities": [
+    "planning evidence",
+    "housing affordability",
+    "official statistics",
+    "place-based decisions"
+  ],
+  "boundary": "Attribute-table context only; no GIS geometry, spatial econometrics, fieldwork, or impact evaluation.",
   "primaryKey": "authority_code",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1421
     },
     "evidence-package.json": {
-      "sha256": "a65f2bdf6f8b633def8958ef4f60e860cf7ee0a1f5aaadb880c44f231997d18a",
+      "sha256": "ee50cd68b6009c53c434d6aba725aab80b35c30410b12440a017704ced7c5697",
       "bytes": 100575
     },
     "case.ts": {

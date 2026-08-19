@@ -5,6 +5,16 @@
   "dataOrigin": "SYNTHETIC",
   "sourceMetadataFile": null,
   "caseId": "spatial-planning",
+  "title": "Spatial Planning: Site Demand and Accessibility",
+  "question": "Should the candidate site change after demand-center and accessibility rankings shift?",
+  "method": "Demand and accessibility ranks with risk and capacity constraints",
+  "capabilities": [
+    "spatial planning",
+    "multi-criteria decisions",
+    "accessibility",
+    "sensitivity"
+  ],
+  "boundary": "Synthetic attribute-table fixture; no GIS network, fieldwork, or regeneration impact estimate.",
   "primaryKey": "site_id",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1341
     },
     "evidence-package.json": {
-      "sha256": "344f0b17ec52780f7b58e9c411b87dc26dba3c8852da5c113ee885faf609ca34",
+      "sha256": "15a3098ce3d1c6822a4570df07450d6d6565f2603b4d8b8ff79ffa9eef3ea018",
       "bytes": 49136
     },
     "case.ts": {

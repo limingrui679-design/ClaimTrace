@@ -4,13 +4,14 @@ This document separates the verified baseline from possible future work. Items b
 
 ## Verified baseline
 
-The `v0.10.3` line demonstrates:
+The `v0.11.0` line demonstrates:
 
 - local browser execution for versioned CSV evidence;
 - primary-key alignment, strict parsing, raw and normalized hashes, and bounded evidence references;
 - executable claim and decision specifications with governed threshold and input provenance;
 - distinct claim, decision, human-disposition, and release states;
 - independently reverified AuditBundle JSON and HTML output;
+- a versioned AuditBundle JSON Schema and command-line verifier for one bundle or a linked history;
 - four deterministic synthetic fixtures and six pinned public-data cases;
 - controlled benchmark, property, unit/integration, built-artifact, and real-browser checks;
 - a public read-only portfolio build and a local writable build.
@@ -27,7 +28,7 @@ See [release verification](RELEASE_VERIFICATION.md) for exact evidence and [limi
 ### Interoperability
 
 - Evaluate explicit adapters for Parquet, SQL result sets, and lineage standards without weakening the current strict snapshot identity.
-- Publish a versioned schema reference and compatibility fixtures for third-party AuditBundle readers.
+- Add cross-language compatibility fixtures and conformance tests for third-party AuditBundle readers; the structural JSON Schema and TypeScript verifier are already shipped.
 
 ### Authenticated governance
 

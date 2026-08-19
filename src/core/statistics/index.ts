@@ -2,12 +2,15 @@ import type {
   Aggregation,
   CsvRow,
   DatasetVersion,
+  IntervalThresholdResult,
   RankResult,
   RowDiff,
   Rule,
   SampleProfile,
 } from "../types";
 import { validatePrimaryKey, valueToNumber } from "../snapshot";
+
+const KEY_COLLATOR = new Intl.Collator("zh-CN", { numeric: true });
 
 export function rowsForRule(rows: CsvRow[], rule: Rule) {
   return rows.filter((row) => {
@@ -81,6 +84,28 @@ export function evaluate(value: number, operator: ">" | ">=" | "<" | "<=" | "=",
   return Math.abs(value - threshold) < 1e-9;
 }
 
+export function intervalThreshold(
+  rows: CsvRow[],
+  rule: Extract<Rule, { type: "interval-threshold" }>,
+): IntervalThresholdResult | null {
+  if (
+    typeof rule.field !== "string" || !rule.field.trim()
+    || typeof rule.lowerField !== "string" || !rule.lowerField.trim()
+    || typeof rule.upperField !== "string" || !rule.upperField.trim()
+    || ![">", ">=", "<", "<="].includes(rule.operator)
+    || !Number.isFinite(rule.threshold)
+    || !Number.isFinite(rule.intervalLevel) || rule.intervalLevel <= 0 || rule.intervalLevel > 1
+    || typeof rule.intervalLabel !== "string" || !rule.intervalLabel.trim()
+  ) return null;
+  const filtered = rowsForRule(rows, rule);
+  if (filtered.length !== 1) return null;
+  const point = valueToNumber(filtered[0][rule.field]);
+  const lower = valueToNumber(filtered[0][rule.lowerField]);
+  const upper = valueToNumber(filtered[0][rule.upperField]);
+  if (point === null || lower === null || upper === null || lower > point || point > upper) return null;
+  return { point, lower, upper, matchingRows: filtered.length };
+}
+
 export function rankGroups(rows: CsvRow[], rule: Extract<Rule, { type: "rank" }>): RankResult | null {
   const grouped = new Map<string, CsvRow[]>();
   let missingGroupRows = 0;
@@ -113,7 +138,7 @@ export function diffRowsByKey(dataset: DatasetVersion): RowDiff[] {
   const currentMap = new Map<string, { row: CsvRow; line: number }>();
   dataset.baselineRows.forEach((row, index) => baselineMap.set(String(row[dataset.primaryKey]), { row, line: dataset.baselineLineNumbers[index] }));
   dataset.currentRows.forEach((row, index) => currentMap.set(String(row[dataset.primaryKey]), { row, line: dataset.currentLineNumbers?.[index] ?? index + 2 }));
-  const keys = [...new Set([...baselineMap.keys(), ...currentMap.keys()])].sort((left, right) => left.localeCompare(right, "zh-CN", { numeric: true }));
+  const keys = [...new Set([...baselineMap.keys(), ...currentMap.keys()])].sort(KEY_COLLATOR.compare);
 
   return keys.map((key) => {
     const baseline = baselineMap.get(key);

@@ -9,6 +9,7 @@ This directory is the documentation entry point for ClaimTrace. Start with the r
 | Run the public demo or a local writable workspace | [Getting started](GETTING_STARTED.md) |
 | Compare the ten reproducible examples | [Case catalog](CASE_CATALOG.md) |
 | Understand what an AuditBundle contains | [Evidence model](EVIDENCE_MODEL.md) |
+| Verify an AuditBundle from the command line | [Bundle verification](VERIFY_BUNDLES.md) |
 | See module boundaries and data flow | [Architecture](ARCHITECTURE.md) |
 | Reproduce benchmarks, tests, and coverage | [Evaluation](EVALUATION.md) |
 | Understand security assumptions and non-goals | [Security](SECURITY.md) · [Limitations](LIMITATIONS.md) |
@@ -24,6 +25,7 @@ This directory is the documentation entry point for ClaimTrace. Start with the r
 ### Run and verify
 
 - [Getting started](GETTING_STARTED.md) covers local setup, the first audit, CSV import, export limits, and common commands.
+- [Bundle verification](VERIFY_BUNDLES.md) covers the versioned JSON Schema, CLI exit codes, independent recomputation, and linked histories.
 - [Evaluation](EVALUATION.md) records benchmark design, property tests, browser checks, coverage, and interpretation limits.
 - [Release verification](RELEASE_VERIFICATION.md) records the exact evidence for the current release candidate.
 - [Security](SECURITY.md) and [limitations](LIMITATIONS.md) state what hashes, local review records, and the hosted demo do—and do not—prove.

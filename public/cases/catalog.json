@@ -9,6 +9,16 @@
       "dataOrigin": "SYNTHETIC",
       "sourceMetadataFile": null,
       "caseId": "business-operations",
+      "title": "Business Operations: Channel Conversion and Service Capacity",
+      "question": "Should media spend and service capacity be reallocated after channel rankings change?",
+      "method": "Grouped rank, threshold, and stability rules",
+      "capabilities": [
+        "business analytics",
+        "operations",
+        "capacity decisions",
+        "communication"
+      ],
+      "boundary": "Controlled regression fixture; no client, spend, revenue, or measured operating impact.",
       "primaryKey": "channel_id",
       "claimCount": 3,
       "decisionCount": 1,
@@ -35,7 +45,7 @@
           "bytes": 1401
         },
         "evidence-package.json": {
-          "sha256": "fde52eb34ec687ece02b1d01177684ae7fdef73a4ba348c95247fcdf584d0994",
+          "sha256": "380a8e34f54d9fedd98954eb1dbf07254371e82d72cd45d00fe5a2732dd42f2e",
           "bytes": 51726
         },
         "case.ts": {
@@ -55,6 +65,16 @@
       "dataOrigin": "SYNTHETIC",
       "sourceMetadataFile": null,
       "caseId": "financial-risk",
+      "title": "Financial Risk: Portfolio Risk and Admission Thresholds",
+      "question": "Can the original admission policy still be used after default probabilities and valid samples change?",
+      "method": "Portfolio means, membership changes, missingness, and governed risk thresholds",
+      "capabilities": [
+        "financial risk",
+        "model monitoring",
+        "threshold governance",
+        "decision analysis"
+      ],
+      "boundary": "Synthetic credit records; not a calibrated risk model, underwriting policy, or backtest.",
       "primaryKey": "account_id",
       "claimCount": 3,
       "decisionCount": 1,
@@ -81,7 +101,7 @@
           "bytes": 1350
         },
         "evidence-package.json": {
-          "sha256": "b982c05016159a64cf699e1df156c184e6ce56de4cfecdaf3205eee871d6fb22",
+          "sha256": "aaa0ece6bd74b188e23a24d5abe9615ed8db7aaf7a1ffdf61ae1cd3f5ff6b142",
           "bytes": 53951
         },
         "case.ts": {
@@ -101,6 +121,16 @@
       "dataOrigin": "SYNTHETIC",
       "sourceMetadataFile": null,
       "caseId": "population-health",
+      "title": "Population Health: Follow-Up Priorities and Model Gating",
+      "question": "Do revised risk and recall rates change the pilot decision or resource priorities?",
+      "method": "Raw-to-summary lineage, recall gating, regional ranks, and constrained options",
+      "capabilities": [
+        "AI governance",
+        "health analytics",
+        "data lineage",
+        "resource allocation"
+      ],
+      "boundary": "Synthetic model and follow-up records; no clinical validation, patient outcome, or deployment.",
       "primaryKey": "row_id",
       "claimCount": 5,
       "decisionCount": 2,
@@ -127,7 +157,7 @@
           "bytes": 2219
         },
         "evidence-package.json": {
-          "sha256": "e4daf0b5363568fa4e59591928c0b7eb6776c36dabb5dbc7edc516a4d8b51ace",
+          "sha256": "45bbe07f6fddbeaa708c876ab5cb719ff951262417fdd154d4686c5395ef54f5",
           "bytes": 268796
         },
         "case.ts": {
@@ -151,6 +181,16 @@
       "dataOrigin": "SYNTHETIC",
       "sourceMetadataFile": null,
       "caseId": "spatial-planning",
+      "title": "Spatial Planning: Site Demand and Accessibility",
+      "question": "Should the candidate site change after demand-center and accessibility rankings shift?",
+      "method": "Demand and accessibility ranks with risk and capacity constraints",
+      "capabilities": [
+        "spatial planning",
+        "multi-criteria decisions",
+        "accessibility",
+        "sensitivity"
+      ],
+      "boundary": "Synthetic attribute-table fixture; no GIS network, fieldwork, or regeneration impact estimate.",
       "primaryKey": "site_id",
       "claimCount": 3,
       "decisionCount": 1,
@@ -177,7 +217,7 @@
           "bytes": 1341
         },
         "evidence-package.json": {
-          "sha256": "344f0b17ec52780f7b58e9c411b87dc26dba3c8852da5c113ee885faf609ca34",
+          "sha256": "15a3098ce3d1c6822a4570df07450d6d6565f2603b4d8b8ff79ffa9eef3ea018",
           "bytes": 49136
         },
         "case.ts": {
@@ -197,6 +237,16 @@
       "dataOrigin": "PUBLIC",
       "sourceMetadataFile": "/cases/world-bank-life-expectancy/source-metadata.json",
       "caseId": "world-bank-life-expectancy",
+      "title": "Public Data: World Bank Life-Expectancy Cross-Year Audit",
+      "question": "Which descriptive claims and publication notes must change after the 2019 and 2024 indicator snapshots are compared?",
+      "method": "Cross-year ranks, descriptive thresholds, and selected-country mean stability",
+      "capabilities": [
+        "population indicators",
+        "public-data provenance",
+        "cross-country comparison",
+        "reproducibility"
+      ],
+      "boundary": "Selected descriptive indicators; not a causal, representative, or country-performance study.",
       "primaryKey": "country_code",
       "claimCount": 3,
       "decisionCount": 1,
@@ -223,7 +273,7 @@
           "bytes": 1384
         },
         "evidence-package.json": {
-          "sha256": "c8cb4caf39a1c847019758948a36d7c771b283d1bad9eb9529cff1fa6d19e1ca",
+          "sha256": "df00f36941d296d4f754e069896d5941a14757748deaccb2b56c6718810171f9",
           "bytes": 68339
         },
         "case.ts": {
@@ -263,6 +313,16 @@
       "dataOrigin": "PUBLIC",
       "sourceMetadataFile": "/cases/usdot-transit-operations/source-metadata.json",
       "caseId": "usdot-transit-operations",
+      "title": "Public Data: USDOT Transit Operations Period Audit",
+      "question": "Can a prior heavy-rail operating brief be reused after ridership and service intensity change?",
+      "method": "Ridership-per-hour derivation, threshold review, and period stability",
+      "capabilities": [
+        "operations analytics",
+        "public infrastructure",
+        "source adapters",
+        "human review"
+      ],
+      "boundary": "Selected public transit rows; not causal efficiency, service quality, or client work.",
       "primaryKey": "ntd_id",
       "claimCount": 3,
       "decisionCount": 1,
@@ -289,7 +349,7 @@
           "bytes": 1472
         },
         "evidence-package.json": {
-          "sha256": "58b5177c67ad6a9268437ecad753b8ac5f81f280d284f83724add68fb8eec1bd",
+          "sha256": "3277d226e57acbfab614b6eb23bb9262af2a9059166e88bb45de9dce85532d7f",
           "bytes": 215909
         },
         "case.ts": {
@@ -329,6 +389,16 @@
       "dataOrigin": "PUBLIC",
       "sourceMetadataFile": "/cases/us-treasury-yield-curve/source-metadata.json",
       "caseId": "us-treasury-yield-curve",
+      "title": "Public Data: U.S. Treasury Yield-Curve Period Audit",
+      "question": "Which curve-shape and short-end claims change between the two year-end snapshots?",
+      "method": "Curve-shape ranks, short-end threshold, and period-mean stability",
+      "capabilities": [
+        "fixed income",
+        "risk communication",
+        "financial data provenance",
+        "decision discipline"
+      ],
+      "boundary": "Descriptive Treasury observations; not trading, valuation, allocation, or return evidence.",
       "primaryKey": "maturity_code",
       "claimCount": 3,
       "decisionCount": 1,
@@ -355,7 +425,7 @@
           "bytes": 1398
         },
         "evidence-package.json": {
-          "sha256": "458f247f4a44818bf387a24a4cfff41e4db618d07b330477a537c0e8ab64474a",
+          "sha256": "0603c978b5a4ac1797184464ff26e91df1647c16c3595531362f747fe5f7389f",
           "bytes": 727880
         },
         "case.ts": {
@@ -395,6 +465,16 @@
       "dataOrigin": "PUBLIC",
       "sourceMetadataFile": "/cases/cfpb-credit-card-complaints/source-metadata.json",
       "caseId": "cfpb-credit-card-complaints",
+      "title": "Public Data: CFPB Credit-Card Complaint Pattern Audit",
+      "question": "Do structured issue rankings, shares, or record volume require the prior consumer-friction brief to change?",
+      "method": "Issue ranks, matched shares, denominator tracking, and volume stability",
+      "capabilities": [
+        "consumer finance",
+        "behavioral context",
+        "sampling limits",
+        "policy communication"
+      ],
+      "boundary": "Complaint patterns are not representative incidence, adjudicated findings, or intervention effects.",
       "primaryKey": "issue_id",
       "claimCount": 3,
       "decisionCount": 1,
@@ -421,7 +501,7 @@
           "bytes": 1489
         },
         "evidence-package.json": {
-          "sha256": "01929ec28b5979f3108c62cde8840bdb097ed6f0aedcb2a101d7633993be43b2",
+          "sha256": "8808748711cacc8fd6e47b7b949e5b2156bd7398c66382d754b8e2e29a6e71b9",
           "bytes": 158206
         },
         "case.ts": {
@@ -461,8 +541,18 @@
       "dataOrigin": "PUBLIC",
       "sourceMetadataFile": "/cases/cdc-places-depression/source-metadata.json",
       "caseId": "cdc-places-depression",
+      "title": "Public Data: CDC PLACES Model-Based Estimate Audit",
+      "question": "Which selected-county descriptive statements need revision when the model-based estimates update?",
+      "method": "Point-estimate ranks, thresholds, interval-aware gates, and period stability",
+      "capabilities": [
+        "health data",
+        "statistical uncertainty",
+        "surveillance",
+        "methods review"
+      ],
+      "boundary": "Model-based county estimates; not diagnosis, epidemiology, causal intervention, or clinical advice.",
       "primaryKey": "county_fips",
-      "claimCount": 3,
+      "claimCount": 4,
       "decisionCount": 1,
       "evidencePackageVerified": true,
       "files": {
@@ -475,24 +565,24 @@
           "bytes": 580
         },
         "claims.json": {
-          "sha256": "a8814c229db7ba7de27ee22f24c0b735eb0e89ecb2fa7ea94124d3e1bb33376c",
-          "bytes": 3041
+          "sha256": "cae96d45eb2573f36f21de1fd75aedf4d18307c0597fd45f5f810c85313f3b61",
+          "bytes": 4353
         },
         "decisions.json": {
-          "sha256": "593e0fd6aed2b4911e40c00030544389f07d313a476da476e5d1cea080a9856d",
-          "bytes": 3210
+          "sha256": "4ff76bc360eb6c536dbb22e4a8cd0b1db356c0bc3275b3978ea04ebcba9f3e8a",
+          "bytes": 3335
         },
         "expected-audit.json": {
-          "sha256": "4622e8d5ac118a591bfa67adcad2160b6fb2211e7bdabdf756c187a69f1f9b7b",
-          "bytes": 1399
+          "sha256": "30cd6806b08d2d1a22e41c9168b0be1f50ca33203fcf8bab3aaee218c598aacd",
+          "bytes": 1762
         },
         "evidence-package.json": {
-          "sha256": "8faeed1e1a0d58c8a393e68d9863a72b556e395a1afae0848d50596527149e64",
-          "bytes": 76078
+          "sha256": "0dc6410c867fcfa500c4b7f66da85674ffc337870b38c8cecde47c8ae918ca8c",
+          "bytes": 86414
         },
         "case.ts": {
-          "sha256": "8f0305c834ee886f3e33608d5604f542a867efa1a3a3b0764c661cc5d3c627e3",
-          "bytes": 6924
+          "sha256": "5006dc09a0b525e13bb7a63ab98fb78d88ae972cac45e7de2807f3b8362ae9ce",
+          "bytes": 8441
         },
         "README.md": {
           "sha256": "2891ff37fd1454efa6c2792b324f80951a5d918f28b4438e59732daf6f5e6f11",
@@ -527,6 +617,16 @@
       "dataOrigin": "PUBLIC",
       "sourceMetadataFile": "/cases/ons-housing-affordability/source-metadata.json",
       "caseId": "ons-housing-affordability",
+      "title": "Public Data: ONS Housing-Affordability Period Audit",
+      "question": "Can the selected-authority planning context note be reused after affordability ratios change?",
+      "method": "Selected-authority ranks, affordability thresholds, and period stability",
+      "capabilities": [
+        "planning evidence",
+        "housing affordability",
+        "official statistics",
+        "place-based decisions"
+      ],
+      "boundary": "Attribute-table context only; no GIS geometry, spatial econometrics, fieldwork, or impact evaluation.",
       "primaryKey": "authority_code",
       "claimCount": 3,
       "decisionCount": 1,
@@ -553,7 +653,7 @@
           "bytes": 1421
         },
         "evidence-package.json": {
-          "sha256": "a65f2bdf6f8b633def8958ef4f60e860cf7ee0a1f5aaadb880c44f231997d18a",
+          "sha256": "ee50cd68b6009c53c434d6aba725aab80b35c30410b12440a017704ced7c5697",
           "bytes": 100575
         },
         "case.ts": {

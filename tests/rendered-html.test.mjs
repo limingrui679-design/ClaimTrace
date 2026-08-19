@@ -28,7 +28,8 @@ test("builds the ClaimTrace SPA shell and product bundle", async () => {
   assert.match(html, /<title>ClaimTrace/);
   assert.match(html, /<div id="root"><\/div>/);
   assert.match(html, /\/assets\/index-.*\.js/);
-  assert.match(script, /Every claim should explain why it holds/);
+  assert.match(script, /See whether a data refresh changes what you can say or do/);
+  assert.match(script, /VERSIONED DATA/);
   assert.match(script, /Community Chronic-Disease Follow-Up Prioritization/);
   assert.match(script, /Claim Rules/);
   assert.match(script, /EXECUTIVE READOUT/);
@@ -38,8 +39,8 @@ test("builds the ClaimTrace SPA shell and product bundle", async () => {
   assert.match(script, /286 validation samples/);
   assert.match(script, /adds 9 false negatives/);
   assert.match(script, /Baseline SHA-256/);
-  assert.match(script, /Ten Executable Cases/);
-  assert.match(script, /Six Public-Data Audits/i);
+  assert.match(script, /Executable Cases/);
+  assert.match(script, /Public-Data Audits/i);
   assert.match(script, /U\.S\. Treasury Yield-Curve Period Audit/);
   assert.match(script, /AuditBundle export embeds raw data up to 500 KB per snapshot/);
   assert.match(script, /Verified AuditBundle and HTML report generation both require snapshots within that limit/);

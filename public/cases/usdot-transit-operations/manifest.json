@@ -5,6 +5,16 @@
   "dataOrigin": "PUBLIC",
   "sourceMetadataFile": "/cases/usdot-transit-operations/source-metadata.json",
   "caseId": "usdot-transit-operations",
+  "title": "Public Data: USDOT Transit Operations Period Audit",
+  "question": "Can a prior heavy-rail operating brief be reused after ridership and service intensity change?",
+  "method": "Ridership-per-hour derivation, threshold review, and period stability",
+  "capabilities": [
+    "operations analytics",
+    "public infrastructure",
+    "source adapters",
+    "human review"
+  ],
+  "boundary": "Selected public transit rows; not causal efficiency, service quality, or client work.",
   "primaryKey": "ntd_id",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1472
     },
     "evidence-package.json": {
-      "sha256": "58b5177c67ad6a9268437ecad753b8ac5f81f280d284f83724add68fb8eec1bd",
+      "sha256": "3277d226e57acbfab614b6eb23bb9262af2a9059166e88bb45de9dce85532d7f",
       "bytes": 215909
     },
     "case.ts": {

@@ -43,6 +43,9 @@ for (const definition of EXECUTABLE_CASES) {
     assert.equal((await verifyEvidencePackage(evidence)).valid, true);
     assert.equal(manifest.claimCount, definition.claims.length);
     assert.equal(manifest.decisionCount, definition.decisions.length);
+    assert.ok(typeof manifest.method === "string" && manifest.method.length > 10);
+    assert.ok(Array.isArray(manifest.capabilities) && manifest.capabilities.length >= 3);
+    assert.ok(typeof manifest.boundary === "string" && manifest.boundary.length > 20);
     for (const [name, metadata] of Object.entries(manifest.files) as Array<[string, { sha256: string; bytes: number }]>) {
       const content = await readFile(path.join(directory, name));
       assert.equal(content.byteLength, metadata.bytes, name);

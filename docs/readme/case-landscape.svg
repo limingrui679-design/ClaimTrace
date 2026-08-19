@@ -1,171 +1,239 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1580" viewBox="0 0 1600 1580" role="img" aria-labelledby="title desc">
   <title id="title">ClaimTrace ten-case reproducible portfolio</title>
-  <desc id="desc">A detailed comparison of four controlled synthetic stress fixtures and six pinned public-data cases. Each card names its primary key, governed checks, committed regression outcome, and downstream decision.</desc>
+  <desc id="desc">Four controlled synthetic fixtures and six pinned public-data audits. Every card shows the primary key, executable method, checks, committed result, downstream action, demonstrated capability, and evidence boundary. A final applicant-authored bridge groups the cases by related graduate-study capabilities.</desc>
   <defs>
     <linearGradient id="header" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#071b2c"/>
       <stop offset="1" stop-color="#0d2d43"/>
     </linearGradient>
-    <filter id="shadow" x="-12%" y="-18%" width="124%" height="145%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#071b2c" flood-opacity="0.10"/>
+    <filter id="shadow" x="-12%" y="-16%" width="124%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#071b2c" flood-opacity="0.10"/>
     </filter>
     <style>
       .sans { font-family: Inter, Arial, sans-serif; }
-      .eyebrow { font-size: 14px; font-weight: 750; letter-spacing: 0.7px; }
-      .card-title { fill: #0b2235; font-size: 23px; font-weight: 750; }
-      .meta { fill: #496572; font-size: 15.5px; }
-      .result { fill: #0b2235; font-size: 15.5px; font-weight: 700; }
-      .decision { fill: #496572; font-size: 15px; }
+      .eyebrow { font-size: 13px; font-weight: 750; letter-spacing: .65px; }
+      .card-title { fill: #0b2235; font-size: 21px; font-weight: 760; }
+      .meta { fill: #496572; font-size: 13.8px; }
+      .result { fill: #0b2235; font-size: 13.8px; font-weight: 720; }
+      .cap { fill: #176b5c; font-size: 13.6px; font-weight: 720; }
+      .boundary { fill: #7a603d; font-size: 12.6px; }
       .card-bg { fill: #fbfcfd; stroke-width: 2; filter: url(#shadow); }
+      .bridge-title { fill: #0b2235; font-size: 15.5px; font-weight: 760; }
+      .bridge-copy { fill: #496572; font-size: 13.5px; }
     </style>
   </defs>
 
-  <rect width="1600" height="1200" rx="28" fill="#f3f7f8"/>
-  <path d="M28 0h1544a28 28 0 0 1 28 28v164H0V28A28 28 0 0 1 28 0z" fill="url(#header)"/>
-  <text x="56" y="58" fill="#28c3ad" class="sans" font-size="18" font-weight="750" letter-spacing="1.5">REPRODUCIBLE CASE PORTFOLIO</text>
-  <text x="56" y="126" fill="#ffffff" class="sans" font-size="42" font-weight="760">Ten cases trace data changes into claims and decisions.</text>
+  <rect width="1600" height="1580" rx="28" fill="#f3f7f8"/>
+  <path d="M28 0h1544a28 28 0 0 1 28 28v178H0V28A28 28 0 0 1 28 0z" fill="url(#header)"/>
+  <text x="56" y="54" fill="#28c3ad" class="sans" font-size="18" font-weight="750" letter-spacing="1.5">REPRODUCIBLE CASE PORTFOLIO</text>
+  <text x="56" y="100" fill="#ffffff" class="sans" font-size="35" font-weight="760">Ten cases show exactly what changed, why it matters,</text>
+  <text x="56" y="138" fill="#ffffff" class="sans" font-size="35" font-weight="760">and where the evidence stops.</text>
+  <text x="955" y="151" fill="#b9d3df" class="sans" font-size="14" text-anchor="end">key · method · checks · result · action · capability · boundary</text>
   <text x="1544" y="54" fill="#d4ad6c" class="sans" font-size="22" font-weight="700" text-anchor="end">4 CONTROLLED + 6 PUBLIC</text>
-  <text x="1544" y="84" fill="#b9d3df" class="sans" font-size="17" text-anchor="end">key · checks · committed outcome · decision</text>
 
-  <rect x="58" y="205" width="716" height="840" rx="24" fill="#ffffff" stroke="#d9e5e9" stroke-width="2"/>
-  <rect x="826" y="205" width="716" height="840" rx="24" fill="#ffffff" stroke="#d9e5e9" stroke-width="2"/>
+  <rect x="58" y="202" width="716" height="1038" rx="24" fill="#ffffff" stroke="#d9e5e9" stroke-width="2"/>
+  <rect x="826" y="202" width="716" height="1038" rx="24" fill="#ffffff" stroke="#d9e5e9" stroke-width="2"/>
 
-  <rect x="90" y="236" width="292" height="38" rx="19" fill="#edf3f6"/>
-  <text x="236" y="261" fill="#3074a7" class="sans" font-size="16" font-weight="750" text-anchor="middle" letter-spacing="0.8">CONTROLLED STRESS FIXTURES</text>
-  <text x="742" y="261" fill="#496572" class="sans" font-size="19" font-weight="700" text-anchor="end">4 CASES</text>
-  <text x="90" y="294" fill="#6a7f89" class="sans" font-size="16">Exact labels isolate edge conditions without claiming real-world outcomes.</text>
+  <rect x="90" y="232" width="292" height="38" rx="19" fill="#edf3f6"/>
+  <text x="236" y="257" fill="#3074a7" class="sans" font-size="16" font-weight="750" text-anchor="middle" letter-spacing=".8">CONTROLLED STRESS FIXTURES</text>
+  <text x="742" y="257" fill="#496572" class="sans" font-size="19" font-weight="700" text-anchor="end">4 CASES</text>
+  <text x="90" y="291" fill="#6a7f89" class="sans" font-size="15">Exact labels isolate edge conditions; they are regression fixtures, not organizations.</text>
 
-  <rect x="858" y="236" width="270" height="38" rx="19" fill="#e7f6f3"/>
-  <text x="993" y="261" fill="#0b8f79" class="sans" font-size="16" font-weight="750" text-anchor="middle" letter-spacing="0.8">PINNED PUBLIC DATA</text>
-  <text x="1510" y="261" fill="#496572" class="sans" font-size="19" font-weight="700" text-anchor="end">6 CASES</text>
-  <text x="858" y="294" fill="#6a7f89" class="sans" font-size="16">Publisher responses, cleaning rules and hashes retained for reruns.</text>
+  <rect x="858" y="232" width="270" height="38" rx="19" fill="#e7f6f3"/>
+  <text x="993" y="257" fill="#0b8f79" class="sans" font-size="16" font-weight="750" text-anchor="middle" letter-spacing=".8">PINNED PUBLIC DATA</text>
+  <text x="1510" y="257" fill="#496572" class="sans" font-size="19" font-weight="700" text-anchor="end">6 CASES</text>
+  <text x="858" y="291" fill="#6a7f89" class="sans" font-size="15">Publisher response, license, cleaning rule and hash stay attached to each rerun.</text>
 
   <!-- Controlled fixtures -->
-  <g class="sans" transform="translate(90 318)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#d7e4e9"/>
-    <rect width="8" height="194" rx="4" fill="#3074a7"/>
-    <text x="28" y="29" fill="#3074a7" class="eyebrow">SYNTHETIC · OPERATIONS</text>
-    <text x="28" y="62" class="card-title">Business operations</text>
-    <text x="28" y="92" class="meta">Primary key · channel_id</text>
-    <text x="28" y="120" class="meta">Checks · rank · SLA · volume stability</text>
-    <text x="28" y="154" class="result">Committed · 2 claims reversed</text>
-    <text x="28" y="178" class="decision">Decision · allocation action changed</text>
+  <g class="sans" transform="translate(90 316)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#d7e4e9"/>
+    <rect width="8" height="252" rx="4" fill="#3074a7"/>
+    <text x="27" y="27" fill="#3074a7" class="eyebrow">SYNTHETIC · OPERATIONS</text>
+    <text x="27" y="56" class="card-title">Business operations</text>
+    <text x="27" y="82" class="meta">Key · channel_id</text>
+    <text x="27" y="105" class="meta">Method · grouped rank + threshold + stability</text>
+    <text x="27" y="128" class="meta">Checks · conversion · SLA · volume</text>
+    <text x="27" y="155" class="result">Result · 1 supported · 2 reversed</text>
+    <text x="27" y="178" class="result">Action · HOLD · freeze + reallocate</text>
+    <text x="27" y="205" class="cap">Shows · operations · capacity decisions</text>
+    <text x="27" y="228" class="boundary">Limit · no client · spend · revenue · impact</text>
   </g>
 
-  <g class="sans" transform="translate(430 318)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#d7e4e9"/>
-    <rect width="8" height="194" rx="4" fill="#3074a7"/>
-    <text x="28" y="29" fill="#3074a7" class="eyebrow">SYNTHETIC · FINANCE</text>
-    <text x="28" y="62" class="card-title">Financial risk</text>
-    <text x="28" y="92" class="meta">Primary key · account_id</text>
-    <text x="28" y="120" class="meta">Checks · mean PD · sample · thresholds</text>
-    <text x="28" y="154" class="result">Committed · 3 claims reversed</text>
-    <text x="28" y="178" class="decision">Decision · admission action changed</text>
+  <g class="sans" transform="translate(430 316)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#d7e4e9"/>
+    <rect width="8" height="252" rx="4" fill="#3074a7"/>
+    <text x="27" y="27" fill="#3074a7" class="eyebrow">SYNTHETIC · FINANCE</text>
+    <text x="27" y="56" class="card-title">Financial risk</text>
+    <text x="27" y="82" class="meta">Key · account_id</text>
+    <text x="27" y="105" class="meta">Method · portfolio means + membership</text>
+    <text x="27" y="128" class="meta">Checks · PD · sample · missingness · gates</text>
+    <text x="27" y="155" class="result">Result · 3 reversed</text>
+    <text x="27" y="178" class="result">Action · HOLD · pause + re-estimate</text>
+    <text x="27" y="205" class="cap">Shows · risk governance · model monitoring</text>
+    <text x="27" y="228" class="boundary">Limit · no calibrated model · backtest · outcome</text>
   </g>
 
-  <g class="sans" transform="translate(90 540)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#d7e4e9"/>
-    <rect width="8" height="194" rx="4" fill="#3074a7"/>
-    <text x="28" y="29" fill="#3074a7" class="eyebrow">SYNTHETIC · HEALTH + LINEAGE</text>
-    <text x="28" y="62" class="card-title">Population health</text>
-    <text x="28" y="92" class="meta">Primary key · row_id</text>
-    <text x="28" y="120" class="meta">Checks · risk rank · recall · follow-up</text>
-    <text x="28" y="154" class="result">Committed · 2 claims reversed</text>
-    <text x="28" y="178" class="decision">Decision · 2 actions changed</text>
+  <g class="sans" transform="translate(90 592)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#d7e4e9"/>
+    <rect width="8" height="252" rx="4" fill="#3074a7"/>
+    <text x="27" y="27" fill="#3074a7" class="eyebrow">SYNTHETIC · HEALTH + LINEAGE</text>
+    <text x="27" y="56" class="card-title">Population health</text>
+    <text x="27" y="82" class="meta">Key · row_id</text>
+    <text x="27" y="105" class="meta">Method · raw→summary + recall + ranks</text>
+    <text x="27" y="128" class="meta">Checks · regional risk · recall · follow-up</text>
+    <text x="27" y="155" class="result">Result · 3 supported · 2 reversed</text>
+    <text x="27" y="178" class="result">Action · 2 HOLD actions changed</text>
+    <text x="27" y="205" class="cap">Shows · AI governance · health-data lineage</text>
+    <text x="27" y="228" class="boundary">Limit · no clinical validity · outcomes · deployment</text>
   </g>
 
-  <g class="sans" transform="translate(430 540)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#d7e4e9"/>
-    <rect width="8" height="194" rx="4" fill="#3074a7"/>
-    <text x="28" y="29" fill="#3074a7" class="eyebrow">SYNTHETIC · PLANNING</text>
-    <text x="28" y="62" class="card-title">Spatial planning</text>
-    <text x="28" y="92" class="meta">Primary key · site_id</text>
-    <text x="28" y="120" class="meta">Checks · demand · travel · flood risk</text>
-    <text x="28" y="154" class="result">Committed · 2 claims reversed</text>
-    <text x="28" y="178" class="decision">Decision · preferred site changed</text>
+  <g class="sans" transform="translate(430 592)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#d7e4e9"/>
+    <rect width="8" height="252" rx="4" fill="#3074a7"/>
+    <text x="27" y="27" fill="#3074a7" class="eyebrow">SYNTHETIC · PLANNING</text>
+    <text x="27" y="56" class="card-title">Spatial planning</text>
+    <text x="27" y="82" class="meta">Key · site_id</text>
+    <text x="27" y="105" class="meta">Method · ranks + constrained choice</text>
+    <text x="27" y="128" class="meta">Checks · demand · travel · risk · capacity</text>
+    <text x="27" y="155" class="result">Result · 1 supported · 2 reversed</text>
+    <text x="27" y="178" class="result">Action · HOLD · cancel + rerank</text>
+    <text x="27" y="205" class="cap">Shows · accessibility · decision sensitivity</text>
+    <text x="27" y="228" class="boundary">Limit · no GIS network · fieldwork · impact</text>
   </g>
 
-  <g class="sans" transform="translate(90 762)">
-    <rect width="655" height="198" rx="18" fill="#f1f6f9" stroke="#d7e4e9" stroke-width="2"/>
-    <text x="28" y="39" fill="#3074a7" font-size="16" font-weight="750" letter-spacing="0.8">WHY KEEP CONTROLLED FIXTURES?</text>
-    <text x="28" y="76" fill="#0b2235" font-size="18" font-weight="700">Public data rarely isolates one failure at a time.</text>
-    <text x="28" y="111" fill="#496572" font-size="16.5">These cases provide exact expected labels for row reordering, membership changes,</text>
-    <text x="28" y="139" fill="#496572" font-size="16.5">missing values, tied ranks, zero baselines, threshold crossings, stale result identity,</text>
-    <text x="28" y="167" fill="#496572" font-size="16.5">and decision re-signing. They are regression tests, not real organizations or outcomes.</text>
+  <g class="sans" transform="translate(90 874)">
+    <rect width="655" height="306" rx="18" fill="#f1f6f9" stroke="#d7e4e9" stroke-width="2"/>
+    <text x="28" y="38" fill="#3074a7" font-size="16" font-weight="750" letter-spacing=".8">WHY KEEP FOUR SYNTHETIC FIXTURES?</text>
+    <text x="28" y="75" fill="#0b2235" font-size="18" font-weight="700">They isolate failures that public snapshots may not contain.</text>
+    <text x="28" y="112" fill="#496572" font-size="15.5">• Pure row reordering must not become a false change.</text>
+    <text x="28" y="142" fill="#496572" font-size="15.5">• Missing values, sample shifts, ties and zero baselines need explicit states.</text>
+    <text x="28" y="172" fill="#496572" font-size="15.5">• Threshold crossings must produce exact expected claim labels.</text>
+    <text x="28" y="202" fill="#496572" font-size="15.5">• Stale result identities must revoke inherited approval.</text>
+    <text x="28" y="232" fill="#496572" font-size="15.5">• Same action + new evidence must mean re-sign, not silent reuse.</text>
+    <text x="28" y="272" fill="#7a603d" font-size="14.5" font-weight="700">Boundary · Regression evidence is engineering evidence, not empirical impact.</text>
   </g>
 
   <!-- Public-data cases -->
-  <g class="sans" transform="translate(858 318)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#cfe5df"/>
-    <rect width="8" height="194" rx="4" fill="#0b8f79"/>
-    <text x="28" y="29" fill="#0b8f79" class="eyebrow">WORLD BANK · CC BY 4.0</text>
-    <text x="28" y="62" class="card-title">Life expectancy</text>
-    <text x="28" y="92" class="meta">Primary key · country_code</text>
-    <text x="28" y="120" class="meta">Checks · rank · 81y gate · mean stability</text>
-    <text x="28" y="154" class="result">Committed · 1 claim reversed</text>
-    <text x="28" y="178" class="decision">Decision · annotate publication note</text>
+  <g class="sans" transform="translate(858 316)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#cfe5df"/>
+    <rect width="8" height="252" rx="4" fill="#0b8f79"/>
+    <text x="27" y="27" fill="#0b8f79" class="eyebrow">WORLD BANK · CC BY 4.0</text>
+    <text x="27" y="56" class="card-title">Life expectancy</text>
+    <text x="27" y="82" class="meta">Key · country_code</text>
+    <text x="27" y="105" class="meta">Method · cross-year rank + gate + mean</text>
+    <text x="27" y="128" class="meta">Checks · leader · 81-year gate · stability</text>
+    <text x="27" y="155" class="result">Result · 2 supported · 1 reversed</text>
+    <text x="27" y="178" class="result">Action · HOLD · update publication note</text>
+    <text x="27" y="205" class="cap">Shows · indicators · provenance · reproducibility</text>
+    <text x="27" y="228" class="boundary">Limit · selected + descriptive · no causal ranking</text>
   </g>
 
-  <g class="sans" transform="translate(1198 318)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#cfe5df"/>
-    <rect width="8" height="194" rx="4" fill="#0b8f79"/>
-    <text x="28" y="29" fill="#0b8f79" class="eyebrow">USDOT / FTA · PUBLIC</text>
-    <text x="28" y="62" class="card-title">Transit operations</text>
-    <text x="28" y="92" class="meta">Primary key · ntd_id</text>
-    <text x="28" y="120" class="meta">Checks · riders/hour · gate · stability</text>
-    <text x="28" y="154" class="result">Committed · 1 claim needs review</text>
-    <text x="28" y="178" class="decision">Decision · human review required</text>
+  <g class="sans" transform="translate(1198 316)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#cfe5df"/>
+    <rect width="8" height="252" rx="4" fill="#0b8f79"/>
+    <text x="27" y="27" fill="#0b8f79" class="eyebrow">USDOT / FTA · PUBLIC</text>
+    <text x="27" y="56" class="card-title">Transit operations</text>
+    <text x="27" y="82" class="meta">Key · ntd_id</text>
+    <text x="27" y="105" class="meta">Method · derived riders/hour + stability</text>
+    <text x="27" y="128" class="meta">Checks · leader · 50 gate · period stability</text>
+    <text x="27" y="155" class="result">Result · 2 supported · 1 review</text>
+    <text x="27" y="178" class="result">Action · REVIEW · human judgment required</text>
+    <text x="27" y="205" class="cap">Shows · operations · adapters · review routing</text>
+    <text x="27" y="228" class="boundary">Limit · no causal efficiency · quality · client</text>
   </g>
 
-  <g class="sans" transform="translate(858 540)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#cfe5df"/>
-    <rect width="8" height="194" rx="4" fill="#0b8f79"/>
-    <text x="28" y="29" fill="#0b8f79" class="eyebrow">U.S. TREASURY · PUBLIC</text>
-    <text x="28" y="62" class="card-title">Yield curve</text>
-    <text x="28" y="92" class="meta">Primary key · maturity_code</text>
-    <text x="28" y="120" class="meta">Checks · curve rank · 4% gate · mean</text>
-    <text x="28" y="154" class="result">Committed · 2 reversed · 1 weakened</text>
-    <text x="28" y="178" class="decision">Decision · revise fixed-income brief</text>
+  <g class="sans" transform="translate(858 592)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#cfe5df"/>
+    <rect width="8" height="252" rx="4" fill="#0b8f79"/>
+    <text x="27" y="27" fill="#0b8f79" class="eyebrow">U.S. TREASURY · PUBLIC</text>
+    <text x="27" y="56" class="card-title">Yield curve</text>
+    <text x="27" y="82" class="meta">Key · maturity_code</text>
+    <text x="27" y="105" class="meta">Method · curve rank + short-end gate + mean</text>
+    <text x="27" y="128" class="meta">Checks · shape · 4% gate · stability</text>
+    <text x="27" y="155" class="result">Result · 1 weakened · 2 reversed</text>
+    <text x="27" y="178" class="result">Action · HOLD · update fixed-income brief</text>
+    <text x="27" y="205" class="cap">Shows · fixed income · risk communication</text>
+    <text x="27" y="228" class="boundary">Limit · no trading · valuation · return evidence</text>
   </g>
 
-  <g class="sans" transform="translate(1198 540)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#cfe5df"/>
-    <rect width="8" height="194" rx="4" fill="#0b8f79"/>
-    <text x="28" y="29" fill="#0b8f79" class="eyebrow">CFPB · CC0</text>
-    <text x="28" y="62" class="card-title">Card complaints</text>
-    <text x="28" y="92" class="meta">Primary key · issue_id</text>
-    <text x="28" y="120" class="meta">Checks · issue rank · share · volume</text>
-    <text x="28" y="154" class="result">Committed · 1 review · 1 weakened</text>
-    <text x="28" y="178" class="decision">Decision · revise consumer brief</text>
+  <g class="sans" transform="translate(1198 592)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#cfe5df"/>
+    <rect width="8" height="252" rx="4" fill="#0b8f79"/>
+    <text x="27" y="27" fill="#0b8f79" class="eyebrow">CFPB · CC0</text>
+    <text x="27" y="56" class="card-title">Card complaints</text>
+    <text x="27" y="82" class="meta">Key · issue_id</text>
+    <text x="27" y="105" class="meta">Method · rank + share + denominator</text>
+    <text x="27" y="128" class="meta">Checks · issue leader · matched share · count</text>
+    <text x="27" y="155" class="result">Result · 1 supported · 1 weak · 1 review</text>
+    <text x="27" y="178" class="result">Action · HOLD · update pattern notes</text>
+    <text x="27" y="205" class="cap">Shows · consumer context · sampling limits</text>
+    <text x="27" y="228" class="boundary">Limit · complaints ≠ incidence or effects</text>
   </g>
 
-  <g class="sans" transform="translate(858 762)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#cfe5df"/>
-    <rect width="8" height="194" rx="4" fill="#0b8f79"/>
-    <text x="28" y="29" fill="#0b8f79" class="eyebrow">CDC PLACES · PUBLIC</text>
-    <text x="28" y="62" class="card-title">Depression estimates</text>
-    <text x="28" y="92" class="meta">Primary key · county_fips</text>
-    <text x="28" y="120" class="meta">Checks · county rank · 20% gate · mean</text>
-    <text x="28" y="154" class="result">Committed · 1 claim reversed</text>
-    <text x="28" y="178" class="decision">Decision · revise surveillance note</text>
+  <g class="sans" transform="translate(858 868)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#cfe5df"/>
+    <rect width="8" height="252" rx="4" fill="#0b8f79"/>
+    <text x="27" y="27" fill="#0b8f79" class="eyebrow">CDC PLACES · PUBLIC</text>
+    <text x="27" y="56" class="card-title">Depression estimates</text>
+    <text x="27" y="82" class="meta">Key · county_fips</text>
+    <text x="27" y="105" class="meta">Method · ranks + stability + 95% interval gate</text>
+    <text x="27" y="128" class="meta">Checks · rank · 20% point · 18% full interval</text>
+    <text x="27" y="155" class="result">Result · 2 supported · 1 reversed · 1 review</text>
+    <text x="27" y="178" class="result">Action · HOLD · update estimate + interval note</text>
+    <text x="27" y="205" class="cap">Shows · health data · interval reasoning</text>
+    <text x="27" y="228" class="boundary">Limit · modeled estimate · no diagnosis or causality</text>
   </g>
 
-  <g class="sans" transform="translate(1198 762)">
-    <rect class="card-bg" width="315" height="194" rx="18" stroke="#cfe5df"/>
-    <rect width="8" height="194" rx="4" fill="#0b8f79"/>
-    <text x="28" y="29" fill="#0b8f79" class="eyebrow">ONS · OGL V3.0</text>
-    <text x="28" y="62" class="card-title">Housing affordability</text>
-    <text x="28" y="92" class="meta">Primary key · authority_code</text>
-    <text x="28" y="120" class="meta">Checks · rank · ratio-5 gate · mean</text>
-    <text x="28" y="154" class="result">Committed · 1 claim reversed</text>
-    <text x="28" y="178" class="decision">Decision · revise planning note</text>
+  <g class="sans" transform="translate(1198 868)">
+    <rect class="card-bg" width="315" height="252" rx="18" stroke="#cfe5df"/>
+    <rect width="8" height="252" rx="4" fill="#0b8f79"/>
+    <text x="27" y="27" fill="#0b8f79" class="eyebrow">ONS · OGL V3.0</text>
+    <text x="27" y="56" class="card-title">Housing affordability</text>
+    <text x="27" y="82" class="meta">Key · authority_code</text>
+    <text x="27" y="105" class="meta">Method · local ranks + threshold + stability</text>
+    <text x="27" y="128" class="meta">Checks · leader · ratio-5 gate · mean</text>
+    <text x="27" y="155" class="result">Result · 2 supported · 1 reversed</text>
+    <text x="27" y="178" class="result">Action · HOLD · update planning note</text>
+    <text x="27" y="205" class="cap">Shows · official statistics · place decisions</text>
+    <text x="27" y="228" class="boundary">Limit · no GIS · spatial model · impact estimate</text>
   </g>
 
-  <text x="858" y="1016" fill="#6a7f89" class="sans" font-size="15.5">Descriptive, bounded case selections—not causal studies, client work or adoption evidence.</text>
+  <text x="858" y="1158" fill="#6a7f89" class="sans" font-size="13.5">Pinned selections support recomputation—not publisher truth, representativeness,</text>
+  <text x="858" y="1180" fill="#6a7f89" class="sans" font-size="13.5">causal validity, adoption or impact.</text>
 
-  <rect x="58" y="1080" width="1484" height="82" rx="20" fill="#e9f0f3" stroke="#d3e0e5" stroke-width="2"/>
-  <text x="86" y="1115" fill="#0b2235" class="sans" font-size="17" font-weight="750">EVERY CASE PACK</text>
-  <text x="265" y="1115" fill="#496572" class="sans" font-size="17">two snapshots · executable claims and decisions · expected audit · manifest · verified AuditBundle</text>
-  <text x="86" y="1147" fill="#0b8f79" class="sans" font-size="17" font-weight="750">PUBLIC CASES ALSO</text>
-  <text x="283" y="1147" fill="#496572" class="sans" font-size="17">raw publisher responses · source URLs and license · cleaning log · SHA-256 · declared limits</text>
+  <!-- Applicant-authored capability bridge -->
+  <rect x="58" y="1272" width="1484" height="246" rx="22" fill="#e9f0f3" stroke="#d3e0e5" stroke-width="2"/>
+  <text x="86" y="1308" fill="#0b2235" class="sans" font-size="17" font-weight="760">APPLICATION CAPABILITY BRIDGE</text>
+  <text x="405" y="1308" fill="#7a603d" class="sans" font-size="14.5">Applicant-authored fit inference · not a school-stated admissions preference</text>
+
+  <g class="sans" transform="translate(86 1332)">
+    <rect width="350" height="72" rx="13" fill="#f8fbfc" stroke="#d4e1e6"/>
+    <text x="16" y="25" class="bridge-title">Business · AI · information systems</text>
+    <text x="16" y="49" class="bridge-copy">Operations · USDOT · population health</text>
+    <text x="16" y="66" fill="#6a7f89" font-size="11.8">MIT · Cornell · Imperial · CMU · Johns Hopkins</text>
+  </g>
+  <g class="sans" transform="translate(452 1332)">
+    <rect width="350" height="72" rx="13" fill="#f8fbfc" stroke="#d4e1e6"/>
+    <text x="16" y="25" class="bridge-title">Decision · risk · finance</text>
+    <text x="16" y="49" class="bridge-copy">Financial risk · Treasury · CFPB</text>
+    <text x="16" y="66" fill="#6a7f89" font-size="11.8">Columbia MSBA · Stanford · Yale Asset Management</text>
+  </g>
+  <g class="sans" transform="translate(818 1332)">
+    <rect width="350" height="72" rx="13" fill="#f8fbfc" stroke="#d4e1e6"/>
+    <text x="16" y="25" class="bridge-title">Statistics · data science · health</text>
+    <text x="16" y="49" class="bridge-copy">CDC · World Bank · population lineage</text>
+    <text x="16" y="66" fill="#6a7f89" font-size="11.8">UChicago · Yale HI · Columbia Stats · Cambridge HDS</text>
+  </g>
+  <g class="sans" transform="translate(1184 1332)">
+    <rect width="330" height="72" rx="13" fill="#f8fbfc" stroke="#d4e1e6"/>
+    <text x="16" y="25" class="bridge-title">Behavior · policy · planning</text>
+    <text x="16" y="49" class="bridge-copy">CFPB · CDC · ONS · spatial fixture</text>
+    <text x="16" y="66" fill="#6a7f89" font-size="11.8">Penn · HKS · Cambridge PGR</text>
+  </g>
+
+  <text x="86" y="1438" fill="#0b2235" class="sans" font-size="14.5" font-weight="750">EVERY PACK</text>
+  <text x="195" y="1438" fill="#496572" class="sans" font-size="14.5">two snapshots · executable claims + decisions · expected audit · manifest · verified AuditBundle</text>
+  <text x="86" y="1468" fill="#0b8f79" class="sans" font-size="14.5" font-weight="750">PUBLIC ALSO</text>
+  <text x="197" y="1468" fill="#496572" class="sans" font-size="14.5">raw response · source URL + license · cleaning rule + parameters · SHA-256 · declared limitations</text>
+  <text x="86" y="1497" fill="#7a603d" class="sans" font-size="13.5">External gaps remain explicit: experiments, clinical interoperability, advanced inference, finance backtests, GIS workflows, domain review and real-user impact.</text>
 </svg>

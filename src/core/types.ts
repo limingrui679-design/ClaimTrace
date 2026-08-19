@@ -1,5 +1,5 @@
-export const RULE_ENGINE_VERSION = "claimtrace-rule/6.2.0";
-export const EVIDENCE_SCHEMA_VERSION = "claimtrace-audit-bundle/2.5.0";
+export const RULE_ENGINE_VERSION = "claimtrace-rule/6.3.0";
+export const EVIDENCE_SCHEMA_VERSION = "claimtrace-audit-bundle/2.6.0";
 export const SNAPSHOT_SCHEMA_VERSION = "claimtrace-snapshot/1.1.0";
 export const CSV_DIALECT_VERSION = "claimtrace-csv-strict/1.0.0";
 export const NORMALIZED_ROWS_VERSION = "claimtrace-normalized-rows/1.0.0";
@@ -211,6 +211,16 @@ export type Rule =
       thresholdSpec?: ThresholdSpec;
     })
   | (RuleBase & {
+      type: "interval-threshold";
+      lowerField: string;
+      upperField: string;
+      operator: Exclude<Operator, "=">;
+      threshold: number;
+      intervalLevel: number;
+      intervalLabel: string;
+      thresholdSpec?: ThresholdSpec;
+    })
+  | (RuleBase & {
       type: "rank";
       groupField: string;
       expectedGroup: CsvValue;
@@ -363,6 +373,13 @@ export interface RankResult {
   groups: Array<{ group: string; value: number }>;
   tied: boolean;
   missingGroupRows: number;
+}
+
+export interface IntervalThresholdResult {
+  point: number;
+  lower: number;
+  upper: number;
+  matchingRows: number;
 }
 
 export interface DecisionCondition {
@@ -578,6 +595,9 @@ export interface CaseDefinition {
   claimCount: number;
   decisionCount: number;
   synthetic: boolean;
+  method: string;
+  capabilities: string[];
+  boundary: string;
   sourceMetadataFile?: string;
   dataCard: string;
   claimsFile: string;

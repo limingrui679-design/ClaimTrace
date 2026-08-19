@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.6.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "U.S. Treasury Year-End Par Yield Curve Audit",
   "primaryKey": "maturity_code",
-  "ruleVersion": "claimtrace-rule/6.2.0",
+  "ruleVersion": "claimtrace-rule/6.3.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
@@ -343,7 +343,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "treasury-20y-highest|claimtrace-rule/6.2.0",
+        "seed": "treasury-20y-highest|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 9,
         "sides": {
           "baseline": {
@@ -406,7 +406,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "treasury-1m-four-percent|claimtrace-rule/6.2.0",
+        "seed": "treasury-1m-four-percent|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -464,7 +464,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "treasury-selected-mean-stability|claimtrace-rule/6.2.0",
+        "seed": "treasury-selected-mean-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 9,
         "sides": {
           "baseline": {
@@ -968,7 +968,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:treasury-20y-highest:34f4e9733cf8ffb0c324b90f",
+          "id": "claim-result:treasury-20y-highest:9c129e793de4ded7794f8441",
           "kind": "Comparison result",
           "title": "yield_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -982,9 +982,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1016,7 +1016,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
         "currentSha256": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a",
@@ -1028,7 +1028,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "treasury-20y-highest|claimtrace-rule/6.2.0",
+        "seed": "treasury-20y-highest|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 9,
         "sides": {
           "baseline": {
@@ -1093,7 +1093,7 @@
           }
         }
       },
-      "resultId": "claim-result:treasury-20y-highest:34f4e9733cf8ffb0c324b90f",
+      "resultId": "claim-result:treasury-20y-highest:9c129e793de4ded7794f8441",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1172,7 +1172,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:treasury-1m-four-percent:ce283ae887de98b60b200371",
+          "id": "claim-result:treasury-1m-four-percent:814b6838f69474723e8c7613",
           "kind": "Comparison result",
           "title": "yield_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1186,9 +1186,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1220,7 +1220,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
         "currentSha256": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a",
@@ -1232,7 +1232,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "treasury-1m-four-percent|claimtrace-rule/6.2.0",
+        "seed": "treasury-1m-four-percent|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1277,7 +1277,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:treasury-1m-four-percent:ce283ae887de98b60b200371",
+      "resultId": "claim-result:treasury-1m-four-percent:814b6838f69474723e8c7613",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1550,7 +1550,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:treasury-selected-mean-stability:945dd12917e6a13456a28cb0",
+          "id": "claim-result:treasury-selected-mean-stability:344ca5f096e80917f849debc",
           "kind": "Comparison result",
           "title": "yield_percent version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1564,9 +1564,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1598,7 +1598,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
         "currentSha256": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a",
@@ -1610,7 +1610,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "treasury-selected-mean-stability|claimtrace-rule/6.2.0",
+        "seed": "treasury-selected-mean-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 9,
         "sides": {
           "baseline": {
@@ -1655,7 +1655,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:treasury-selected-mean-stability:945dd12917e6a13456a28cb0",
+      "resultId": "claim-result:treasury-selected-mean-stability:344ca5f096e80917f849debc",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1811,11 +1811,11 @@
         "decisionInputProvenanceHash": "3f5d97084c6e0f1f49c10e9e510d917fe1e4f60ba90d04cb152b9a7a19301ea7",
         "baselineSha256": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
         "currentSha256": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a",
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "claimResultIds": [
-          "claim-result:treasury-1m-four-percent:ce283ae887de98b60b200371",
-          "claim-result:treasury-20y-highest:34f4e9733cf8ffb0c324b90f",
-          "claim-result:treasury-selected-mean-stability:945dd12917e6a13456a28cb0"
+          "claim-result:treasury-1m-four-percent:814b6838f69474723e8c7613",
+          "claim-result:treasury-20y-highest:9c129e793de4ded7794f8441",
+          "claim-result:treasury-selected-mean-stability:344ca5f096e80917f849debc"
         ]
       },
       "analysis": {
@@ -1937,7 +1937,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:treasury-fixed-income-brief:f03ade49095c629d1debebfc"
+      "resultId": "decision-result:treasury-fixed-income-brief:4dce78a42fb30d8bb6f4085a"
     }
   ],
   "reviews": [],
@@ -2048,12 +2048,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "67f1d5de3160380361c389408164ef78e9caf954cc891b87f271e894bfb06c55",
+    "payloadHash": "9f6d98aa938214d35fc52a25d267008d0af52d0340fa6f3126368df20678435c",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "e0317b1b5f416c3faf9abb00991763ccd2facc66e945f64a2958823655efc609",
-      "claims": "aff582dd18940643892d3da8042945ef7e7d05e94e34e48105d915b8cce4b7a2",
-      "decisions": "0d96bbe61c0b0ed89bd2554819abf68cfc2b73fbb74fec3df43ed8821bbe63c3",
+      "claims": "8ae6a162f21b3f41eede5d12304bf99866e4b9bbd8cec4ccfafdc64160663c84",
+      "decisions": "eb5f043e538ee9f51c9f4ac60738237ea76e70db5c3743c92961091682a4f25a",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "f5bc9662db6ba6ea6d21fa00f9e4746723582ea746ecd3024f18e65b8a064e2d",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

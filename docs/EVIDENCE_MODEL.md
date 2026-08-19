@@ -14,7 +14,7 @@ A claim binds natural-language text to:
 
 - a field and aggregation;
 - include/exclude filters;
-- a stability, threshold, or grouped-rank rule;
+- a stability, point-threshold, interval-threshold, or grouped-rank rule;
 - a canonical comparison-result ID derived from stable claim and rule content;
 - threshold value, unit, source, business rationale, confirmer, and confirmation time where applicable;
 - baseline/current sample profiles;
@@ -22,6 +22,8 @@ A claim binds natural-language text to:
 - rule-engine version and audit time.
 
 An automatic tolerance without a confirmer remains `REVIEW_REQUIRED` and is labeled preliminary.
+
+An interval-threshold rule binds one explicitly selected point estimate and its lower/upper fields to a non-equality threshold. The engine returns `SUPPORTED` only when the complete interval satisfies the rule, `REVERSED` only when the complete interval lies on the opposite side, and `REVIEW_REQUIRED` when the interval crosses the boundary. Missing, non-finite, out-of-order, or multiply selected interval rows are `UNTESTABLE`. The rule consumes a reported interval; it does not calculate confidence intervals or make a significance claim.
 
 The result ID covers the claim text, formula, executable rule, threshold provenance, filters, computed status and values, sample profile, evidence scope, exact source references, rule-engine version, and snapshot hashes. It excludes mutable run time and governance state. Changing a threshold, formula, filter, or provenance source therefore creates a new result identity, blocks the old release, and changes the bound result ID seen by downstream decisions.
 
@@ -92,6 +94,8 @@ Decision calculation remains independent of human release state, but decision re
 ## AuditBundle
 
 The exported `AuditBundle` places snapshot manifests/payloads, claim specifications/results, decision specifications/results, diffs, summaries, previews, reviews, review-chain head, optional upstream lineage, optional external-source provenance, and `previousBundleHash` under one canonical SHA-256 root. Section hashes localize changes but do not replace the root. Publisher-reported update dates are also recomputed from the retained World Bank/Treasury response pair or pinned USDOT Socrata metadata; a valid replacement root therefore cannot make an invalid or evidence-mismatched date pass.
+
+The interchange envelope is documented by the versioned [AuditBundle 2.6.0 JSON Schema](../schemas/claimtrace-audit-bundle-2.6.0.schema.json). Structural schema validation is intentionally weaker than semantic verification. Use the [command-line verifier](VERIFY_BUNDLES.md) to reconstruct snapshots and recompute the governed state.
 
 Verification does not trust exported result fields. It reconstructs snapshots from raw bytes, validates hashes and primary keys, reruns all claim and decision specifications, reapplies the review chain, and compares regenerated derived fields. If upstream lineage is present, it also verifies raw source hashes, filters, numerator/denominator rules, rounding, source-key-set hashes, and the resulting summary rows. External-source verification requires exactly one embedded response per snapshot side and binds each declared source type to its registered cleaning implementation before either snapshot is rebuilt. The bundle is tamper-evident but not digitally signed; see `docs/SECURITY.md`.
 

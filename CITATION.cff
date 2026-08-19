@@ -5,8 +5,8 @@ type: software
 authors:
   - family-names: "Li"
     given-names: "Mingrui"
-version: 0.10.3
-date-released: 2026-08-14
+version: 0.11.0
+date-released: 2026-08-20
 license: MIT
 repository-code: "https://github.com/limingrui679-design/ClaimTrace"
 url: "https://claimtrace-audit.limingrui2.chatgpt.site"

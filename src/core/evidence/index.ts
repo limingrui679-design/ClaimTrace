@@ -45,7 +45,7 @@ function snapshotLines(dataset: DatasetVersion, side: SnapshotSide) {
 function thresholdProvenancePasses(rule: Rule | undefined, claim: Claim) {
   if (!rule || rule.type === "rank") return Boolean(rule);
   const spec = thresholdSpecForRule(rule);
-  const expected = rule.type === "threshold" ? rule.threshold : rule.supportTolerance;
+  const expected = rule.type === "stability" ? rule.supportTolerance : rule.threshold;
   const supportConfirmed = isThresholdConfirmed(spec) && Math.abs((spec?.value ?? Number.NaN) - expected) < 1e-9;
   if (!supportConfirmed) return false;
   if (rule.type === "stability" && ["WEAKENED", "REVERSED"].includes(claim.status)) return stabilityReversalIsGoverned(rule);
@@ -55,7 +55,11 @@ function thresholdProvenancePasses(rule: Rule | undefined, claim: Claim) {
 
 export function computeEvidenceCompleteness(claim: Claim, dataset: DatasetVersion): EvidenceCompleteness {
   const evidence = completeEvidence(claim, dataset);
-  const fields = claim.rule ? [claim.rule.field, ...(claim.rule.type === "rank" ? [claim.rule.groupField] : [])] : [];
+  const fields = claim.rule ? [
+    claim.rule.field,
+    ...(claim.rule.type === "rank" ? [claim.rule.groupField] : []),
+    ...(claim.rule.type === "interval-threshold" ? [claim.rule.lowerField, claim.rule.upperField] : []),
+  ] : [];
   const expectedSides: SnapshotSide[] = dataset.currentRows ? ["baseline", "current"] : ["baseline"];
   const referenceMatchesRow = (ref: SourceReference) => {
     const rows = snapshotRows(dataset, ref.snapshot);
@@ -106,7 +110,7 @@ export function computeEvidenceCompleteness(claim: Claim, dataset: DatasetVersio
   return { score: Math.round((passed / checks.length) * 100), passed, total: checks.length, missing };
 }
 
-export function auditSummary(claims: Claim[], dataset: DatasetVersion): AuditSummary {
+export function auditSummary(claims: Claim[], dataset: DatasetVersion, changedRecords?: number): AuditSummary {
   const counts = claims.reduce(
     (result, claim) => ({ ...result, [claim.status]: result[claim.status] + 1 }),
     { SUPPORTED: 0, WEAKENED: 0, REVERSED: 0, UNTESTABLE: 0, REVIEW_REQUIRED: 0 } as Record<ClaimStatus, number>,
@@ -127,7 +131,7 @@ export function auditSummary(claims: Claim[], dataset: DatasetVersion): AuditSum
     completenessChecksPassed,
     completenessChecksTotal,
     evidenceCoverage: coverage,
-    changedRecords: compareRows(dataset),
+    changedRecords: changedRecords ?? compareRows(dataset),
   };
 }
 
@@ -215,7 +219,7 @@ function evidenceSections(dataset: DatasetVersion, claims: Claim[]) {
   return {
     snapshots: { baseline: buildSnapshotManifest(dataset, "baseline"), current: buildSnapshotManifest(dataset, "current") },
     snapshotPayloads: { baseline: rawPayload(dataset, "baseline"), current: rawPayload(dataset, "current") },
-    summary: auditSummary(claims, dataset),
+    summary: auditSummary(claims, dataset, allDiffs.length),
     diffSummary: {
       totalChanged: allDiffs.length,
       exported: Math.min(allDiffs.length, MAX_EXPORTED_DIFFS),

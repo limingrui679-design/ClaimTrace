@@ -26,6 +26,12 @@
           "SUPPORTED",
           "WEAKENED"
         ]
+      },
+      {
+        "claimId": "places-maricopa-interval",
+        "allowedStatuses": [
+          "SUPPORTED"
+        ]
       }
     ],
     "stakeholders": [

@@ -44,6 +44,20 @@
         "total": 16,
         "missing": []
       }
+    },
+    {
+      "id": "places-maricopa-interval",
+      "kind": "SNAPSHOT",
+      "baselineStatus": "SUPPORTED",
+      "status": "REVIEW_REQUIRED",
+      "baselineValue": "20.9 [18.8, 23.1]",
+      "currentValue": "18.9 [17, 20.9]",
+      "evidenceCompleteness": {
+        "score": 100,
+        "passed": 16,
+        "total": 16,
+        "missing": []
+      }
     }
   ],
   "decisions": [

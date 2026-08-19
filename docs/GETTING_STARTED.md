@@ -67,6 +67,12 @@ npm run benchmark
 # Check documentation references
 npm run test:docs
 
+# Independently verify one exported or committed AuditBundle
+npm run verify:bundle -- public/cases/cdc-places-depression/evidence-package.json
+
+# Verify a chronological chain of AuditBundles
+npm run verify:chain -- bundle-1.json bundle-2.json
+
 # Run the complete local quality gate
 npm run ci
 ```
@@ -92,6 +98,7 @@ The refresh path validates case-local targets, source type, cleaner binding, HTT
 
 - [Case catalog](CASE_CATALOG.md)
 - [Evidence model](EVIDENCE_MODEL.md)
+- [Bundle verification and JSON Schema](VERIFY_BUNDLES.md)
 - [Architecture](ARCHITECTURE.md)
 - [Development guide](../DEVELOPMENT.md)
 - [Security](SECURITY.md) and [limitations](LIMITATIONS.md)

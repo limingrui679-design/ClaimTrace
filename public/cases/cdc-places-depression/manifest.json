@@ -5,8 +5,18 @@
   "dataOrigin": "PUBLIC",
   "sourceMetadataFile": "/cases/cdc-places-depression/source-metadata.json",
   "caseId": "cdc-places-depression",
+  "title": "Public Data: CDC PLACES Model-Based Estimate Audit",
+  "question": "Which selected-county descriptive statements need revision when the model-based estimates update?",
+  "method": "Point-estimate ranks, thresholds, interval-aware gates, and period stability",
+  "capabilities": [
+    "health data",
+    "statistical uncertainty",
+    "surveillance",
+    "methods review"
+  ],
+  "boundary": "Model-based county estimates; not diagnosis, epidemiology, causal intervention, or clinical advice.",
   "primaryKey": "county_fips",
-  "claimCount": 3,
+  "claimCount": 4,
   "decisionCount": 1,
   "evidencePackageVerified": true,
   "files": {
@@ -19,24 +29,24 @@
       "bytes": 580
     },
     "claims.json": {
-      "sha256": "a8814c229db7ba7de27ee22f24c0b735eb0e89ecb2fa7ea94124d3e1bb33376c",
-      "bytes": 3041
+      "sha256": "cae96d45eb2573f36f21de1fd75aedf4d18307c0597fd45f5f810c85313f3b61",
+      "bytes": 4353
     },
     "decisions.json": {
-      "sha256": "593e0fd6aed2b4911e40c00030544389f07d313a476da476e5d1cea080a9856d",
-      "bytes": 3210
+      "sha256": "4ff76bc360eb6c536dbb22e4a8cd0b1db356c0bc3275b3978ea04ebcba9f3e8a",
+      "bytes": 3335
     },
     "expected-audit.json": {
-      "sha256": "4622e8d5ac118a591bfa67adcad2160b6fb2211e7bdabdf756c187a69f1f9b7b",
-      "bytes": 1399
+      "sha256": "30cd6806b08d2d1a22e41c9168b0be1f50ca33203fcf8bab3aaee218c598aacd",
+      "bytes": 1762
     },
     "evidence-package.json": {
-      "sha256": "8faeed1e1a0d58c8a393e68d9863a72b556e395a1afae0848d50596527149e64",
-      "bytes": 76078
+      "sha256": "0dc6410c867fcfa500c4b7f66da85674ffc337870b38c8cecde47c8ae918ca8c",
+      "bytes": 86414
     },
     "case.ts": {
-      "sha256": "8f0305c834ee886f3e33608d5604f542a867efa1a3a3b0764c661cc5d3c627e3",
-      "bytes": 6924
+      "sha256": "5006dc09a0b525e13bb7a63ab98fb78d88ae972cac45e7de2807f3b8362ae9ce",
+      "bytes": 8441
     },
     "README.md": {
       "sha256": "2891ff37fd1454efa6c2792b324f80951a5d918f28b4438e59732daf6f5e6f11",

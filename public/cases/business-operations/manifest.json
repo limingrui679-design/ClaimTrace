@@ -5,6 +5,16 @@
   "dataOrigin": "SYNTHETIC",
   "sourceMetadataFile": null,
   "caseId": "business-operations",
+  "title": "Business Operations: Channel Conversion and Service Capacity",
+  "question": "Should media spend and service capacity be reallocated after channel rankings change?",
+  "method": "Grouped rank, threshold, and stability rules",
+  "capabilities": [
+    "business analytics",
+    "operations",
+    "capacity decisions",
+    "communication"
+  ],
+  "boundary": "Controlled regression fixture; no client, spend, revenue, or measured operating impact.",
   "primaryKey": "channel_id",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1401
     },
     "evidence-package.json": {
-      "sha256": "fde52eb34ec687ece02b1d01177684ae7fdef73a4ba348c95247fcdf584d0994",
+      "sha256": "380a8e34f54d9fedd98954eb1dbf07254371e82d72cd45d00fe5a2732dd42f2e",
       "bytes": 51726
     },
     "case.ts": {

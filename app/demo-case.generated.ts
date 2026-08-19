@@ -799,6 +799,6 @@ export const DEMO_DATASET = {
     "source_field"
   ],
   "primaryKey": "row_id",
-  "ruleVersion": "claimtrace-rule/6.2.0",
+  "ruleVersion": "claimtrace-rule/6.3.0",
   "isDemo": true
 } as DatasetVersion;

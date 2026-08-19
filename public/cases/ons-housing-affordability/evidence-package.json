@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.6.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "ONS Selected-Authority Housing-Affordability Ratio Audit",
   "primaryKey": "authority_code",
-  "ruleVersion": "claimtrace-rule/6.2.0",
+  "ruleVersion": "claimtrace-rule/6.3.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
@@ -415,7 +415,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-kensington-rank|claimtrace-rule/6.2.0",
+        "seed": "ons-kensington-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -478,7 +478,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.2.0",
+        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -536,7 +536,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-selected-mean-stability|claimtrace-rule/6.2.0",
+        "seed": "ons-selected-mean-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -1154,7 +1154,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ons-kensington-rank:1182c2f58e5dca7af5a7ffdd",
+          "id": "claim-result:ons-kensington-rank:da99a52953ba6c5750d623c0",
           "kind": "Comparison result",
           "title": "housing_affordability_ratio version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1168,9 +1168,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1202,7 +1202,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
@@ -1214,7 +1214,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-kensington-rank|claimtrace-rule/6.2.0",
+        "seed": "ons-kensington-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -1285,7 +1285,7 @@
           }
         }
       },
-      "resultId": "claim-result:ons-kensington-rank:1182c2f58e5dca7af5a7ffdd",
+      "resultId": "claim-result:ons-kensington-rank:da99a52953ba6c5750d623c0",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1364,7 +1364,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ons-redcar-five-ratio:43dfab90bdd95338541038a6",
+          "id": "claim-result:ons-redcar-five-ratio:70a8f6788c841e7fdc6ce697",
           "kind": "Comparison result",
           "title": "housing_affordability_ratio version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1378,9 +1378,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1412,7 +1412,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
@@ -1424,7 +1424,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.2.0",
+        "seed": "ons-redcar-five-ratio|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1469,7 +1469,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ons-redcar-five-ratio:43dfab90bdd95338541038a6",
+      "resultId": "claim-result:ons-redcar-five-ratio:70a8f6788c841e7fdc6ce697",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1814,7 +1814,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ons-selected-mean-stability:b7320fc0a8b3ff8ce60c5163",
+          "id": "claim-result:ons-selected-mean-stability:835f7d303b71098f929ef888",
           "kind": "Comparison result",
           "title": "housing_affordability_ratio version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1828,9 +1828,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1862,7 +1862,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
@@ -1874,7 +1874,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ons-selected-mean-stability|claimtrace-rule/6.2.0",
+        "seed": "ons-selected-mean-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 12,
         "sides": {
           "baseline": {
@@ -1919,7 +1919,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ons-selected-mean-stability:b7320fc0a8b3ff8ce60c5163",
+      "resultId": "claim-result:ons-selected-mean-stability:835f7d303b71098f929ef888",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -2074,11 +2074,11 @@
         "decisionInputProvenanceHash": "09e9c2f24f8fc3b89e9c0b9823fb5d83b5979812e81ec3cbdb1521ca8311376b",
         "baselineSha256": "cd3f0d433ec73a2373f3ba1902ba2519141950b012e838875086e1c92824facb",
         "currentSha256": "8d9006a4cb84ddbbeaf1f918dd7ee789f46feb865265be3c904d285a7aa34be0",
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "claimResultIds": [
-          "claim-result:ons-kensington-rank:1182c2f58e5dca7af5a7ffdd",
-          "claim-result:ons-redcar-five-ratio:43dfab90bdd95338541038a6",
-          "claim-result:ons-selected-mean-stability:b7320fc0a8b3ff8ce60c5163"
+          "claim-result:ons-kensington-rank:da99a52953ba6c5750d623c0",
+          "claim-result:ons-redcar-five-ratio:70a8f6788c841e7fdc6ce697",
+          "claim-result:ons-selected-mean-stability:835f7d303b71098f929ef888"
         ]
       },
       "analysis": {
@@ -2200,7 +2200,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:ons-planning-context-note:8f9e58caacc38e7a7942d25f"
+      "resultId": "decision-result:ons-planning-context-note:30c4cff071f986f4e743c365"
     }
   ],
   "reviews": [],
@@ -2276,12 +2276,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "f877f97c8d2e117ad563cac896458a686e1d3e1c257ec9c14a381b2a930e772e",
+    "payloadHash": "52907db33eba6476ce783538a1c1203400dfce77779c0419211887492a6d6c6c",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "b560b1b2fc13e16169a88bef6c7a1d59dce3062e6104900f8c3a8d36202a7393",
-      "claims": "af689a428c80141f892e91d9fee17718a1175fc5ed78e7bad75859688335e46b",
-      "decisions": "6e7fa1c5a8ca1e3408022c7459214a3bf2ac223c91f2a834970731acfbafefa2",
+      "claims": "f6088d71ae711b85ebc7da698236d2fb81e489efec270b97e790f42a6a570c44",
+      "decisions": "36fcf788bfa77257a579c50950a78eb8f1a8f4b314758d9b14bf58ca17f242b6",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "96b92afbae9fca682d6e871bc98f876eb8f3c230209556d5da4cc4c8a6d17160",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

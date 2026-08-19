@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.6.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-08T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "Synthetic Site-Selection Audit",
   "primaryKey": "site_id",
-  "ruleVersion": "claimtrace-rule/6.2.0",
+  "ruleVersion": "claimtrace-rule/6.3.0",
   "isDemo": true,
   "dataOrigin": "SYNTHETIC",
   "snapshots": {
@@ -210,7 +210,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-demand-rank|claimtrace-rule/6.2.0",
+        "seed": "spatial-demand-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -268,7 +268,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-travel-gate|claimtrace-rule/6.2.0",
+        "seed": "spatial-travel-gate|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -326,7 +326,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-flood-gate|claimtrace-rule/6.2.0",
+        "seed": "spatial-flood-gate|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -635,7 +635,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:spatial-demand-rank:95038996fc1ecd793d061893",
+          "id": "claim-result:spatial-demand-rank:709cd6a840e4e4fd73902c16",
           "kind": "Comparison result",
           "title": "demand_index version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -649,9 +649,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -683,7 +683,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
@@ -695,7 +695,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-demand-rank|claimtrace-rule/6.2.0",
+        "seed": "spatial-demand-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -750,7 +750,7 @@
           }
         }
       },
-      "resultId": "claim-result:spatial-demand-rank:95038996fc1ecd793d061893",
+      "resultId": "claim-result:spatial-demand-rank:709cd6a840e4e4fd73902c16",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -895,7 +895,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:spatial-travel-gate:15f868c31eb8cea13dcc25f2",
+          "id": "claim-result:spatial-travel-gate:b9db0331b55132ee80329224",
           "kind": "Comparison result",
           "title": "travel_minutes version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -909,9 +909,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -943,7 +943,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
@@ -955,7 +955,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-travel-gate|claimtrace-rule/6.2.0",
+        "seed": "spatial-travel-gate|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -1000,7 +1000,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:spatial-travel-gate:15f868c31eb8cea13dcc25f2",
+      "resultId": "claim-result:spatial-travel-gate:b9db0331b55132ee80329224",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1145,7 +1145,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:spatial-flood-gate:97e11d3d87fd74ddcecbee93",
+          "id": "claim-result:spatial-flood-gate:430af7b2349741f16bd96971",
           "kind": "Comparison result",
           "title": "flood_risk version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1159,9 +1159,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1193,7 +1193,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-08T00:00:00.000Z",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
@@ -1205,7 +1205,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "spatial-flood-gate|claimtrace-rule/6.2.0",
+        "seed": "spatial-flood-gate|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 3,
         "sides": {
           "baseline": {
@@ -1250,7 +1250,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:spatial-flood-gate:97e11d3d87fd74ddcecbee93",
+      "resultId": "claim-result:spatial-flood-gate:430af7b2349741f16bd96971",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1442,10 +1442,10 @@
         "decisionInputProvenanceHash": "4290dfd68668fa8c94ffdf67043bab2f7a2afdfb12ebddb7a3f9d5687a1534a3",
         "baselineSha256": "58ecc52ea5956dc07f3830eb99613f7d7ae76fe7bf603a3f030b7ad5b82e5b61",
         "currentSha256": "c0ee909924202eb7575156b9dc78d3fef925bddccf0d99126d1e43de600a0cd9",
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "claimResultIds": [
-          "claim-result:spatial-demand-rank:95038996fc1ecd793d061893",
-          "claim-result:spatial-flood-gate:97e11d3d87fd74ddcecbee93"
+          "claim-result:spatial-demand-rank:709cd6a840e4e4fd73902c16",
+          "claim-result:spatial-flood-gate:430af7b2349741f16bd96971"
         ]
       },
       "analysis": {
@@ -1578,7 +1578,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:spatial-site-choice:a96aeb6879fb0abfdf2df5de"
+      "resultId": "decision-result:spatial-site-choice:1be5460f5e0b100a18b61173"
     }
   ],
   "reviews": [],
@@ -1592,12 +1592,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "fca07ddcbfd049aee0aebfcde5c31fcf8de462f45f5f2bb41d88aea5393fea09",
+    "payloadHash": "cc06d281f7eb92b4f02ef9c511feab7cfe4ec513fc3106eeac6c7858a973e6ec",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "6ec3f64588f2411b04d6792999e57345c1258cea0a0e797099834f449cdaf20f",
-      "claims": "9d3dac5fd815f2482c47d733403286f0c356d984aec56447016c4fed14f4f0b4",
-      "decisions": "4088299959c846c163c115e9dcdd563c98b960c20a7918d3fd0f0c4c52111cc7",
+      "claims": "20dc17000ce28531da36507a9baf7dd8526dfaec81ae892e65979bf8d3d1d621",
+      "decisions": "2797a5cb07e64cd6827d69c2eabf293af81229ca317dd80b9022cd3087e832c7",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

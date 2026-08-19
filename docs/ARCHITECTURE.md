@@ -25,12 +25,13 @@ flowchart LR
 
 - `src/core/snapshot`: decoding, strict versioned CSV parsing, exact physical lines, baseline-ordered canonical rows, raw and normalized SHA-256, primary-key validation, and snapshot manifests.
 - `src/core/claim-spec`: independent support/reversal threshold provenance and confirmation checks.
-- `src/core/statistics`: filtering, aggregation, effective denominators, missingness, sample-composition fingerprints, keyed row diffs, and tie-aware rankings.
-- `src/core/validation`: snapshot/comparison claim status computation, balanced two-sided source-reference extraction, boundary sampling, canonical content-derived result identities, and imported diagnostic claims.
+- `src/core/statistics`: filtering, aggregation, effective denominators, missingness, sample-composition fingerprints, keyed row diffs, tie-aware rankings, and single-row reported-interval extraction.
+- `src/core/validation`: snapshot/comparison claim status computation, full-interval threshold classification, balanced two-sided source-reference extraction, boundary sampling, canonical content-derived result identities, and imported diagnostic claims.
 - `src/core/decision`: current claim gating, active action-identity comparison, numerical-input provenance gates, comparison with stored signed decision history, deterministic multi-option scoring, constraint filtering, break-even values, score intervals, Pareto frontiers, stability sweeps, and fixed-seed bounded Monte Carlo.
 - `src/core/governance`: UUID/SHA-256-chained append-only review objects, explicit local-unverified assurance fields, and separate engine/disposition/release state transitions.
 - `src/core/integrity`: canonical JSON, portable SHA-256, stable review-result hashes, semantic action/policy hashes, and decision-input provenance hashes.
 - `src/core/evidence`: computed completeness, bounded AuditBundle export, independent snapshot/claim/decision/review/upstream/public-source verification, cross-bundle-chain verification, and standalone HTML reports.
+- `schemas/` and `tools/verify-audit-bundle.ts`: versioned AuditBundle interchange structure plus human-readable and JSON CLI verification for one bundle or a chronological chain.
 - `src/cases`: ten executable case specifications and shared browser/test runtime. Six are pinned official public-data transformations covering operations, fixed income, consumer finance, population health, planning, and international indicators; four are deterministic synthetic stress fixtures for controlled failure modes. Self-contained generated packs live under `public/cases`.
 - `benchmarks`: 64 independently labeled scenarios across eight edge-case families, multiple baselines, ablations, and committed results. Deterministic property tests live under `tests/property.test.ts`.
 - `app/workspace-config.ts`: shared view identifiers, demo initialization, build identity, and display metadata.

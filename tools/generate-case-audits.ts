@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { computeEvidenceCompleteness, verifyEvidencePackage } from "../app/claimtrace-core";
-import { EXECUTABLE_CASES, runExecutableCase } from "../src/cases";
+import { CASE_CATALOG, EXECUTABLE_CASES, runExecutableCase } from "../src/cases";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC = path.join(ROOT, "public");
@@ -35,6 +35,8 @@ function project(run: Awaited<ReturnType<typeof runExecutableCase>>) {
 
 const catalog = [];
 for (const definition of EXECUTABLE_CASES) {
+  const catalogDefinition = CASE_CATALOG.find((item) => item.id === definition.id);
+  if (!catalogDefinition) throw new Error(`${definition.id}: missing case-catalog metadata`);
   const directory = path.join(OUTPUT, definition.id);
   await mkdir(directory, { recursive: true });
   if (definition.id === "population-health") {
@@ -84,6 +86,11 @@ for (const definition of EXECUTABLE_CASES) {
     dataOrigin: definition.dataOrigin ?? "SYNTHETIC",
     sourceMetadataFile: definition.sourceMetadataFile ?? null,
     caseId: definition.id,
+    title: catalogDefinition.title,
+    question: catalogDefinition.question,
+    method: catalogDefinition.method,
+    capabilities: catalogDefinition.capabilities,
+    boundary: catalogDefinition.boundary,
     primaryKey: definition.primaryKey,
     claimCount: definition.claims.length,
     decisionCount: definition.decisions.length,

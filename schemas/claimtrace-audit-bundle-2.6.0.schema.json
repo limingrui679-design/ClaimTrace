@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/limingrui679-design/ClaimTrace/main/schemas/claimtrace-audit-bundle-2.6.0.schema.json",
+  "title": "ClaimTrace AuditBundle 2.6.0",
+  "description": "Structural interchange schema for a ClaimTrace AuditBundle. Passing this schema is necessary but not sufficient: use the ClaimTrace verifier to recompute snapshots, claims, decisions, lineage, and canonical hashes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "bundleType",
+    "generatedAt",
+    "previousBundleHash",
+    "project",
+    "primaryKey",
+    "ruleVersion",
+    "isDemo",
+    "dataOrigin",
+    "snapshots",
+    "snapshotPayloads",
+    "summary",
+    "diffSummary",
+    "diffs",
+    "queryTrace",
+    "dataPreview",
+    "scaleBoundary",
+    "claimSpecs",
+    "claimResults",
+    "decisionSpecs",
+    "decisionResults",
+    "reviews",
+    "reviewChain",
+    "externalSource",
+    "upstreamLineage",
+    "integrity"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "claimtrace-audit-bundle/2.6.0" },
+    "bundleType": { "const": "AuditBundle" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "previousBundleHash": {
+      "oneOf": [
+        { "$ref": "#/$defs/sha256" },
+        { "type": "null" }
+      ]
+    },
+    "project": { "type": "string", "minLength": 1 },
+    "primaryKey": { "type": "string", "minLength": 1 },
+    "ruleVersion": { "type": "string", "pattern": "^claimtrace-rule/[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "isDemo": { "type": "boolean" },
+    "dataOrigin": { "enum": ["SYNTHETIC", "PUBLIC", "USER"] },
+    "snapshots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseline", "current"],
+      "properties": {
+        "baseline": { "$ref": "#/$defs/snapshotManifest" },
+        "current": {
+          "oneOf": [
+            { "$ref": "#/$defs/snapshotManifest" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "snapshotPayloads": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseline", "current"],
+      "properties": {
+        "baseline": { "$ref": "#/$defs/nullableSnapshotPayload" },
+        "current": { "$ref": "#/$defs/nullableSnapshotPayload" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "supported", "weakened", "reversed", "untestable", "reviewRequired", "completenessChecksPassed", "completenessChecksTotal", "evidenceCoverage", "changedRecords"],
+      "properties": {
+        "total": { "$ref": "#/$defs/nonNegativeInteger" },
+        "supported": { "$ref": "#/$defs/nonNegativeInteger" },
+        "weakened": { "$ref": "#/$defs/nonNegativeInteger" },
+        "reversed": { "$ref": "#/$defs/nonNegativeInteger" },
+        "untestable": { "$ref": "#/$defs/nonNegativeInteger" },
+        "reviewRequired": { "$ref": "#/$defs/nonNegativeInteger" },
+        "completenessChecksPassed": { "$ref": "#/$defs/nonNegativeInteger" },
+        "completenessChecksTotal": { "$ref": "#/$defs/nonNegativeInteger" },
+        "evidenceCoverage": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "changedRecords": { "$ref": "#/$defs/nonNegativeInteger" }
+      }
+    },
+    "diffSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["totalChanged", "exported", "truncated", "limit"],
+      "properties": {
+        "totalChanged": { "$ref": "#/$defs/nonNegativeInteger" },
+        "exported": { "$ref": "#/$defs/nonNegativeInteger" },
+        "truncated": { "type": "boolean" },
+        "limit": { "$ref": "#/$defs/nonNegativeInteger" }
+      }
+    },
+    "diffs": { "type": "array", "items": { "type": "object" } },
+    "queryTrace": { "type": "array", "items": { "type": "object" } },
+    "dataPreview": {
+      "type": "object",
+      "required": ["columns", "baselineRows", "currentRows", "previewLimit"],
+      "properties": {
+        "columns": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "baselineRows": { "type": "array", "items": { "type": "object" } },
+        "currentRows": {
+          "oneOf": [
+            { "type": "array", "items": { "type": "object" } },
+            { "type": "null" }
+          ]
+        },
+        "previewLimit": { "$ref": "#/$defs/nonNegativeInteger" }
+      }
+    },
+    "scaleBoundary": {
+      "type": "object",
+      "required": ["maxExportedDiffs", "maxRawBytesPerSnapshot", "maxReferencesPerClaim", "note"],
+      "properties": {
+        "maxExportedDiffs": { "$ref": "#/$defs/nonNegativeInteger" },
+        "maxRawBytesPerSnapshot": { "$ref": "#/$defs/nonNegativeInteger" },
+        "maxReferencesPerClaim": { "$ref": "#/$defs/nonNegativeInteger" },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    },
+    "claimSpecs": { "type": "array", "items": { "type": "object" } },
+    "claimResults": { "type": "array", "items": { "type": "object" } },
+    "decisionSpecs": { "type": "array", "items": { "type": "object" } },
+    "decisionResults": { "type": "array", "items": { "type": "object" } },
+    "reviews": { "type": "array", "items": { "type": "object" } },
+    "reviewChain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "headRecordId", "headRecordHash"],
+      "properties": {
+        "count": { "$ref": "#/$defs/nonNegativeInteger" },
+        "headRecordId": { "type": ["string", "null"] },
+        "headRecordHash": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "externalSource": { "type": ["object", "null"] },
+    "upstreamLineage": { "type": ["object", "null"] },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "canonicalization", "payloadHash", "sectionHashes"],
+      "properties": {
+        "algorithm": { "const": "SHA-256" },
+        "canonicalization": { "const": "claimtrace-json-c14n/1.0.0" },
+        "payloadHash": { "$ref": "#/$defs/sha256" },
+        "sectionHashes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["chain", "snapshots", "claims", "decisions", "reviews", "provenance", "upstream"],
+          "properties": {
+            "chain": { "$ref": "#/$defs/sha256" },
+            "snapshots": { "$ref": "#/$defs/sha256" },
+            "claims": { "$ref": "#/$defs/sha256" },
+            "decisions": { "$ref": "#/$defs/sha256" },
+            "reviews": { "$ref": "#/$defs/sha256" },
+            "provenance": { "$ref": "#/$defs/sha256" },
+            "upstream": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonNegativeInteger": { "type": "integer", "minimum": 0 },
+    "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+    "snapshotManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "csvDialectVersion", "normalizationVersion", "snapshotId", "side", "fileName", "sha256", "rowCount", "byteSize", "columns", "primaryKey", "generatedAt", "verificationStatus"],
+      "properties": {
+        "schemaVersion": { "const": "claimtrace-snapshot/1.1.0" },
+        "csvDialectVersion": { "const": "claimtrace-csv-strict/1.0.0" },
+        "normalizationVersion": { "const": "claimtrace-normalized-rows/1.0.0" },
+        "snapshotId": { "type": "string", "minLength": 1 },
+        "side": { "enum": ["baseline", "current"] },
+        "fileName": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "normalizedSha256": { "$ref": "#/$defs/sha256" },
+        "rowCount": { "$ref": "#/$defs/nonNegativeInteger" },
+        "byteSize": { "$ref": "#/$defs/nonNegativeInteger" },
+        "columns": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1, "uniqueItems": true },
+        "primaryKey": { "type": "string", "minLength": 1 },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "verifiedAt": { "type": "string", "format": "date-time" },
+        "verificationStatus": { "enum": ["verified", "unverified", "failed"] }
+      }
+    },
+    "snapshotPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "sha256"],
+      "anyOf": [
+        {
+          "required": ["text"],
+          "properties": { "text": { "type": "string" } }
+        },
+        {
+          "required": ["rawBytesBase64"],
+          "properties": { "rawBytesBase64": { "type": "string", "contentEncoding": "base64" } }
+        }
+      ],
+      "properties": {
+        "fileName": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "normalizedSha256": { "$ref": "#/$defs/sha256" },
+        "text": { "type": "string" },
+        "rawBytesBase64": { "type": "string", "contentEncoding": "base64" }
+      }
+    },
+    "nullableSnapshotPayload": {
+      "oneOf": [
+        { "$ref": "#/$defs/snapshotPayload" },
+        { "type": "null" }
+      ]
+    }
+  }
+}

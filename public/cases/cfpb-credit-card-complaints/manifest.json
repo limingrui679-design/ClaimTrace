@@ -5,6 +5,16 @@
   "dataOrigin": "PUBLIC",
   "sourceMetadataFile": "/cases/cfpb-credit-card-complaints/source-metadata.json",
   "caseId": "cfpb-credit-card-complaints",
+  "title": "Public Data: CFPB Credit-Card Complaint Pattern Audit",
+  "question": "Do structured issue rankings, shares, or record volume require the prior consumer-friction brief to change?",
+  "method": "Issue ranks, matched shares, denominator tracking, and volume stability",
+  "capabilities": [
+    "consumer finance",
+    "behavioral context",
+    "sampling limits",
+    "policy communication"
+  ],
+  "boundary": "Complaint patterns are not representative incidence, adjudicated findings, or intervention effects.",
   "primaryKey": "issue_id",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1489
     },
     "evidence-package.json": {
-      "sha256": "01929ec28b5979f3108c62cde8840bdb097ed6f0aedcb2a101d7633993be43b2",
+      "sha256": "8808748711cacc8fd6e47b7b949e5b2156bd7398c66382d754b8e2e29a6e71b9",
       "bytes": 158206
     },
     "case.ts": {

@@ -83,6 +83,40 @@ export default {
           "confirmedAt": "2026-08-10T00:00:00.000Z"
         }
       }
+    },
+    {
+      "id": "places-maricopa-interval",
+      "code": "CDC-004",
+      "title": "Maricopa County's complete 95% confidence interval remains at or above 18%",
+      "section": "Interval-aware estimate gate",
+      "owner": "Public-data case reviewer",
+      "category": "Uncertainty-aware threshold",
+      "formula": "Maricopa ci_low_percent >= 18 with point estimate and 95% confidence interval retained",
+      "rule": {
+        "type": "interval-threshold",
+        "field": "age_adjusted_depression_percent",
+        "lowerField": "ci_low_percent",
+        "upperField": "ci_high_percent",
+        "aggregation": "average",
+        "operator": ">=",
+        "threshold": 18,
+        "intervalLevel": 0.95,
+        "intervalLabel": "95% confidence interval",
+        "filters": [
+          {
+            "field": "county_fips",
+            "equals": "04013"
+          }
+        ],
+        "thresholdSpec": {
+          "value": 18,
+          "unit": "percent",
+          "source": "Illustrative uncertainty-review threshold v1",
+          "rationale": "Tests whether the complete reported interval, rather than only the point estimate, clears an analyst-authored descriptive threshold; this is not CDC guidance or a clinical rule",
+          "confirmedBy": "ClaimTrace public-data case author",
+          "confirmedAt": "2026-08-10T00:00:00.000Z"
+        }
+      }
     }
   ],
   "decisions": [
@@ -112,6 +146,12 @@ export default {
           "allowedStatuses": [
             "SUPPORTED",
             "WEAKENED"
+          ]
+        },
+        {
+          "claimId": "places-maricopa-interval",
+          "allowedStatuses": [
+            "SUPPORTED"
           ]
         }
       ],

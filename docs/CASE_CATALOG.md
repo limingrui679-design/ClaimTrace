@@ -4,18 +4,18 @@ ClaimTrace ships ten executable cases with two distinct evidence roles. Four det
 
 ## At a glance
 
-| Case | Evidence role | Primary key | Audit focus | Case pack |
-|---|---|---|---|---|
-| Business operations | Deterministic synthetic | `channel_id` | Ranking, SLA changes, and resource allocation | [Open](../public/cases/business-operations/) |
-| Financial risk | Deterministic synthetic | `account_id` | Probability, membership, missingness, and thresholds | [Open](../public/cases/financial-risk/) |
-| Population health | Synthetic with verified upstream lineage | `row_id` | Risk, recall, follow-up, and model gating | [Open](../public/cases/population-health/) |
-| Spatial planning | Deterministic synthetic | `site_id` | Demand, travel time, risk, and site selection | [Open](../public/cases/spatial-planning/) |
-| World Bank life expectancy | Pinned public data · CC BY 4.0 | `country_code` | Cross-year indicator claims | [Open](../public/cases/world-bank-life-expectancy/) |
-| USDOT transit operations | Pinned public data · U.S. DOT/FTA | `ntd_id` | Ridership and service intensity | [Open](../public/cases/usdot-transit-operations/) |
-| U.S. Treasury yield curve | Pinned public data · U.S. Treasury | `maturity_code` | Period and curve-shape claims | [Open](../public/cases/us-treasury-yield-curve/) |
-| CFPB credit-card complaints | Pinned public data · CC0 | `issue_id` | Issue ranking, shares, and matched volume | [Open](../public/cases/cfpb-credit-card-complaints/) |
-| CDC PLACES depression estimates | Pinned public data · CDC | `location_id` | Selected-county release changes | [Open](../public/cases/cdc-places-depression/) |
-| ONS housing affordability | Pinned public data · OGL v3.0 | `area_code` | Selected-authority period changes | [Open](../public/cases/ons-housing-affordability/) |
+| Case | Evidence role | Primary key | Executed method | Demonstrated capability | Case pack |
+|---|---|---|---|---|---|
+| Business operations | Deterministic synthetic | `channel_id` | Grouped rank, threshold, and stability rules | Operations and capacity decisions | [Open](../public/cases/business-operations/) |
+| Financial risk | Deterministic synthetic | `account_id` | Portfolio means, membership change, missingness, and thresholds | Risk governance and model monitoring | [Open](../public/cases/financial-risk/) |
+| Population health | Synthetic with verified upstream lineage | `row_id` | Raw-to-summary lineage, recall gate, regional ranks, and constrained options | AI governance and health-data lineage | [Open](../public/cases/population-health/) |
+| Spatial planning | Deterministic synthetic | `site_id` | Demand/accessibility ranks with risk and capacity constraints | Multi-criteria place decisions and sensitivity | [Open](../public/cases/spatial-planning/) |
+| World Bank life expectancy | Pinned public data · CC BY 4.0 | `country_code` | Cross-year ranks, descriptive threshold, and mean stability | Population indicators and reproducibility | [Open](../public/cases/world-bank-life-expectancy/) |
+| USDOT transit operations | Pinned public data · U.S. DOT/FTA | `ntd_id` | Derived riders per vehicle-revenue hour, threshold, and stability | Operations, source adapters, and review routing | [Open](../public/cases/usdot-transit-operations/) |
+| U.S. Treasury yield curve | Pinned public data · U.S. Treasury | `maturity_code` | Curve-shape ranks, short-end threshold, and period mean | Fixed-income evidence and risk communication | [Open](../public/cases/us-treasury-yield-curve/) |
+| CFPB credit-card complaints | Pinned public data · CC0 | `issue_id` | Issue ranks, matched shares, denominator, and volume stability | Consumer context and sampling limits | [Open](../public/cases/cfpb-credit-card-complaints/) |
+| CDC PLACES depression estimates | Pinned public data · CDC | `county_fips` | Point ranks and stability plus a 95% interval-aware threshold | Health data and statistical uncertainty | [Open](../public/cases/cdc-places-depression/) |
+| ONS housing affordability | Pinned public data · OGL v3.0 | `authority_code` | Local-authority ranks, affordability threshold, and stability | Official statistics and place-based decisions | [Open](../public/cases/ons-housing-affordability/) |
 
 ## Why both roles matter
 
@@ -52,6 +52,8 @@ npm run test:unit
 ```
 
 Generation must leave the committed artifacts unchanged. The machine-readable catalog at [`public/cases/catalog.json`](../public/cases/catalog.json) records all ten packs and their file hashes.
+
+Each generated manifest also records the case question, method, demonstrated capability tags, and evidence boundary. Those labels describe what the committed code and artifacts show; they are not impact claims.
 
 ## Interpretation boundary
 

@@ -1,6 +1,6 @@
 # Release verification
 
-## ClaimTrace 0.10.3 — 2026-08-14
+## ClaimTrace 0.11.0 — 2026-08-20
 
 This record describes a local release-candidate verification on Darwin arm64 with Node.js 22.20.0 and npm 10.9.3. It is a reproducibility receipt, not evidence of external adoption or real-world impact.
 
@@ -9,11 +9,12 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Check | Result |
 |---|---|
 | `npm run ci` | Passed |
-| Unit and integration tests | 155/155 passed |
+| Unit and integration tests | 166/166 passed |
 | Built-artifact and release-package checks | 3/3 passed |
 | Real-Chromium read-only acceptance test | 1/1 passed |
 | Real-Chromium writable workflow and race test | 1/1 passed |
 | Dataset-intent cross-flow matrix | case→import, import read→case, revision→case, case→demo passed |
+| Import-dialog intent boundary | Opening an import aborts an older case request before CSV preview or form submission; the delayed browser race passed |
 | Dataset-intent transition unit tests | 2/2 passed; superseded case controllers abort and baseline/current read generations invalidate |
 | Review/export isolation during dataset replacement | Passed; no stale record, download, or predecessor root |
 | UI/workflow architecture split | `app/page.tsx` reduced from 952 to 610 lines; views, configuration, dataset intent, case loading, CSV import, and verified export are separate modules |
@@ -21,19 +22,25 @@ This record describes a local release-candidate verification on Darwin arm64 wit
 | Executable cases loaded and run in Chromium | 10/10 passed |
 | Controlled benchmark | 64/64 exact labels |
 | Deterministic property trials | 512 across four seeded properties |
-| Core statement and line coverage | 96.99% |
-| Core function coverage | 99.37% |
-| Core branch coverage | 78.75% |
+| 20,000-row bounded evidence selection | Passed the unchanged 10-second browser-scale budget after reusing the keyed diff; full-suite observation 2.14 seconds |
+| Core statement and line coverage | 96.83% |
+| Core function coverage | 99.39% |
+| Core branch coverage | 78.98% |
 | Executable case regeneration and AuditBundle verification | 10/10 passed |
+| Published structural schema | 10/10 generated AuditBundles satisfy AuditBundle 2.6.0; missing integrity rejected; raw-bytes-only payload accepted |
+| Command-line verifier | Valid bundle, semantically tampered bundle, and genesis-chain paths passed with exit codes 0/1/0 |
+| Reported-interval rule | Complete support, threshold crossing, complete reversal, malformed bounds, multi-row selection, and invalid untrusted metadata paths passed |
 | Public-source raw-content and cleaning-parameter tamper tests | 6/6 passed |
 | Public-source update-date basis | 6/6 declare publisher-reported or not-separately-reported; World Bank and Treasury bind both response headers, USDOT binds official Socrata metadata, and all three missing dates carry an explicit reason |
 | Publisher-date adversarial checks | Invalid ISO dates, two-response disagreement, wrong Socrata dataset identity, invalid `rowsUpdatedAt`, and fully rehashed date tampering rejected |
 | Publisher-date diagnostic isolation | Each invalid or mismatched declared date produces one root-cause diagnostic, no duplicate message, and no derivative baseline/current CSV-rebuild failure |
-| Current evidence contracts | AuditBundle `2.5.0`; external-source metadata `2.2.0` |
+| Current evidence contracts | AuditBundle `2.6.0`; rule engine `6.3.0`; external-source metadata `2.2.0` |
 | Source-refresh consistency, locking, recovery, and failure-path tests | 28/28 passed, including four-file Socrata commit and rollback |
 | `npm audit --omit=dev` | 0 known vulnerabilities |
 | `npm audit` | 0 known vulnerabilities |
 | Repository English-only artifact test | Passed |
+| Documentation references | 125 checked across 24 documentation files |
+| README and case-card visual QA | 1600 px case landscape plus 1440 px desktop and 390 px mobile application captures reviewed; no horizontal overflow |
 | Read-only UI mutation-control count | 0 |
 | Local CSV pre-read size boundary | 10 MiB per file |
 | Strict CSV and canonical-column adversarial regressions | Passed |

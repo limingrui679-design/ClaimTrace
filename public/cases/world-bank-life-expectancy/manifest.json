@@ -5,6 +5,16 @@
   "dataOrigin": "PUBLIC",
   "sourceMetadataFile": "/cases/world-bank-life-expectancy/source-metadata.json",
   "caseId": "world-bank-life-expectancy",
+  "title": "Public Data: World Bank Life-Expectancy Cross-Year Audit",
+  "question": "Which descriptive claims and publication notes must change after the 2019 and 2024 indicator snapshots are compared?",
+  "method": "Cross-year ranks, descriptive thresholds, and selected-country mean stability",
+  "capabilities": [
+    "population indicators",
+    "public-data provenance",
+    "cross-country comparison",
+    "reproducibility"
+  ],
+  "boundary": "Selected descriptive indicators; not a causal, representative, or country-performance study.",
   "primaryKey": "country_code",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1384
     },
     "evidence-package.json": {
-      "sha256": "c8cb4caf39a1c847019758948a36d7c771b283d1bad9eb9529cff1fa6d19e1ca",
+      "sha256": "df00f36941d296d4f754e069896d5941a14757748deaccb2b56c6718810171f9",
       "bytes": 68339
     },
     "case.ts": {

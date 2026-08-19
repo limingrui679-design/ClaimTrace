@@ -1,4 +1,7 @@
+import { readFile } from "node:fs/promises";
 import { expect, test, type Page } from "@playwright/test";
+
+const packageMetadata = JSON.parse(await readFile(new URL("../../package.json", import.meta.url), "utf8")) as { version: string };
 
 async function expectNoMutationControls(page: Page) {
   await expect(page.locator("[data-claimtrace-mutation]")).toHaveCount(0);
@@ -24,7 +27,7 @@ test("public build renders no import, claim, review, or sign-off controls", asyn
 
   await page.goto("/");
   await expect(page.getByText("Read-only portfolio mode · controls disabled")).toBeVisible();
-  await expect(page.getByTestId("build-receipt")).toContainText("v0.10.3");
+  await expect(page.getByTestId("build-receipt")).toContainText(`v${packageMetadata.version}`);
   await expect(page.getByTestId("build-receipt")).toContainText("commit readonl · read-only");
   await expect(page.locator(".executive-brief")).toBeVisible();
   await expect(page.locator(".status-mix-track").first()).toBeVisible();
@@ -66,7 +69,7 @@ test("public build renders no import, claim, review, or sign-off controls", asyn
   await expectNoMutationControls(page);
 
   const mobileRoutes = [
-    { name: "Project Audit", heading: "Every claim should explain why it holds.", visual: ".executive-brief" },
+    { name: "Project Audit", heading: "See whether a data refresh changes what you can say or do.", visual: ".executive-brief" },
     { name: "Data Versions", heading: "Data Versions and Changes", visual: ".diff-intelligence" },
     { name: "Claim Rules", heading: "Claims and Evidence", visual: ".claim-portfolio-summary" },
     { name: "Decision Impact", heading: "Does the change actually alter the action?", visual: ".decision-portfolio" },

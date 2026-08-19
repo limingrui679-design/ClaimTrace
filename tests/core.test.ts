@@ -97,7 +97,7 @@ function makeDataset(baselineRows: CsvRow[], currentRows?: CsvRow[], options: Pa
 }
 
 function makeClaim(rule?: Rule, title = "Test claim"): Claim {
-  const governedRule: Rule | undefined = rule?.type === "threshold" ? {
+  const governedRule: Rule | undefined = rule?.type === "threshold" || rule?.type === "interval-threshold" ? {
     ...rule,
     thresholdSpec: { value: rule.threshold, unit: "score", source: "test policy", rationale: "test threshold", confirmedBy: "tester", confirmedAt: RUN_AT },
   } : rule?.type === "stability" ? {
@@ -391,6 +391,59 @@ test("33 catches a rank reversal", () => {
 test("34 keeps a stable ranking valid", () => {
   const rule: Rule = { type: "rank", field: "value", aggregation: "average", groupField: "region", expectedGroup: "North", rank: "max" };
   assert.equal(recomputeClaim(makeClaim(rule), makeDataset([{ id: "A", region: "North", value: 10 }, { id: "B", region: "East", value: 8 }], [{ id: "B", region: "East", value: 9 }, { id: "A", region: "North", value: 11 }])).status, "SUPPORTED");
+});
+
+test("34a supports an interval claim only when the complete interval clears the threshold", () => {
+  const rule: Rule = { type: "interval-threshold", field: "estimate", lowerField: "low", upperField: "high", aggregation: "average", operator: ">=", threshold: 18, intervalLevel: 0.95, intervalLabel: "95% confidence interval" };
+  const claim = recomputeClaim(makeClaim(rule), makeDataset(
+    [{ id: "A", estimate: 20.9, low: 18.8, high: 23.1 }],
+    [{ id: "A", estimate: 21.2, low: 18.2, high: 24.0 }],
+  ));
+  assert.equal(claim.baselineStatus, "SUPPORTED");
+  assert.equal(claim.status, "SUPPORTED");
+  assert.match(claim.currentValue, /21.2 \[18.2, 24\]/);
+  assert.ok(claim.sourceRefs.every((ref) => ref.fields.includes("low") && ref.fields.includes("high")));
+});
+
+test("34b requires review when an interval crosses the threshold", () => {
+  const rule: Rule = { type: "interval-threshold", field: "estimate", lowerField: "low", upperField: "high", aggregation: "average", operator: ">=", threshold: 18, intervalLevel: 0.95, intervalLabel: "95% confidence interval" };
+  const claim = recomputeClaim(makeClaim(rule), makeDataset(
+    [{ id: "A", estimate: 20.9, low: 18.8, high: 23.1 }],
+    [{ id: "A", estimate: 18.9, low: 17.0, high: 20.9 }],
+  ));
+  assert.equal(claim.status, "REVIEW_REQUIRED");
+  assert.match(claim.reason, /point estimate alone is insufficient/);
+});
+
+test("34c reverses an interval claim only when the complete interval is on the opposite side", () => {
+  const rule: Rule = { type: "interval-threshold", field: "estimate", lowerField: "low", upperField: "high", aggregation: "average", operator: ">=", threshold: 18, intervalLevel: 0.95, intervalLabel: "95% confidence interval" };
+  const claim = recomputeClaim(makeClaim(rule), makeDataset(
+    [{ id: "A", estimate: 20.9, low: 18.8, high: 23.1 }],
+    [{ id: "A", estimate: 15.0, low: 14.0, high: 17.9 }],
+  ));
+  assert.equal(claim.status, "REVERSED");
+});
+
+test("34d rejects malformed or multiply selected interval rows", () => {
+  const rule: Rule = { type: "interval-threshold", field: "estimate", lowerField: "low", upperField: "high", aggregation: "average", operator: "<=", threshold: 20, intervalLevel: 0.95, intervalLabel: "95% confidence interval" };
+  const malformed = recomputeClaim(makeClaim(rule), makeDataset([{ id: "A", estimate: 18, low: 19, high: 21 }]));
+  const multiple = recomputeClaim(makeClaim(rule), makeDataset([{ id: "A", estimate: 18, low: 17, high: 19 }, { id: "B", estimate: 18, low: 17, high: 19 }]));
+  assert.equal(malformed.status, "UNTESTABLE");
+  assert.equal(multiple.status, "UNTESTABLE");
+});
+
+test("34e rejects invalid interval metadata loaded from an untrusted specification", () => {
+  const base: Rule = { type: "interval-threshold", field: "estimate", lowerField: "low", upperField: "high", aggregation: "average", operator: ">=", threshold: 18, intervalLevel: 0.95, intervalLabel: "95% confidence interval" };
+  const rows = [{ id: "A", estimate: 20, low: 19, high: 21 }];
+  const invalidRules = [
+    { ...base, intervalLevel: 1.5 },
+    { ...base, intervalLabel: "" },
+    { ...base, threshold: Number.NaN },
+    { ...base, operator: "!=" } as unknown as Rule,
+  ];
+  for (const rule of invalidRules) {
+    assert.equal(recomputeClaim(makeClaim(rule), makeDataset(rows)).status, "UNTESTABLE");
+  }
 });
 
 test("35 writes exact row, key, field, hash, rule and time lineage", () => {

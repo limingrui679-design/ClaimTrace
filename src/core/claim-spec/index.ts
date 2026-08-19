@@ -1,7 +1,7 @@
 import type { Rule, ThresholdSpec } from "../types";
 
 export function thresholdSpecForRule(rule: Rule): ThresholdSpec | undefined {
-  if (rule.type === "threshold") return rule.thresholdSpec;
+  if (rule.type === "threshold" || rule.type === "interval-threshold") return rule.thresholdSpec;
   if (rule.type === "stability") return rule.supportToleranceSpec;
   return undefined;
 }

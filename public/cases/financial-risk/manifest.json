@@ -5,6 +5,16 @@
   "dataOrigin": "SYNTHETIC",
   "sourceMetadataFile": null,
   "caseId": "financial-risk",
+  "title": "Financial Risk: Portfolio Risk and Admission Thresholds",
+  "question": "Can the original admission policy still be used after default probabilities and valid samples change?",
+  "method": "Portfolio means, membership changes, missingness, and governed risk thresholds",
+  "capabilities": [
+    "financial risk",
+    "model monitoring",
+    "threshold governance",
+    "decision analysis"
+  ],
+  "boundary": "Synthetic credit records; not a calibrated risk model, underwriting policy, or backtest.",
   "primaryKey": "account_id",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1350
     },
     "evidence-package.json": {
-      "sha256": "b982c05016159a64cf699e1df156c184e6ce56de4cfecdaf3205eee871d6fb22",
+      "sha256": "aaa0ece6bd74b188e23a24d5abe9615ed8db7aaf7a1ffdf61ae1cd3f5ff6b142",
       "bytes": 53951
     },
     "case.ts": {

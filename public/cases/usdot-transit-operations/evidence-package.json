@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "claimtrace-audit-bundle/2.5.0",
+  "schemaVersion": "claimtrace-audit-bundle/2.6.0",
   "bundleType": "AuditBundle",
   "generatedAt": "2026-08-10T00:00:00.000Z",
   "previousBundleHash": null,
   "project": "USDOT NTD Selected Heavy-Rail Operations Audit",
   "primaryKey": "ntd_id",
-  "ruleVersion": "claimtrace-rule/6.2.0",
+  "ruleVersion": "claimtrace-rule/6.3.0",
   "isDemo": true,
   "dataOrigin": "PUBLIC",
   "snapshots": {
@@ -407,7 +407,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.2.0",
+        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -470,7 +470,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.2.0",
+        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -528,7 +528,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.2.0",
+        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1062,7 +1062,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ntd-nyct-productivity-rank:f41bc618b3ee301e8aa8556a",
+          "id": "claim-result:ntd-nyct-productivity-rank:dca466a28a38d5f7332e0fd8",
           "kind": "Comparison result",
           "title": "riders_per_revenue_hour version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1076,9 +1076,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1110,7 +1110,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
@@ -1122,7 +1122,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.2.0",
+        "seed": "ntd-nyct-productivity-rank|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1185,7 +1185,7 @@
           }
         }
       },
-      "resultId": "claim-result:ntd-nyct-productivity-rank:f41bc618b3ee301e8aa8556a",
+      "resultId": "claim-result:ntd-nyct-productivity-rank:dca466a28a38d5f7332e0fd8",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1264,7 +1264,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ntd-wmata-productivity-gate:1412c5c5d3a3dd62e70ea92f",
+          "id": "claim-result:ntd-wmata-productivity-gate:2d67a7636d106c0d03665361",
           "kind": "Comparison result",
           "title": "riders_per_revenue_hour version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1278,9 +1278,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1312,7 +1312,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
@@ -1324,7 +1324,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.2.0",
+        "seed": "ntd-wmata-productivity-gate|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 1,
         "sides": {
           "baseline": {
@@ -1369,7 +1369,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ntd-wmata-productivity-gate:1412c5c5d3a3dd62e70ea92f",
+      "resultId": "claim-result:ntd-wmata-productivity-gate:2d67a7636d106c0d03665361",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1618,7 +1618,7 @@
           "bound": true
         },
         {
-          "id": "claim-result:ntd-selected-ridership-stability:b97e9cc974a648478974e87e",
+          "id": "claim-result:ntd-selected-ridership-stability:b71dde58fbe2b83624a61661",
           "kind": "Comparison result",
           "title": "ridership version comparison",
           "detail": "Bound to this rule execution result, not a UI label",
@@ -1632,9 +1632,9 @@
           "bound": true
         },
         {
-          "id": "rule:claimtrace-rule/6.2.0",
+          "id": "rule:claimtrace-rule/6.3.0",
           "kind": "Rule",
-          "title": "claimtrace-rule/6.2.0",
+          "title": "claimtrace-rule/6.3.0",
           "detail": "Deterministic rule-engine version",
           "bound": true
         },
@@ -1666,7 +1666,7 @@
         "releaseStatus": "BLOCKED"
       },
       "audit": {
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "lastRunAt": "2026-08-10T00:00:00.000Z",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
@@ -1678,7 +1678,7 @@
         "truncated": false,
         "strategy": "all-matching",
         "maxReferences": 200,
-        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.2.0",
+        "seed": "ntd-selected-ridership-stability|claimtrace-rule/6.3.0",
         "pairedChangedKeys": 8,
         "sides": {
           "baseline": {
@@ -1723,7 +1723,7 @@
           "groupCounts": {}
         }
       },
-      "resultId": "claim-result:ntd-selected-ridership-stability:b97e9cc974a648478974e87e",
+      "resultId": "claim-result:ntd-selected-ridership-stability:b71dde58fbe2b83624a61661",
       "evidenceCompleteness": {
         "score": 100,
         "passed": 16,
@@ -1878,11 +1878,11 @@
         "decisionInputProvenanceHash": "2bd7ea1fdfb75390a04d9583307f32dca4b12013a9b0d7833a3eba78f1ae7caa",
         "baselineSha256": "6de76fae9d280d03229db71403e55ad67b2ad9e040a364e9aa621a90e974bc61",
         "currentSha256": "47243affc422e851716c46210cb18ed16ff9c880eed80e959e3467849ee97581",
-        "ruleVersion": "claimtrace-rule/6.2.0",
+        "ruleVersion": "claimtrace-rule/6.3.0",
         "claimResultIds": [
-          "claim-result:ntd-nyct-productivity-rank:f41bc618b3ee301e8aa8556a",
-          "claim-result:ntd-selected-ridership-stability:b97e9cc974a648478974e87e",
-          "claim-result:ntd-wmata-productivity-gate:1412c5c5d3a3dd62e70ea92f"
+          "claim-result:ntd-nyct-productivity-rank:dca466a28a38d5f7332e0fd8",
+          "claim-result:ntd-selected-ridership-stability:b71dde58fbe2b83624a61661",
+          "claim-result:ntd-wmata-productivity-gate:2d67a7636d106c0d03665361"
         ]
       },
       "analysis": {
@@ -2004,7 +2004,7 @@
         "reviewDisposition": "PENDING",
         "releaseStatus": "BLOCKED"
       },
-      "resultId": "decision-result:ntd-operations-brief:787846d06627e9e07d4dacf0"
+      "resultId": "decision-result:ntd-operations-brief:5ae5c1e4eedf47f80ffa9b65"
     }
   ],
   "reviews": [],
@@ -2083,12 +2083,12 @@
   "integrity": {
     "algorithm": "SHA-256",
     "canonicalization": "claimtrace-json-c14n/1.0.0",
-    "payloadHash": "cc19b27290f3f36c9b8a85a7d6b42e89579e8f17c7c6e5e1290a9a5cf509ba3b",
+    "payloadHash": "608d69a6d9edf9c7be098abcca778004f23ae6e1c9a51a4035c1f6eb12ca93b1",
     "sectionHashes": {
       "chain": "9e3f2281c5ec8ef7ddf3f44155ac44e99120788a7a15d01997025ff437b4481e",
       "snapshots": "c65b436105029d5bc9bc0a9d45cf1a6beb51a783d5ffc0cd0127aad2ba2fb3eb",
-      "claims": "acacf001dbf4bd2f2b4275239c67b13ef639094b9b48808581ce82b4c0122667",
-      "decisions": "4918f0e7c106ca8bafba1c687c98d3efbfedf1a84d117eceab5e0a40e551c821",
+      "claims": "6071eca043fbeb1b7b05a78abebe0f3e844ebada3e512c4a0ed34e94635b0b64",
+      "decisions": "4e1dd753d8ae466c7fa7db2a199b28836a1f04ce1e6af8c2cacb4716c448b4b9",
       "reviews": "67e3e513f95bedc358fb1c692cf3c16dbd9d29f89758783a51cc0b60c32cb8a8",
       "provenance": "cfbd6b9c7a640f04c1581f581cb87e18027118234d5255ca05affe5a825f3461",
       "upstream": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"

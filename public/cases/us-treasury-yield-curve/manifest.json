@@ -5,6 +5,16 @@
   "dataOrigin": "PUBLIC",
   "sourceMetadataFile": "/cases/us-treasury-yield-curve/source-metadata.json",
   "caseId": "us-treasury-yield-curve",
+  "title": "Public Data: U.S. Treasury Yield-Curve Period Audit",
+  "question": "Which curve-shape and short-end claims change between the two year-end snapshots?",
+  "method": "Curve-shape ranks, short-end threshold, and period-mean stability",
+  "capabilities": [
+    "fixed income",
+    "risk communication",
+    "financial data provenance",
+    "decision discipline"
+  ],
+  "boundary": "Descriptive Treasury observations; not trading, valuation, allocation, or return evidence.",
   "primaryKey": "maturity_code",
   "claimCount": 3,
   "decisionCount": 1,
@@ -31,7 +41,7 @@
       "bytes": 1398
     },
     "evidence-package.json": {
-      "sha256": "458f247f4a44818bf387a24a4cfff41e4db618d07b330477a537c0e8ab64474a",
+      "sha256": "0603c978b5a4ac1797184464ff26e91df1647c16c3595531362f747fe5f7389f",
       "bytes": 727880
     },
     "case.ts": {

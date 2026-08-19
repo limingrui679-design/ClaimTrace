@@ -4,23 +4,23 @@ ClaimTrace is a publicly reviewable read-only demo and a locally runnable portfo
 
 ## Current evidence boundary
 
-- Source release: package `0.10.3`; release tag `v0.10.3`, attached ZIP, and the public build receipt are bound to the same tag commit.
+- Source release: package `0.11.0`; release tag `v0.11.0`, attached ZIP, and the public build receipt must be bound to the same tag commit before release publication is claimed.
 - Reproducible scope: six bounded official public-data audit cases and four deterministic synthetic stress fixtures.
 - Review assurance: local, unauthenticated display names; local clock; self-asserted authorization; no cryptographic signature.
-- Delivery status: public source, a reproducible local build, and a public read-only demo at <https://claimtrace-audit.limingrui2.chatgpt.site>. The deployed UI visibly reports `v0.10.3`, the release-commit prefix, and `read-only`; publication does not make it an authenticated or production-grade service.
+- Delivery status: public source, a reproducible local build, and a public read-only demo at <https://claimtrace-audit.limingrui2.chatgpt.site>. The deployed UI must visibly report `v0.11.0`, the matching release-commit prefix, and `read-only` before this handoff is complete; publication does not make it an authenticated or production-grade service.
 - External validity: no users, institutional adoption, customer delivery, causal effect, ROI, health outcome, investment return, or policy impact is claimed.
 
 ## Short verification path
 
-1. Open <https://claimtrace-audit.limingrui2.chatgpt.site> and confirm that the visible `v0.10.3 · commit … · read-only` receipt matches the `v0.10.3` tag commit.
+1. Open <https://claimtrace-audit.limingrui2.chatgpt.site> and confirm that the visible `v0.11.0 · commit … · read-only` receipt matches the `v0.11.0` tag commit.
 2. Inspect `public/cases/catalog.json` for the ten-case scope and origin labels.
 3. Inspect a public case's `source-metadata.json`, pinned raw responses, `cleaning-log.json`, snapshots, and `evidence-package.json`.
-4. Run `npm ci` and `npm run ci` from a clean checkout.
-5. Read `docs/RELEASE_VERIFICATION.md`, `docs/LIMITATIONS.md`, and `docs/SECURITY.md` before reusing any numerical claim.
+4. Run `npm ci`, `npm run verify:bundle -- public/cases/cdc-places-depression/evidence-package.json`, and `npm run ci` from a clean checkout.
+5. Read `docs/VERIFY_BUNDLES.md`, `docs/RELEASE_VERIFICATION.md`, `docs/LIMITATIONS.md`, and `docs/SECURITY.md` before reusing any numerical claim.
 
 ## Supported application wording
 
-> Built a local-first TypeScript/React prototype that binds versioned CSV evidence, governed analytical claims, decision identities, and local unauthenticated review records into independently recomputable AuditBundles; validated it with six bounded public-data cases, four synthetic stress fixtures, 155 unit/integration tests, three built-artifact and release-package checks, and two Chromium flows.
+> Built a local-first TypeScript/React system that detects when refreshed CSV evidence invalidates an analytical claim or downstream decision and exports independently recomputable AuditBundles; implemented versioned source lineage, point and reported-interval rules, decision/review identity, a JSON Schema and CLI verifier, and validated them with six bounded public-data cases, four synthetic stress fixtures, 166 unit/integration tests, three built-artifact checks, and two Chromium flows.
 
 Use first person only for modules and design decisions that the applicant can explain and support with commit history or retained process evidence. If contribution was shared, identify the applicant's exact scope instead of claiming sole authorship.
 

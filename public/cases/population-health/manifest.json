@@ -5,6 +5,16 @@
   "dataOrigin": "SYNTHETIC",
   "sourceMetadataFile": null,
   "caseId": "population-health",
+  "title": "Population Health: Follow-Up Priorities and Model Gating",
+  "question": "Do revised risk and recall rates change the pilot decision or resource priorities?",
+  "method": "Raw-to-summary lineage, recall gating, regional ranks, and constrained options",
+  "capabilities": [
+    "AI governance",
+    "health analytics",
+    "data lineage",
+    "resource allocation"
+  ],
+  "boundary": "Synthetic model and follow-up records; no clinical validation, patient outcome, or deployment.",
   "primaryKey": "row_id",
   "claimCount": 5,
   "decisionCount": 2,
@@ -31,7 +41,7 @@
       "bytes": 2219
     },
     "evidence-package.json": {
-      "sha256": "e4daf0b5363568fa4e59591928c0b7eb6776c36dabb5dbc7edc516a4d8b51ace",
+      "sha256": "45bbe07f6fddbeaa708c876ab5cb719ff951262417fdd154d4686c5395ef54f5",
       "bytes": 268796
     },
     "case.ts": {
