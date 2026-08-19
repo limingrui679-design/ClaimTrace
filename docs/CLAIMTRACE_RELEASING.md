@@ -12,7 +12,7 @@ npm audit --omit=dev --audit-level=high
 npm audit --audit-level=high
 ```
 
-`npm run ci` must finish with generated fixtures unchanged, 155 passing unit/integration tests, 3 passing built-artifact and release-package checks, separate passing read-only and writable Chromium flows, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
+`npm run ci` must finish with generated fixtures unchanged, 166 passing unit/integration tests, 3 passing built-artifact and release-package checks, separate passing read-only and writable Chromium flows, 64/64 benchmark labels, 512 deterministic property trials, and coverage above the committed thresholds.
 
 The corresponding GitHub Actions run must point to the release commit, finish successfully, retain coverage and both browser-mode artifacts, and contain no Action-runtime deprecation annotation. Official Actions remain pinned to complete commit SHAs rather than floating tags.
 
