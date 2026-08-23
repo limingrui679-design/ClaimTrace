@@ -20,10 +20,10 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   webServer: {
-    command: "VITE_PUBLIC_READ_ONLY=false npm run build && npm run preview -- --host 127.0.0.1 --port 4174 --strictPort",
+    command: "CLAIMTRACE_SKIP_HOSTING_PACKAGE=true VITE_PUBLIC_READ_ONLY=false npm run build && CLAIMTRACE_SKIP_HOSTING_PACKAGE=true npm run preview -- --host 127.0.0.1 --port 4174 --strictPort",
     url: "http://127.0.0.1:4174",
     reuseExistingServer: false,
-    timeout: 120_000,
+    timeout: 180_000,
   },
   projects: [
     {

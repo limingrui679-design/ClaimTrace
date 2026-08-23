@@ -5,6 +5,7 @@ import { sites } from "./build/sites-vite-plugin.ts";
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
+const skipHostingPackage = process.env.CLAIMTRACE_SKIP_HOSTING_PACKAGE === "true";
 
 export default defineConfig(async () => {
   const packageMetadata = JSON.parse(
@@ -22,7 +23,11 @@ export default defineConfig(async () => {
   process.env.MINIFLARE_REGISTRY_PATH ??= ".wrangler/registry";
 
   // Wrangler snapshots its log path while the Cloudflare plugin is imported.
-  const { cloudflare } = await import("@cloudflare/vite-plugin");
+  // Browser-only preview builds exercise the SPA and skip both hosting plugins;
+  // the normal build still packages and tests the complete hosted artifact.
+  const hostingPlugins = skipHostingPackage
+    ? []
+    : [sites(), (await import("@cloudflare/vite-plugin")).cloudflare()];
 
   return {
     define: {
@@ -49,8 +54,7 @@ export default defineConfig(async () => {
       : undefined,
     plugins: [
       react(),
-      sites(),
-      cloudflare(),
+      ...hostingPlugins,
     ],
   };
 });

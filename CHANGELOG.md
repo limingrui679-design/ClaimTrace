@@ -3,6 +3,7 @@
 ## Unreleased
 
 - replaced full 20,000-row evidence-candidate sorts with deterministic bounded selection and an early exit when paired references already fill the quota, preserving the exact changed, boundary, and fixed-seed sampling contract while restoring margin under the existing 10-second browser-scale regression budget.
+- kept browser tests focused on UI behavior by skipping separately tested hosting plugins in their temporary builds and allowing more startup headroom on loaded runners, reducing timeout flakiness without changing production builds.
 
 ## 0.11.0 — 2026-08-20
 
