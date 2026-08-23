@@ -41,6 +41,44 @@ function stableScore(value: string) {
   return hash >>> 0;
 }
 
+function takeLowest<T>(items: T[], limit: number, compare: (left: T, right: T) => number) {
+  if (limit <= 0 || !items.length) return [];
+  if (items.length <= limit) return [...items].sort(compare);
+  const heap: T[] = [];
+  const siftUp = (start: number) => {
+    let index = start;
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+      if (compare(heap[parent], heap[index]) >= 0) break;
+      [heap[parent], heap[index]] = [heap[index], heap[parent]];
+      index = parent;
+    }
+  };
+  const siftDown = (start: number) => {
+    let index = start;
+    while (true) {
+      const left = index * 2 + 1;
+      const right = left + 1;
+      let largest = index;
+      if (left < heap.length && compare(heap[left], heap[largest]) > 0) largest = left;
+      if (right < heap.length && compare(heap[right], heap[largest]) > 0) largest = right;
+      if (largest === index) break;
+      [heap[index], heap[largest]] = [heap[largest], heap[index]];
+      index = largest;
+    }
+  };
+  for (const item of items) {
+    if (heap.length < limit) {
+      heap.push(item);
+      siftUp(heap.length - 1);
+    } else if (compare(item, heap[0]) < 0) {
+      heap[0] = item;
+      siftDown(0);
+    }
+  }
+  return heap.sort(compare);
+}
+
 function boundaryScorer(dataset: DatasetVersion, side: SnapshotSide, rule: Rule) {
   if (rule.type === "stability") {
     const baselineMetric = aggregate(rowsForRule(dataset.baselineRows, rule), rule.field, rule.aggregation);
@@ -100,7 +138,7 @@ function candidateReferences(dataset: DatasetVersion, side: SnapshotSide, rule: 
   if (rule.type === "rank") fields.push(rule.groupField);
   const uniqueFields = [...new Set(fields)];
   const scoreBoundary = boundaryScorer(dataset, side, rule);
-  return rows
+  const candidates = rows
     .map((row, index) => ({ row, index }))
     .filter(({ row }) => rowMatchesRule(row, rule))
     .map(({ row, index }) => ({
@@ -113,8 +151,11 @@ function candidateReferences(dataset: DatasetVersion, side: SnapshotSide, rule: 
       fields: uniqueFields,
       changed: changedKeys.has(String(row[dataset.primaryKey])),
       boundaryScore: scoreBoundary(row),
-    }))
-    .sort((left, right) => left.lineNumber - right.lineNumber);
+    }));
+  if (candidates.some((item, index) => index > 0 && item.lineNumber < candidates[index - 1].lineNumber)) {
+    candidates.sort((left, right) => left.lineNumber - right.lineNumber);
+  }
+  return candidates;
 }
 
 function sideQuotas(baselineCount: number, currentCount: number) {
@@ -186,25 +227,38 @@ function selectSideReferences(
 
   const paired = add(candidates.filter((item) => pairedKeys.has(item.keyValue)), pairedKeys.size);
   const pairedBoundary = selected.filter((item) => boundaryPairedKeys.has(item.keyValue)).length;
+  if (selected.length >= quota) {
+    return { selected, paired, unpaired: 0, boundary: pairedBoundary, sampled: 0 };
+  }
   const boundaryReserve = Math.max(0, Math.min(20, Math.floor(quota * 0.2), Math.max(0, candidates.length - selected.length)) - pairedBoundary);
   const changedCapacity = Math.max(0, quota - selected.length - boundaryReserve);
   const unpaired = add(
-    candidates
+    takeLowest(candidates
       .filter((item) => changedKeys.has(item.keyValue) && !pairableKeys.has(item.keyValue))
-      .sort((left, right) => stableScore(`${seed}|changed|${left.keyValue}`) - stableScore(`${seed}|changed|${right.keyValue}`)),
+      .map((item, index) => ({ item, index, score: stableScore(`${seed}|changed|${item.keyValue}`) })),
+      changedCapacity,
+      (left, right) => left.score - right.score || left.index - right.index,
+    ).map(({ item }) => item),
     changedCapacity,
   );
   const boundary = add(
-    candidates
+    takeLowest(candidates
       .filter((item) => !selectedKeys.has(item.keyValue) && !pairableKeys.has(item.keyValue))
-      .sort((left, right) => left.boundaryScore - right.boundaryScore || stableScore(`${seed}|boundary|${left.keyValue}`) - stableScore(`${seed}|boundary|${right.keyValue}`)),
+      .map((item, index) => ({ item, index, score: stableScore(`${seed}|boundary|${item.keyValue}`) })),
+      boundaryReserve,
+      (left, right) => left.item.boundaryScore - right.item.boundaryScore || left.score - right.score || left.index - right.index,
+    ).map(({ item }) => item),
     boundaryReserve,
   );
+  const sampleCapacity = quota - selected.length;
   const sampled = add(
-    candidates
+    takeLowest(candidates
       .filter((item) => !selectedKeys.has(item.keyValue) && !pairableKeys.has(item.keyValue))
-      .sort((left, right) => stableScore(`${seed}|sample|${left.keyValue}`) - stableScore(`${seed}|sample|${right.keyValue}`)),
-    quota - selected.length,
+      .map((item, index) => ({ item, index, score: stableScore(`${seed}|sample|${item.keyValue}`) })),
+      sampleCapacity,
+      (left, right) => left.score - right.score || left.index - right.index,
+    ).map(({ item }) => item),
+    sampleCapacity,
   );
   return { selected, paired, unpaired, boundary: pairedBoundary + boundary, sampled };
 }
@@ -228,14 +282,20 @@ function sourceReferences(dataset: DatasetVersion, rule: Rule, claimId: string):
     const currentScore = currentBoundaryScores.get(key) ?? Number.POSITIVE_INFINITY;
     return Math.min(baselineScore, currentScore);
   };
-  const boundaryPairs = [...pairCandidates]
-    .sort((left, right) => pairBoundaryScore(left) - pairBoundaryScore(right) || stableScore(`${seed}|pair-boundary|${left}`) - stableScore(`${seed}|pair-boundary|${right}`))
-    .slice(0, boundaryPairLimit);
-  const remainingPairs = pairCandidates
-    .filter((key) => !boundaryPairs.includes(key))
-    .sort((left, right) => stableScore(`${seed}|pair|${left}`) - stableScore(`${seed}|pair|${right}`));
-  const pairedKeys = new Set([...boundaryPairs, ...remainingPairs].slice(0, pairLimit));
-  const boundaryPairedKeys = new Set(boundaryPairs.filter((key) => pairedKeys.has(key)));
+  const boundaryPairs = takeLowest(
+    pairCandidates.map((key, index) => ({ key, index, boundaryScore: pairBoundaryScore(key), score: stableScore(`${seed}|pair-boundary|${key}`) })),
+    boundaryPairLimit,
+    (left, right) => left.boundaryScore - right.boundaryScore || left.score - right.score || left.index - right.index,
+  );
+  const boundaryPairKeys = new Set(boundaryPairs.map(({ key }) => key));
+  const remainingPairLimit = Math.max(0, pairLimit - boundaryPairs.length);
+  const remainingPairs = takeLowest(pairCandidates
+    .map((key, index) => ({ key, index, score: stableScore(`${seed}|pair|${key}`) }))
+    .filter(({ key }) => !boundaryPairKeys.has(key)),
+  remainingPairLimit,
+  (left, right) => left.score - right.score || left.index - right.index);
+  const pairedKeys = new Set([...boundaryPairs, ...remainingPairs].map(({ key }) => key));
+  const boundaryPairedKeys = new Set([...boundaryPairKeys].filter((key) => pairedKeys.has(key)));
   const baselineSelection = selectSideReferences(baseline, quotas.baseline, pairedKeys, pairableKeys, boundaryPairedKeys, changedKeys, `${seed}|baseline`);
   const currentSelection = selectSideReferences(current, quotas.current, pairedKeys, pairableKeys, boundaryPairedKeys, changedKeys, `${seed}|current`);
   const refs = [...baselineSelection.selected, ...currentSelection.selected].map(toSourceReference);

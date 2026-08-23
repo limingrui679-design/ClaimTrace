@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- replaced full 20,000-row evidence-candidate sorts with deterministic bounded selection and an early exit when paired references already fill the quota, preserving the exact changed, boundary, and fixed-seed sampling contract while restoring margin under the existing 10-second browser-scale regression budget.
+
 ## 0.11.0 — 2026-08-20
 
 - rewrote the repository and in-app introductions around the concrete data-refresh question, and expanded every case card plus the README landscape with method, capability, committed result, downstream action, and evidence boundary;
