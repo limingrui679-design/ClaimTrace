@@ -13,6 +13,7 @@ import {
   type SignedDecisionResult,
   appendReviewRecord,
   decomposeMeanChange,
+  minimumRevisionWitness,
   stratifiedMeanChange,
   applyReviewToClaim,
   applyReviewToDecision,
@@ -1266,4 +1267,43 @@ test("replays group contributions on the two actual CDC PLACES county snapshots"
   assert.equal(result.composition,0);
   assert.equal(result.oneSided,0);
   assert.ok(Math.abs(result.within+0.275)<1e-10);
+});
+
+test("partial-refresh witnesses are minimal against exhaustive subset enumeration", () => {
+  const rule: Rule = { type: "stability", aggregation: "average", field: "value", supportTolerance: 10 };
+  for (let n = 1; n <= 7; n++) {
+    for (let seed = 0; seed < 18; seed++) {
+      const baseline = Array.from({length:n}, (_, i) => ({ id: String(i), value: (seed % 2 ? -20 : 20) + i }));
+      const current = baseline.map((r, i) => ({ ...r, value: r.value + (seed * 5 + i * 11) % 17 - 8 }));
+      const result: NonNullable<ReturnType<typeof minimumRevisionWitness>> = minimumRevisionWitness(makeDataset(baseline, current), rule)!;
+      const limit = Math.abs(baseline.reduce((s, r) => s + r.value, 0)) / 10;
+      for (const direction of [1, -1]) {
+        const gains = current.map((r, i) => direction * (r.value - baseline[i].value));
+        let smallest = Infinity;
+        for (let mask = 0; mask < (1 << n); mask++) {
+          const picked = gains.filter((_, i) => mask & (1 << i));
+          if (picked.reduce((a,b) => a+b,0) > limit) smallest = Math.min(smallest, picked.length);
+        }
+        const keys: string[] | null = direction === 1 ? result.upwardKeys : result.downwardKeys;
+        assert.equal(keys?.length ?? Infinity, smallest);
+        if (keys) assert.ok(keys.reduce((total, k) => total + gains[Number(k)], 0) > limit);
+      }
+      assert.deepEqual(result, minimumRevisionWitness(makeDataset([...baseline].reverse(), [...current].reverse()), rule));
+    }
+  }
+});
+
+test("stability band includes decimal equality and excludes incompatible numeric cohorts", () => {
+  const rule: Rule = { type: "stability", aggregation: "sum", field: "value", supportTolerance: 10 };
+  const before = [{ id: "a", value: 0.1 }];
+  assert.equal(minimumRevisionWitness(makeDataset(before, [{id:"a",value:0.11}]),rule)?.upwardKeys,null);
+  assert.equal(minimumRevisionWitness(makeDataset(before,[{id:"b",value:0.13}]),rule),undefined);
+  assert.equal(minimumRevisionWitness(makeDataset(before,[{id:"a",value:"NA"}]),rule),undefined);
+  assert.equal(minimumRevisionWitness(makeDataset([{id:"a",value:0}],before),rule),undefined);
+  assert.equal(minimumRevisionWitness(makeDataset([...before,...before],before),rule),undefined);
+  assert.equal(minimumRevisionWitness(makeDataset(before),rule),undefined);
+  assert.equal(minimumRevisionWitness(makeDataset(before,before),{...rule,aggregation:"max"}),undefined);
+  const ties = minimumRevisionWitness(makeDataset([{id:"b",value:1e-9},{id:"a",value:1e-9}],
+    [{id:"b",value:2e-9},{id:"a",value:2e-9}]),rule);
+  assert.deepEqual(ties?.upwardKeys,["a"]);
 });

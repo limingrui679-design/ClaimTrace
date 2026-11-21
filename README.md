@@ -32,7 +32,7 @@ The CDC PLACES case lets you follow a revision in county-level estimates of adul
 <table>
   <tr>
     <td align="center"><strong>10</strong><br>reproducible cases</td>
-    <td align="center"><strong>174 / 174</strong><br>automated checks</td>
+    <td align="center"><strong>176 / 176</strong><br>automated checks</td>
     <td align="center"><strong>64 / 64</strong><br>benchmark scenarios</td>
     <td align="center"><strong>512</strong><br>property trials</td>
   </tr>
@@ -56,6 +56,8 @@ The public demo opens the ten bundled cases. To compare your own files, run the 
 - [Contributing](#contributing)
 
 </details>
+
+Open a sum or mean stability claim to see the fewest record updates that could move it outside its tolerance. In the eight-county CDC PLACES case, the complete refresh stays inside the 2% band. Refreshing two counties alone would cross the lower boundary. The workspace identifies the keys for review and exports the witness with both snapshot hashes. [Method and real-data comparisons](docs/EVALUATION.md#minimum-partial-refresh-witness).
 
 ## Why ClaimTrace
 
