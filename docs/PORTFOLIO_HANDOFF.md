@@ -20,7 +20,7 @@ ClaimTrace is a publicly reviewable read-only demo and a locally runnable portfo
 
 ## Supported application wording
 
-> Built a local-first TypeScript/React system that detects when refreshed CSV evidence invalidates an analytical claim or downstream decision and exports independently recomputable AuditBundles; implemented versioned source lineage, point and reported-interval rules, decision/review identity, a JSON Schema and CLI verifier, and validated them with six bounded public-data cases, four synthetic stress fixtures, 169 unit/integration tests, three built-artifact checks, and two Chromium flows.
+> Built a local-first TypeScript/React system that detects when refreshed CSV evidence invalidates an analytical claim or downstream decision and exports independently recomputable AuditBundles; implemented versioned source lineage, point and reported-interval rules, decision/review identity, a JSON Schema and CLI verifier, and validated them with six bounded public-data cases, four synthetic stress fixtures, 171 unit/integration tests, three built-artifact checks, and two Chromium flows.
 
 Use first person only for modules and design decisions that the applicant can explain and support with commit history or retained process evidence. If contribution was shared, identify the applicant's exact scope instead of claiming sole authorship.
 

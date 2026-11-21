@@ -6,7 +6,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { computeEvidenceCompleteness, sha256Canonical, verifyEvidencePackage } from "../app/claimtrace-core";
 import { EXECUTABLE_CASES, runExecutableCase } from "../src/cases";
-import { externalSourceUpdateBindingErrors, rebuildExternalSnapshot } from "../src/core";
+import { minimumRevisionWitness, externalSourceUpdateBindingErrors, rebuildExternalSnapshot } from "../src/core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CASES = path.join(ROOT, "public", "cases");
@@ -31,6 +31,19 @@ for (const definition of EXECUTABLE_CASES) {
       ? JSON.parse(await readFile(path.join(ROOT, "public", definition.sourceMetadataFile.replace(/^\//, "")), "utf8"))
       : undefined;
     const run = await runExecutableCase(definition, baselineText, currentText, upstreamLineage, externalSource);
+    if (definition.id === "cdc-places-depression" || definition.id === "us-treasury-yield-curve") {
+      const rule = run.claims.find(claim => claim.rule?.type === "stability")!.rule!;
+      const witness = minimumRevisionWitness(run.dataset, rule)!;
+      if (definition.id === "cdc-places-depression") {
+        assert.equal(witness.fullRefreshExceedsBand, false);
+        assert.deepEqual(witness.downwardKeys, ["36061", "04013"]);
+        assert.deepEqual(witness.upwardKeys, ["17031", "06075", "25017"]);
+      } else {
+        assert.equal(witness.fullRefreshExceedsBand, true);
+        assert.deepEqual(witness.downwardKeys, ["2Y", "3M", "1Y", "1M", "5Y", "6M"]);
+        assert.equal(witness.upwardKeys, null);
+      }
+    }
     const projection = {
       schemaVersion: "claimtrace-case-audit/1.0.0",
       caseId: definition.id,
