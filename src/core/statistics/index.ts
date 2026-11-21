@@ -3,6 +3,7 @@ import type {
   CsvRow,
   DatasetVersion,
   IntervalThresholdResult,
+  MeanChange,
   RankResult,
   RowDiff,
   Rule,
@@ -28,6 +29,48 @@ export function aggregate(rows: CsvRow[], field: string, method: Aggregation): n
   if (method === "min") return Math.min(...values);
   if (method === "max") return Math.max(...values);
   return values.reduce((total, value) => total + value, 0) / values.length;
+}
+
+/** Bridge between two means using the same record keys wherever they overlap. */
+export function decomposeMeanChange(dataset: DatasetVersion, rule: Rule): MeanChange | undefined {
+  if (!dataset.currentRows || rule.type !== "stability" || rule.aggregation !== "average") return;
+  if (!validatePrimaryKey(dataset.baselineRows, dataset.baselineLineNumbers, dataset.primaryKey).valid
+    || !validatePrimaryKey(dataset.currentRows, dataset.currentLineNumbers ?? [], dataset.primaryKey).valid) return;
+  function observations(rows: CsvRow[]) {
+    const values = new Map<string, number>();
+    for (const row of rowsForRule(rows, rule)) {
+      const value = valueToNumber(row[rule.field]);
+      if (value !== null) values.set(String(row[dataset.primaryKey]), value);
+    }
+    return values;
+  }
+  const baseline = observations(dataset.baselineRows);
+  const current = observations(dataset.currentRows);
+  if (!baseline.size || !current.size) return;
+  const mean = (values: Map<string, number>) => {
+    let total = 0;
+    for (const value of values.values()) total += value;
+    return total / values.size;
+  };
+  let matched = 0;
+  let before = 0;
+  let after = 0;
+  for (const [key, previous] of baseline) {
+    const next = current.get(key);
+    if (next === undefined) continue;
+    matched++;
+    before += previous;
+    after += next;
+  }
+  const oldMean = mean(baseline);
+  const newMean = mean(current);
+  return {
+    matched, entered: current.size - matched, left: baseline.size - matched,
+    totalChange: newMean - oldMean,
+    exitEffect: matched ? before / matched - oldMean : null,
+    withinEffect: matched ? (after - before) / matched : null,
+    entryEffect: matched ? newMean - after / matched : null,
+  };
 }
 
 function stableKeyHash(keys: string[]) {

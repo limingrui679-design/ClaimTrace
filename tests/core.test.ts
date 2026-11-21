@@ -12,6 +12,7 @@ import {
   type Rule,
   type SignedDecisionResult,
   appendReviewRecord,
+  decomposeMeanChange,
   applyReviewToClaim,
   applyReviewToDecision,
   aggregate,
@@ -1221,4 +1222,16 @@ test("82 anchors recommendation stability at an inserted exact 1.0 point", () =>
   assert.equal(result.analysis?.recommendationStability.min, 1);
   assert.equal(result.analysis?.recommendationStability.max, 1.5);
   assert.equal(result.analysis?.recommendationStability.evaluatedPoints, 5);
+});
+
+test("decomposes the mean across matched, entering, and leaving observations", () => {
+  const rule: Rule = { type: "stability", field: "value", aggregation: "average", supportTolerance: 5 };
+  const baseline = [{id: "A", value: 10}, {id: "B", value: 30}];
+  const current = [{id: "A", value: 14}, {id: "C", value: 46}];
+  const change = decomposeMeanChange(makeDataset(baseline, current), rule);
+  assert.deepEqual(change, {matched: 1, entered: 1, left: 1, totalChange: 10,
+    exitEffect: -10, withinEffect: 4, entryEffect: 16});
+  const separate = decomposeMeanChange(makeDataset(baseline, [{id:"C",value:46}]), rule);
+  assert.equal(separate?.withinEffect, null);
+  assert.equal(decomposeMeanChange(makeDataset([...baseline, baseline[0]], current), rule), undefined);
 });

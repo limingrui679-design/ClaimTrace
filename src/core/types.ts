@@ -270,6 +270,16 @@ export interface EvidenceScope {
   };
 }
 
+export interface MeanChange {
+  matched: number;
+  entered: number;
+  left: number;
+  totalChange: number;
+  exitEffect: number | null;
+  withinEffect: number | null;
+  entryEffect: number | null;
+}
+
 export interface SampleProfile {
   totalRows: number;
   filteredRows: number;
