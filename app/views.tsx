@@ -12,6 +12,7 @@ import {
   diffRowsByKey,
   evaluateDecision,
   decomposeMeanChange,
+  stratifiedMeanChange,
   formatNumber,
   isSnapshotVerified,
 } from "./claimtrace-core";
@@ -106,10 +107,12 @@ function ClaimsView({ claims, selectedClaim, dataset, filter, search, counts, op
 
 function MeanChangeDetail({ claim, dataset }: { claim: Claim; dataset: DatasetVersion }) {
   const change = useMemo(() => claim.rule && decomposeMeanChange(dataset, claim.rule), [dataset, claim.rule]);
+  const [groupField, setGroupField] = useState("");
+  const split = useMemo(() => claim.rule && stratifiedMeanChange(dataset, claim.rule, groupField), [dataset, claim.rule, groupField]);
   if (!change) return null;
   const json = JSON.stringify({
     claimId: claim.id, rule: claim.rule, baselineSha256: dataset.baselineMeta.sha256,
-    currentSha256: dataset.currentMeta?.sha256, ...change,
+    currentSha256: dataset.currentMeta?.sha256, ...change, ...(split ? { groupBreakdown: split } : {}),
   }, null, 2);
   return <section className="scope-note">
     <strong>Why the mean changed</strong>
@@ -117,6 +120,13 @@ function MeanChangeDetail({ claim, dataset }: { claim: Claim; dataset: DatasetVe
     {change.withinEffect === null || change.exitEffect === null || change.entryEffect === null
       ? <p>The numeric samples have no records in common.</p>
       : <p>Within matched records {formatNumber(change.withinEffect)}. Leaving records contributed {formatNumber(change.exitEffect)} and entering records contributed {formatNumber(change.entryEffect)}.</p>}
+    <label>Compare groups <select value={groupField} onChange={event => setGroupField(event.target.value)}>
+      <option value="">Choose a grouping field</option>
+      {dataset.columns.filter(field => field !== dataset.primaryKey && field !== claim.rule?.field)
+        .map(field => <option key={field}>{field}</option>)}
+    </select></label>
+    {split && <p>Within shared groups {formatNumber(split.within)}. Group composition {formatNumber(split.composition)}.
+      {" "}Groups observed only once contributed {formatNumber(split.oneSided)}. Contributions sum to the overall change.</p>}
     <a download="mean-change.json" href={`data:application/json;charset=utf-8,${encodeURIComponent(json)}`}>Download breakdown</a>
   </section>;
 }

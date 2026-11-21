@@ -73,6 +73,49 @@ export function decomposeMeanChange(dataset: DatasetVersion, rule: Rule): MeanCh
   };
 }
 
+/** Symmetric within-group and composition effects for two independently sampled snapshots. */
+export function stratifiedMeanChange(dataset: DatasetVersion, rule: Rule, field: string) {
+  if (rule.type !== "stability" || rule.aggregation !== "average" || !dataset.currentRows ||
+      !field || field === dataset.primaryKey || field === rule.field || !dataset.columns.includes(field)) return;
+  const metric = rule.field;
+  function summarize(rows: CsvRow[]) {
+    const groups = new Map<string | null, { n: number; sum: number }>();
+    let n = 0, sum = 0;
+    for (const row of rowsForRule(rows, rule)) {
+      const value = valueToNumber(row[metric]);
+      if (value === null) continue;
+      const key = String(row[field] ?? "").trim() || null;
+      const group = groups.get(key) ?? { n: 0, sum: 0 };
+      group.n += 1;
+      group.sum += value;
+      groups.set(key, group);
+      n++;
+      sum += value;
+    }
+    return { groups, n, mean: sum / n };
+  }
+  const old = summarize(dataset.baselineRows), next = summarize(dataset.currentRows);
+  if (!old.n || !next.n) return;
+  const reference = (old.mean + next.mean) / 2;
+  let within = 0, composition = 0, oneSided = 0, sharedGroups = 0;
+  for (const group of new Set([...old.groups.keys(), ...next.groups.keys()])) {
+    const a = old.groups.get(group), b = next.groups.get(group);
+    const p = (a?.n ?? 0) / old.n, q = (b?.n ?? 0) / next.n;
+    if (a && b) {
+      const before = a.sum / a.n, after = b.sum / b.n;
+      within += (p + q) / 2 * (after - before);
+      composition += (q - p) * ((before + after) / 2 - reference);
+      sharedGroups++;
+    } else if (a) {
+      oneSided -= p * (a.sum / a.n - reference);
+    } else if (b) {
+      oneSided += q * (b.sum / b.n - reference);
+    }
+  }
+  return { field, sharedGroups, baselineRows: old.n, currentRows: next.n,
+    totalChange: next.mean - old.mean, within, composition, oneSided };
+}
+
 function stableKeyHash(keys: string[]) {
   let hash = 2166136261;
   for (const char of keys.slice().sort().join("\u001f")) {

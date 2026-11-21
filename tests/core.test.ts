@@ -13,6 +13,7 @@ import {
   type SignedDecisionResult,
   appendReviewRecord,
   decomposeMeanChange,
+  stratifiedMeanChange,
   applyReviewToClaim,
   applyReviewToDecision,
   aggregate,
@@ -1234,4 +1235,35 @@ test("decomposes the mean across matched, entering, and leaving observations", (
   const separate = decomposeMeanChange(makeDataset(baseline, [{id:"C",value:46}]), rule);
   assert.equal(separate?.withinEffect, null);
   assert.equal(decomposeMeanChange(makeDataset([...baseline, baseline[0]], current), rule), undefined);
+});
+
+test("separates genuine within-stratum change from a composition reversal and nonoverlap", () => {
+  const rule: Rule = {type:"stability",field:"value",aggregation:"average",supportTolerance:5};
+  const rows = (values: [string, number][]) => values.map(([g, value], i) => ({id:String(i),g,value}));
+  const a = rows([["A",0],["B",10],["B",10]]), b = rows([["A",1],["A",1],["B",11]]);
+  const run = (old: CsvRow[], next: CsvRow[]) => stratifiedMeanChange(
+    {...makeDataset(old, next), columns:["id","value","g"]}, rule, "g")!;
+  const forward = run(a,b), backward = run(b,a);
+  assert.ok(forward.totalChange < 0);
+  assert.equal(forward.within, 1);
+  assert.ok(Math.abs(forward.composition + 10/3) < 1e-12);
+  assert.equal(forward.composition, -backward.composition);
+  const exclusive = run([{id:"1",g:"",value:10}], [{id:"2",g:"new",value:30}]);
+  assert.equal(exclusive.oneSided,20);
+  assert.equal(exclusive.sharedGroups,0);
+  assert.equal(exclusive.within + exclusive.composition + exclusive.oneSided,exclusive.totalChange);
+  assert.equal(stratifiedMeanChange(makeDataset(a,b),rule,"id"), undefined);
+});
+
+test("replays group contributions on the two actual CDC PLACES county snapshots", async () => {
+  const {readFile} = await import("node:fs/promises");
+  const load = async (name:string) => parseCSV(await readFile(
+    `public/cases/cdc-places-depression/${name}.csv`,"utf8"));
+  const [old,next] = await Promise.all([load("baseline"),load("current")]);
+  const rule:Rule={type:"stability",aggregation:"average",field:"age_adjusted_depression_percent",supportTolerance:1};
+  const result=stratifiedMeanChange(makeDataset(old.rows,next.rows,{primaryKey:"county_fips",columns:old.columns}),rule,"state")!;
+  assert.equal(result.sharedGroups,7);
+  assert.equal(result.composition,0);
+  assert.equal(result.oneSided,0);
+  assert.ok(Math.abs(result.within+0.275)<1e-10);
 });

@@ -64,3 +64,9 @@ The bounded-export regression also processes 20,000 changed rows under an unchan
 ## Next evaluation step
 
 Before claiming external performance, create a blinded, independently labeled set of real-but-deidentified analysis revisions, publish annotation rules, compare mature tools and stronger baselines, and report confidence intervals plus category-level errors. That work is not represented as completed; the current scenarios remain regression tests.
+
+### Change within groups and change in group composition
+
+For average-based comparisons, choose a grouping field in the claim detail. Shared groups use the symmetric difference in means weighted by their average share, plus the difference in shares weighted by their average mean. The midpoint of the two global means is the common reference for share effects and one-sided groups. Missing grouping values form their own stratum. The three contributions add to the observed change, including completely disjoint samples. They describe the chosen partition.
+
+Across the two archived CDC PLACES snapshots, eight counties belong to seven states. Their unweighted mean age-adjusted estimate moved from 20.600% to 20.325%. With unchanged state shares, all −0.275 percentage points came from within-state changes. This describes the eight-county sample. The regression named “two actual CDC PLACES county snapshots” reads both original case CSV files.
