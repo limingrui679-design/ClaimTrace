@@ -3,6 +3,7 @@ import type {
   CsvRow,
   DatasetVersion,
   IntervalThresholdResult,
+  MeanChange,
   RankResult,
   RowDiff,
   Rule,
@@ -28,6 +29,91 @@ export function aggregate(rows: CsvRow[], field: string, method: Aggregation): n
   if (method === "min") return Math.min(...values);
   if (method === "max") return Math.max(...values);
   return values.reduce((total, value) => total + value, 0) / values.length;
+}
+
+/** Bridge between two means using the same record keys wherever they overlap. */
+export function decomposeMeanChange(dataset: DatasetVersion, rule: Rule): MeanChange | undefined {
+  if (!dataset.currentRows || rule.type !== "stability" || rule.aggregation !== "average") return;
+  if (!validatePrimaryKey(dataset.baselineRows, dataset.baselineLineNumbers, dataset.primaryKey).valid
+    || !validatePrimaryKey(dataset.currentRows, dataset.currentLineNumbers ?? [], dataset.primaryKey).valid) return;
+  function observations(rows: CsvRow[]) {
+    const values = new Map<string, number>();
+    for (const row of rowsForRule(rows, rule)) {
+      const value = valueToNumber(row[rule.field]);
+      if (value !== null) values.set(String(row[dataset.primaryKey]), value);
+    }
+    return values;
+  }
+  const baseline = observations(dataset.baselineRows);
+  const current = observations(dataset.currentRows);
+  if (!baseline.size || !current.size) return;
+  const mean = (values: Map<string, number>) => {
+    let total = 0;
+    for (const value of values.values()) total += value;
+    return total / values.size;
+  };
+  let matched = 0;
+  let before = 0;
+  let after = 0;
+  for (const [key, previous] of baseline) {
+    const next = current.get(key);
+    if (next === undefined) continue;
+    matched++;
+    before += previous;
+    after += next;
+  }
+  const oldMean = mean(baseline);
+  const newMean = mean(current);
+  return {
+    matched, entered: current.size - matched, left: baseline.size - matched,
+    totalChange: newMean - oldMean,
+    exitEffect: matched ? before / matched - oldMean : null,
+    withinEffect: matched ? (after - before) / matched : null,
+    entryEffect: matched ? newMean - after / matched : null,
+  };
+}
+
+/** Symmetric within-group and composition effects for two independently sampled snapshots. */
+export function stratifiedMeanChange(dataset: DatasetVersion, rule: Rule, field: string) {
+  if (rule.type !== "stability" || rule.aggregation !== "average" || !dataset.currentRows ||
+      !field || field === dataset.primaryKey || field === rule.field || !dataset.columns.includes(field)) return;
+  const metric = rule.field;
+  function summarize(rows: CsvRow[]) {
+    const groups = new Map<string | null, { n: number; sum: number }>();
+    let n = 0, sum = 0;
+    for (const row of rowsForRule(rows, rule)) {
+      const value = valueToNumber(row[metric]);
+      if (value === null) continue;
+      const key = String(row[field] ?? "").trim() || null;
+      const group = groups.get(key) ?? { n: 0, sum: 0 };
+      group.n += 1;
+      group.sum += value;
+      groups.set(key, group);
+      n++;
+      sum += value;
+    }
+    return { groups, n, mean: sum / n };
+  }
+  const old = summarize(dataset.baselineRows), next = summarize(dataset.currentRows);
+  if (!old.n || !next.n) return;
+  const reference = (old.mean + next.mean) / 2;
+  let within = 0, composition = 0, oneSided = 0, sharedGroups = 0;
+  for (const group of new Set([...old.groups.keys(), ...next.groups.keys()])) {
+    const a = old.groups.get(group), b = next.groups.get(group);
+    const p = (a?.n ?? 0) / old.n, q = (b?.n ?? 0) / next.n;
+    if (a && b) {
+      const before = a.sum / a.n, after = b.sum / b.n;
+      within += (p + q) / 2 * (after - before);
+      composition += (q - p) * ((before + after) / 2 - reference);
+      sharedGroups++;
+    } else if (a) {
+      oneSided -= p * (a.sum / a.n - reference);
+    } else if (b) {
+      oneSided += q * (b.sum / b.n - reference);
+    }
+  }
+  return { field, sharedGroups, baselineRows: old.n, currentRows: next.n,
+    totalChange: next.mean - old.mean, within, composition, oneSided };
 }
 
 function stableKeyHash(keys: string[]) {

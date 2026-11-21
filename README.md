@@ -32,7 +32,7 @@ The CDC PLACES case lets you follow a revision in county-level estimates of adul
 <table>
   <tr>
     <td align="center"><strong>10</strong><br>reproducible cases</td>
-    <td align="center"><strong>171 / 171</strong><br>automated checks</td>
+    <td align="center"><strong>174 / 174</strong><br>automated checks</td>
     <td align="center"><strong>64 / 64</strong><br>benchmark scenarios</td>
     <td align="center"><strong>512</strong><br>property trials</td>
   </tr>
@@ -268,3 +268,7 @@ Software citation metadata is available in [CITATION.cff](CITATION.cff).
 ## License
 
 [MIT](LICENSE) © 2026 Mingrui Li
+
+### Why an average changed
+
+For a stability claim about a mean, the evidence view and its downloadable breakdown separate the change among matched records from the contributions of records leaving or entering the numeric sample. For example, A=10 and B=30 changing to A=14 and C=46 moves the mean from 20 to 30: −10 on exit, +4 within A, and +16 on entry. The calculation first removes departing records, then updates matched records, then adds arrivals. The three terms sum to the observed change and describe that sequence. Filters and missing numeric values determine sample membership. With no overlap the total change remains visible and the attribution is unavailable.
