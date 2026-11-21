@@ -5,7 +5,7 @@
 <h1 align="center">ClaimTrace</h1>
 
 <p align="center">
-  <strong>Find out whether refreshed data invalidates a conclusion or decision—and export the evidence needed to verify the answer.</strong>
+  <strong>See which conclusions and decisions change when the underlying data is revised.</strong>
 </p>
 
 <p align="center">
@@ -25,20 +25,9 @@
   · <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
-ClaimTrace answers one practical question: **when a dataset is refreshed, can the conclusion and action built on the previous version still be reused?**
+A team allocates resources using a ranking. When the source updates its numbers, the team needs to know whether the same group still ranks first and whether the allocation rule still selects it. ClaimTrace matches records across CSV versions, reruns the original calculation, and follows the result through to the decision that used it.
 
-For example, a report may say that one channel has the highest conversion rate and a capacity plan may depend on that statement. A new CSV arrives. A normal diff shows changed cells; ClaimTrace goes further: it matches records by primary key, reruns the exact ranking and threshold rules, classifies the old statement, recomputes the bound action, and packages the source rows, formulas, hashes, and result identities for another reviewer.
-
-Give it two versions of the same CSV—or open one of the ten bundled cases—and it tells you:
-
-- which records, formulas, cohorts, denominators, and thresholds changed;
-- whether each analytical claim is still supported, weakened, reversed, or unresolved;
-- whether the action changed, stayed the same but needs a new sign-off, or must be reviewed; and
-- whether the exported JSON and HTML audit package can be independently reconstructed and verified.
-
-The result is not a generic data-quality score or an AI-generated recommendation. It is a deterministic chain from **versioned evidence → executable claim → downstream decision → review state → verifiable AuditBundle**.
-
-The writable workspace runs locally in the browser and can import CSV files, define claims and decision rules, record explicitly unauthenticated local review state, and export a tamper-evident AuditBundle. The hosted demo is intentionally read-only and executes only the ten committed cases; it accepts no uploads and creates no review records.
+The CDC PLACES case lets you follow a revision in county-level estimates of adult depression from the original source tables through the cleaned data, claim and decision. Open the case in the browser to inspect the changed records, or export an AuditBundle so a colleague can repeat the calculation and verify the result. [Explore the CDC case](public/cases/cdc-places-depression/README.md)
 
 <table>
   <tr>
@@ -49,7 +38,7 @@ The writable workspace runs locally in the browser and can import CSV files, def
   </tr>
 </table>
 
-> **Project status:** release `v0.11.0` supports a public read-only portfolio build with an exact source-commit receipt and a local writable workspace. A public receipt must match the release commit before the deployment is cited. Neither mode claims authenticated sign-off, durable collaboration, institutional adoption, or production governance.
+The public demo opens the ten bundled cases. To compare your own files, run the local workspace using the quick start below.
 
 <details>
 <summary><strong>Table of contents</strong></summary>
