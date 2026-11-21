@@ -39,14 +39,31 @@ test("public build renders no import, claim, review, or sign-off controls", asyn
   await expect(caseCards).toHaveCount(10);
   await expect(caseCards.filter({ hasText: "Synthetic data" })).toHaveCount(4);
   await expect(caseCards.filter({ hasText: "External public data" })).toHaveCount(6);
+  let treasuryReviewed = false;
   for (let index = 0; index < 10; index += 1) {
     const card = caseCards.nth(index);
     await card.getByRole("button", { name: /Load and audit|Rerun case/ }).click();
     await expect(card).toHaveClass(/active/);
     await expect(card.getByRole("button", { name: "Rerun case" })).toBeVisible();
     await expect(page.locator(".case-library article.active")).toHaveCount(1);
+    const history = page.getByRole("region", { name: "Daily Treasury stability history" });
+    if ((await card.textContent())?.includes("U.S. Treasury Yield-Curve")) {
+      await expect(history).toContainText("37 of 249 published dates");
+      await expect(history).toContainText("10 of 22 published dates");
+      await expect(history.getByRole("row", { name: /2025-10-14 2025-10-15/ })).toBeVisible();
+      await expect(history.getByRole("row", { name: /2025-11-21 Open at 2025-12-31/ })).toBeVisible();
+      const downloadEvent = page.waitForEvent("download");
+      await history.getByRole("link", { name: "Download daily audit (JSON)" }).click();
+      const download = await downloadEvent;
+      const downloaded = JSON.parse(await readFile((await download.path())!, "utf8"));
+      expect(downloaded.history.peak.date).toBe("2025-12-18");
+      treasuryReviewed = true;
+    } else {
+      await expect(history).toHaveCount(0);
+    }
   }
 
+  expect(treasuryReviewed).toBe(true);
   await page.getByRole("button", { name: /Data Versions/ }).click();
   await expect(page.locator(".diff-intelligence")).toBeVisible();
   await expect(page.getByRole("button", { name: "Import new project" })).toHaveCount(0);
