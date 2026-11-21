@@ -85,6 +85,9 @@ jobs:
       - name: Reject stale generated artifacts
         run: git diff --exit-code -- public/demo-data public/cases app/demo-case.generated.ts benchmarks/results.json
 
+      - name: Verify the observed Treasury history with an independent decimal calculation
+        run: python3 tools/verify-treasury-history.py
+
       - name: Build and run the full test suite
         run: npm test && npm run test:browser
 

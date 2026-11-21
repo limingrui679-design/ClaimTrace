@@ -1,0 +1,1807 @@
+{
+  "claimId": "treasury-selected-mean-stability",
+  "calendar": "All published observation dates in the pinned annual Treasury XML between the declared endpoints.",
+  "vintage": "2026-08-11T11:07:55.527Z",
+  "snapshotHashes": {
+    "baseline": "5179f04cc33191a1fdc4bf013453e266c23508c345c5a830d11acff180785f26",
+    "current": "0b95b974de82d208e5940a3570ffb03b9a718c5a9887f4abae0d648a24c84f9a"
+  },
+  "sources": [
+    {
+      "side": "baseline",
+      "file": "raw-2024.xml",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2024",
+      "sha256": "b5ce6157ede50096bf7b05e513918762c137e627eff1342b414f637fb82098dd"
+    },
+    {
+      "side": "current",
+      "file": "raw-2025.xml",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2025",
+      "sha256": "2157ae09266ef8bea40aaad92ff6851ed08ee3fb41262b0a7cb6f2733a968f04"
+    }
+  ],
+  "monthlyEndpoints": [
+    {
+      "month": "2025-01",
+      "first": {
+        "date": "2025-01-02",
+        "status": "within",
+        "value": 4.453333333333333,
+        "changePct": 0.14992503748125935
+      },
+      "last": {
+        "date": "2025-01-31",
+        "status": "within",
+        "value": 4.444444444444445,
+        "changePct": -0.04997501249375312
+      },
+      "observedDates": 21,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-02",
+      "first": {
+        "date": "2025-02-03",
+        "status": "within",
+        "value": 4.4366666666666665,
+        "changePct": -0.22488755622188905
+      },
+      "last": {
+        "date": "2025-02-28",
+        "status": "within",
+        "value": 4.261111111111111,
+        "changePct": -4.172913543228385
+      },
+      "observedDates": 19,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-03",
+      "first": {
+        "date": "2025-03-03",
+        "status": "within",
+        "value": 4.236666666666667,
+        "changePct": -4.72263868065967
+      },
+      "last": {
+        "date": "2025-03-31",
+        "status": "within",
+        "value": 4.25,
+        "changePct": -4.422788605697151
+      },
+      "observedDates": 21,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-04",
+      "first": {
+        "date": "2025-04-01",
+        "status": "within",
+        "value": 4.2188888888888885,
+        "changePct": -5.122438780609694
+      },
+      "last": {
+        "date": "2025-04-30",
+        "status": "within",
+        "value": 4.17,
+        "changePct": -6.221889055472264
+      },
+      "observedDates": 21,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-05",
+      "first": {
+        "date": "2025-05-01",
+        "status": "within",
+        "value": 4.231111111111111,
+        "changePct": -4.847576211894053
+      },
+      "last": {
+        "date": "2025-05-30",
+        "status": "within",
+        "value": 4.363333333333333,
+        "changePct": -1.874062968515742
+      },
+      "observedDates": 21,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-06",
+      "first": {
+        "date": "2025-06-02",
+        "status": "within",
+        "value": 4.4,
+        "changePct": -1.0494752623688155
+      },
+      "last": {
+        "date": "2025-06-30",
+        "status": "within",
+        "value": 4.251111111111111,
+        "changePct": -4.397801099450274
+      },
+      "observedDates": 20,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-07",
+      "first": {
+        "date": "2025-07-01",
+        "status": "within",
+        "value": 4.271111111111111,
+        "changePct": -3.948025987006497
+      },
+      "last": {
+        "date": "2025-07-31",
+        "status": "within",
+        "value": 4.373333333333333,
+        "changePct": -1.6491754122938531
+      },
+      "observedDates": 22,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-08",
+      "first": {
+        "date": "2025-08-01",
+        "status": "within",
+        "value": 4.239999999999999,
+        "changePct": -4.6476761619190405
+      },
+      "last": {
+        "date": "2025-08-29",
+        "status": "within",
+        "value": 4.195555555555555,
+        "changePct": -5.647176411794102
+      },
+      "observedDates": 21,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-09",
+      "first": {
+        "date": "2025-09-02",
+        "status": "within",
+        "value": 4.22,
+        "changePct": -5.097451274362818
+      },
+      "last": {
+        "date": "2025-09-30",
+        "status": "within",
+        "value": 4.0744444444444445,
+        "changePct": -8.370814592703647
+      },
+      "observedDates": 21,
+      "breaches": 0,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-10",
+      "first": {
+        "date": "2025-10-01",
+        "status": "within",
+        "value": 4.04,
+        "changePct": -9.14542728635682
+      },
+      "last": {
+        "date": "2025-10-31",
+        "status": "within",
+        "value": 4.02,
+        "changePct": -9.595202398800598
+      },
+      "observedDates": 22,
+      "breaches": 10,
+      "hiddenBreachDates": [
+        "2025-10-14",
+        "2025-10-16",
+        "2025-10-17",
+        "2025-10-20",
+        "2025-10-21",
+        "2025-10-22",
+        "2025-10-23",
+        "2025-10-24",
+        "2025-10-27",
+        "2025-10-28"
+      ]
+    },
+    {
+      "month": "2025-11",
+      "first": {
+        "date": "2025-11-03",
+        "status": "within",
+        "value": 4.038888888888889,
+        "changePct": -9.170414792603697
+      },
+      "last": {
+        "date": "2025-11-28",
+        "status": "breach",
+        "value": 3.961111111111111,
+        "changePct": -10.919540229885056
+      },
+      "observedDates": 18,
+      "breaches": 5,
+      "hiddenBreachDates": []
+    },
+    {
+      "month": "2025-12",
+      "first": {
+        "date": "2025-12-01",
+        "status": "breach",
+        "value": 3.9899999999999998,
+        "changePct": -10.269865067466268
+      },
+      "last": {
+        "date": "2025-12-31",
+        "status": "breach",
+        "value": 3.9433333333333334,
+        "changePct": -11.319340329835082
+      },
+      "observedDates": 22,
+      "breaches": 22,
+      "hiddenBreachDates": []
+    }
+  ],
+  "history": {
+    "baselineDate": "2024-12-31",
+    "baselineValue": 4.446666666666667,
+    "keys": [
+      "1M",
+      "3M",
+      "6M",
+      "1Y",
+      "2Y",
+      "5Y",
+      "10Y",
+      "20Y",
+      "30Y"
+    ],
+    "tolerancePct": 10,
+    "aggregation": "average",
+    "expectedFollowUps": 249,
+    "unknownCount": 0,
+    "breachCount": 37,
+    "endpoint": {
+      "date": "2025-12-31",
+      "status": "breach",
+      "value": 3.9433333333333334,
+      "changePct": -11.319340329835082
+    },
+    "peak": {
+      "date": "2025-12-18",
+      "changePct": -12.093953023488254
+    },
+    "episodes": [
+      {
+        "firstObservedBreach": "2025-10-14",
+        "lastObservedBreach": "2025-10-14",
+        "firstObservedRecovery": "2025-10-15",
+        "breachedObservations": 1,
+        "unknownObservationsBeforeRecovery": 0
+      },
+      {
+        "firstObservedBreach": "2025-10-16",
+        "lastObservedBreach": "2025-10-28",
+        "firstObservedRecovery": "2025-10-29",
+        "breachedObservations": 9,
+        "unknownObservationsBeforeRecovery": 0
+      },
+      {
+        "firstObservedBreach": "2025-11-21",
+        "lastObservedBreach": "2025-12-31",
+        "firstObservedRecovery": null,
+        "breachedObservations": 27,
+        "unknownObservationsBeforeRecovery": 0
+      }
+    ],
+    "observations": [
+      {
+        "date": "2024-12-31",
+        "status": "within",
+        "value": 4.446666666666667,
+        "changePct": 0
+      },
+      {
+        "date": "2025-01-02",
+        "status": "within",
+        "value": 4.453333333333333,
+        "changePct": 0.14992503748125935
+      },
+      {
+        "date": "2025-01-03",
+        "status": "within",
+        "value": 4.466666666666667,
+        "changePct": 0.4497751124437781
+      },
+      {
+        "date": "2025-01-06",
+        "status": "within",
+        "value": 4.474444444444445,
+        "changePct": 0.624687656171914
+      },
+      {
+        "date": "2025-01-07",
+        "status": "within",
+        "value": 4.501111111111111,
+        "changePct": 1.2243878060969513
+      },
+      {
+        "date": "2025-01-08",
+        "status": "within",
+        "value": 4.497777777777777,
+        "changePct": 1.1494252873563218
+      },
+      {
+        "date": "2025-01-09",
+        "status": "within",
+        "value": 4.5,
+        "changePct": 1.1994002998500748
+      },
+      {
+        "date": "2025-01-10",
+        "status": "within",
+        "value": 4.562222222222222,
+        "changePct": 2.598700649675162
+      },
+      {
+        "date": "2025-01-13",
+        "status": "within",
+        "value": 4.572222222222222,
+        "changePct": 2.823588205897051
+      },
+      {
+        "date": "2025-01-14",
+        "status": "within",
+        "value": 4.5633333333333335,
+        "changePct": 2.623688155922039
+      },
+      {
+        "date": "2025-01-15",
+        "status": "within",
+        "value": 4.489999999999999,
+        "changePct": 0.9745127436281859
+      },
+      {
+        "date": "2025-01-16",
+        "status": "within",
+        "value": 4.4655555555555555,
+        "changePct": 0.42478760619690153
+      },
+      {
+        "date": "2025-01-17",
+        "status": "within",
+        "value": 4.478888888888889,
+        "changePct": 0.7246376811594202
+      },
+      {
+        "date": "2025-01-21",
+        "status": "within",
+        "value": 4.466666666666667,
+        "changePct": 0.4497751124437781
+      },
+      {
+        "date": "2025-01-22",
+        "status": "within",
+        "value": 4.476666666666667,
+        "changePct": 0.6746626686656672
+      },
+      {
+        "date": "2025-01-23",
+        "status": "within",
+        "value": 4.493333333333333,
+        "changePct": 1.0494752623688155
+      },
+      {
+        "date": "2025-01-24",
+        "status": "within",
+        "value": 4.478888888888889,
+        "changePct": 0.7246376811594202
+      },
+      {
+        "date": "2025-01-27",
+        "status": "within",
+        "value": 4.415555555555556,
+        "changePct": -0.6996501749125438
+      },
+      {
+        "date": "2025-01-28",
+        "status": "within",
+        "value": 4.426666666666667,
+        "changePct": -0.4497751124437781
+      },
+      {
+        "date": "2025-01-29",
+        "status": "within",
+        "value": 4.4366666666666665,
+        "changePct": -0.22488755622188905
+      },
+      {
+        "date": "2025-01-30",
+        "status": "within",
+        "value": 4.408888888888889,
+        "changePct": -0.8495752123938031
+      },
+      {
+        "date": "2025-01-31",
+        "status": "within",
+        "value": 4.444444444444445,
+        "changePct": -0.04997501249375312
+      },
+      {
+        "date": "2025-02-03",
+        "status": "within",
+        "value": 4.4366666666666665,
+        "changePct": -0.22488755622188905
+      },
+      {
+        "date": "2025-02-04",
+        "status": "within",
+        "value": 4.415555555555556,
+        "changePct": -0.6996501749125438
+      },
+      {
+        "date": "2025-02-05",
+        "status": "within",
+        "value": 4.365555555555556,
+        "changePct": -1.824087956021989
+      },
+      {
+        "date": "2025-02-06",
+        "status": "within",
+        "value": 4.385555555555555,
+        "changePct": -1.3743128435782108
+      },
+      {
+        "date": "2025-02-07",
+        "status": "within",
+        "value": 4.4255555555555555,
+        "changePct": -0.4747626186906546
+      },
+      {
+        "date": "2025-02-10",
+        "status": "within",
+        "value": 4.431111111111111,
+        "changePct": -0.3498250874562719
+      },
+      {
+        "date": "2025-02-11",
+        "status": "within",
+        "value": 4.448888888888889,
+        "changePct": 0.04997501249375312
+      },
+      {
+        "date": "2025-02-12",
+        "status": "within",
+        "value": 4.5055555555555555,
+        "changePct": 1.3243378310844578
+      },
+      {
+        "date": "2025-02-13",
+        "status": "within",
+        "value": 4.448888888888889,
+        "changePct": 0.04997501249375312
+      },
+      {
+        "date": "2025-02-14",
+        "status": "within",
+        "value": 4.417777777777777,
+        "changePct": -0.6496751624187905
+      },
+      {
+        "date": "2025-02-18",
+        "status": "within",
+        "value": 4.46,
+        "changePct": 0.2998500749625187
+      },
+      {
+        "date": "2025-02-19",
+        "status": "within",
+        "value": 4.445555555555555,
+        "changePct": -0.02498750624687656
+      },
+      {
+        "date": "2025-02-20",
+        "status": "within",
+        "value": 4.428888888888888,
+        "changePct": -0.39980009995002497
+      },
+      {
+        "date": "2025-02-21",
+        "status": "within",
+        "value": 4.373333333333333,
+        "changePct": -1.6491754122938531
+      },
+      {
+        "date": "2025-02-24",
+        "status": "within",
+        "value": 4.358888888888888,
+        "changePct": -1.9740129935032484
+      },
+      {
+        "date": "2025-02-25",
+        "status": "within",
+        "value": 4.296666666666667,
+        "changePct": -3.373313343328336
+      },
+      {
+        "date": "2025-02-26",
+        "status": "within",
+        "value": 4.275555555555555,
+        "changePct": -3.8480759620189904
+      },
+      {
+        "date": "2025-02-27",
+        "status": "within",
+        "value": 4.301111111111111,
+        "changePct": -3.2733633183408295
+      },
+      {
+        "date": "2025-02-28",
+        "status": "within",
+        "value": 4.261111111111111,
+        "changePct": -4.172913543228385
+      },
+      {
+        "date": "2025-03-03",
+        "status": "within",
+        "value": 4.236666666666667,
+        "changePct": -4.72263868065967
+      },
+      {
+        "date": "2025-03-04",
+        "status": "within",
+        "value": 4.2588888888888885,
+        "changePct": -4.222888555722139
+      },
+      {
+        "date": "2025-03-05",
+        "status": "within",
+        "value": 4.29111111111111,
+        "changePct": -3.498250874562718
+      },
+      {
+        "date": "2025-03-06",
+        "status": "within",
+        "value": 4.2811111111111115,
+        "changePct": -3.7231384307846076
+      },
+      {
+        "date": "2025-03-07",
+        "status": "within",
+        "value": 4.304444444444445,
+        "changePct": -3.1984007996001997
+      },
+      {
+        "date": "2025-03-10",
+        "status": "within",
+        "value": 4.237777777777778,
+        "changePct": -4.697651174412793
+      },
+      {
+        "date": "2025-03-11",
+        "status": "within",
+        "value": 4.274444444444445,
+        "changePct": -3.8730634682658667
+      },
+      {
+        "date": "2025-03-12",
+        "status": "within",
+        "value": 4.307777777777778,
+        "changePct": -3.12343828085957
+      },
+      {
+        "date": "2025-03-13",
+        "status": "within",
+        "value": 4.273333333333333,
+        "changePct": -3.8980509745127434
+      },
+      {
+        "date": "2025-03-14",
+        "status": "within",
+        "value": 4.307777777777778,
+        "changePct": -3.12343828085957
+      },
+      {
+        "date": "2025-03-17",
+        "status": "within",
+        "value": 4.314444444444444,
+        "changePct": -2.9735132433783105
+      },
+      {
+        "date": "2025-03-18",
+        "status": "within",
+        "value": 4.302222222222222,
+        "changePct": -3.248375812093953
+      },
+      {
+        "date": "2025-03-19",
+        "status": "within",
+        "value": 4.277777777777778,
+        "changePct": -3.798100949525237
+      },
+      {
+        "date": "2025-03-20",
+        "status": "within",
+        "value": 4.260000000000001,
+        "changePct": -4.197901049475262
+      },
+      {
+        "date": "2025-03-21",
+        "status": "within",
+        "value": 4.263333333333333,
+        "changePct": -4.122938530734633
+      },
+      {
+        "date": "2025-03-24",
+        "status": "within",
+        "value": 4.318888888888889,
+        "changePct": -2.8735632183908044
+      },
+      {
+        "date": "2025-03-25",
+        "status": "within",
+        "value": 4.300000000000001,
+        "changePct": -3.2983508245877062
+      },
+      {
+        "date": "2025-03-26",
+        "status": "within",
+        "value": 4.317777777777778,
+        "changePct": -2.8985507246376807
+      },
+      {
+        "date": "2025-03-27",
+        "status": "within",
+        "value": 4.332222222222223,
+        "changePct": -2.573713143428286
+      },
+      {
+        "date": "2025-03-28",
+        "status": "within",
+        "value": 4.271111111111111,
+        "changePct": -3.948025987006497
+      },
+      {
+        "date": "2025-03-31",
+        "status": "within",
+        "value": 4.25,
+        "changePct": -4.422788605697151
+      },
+      {
+        "date": "2025-04-01",
+        "status": "within",
+        "value": 4.2188888888888885,
+        "changePct": -5.122438780609694
+      },
+      {
+        "date": "2025-04-02",
+        "status": "within",
+        "value": 4.239999999999999,
+        "changePct": -4.6476761619190405
+      },
+      {
+        "date": "2025-04-03",
+        "status": "within",
+        "value": 4.145555555555556,
+        "changePct": -6.771614192903548
+      },
+      {
+        "date": "2025-04-04",
+        "status": "within",
+        "value": 4.1,
+        "changePct": -7.796101949025487
+      },
+      {
+        "date": "2025-04-07",
+        "status": "within",
+        "value": 4.171111111111111,
+        "changePct": -6.1969015492253865
+      },
+      {
+        "date": "2025-04-08",
+        "status": "within",
+        "value": 4.217777777777778,
+        "changePct": -5.147426286856572
+      },
+      {
+        "date": "2025-04-09",
+        "status": "within",
+        "value": 4.308888888888889,
+        "changePct": -3.0984507746126932
+      },
+      {
+        "date": "2025-04-10",
+        "status": "within",
+        "value": 4.32,
+        "changePct": -2.8485757121439277
+      },
+      {
+        "date": "2025-04-11",
+        "status": "within",
+        "value": 4.367777777777778,
+        "changePct": -1.7741129435282357
+      },
+      {
+        "date": "2025-04-14",
+        "status": "within",
+        "value": 4.305555555555555,
+        "changePct": -3.173413293353323
+      },
+      {
+        "date": "2025-04-15",
+        "status": "within",
+        "value": 4.295555555555556,
+        "changePct": -3.3983008495752123
+      },
+      {
+        "date": "2025-04-16",
+        "status": "within",
+        "value": 4.257777777777778,
+        "changePct": -4.2478760619690155
+      },
+      {
+        "date": "2025-04-17",
+        "status": "within",
+        "value": 4.292222222222223,
+        "changePct": -3.4732633683158416
+      },
+      {
+        "date": "2025-04-21",
+        "status": "within",
+        "value": 4.315555555555556,
+        "changePct": -2.9485257371314337
+      },
+      {
+        "date": "2025-04-22",
+        "status": "within",
+        "value": 4.308888888888889,
+        "changePct": -3.0984507746126932
+      },
+      {
+        "date": "2025-04-23",
+        "status": "within",
+        "value": 4.31,
+        "changePct": -3.073463268365817
+      },
+      {
+        "date": "2025-04-24",
+        "status": "within",
+        "value": 4.267777777777777,
+        "changePct": -4.022988505747127
+      },
+      {
+        "date": "2025-04-25",
+        "status": "within",
+        "value": 4.247777777777777,
+        "changePct": -4.472763618190904
+      },
+      {
+        "date": "2025-04-28",
+        "status": "within",
+        "value": 4.213333333333334,
+        "changePct": -5.247376311844078
+      },
+      {
+        "date": "2025-04-29",
+        "status": "within",
+        "value": 4.184444444444444,
+        "changePct": -5.8970514742628675
+      },
+      {
+        "date": "2025-04-30",
+        "status": "within",
+        "value": 4.17,
+        "changePct": -6.221889055472264
+      },
+      {
+        "date": "2025-05-01",
+        "status": "within",
+        "value": 4.231111111111111,
+        "changePct": -4.847576211894053
+      },
+      {
+        "date": "2025-05-02",
+        "status": "within",
+        "value": 4.294444444444444,
+        "changePct": -3.423288355822089
+      },
+      {
+        "date": "2025-05-05",
+        "status": "within",
+        "value": 4.312222222222222,
+        "changePct": -3.0234882558720635
+      },
+      {
+        "date": "2025-05-06",
+        "status": "within",
+        "value": 4.282222222222222,
+        "changePct": -3.6981509245377313
+      },
+      {
+        "date": "2025-05-07",
+        "status": "within",
+        "value": 4.271111111111111,
+        "changePct": -3.948025987006497
+      },
+      {
+        "date": "2025-05-08",
+        "status": "within",
+        "value": 4.333333333333333,
+        "changePct": -2.548725637181409
+      },
+      {
+        "date": "2025-05-09",
+        "status": "within",
+        "value": 4.3311111111111105,
+        "changePct": -2.598700649675162
+      },
+      {
+        "date": "2025-05-12",
+        "status": "within",
+        "value": 4.392222222222222,
+        "changePct": -1.2243878060969513
+      },
+      {
+        "date": "2025-05-13",
+        "status": "within",
+        "value": 4.415555555555556,
+        "changePct": -0.6996501749125438
+      },
+      {
+        "date": "2025-05-14",
+        "status": "within",
+        "value": 4.44,
+        "changePct": -0.14992503748125935
+      },
+      {
+        "date": "2025-05-15",
+        "status": "within",
+        "value": 4.384444444444444,
+        "changePct": -1.3993003498250876
+      },
+      {
+        "date": "2025-05-16",
+        "status": "within",
+        "value": 4.383333333333334,
+        "changePct": -1.4242878560719638
+      },
+      {
+        "date": "2025-05-19",
+        "status": "within",
+        "value": 4.3966666666666665,
+        "changePct": -1.1244377811094453
+      },
+      {
+        "date": "2025-05-20",
+        "status": "within",
+        "value": 4.405555555555555,
+        "changePct": -0.9245377311344328
+      },
+      {
+        "date": "2025-05-21",
+        "status": "within",
+        "value": 4.4511111111111115,
+        "changePct": 0.09995002498750624
+      },
+      {
+        "date": "2025-05-22",
+        "status": "within",
+        "value": 4.44,
+        "changePct": -0.14992503748125935
+      },
+      {
+        "date": "2025-05-23",
+        "status": "within",
+        "value": 4.431111111111111,
+        "changePct": -0.3498250874562719
+      },
+      {
+        "date": "2025-05-27",
+        "status": "within",
+        "value": 4.385555555555555,
+        "changePct": -1.3743128435782108
+      },
+      {
+        "date": "2025-05-28",
+        "status": "within",
+        "value": 4.406666666666666,
+        "changePct": -0.8995502248875562
+      },
+      {
+        "date": "2025-05-29",
+        "status": "within",
+        "value": 4.377777777777777,
+        "changePct": -1.5492253873063466
+      },
+      {
+        "date": "2025-05-30",
+        "status": "within",
+        "value": 4.363333333333333,
+        "changePct": -1.874062968515742
+      },
+      {
+        "date": "2025-06-02",
+        "status": "within",
+        "value": 4.4,
+        "changePct": -1.0494752623688155
+      },
+      {
+        "date": "2025-06-03",
+        "status": "within",
+        "value": 4.403333333333333,
+        "changePct": -0.9745127436281859
+      },
+      {
+        "date": "2025-06-04",
+        "status": "within",
+        "value": 4.341111111111111,
+        "changePct": -2.3738130934532733
+      },
+      {
+        "date": "2025-06-05",
+        "status": "within",
+        "value": 4.351111111111111,
+        "changePct": -2.148925537231384
+      },
+      {
+        "date": "2025-06-06",
+        "status": "within",
+        "value": 4.422222222222222,
+        "changePct": -0.5497251374312843
+      },
+      {
+        "date": "2025-06-09",
+        "status": "within",
+        "value": 4.411111111111111,
+        "changePct": -0.7996001999000499
+      },
+      {
+        "date": "2025-06-10",
+        "status": "within",
+        "value": 4.403333333333333,
+        "changePct": -0.9745127436281859
+      },
+      {
+        "date": "2025-06-11",
+        "status": "within",
+        "value": 4.372222222222223,
+        "changePct": -1.6741629185407294
+      },
+      {
+        "date": "2025-06-12",
+        "status": "within",
+        "value": 4.3244444444444445,
+        "changePct": -2.7486256871564216
+      },
+      {
+        "date": "2025-06-13",
+        "status": "within",
+        "value": 4.365555555555556,
+        "changePct": -1.824087956021989
+      },
+      {
+        "date": "2025-06-16",
+        "status": "within",
+        "value": 4.387777777777778,
+        "changePct": -1.3243378310844578
+      },
+      {
+        "date": "2025-06-17",
+        "status": "within",
+        "value": 4.35,
+        "changePct": -2.1739130434782608
+      },
+      {
+        "date": "2025-06-18",
+        "status": "within",
+        "value": 4.346666666666667,
+        "changePct": -2.2488755622188905
+      },
+      {
+        "date": "2025-06-20",
+        "status": "within",
+        "value": 4.3311111111111105,
+        "changePct": -2.598700649675162
+      },
+      {
+        "date": "2025-06-23",
+        "status": "within",
+        "value": 4.2988888888888885,
+        "changePct": -3.3233383308345825
+      },
+      {
+        "date": "2025-06-24",
+        "status": "within",
+        "value": 4.268888888888889,
+        "changePct": -3.99800099950025
+      },
+      {
+        "date": "2025-06-25",
+        "status": "within",
+        "value": 4.262222222222222,
+        "changePct": -4.1479260369815085
+      },
+      {
+        "date": "2025-06-26",
+        "status": "within",
+        "value": 4.232222222222223,
+        "changePct": -4.822588705647176
+      },
+      {
+        "date": "2025-06-27",
+        "status": "within",
+        "value": 4.262222222222222,
+        "changePct": -4.1479260369815085
+      },
+      {
+        "date": "2025-06-30",
+        "status": "within",
+        "value": 4.251111111111111,
+        "changePct": -4.397801099450274
+      },
+      {
+        "date": "2025-07-01",
+        "status": "within",
+        "value": 4.271111111111111,
+        "changePct": -3.948025987006497
+      },
+      {
+        "date": "2025-07-02",
+        "status": "within",
+        "value": 4.29111111111111,
+        "changePct": -3.498250874562718
+      },
+      {
+        "date": "2025-07-03",
+        "status": "within",
+        "value": 4.342222222222222,
+        "changePct": -2.3488255872063966
+      },
+      {
+        "date": "2025-07-07",
+        "status": "within",
+        "value": 4.367777777777778,
+        "changePct": -1.7741129435282357
+      },
+      {
+        "date": "2025-07-08",
+        "status": "within",
+        "value": 4.381111111111111,
+        "changePct": -1.4742628685657169
+      },
+      {
+        "date": "2025-07-09",
+        "status": "within",
+        "value": 4.335555555555556,
+        "changePct": -2.498750624687656
+      },
+      {
+        "date": "2025-07-10",
+        "status": "within",
+        "value": 4.336666666666667,
+        "changePct": -2.4737631184407793
+      },
+      {
+        "date": "2025-07-11",
+        "status": "within",
+        "value": 4.38,
+        "changePct": -1.4992503748125936
+      },
+      {
+        "date": "2025-07-14",
+        "status": "within",
+        "value": 4.381111111111111,
+        "changePct": -1.4742628685657169
+      },
+      {
+        "date": "2025-07-15",
+        "status": "within",
+        "value": 4.417777777777777,
+        "changePct": -0.6496751624187905
+      },
+      {
+        "date": "2025-07-16",
+        "status": "within",
+        "value": 4.39,
+        "changePct": -1.2743628185907045
+      },
+      {
+        "date": "2025-07-17",
+        "status": "within",
+        "value": 4.398888888888889,
+        "changePct": -1.074462768615692
+      },
+      {
+        "date": "2025-07-18",
+        "status": "within",
+        "value": 4.377777777777777,
+        "changePct": -1.5492253873063466
+      },
+      {
+        "date": "2025-07-21",
+        "status": "within",
+        "value": 4.347777777777778,
+        "changePct": -2.2238880559720138
+      },
+      {
+        "date": "2025-07-22",
+        "status": "within",
+        "value": 4.332222222222223,
+        "changePct": -2.573713143428286
+      },
+      {
+        "date": "2025-07-23",
+        "status": "within",
+        "value": 4.363333333333333,
+        "changePct": -1.874062968515742
+      },
+      {
+        "date": "2025-07-24",
+        "status": "within",
+        "value": 4.382222222222222,
+        "changePct": -1.4492753623188404
+      },
+      {
+        "date": "2025-07-25",
+        "status": "within",
+        "value": 4.365555555555556,
+        "changePct": -1.824087956021989
+      },
+      {
+        "date": "2025-07-28",
+        "status": "within",
+        "value": 4.376666666666667,
+        "changePct": -1.5742128935532234
+      },
+      {
+        "date": "2025-07-29",
+        "status": "within",
+        "value": 4.33,
+        "changePct": -2.623688155922039
+      },
+      {
+        "date": "2025-07-30",
+        "status": "within",
+        "value": 4.368888888888889,
+        "changePct": -1.749125437281359
+      },
+      {
+        "date": "2025-07-31",
+        "status": "within",
+        "value": 4.373333333333333,
+        "changePct": -1.6491754122938531
+      },
+      {
+        "date": "2025-08-01",
+        "status": "within",
+        "value": 4.239999999999999,
+        "changePct": -4.6476761619190405
+      },
+      {
+        "date": "2025-08-04",
+        "status": "within",
+        "value": 4.226666666666667,
+        "changePct": -4.947526236881559
+      },
+      {
+        "date": "2025-08-05",
+        "status": "within",
+        "value": 4.2411111111111115,
+        "changePct": -4.622688655672164
+      },
+      {
+        "date": "2025-08-06",
+        "status": "within",
+        "value": 4.237777777777778,
+        "changePct": -4.697651174412793
+      },
+      {
+        "date": "2025-08-07",
+        "status": "within",
+        "value": 4.248888888888889,
+        "changePct": -4.4477761119440276
+      },
+      {
+        "date": "2025-08-08",
+        "status": "within",
+        "value": 4.271111111111111,
+        "changePct": -3.948025987006497
+      },
+      {
+        "date": "2025-08-11",
+        "status": "within",
+        "value": 4.267777777777777,
+        "changePct": -4.022988505747127
+      },
+      {
+        "date": "2025-08-12",
+        "status": "within",
+        "value": 4.264444444444445,
+        "changePct": -4.097951024487755
+      },
+      {
+        "date": "2025-08-13",
+        "status": "within",
+        "value": 4.222222222222222,
+        "changePct": -5.047476261869066
+      },
+      {
+        "date": "2025-08-14",
+        "status": "within",
+        "value": 4.266666666666667,
+        "changePct": -4.0479760119940025
+      },
+      {
+        "date": "2025-08-15",
+        "status": "within",
+        "value": 4.287777777777778,
+        "changePct": -3.5732133933033476
+      },
+      {
+        "date": "2025-08-18",
+        "status": "within",
+        "value": 4.2988888888888885,
+        "changePct": -3.3233383308345825
+      },
+      {
+        "date": "2025-08-19",
+        "status": "within",
+        "value": 4.271111111111111,
+        "changePct": -3.948025987006497
+      },
+      {
+        "date": "2025-08-20",
+        "status": "within",
+        "value": 4.261111111111111,
+        "changePct": -4.172913543228385
+      },
+      {
+        "date": "2025-08-21",
+        "status": "within",
+        "value": 4.2988888888888885,
+        "changePct": -3.3233383308345825
+      },
+      {
+        "date": "2025-08-22",
+        "status": "within",
+        "value": 4.234444444444445,
+        "changePct": -4.772613693153422
+      },
+      {
+        "date": "2025-08-25",
+        "status": "within",
+        "value": 4.251111111111111,
+        "changePct": -4.397801099450274
+      },
+      {
+        "date": "2025-08-26",
+        "status": "within",
+        "value": 4.221111111111111,
+        "changePct": -5.072463768115941
+      },
+      {
+        "date": "2025-08-27",
+        "status": "within",
+        "value": 4.205555555555556,
+        "changePct": -5.422288855572213
+      },
+      {
+        "date": "2025-08-28",
+        "status": "within",
+        "value": 4.2011111111111115,
+        "changePct": -5.52223888055972
+      },
+      {
+        "date": "2025-08-29",
+        "status": "within",
+        "value": 4.195555555555555,
+        "changePct": -5.647176411794102
+      },
+      {
+        "date": "2025-09-02",
+        "status": "within",
+        "value": 4.22,
+        "changePct": -5.097451274362818
+      },
+      {
+        "date": "2025-09-03",
+        "status": "within",
+        "value": 4.17,
+        "changePct": -6.221889055472264
+      },
+      {
+        "date": "2025-09-04",
+        "status": "within",
+        "value": 4.141111111111112,
+        "changePct": -6.871564217891053
+      },
+      {
+        "date": "2025-09-05",
+        "status": "within",
+        "value": 4.062222222222222,
+        "changePct": -8.64567716141929
+      },
+      {
+        "date": "2025-09-08",
+        "status": "within",
+        "value": 4.032222222222222,
+        "changePct": -9.320339830084958
+      },
+      {
+        "date": "2025-09-09",
+        "status": "within",
+        "value": 4.056666666666667,
+        "changePct": -8.770614692653671
+      },
+      {
+        "date": "2025-09-10",
+        "status": "within",
+        "value": 4.035555555555556,
+        "changePct": -9.245377311344328
+      },
+      {
+        "date": "2025-09-11",
+        "status": "within",
+        "value": 4.014444444444445,
+        "changePct": -9.720139930034982
+      },
+      {
+        "date": "2025-09-12",
+        "status": "within",
+        "value": 4.043333333333333,
+        "changePct": -9.07046476761619
+      },
+      {
+        "date": "2025-09-15",
+        "status": "within",
+        "value": 4.024444444444445,
+        "changePct": -9.495252373813093
+      },
+      {
+        "date": "2025-09-16",
+        "status": "within",
+        "value": 4.007777777777778,
+        "changePct": -9.87006496751624
+      },
+      {
+        "date": "2025-09-17",
+        "status": "within",
+        "value": 4.007777777777778,
+        "changePct": -9.87006496751624
+      },
+      {
+        "date": "2025-09-18",
+        "status": "within",
+        "value": 4.044444444444444,
+        "changePct": -9.045477261369316
+      },
+      {
+        "date": "2025-09-19",
+        "status": "within",
+        "value": 4.053333333333333,
+        "changePct": -8.845577211394302
+      },
+      {
+        "date": "2025-09-22",
+        "status": "within",
+        "value": 4.062222222222222,
+        "changePct": -8.64567716141929
+      },
+      {
+        "date": "2025-09-23",
+        "status": "within",
+        "value": 4.037777777777778,
+        "changePct": -9.195402298850574
+      },
+      {
+        "date": "2025-09-24",
+        "status": "within",
+        "value": 4.0633333333333335,
+        "changePct": -8.620689655172413
+      },
+      {
+        "date": "2025-09-25",
+        "status": "within",
+        "value": 4.095555555555555,
+        "changePct": -7.896051974012994
+      },
+      {
+        "date": "2025-09-26",
+        "status": "within",
+        "value": 4.093333333333334,
+        "changePct": -7.946026986506746
+      },
+      {
+        "date": "2025-09-29",
+        "status": "within",
+        "value": 4.0744444444444445,
+        "changePct": -8.370814592703647
+      },
+      {
+        "date": "2025-09-30",
+        "status": "within",
+        "value": 4.0744444444444445,
+        "changePct": -8.370814592703647
+      },
+      {
+        "date": "2025-10-01",
+        "status": "within",
+        "value": 4.04,
+        "changePct": -9.14542728635682
+      },
+      {
+        "date": "2025-10-02",
+        "status": "within",
+        "value": 4.038888888888889,
+        "changePct": -9.170414792603697
+      },
+      {
+        "date": "2025-10-03",
+        "status": "within",
+        "value": 4.062222222222222,
+        "changePct": -8.64567716141929
+      },
+      {
+        "date": "2025-10-06",
+        "status": "within",
+        "value": 4.0811111111111105,
+        "changePct": -8.220889555222389
+      },
+      {
+        "date": "2025-10-07",
+        "status": "within",
+        "value": 4.057777777777778,
+        "changePct": -8.745627186406796
+      },
+      {
+        "date": "2025-10-08",
+        "status": "within",
+        "value": 4.058888888888889,
+        "changePct": -8.72063968015992
+      },
+      {
+        "date": "2025-10-09",
+        "status": "within",
+        "value": 4.068888888888889,
+        "changePct": -8.495752123938031
+      },
+      {
+        "date": "2025-10-10",
+        "status": "within",
+        "value": 4.007777777777778,
+        "changePct": -9.87006496751624
+      },
+      {
+        "date": "2025-10-14",
+        "status": "breach",
+        "value": 3.9899999999999998,
+        "changePct": -10.269865067466268
+      },
+      {
+        "date": "2025-10-15",
+        "status": "within",
+        "value": 4.010000000000001,
+        "changePct": -9.820089955022489
+      },
+      {
+        "date": "2025-10-16",
+        "status": "breach",
+        "value": 3.96,
+        "changePct": -10.944527736131933
+      },
+      {
+        "date": "2025-10-17",
+        "status": "breach",
+        "value": 3.9755555555555557,
+        "changePct": -10.594702648675662
+      },
+      {
+        "date": "2025-10-20",
+        "status": "breach",
+        "value": 3.958888888888889,
+        "changePct": -10.96951524237881
+      },
+      {
+        "date": "2025-10-21",
+        "status": "breach",
+        "value": 3.9433333333333334,
+        "changePct": -11.319340329835082
+      },
+      {
+        "date": "2025-10-22",
+        "status": "breach",
+        "value": 3.9377777777777774,
+        "changePct": -11.444277861069464
+      },
+      {
+        "date": "2025-10-23",
+        "status": "breach",
+        "value": 3.9633333333333334,
+        "changePct": -10.869565217391303
+      },
+      {
+        "date": "2025-10-24",
+        "status": "breach",
+        "value": 3.96,
+        "changePct": -10.944527736131933
+      },
+      {
+        "date": "2025-10-27",
+        "status": "breach",
+        "value": 3.946666666666667,
+        "changePct": -11.244377811094452
+      },
+      {
+        "date": "2025-10-28",
+        "status": "breach",
+        "value": 3.934444444444444,
+        "changePct": -11.519240379810094
+      },
+      {
+        "date": "2025-10-29",
+        "status": "within",
+        "value": 4.002222222222223,
+        "changePct": -9.995002498750624
+      },
+      {
+        "date": "2025-10-30",
+        "status": "within",
+        "value": 4.021111111111111,
+        "changePct": -9.570214892553723
+      },
+      {
+        "date": "2025-10-31",
+        "status": "within",
+        "value": 4.02,
+        "changePct": -9.595202398800598
+      },
+      {
+        "date": "2025-11-03",
+        "status": "within",
+        "value": 4.038888888888889,
+        "changePct": -9.170414792603697
+      },
+      {
+        "date": "2025-11-04",
+        "status": "within",
+        "value": 4.013333333333333,
+        "changePct": -9.745127436281859
+      },
+      {
+        "date": "2025-11-05",
+        "status": "within",
+        "value": 4.053333333333333,
+        "changePct": -8.845577211394302
+      },
+      {
+        "date": "2025-11-06",
+        "status": "within",
+        "value": 4.010000000000001,
+        "changePct": -9.820089955022489
+      },
+      {
+        "date": "2025-11-07",
+        "status": "within",
+        "value": 4.003333333333334,
+        "changePct": -9.970014992503748
+      },
+      {
+        "date": "2025-11-10",
+        "status": "within",
+        "value": 4.03,
+        "changePct": -9.37031484257871
+      },
+      {
+        "date": "2025-11-12",
+        "status": "within",
+        "value": 4.0055555555555555,
+        "changePct": -9.920039980009996
+      },
+      {
+        "date": "2025-11-13",
+        "status": "within",
+        "value": 4.0311111111111115,
+        "changePct": -9.345327336331835
+      },
+      {
+        "date": "2025-11-14",
+        "status": "within",
+        "value": 4.051111111111111,
+        "changePct": -8.895552223888055
+      },
+      {
+        "date": "2025-11-17",
+        "status": "within",
+        "value": 4.044444444444444,
+        "changePct": -9.045477261369316
+      },
+      {
+        "date": "2025-11-18",
+        "status": "within",
+        "value": 4.0311111111111115,
+        "changePct": -9.345327336331835
+      },
+      {
+        "date": "2025-11-19",
+        "status": "within",
+        "value": 4.035555555555556,
+        "changePct": -9.245377311344328
+      },
+      {
+        "date": "2025-11-20",
+        "status": "within",
+        "value": 4.017777777777777,
+        "changePct": -9.645177411294352
+      },
+      {
+        "date": "2025-11-21",
+        "status": "breach",
+        "value": 3.985555555555555,
+        "changePct": -10.369815092453774
+      },
+      {
+        "date": "2025-11-24",
+        "status": "breach",
+        "value": 3.9711111111111115,
+        "changePct": -10.69465267366317
+      },
+      {
+        "date": "2025-11-25",
+        "status": "breach",
+        "value": 3.9522222222222223,
+        "changePct": -11.11944027986007
+      },
+      {
+        "date": "2025-11-26",
+        "status": "breach",
+        "value": 3.9555555555555557,
+        "changePct": -11.04447776111944
+      },
+      {
+        "date": "2025-11-28",
+        "status": "breach",
+        "value": 3.961111111111111,
+        "changePct": -10.919540229885056
+      },
+      {
+        "date": "2025-12-01",
+        "status": "breach",
+        "value": 3.9899999999999998,
+        "changePct": -10.269865067466268
+      },
+      {
+        "date": "2025-12-02",
+        "status": "breach",
+        "value": 3.964444444444444,
+        "changePct": -10.844577711144426
+      },
+      {
+        "date": "2025-12-03",
+        "status": "breach",
+        "value": 3.9311111111111114,
+        "changePct": -11.594202898550723
+      },
+      {
+        "date": "2025-12-04",
+        "status": "breach",
+        "value": 3.9577777777777774,
+        "changePct": -10.994502748625687
+      },
+      {
+        "date": "2025-12-05",
+        "status": "breach",
+        "value": 3.9755555555555557,
+        "changePct": -10.594702648675662
+      },
+      {
+        "date": "2025-12-08",
+        "status": "breach",
+        "value": 3.9922222222222223,
+        "changePct": -10.219890054972511
+      },
+      {
+        "date": "2025-12-09",
+        "status": "breach",
+        "value": 4.001111111111111,
+        "changePct": -10.019990004997501
+      },
+      {
+        "date": "2025-12-10",
+        "status": "breach",
+        "value": 3.958888888888889,
+        "changePct": -10.96951524237881
+      },
+      {
+        "date": "2025-12-11",
+        "status": "breach",
+        "value": 3.947777777777778,
+        "changePct": -11.219390304847575
+      },
+      {
+        "date": "2025-12-12",
+        "status": "breach",
+        "value": 3.96,
+        "changePct": -10.944527736131933
+      },
+      {
+        "date": "2025-12-15",
+        "status": "breach",
+        "value": 3.9555555555555557,
+        "changePct": -11.04447776111944
+      },
+      {
+        "date": "2025-12-16",
+        "status": "breach",
+        "value": 3.9355555555555557,
+        "changePct": -11.494252873563218
+      },
+      {
+        "date": "2025-12-17",
+        "status": "breach",
+        "value": 3.9366666666666665,
+        "changePct": -11.469265367316341
+      },
+      {
+        "date": "2025-12-18",
+        "status": "breach",
+        "value": 3.908888888888889,
+        "changePct": -12.093953023488254
+      },
+      {
+        "date": "2025-12-19",
+        "status": "breach",
+        "value": 3.9299999999999997,
+        "changePct": -11.619190404797601
+      },
+      {
+        "date": "2025-12-22",
+        "status": "breach",
+        "value": 3.9366666666666665,
+        "changePct": -11.469265367316341
+      },
+      {
+        "date": "2025-12-23",
+        "status": "breach",
+        "value": 3.94,
+        "changePct": -11.39430284857571
+      },
+      {
+        "date": "2025-12-24",
+        "status": "breach",
+        "value": 3.928888888888889,
+        "changePct": -11.644177911044478
+      },
+      {
+        "date": "2025-12-26",
+        "status": "breach",
+        "value": 3.9177777777777774,
+        "changePct": -11.894052973513242
+      },
+      {
+        "date": "2025-12-29",
+        "status": "breach",
+        "value": 3.914444444444444,
+        "changePct": -11.969015492253872
+      },
+      {
+        "date": "2025-12-30",
+        "status": "breach",
+        "value": 3.9111111111111114,
+        "changePct": -12.043978010994502
+      },
+      {
+        "date": "2025-12-31",
+        "status": "breach",
+        "value": 3.9433333333333334,
+        "changePct": -11.319340329835082
+      }
+    ]
+  }
+}

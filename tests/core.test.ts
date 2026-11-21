@@ -20,6 +20,7 @@ import {
   aggregate,
   alignParsedCsvColumns,
   auditSummary,
+  auditToleranceHistory,
   buildHtmlReport,
   bytesToBase64,
   compareRows,
@@ -1306,4 +1307,60 @@ test("stability band includes decimal equality and excludes incompatible numeric
   const ties = minimumRevisionWitness(makeDataset([{id:"b",value:1e-9},{id:"a",value:1e-9}],
     [{id:"b",value:2e-9},{id:"a",value:2e-9}]),rule);
   assert.deepEqual(ties?.upwardKeys,["a"]);
+});
+
+const historySpec = {
+  dates: ["2025-01-02", "2025-01-03", "2025-01-06", "2025-01-07"],
+  keys: ["A", "B"], dateField: "date", keyField: "key", valueField: "value", aggregation: "average" as const, tolerancePct: 10,
+};
+function historyDay(i: number, valueA: number, valueB: number) {
+  return [{ date: historySpec.dates[i], key: "B", value: valueB }, { date: historySpec.dates[i], key: "A", value: valueA }];
+}
+
+test("dated fixed-cohort tolerance finds a recovered crossing invisible at the endpoints", () => {
+  const rows = [...historyDay(0, 1, 1), ...historyDay(1, 1.1, 1.1), ...historyDay(2, 1.100000000000001, 1.1), ...historyDay(3, 1, 1)];
+  const audit = auditToleranceHistory(rows.reverse(), historySpec);
+  assert.equal(audit.endpoint.status, "within");
+  assert.equal(audit.breachCount, 1);
+  assert.equal(audit.unknownCount, 0);
+  assert.deepEqual(audit.observations.map(day => day.status), ["within", "within", "breach", "within"]);
+  assert.deepEqual(audit.episodes, [{ firstObservedBreach: historySpec.dates[2], lastObservedBreach: historySpec.dates[2],
+    firstObservedRecovery: historySpec.dates[3], breachedObservations: 1, unknownObservationsBeforeRecovery: 0 }]);
+  assert.equal(audit.peak?.date, historySpec.dates[2]);
+});
+
+test("missing dates and changes to numeric key support remain unknown, including an unresolved crossing", () => {
+  const rows = [...historyDay(0, -1, -1), ...historyDay(1, -2, -2),
+    { date: historySpec.dates[3], key: "A", value: 100 },
+    { date: historySpec.dates[3], key: "A", value: "NA" },
+    { date: historySpec.dates[3], key: "C", value: 10 },
+    { date: historySpec.dates[3], key: "", value: 10 }];
+  const audit = auditToleranceHistory(rows, { ...historySpec, aggregation: "sum" });
+  assert.equal(audit.baselineValue, -2);
+  assert.equal(audit.unknownCount, 2);
+  assert.deepEqual(audit.peak, { date: historySpec.dates[1], changePct: -100 });
+  assert.equal(audit.episodes[0].firstObservedRecovery, null);
+  assert.equal(audit.episodes[0].unknownObservationsBeforeRecovery, 2);
+  assert.equal(audit.observations[2].status, "missing_date");
+  assert.deepEqual(audit.endpoint.problems, { missing: ["B"], unexpected: ["C"], duplicates: ["A"], nonNumeric: ["A"], blankKeys: 1 });
+  assert.equal(audit.endpoint.value, null);
+});
+
+test("a stable panel and a panel without any comparable follow-up have distinct evidence", () => {
+  const initial = historyDay(0, 1, 1);
+  const stable = auditToleranceHistory(historySpec.dates.flatMap((_, i) => historyDay(i, 1, 1)), historySpec);
+  assert.deepEqual(stable.episodes, []);
+  assert.equal(stable.unknownCount, 0);
+  assert.deepEqual(stable.peak, { date: historySpec.dates[1], changePct: 0 });
+  const missing = auditToleranceHistory(initial, historySpec);
+  assert.deepEqual(missing.episodes, []);
+  assert.equal(missing.unknownCount, 3);
+  assert.equal(missing.peak, null);
+  assert.throws(() => auditToleranceHistory(initial.slice(1), historySpec), /baseline/);
+  assert.throws(() => auditToleranceHistory(historyDay(0, 1, -1), historySpec), /nonzero/);
+  assert.throws(() => auditToleranceHistory([{ key: "A", value: 1 }], historySpec), /observation date/);
+  assert.throws(() => auditToleranceHistory(initial, { ...historySpec, dates: [historySpec.dates[0], "2025-02-30"] }), /dates/);
+  assert.throws(() => auditToleranceHistory(initial, { ...historySpec, keys: ["A", "A"] }), /keys/);
+  assert.throws(() => auditToleranceHistory(initial, { ...historySpec, tolerancePct: -1 }), /tolerance/);
+  assert.throws(() => auditToleranceHistory(historyDay(0, Number.MAX_VALUE, Number.MAX_VALUE), historySpec), /numeric range/);
 });

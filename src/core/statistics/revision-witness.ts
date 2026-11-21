@@ -2,18 +2,7 @@ import type { CsvRow, DatasetVersion, Rule } from "../types";
 import { validatePrimaryKey, valueToNumber } from "../snapshot";
 import { rowsForRule } from "./index";
 
-type DecimalParts = { coefficient: bigint; places: number };
-
-// Work in decimal units of the normalized inputs so equality at the tolerance is stable.
-function decimalParts(value: number): DecimalParts {
-  const [mantissa, exponent = "0"] = value.toString().split("e");
-  const [whole, fraction = ""] = mantissa.split(".");
-  return { coefficient: BigInt(whole + fraction), places: fraction.length - Number(exponent) };
-}
-
-function units(value: DecimalParts, places: number): bigint {
-  return value.coefficient * (BigInt(10) ** BigInt(places - value.places));
-}
+import { decimalParts, relativeBand, units, type DecimalParts } from "./decimal-units";
 
 function numericSample(rows: CsvRow[], rule: Rule, primaryKey: string) {
   const result = new Map<string, DecimalParts>();
@@ -60,10 +49,7 @@ export function minimumRevisionWitness(dataset: DatasetVersion, rule: Rule): Rev
     if (delta !== zero) edits.push({ id, delta });
   }
   if (baseline === zero) return;
-  const tolerance = decimalParts(rule.supportTolerance);
-  const tolerancePlaces = Math.max(0, tolerance.places);
-  const band = (baseline < zero ? -baseline : baseline) * units(tolerance, tolerancePlaces);
-  const scale = BigInt(100) * (BigInt(10) ** BigInt(tolerancePlaces));
+  const { band, scale } = relativeBand(baseline, rule.supportTolerance);
   // With fixed support, a mean and its sum have the same relative change.
   function smallest(direction: bigint) {
     const candidates = edits.map(edit => ({ id: edit.id, gain: direction * edit.delta }))

@@ -32,7 +32,7 @@ The CDC PLACES case lets you follow a revision in county-level estimates of adul
 <table>
   <tr>
     <td align="center"><strong>10</strong><br>reproducible cases</td>
-    <td align="center"><strong>176 / 176</strong><br>automated checks</td>
+    <td align="center"><strong>181 / 181</strong><br>automated checks</td>
     <td align="center"><strong>64 / 64</strong><br>benchmark scenarios</td>
     <td align="center"><strong>512</strong><br>property trials</td>
   </tr>
@@ -58,6 +58,8 @@ The public demo opens the ten bundled cases. To compare your own files, run the 
 </details>
 
 Open a sum or mean stability claim to see the fewest record updates that could move it outside its tolerance. In the eight-county CDC PLACES case, the complete refresh stays inside the 2% band. Refreshing two counties alone would cross the lower boundary. The workspace identifies the keys for review and exports the witness with both snapshot hashes. [Method and real-data comparisons](docs/EVALUATION.md#minimum-partial-refresh-witness).
+
+Open the Treasury case to see when the curve crossed its stability band and download the full daily audit. Run `npm run audit:history` to reproduce it. On the nine selected U.S. Treasury maturities, both ends of October 2025 met the existing 10% stability tolerance. The mean crossed the band on 10 of the 22 published October dates. The [daily audit and field definitions](docs/EVALUATION.md#dated-tolerance-history) show when each crossing began, when the curve returned, and which dates remained comparable.
 
 ## Why ClaimTrace
 

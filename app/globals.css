@@ -799,3 +799,12 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+.treasury-history { margin: 0 0 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.treasury-history .panel-head { flex-wrap: wrap; gap: 8px 12px; }
+.treasury-history .panel-head a { font-size: 13px; color: #17664d; }
+.treasury-history-body { padding: 0 20px 16px; }
+.treasury-history-body p, .treasury-history-body table { font-size: 13px; line-height: 1.5; }
+.treasury-history-body table { width: 100%; border-collapse: collapse; }
+.treasury-history-body caption { margin-bottom: 5px; text-align: left; font-weight: 650; }
+.treasury-history-body th, .treasury-history-body td { padding: 6px 3px; text-align: left; border-bottom: 1px solid var(--line); }
