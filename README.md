@@ -32,7 +32,7 @@ The CDC PLACES case lets you follow a revision in county-level estimates of adul
 <table>
   <tr>
     <td align="center"><strong>10</strong><br>reproducible cases</td>
-    <td align="center"><strong>171 / 171</strong><br>automated checks</td>
+    <td align="center"><strong>174 / 174</strong><br>automated checks</td>
     <td align="center"><strong>64 / 64</strong><br>benchmark scenarios</td>
     <td align="center"><strong>512</strong><br>property trials</td>
   </tr>
